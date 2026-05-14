@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     wget \
     git \
+    git-lfs \
     make \
     build-essential \
     pkg-config \
@@ -32,6 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev \
     libjpeg-dev \
     libtiff5-dev \
+    && git lfs install --system \
     && rm -rf /var/lib/apt/lists/*
 
 # Quarto CLI
