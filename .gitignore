@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Quarto
+/.quarto/
+
+# OS
+.DS_Store

@@ -1,0 +1,34 @@
+{
+  "name": "slides-r-quarto-typst",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "rstudio",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "REditorSupport.r",
+        "quarto.quarto",
+        "myriad-dreamin.tinymist",
+        "ms-python.python",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "files.associations": {
+          "*.typ": "typst"
+        }
+      }
+    }
+  },
+  "forwardPorts": [4444, 8000],
+  "portsAttributes": {
+    "4444": {
+      "label": "Quarto preview"
+    },
+    "8000": {
+      "label": "Static docs preview"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/postCreate.sh"
+}
