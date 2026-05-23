@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "medicine/index.html",
+    "href": "medicine/index.html",
+    "title": "医学",
+    "section": "",
+    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です"
+  },
+  {
+    "objectID": "medicine/index.html#スライド一覧",
+    "href": "medicine/index.html#スライド一覧",
+    "title": "医学",
+    "section": "",
+    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です"
+  },
+  {
+    "objectID": "statistics/index.html",
+    "href": "statistics/index.html",
+    "title": "統計学",
+    "section": "",
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
+  },
+  {
+    "objectID": "statistics/index.html#スライド一覧",
+    "href": "statistics/index.html#スライド一覧",
+    "title": "統計学",
+    "section": "",
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
+  },
+  {
     "objectID": "statistics/bootstrap/index.html#クイズ",
     "href": "statistics/bootstrap/index.html#クイズ",
     "title": "Bootstrapについて",
@@ -18,7 +46,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n21.40592\n\n\n2\n22.67425\n\n\n3\n23.50853\n\n\n4\n19.83409\n\n\n5\n22.07209\n\n\n6\n21.04962\n\n\n7\n23.14966\n\n\n8\n22.01017\n\n\n9\n22.70362\n\n\n10\n22.64768\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.10696\n\n\n2\n22.22223\n\n\n3\n20.08348\n\n\n4\n20.87714\n\n\n5\n18.29993\n\n\n6\n18.60577\n\n\n7\n18.85521\n\n\n8\n21.60016\n\n\n9\n22.70758\n\n\n10\n19.87856\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -60,7 +88,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n68.99574\n199.7920\n\n\n\n2\n79.26011\n205.8681\n\n\n\n3\n72.50536\n171.7299\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n76.16520\n192.4350\n\n\n\n2\n75.01079\n207.4421\n\n\n\n3\n70.05877\n204.5441\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -187,20 +215,6 @@
     "title": "Bootstrapについて",
     "section": "References",
     "text": "References\n\n\nBland, J Martin, and Douglas G Altman. 2015. “Statistics Notes: Bootstrap Resampling Methods.” BMJ. https://doi.org/10.1136/bmj.h2622.\n\n\nCarpenter, J, and J Bithell. 2000. “Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.” Statistics in Medicine 19 (9): 1141–64. https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f.\n\n\nChernick, Michael R. 2008. Bootstrap Methods a Guide for Practitioners and Researchers. 2nd ed. Hoboken, N.J: Wiley-Interscience.\n\n\nDavison, A. C., and D. V. Hinkley. 1997. Bootstrap Methods and Their Applications. Cambridge: Cambridge University Press. http://statwww.epfl.ch/davison/BMA/.\n\n\nDiCiccio, Thomas J, and Bradley Efron. 1996. “Bootstrap Confidence Intervals.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 11 (3): 189–228. https://doi.org/10.1214/ss/1032280214.\n\n\nEfron, Bradley. 2003. “Second Thoughts on the Bootstrap.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 18 (2): 135–40. https://doi.org/10.1214/ss/1063994968.\n\n\nWicklin, Rick. n.d. “The Bias-Corrected and Accelerated (BCa) Bootstrap Interval.” https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html.\n\n\n汪金芳, and 桜井裕仁. 2011. ブートストラップ入門."
-  },
-  {
-    "objectID": "statistics/index.html",
-    "href": "statistics/index.html",
-    "title": "統計学",
-    "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
-  },
-  {
-    "objectID": "statistics/index.html#スライド一覧",
-    "href": "statistics/index.html#スライド一覧",
-    "title": "統計学",
-    "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
   },
   {
     "objectID": "medicine/hypoglycemia/index.html#agenda",
