@@ -7,7 +7,8 @@ project:
     - medicine/**/*.qmd
 
 website:
-  title: "Slides"
+  title: "My personal slides"
+  site-url: "https://figarofuga.github.io/personal-slides/"
   navbar:
     left:
       - href: index.qmd
