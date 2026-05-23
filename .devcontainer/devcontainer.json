@@ -1,34 +1,68 @@
 {
-  "name": "slides-r-quarto-typst",
+  "name": "quarto-r-slides",
   "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
+    "dockerfile": "Dockerfile"
   },
-  "remoteUser": "rstudio",
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
+      "vscodeRSupport": "full",
+      "installRMarkdown": true,
+      "installBspm": true
+    },
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "jq,curl,wget,git,make,build-essential,pkg-config,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,r-cran-knitr,r-cran-rmarkdown,r-cran-reticulate,r-cran-tidyverse,r-cran-here,r-cran-glue,r-cran-scales,r-cran-gt,r-cran-htmltools,r-cran-survival",
+      "upgradePackages": false
+    },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "version": "latest",
+      "installTinyTex": false,
+      "installChromium": true
+    },
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {
+      "version": "stable",
+      "singleUser": true
+    }
+  },
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/rocker-org/devcontainer-features/r-apt",
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages",
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli",
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server"
+  ],
+  "remoteUser": "vscode",
   "customizations": {
     "vscode": {
       "extensions": [
-        "REditorSupport.r",
         "quarto.quarto",
-        "myriad-dreamin.tinymist",
+        "REditorSupport.r",
         "ms-python.python",
         "yzhang.markdown-all-in-one"
       ],
       "settings": {
+        "editor.formatOnSave": true,
         "files.associations": {
-          "*.typ": "typst"
+          "*.qmd": "quarto"
         }
       }
     }
   },
-  "forwardPorts": [4444, 8000],
+  "forwardPorts": [4444, 8000, 8787],
   "portsAttributes": {
     "4444": {
-      "label": "Quarto preview"
+      "label": "Quarto preview",
+      "onAutoForward": "openPreview"
     },
     "8000": {
-      "label": "Static docs preview"
+      "label": "Static docs preview",
+      "onAutoForward": "notify"
+    },
+    "8787": {
+      "label": "RStudio Server",
+      "onAutoForward": "openBrowser"
     }
   },
-  "postCreateCommand": "bash .devcontainer/postCreate.sh"
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "postAttachCommand": {
+    "rstudio-server": "pgrep -x rserver >/dev/null || rserver"
+  }
 }

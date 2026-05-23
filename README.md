@@ -6,31 +6,21 @@ chmod +x .devcontainer/postCreate.sh
 
 The structure of this repositry was as follows: 
 
+``` text
 slides/
 ├── .devcontainer/
 │   ├── devcontainer.json
-│   └── Dockerfile
+│   ├── Dockerfile
 ├── _quarto.yml
 ├── index.qmd
-├── quarto/
-│   ├── slide-01/
-│   │   └── index.qmd
-│   ├── slide-02/
-│   │   └── index.qmd
-│   └── slide-03/
+├── statistics/
+│   ├── index.qmd
+│   └── regression-intro/
 │       └── index.qmd
-├── typst/
-│   ├── slide-04/
-│   │   ├── main.typ
-│   │   └── images/
-│   ├── slide-05/
-│   │   └── main.typ
-│   └── slide-06/
-│       └── main.typ
-├── build.sh
+├── medicine/
+│   ├── index.qmd
+│   └── clinical-trial/
+│       └── index.qmd
 └── docs/
-    ├── index.html
-    ├── quarto/
-    └── typst/
-
+```
 

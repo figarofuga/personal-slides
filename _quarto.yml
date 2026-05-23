@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - statistics/**/*.qmd
+    - medicine/**/*.qmd
+
+website:
+  title: "Slides"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: statistics/index.qmd
+        text: 統計学
+      - href: medicine/index.qmd
+        text: 医学
+
+format:
+  html:
+    theme: cosmo
+    toc: false
