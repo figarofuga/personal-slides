@@ -29,8 +29,9 @@ If make slides, do as follows.
 ```bash
 
 quarto render
+touch docs/.nojekyll
 git add .
-git commit -m "Update slides"
+git commit -m "Update rendered slides"
 git push
 
 ```

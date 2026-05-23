@@ -10,7 +10,7 @@
       "installBspm": true
     },
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "jq,curl,wget,git,make,build-essential,pkg-config,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,r-cran-knitr,r-cran-rmarkdown,r-cran-reticulate,r-cran-tidyverse,r-cran-here,r-cran-glue,r-cran-scales,r-cran-gt,r-cran-htmltools,r-cran-survival",
+      "packages": "jq,curl,wget,git,make,build-essential,pkg-config,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,r-cran-knitr,r-cran-rmarkdown,r-cran-reticulate,r-cran-tidyverse,r-cran-here,r-cran-glue,r-cran-scales,r-cran-gt,r-cran-htmltools,r-cran-survival,r-cran-plotly,r-cran-tidymodels,r-cran-xgboost,r-cran-marginaleffects,r-cran-matchit,r-cran-weightit",
       "upgradePackages": false
     },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
