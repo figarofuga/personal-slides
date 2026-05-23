@@ -1,8 +1,8 @@
 # personal-slides
 
-```bash
-chmod +x .devcontainer/postCreate.sh
-```
+Make my own study homepage.
+
+**https://figarofuga.github.io/personal-slides/**
 
 The structure of this repositry was as follows: 
 
@@ -24,3 +24,13 @@ slides/
 └── docs/
 ```
 
+If make slides, do as follows.
+
+```bash
+
+quarto render
+git add .
+git commit -m "Update slides"
+git push
+
+```
