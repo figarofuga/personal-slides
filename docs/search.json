@@ -14,18 +14,326 @@
     "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です"
   },
   {
-    "objectID": "statistics/index.html",
-    "href": "statistics/index.html",
-    "title": "統計学",
-    "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
+    "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
+    "href": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
+    "title": "Marginal effectsとその周辺",
+    "section": "皆さん多変量回帰は好きですか？",
+    "text": "皆さん多変量回帰は好きですか？\n\n古くから研究されつくされており、信頼感がある\n多くの統計ソフトに入っており、行うのが簡単\n解釈性が高く、分かりやすい\n本当？"
   },
   {
-    "objectID": "statistics/index.html#スライド一覧",
-    "href": "statistics/index.html#スライド一覧",
-    "title": "統計学",
-    "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
+    "objectID": "statistics/marginaleffects/index.html#多変量回帰は簡単",
+    "href": "statistics/marginaleffects/index.html#多変量回帰は簡単",
+    "title": "Marginal effectsとその周辺",
+    "section": "多変量回帰は簡単？",
+    "text": "多変量回帰は簡単？\n\nMany regression species\n多変量回帰は多くの種類がある\n\n0/1でLogistic回帰\n整数値だとPoisson回帰\n順序ロジット\nCensored regression(Cox回帰もこのうち)\n\n選択肢が多く、その分どうすればよいのか分からない！"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#例えば",
+    "href": "statistics/marginaleffects/index.html#例えば",
+    "title": "Marginal effectsとその周辺",
+    "section": "例えば・・・・・・",
+    "text": "例えば・・・・・・\n\nICU入室患者に対してRHCが予後を改善するかをみた観察研究(Connors et al. 1996)\n\nPropensity scoreを広めた研究としても有名\n\n例えば、RHCが半年以内の死亡と関連するかをロジスティック回帰で解析をする\n\n\n\n\n\n\n\n\n\nParameter\nBase model\n\n\n\n\nswang1 (RHC)\n1.16 [1.01, 1.32]\n\n\ncat chf (Others)\n1.71 [1.29, 2.25]\n\n\nage\n1.03 [1.03, 1.04]\n\n\n\n\n\n\nObservations\n5733\n\n\n\n\n\n\n\n\n結果として、RHCは半年以内の死亡と関連する！\nしかし、ここで上司からのつっこみ"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#上司からのつっこみ①",
+    "href": "statistics/marginaleffects/index.html#上司からのつっこみ①",
+    "title": "Marginal effectsとその周辺",
+    "section": "上司からのつっこみ①",
+    "text": "上司からのつっこみ①"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#結果①",
+    "href": "statistics/marginaleffects/index.html#結果①",
+    "title": "Marginal effectsとその周辺",
+    "section": "結果①",
+    "text": "結果①\n\n\n\n\n\n\n\n\nParameter\nBase model\nInteract model\n\n\n\n\nswang1 (RHC)\n1.16 [1.01, 1.32]\n1.52 [1.02, 2.26]\n\n\ncat chf (Others)\n1.71 [1.29, 2.25]\n1.94 [1.40, 2.69]\n\n\nage\n1.03 [1.03, 1.04]\n1.03 [1.03, 1.04]\n\n\nswang1 (RHC) × cat chf (Others)\n\n0.74 [0.49, 1.12]\n\n\n\n\n\n\n\nObservations\n5733\n5733"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#上司からのつっこみ②",
+    "href": "statistics/marginaleffects/index.html#上司からのつっこみ②",
+    "title": "Marginal effectsとその周辺",
+    "section": "上司からのつっこみ②",
+    "text": "上司からのつっこみ②"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#結果②",
+    "href": "statistics/marginaleffects/index.html#結果②",
+    "title": "Marginal effectsとその周辺",
+    "section": "結果②",
+    "text": "結果②\n\n\n\n\n\n\n\n\nParameter\nBase model\nInteract model\nSpline model\n\n\n\n\nswang1 (RHC)\n1.16 [1.01, 1.32]\n1.52 [1.02, 2.26]\n1.49 [1.00, 2.23]\n\n\ncat chf (Others)\n1.71 [1.29, 2.25]\n1.94 [1.40, 2.69]\n1.94 [1.40, 2.70]\n\n\nage\n1.03 [1.03, 1.04]\n1.03 [1.03, 1.04]\n\n\n\nswang1 (RHC) × cat chf (Others)\n\n0.74 [0.49, 1.12]\n0.75 [0.49, 1.14]\n\n\nrcs(age ( degree)\n\n\n0.99 [0.96, 1.01]\n\n\nrcs(age ( degree)\n\n\n1.04 [0.89, 1.21]\n\n\nrcs(age ( degree)\n\n\n1.04 [1.03, 1.05]\n\n\n\n\n\n\n\n\nObservations\n5733\n5733\n5733"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#最終的に",
+    "href": "statistics/marginaleffects/index.html#最終的に",
+    "title": "Marginal effectsとその周辺",
+    "section": "最終的に・・・・・・",
+    "text": "最終的に・・・・・・"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#例えば2つの連続値をsplineで表したの場合",
+    "href": "statistics/marginaleffects/index.html#例えば2つの連続値をsplineで表したの場合",
+    "title": "Marginal effectsとその周辺",
+    "section": "例えば、2つの連続値をSplineで表したの場合",
+    "text": "例えば、2つの連続値をSplineで表したの場合\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n解釈・・・・・・"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#我々はどこにいる",
+    "href": "statistics/marginaleffects/index.html#我々はどこにいる",
+    "title": "Marginal effectsとその周辺",
+    "section": "我々はどこにいる？",
+    "text": "我々はどこにいる？"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#こんな時にjama",
+    "href": "statistics/marginaleffects/index.html#こんな時にjama",
+    "title": "Marginal effectsとその周辺",
+    "section": "こんな時にJAMA！",
+    "text": "こんな時にJAMA！\n\n\n“誰に”、“どの統計量で”計測するのか？\nCausal Estimandを決める (Dahabreh and Bibbins-Domingo 2024)"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#我々臨床医のしたい事",
+    "href": "statistics/marginaleffects/index.html#我々臨床医のしたい事",
+    "title": "Marginal effectsとその周辺",
+    "section": "我々(臨床医)のしたい事",
+    "text": "我々(臨床医)のしたい事\n\n根本的な問いかけ\n\n「誰への治療効果ですか？」\n「どうやった時の治療効果ですか？」"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#線形回帰の係数だと駄目な理由は",
+    "href": "statistics/marginaleffects/index.html#線形回帰の係数だと駄目な理由は",
+    "title": "Marginal effectsとその周辺",
+    "section": "線形回帰の係数だと駄目な理由は？",
+    "text": "線形回帰の係数だと駄目な理由は？\n\n線形回帰の係数の解釈 = 条件付き期待値\n\n他の値を固定した時に、その因子を1単位変化した時の平均的なアウトカムの変化量\n\nその結果、係数(OR, HRなど)という1つの値にまるめてしまう\n複雑な関係性をこの係数のみを報告する事で逆にわかりにくくなる事もある\nEx. HFmrEFとHFrEFでARNIの効果が変わる"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#じゃあどうやって報告する",
+    "href": "statistics/marginaleffects/index.html#じゃあどうやって報告する",
+    "title": "Marginal effectsとその周辺",
+    "section": "じゃあ、どうやって報告する？",
+    "text": "じゃあ、どうやって報告する？\n\n「誰に？」「何が？」「どのくらい？」変化したら、アウトカムが変化するか？\n難しい言葉でいうと“Estimand”を報告する必要がある\n例えば\n\n群全体: ATE\n治療を受けた群全体: ATT\n治療を受けなかった群全体: ATU"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#ここまでの纏め",
+    "href": "statistics/marginaleffects/index.html#ここまでの纏め",
+    "title": "Marginal effectsとその周辺",
+    "section": "ここまでの纏め",
+    "text": "ここまでの纏め\n\n多変量解析は解釈がわかりにくい！\n\n特に、InteractionやSplineが入るとよりわかりにくい\n通常の解析だと、結果は集団全体の平均で丸め込まれてしまう\n\nEstimandをどうやって出せばいい？"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#marginal-effectsという選択肢",
+    "href": "statistics/marginaleffects/index.html#marginal-effectsという選択肢",
+    "title": "Marginal effectsとその周辺",
+    "section": "Marginal effectsという選択肢",
+    "text": "Marginal effectsという選択肢\n\nG-computationを用いて限界効果を出す手法\n本来は、結果のStandardizationの手法\nEstimandを決定する方法でもある(Hernan 2024)"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationの考え方",
+    "href": "statistics/marginaleffects/index.html#g-computationの考え方",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationの考え方",
+    "text": "G-computationの考え方"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践①",
+    "href": "statistics/marginaleffects/index.html#実践①",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践①",
+    "text": "実践①\n\n\n\n生データ\n\n\n\n# A tibble: 5,733 × 6\n   rowid swang1 estimate conf.low conf.high death_01\n   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n 1     1 No RHC    0.606    0.535     0.672        0\n 2     2 RHC       0.839    0.787     0.880        1\n 3     3 RHC       0.743    0.675     0.801        0\n 4     4 No RHC    0.746    0.684     0.800        1\n 5     5 RHC       0.872    0.830     0.904        1\n 6     6 No RHC    0.780    0.721     0.829        0\n 7     7 No RHC    0.585    0.519     0.648        0\n 8     8 No RHC    0.287    0.231     0.350        1\n 9     9 No RHC    0.315    0.247     0.394        0\n10    10 RHC       0.593    0.535     0.648        0\n# ℹ 5,723 more rows\n\n\n\n\n元データ+swang1列のみ変更して複製したデータセット\n\n\n\n# A tibble: 11,466 × 6\n   rowid swang1 estimate conf.low conf.high death_01\n   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n 1     1 No RHC    0.606    0.535     0.672        0\n 2     2 No RHC    0.823    0.768     0.868        1\n 3     3 No RHC    0.721    0.651     0.782        0\n 4     4 No RHC    0.746    0.684     0.800        1\n 5     5 No RHC    0.859    0.815     0.893        1\n 6     6 No RHC    0.780    0.721     0.829        0\n 7     7 No RHC    0.585    0.519     0.648        0\n 8     8 No RHC    0.287    0.231     0.350        1\n 9     9 No RHC    0.315    0.247     0.394        0\n10    10 No RHC    0.567    0.508     0.623        0\n# ℹ 11,456 more rows\n\n\n\n\n行数が2倍(5733→11466)になっている事に注意！"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践②",
+    "href": "statistics/marginaleffects/index.html#実践②",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践②",
+    "text": "実践②\n\n\n\n swang1 Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n No RHC    0.638    0.00792 80.5   &lt;0.001 Inf 0.623  0.654\n RHC       0.666    0.01034 64.4   &lt;0.001 Inf 0.645  0.686\n\nType: response\n\n\n\nswang1毎でのestimateを纏める\n差をとったらRisk differenceを出せる\nこの結果を変形する事で色々な数値を出せる。"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践③",
+    "href": "statistics/marginaleffects/index.html#実践③",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践③",
+    "text": "実践③\n\n\nRisk ratio\n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.04   0.0433 4.5     1   1.09\n\nTerm: swang1\nType: response\nComparison: ln(mean(RHC) / mean(No RHC))\n\n\n\nOdds ratio\n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.13   0.0454 4.5     1   1.27\n\nTerm: swang1\nType: response\nComparison: ln(odds(RHC) / odds(No RHC))\n\n\n\n\n疫学的にはリスク差(あるいはリスク比)が最も知りたい数値\nOdds ratioは発生率が低いイベントでないと、Risk ratioと近似出来ない(Cummings 2009)"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationの応用ateattatu",
+    "href": "statistics/marginaleffects/index.html#g-computationの応用ateattatu",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationの応用～ATE/ATT/ATU",
+    "text": "G-computationの応用～ATE/ATT/ATU\n\n\n元データのうち、元々Interventionが0/1の群だけで同様の事をするとATT/ATUも推定可能\nInterventionだけでなくても、興味がある変数を動かす事で周辺効果(marginal effect)を出すことが可能"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践④-1",
+    "href": "statistics/marginaleffects/index.html#実践④-1",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践④-1",
+    "text": "実践④-1\n\n例えば、患者背景がCHFでRHCの効果がどうなるかをみたい時\nまずは交互作用項を含んだ式を作成する\n\n\n\nglm(formula = death_01 ~ swang1 + cat_chf + swang1:cat_chf + \n    rcs(age, 4) + crea1 + sex + race + edu + income + wtkilo1 + \n    temp1 + meanbp1 + resp1 + hrt1 + pafi1 + paco21 + ph1 + wblc1 + \n    hema1 + sod1 + pot1 + bili1 + alb1 + cardiohx + chfhx + immunhx + \n    transhx + amihx, family = binomial, data = rhc_prep)\n\n\n\n\n\n\n\n\nParameter\nCoefficient\nSE\n95% CI\nz\np\n\n\n\n\n(Intercept)\n754.71\n2013.26\n(4.14, 1.45e+05)\n2.48\n0.013\n\n\nswang1 (RHC)\n1.49\n0.30\n(1.00, 2.23)\n1.97\n0.049\n\n\ncat chf (Others)\n1.94\n0.33\n(1.40, 2.70)\n3.97\n&lt; .001\n\n\nrcs(age ( degree)\n1.04\n6.43e-03\n(1.03, 1.05)\n6.24\n&lt; .001\n\n\nrcs(age ( degree)\n0.99\n0.01\n(0.96, 1.01)\n-0.98\n0.325\n\n\nrcs(age ( degree)\n1.04\n0.08\n(0.89, 1.21)\n0.51\n0.611\n\n\ncrea1\n1.02\n0.02\n(0.99, 1.05)\n1.16\n0.244\n\n\nsex (Male)\n1.23\n0.08\n(1.09, 1.39)\n3.42\n&lt; .001\n\n\nrace (other)\n1.05\n0.15\n(0.80, 1.38)\n0.33\n0.741\n\n\nrace (white)\n0.95\n0.08\n(0.80, 1.12)\n-0.61\n0.542\n\n\nedu\n1.02\n0.01\n(1.00, 1.04)\n1.66\n0.098\n\n\nincome ($11-$25k)\n1.15\n0.14\n(0.90, 1.47)\n1.13\n0.257\n\n\nincome ($25-$50k)\n1.00\n0.13\n(0.78, 1.28)\n0.02\n0.983\n\n\nincome (Under $11k)\n1.40\n0.17\n(1.10, 1.77)\n2.77\n0.006\n\n\nwtkilo1\n1.00\n1.05e-03\n(0.99, 1.00)\n-3.80\n&lt; .001\n\n\ntemp1\n0.92\n0.02\n(0.89, 0.95)\n-4.49\n&lt; .001\n\n\nmeanbp1\n1.00\n8.02e-04\n(0.99, 1.00)\n-4.73\n&lt; .001\n\n\nresp1\n1.00\n2.20e-03\n(1.00, 1.01)\n1.84\n0.066\n\n\nhrt1\n1.00\n7.87e-04\n(1.00, 1.00)\n3.23\n0.001\n\n\npafi1\n1.00\n2.82e-04\n(1.00, 1.00)\n1.85\n0.065\n\n\npaco21\n0.99\n2.74e-03\n(0.99, 1.00)\n-2.95\n0.003\n\n\nph1\n0.46\n0.16\n(0.23, 0.89)\n-2.29\n0.022\n\n\nwblc1\n1.00\n2.59e-03\n(1.00, 1.01)\n0.58\n0.564\n\n\nhema1\n0.98\n3.94e-03\n(0.97, 0.99)\n-4.82\n&lt; .001\n\n\nsod1\n1.00\n3.99e-03\n(0.99, 1.01)\n0.50\n0.617\n\n\npot1\n1.03\n0.03\n(0.96, 1.09)\n0.79\n0.431\n\n\nbili1\n1.06\n9.33e-03\n(1.04, 1.08)\n6.43\n&lt; .001\n\n\nalb1\n0.96\n0.04\n(0.88, 1.05)\n-0.82\n0.411\n\n\ncardiohx\n1.08\n0.10\n(0.90, 1.29)\n0.83\n0.406\n\n\nchfhx\n1.52\n0.16\n(1.25, 1.86)\n4.13\n&lt; .001\n\n\nimmunhx\n1.25\n0.09\n(1.09, 1.44)\n3.26\n0.001\n\n\ntranshx\n0.70\n0.06\n(0.59, 0.84)\n-3.94\n&lt; .001\n\n\namihx\n0.78\n0.12\n(0.57, 1.07)\n-1.55\n0.122\n\n\nswang1 (RHC) × cat chf (Others)\n0.75\n0.16\n(0.49, 1.13)\n-1.37\n0.172"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践④-2",
+    "href": "statistics/marginaleffects/index.html#実践④-2",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践④-2",
+    "text": "実践④-2\n\n次に、データセットを介入に併せて(RHCの有無)拡張した上でSubgroupを作成する"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践④-3",
+    "href": "statistics/marginaleffects/index.html#実践④-3",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践④-3",
+    "text": "実践④-3\n\nこのsubgroupにモデルをfitさせて個々人の死亡率を計算する\n\n\n\n# A tibble: 912 × 9\n   rowid rowidcf swang1 cat_chf   age crea1 estimate conf.low conf.high\n   &lt;int&gt;   &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n 1     1       1 No RHC CHF      42.1 1.30     0.360    0.266     0.467\n 2     2       2 No RHC CHF      62.1 1.30     0.610    0.534     0.681\n 3     3       3 No RHC CHF      73.5 1.90     0.687    0.614     0.752\n 4     4       4 No RHC CHF      41.3 1.5      0.335    0.260     0.420\n 5     5       5 No RHC CHF      58.0 1.60     0.457    0.361     0.557\n 6     6       6 No RHC CHF      68.4 0.800    0.475    0.387     0.564\n 7     7       7 No RHC CHF      63.5 1.10     0.561    0.472     0.645\n 8     8       8 No RHC CHF      66.9 2.40     0.566    0.476     0.652\n 9     9       9 No RHC CHF      57.5 1.10     0.597    0.514     0.675\n10    10      10 No RHC CHF      76.4 2        0.673    0.568     0.764\n# ℹ 902 more rows\n\n\n\n - 例えば、平均するとこんな感じ \n\n\n\n swang1 Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %\n No RHC    0.562     0.0306 18.3   &lt;0.001 247.4 0.502  0.622\n RHC       0.651     0.0317 20.5   &lt;0.001 307.8 0.588  0.713\n\nType: response"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践④-4",
+    "href": "statistics/marginaleffects/index.html#実践④-4",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践④-4",
+    "text": "実践④-4\n\nこのEstimateを使っていろんな指標を算出する\n\nRisk differenceの場合\n\n\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S   2.5 % 97.5 %\n   0.0884     0.0444 1.99   0.0466 4.4 0.00132  0.175\n\nTerm: swang1\nType: response\nComparison: RHC - No RHC\n\n\n\nOdds ratioの場合\n\n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.16   0.0474 4.4     1   1.34\n\nTerm: swang1\nType: response\nComparison: ln(mean(RHC) / mean(No RHC))"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationの応用propensity-score-match",
+    "href": "statistics/marginaleffects/index.html#g-computationの応用propensity-score-match",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationの応用～Propensity score match",
+    "text": "G-computationの応用～Propensity score match\n\nPropensity score matchを計算\nMatched cohortを作成\nその上で、共変量を入れたアウトカムモデルで回帰を行う\nRCTの多変量と同じでバランスをちゃんと取れる\nどの群を選ぶかでATT/ATE/ATUも簡単に計算可能！(Greifer 2025)"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤-1",
+    "href": "statistics/marginaleffects/index.html#実践⑤-1",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤-1",
+    "text": "実践⑤-1\n\nまずはPropensity score match行い、Matched dataを出す\n\n\n\n\n\nA `matchit` object\n - method: 1:1 nearest neighbor matching without replacement\n - distance: Propensity score\n             - estimated with logistic regression\n - number of obs.: 5733 (original), 4366 (matched)\n - target estimand: ATT\n - covariates: cat_chf, age, sex, race, edu, income, wtkilo1, temp1, meanbp1, resp1, hrt1, pafi1, paco21, ph1, wblc1, hema1, sod1, pot1, crea1, bili1, alb1, cardiohx, chfhx, immunhx, transhx, amihx\n\n\n\n\n\nmatched data \n\n\n# A tibble: 4,366 × 6\n   death_yn swang1 cat_chf   age distance weights\n      &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n 1        0 No RHC Others   70.3    0.502       1\n 2        1 RHC    Others   78.2    0.563       1\n 3        0 RHC    Others   46.1    0.402       1\n 4        1 No RHC Others   75.3    0.344       1\n 5        1 RHC    Others   67.9    0.302       1\n 6        0 No RHC Others   55.0    0.379       1\n 7        1 No RHC Others   43.6    0.281       1\n 8        0 No RHC Others   18.0    0.283       1\n 9        0 RHC    Others   48.4    0.490       1\n10        0 No RHC Others   34.4    0.393       1\n# ℹ 4,356 more rows"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤-2",
+    "href": "statistics/marginaleffects/index.html#実践⑤-2",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤-2",
+    "text": "実践⑤-2\n\nPropensity scoreに用いた共変量を含めてアウトカムの回帰モデルを作成する\nこの重みも用いることに注意！\n\n\n\nアウトカムモデル \n\n\nglm(formula = death_01 ~ swang1 * cat_chf + rcs(age, 4) + crea1 + \n    sex + race + edu + income + wtkilo1 + temp1 + meanbp1 + resp1 + \n    hrt1 + pafi1 + paco21 + ph1 + wblc1 + hema1 + sod1 + pot1 + \n    bili1 + alb1 + cardiohx + chfhx + immunhx + transhx + amihx, \n    family = binomial, data = dat_m, weights = weights)"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤結果",
+    "href": "statistics/marginaleffects/index.html#実践⑤結果",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤～結果",
+    "text": "実践⑤～結果\n\n\nG-computationを各々の群で行う\n\n\nATEの場合ATTの場合ATCの場合\n\n\n\n\n# A tibble: 4,366 × 8\n   rowid contrast     estimate conf.low conf.high death_01 swang1 weights\n   &lt;int&gt; &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;\n 1     1 RHC - No RHC  0.0196  -0.0137     0.0529        0 No RHC       1\n 2     2 RHC - No RHC  0.0120  -0.00850    0.0324        1 RHC          1\n 3     3 RHC - No RHC  0.0163  -0.0115     0.0441        0 RHC          1\n 4     4 RHC - No RHC  0.0156  -0.0110     0.0422        1 No RHC       1\n 5     5 RHC - No RHC  0.00965 -0.00700    0.0263        1 RHC          1\n 6     6 RHC - No RHC  0.0193  -0.0134     0.0519        0 No RHC       1\n 7     7 RHC - No RHC  0.0169  -0.0120     0.0458        1 No RHC       1\n 8     8 RHC - No RHC  0.0177  -0.0126     0.0480        0 No RHC       1\n 9     9 RHC - No RHC  0.0201  -0.0140     0.0543        0 RHC          1\n10    10 RHC - No RHC  0.0197  -0.0139     0.0533        0 No RHC       1\n# ℹ 4,356 more rows\n\n\n\n\nここから計算する\n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.03    0.122 3.0 0.992   1.07\n\nTerm: swang1\nType: response\nComparison: ln(mean(RHC) / mean(No RHC))\n\n\n\n\n\n\n# A tibble: 2,183 × 8\n   rowid contrast     estimate conf.low conf.high death_01 swang1 weights\n   &lt;int&gt; &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;\n 1     1 RHC - No RHC  0.0120  -0.00850    0.0324        1 RHC          1\n 2     2 RHC - No RHC  0.0163  -0.0115     0.0441        0 RHC          1\n 3     3 RHC - No RHC  0.00965 -0.00700    0.0263        1 RHC          1\n 4     4 RHC - No RHC  0.0201  -0.0140     0.0543        0 RHC          1\n 5     5 RHC - No RHC  0.0207  -0.0145     0.0560        0 RHC          1\n 6     6 RHC - No RHC  0.0199  -0.0140     0.0538        1 RHC          1\n 7     7 RHC - No RHC  0.00868 -0.00604    0.0234        1 RHC          1\n 8     8 RHC - No RHC  0.0165  -0.0115     0.0446        1 RHC          1\n 9     9 RHC - No RHC  0.0146  -0.0106     0.0399        0 RHC          1\n10    10 RHC - No RHC  0.0206  -0.0143     0.0556        1 RHC          1\n# ℹ 2,173 more rows\n\n\n\n\nここから計算する\n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.03    0.121 3.0 0.992   1.07\n\nTerm: swang1\nType: response\nComparison: ln(mean(RHC) / mean(No RHC))\n\n\n\n\n\n\n# A tibble: 2,183 × 8\n   rowid contrast     estimate conf.low conf.high death_01 swang1 weights\n   &lt;int&gt; &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;\n 1     1 RHC - No RHC   0.0196 -0.0137     0.0529        0 No RHC       1\n 2     2 RHC - No RHC   0.0156 -0.0110     0.0422        1 No RHC       1\n 3     3 RHC - No RHC   0.0193 -0.0134     0.0519        0 No RHC       1\n 4     4 RHC - No RHC   0.0169 -0.0120     0.0458        1 No RHC       1\n 5     5 RHC - No RHC   0.0177 -0.0126     0.0480        0 No RHC       1\n 6     6 RHC - No RHC   0.0197 -0.0139     0.0533        0 No RHC       1\n 7     7 RHC - No RHC   0.0210 -0.0146     0.0565        1 No RHC       1\n 8     8 RHC - No RHC   0.0203 -0.0143     0.0550        0 No RHC       1\n 9     9 RHC - No RHC   0.0124 -0.00937    0.0342        0 No RHC       1\n10    10 RHC - No RHC   0.0642 -0.0284     0.157         1 No RHC       1\n# ℹ 2,173 more rows\n\n\nここから計算する\n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.03    0.123 3.0 0.992   1.07\n\nTerm: swang1\nType: response\nComparison: ln(mean(RHC) / mean(No RHC))"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationの応用doubly-robust",
+    "href": "statistics/marginaleffects/index.html#g-computationの応用doubly-robust",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationの応用～Doubly robust",
+    "text": "G-computationの応用～Doubly robust\n\nPropensity score weightingを計算\nOutcomeを目標とする多変量回帰を作成\n上記を組み合わせてDoubly robustを計算可能\nどの群を選ぶかでATT/ATE/ATUも簡単に計算可能！"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤結果-1",
+    "href": "statistics/marginaleffects/index.html#実践⑤結果-1",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤～結果",
+    "text": "実践⑤～結果\n\ntreatmentを目的としたLogistic regressionを作成して、予測式を作成\n予測式とATE/ATT/ATCでそれぞれ重み付けの計算方法を変える(ATOなどもあり)\nこの重みを考慮したアウトカムモデルを作成する\nこのアウトカムモデルで、各データでのG-computationを行う\nATEは全体、ATTはRHC使用者、ATCはRHC不使用者\n\n\nATEの場合ATTの場合ATC(U)の場合\n\n\n\n\n \n 1. 重み付けの式 \n\n\nWeightIt::weightit(formula = swang_yn ~ cat_chf + age + sex + \n    race + edu + income + wtkilo1 + temp1 + meanbp1 + resp1 + \n    hrt1 + pafi1 + paco21 + ph1 + wblc1 + hema1 + sod1 + pot1 + \n    crea1 + bili1 + alb1 + cardiohx + chfhx + immunhx + transhx + \n    amihx, data = rhc_prep, method = \"glm\", estimand = \"ATE\")\n\n\n\n 2. 重みを元のデータセットに追加 \n\n\n# A tibble: 5,733 × 8\n   death_01 swang_yn   age sex    race  cat_chf crea1 weights\n      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1        0        0  70.3 Male   white Others  1.20     2.01\n 2        1        1  78.2 Female white Others  0.600    1.78\n 3        0        1  46.1 Female white Others  2.60     2.49\n 4        1        0  75.3 Female white Others  1.70     1.53\n 5        1        1  67.9 Male   white Others  3.60     3.31\n 6        0        0  86.1 Female white Others  1.40     1.12\n 7        0        0  55.0 Male   white Others  1        1.61\n 8        1        0  43.6 Male   white Others  0.700    1.39\n 9        0        0  18.0 Female white Others  1.70     1.39\n10        0        1  48.4 Female white Others  0.5      2.04\n# ℹ 5,723 more rows\n\n\n\n 3. 重みを考慮したアウトカムモデル \n\n\nWeightIt::glm_weightit(formula = death_01 ~ swang1 * cat_chf + \n    rcs(age, 4) + crea1 + sex + race + edu + income + wtkilo1 + \n    temp1 + meanbp1 + resp1 + hrt1 + pafi1 + paco21 + ph1 + wblc1 + \n    hema1 + sod1 + pot1 + bili1 + alb1 + cardiohx + chfhx + immunhx + \n    transhx + amihx, data = rhc_prep, family = binomial, weightit = wout_ate)\n\n\n\n 4. G-computation \n\n\n# A tibble: 11,466 × 6\n   rowid   age swang1 estimate conf.low conf.high\n   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n 1     1  70.3 No RHC    0.562    0.474     0.647\n 2     2  78.2 No RHC    0.801    0.729     0.858\n 3     3  46.1 No RHC    0.684    0.590     0.765\n 4     4  75.3 No RHC    0.756    0.678     0.820\n 5     5  67.9 No RHC    0.864    0.813     0.903\n 6     6  86.1 No RHC    0.824    0.757     0.876\n 7     7  55.0 No RHC    0.566    0.482     0.646\n 8     8  43.6 No RHC    0.258    0.200     0.325\n 9     9  18.0 No RHC    0.343    0.251     0.449\n10    10  48.4 No RHC    0.547    0.476     0.616\n# ℹ 11,456 more rows\n\n\n\n 5. Risk ratio and 95% confidence interval \n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.05   0.0291 5.1     1    1.1\n\nTerm: swang1\nType: probs\nComparison: ln(mean(RHC) / mean(No RHC))\n\n\n\n\n\n\n \n 1. 重み付けの式 \n\n\nWeightIt::weightit(formula = swang_yn ~ cat_chf + age + sex + \n    race + edu + income + wtkilo1 + temp1 + meanbp1 + resp1 + \n    hrt1 + pafi1 + paco21 + ph1 + wblc1 + hema1 + sod1 + pot1 + \n    crea1 + bili1 + alb1 + cardiohx + chfhx + immunhx + transhx + \n    amihx, data = rhc_prep, method = \"glm\", estimand = \"ATT\")\n\n\n\n 2. 重みを元のデータセットに追加 \n\n\n# A tibble: 5,733 × 8\n   death_01 swang_yn   age sex    race  cat_chf crea1 weights\n      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1        0        0  70.3 Male   white Others  1.20    1.01 \n 2        1        1  78.2 Female white Others  0.600   1    \n 3        0        1  46.1 Female white Others  2.60    1    \n 4        1        0  75.3 Female white Others  1.70    0.526\n 5        1        1  67.9 Male   white Others  3.60    1    \n 6        0        0  86.1 Female white Others  1.40    0.117\n 7        0        0  55.0 Male   white Others  1       0.611\n 8        1        0  43.6 Male   white Others  0.700   0.392\n 9        0        0  18.0 Female white Others  1.70    0.394\n10        0        1  48.4 Female white Others  0.5     1    \n# ℹ 5,723 more rows\n\n\n\n 3. 重みを考慮したアウトカムモデル \n\n\nWeightIt::glm_weightit(formula = death_01 ~ swang1 * cat_chf + \n    rcs(age, 4) + crea1 + sex + race + edu + income + wtkilo1 + \n    temp1 + meanbp1 + resp1 + hrt1 + pafi1 + paco21 + ph1 + wblc1 + \n    hema1 + sod1 + pot1 + bili1 + alb1 + cardiohx + chfhx + immunhx + \n    transhx + amihx, data = rhc_prep, family = binomial, weightit = wout_att)\n\n\n\n 4. G-computation \n\n\n# A tibble: 4,366 × 6\n   rowid   age swang1 estimate conf.low conf.high\n   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n 1     1  78.2 No RHC    0.834    0.770     0.883\n 2     2  46.1 No RHC    0.733    0.643     0.808\n 3     3  67.9 No RHC    0.864    0.810     0.905\n 4     4  48.4 No RHC    0.582    0.513     0.649\n 5     5  68.3 No RHC    0.554    0.434     0.669\n 6     6  74.7 No RHC    0.604    0.506     0.694\n 7     7  88.4 No RHC    0.881    0.825     0.920\n 8     8  69.0 No RHC    0.719    0.656     0.775\n 9     9  50.6 No RHC    0.800    0.716     0.864\n10    10  62.7 No RHC    0.577    0.493     0.657\n# ℹ 4,356 more rows\n\n\n\n 5. Risk ratio and 95% confidence interval \n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.04    0.115 3.1 0.991   1.08\n\nTerm: swang1\nType: probs\nComparison: ln(mean(RHC) / mean(No RHC))\n\n\n\n\n\n\n \n 1. 重み付けの式 \n\n\nWeightIt::weightit(formula = swang_yn ~ cat_chf + age + sex + \n    race + edu + income + wtkilo1 + temp1 + meanbp1 + resp1 + \n    hrt1 + pafi1 + paco21 + ph1 + wblc1 + hema1 + sod1 + pot1 + \n    crea1 + bili1 + alb1 + cardiohx + chfhx + immunhx + transhx + \n    amihx, data = rhc_prep, method = \"glm\", estimand = \"ATC\")\n\n\n\n 2. 重みを元のデータセットに追加 \n\n\n# A tibble: 5,733 × 8\n   death_01 swang_yn   age sex    race  cat_chf crea1 weights\n      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1        0        0  70.3 Male   white Others  1.20    1    \n 2        1        1  78.2 Female white Others  0.600   0.777\n 3        0        1  46.1 Female white Others  2.60    1.49 \n 4        1        0  75.3 Female white Others  1.70    1    \n 5        1        1  67.9 Male   white Others  3.60    2.31 \n 6        0        0  86.1 Female white Others  1.40    1    \n 7        0        0  55.0 Male   white Others  1       1    \n 8        1        0  43.6 Male   white Others  0.700   1    \n 9        0        0  18.0 Female white Others  1.70    1    \n10        0        1  48.4 Female white Others  0.5     1.04 \n# ℹ 5,723 more rows\n\n\n\n 3. 重みを考慮したアウトカムモデル \n\n\nWeightIt::glm_weightit(formula = death_01 ~ swang1 * cat_chf + \n    rcs(age, 4) + crea1 + sex + race + edu + income + wtkilo1 + \n    temp1 + meanbp1 + resp1 + hrt1 + pafi1 + paco21 + ph1 + wblc1 + \n    hema1 + sod1 + pot1 + bili1 + alb1 + cardiohx + chfhx + immunhx + \n    transhx + amihx, data = rhc_prep, family = binomial, weightit = wout_atc)\n\n\n\n 4. G-computation \n\n\n# A tibble: 7,100 × 6\n   rowid   age swang1 estimate conf.low conf.high\n   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n 1     1  70.3 No RHC    0.553    0.454     0.648\n 2     2  75.3 No RHC    0.771    0.685     0.839\n 3     3  86.1 No RHC    0.828    0.753     0.884\n 4     4  55.0 No RHC    0.530    0.435     0.623\n 5     5  43.6 No RHC    0.240    0.179     0.313\n 6     6  18.0 No RHC    0.401    0.288     0.527\n 7     7  34.4 No RHC    0.347    0.258     0.448\n 8     8  42.2 No RHC    0.436    0.330     0.547\n 9     9  82.0 No RHC    0.630    0.513     0.733\n10    10  78.3 No RHC    0.747    0.673     0.808\n# ℹ 7,090 more rows\n\n\n\n 5. Risk ratio and 95% confidence interval \n\n\n\n Estimate Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1.06   0.0271 5.2  1.01   1.12\n\nTerm: swang1\nType: probs\nComparison: ln(mean(RHC) / mean(No RHC))"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationの応用機械学習を用いた手法",
+    "href": "statistics/marginaleffects/index.html#g-computationの応用機械学習を用いた手法",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationの応用～機械学習を用いた手法",
+    "text": "G-computationの応用～機械学習を用いた手法\n\n厳密にはStandardizationとは違うが・・・・・・\nDatasetを倍にして機械学習で推定する方法をS-learnerという\n因果推定を行う場合は、重み付けも行うD-learnerやX-learnerもある\n信頼区間やP値が出せないのが難点"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤-s-learnerの場合",
+    "href": "statistics/marginaleffects/index.html#実践⑤-s-learnerの場合",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤ S-learnerの場合",
+    "text": "実践⑤ S-learnerの場合"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤モデル作成",
+    "href": "statistics/marginaleffects/index.html#実践⑤モデル作成",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤～モデル作成",
+    "text": "実践⑤～モデル作成\n\nMachine learning modelとしてXGBoostとする\nハイパーパラメーターはデフォルト\n何も考えずに、全体で学習させる\n\n\n\nモデルの中身\n\n\nBoosted Tree Model Specification (classification)\n\nComputational engine: xgboost \n\n\n##### xgb.Booster\ncall:\n  xgboost::xgb.train(params = list(eta = 0.3, max_depth = 6, gamma = 0, \n    colsample_bytree = 1, colsample_bynode = 1, min_child_weight = 1, \n    subsample = 1, nthread = 1, objective = \"binary:logistic\"), \n    data = x$data, nrounds = 15, evals = x$watchlist, verbose = 0)\n# of features: 38 \n# of rounds:  15 \ncallbacks:\n   evaluation_log \nevaluation_log:\n  iter training_logloss\n &lt;num&gt;            &lt;num&gt;\n     1        0.6098085\n     2        0.5866390\n   ---              ---\n    14        0.4528868\n    15        0.4455501"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤-仮想データ作成",
+    "href": "statistics/marginaleffects/index.html#実践⑤-仮想データ作成",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤ 仮想データ作成",
+    "text": "実践⑤ 仮想データ作成\n\n\n# A tibble: 11,466 × 33\n   rowid rowidcf death_yn death_days swang_yn cat_chf cat1       age crea1 sex  \n   &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;\n 1     1       1        0        180        0 Others  COPD      70.3 1.20  Male \n 2     2       2        1         45        1 Others  MOSF w/…  78.2 0.600 Fema…\n 3     3       3        0        180        1 Others  MOSF w/…  46.1 2.60  Fema…\n 4     4       4        1         37        0 Others  ARF       75.3 1.70  Fema…\n 5     5       5        1          2        1 Others  MOSF w/…  67.9 3.60  Male \n 6     6       6        0        180        0 Others  COPD      86.1 1.40  Fema…\n 7     7       7        0        180        0 Others  MOSF w/…  55.0 1     Male \n 8     8       8        1         38        0 Others  ARF       43.6 0.700 Male \n 9     9       9        0        180        0 Others  MOSF w/…  18.0 1.70  Fema…\n10    10      10        0        180        1 Others  ARF       48.4 0.5   Fema…\n# ℹ 11,456 more rows\n# ℹ 23 more variables: race &lt;chr&gt;, edu &lt;dbl&gt;, income &lt;chr&gt;, wtkilo1 &lt;dbl&gt;,\n#   temp1 &lt;dbl&gt;, meanbp1 &lt;dbl&gt;, resp1 &lt;dbl&gt;, hrt1 &lt;int&gt;, pafi1 &lt;dbl&gt;,\n#   paco21 &lt;dbl&gt;, ph1 &lt;dbl&gt;, wblc1 &lt;dbl&gt;, hema1 &lt;dbl&gt;, sod1 &lt;int&gt;, pot1 &lt;dbl&gt;,\n#   bili1 &lt;dbl&gt;, alb1 &lt;dbl&gt;, cardiohx &lt;int&gt;, chfhx &lt;int&gt;, immunhx &lt;int&gt;,\n#   transhx &lt;int&gt;, amihx &lt;int&gt;, swang1 &lt;chr&gt;"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#実践⑤-結果を纏める",
+    "href": "statistics/marginaleffects/index.html#実践⑤-結果を纏める",
+    "title": "Marginal effectsとその周辺",
+    "section": "実践⑤ 結果を纏める",
+    "text": "実践⑤ 結果を纏める\n\n\n# A tibble: 11,466 × 4\n   swang1 death_01 probability_1 predicted_class\n   &lt;chr&gt;  &lt;fct&gt;            &lt;dbl&gt; &lt;fct&gt;          \n 1 No RHC 0                0.601 1              \n 2 No RHC 1                0.795 1              \n 3 No RHC 0                0.545 1              \n 4 No RHC 1                0.745 1              \n 5 No RHC 1                0.859 1              \n 6 No RHC 0                0.642 1              \n 7 No RHC 0                0.599 1              \n 8 No RHC 1                0.265 0              \n 9 No RHC 0                0.546 1              \n10 No RHC 0                0.426 0              \n# ℹ 11,456 more rows\n\n\n# A tibble: 2 × 2\n  swang1 mean_death_prob\n  &lt;chr&gt;            &lt;dbl&gt;\n1 No RHC           0.644\n2 RHC              0.654"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationの利点",
+    "href": "statistics/marginaleffects/index.html#g-computationの利点",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationの利点",
+    "text": "G-computationの利点\n\n「この集団の介入を変えたら、どの程度良くなるか？」をダイレクトに伝えられる(King, Tomz, and Wittenberg 2000)\n\nInteractionやSplineなど複雑な式でもシンプルに結果を伝えられる\n\n予測と因果を両方行う事が可能！"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#予測average-marginal-prediction",
+    "href": "statistics/marginaleffects/index.html#予測average-marginal-prediction",
+    "title": "Marginal effectsとその周辺",
+    "section": "予測～Average marginal prediction",
+    "text": "予測～Average marginal prediction\n\n通常のアウトカム式のみで一発勝負\n一応Bias補正方法も存在する(Tibshirani et al. 2024)"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#因果average-comparison",
+    "href": "statistics/marginaleffects/index.html#因果average-comparison",
+    "title": "Marginal effectsとその周辺",
+    "section": "因果～Average comparison",
+    "text": "因果～Average comparison\n\nAIPWやTLMEを使った方が安心かもしれない\n\nただし、効率が悪い可能性もあり"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#g-computationでのadvancedな統計結果の伝え方",
+    "href": "statistics/marginaleffects/index.html#g-computationでのadvancedな統計結果の伝え方",
+    "title": "Marginal effectsとその周辺",
+    "section": "G-computationでのAdvancedな統計結果の伝え方",
+    "text": "G-computationでのAdvancedな統計結果の伝え方\n\n伝えるEstimandを正確に伝える\n「誰に」、「もし＊＊したら」、「平均的にどのような効果？」が「どれくらいの確実性」あるかを言う\n\n出来るだけ、臨床的に意味がある差かどうかを考える"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#how-to-use-marginal-effects",
+    "href": "statistics/marginaleffects/index.html#how-to-use-marginal-effects",
+    "title": "Marginal effectsとその周辺",
+    "section": "How to use marginal effects",
+    "text": "How to use marginal effects\n\n\nこれを、動悸/めまい/息切れ/倦怠感で各々行った\n\nさらに、感度分析で機械学習モデル(grf)を使ってみたりしてみた"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#result",
+    "href": "statistics/marginaleffects/index.html#result",
+    "title": "Marginal effectsとその周辺",
+    "section": "Result",
+    "text": "Result\n\n\n\n\n\n\n\n\nforest plot\n\n\n\n\n\n\n\nresponder fig\n\n\n\n\n\n\n\nML fig\n\n\n\n\n\n\nFigure 1: Main figure\n\n\n\n\n誰に(症状がある患者)、どの介入(Rate/AAD/CA)を行うとQOLがどうなるか？を臨床的に使いやすく見せることを目的\nそのため、Responder analysisも行った\n機械学習の結果もRobustnessを示すために行った"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#box先生の名言",
+    "href": "statistics/marginaleffects/index.html#box先生の名言",
+    "title": "Marginal effectsとその周辺",
+    "section": "Box先生の名言",
+    "text": "Box先生の名言\n\n\nすべてのモデルは誤っている。しかし、そのうちのいくつかは役に立つ。"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#rでのmarginal-effectsの使い方",
+    "href": "statistics/marginaleffects/index.html#rでのmarginal-effectsの使い方",
+    "title": "Marginal effectsとその周辺",
+    "section": "RでのMarginal effectsの使い方",
+    "text": "RでのMarginal effectsの使い方\n\nemmeans, marginaleffects, easystatsのmodelbasedなど\nAIMの論文にも記載があり使いやすいのはmarginaleffects"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#thank-you-for-your-listening",
+    "href": "statistics/marginaleffects/index.html#thank-you-for-your-listening",
+    "title": "Marginal effectsとその周辺",
+    "section": "Thank you for your listening!!",
+    "text": "Thank you for your listening!!"
+  },
+  {
+    "objectID": "statistics/marginaleffects/index.html#references",
+    "href": "statistics/marginaleffects/index.html#references",
+    "title": "Marginal effectsとその周辺",
+    "section": "References",
+    "text": "References\n\n\nConnors, A F, Jr, T Speroff, N V Dawson, C Thomas, F E Harrell Jr, D Wagner, N Desbiens, et al. 1996. “The Effectiveness of Right Heart Catheterization in the Initial Care of Critically Ill Patients. SUPPORT Investigators.” JAMA: The Journal of the American Medical Association 276 (11): 889–97. https://doi.org/10.1001/jama.276.11.889.\n\n\nCummings, Peter. 2009. “The Relative Merits of Risk Ratios and Odds Ratios.” Archives of Pediatrics & Adolescent Medicine 163 (5): 438–45. https://doi.org/10.1001/archpediatrics.2009.31.\n\n\nDahabreh, Issa J, and Kirsten Bibbins-Domingo. 2024. “Causal Inference about the Effects of Interventions from Observational Studies in Medical Journals.” JAMA: The Journal of the American Medical Association 331 (21): 1845–53. https://doi.org/10.1001/jama.2024.7741.\n\n\nGreifer, Noah. 2025. “Estimating Effects After Matching.” https://cran.r-project.org/web/packages/MatchIt/vignettes/estimating-effects.html.\n\n\nHernan, Miguel A. 2024. Causal Inference: What If. Edited by James M. Robins. Boca Raton: Taylor & Francis.\n\n\nKing, Gary, Michael Tomz, and Jason Wittenberg. 2000. “Making the Most of Statistical Analyses: Improving Interpretation and Presentation.” American Journal of Political Science 44 (2): 347–61. https://doi.org/10.2307/2669316.\n\n\nTibshirani, Julie, Susan Athey, Erik Sverdrup, and Stefan Wager. 2024. Grf: Generalized Random Forests. https://github.com/grf-labs/grf."
   },
   {
     "objectID": "statistics/bootstrap/index.html#クイズ",
@@ -46,7 +354,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n16.49814\n\n\n2\n22.27221\n\n\n3\n20.45309\n\n\n4\n21.39196\n\n\n5\n17.50208\n\n\n6\n19.42014\n\n\n7\n18.48225\n\n\n8\n19.61119\n\n\n9\n21.09630\n\n\n10\n21.36545\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.01106\n\n\n2\n24.16640\n\n\n3\n22.93927\n\n\n4\n21.23770\n\n\n5\n22.08104\n\n\n6\n20.13425\n\n\n7\n22.65376\n\n\n8\n25.56158\n\n\n9\n20.04097\n\n\n10\n19.37870\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -88,7 +396,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n81.37688\n193.7586\n\n\n\n2\n80.10021\n183.7292\n\n\n\n3\n69.27430\n190.2912\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n79.54363\n176.2443\n\n\n\n2\n73.56898\n192.5432\n\n\n\n3\n74.22304\n174.1898\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -215,6 +523,20 @@
     "title": "Bootstrapについて",
     "section": "References",
     "text": "References\n\n\nBland, J Martin, and Douglas G Altman. 2015. “Statistics Notes: Bootstrap Resampling Methods.” BMJ. https://doi.org/10.1136/bmj.h2622.\n\n\nCarpenter, J, and J Bithell. 2000. “Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.” Statistics in Medicine 19 (9): 1141–64. https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f.\n\n\nChernick, Michael R. 2008. Bootstrap Methods a Guide for Practitioners and Researchers. 2nd ed. Hoboken, N.J: Wiley-Interscience.\n\n\nDavison, A. C., and D. V. Hinkley. 1997. Bootstrap Methods and Their Applications. Cambridge: Cambridge University Press. http://statwww.epfl.ch/davison/BMA/.\n\n\nDiCiccio, Thomas J, and Bradley Efron. 1996. “Bootstrap Confidence Intervals.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 11 (3): 189–228. https://doi.org/10.1214/ss/1032280214.\n\n\nEfron, Bradley. 2003. “Second Thoughts on the Bootstrap.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 18 (2): 135–40. https://doi.org/10.1214/ss/1063994968.\n\n\nWicklin, Rick. n.d. “The Bias-Corrected and Accelerated (BCa) Bootstrap Interval.” https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html.\n\n\n汪金芳, and 桜井裕仁. 2011. ブートストラップ入門."
+  },
+  {
+    "objectID": "statistics/index.html",
+    "href": "statistics/index.html",
+    "title": "統計学",
+    "section": "",
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法"
+  },
+  {
+    "objectID": "statistics/index.html#スライド一覧",
+    "href": "statistics/index.html#スライド一覧",
+    "title": "統計学",
+    "section": "",
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法"
   },
   {
     "objectID": "medicine/hypoglycemia/index.html#agenda",
