@@ -1,0 +1,57 @@
+/*-- scss:defaults --*/
+// 以下でフォント、色、ボーダーなどに影響する変数を定義する
+$primary-color: #2c3e50;
+$secondary-color: #34495e;
+$heading-font-size: 2.5em;
+$body-font-size: 1.5em;
+$font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$line-height: 1.5;
+$border-radius: 5px;
+$list-font-size: 0.9em;
+$list-nested-ratio: 0.9;
+/*-- scss:rules --*/
+// 以下でCSSルールを作成する
+
+.reveal h1 {
+    color: #2c3e50;
+    font-size: 2.5em !important;
+    text-align: center;
+  }
+  
+.reveal h2 {
+    color: #34495e;
+    font-size: 2em;
+    text-align: left;
+  }
+
+.reveal h3 {
+    color: #34495e;
+    font-size: 1.5em;
+    text-align: left;
+    text-indent: 1.5em;
+
+  }
+  // リストの基本スタイル
+.reveal ul, .reveal ol {
+    font-size: $list-font-size;
+    margin-left: 1.5em;
+}
+
+// ネストされたリストのスタイル
+.reveal ul ul, .reveal ol ol,
+.reveal ul ol, .reveal ol ul {
+    font-size: calc($list-font-size * $list-nested-ratio);
+    margin-left: 1.5em;
+}
+
+  @media (max-width: 768px) {
+  .reveal h1 {
+    font-size: 2em;
+  }
+  .reveal h2 {
+    font-size: 1.5em;
+  }
+  .reveal h3 {
+    font-size: 1.2em;
+  }
+}

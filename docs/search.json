@@ -201,5 +201,215 @@
     "title": "統計学",
     "section": "",
     "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#agenda",
+    "href": "medicine/hypoglycemia/index.html#agenda",
+    "title": "低血糖についての覚書",
+    "section": "Agenda",
+    "text": "Agenda\n\n症例\n低血糖！とくらいつく前に・・・・・・\nHypoglycemia without DM\n低血糖のModernな分類\nFitting wellの場合\n低血糖の検査の考え方～低血糖の各種の検査～"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#症例",
+    "href": "medicine/hypoglycemia/index.html#症例",
+    "title": "低血糖についての覚書",
+    "section": "症例",
+    "text": "症例\n\n78歳男性\n繰り返す低血糖で入院\n食事摂取低下後の低血糖で入院→退院後に低血糖によるCPAで救急科入院→総合内科転科後も低血糖を繰り返した・・・・・・"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖とくらいつく前に",
+    "href": "medicine/hypoglycemia/index.html#低血糖とくらいつく前に",
+    "title": "低血糖についての覚書",
+    "section": "低血糖！とくらいつく前に・・・",
+    "text": "低血糖！とくらいつく前に・・・\n\n本当に意味のある低血糖？\n意味のある低血糖かどうかはWhippleの3徴を確認する\n\n低血糖症状があるかを確認する\n\n自律神経症状: 振戦、動悸、不安/興奮、発汗、空腹感、\nNeuroglycopenic symptoms: めまい、脱力、意識障害\n\n有症状時に通常の採血で血糖値&lt; 55mg/dLが証明されている\n血糖値が改善したら症状も改善する\n\n若年女性だと絶食期間があると無症状の低血糖になる事は多い"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#人体の空腹への生理的反応",
+    "href": "medicine/hypoglycemia/index.html#人体の空腹への生理的反応",
+    "title": "低血糖についての覚書",
+    "section": "人体の空腹への生理的反応",
+    "text": "人体の空腹への生理的反応\n\n\nInsulinを抑制されて血糖利用が抑制される\nGlucagon分泌が増えて、糖新生が増える\n\n脂質代謝が増えて、ケトン体(βヒドロキシ酪酸)が増加する\n\nAdrenalineおよびCortisol、GHが増加\n\n自律神経症状が出る\n\n更に血糖値が下がる(48-50 mg/dL)と脳が血糖低下に耐えられずにneuroglycopenic symptomを起こす(Rayas and Salehi 2000)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の具体的な症状",
+    "href": "medicine/hypoglycemia/index.html#低血糖の具体的な症状",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の具体的な症状",
+    "text": "低血糖の具体的な症状\n\n例えばInsulinomaで多い症状は以下の通り\n\n77%が自律神経症状\n96%が血糖低下による神経症状\n\n≥ 80%が混乱・異常行動,\n50%が意識消失\n12-19%が痙攣発作"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#症状血糖値はいつ有意",
+    "href": "medicine/hypoglycemia/index.html#症状血糖値はいつ有意",
+    "title": "低血糖についての覚書",
+    "section": "症状×血糖値はいつ有意？",
+    "text": "症状×血糖値はいつ有意？\n\n症候性\n\n65 mg/dL未満で症状があればほぼ有意\n65-79 mg/dLの場合は通常は低血糖によるものではないが、否定は出来ない\n80 mg/dL以上だと症状の原因にはならない\n\n無症候性\n\n40 mg/dL未満は有意: 繰り返す低血糖で症状が出なくなっている可能性\n40-64 mg/dL: 患者背景で考える"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の考え方",
+    "href": "medicine/hypoglycemia/index.html#低血糖の考え方",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の考え方",
+    "text": "低血糖の考え方\n\n栄養不良や吸収不良による低血糖は稀\n血糖を上げるホルモンと下げるホルモンの疾患で考えると良い\n\n血糖を上げるホルモン(原因としては少ない)\n\n甲状腺ホルモン\nGlucagon\nAdrenaline\nGHなど\n\n血糖を下げるホルモン(原因として多い)\n\nInsulin\nInsulin likeなホルモン(IGF-2など)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#ただし",
+    "href": "medicine/hypoglycemia/index.html#ただし",
+    "title": "低血糖についての覚書",
+    "section": "ただし・・・・・・",
+    "text": "ただし・・・・・・\n\n下記理由から、この考え方よりはより実践的な考え方がある"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖のmodernな分類",
+    "href": "medicine/hypoglycemia/index.html#低血糖のmodernな分類",
+    "title": "低血糖についての覚書",
+    "section": "低血糖のModernな分類",
+    "text": "低血糖のModernな分類\n\n昔は、空腹時と食後で分類していた\n\nこの区別は現在では有用性が低いことが知られている\n\n例えば、空腹時血糖の主原因とされるInsulinomaでは27%が食後低血糖を呈する(Martens and Tits 2014)\n患者が自覚できない事もちゃんと病歴を述べられないことも多い\n\n\n現在では以下のように分ける\n\n内服中または内科疾患が明らかにある患者(Ill or medicated)\n健康(そうに見える)患者(Seemingly well)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の鑑別-ill-or-medicated-individual",
+    "href": "medicine/hypoglycemia/index.html#低血糖の鑑別-ill-or-medicated-individual",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の鑑別 ~ Ill or medicated individual",
+    "text": "低血糖の鑑別 ~ Ill or medicated individual\n\n薬剤性\n\nInsulin or insulin分泌促進薬\nアルコール\n\n重症患者(Critical illnesses)\n\n肝/腎/心不全\n敗血症 (malariaを含む)\n\n内分泌疾患(ホルモン分泌不全)\n\n副腎不全(Cortisol分泌不全)\nグルカゴン・ノルアドレナリン分泌不全1\n\nNonislet cell tumor\n\nInsulin分泌不全の糖尿病患者において、下垂体疾患などによる甲状腺機能低下やGH低下で低血糖になりやすい"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#ill-or-medicatedについて",
+    "href": "medicine/hypoglycemia/index.html#ill-or-medicatedについて",
+    "title": "低血糖についての覚書",
+    "section": "Ill or medicatedについて",
+    "text": "Ill or medicatedについて\n\n重症患者の場合はしばしば低血糖になる\n\n食事量低下+(肝臓/腎臓での)糖新生の低下+Insulinのclearanceの低下\nSepsis, 肝/腎不全\n\nこの場合、色々な検査はあまり有用性は低く原病の治療のみ行う\nただし、副腎不全の検査の閾値は低くする\nNonislet cell tumorについては、事前に分かっている可能性が高い"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#nonislet-cell-tumorについて",
+    "href": "medicine/hypoglycemia/index.html#nonislet-cell-tumorについて",
+    "title": "低血糖についての覚書",
+    "section": "Nonislet cell tumorについて",
+    "text": "Nonislet cell tumorについて\n\n膵臓以外の腫瘍による低血糖\n機序として複数あり\n\nIGF-IIを産生する事によりInsulinomaのような病態になる\n悪性腫瘍自身が血糖を消費する　など\n\n巨大な肝臓癌が大きく、70%以上が10cmより大きい\n検査結果として、free IGF-IIが上昇し、IGF-I, Insulinが低下する事が知られている(Martens and Tits 2014)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の鑑別-seemingly-well",
+    "href": "medicine/hypoglycemia/index.html#低血糖の鑑別-seemingly-well",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の鑑別 ~ Seemingly well",
+    "text": "低血糖の鑑別 ~ Seemingly well\n\n内因性の高インシュリン血症\n\nInsulinoma\n機能性Β細胞疾患(Functional beta cell disorders; nesidioblastosis)\n\nNoninsulinoma pancreatogenous hypoglycemia (NIPHS)\nPost-gastric bypass hypoglycemia\n\nインシュリンへの自己免疫関連(Insulin autoimmune hypoglycemia)\n\n抗Insulin抗体 or 抗Insulin受容体抗体\n\nInsulin分泌促進薬\n\n偶発的、あるいは故意による低血糖"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#seemingly-well-individual",
+    "href": "medicine/hypoglycemia/index.html#seemingly-well-individual",
+    "title": "低血糖についての覚書",
+    "section": "Seemingly well individual",
+    "text": "Seemingly well individual\n\n簡単に言うと「きれいな原因の疾患」が隠れている\nインシュリン関連の検査をしつつ、\n頑張って低血糖時の採血をとりに行く！"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#insulinomaについて",
+    "href": "medicine/hypoglycemia/index.html#insulinomaについて",
+    "title": "低血糖についての覚書",
+    "section": "Insulinomaについて",
+    "text": "Insulinomaについて\n\n膵臓のβ細胞の良性腫瘍(10%未満が悪性)\n通常は空腹時だが、食後にも低血糖は起こり得る(前述)\nやや女性に多く、1/250,000人年の発症率\n10%未満がMEN-1と関連する(Martens and Tits 2014)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#niphsについて",
+    "href": "medicine/hypoglycemia/index.html#niphsについて",
+    "title": "低血糖についての覚書",
+    "section": "NIPHSについて",
+    "text": "NIPHSについて\n\n膵島細胞の過形成(nesidioblastosis)および、Lngerhans細胞への分化による稀な疾患\n\n腫瘍のないInsulinomaみたいな感じ\n\n食後2-4時間で低血糖が起こることが特徴で、精神神経症状が起こる(Adrian Vella, n.d.b)\n男性に多い"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#pgbhについて",
+    "href": "medicine/hypoglycemia/index.html#pgbhについて",
+    "title": "低血糖についての覚書",
+    "section": "PGBHについて",
+    "text": "PGBHについて\n\nRoux-en-Y gastric bypass (RYGB) surgeryの後の低血糖\n以前は晩期Dumping症候群と言われていた\nEtiologyははっきり分かっていないが、複数のHormon異常が原因とされている(James C Ellsmere, n.d.)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#insulin-autoimmune-hypoglycemiaについて",
+    "href": "medicine/hypoglycemia/index.html#insulin-autoimmune-hypoglycemiaについて",
+    "title": "低血糖についての覚書",
+    "section": "Insulin autoimmune hypoglycemiaについて",
+    "text": "Insulin autoimmune hypoglycemiaについて\n\n抗Insulin抗体(Insulin autoimmune syndrome)あるいは、Insulin受容体への抗体(type B insulin reistance)で起こる低血糖(Rayas and Salehi 2000)\n抗Insulin抗体は自己抗体が外れた時に低血糖になる\n\n食後すぐの高血糖と数時間経過した後の低血糖が特徴\n日本人だと、MMI内服後に起こりやすい(非Asianだと、血液疾患や自己免疫疾患背景が多い)\n\n抗Insulin受容体抗体はInsulin受容体へのpartial agonistによって起こる\n\n低力価だと低血糖、高力価だと高血糖となる\n背景にSLEなどが多い\n\n代償として血中C-peptide, Insulin濃度が異常高値となる"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#hypoglycemiaの問診",
+    "href": "medicine/hypoglycemia/index.html#hypoglycemiaの問診",
+    "title": "低血糖についての覚書",
+    "section": "Hypoglycemiaの問診",
+    "text": "Hypoglycemiaの問診\n\n日常生活\n\n栄養状態、普段の食事内容、アルコール摂取量\n\n詳細な病歴\n\nいつ・どんな症状が出る？誘発因子は？\n\n患者背景\n\n既往歴や併存症(肝腎不全など)の確認\n\n薬は？\n\nOTC、漢方薬も含めて確認する(Rayas and Salehi 2000)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#薬について",
+    "href": "medicine/hypoglycemia/index.html#薬について",
+    "title": "低血糖についての覚書",
+    "section": "薬について",
+    "text": "薬について\n\n\n\n\n\n\n\nEvidenceレベル\n薬剤名　　　　　　\n\n\n\n\nModerate quality\nCibenzoline, Gatifloxacin, Pentamidine, Quinine, Indomethacin, Glucagon during endoscopy\n\n\nLow qualtiy\nChloroquineoxaline sulfonamide, Artemisin, IGF-1, Lithium, Propoxypherene/Dextropropoxyphene\n\n\n\n\nQuinolones, Pentamidine, Quinine, BB, ACEi, IGF-1が有名\nVery low quality of evidenceは割愛"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#uptodateのアルゴリズム",
+    "href": "medicine/hypoglycemia/index.html#uptodateのアルゴリズム",
+    "title": "低血糖についての覚書",
+    "section": "UptoDateのアルゴリズム",
+    "text": "UptoDateのアルゴリズム\n\n\n副腎不全を否定する\n問診を重視 →理論的というよりは、実践的"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#dynamedのアルゴリズム",
+    "href": "medicine/hypoglycemia/index.html#dynamedのアルゴリズム",
+    "title": "低血糖についての覚書",
+    "section": "Dynamedのアルゴリズム",
+    "text": "Dynamedのアルゴリズム\n\n\n薬剤性を病歴から否定はUptoDateと一緒\n検査結果がPureじゃないconcurrent illnessを除外 →どちらかというと理論派"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#勇気を持って低血糖誘発試験",
+    "href": "medicine/hypoglycemia/index.html#勇気を持って低血糖誘発試験",
+    "title": "低血糖についての覚書",
+    "section": "勇気を持って、低血糖誘発試験",
+    "text": "勇気を持って、低血糖誘発試験\n\nInsulin/IGFによる低血糖疑い or 原因がわからない時に誘発試験の適応\n空腹時血糖 = 絶食試験、食後低血糖 = Mixed-meal test\n低血糖の時に採血を行う\n\n血糖値\nInsulin値\n血清C-peptide\n血清βヒドロキシ酪酸(aka ケトン体)\nプロインシュリン値\n(血糖降下薬のスクリーニング)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の検査の考え方各種の検査の意味",
+    "href": "medicine/hypoglycemia/index.html#低血糖の検査の考え方各種の検査の意味",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の検査の考え方〜各種の検査の意味～",
+    "text": "低血糖の検査の考え方〜各種の検査の意味～\n\n血中Insulin = 内因性+外因性のInsulin\n内因性のInsulinの量をみる検査\n\nProInsulin\n血清C-peptide\n\nInsulinが分泌していないのに血糖が低いときの検査  = 脂肪酸代謝になっている\n\n血清ケトン体"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#負荷試験",
+    "href": "medicine/hypoglycemia/index.html#負荷試験",
+    "title": "低血糖についての覚書",
+    "section": "負荷試験",
+    "text": "負荷試験\n\nMixed-meal testのやり方絶食試験のやり方\n\n\n\n施設ごとでばらつきあり\n\n\n食事前に採血をする\n固形の食事(普段の食事内容)を摂取\n\n施設によって、ここから30分毎に採血\n\n低血糖症状あるいは5時間確認したら採血\n15gの炭水化物をとらせて血糖値の推移と症状の回復を確認\nBS &lt;65 mg/dLかつ症状がある時の検査を有意とする\n\n\n\n\nAM 8時に絶食開始\nカロリー/カフェインフリーの飲み物のみ摂取可\n2hr毎に血糖測定\n70mg/dL未満になったら、30min毎に症状確認と血糖測定\n72時間経過あるいは&lt;55mg/dLまたは無症候でもBS&lt; 45 mg/dLを達成したら修了\nBS&lt; 55 mg/dLの時の採血を行う\nGlucagon 1mg ivし10, 20, 30min後の血糖測定\n\nGlucagon iv後にGluが25 mg/dL以上改善したらInsulin性低血糖を示唆する"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#検査結果の解釈",
+    "href": "medicine/hypoglycemia/index.html#検査結果の解釈",
+    "title": "低血糖についての覚書",
+    "section": "検査結果の解釈",
+    "text": "検査結果の解釈\n\n\n\n\n\n\n\n\n\n\n\n疾患名\nInsulin (microU/mL)\nC-peptide (nmol/L)\nProinsulin (pmol/L)\nβヒドロキシ酪酸 (mmol/L)\ninsulin自己抗体\n\n\n\n\n外因性insulin\n&gt;&gt;3\n&lt;0.2\n&lt;5\n≤2.7\n陰性 (時に陽性)\n\n\nInsulinoma, NIPHS1, PGBH2\n≥3\n≥0.2\n≥5\n≤2.7\n陰性\n\n\n血糖降下薬\n≥3\n≥0.2\n≥5\n≤2.7\n陰性\n\n\nInsulin自己抗体\n&gt;&gt;3\n&gt;&gt;0.2\n&gt;&gt;5\n≤2.7\n陽性\n\n\nIGFによる\n&lt;3\n&lt;0.2\n&lt;5\n≤2.7\n陰性\n\n\nNot insulin (or IGF)-mediated\n&lt;3\n&lt;0.2\n&lt;5\n&gt;2.7\n陰性\n\n\n\n\nNIPHS: noninsulinoma pancreatogenous hypoglycemia syndrome\nPGBH: post-gastric bypass hypoglycemia"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#検査結果の読み方",
+    "href": "medicine/hypoglycemia/index.html#検査結果の読み方",
+    "title": "低血糖についての覚書",
+    "section": "検査結果の読み方",
+    "text": "検査結果の読み方"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#point",
+    "href": "medicine/hypoglycemia/index.html#point",
+    "title": "低血糖についての覚書",
+    "section": "Point",
+    "text": "Point\n\nInsulin ≧3 μU/mLはInsulinによる低血糖を示唆する\nC-peptide, ProInsulinはInsulinが内因性か外因性かを判断する\n\nInsulinによる低血糖の時に、C-peptide &lt;0.2nmol/L(0.6 ng/mL)は外因性のInsulin\nProInsulin &lt;5 pmol/Lは外因性のInsulinを示唆する\nProInsulin, C-peptideが高いと悪性腫瘍を示唆し、Proinsulinが高値なほど未分化\n\nβヒドロキシ酪酸はInsulinまたはIGFによる低血糖では抑制される = 陽性の場合はInsulinやIGFによる低血糖は否定的で、Cortisol欠乏、慢性の低栄養、肝腎不全、薬剤性など\n低血糖時の検査の閾値での結果はInsulinomaに対して感度&gt;90%, 特異度&gt;70%"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#take-home-message",
+    "href": "medicine/hypoglycemia/index.html#take-home-message",
+    "title": "低血糖についての覚書",
+    "section": "Take home message",
+    "text": "Take home message\n\n低血糖を見た時には、Whippleの三徴で真の低血糖かを確認する\n低血糖はseeming wellかmedicated or illで鑑別する\n低血糖の原因はInsulin関連かInsulin以外かで考えると分かりやすい"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#reference",
+    "href": "medicine/hypoglycemia/index.html#reference",
+    "title": "低血糖についての覚書",
+    "section": "Reference",
+    "text": "Reference\n\n\nAdrian Vella. n.d.a. “Hypoglycemia in Adults Without Diabetes Mellitus: Determining the Etiology.” https://www.uptodate.com.\n\n\n———. n.d.b. “Noninsulinoma Pancreatogenous Hypoglycemia Syndrome.” https://www.uptodate.com.\n\n\nDynaMed. n.d. “Hypoglycemia in Adults - Approach to the Patient Without Diabetes.” https://www.dynamed.com/approach-to/hypoglycemia-in-adults-approach-to-the-patient-without-diabetes; DynaMed.\n\n\nJames C Ellsmere. n.d. “Bariatric Operations: Late Complications with Subacute Presentations.” https://www.uptodate.com.\n\n\nMartens, Pieter, and Jos Tits. 2014. “Approach to the Patient with Spontaneous Hypoglycemia.” European Journal of Internal Medicine 25 (5): 415–21. https://doi.org/10.1016/j.ejim.2014.02.011.\n\n\nRayas, Maria S, and Marzieh Salehi. 2000. “Non-Diabetic Hypoglycemia.” In Endotext. South Dartmouth (MA): MDText.com, Inc."
   }
 ]
