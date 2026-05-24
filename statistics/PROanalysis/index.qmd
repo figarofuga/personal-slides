@@ -13,80 +13,69 @@ execute:
   echo: false
 editor: visual
 ---
+
 # PROとは
-Patient reported outcomesの略
-「 <span style="color:#333333">PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた</span>  <span style="color:#333333">患者の健康状態に関するあらゆる報告である</span> 」
-議論は複数あるが、HR\-QOLを含む事が多い
+
+-   Patient reported outcomesの略 「 [PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた]{style="color:#333333"} [患者の健康状態に関するあらゆる報告である]{style="color:#333333"} 」 議論は複数あるが、HR-QOLを含む事が多い
+
 # PROの代表例
-![](imges/ordered_scale.png)
-* 循環器では以下のものが有名
-  * SIHDで利用するSAQ
-  * 心不全で利用するKCCQ
-  * AFで利用するAFEQT
-# 循環器の研究におけるPRO
+
+![](imges/ordered_scale.png) - 循環器では以下のものが有名 \* SIHDで利用するSAQ \* 心不全で利用するKCCQ \* AFで利用するAFEQT \# 循環器の研究におけるPRO
+
 ![](images/num_publish_pro.png)
-High impact journalではPROを含む研究が増えている！！
-_J Am Heart Assoc_  __\. 2021;10\(21\):e022353\. __
-# PROの特徴
-![](img/scale_species.png)
-* 値が高い\(or 低い\)ほうが良いが40点と80点で正確に2倍かどうかは分からない\(通常のNumericじゃない\)
-  * 順序尺度と間隔尺度の間
-* 値の下限と上限が決まっている\(通常加減は0点、上限は100点が多い\)
-  * 分布が歪んでいる
+
+-   High impact journalではPROを含む研究が増えている！！ *J Am Heart Assoc* **. 2021;10(21):e022353.**
+
+# PROの特徴 ![](images/scale_species.png)
+
+-   値が高い(or 低い)ほうが良いが40点と80点で正確に2倍かどうかは分からない(通常のNumericじゃない)
+-   順序尺度と間隔尺度の間
+-   値の下限と上限が決まっている(通常加減は0点、上限は100点が多い)
+-   分布が歪んでいる
+
 # このPROはどうやって解析すればいい？
-統計学の論文では通常の多変量回帰、beta\-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・
-結局どれがいいの？
-_Stat Methods Med Res_  __\. 2012;21\(2\):189\-214\. __
-![](img/pro_analysis_real.png)
+
+-   統計学の論文では通常の多変量回帰、beta-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・
+
+-   結局どれがいいの？ *Stat Methods Med Res* **. 2012;21(2):189-214.**
+
+![](images/pro_analysis_real.png)
+
 # 先行研究では？
-![](img/pro_analysis_real2.png)
-__多種多様な手法が使われており標準化されていない__
-_BMJ Open_  __\. 2021;11\(9\):e051673\. __
+
+![](images/pro_analysis_real2.png) - **多種多様な手法が使われており標準化されていない** *BMJ Open* **. 2021;11(9):e051673.**
+
 # ガイドラインでは？
-![](img/guideline_title.jpg)
-_The Lancet Oncology_  21 \(2\): e83–96\.
+
+![](images/guideline_title.jpg) *The Lancet Oncology* 21 (2): e83–96.
+
 # PROの確定的な解析方法は！！
-![](img/no_consensus.png)
-_ない！_
-・・・・・・
 
-それだけだと虚しいのでもう少し読み込みましょう
-# PROの解析において必須の要素
-明瞭なResearch question
-適切な解析方法に必要な要素
-欠損値について
-について検討が必要
-
-_ない！_
+![](images/no_consensus.png) *ない！* ・・・・・・
 
 それだけだと虚しいのでもう少し読み込みましょう
 
 # PROの解析において必須の要素
 
-明瞭なResearch question
-
-適切な解析方法に必要な要素
-
-欠損値について
+-   明瞭なResearch question
+-   適切な解析方法に必要な要素
+-   欠損値について
 
 について検討が必要
 
 # Research object
 
-
-
-* <span style="color:#ff0000"> __PRO研究の目的を明確にする__ </span>
-  * 治療効果・臨床的効果の証明？
-  * 記述統計・探索的研究？
-  * 群の差を、同等性・非劣性か優越性かしっかり決める
-* 患者個人間あるいは治療群間でのPROの解析を明確にする
-  * _個々の患者に焦点を当てる場合_
-    * “どの患者に”有効か？ = レスポンダーに興味がある
-    * イベント発生までの時間やレスポンダーの割合などがエンドポイント
-  * _群に焦点を当てる場合_
-    * “どちらの\(治療\)群がより有効か？ = 群間の平均的な差に興味がある
-    * PROの変化の大きさなどがエンドポイント
-
+-   [**PRO研究の目的を明確にする**]{style="color:#ff0000"}
+    -   治療効果・臨床的効果の証明？
+    -   記述統計・探索的研究？
+    -   群の差を、同等性・非劣性か優越性かしっかり決める
+-   患者個人間あるいは治療群間でのPROの解析を明確にする
+    -   *個々の患者に焦点を当てる場合*
+        -   “どの患者に”有効か？ = レスポンダーに興味がある
+        -   イベント発生までの時間やレスポンダーの割合などがエンドポイント
+    -   *群に焦点を当てる場合*
+        -   “どちらの(治療)群がより有効か？ = 群間の平均的な差に興味がある
+        -   PROの変化の大きさなどがエンドポイント
 
 # PRO解析方法での考慮点
 
@@ -100,88 +89,76 @@ _ない！_
 
 多変量回帰: ベースラインのPROの影響を考慮したい
 
-個人差を考慮した解析\(Cluster/Mixed model\): 同じ人で時間をあけて何度も取り直す事も多い
+個人差を考慮した解析(Cluster/Mixed model): 同じ人で時間をあけて何度も取り直す事も多い
 
 欠損値をうまく扱える手法: 欠損値がMNARの可能性が高い
 
 # 具体的な推奨される統計手法
 
-1回のみfollow\-upするdesign: 線形回帰
+1回のみfollow-upするdesign: 線形回帰
 
-![](img/PROの解析について_7.png)
+![](images/PROの解析について_7.png)
 
+-   2回以上のfollow-upをするdesign: Linear mixed model
+    -   時間は離散変数とする
+    -   Trajectoryの場合は時間X治療の相互作用項を入れる
 
+Time-to-event解析: Cox回帰
 
-* 2回以上のfollow\-upをするdesign: Linear mixed model
-  * 時間は離散変数とする
-  * Trajectoryの場合は時間X治療の相互作用項を入れる
+![](images/PROの解析について_8.png)
 
+[**これらの解析ではMICを考慮する事が強く推奨！**]{style="color:#ff0000"}
 
-Time\-to\-event解析: Cox回帰
+*Chest* **. 2020;158(1S):S49-S56.**
 
-![](img/PROの解析について_8.png)
-
-<span style="color:#ff0000"> __これらの解析ではMICを考慮する事が強く推奨！__ </span>
-
-_Chest_  __\. 2020;158\(1S\):S49\-S56\. __
-
-_JAMA_  __\. 2013;309\(8\):814\. __
+*JAMA* **. 2013;309(8):814.**
 
 # 線形回帰でいいの？
 
-7種類以下のカテゴリカルの場合は\(とても良い/やや良い/普通/やや悪い/とても悪い\)などではOrdinal regressionが良いかもしれない
+7種類以下のカテゴリカルの場合は(とても良い/やや良い/普通/やや悪い/とても悪い)などではOrdinal regressionが良いかもしれない
 
-分布\(残差\)が偏っていても、通常のOLSはRobustであり問題ない
+分布(残差)が偏っていても、通常のOLSはRobustであり問題ない
 
-_Stat Methods Med Res_  __\. 2012;21\(2\):189\-214\. __
+*Stat Methods Med Res* **. 2012;21(2):189-214.**
 
-__Piantadosi S\, Meinert CL\. __  _Principles and Practice of Clinical Trials_  __\. 1st ed\. \(Meinert CL\, ed\.\)\. Springer International Publishing; 2022\. __
+**Piantadosi S, Meinert CL.** *Principles and Practice of Clinical Trials* **. 1st ed. (Meinert CL, ed.). Springer International Publishing; 2022.**
 
 # ただし・・・・・・
 
-![](img/PROの解析について_9.png)
+![](images/PROの解析について_9.png)
 
+-   差をアウトカムに回帰はやらないほうが良い！
+    -   Baselineが良い患者ほど予後不良になってしまう
+-   BaselineのPROで補正をした上で＊年後のPROを予測するほうが良い
 
-
-* 差をアウトカムに回帰はやらないほうが良い！
-  * Baselineが良い患者ほど予後不良になってしまう
-* BaselineのPROで補正をした上で＊年後のPROを予測するほうが良い
-
-
-__https://hbiostat\.org/bbr/change__
+**https://hbiostat.org/bbr/change**
 
 # 欠損値について
 
-
-
-* PRO cohortと研究全体のcohortの違いを考える
-  * 何を代表した母集団か考えて解析する
-* 死亡した患者のPROは解析できない為、単なる欠損値としない
-* 欠損率は複数の方法で報告
-  * variable denominator: その時点でPROを出せる患者を分母とする欠損率
-  * fixed denominator: 研究のコホート全体を分母とする欠損率
-* 明示的なSingle imputation\(平均値やLOCF\)は避けよ
-* 最低2種類の欠損値の対処方法を用いて感度分析とせよ
-
+-   PRO cohortと研究全体のcohortの違いを考える
+    -   何を代表した母集団か考えて解析する
+-   死亡した患者のPROは解析できない為、単なる欠損値としない
+-   欠損率は複数の方法で報告
+    -   variable denominator: その時点でPROを出せる患者を分母とする欠損率
+    -   fixed denominator: 研究のコホート全体を分母とする欠損率
+-   明示的なSingle imputation(平均値やLOCF)は避けよ
+-   最低2種類の欠損値の対処方法を用いて感度分析とせよ
 
 # 欠損値の対処法について
 
-
-
-* 明示的なものは推奨されない→分散が減ってしまう
-  * 平均値、LOCF、中央値代入など
-* 現実的には多重代入でPattern mixture modelを使う事も
-* MAR：多重代入
-* MNAR：Pattern mixture modelを用いたMI
-
+-   明示的なものは推奨されない→分散が減ってしまう
+    -   平均値、LOCF、中央値代入など
+-   現実的には多重代入でPattern mixture modelを使う事も
+-   MAR：多重代入
+-   MNAR：Pattern mixture modelを用いたMI
 
 # Pattern mixture model
 
-![](img/PROの解析について_10.png)
+![](images/PROの解析について_10.png)
 
 MNARの時の感度分析で用いる手法
 
-欠損パターンが似ている情報\+制約\(=仮定\)をおく事によって、補完する
+欠損パターンが似ている情報+制約(=仮定)をおく事によって、補完する
 
 イメージだとデータがある人とない人の結果の差Δを他のすべてのデータを用いて埋めるイメージ
 
@@ -195,122 +172,110 @@ PROをメインの解析において、複数の方法がある
 
 複数回計測している場合はBayesian Joint modelを行う
 
-Ordinal regressionの応用を行う\(後述\)
+Ordinal regressionの応用を行う(後述)
 
 直感的かつ簡単なのは1だがPowerが減る。RCTやる人は2か3が良いかも
 
-_Circ Cardiovasc Qual Outcomes_  __\. 2013;6\(5\):591\-597\. __
+*Circ Cardiovasc Qual Outcomes* **. 2013;6(5):591-597.**
 
-_Circ Cardiovasc Qual Outcomes_  __\. 2019;12\(6\)\.__
+*Circ Cardiovasc Qual Outcomes* **. 2019;12(6).**
 
 # Visualizationについて
 
-![](img/PROの解析について_11.jpg)
+![](images/PROの解析について_11.jpg)
 
-![](img/PROの解析について_12.png)
+![](images/PROの解析について_12.png)
 
-__個々人のPROMデータ: bar or Line plotが良い__
+**個々人のPROMデータ: bar or Line plotが良い**
 
-__治療群の平均のPROMデータ：Line plot\, Pie chart > bar chart__
+**治療群の平均のPROMデータ：Line plot, Pie chart \> bar chart**
 
-_J Patient Rep Outcomes_  __\. 2022;6\(1\):18\. __
+*J Patient Rep Outcomes* **. 2022;6(1):18.**
 
 # よりよい可視化のために
 
-![](img/PROの解析について_13.png)
+![](images/PROの解析について_13.png)
 
-__・__  __警告点を書く__
+**・** **警告点を書く**
 
-__・悪い結果を赤にする__
+**・悪い結果を赤にする**
 
-_Qual Life Res_  __\. 2019;28\(2\):345\-356\. __
+*Qual Life Res* **. 2019;28(2):345-356.**
 
 # 群レベルのVisualization
 
-![](img/PROの解析について_14.png)
+![](images/PROの解析について_14.png)
 
 95%信頼区間を記述する
 
-_Qual Life Res_  __\. 2019;28\(2\):345\-356\. __
+*Qual Life Res* **. 2019;28(2):345-356.**
 
 # 一応、特殊な手法を2つほど・・・・・・・
 
-Ceiling/Floorがあるときに使えるCensored regression \( = tobit model\)
+Ceiling/Floorがあるときに使えるCensored regression ( = tobit model)
 
 Ordered regression model
 
-![](img/PROの解析について_15.png)
+![](images/PROの解析について_15.png)
 
 # Tobit modelとは
 
-
-
-* ある範囲外の値が丸め込まれる\(打ち切られる\)ときの回帰
-  * テストの点数\(上限が100点\)など
-* 打ち切られた点が実はもっと高い値がありうると想定した上で回帰を行う
-* 上限、下限ともに対応可能
-* 実は生存分析はこの一種
-
+-   ある範囲外の値が丸め込まれる(打ち切られる)ときの回帰
+    -   テストの点数(上限が100点)など
+-   打ち切られた点が実はもっと高い値がありうると想定した上で回帰を行う
+-   上限、下限ともに対応可能
+-   実は生存分析はこの一種
 
 # Ordinary regression modelとは
 
-
-
-* 順序のあるカテゴリー変数で3種類以上の応答の時に使える
-  * Ex\) NYHAなど
-* Proportional odds仮定があり、常に上の段階に行くときには似たような方向性がある
-* 厳密に差が一緒じゃなくても一つ一つのOdds比の平均値として1つの値が出る
-* 実は仮定が少なくRobustな上に、検出力も高い
-
+-   順序のあるカテゴリー変数で3種類以上の応答の時に使える
+    -   Ex) NYHAなど
+-   Proportional odds仮定があり、常に上の段階に行くときには似たような方向性がある
+-   厳密に差が一緒じゃなくても一つ一つのOdds比の平均値として1つの値が出る
+-   実は仮定が少なくRobustな上に、検出力も高い
 
 # Ordered regression modelの応用
 
-![](img/PROの解析について_16.png)
+![](images/PROの解析について_16.png)
 
+-   死亡をアウトカムの1つに組み入れてしまう
+    -   負の値がだめなので反転させている
+    -   CV deathの方が介入で意義がありそうなので高い値にしている
+-   この方法だと、かなり高い検出力を出せる
+-   しかし、KCCQの1点の差と心不全入院と非心血管死亡のOdds比が一緒という仮定の値のみ得られる
+-   →傾向には有用だが、数値の大小の意味が薄れる
 
-
-* 死亡をアウトカムの1つに組み入れてしまう
-  * 負の値がだめなので反転させている
-  * CV deathの方が介入で意義がありそうなので高い値にしている
-* この方法だと、かなり高い検出力を出せる
-* しかし、KCCQの1点の差と心不全入院と非心血管死亡のOdds比が一緒という仮定の値のみ得られる
-* →傾向には有用だが、数値の大小の意味が薄れる
-
-
-_[Statistical Thinking – Proportional Odds Model Power Calculations for Ordinal and Mixed Ordinal/Continuous Outcomes \(fharrell\.com\)](https://www.fharrell.com/post/pop/)_
+[*Statistical Thinking – Proportional Odds Model Power Calculations for Ordinal and Mixed Ordinal/Continuous Outcomes (fharrell.com)*](https://www.fharrell.com/post/pop/)
 
 # 実践！
 
-
-
-* KiCS\-AFのデータ
-  * 2012\-2018年の11施設でのAFの患者
-  * AFEQTを登録直後と1年後に各々取っている
-* AFEQTは4\+1つのドメイン
-  * Overall summary\(以下のSymptom \+ Daily activity \+ Treatment concernの平均\)
-  * Symptom
-  * Daily activity
-  * Treatment concern
-  * Treatment satisfaction
-
+-   KiCS-AFのデータ
+    -   2012-2018年の11施設でのAFの患者
+    -   AFEQTを登録直後と1年後に各々取っている
+-   AFEQTは4+1つのドメイン
+    -   Overall summary(以下のSymptom + Daily activity + Treatment concernの平均)
+    -   Symptom
+    -   Daily activity
+    -   Treatment concern
+    -   Treatment satisfaction
 
 # AFEQTの正規性の確認
 
-![](img/PROの解析について_17.png)
+![](images/PROの解析について_17.png)
 
-![](img/PROの解析について_18.png)
+![](images/PROの解析について_18.png)
 
 # Baselineと1年後のAFEQTの関連
 
-![](img/PROの解析について_19.png)
+![](images/PROの解析について_19.png)
 
-__Baselineと1年後のAFEQTのは相関している__
+**Baselineと1年後のAFEQTのは相関している**
 
 # 欠損値パターンについて
 
-![](img/PROの解析について_20.png)
+![](images/PROの解析について_20.png)
 
-![](img/PROの解析について_21.png)
+![](images/PROの解析について_21.png)
 
 Baselineの欠損はほぼない
 
@@ -318,19 +283,19 @@ Baselineの欠損はほぼない
 
 # 1年後の欠損値とハードアウトカムの関係
 
-![](img/PROの解析について_22.png)
+![](images/PROの解析について_22.png)
 
-![](img/PROの解析について_23.png)
+![](images/PROの解析について_23.png)
 
 Satisfyの欠損は多いが、明らかなアウトカムとのパターンはなさそう
 
-Missingの患者はBNP\, CKD\, 貧血などの重症度が高めの可能性あり
+Missingの患者はBNP, CKD, 貧血などの重症度が高めの可能性あり
 
 # 簡単な解析
 
 死亡を無視した解析
 
-BaselineのOverall summary\(RCSで非線形を表現\)\+複数の交絡因子で回帰
+BaselineのOverall summary(RCSで非線形を表現)+複数の交絡因子で回帰
 
 通常のOLS
 
@@ -338,7 +303,7 @@ Ordinary regression model
 
 Tobit analysis
 
-1年以内の治療\(Ablation/Rate/AAD\)との関連を解析、結果としては
+1年以内の治療(Ablation/Rate/AAD)との関連を解析、結果としては
 
 因果関係を推定出来るか？
 
@@ -346,51 +311,48 @@ Tobit analysis
 
 # Results
 
-![](img/PROの解析について_24.png)
+![](images/PROの解析について_24.png)
 
-![](img/PROの解析について_25.png)
+![](images/PROの解析について_25.png)
 
-__全て同じ傾向で有意になっている__
+**全て同じ傾向で有意になっている**
 
-__OLSとTobitはPowerが大きい__
+**OLSとTobitはPowerが大きい**
 
-![](img/PROの解析について_26.png)
+![](images/PROの解析について_26.png)
 
-![](img/PROの解析について_27.png)
+![](images/PROの解析について_27.png)
 
-__DiscriminationもCalibrationも大きく変わらない__
+**DiscriminationもCalibrationも大きく変わらない**
 
-__→OLSがやはりいちばん解釈しやすい__
+**→OLSがやはりいちばん解釈しやすい**
 
 # 死亡を考慮した解析
 
 死亡した患者を以下のように解析
 
-死亡または1年後のAFEQT\-OS、60点未満あるいは18点より低下を”Poor outcome”としてロジスティック回帰
+死亡または1年後のAFEQT-OS、60点未満あるいは18点より低下を”Poor outcome”としてロジスティック回帰
 
-死亡を101点\, AFEQT\-OSを0を100点・・・・・・としてOrdinary regression model
+死亡を101点, AFEQT-OSを0を100点・・・・・・としてOrdinary regression model
 
-で1年以内の治療\(Ablation/Rate/AAD\)との関連を解析
+で1年以内の治療(Ablation/Rate/AAD)との関連を解析
 
 # Results
 
-![](img/PROの解析について_28.png)
+![](images/PROの解析について_28.png)
 
 # Take home message
 
-
-
-* PROをメインとした解析をする時は
-  * Research questionを明確にする
-  * BaselineのPROの調整を検討
-  * 欠損値の扱いについて　　　　　十分に検討する
-* MCIDなどを使って、解釈可能な解析をする
-* 細かい解析法はあまり重要じゃなく、Linear \(mixed\) regression位で良い
-* 死亡の扱いに要注意！！
-
+-   PROをメインとした解析をする時は
+    -   Research questionを明確にする
+    -   BaselineのPROの調整を検討
+    -   欠損値の扱いについて　　　　　十分に検討する
+-   MCIDなどを使って、解釈可能な解析をする
+-   細かい解析法はあまり重要じゃなく、Linear (mixed) regression位で良い
+-   死亡の扱いに要注意！！
 
 # わかりやすい参考文献
 
-_[患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ \(lifescience\.co\.jp\)](https://www.lifescience.co.jp/pro/index.html)_
+[*患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)*](https://www.lifescience.co.jp/pro/index.html)
 
-_[https://www\.lifescience\.co\.jp/pro/article02\-2\-9\.html\#main](https://www.lifescience.co.jp/pro/article02-2-9.html#main)_
+[*https://www.lifescience.co.jp/pro/article02-2-9.html#main*](https://www.lifescience.co.jp/pro/article02-2-9.html#main)
