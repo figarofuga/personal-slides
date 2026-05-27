@@ -1,0 +1,214 @@
+id,gender,age_cat,married,education_cat,employment,address,SES,t1dm,t2dm,htn,ckd,cvd,icu,eq5d5l_mobility,eq5d5l_selfcare,eq5d5l_activity,eq5d5l_pain,eq5d5l_anxiety,eq5d5l_vas
+1,Female,18-40,Married,Primary school,Unemployed/retired,Rural,Medium,No,No,No,No,No,No,1,1,2,2,1,80
+2,Male,18-40,Single,University,Employed,Urban,Medium,No,Yes,No,No,No,No,2,1,3,1,3,60
+3,Male,18-40,Married,Primary school,Unemployed/retired,Urban,Medium,No,No,Yes,Yes,No,No,2,2,2,2,2,70
+4,Female,over 60,Single,University,Employed,Urban,Medium,No,No,No,Yes,No,No,2,1,1,1,2,80
+5,Male,over 60,Married,Primary school,Unemployed/retired,Urban,Medium,Yes,No,No,No,No,No,2,2,1,2,1,75
+6,Male,over 60,Widowed,Primary school,Employed,Urban,Medium,No,Yes,Yes,Yes,No,No,3,3,2,2,2,60
+7,Male,41-60,Single,University,Employed,Urban,Medium,No,No,No,No,No,No,1,1,1,1,1,95
+8,Male,41-60,Single,Primary school,Unemployed/retired,Urban,Low,No,No,No,Yes,No,No,2,2,1,2,2,70
+9,Female,over 60,Married,Primary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,No,2,2,2,2,2,60
+10,Male,18-40,Single,University,Employed,Urban,Medium,No,No,No,Yes,No,No,1,2,2,3,2,70
+11,Male,over 60,Single,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,No,1,2,2,1,2,80
+12,Female,18-40,Single,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,No,1,2,2,2,3,70
+13,Male,41-60,Single,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,No,2,3,3,3,2,60
+14,Female,41-60,Single,Primary school,Unemployed/retired,Urban,Medium,No,No,No,Yes,No,No,3,3,3,2,2,50
+15,Female,41-60,Single,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,No,3,3,4,3,2,50
+16,Male,41-60,Married,Illeterate,Unemployed/retired,Urban,Medium,No,No,No,No,No,No,1,2,1,1,1,75
+17,Female,18-40,Married,University,Employed,Urban,Medium,No,Yes,Yes,Yes,No,No,2,2,1,1,2,70
+18,Female,41-60,Widowed,University,Employed,Urban,Medium,No,No,Yes,Yes,No,No,1,2,1,1,1,75
+19,Female,over 60,Married,Primary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,2,2,1,1,2,70
+20,Male,41-60,Married,Primary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,2,1,2,2,1,80
+21,Male,41-60,Married,University,Employed,Urban,Medium,No,No,No,Yes,No,No,2,2,2,2,1,80
+22,Male,over 60,Married,Primary school,Unemployed/retired,Urban,Low,No,No,Yes,Yes,No,No,1,2,1,2,2,80
+23,Male,41-60,Married,Illeterate,Employed,Urban,Medium,No,No,Yes,Yes,Yes,No,2,3,2,2,3,60
+24,Male,over 60,Married,University,Employed,Urban,Medium,No,Yes,No,No,No,No,2,2,2,2,4,70
+25,Male,18-40,Married,Illeterate,Unemployed/retired,Urban,Medium,No,No,No,Yes,No,No,2,2,2,2,2,50
+26,Male,41-60,Widowed,Illeterate,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,3,4,2,5,40
+27,Female,over 60,Married,Primary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,2,2,2,1,1,70
+28,Male,18-40,Married,Primary school,Unemployed/retired,Urban,Medium,No,No,Yes,Yes,No,No,1,1,1,1,1,90
+29,Male,over 60,Widowed,University,Unemployed/retired,Urban,Low,No,No,No,No,No,No,3,2,3,1,3,50
+30,Male,over 60,Married,Illeterate,Employed,Urban,Medium,No,Yes,No,No,No,No,3,3,2,3,3,50
+31,Male,41-60,Married,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,No,2,2,3,2,3,65
+32,Male,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,2,2,3,2,3,65
+33,Male,41-60,Married,University,Employed,Urban,Medium,No,No,Yes,Yes,No,No,3,3,4,3,2,50
+34,Male,over 60,Married,University,Employed,Urban,Medium,No,No,No,Yes,No,No,3,3,3,2,2,60
+35,Female,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,2,2,3,1,1,70
+36,Female,41-60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,2,3,3,2,3,50
+37,Male,over 60,Married,University,Employed,Rural,Medium,No,No,Yes,No,No,No,2,2,2,3,3,60
+38,Male,over 60,Married,Illeterate,Unemployed/retired,Rural,Low,No,No,Yes,Yes,No,No,2,1,2,2,2,70
+39,Male,over 60,Married,University,Unemployed/retired,Urban,Low,No,No,Yes,Yes,No,No,2,2,3,2,3,55
+40,Male,41-60,Married,University,Employed,Urban,Medium,No,Yes,Yes,Yes,Yes,No,3,2,2,3,2,50
+41,Male,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Medium,No,No,Yes,Yes,No,No,3,1,1,2,2,75
+42,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,3,2,3,3,3,55
+43,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,1,1,2,2,50
+44,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,2,2,2,2,80
+45,Male,over 60,Widowed,Illeterate,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,1,1,1,2,1,80
+46,Male,over 60,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,2,2,3,2,2,60
+47,Male,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,3,2,3,2,2,50
+48,Female,18-40,Married,Illeterate,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,1,2,1,1,1,75
+49,Female,41-60,Widowed,University,Employed,Urban,Medium,No,Yes,No,No,No,No,2,1,2,1,1,70
+50,Male,over 60,Married,University,Employed,Urban,Medium,No,No,Yes,Yes,No,No,3,3,3,2,2,50
+51,Male,18-40,Married,Illeterate,Employed,Urban,Medium,No,No,No,Yes,No,No,2,3,3,2,3,40
+52,Female,over 60,Married,University,Unemployed/retired,Rural,Medium,No,Yes,No,No,No,No,2,1,3,2,2,40
+53,Male,over 60,Married,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,No,1,2,1,1,2,70
+54,Male,over 60,Married,Illeterate,Employed,Urban,Medium,Yes,No,No,No,No,No,2,2,1,2,2,80
+55,Female,over 60,Married,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,1,2,1,1,1,80
+56,Male,41-60,Married,Primary school,Unemployed/retired,Rural,Low,Yes,No,No,No,No,No,2,2,1,2,2,80
+57,Female,over 60,Married,University,Employed,Urban,Medium,Yes,No,No,No,No,No,2,2,3,2,3,65
+58,Female,over 60,Married,Secondary school,Unemployed/retired,Urban,Medium,Yes,No,No,No,No,No,2,3,1,2,2,75
+59,Male,18-40,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,No,No,No,No,2,3,1,2,1,70
+60,Female,41-60,Married,University,Employed,Urban,Medium,Yes,No,No,No,No,No,1,1,2,2,3,70
+61,Male,over 60,Married,University,Employed,Urban,Medium,Yes,No,No,No,No,No,2,2,3,1,2,55
+62,Male,18-40,Married,University,Employed,Urban,Medium,No,Yes,No,No,No,No,2,2,2,3,2,65
+63,Female,41-60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,3,3,3,2,2,50
+64,Female,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,3,3,3,2,2,70
+65,Female,over 60,Married,University,Employed,Urban,Medium,Yes,No,No,No,No,No,2,2,2,2,2,50
+66,Female,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,1,2,2,1,2,70
+67,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,3,2,2,3,60
+68,Female,over 60,Married,Illeterate,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,3,2,2,3,60
+69,Male,over 60,Married,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,3,2,2,2,3,50
+70,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,1,1,2,1,75
+71,Female,18-40,Widowed,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,2,2,1,2,2,50
+72,Female,over 60,Married,Illeterate,Unemployed/retired,Urban,Medium,Yes,No,No,No,No,No,2,2,3,2,2,75
+73,Male,over 60,Widowed,Secondary school,Employed,Urban,Medium,No,No,No,No,No,No,3,2,1,2,3,60
+74,Male,18-40,Married,Secondary school,Employed,Urban,Medium,No,No,No,No,No,No,2,2,3,2,2,60
+75,Female,18-40,Married,Secondary school,Employed,Urban,Medium,No,No,No,No,No,No,3,2,1,2,2,70
+76,Male,18-40,Married,Secondary school,Employed,Urban,Medium,No,No,No,No,No,No,1,2,2,2,3,70
+77,Female,18-40,Married,Primary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,2,2,2,1,60
+78,Male,18-40,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,2,2,3,2,3,60
+79,Male,18-40,Married,University,Employed,Urban,Medium,Yes,No,No,No,No,No,2,2,3,2,2,50
+80,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,2,2,2,2,2,60
+81,Male,41-60,Married,Secondary school,Unemployed/retired,Rural,Medium,No,No,No,No,No,No,2,1,2,2,3,70
+82,Female,41-60,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,No,No,No,No,2,2,2,2,2,60
+83,Male,over 60,Married,University,Employed,Rural,Medium,Yes,No,Yes,No,No,No,2,1,2,2,1,80
+84,Female,over 60,Married,Secondary school,Unemployed/retired,Rural,Low,No,Yes,Yes,No,No,No,1,3,1,2,2,75
+85,Male,41-60,Married,Secondary school,Employed,Rural,Low,No,Yes,No,Yes,No,No,1,2,2,2,3,70
+86,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Low,No,No,Yes,Yes,No,No,2,2,2,1,2,60
+87,Male,41-60,Married,University,Employed,Urban,Medium,No,Yes,Yes,Yes,Yes,No,1,2,2,1,1,80
+88,Female,over 60,Married,Illeterate,Unemployed/retired,Urban,Low,No,No,No,No,No,No,3,3,3,3,2,50
+89,Female,18-40,Married,Illeterate,Unemployed/retired,Rural,Medium,No,No,No,No,No,No,2,2,1,1,1,85
+90,Male,18-40,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,2,1,1,2,3,50
+91,Male,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Medium,Yes,No,No,No,No,No,3,3,3,3,3,50
+92,Male,41-60,Married,Primary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,2,2,1,2,60
+93,Male,18-40,Married,Primary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,1,2,2,2,75
+94,Female,over 60,Married,Illeterate,Employed,Urban,Medium,No,No,No,No,No,No,2,2,3,2,2,50
+95,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,1,2,2,3,60
+96,Male,41-60,Married,Illeterate,Employed,Urban,Medium,No,No,No,No,No,No,1,1,2,1,1,90
+97,Male,over 60,Married,Primary school,Employed,Urban,Medium,No,Yes,No,No,No,No,2,1,2,2,2,75
+98,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,1,1,2,1,2,70
+99,Female,over 60,Married,Illeterate,Employed,Urban,Medium,Yes,No,No,No,No,No,2,1,2,3,2,60
+100,Female,18-40,Married,Illeterate,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,2,3,3,3,50
+101,Female,41-60,Married,Secondary school,Unemployed/retired,Rural,Medium,No,Yes,No,No,No,No,3,1,3,2,3,40
+102,Male,41-60,Married,Secondary school,Unemployed/retired,Rural,Medium,No,Yes,No,No,No,No,3,1,2,2,3,50
+103,Male,over 60,Married,Illeterate,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,1,1,1,1,2,90
+104,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,1,1,2,1,2,80
+105,Male,41-60,Widowed,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,1,1,1,1,2,90
+106,Male,41-60,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,3,1,2,3,3,50
+107,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,1,1,1,1,2,95
+108,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,1,1,1,1,2,90
+109,Male,over 60,Widowed,Illeterate,Employed,Urban,Medium,Yes,No,No,No,No,No,2,1,3,1,3,50
+110,Male,18-40,Married,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,1,1,1,1,2,90
+111,Male,18-40,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,1,1,1,1,2,50
+112,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,No,2,1,3,1,1,70
+113,Female,18-40,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,Yes,Yes,Yes,No,2,1,2,1,3,60
+114,Male,18-40,Married,Primary school,Employed,Urban,Medium,No,Yes,Yes,Yes,Yes,No,3,1,2,2,2,60
+115,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,Yes,No,No,3,1,3,2,2,60
+116,Male,over 60,Married,Primary school,Employed,Urban,Medium,Yes,No,No,Yes,Yes,No,1,1,2,2,2,70
+117,Male,41-60,Widowed,Secondary school,Unemployed/retired,Rural,Medium,No,No,No,No,No,No,3,3,3,3,3,40
+118,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,3,4,3,2,50
+119,Male,41-60,Widowed,Secondary school,Unemployed/retired,Rural,Low,No,Yes,No,No,No,No,3,1,3,3,3,60
+120,Female,over 60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,No,2,3,5,3,3,70
+121,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,No,3,3,3,2,2,60
+122,Male,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,2,2,2,2,60
+123,Female,41-60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,3,2,3,3,3,60
+124,Male,over 60,Widowed,Primary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,3,3,3,3,60
+125,Male,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,3,3,3,1,3,40
+126,Male,41-60,Married,Illeterate,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,3,4,3,3,60
+127,Male,over 60,Married,Illeterate,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,3,2,3,3,3,40
+128,Male,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,No,No,No,No,No,No,2,3,2,3,2,60
+129,Male,18-40,Married,University,Employed,Urban,Medium,No,No,No,No,No,No,2,2,2,2,2,50
+130,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,2,1,2,2,2,50
+131,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,Yes,No,No,No,No,No,3,1,2,3,3,50
+132,Female,over 60,Widowed,Illeterate,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,2,4,2,3,50
+133,Female,18-40,Widowed,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,2,2,2,3,2,60
+134,Female,18-40,Married,Primary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,2,2,3,3,60
+135,Male,18-40,Married,Primary school,Employed,Urban,Medium,Yes,No,No,No,No,No,2,3,3,3,3,60
+136,Male,18-40,Married,Primary school,Employed,Rural,Medium,No,No,No,No,No,No,3,2,2,2,2,40
+137,Male,18-40,Married,Illeterate,Unemployed/retired,Rural,Low,No,No,No,Yes,No,No,3,3,3,2,2,50
+138,Female,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,Yes,No,No,3,2,2,3,2,60
+139,Female,18-40,Widowed,Secondary school,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,No,3,2,2,2,2,60
+140,Female,18-40,Widowed,Secondary school,Unemployed/retired,Urban,Low,Yes,No,Yes,Yes,Yes,No,2,2,2,3,3,50
+141,Male,18-40,Married,Illeterate,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,3,2,3,2,3,50
+142,Male,41-60,Married,Illeterate,Unemployed/retired,Rural,Low,No,Yes,No,No,No,No,3,2,2,2,2,60
+143,Male,18-40,Widowed,Illeterate,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,3,4,3,3,3,50
+144,Male,41-60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,2,2,2,2,70
+145,Male,41-60,Married,Secondary school,Employed,Urban,Medium,No,No,Yes,No,No,No,2,2,2,2,2,60
+146,Female,41-60,Married,Secondary school,Unemployed/retired,Rural,Medium,No,No,Yes,No,No,No,2,2,2,3,2,60
+147,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,No,No,Yes,No,No,2,2,2,3,2,70
+148,Male,18-40,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,3,2,2,2,2,60
+149,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,No,No,No,No,3,3,3,2,3,40
+150,Female,18-40,Widowed,Secondary school,Unemployed/retired,Urban,Medium,No,No,Yes,Yes,No,No,2,2,3,3,2,60
+151,Male,41-60,Widowed,Secondary school,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,2,2,2,3,3,80
+152,Male,18-40,Married,Illeterate,Unemployed/retired,Urban,Low,No,Yes,No,No,No,No,3,2,3,2,3,60
+153,Male,18-40,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,2,2,2,2,3,60
+154,Female,41-60,Widowed,Secondary school,Unemployed/retired,Urban,Medium,No,No,Yes,Yes,No,No,2,2,2,2,2,70
+155,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,Yes,Yes,No,No,3,3,3,3,5,50
+156,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,No,No,No,2,2,3,2,4,50
+157,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Low,Yes,No,Yes,Yes,Yes,No,2,2,2,2,2,60
+158,Female,over 60,Widowed,Secondary school,Unemployed/retired,Rural,Low,No,No,Yes,Yes,No,No,3,2,2,2,3,50
+159,Male,over 60,Single,University,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,5,3,4,4,5,30
+160,Female,41-60,Single,Illeterate,Employed,Urban,Medium,Yes,No,No,Yes,Yes,Yes,3,2,3,3,2,60
+161,Male,41-60,Single,University,Employed,Urban,Medium,Yes,No,No,No,No,Yes,2,2,1,1,2,60
+162,Female,41-60,Married,University,Unemployed/retired,Rural,Low,No,No,No,Yes,No,Yes,3,3,3,3,3,50
+163,Female,41-60,Single,Primary school,Unemployed/retired,Urban,Low,No,No,No,Yes,No,Yes,3,2,2,3,2,60
+164,Male,41-60,Single,Primary school,Unemployed/retired,Urban,Low,No,No,Yes,Yes,No,Yes,3,1,3,3,3,40
+165,Male,41-60,Single,Secondary school,Unemployed/retired,Urban,Low,No,Yes,Yes,Yes,Yes,Yes,3,4,4,3,5,40
+166,Female,18-40,Single,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,Yes,No,Yes,2,2,2,1,1,80
+167,Female,18-40,Married,Primary school,Employed,Urban,Medium,No,No,Yes,Yes,No,Yes,1,2,1,1,1,80
+168,Female,over 60,Married,University,Unemployed/retired,Urban,Medium,Yes,No,No,Yes,Yes,Yes,3,3,3,3,4,40
+169,Female,18-40,Married,University,Unemployed/retired,Urban,Medium,No,Yes,Yes,Yes,Yes,Yes,2,2,1,2,2,80
+170,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,Yes,Yes,Yes,Yes,4,3,3,3,4,30
+171,Female,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,Yes,1,2,2,2,2,70
+172,Male,41-60,Married,University,Employed,Urban,Medium,No,No,No,No,No,Yes,2,2,2,2,2,60
+173,Male,18-40,Married,Primary school,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,2,1,1,1,2,80
+174,Male,18-40,Married,Illeterate,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,2,1,1,1,2,70
+175,Male,41-60,Married,Primary school,Unemployed/retired,Urban,Low,Yes,No,Yes,Yes,Yes,Yes,3,3,3,3,4,50
+176,Male,18-40,Married,Primary school,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,1,1,1,2,2,85
+177,Male,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,No,Yes,No,Yes,3,2,3,3,2,70
+178,Male,over 60,Married,University,Employed,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,3,4,4,3,5,30
+179,Male,18-40,Married,University,Employed,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,1,2,2,1,1,80
+180,Female,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,Yes,1,2,2,1,2,70
+181,Male,41-60,Married,University,Employed,Urban,Medium,No,No,No,No,No,Yes,1,1,2,2,3,70
+182,Female,41-60,Widowed,Secondary school,Unemployed/retired,Rural,Low,No,Yes,Yes,Yes,Yes,Yes,3,3,3,4,4,30
+183,Female,over 60,Married,University,Unemployed/retired,Rural,Low,No,Yes,Yes,Yes,Yes,Yes,4,3,3,4,4,30
+184,Female,41-60,Married,Primary school,Unemployed/retired,Urban,Low,No,No,Yes,Yes,Yes,Yes,3,3,4,3,4,40
+185,Male,41-60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,Yes,Yes,No,Yes,3,3,3,3,3,30
+186,Male,over 60,Married,Primary school,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,3,2,3,4,4,20
+187,Male,over 60,Married,Secondary school,Unemployed/retired,Urban,Low,Yes,No,Yes,Yes,Yes,Yes,4,3,3,3,4,40
+188,Male,over 60,Married,Primary school,Employed,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,4,4,3,3,5,30
+189,Male,over 60,Married,Primary school,Employed,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,3,3,3,4,4,20
+190,Male,over 60,Married,Primary school,Employed,Urban,Medium,No,No,No,No,No,Yes,2,3,2,2,2,60
+191,Male,41-60,Married,University,Employed,Urban,Medium,No,Yes,No,Yes,No,Yes,2,2,2,2,3,60
+192,Male,41-60,Married,University,Employed,Urban,Medium,Yes,No,No,Yes,Yes,Yes,3,2,3,2,2,60
+193,Male,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,Yes,1,3,2,2,2,60
+194,Female,41-60,Married,University,Employed,Urban,Medium,No,No,No,No,No,Yes,2,2,1,1,2,60
+195,Male,41-60,Married,Primary school,Employed,Urban,Medium,Yes,No,No,Yes,Yes,Yes,3,2,4,3,2,60
+196,Male,over 60,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,No,No,No,Yes,2,3,2,2,3,70
+197,Female,over 60,Married,University,Employed,Urban,Medium,No,No,No,No,No,Yes,2,3,1,2,2,60
+198,Female,over 60,Widowed,Secondary school,Unemployed/retired,Rural,Low,No,No,No,Yes,Yes,Yes,3,3,2,4,4,30
+199,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Medium,Yes,No,Yes,Yes,Yes,Yes,3,3,4,4,4,40
+200,Female,41-60,Married,Illeterate,Unemployed/retired,Urban,Medium,No,Yes,No,Yes,No,Yes,3,2,2,3,3,50
+201,Female,over 60,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,Yes,Yes,Yes,Yes,3,1,3,3,4,40
+202,Female,over 60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,Yes,2,3,2,2,2,70
+203,Female,over 60,Married,Primary school,Unemployed/retired,Urban,Medium,No,No,No,No,No,Yes,2,2,2,2,2,50
+204,Female,over 60,Married,Secondary school,Unemployed/retired,Rural,Low,Yes,No,Yes,No,Yes,Yes,3,3,3,3,5,40
+205,Male,18-40,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,Yes,Yes,Yes,Yes,1,1,1,1,2,85
+206,Male,41-60,Married,Secondary school,Unemployed/retired,Urban,Low,No,Yes,Yes,Yes,Yes,Yes,3,4,3,3,4,40
+207,Female,18-40,Married,Secondary school,Unemployed/retired,Rural,Low,No,No,Yes,Yes,No,Yes,1,1,1,2,2,80
+208,Female,over 60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,No,No,Yes,No,Yes,2,2,2,2,2,70
+209,Female,over 60,Married,Secondary school,Unemployed/retired,Urban,Medium,No,Yes,Yes,Yes,No,Yes,3,3,3,2,5,30
+210,Female,41-60,Widowed,Secondary school,Unemployed/retired,Urban,Low,Yes,No,Yes,Yes,Yes,Yes,3,3,3,3,4,40
+211,Male,over 60,Married,Secondary school,Unemployed/retired,Urban,Low,No,No,Yes,Yes,No,Yes,2,4,3,2,5,40
+212,Female,over 60,Widowed,Secondary school,Unemployed/retired,Urban,Low,Yes,No,Yes,Yes,Yes,Yes,4,5,5,4,4,30
+213,Female,over 60,Widowed,Secondary school,Unemployed/retired,Rural,Low,No,Yes,Yes,Yes,No,Yes,3,3,3,4,4,40
