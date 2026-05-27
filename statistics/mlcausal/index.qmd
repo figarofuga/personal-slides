@@ -1,0 +1,1240 @@
+---
+title: "機械学習を用いた因果推論"
+author: "Nozomi Niimi"
+format:
+  revealjs:
+    pdf-separate-fragments: false
+    pdf-max-pages-per-slide: 3
+    theme: [default, custom.scss]
+    embed-resources: false
+    self-contained-math: false
+    slide-number: true
+execute:
+  freeze: auto
+  cache: true
+  echo: false
+  warning: false
+  error: false
+date: today
+date-format: long
+---
+
+# 因果推論 at glance
+
+## 因果関係
+
+- 医学研究の第一の目標と言っても過言ではない
+- Aの薬を使うと患者の予後は良くなるか？
+- 実際は口で言うほど簡単ではない
+
+## 因果関係の考え方
+
+- 大きく分けて2つの考え方がある
+  - 潜在的アウトカムを考えるRubin流
+  - DAGを作り、do operatorを使うPearl流
+- 詳細は省くが、今回はPearl流のDAGを中心に考える
+
+## DAGの基本
+
+```{r}
+#| label: setup
+
+library(sessioninfo)
+library(reticulate)
+
+
+library(dagitty)
+library(ggdag)
+library(dplyr)
+library(ggplot2)
+library(grid)
+
+Sys.setenv(RETICULATE_PYTHON="managed")
+
+reticulate::py_require(packages = c("numpy", "pandas", "matplotlib", "seaborn", "scikit-learn", "lightgbm", "xgboost", "causallib", "econml", "causal-learn", "causalml", "dowhy", "doubleml", "scikit-survival"))
+
+
+sessioninfo::session_info(info = "all")
+
+```
+
+```{r}
+#| label: DAG
+#| fig-width: 10
+#| fig-height: 4
+
+library(dagitty)
+library(ggdag)
+library(dplyr)
+library(ggplot2)
+library(grid)
+
+dag <- dagitty("dag {
+  D -> A
+  A -> B
+  B -> C
+  D -> C
+  A -> E
+  C -> E
+}")
+
+# Graphviz版の見た目に合わせて座標を固定
+coordinates(dag) <- list(
+  x = c(A = 1, B = 4, C = 7, D = 4, E = 4),
+  y = c(A = 0, B = 0, C = 0, D = -1, E = 1)
+)
+
+labels_ja <- c(
+  A = "曝露",
+  B = "中間因子",
+  C = "アウトカム",
+  D = "交絡因子",
+  E = "Collider"
+)
+
+tidy_dagitty(dag) |>
+  mutate(
+    label = labels_ja[name],
+    label_x = if_else(name == "C", x + 0.05, x),
+    label_y = y
+  ) |>
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(
+    arrow_directed = grid::arrow(length = grid::unit(8, "pt"), type = "closed")
+  ) +
+  geom_dag_point(size = 32, alpha = 0.2, color = "#2C7FB8") +
+  geom_dag_text(aes(x = label_x, y = label_y, label = label), size = 4, color = "black") +
+  theme_dag() +
+  coord_equal(xlim = c(0, 8), ylim = c(-1.5, 1.5), clip = "off")
+
+
+```
+
+
+
+## 世界は結構複雑にできている {.scrollable}
+
+```{r}
+#| label: Make-ToyData
+
+# ============================================================
+# Toy data generation according to DAG
+# with BNP, nonlinear BMI effect, and heterogeneous treatment effect
+# ============================================================
+
+# Required packages for DAG plot:
+# install.packages(c("dagitty", "ggdag", "ggplot2"))
+library(tinyplot)
+library(dplyr)
+library(simsurv)
+
+set.seed(123)
+
+n <- 6000
+
+# ------------------------------------------------------------
+# Helper functions
+# ------------------------------------------------------------
+
+inv_logit <- function(x) {
+  1 / (1 + exp(-x))
+}
+
+rtruncnorm_simple <- function(n, mean, sd, lower, upper) {
+  out <- numeric(0)
+
+  while (length(out) < n) {
+    x <- rnorm(n, mean = mean, sd = sd)
+    x <- x[x >= lower & x <= upper]
+    out <- c(out, x)
+  }
+
+  out[seq_len(n)]
+}
+
+rtrunclnorm_simple <- function(n, meanlog, sdlog, lower, upper) {
+  out <- numeric(0)
+
+  while (length(out) < n) {
+    x <- rlnorm(n, meanlog = meanlog, sdlog = sdlog)
+    x <- x[x >= lower & x <= upper]
+    out <- c(out, x)
+  }
+
+  out[seq_len(n)]
+}
+
+# ------------------------------------------------------------
+# 1. Baseline variables
+# ------------------------------------------------------------
+
+# Sex: 0/1, P(Sex = 0) = 0.40, P(Sex = 1) = 0.60
+sex <- rbinom(n, size = 1, prob = 0.60)
+
+# Age: Normal(mean 60 for male, mean 65 for female, sd 8), truncated at 20 and 95
+
+
+age <- ifelse(
+  sex == 0,
+  rtruncnorm_simple(
+    n = sum(sex == 0),
+    mean = 65,
+    sd = 8,
+    lower = 20,
+    upper = 99
+  ),
+  rtruncnorm_simple(
+    n = sum(sex == 1),
+    mean = 60,
+    sd = 8,
+    lower = 20,
+    upper = 95
+  )
+) |> as.integer()
+
+
+# BMI: lognormal with expected value approximately 25 before truncation
+# truncated at 10 and 35
+sdlog_bmi <- 0.20
+meanlog_bmi <- log(22) - sdlog_bmi^2 / 2
+
+bmi <- rtrunclnorm_simple(
+  n = n,
+  meanlog = meanlog_bmi,
+  sdlog = sdlog_bmi,
+  lower = 12,
+  upper = 40
+)
+
+# LVEF: normal with expected value for 55%
+
+lvef <- rtruncnorm_simple(
+  n = n,
+  mean = 52,
+  sd = 8,
+  lower = 15,
+  upper = 75
+) |> as.integer()
+
+
+
+
+# Standardized variables for model coefficients
+age_z <- as.numeric(scale(age))
+bmi_z <- as.numeric(scale(bmi))
+lvef_z <- as.numeric(scale(lvef))
+
+p_SES <- 0.625
+
+SES <- rbinom(n, size = 4, prob = p_SES)
+
+SES_z <- as.numeric(scale(SES))
+
+# ------------------------------------------------------------
+# 2. Comorbidities
+#    Age, Sex, SES -> HF, HTN, Stroke, SES
+# ------------------------------------------------------------
+
+p_hf <- inv_logit(
+  -1.5 +
+    0.95 * age_z +
+    0.15 * sex -
+    0.45 * bmi_z -
+    0.3 * lvef_z +
+    0.2 * SES_z
+)
+
+hf <- rbinom(n, size = 1, prob = p_hf)
+
+
+# ------------------------------------------------------------
+# 3. BNP
+#    Lognormal, lower bound 0, upper bound 2000,
+#    expected value approximately 150 before truncation.
+#
+#    BNP is affected by:
+#    Age, Sex, BMI, SES, HF, HTN, Stroke, SES
+# ------------------------------------------------------------
+
+sdlog_bnp <- 0.90
+meanlog_bnp <- log(150) - sdlog_bnp^2 / 2
+
+bnp_base <- rtrunclnorm_simple(
+  n = n,
+  meanlog = meanlog_bnp,
+  sdlog = sdlog_bnp,
+  lower = 0,
+  upper = 2000
+)
+
+# Disease-related multiplicative structure for BNP
+bnp <- bnp_base *
+  exp(
+    0.3 * age_z +
+      0.10 * sex -
+      0.15 * bmi_z -
+      0.4 * lvef_z
+  )
+
+# Truncate again at 0 and 2000
+bnp <- pmin(pmax(bnp, 0), 2000) |>
+  as.integer()
+
+bnp_z <- as.numeric(scale(log1p(bnp)))
+
+# ------------------------------------------------------------
+# 4. Palpitation
+#    Age, Sex, HF, SES, SES -> Palpitation
+# ------------------------------------------------------------
+
+p_palpitation <- inv_logit(
+  -1.0 +
+    0.10 * age_z +
+    0.35 * sex -
+    0.40 * SES_z
+)
+
+palpitation <- rbinom(n, size = 1, prob = p_palpitation)
+
+# ------------------------------------------------------------
+# 5. Treatment / intervention
+#    CA is more likely in lower-risk patients:
+#    younger age, male sex, higher BMI, higher SES, and lower BNP.
+#    Palpitation, lower LVEF, and HF also increase CA use.
+# ------------------------------------------------------------
+
+p_ca <- inv_logit(
+    -1.00 +
+    -1.05 * age_z +
+    0.60 * sex +
+    0.35 * bmi_z +
+    0.75 * SES_z +
+    -0.85 * bnp_z +
+    1.70 * palpitation -
+    0.70 * lvef_z +
+    1.25 * hf
+)
+
+ca <- rbinom(n, size = 1, prob = p_ca)
+
+# ------------------------------------------------------------
+# 6. Nonlinear BMI prognostic effect
+#
+#    BMI 25-30: lowest risk
+#    BMI < 25: lower BMI increases risk strongly
+#    BMI > 30: higher BMI increases risk mildly
+#
+#    This creates an asymmetric convex / U-shaped risk function.
+# ------------------------------------------------------------
+
+bmi_risk <-
+  pmax(25 - bmi, 0)^2 +
+  0.3 * pmax(bmi - 30, 0)^2
+
+lvef_risk <-
+  pmax(40 - lvef, 0)^2 +
+  0.3 * pmax(60 - lvef, 0)^2
+
+bmi_risk_z <- as.numeric(scale(bmi_risk))
+lvef_risk_z <- as.numeric(scale(lvef_risk))
+
+age_risk <- pmax(age - 65, 0) / 10
+
+bnp_risk <- log1p(bnp) / log1p(2000)
+
+# ------------------------------------------------------------
+# 7. Heterogeneous treatment effect
+#
+#    Higher risk patients have a larger treatment benefit:
+#    older age, higher BNP, higher BMI risk, and higher LVEF risk.
+#
+#    Female patients have a smaller age-related increase in treatment
+#    benefit and a larger BMI-risk-related increase.
+#
+#    The effect is coded on the log-odds scale.
+#    More negative = stronger risk reduction by CA.
+# ------------------------------------------------------------
+
+
+treatment_effect <- ifelse(
+  sex == 1,
+  -0.20 - 0.45 * age_risk - 0.55 * bnp_risk - 0.20 * bmi_risk_z - 0.25 * lvef_risk_z,
+  -0.20 - 0.25 * age_risk - 0.55 * bnp_risk - 0.45 * bmi_risk_z - 0.25 * lvef_risk_z
+  )
+
+# ------------------------------------------------------------
+# 8. Outcome
+#    HF + death composite outcome
+#
+#    Affected by everything except palpitation:
+#    Age, Sex, BMI, SES, HF, HTN, Stroke, SES, BNP, CA -> Outcome
+#
+#    Palpitation does not directly affect Outcome.
+# ------------------------------------------------------------
+
+linear_predictor_outcome <-
+  -2.0 +
+  0.70 * age_risk +
+  0.90 * hf +
+  -0.85 * SES_z +
+  0.55 * bnp_risk +
+  0.04 * bmi_risk +
+  0.1 * lvef_risk +
+  ca * treatment_effect
+
+p_bin_outcome <- inv_logit(linear_predictor_outcome)
+
+bin_outcome <- rbinom(n, size = 1, prob = p_bin_outcome)
+
+afeqt_mean <- (
+  75 -
+  4 * age_z -
+  7.0 * sex -
+  2.0 * bmi_z -
+  8.0 * hf +
+  3.0 * SES_z -
+  5.0 * bnp_z +
+  3.0 * lvef_z -
+  10.0 * palpitation +
+  6.0 * ca
+)
+
+afeqt_os <- rtruncnorm_simple(
+  n = n,
+  mean = afeqt_mean,
+  sd = 12,
+  lower = 0,
+  upper = 100
+)
+
+
+# ------------------------------------------------------------
+# 9. Final dataset
+# ------------------------------------------------------------
+
+pre_toy_data <- tibble::tibble(
+  age = age,
+  sex = sex,
+  bmi = bmi,
+  hf = hf,
+  SES = SES,
+  bnp = bnp,
+  lvef = lvef,
+  palpitation = palpitation,
+  p_ca = p_ca,
+  ca = ca,
+  age_risk = age_risk,
+  bnp_risk = bnp_risk,
+  bmi_risk = bmi_risk,
+  lvef_risk = lvef_risk,
+  treatment_effect = treatment_effect,
+  linear_predictor_outcome = linear_predictor_outcome,
+  p_bin_outcome = p_bin_outcome,
+  bin_outcome = bin_outcome,
+  afeqt_os = afeqt_os
+)  |>
+dplyr::mutate(
+  id = dplyr::row_number(),
+  .before = age
+  )
+
+library(simsurv)
+
+surv_dat <- simsurv::simsurv(
+  dist = "weibull",
+  lambdas = 0.08,
+  gammas = 1.5,
+  x = pre_toy_data,
+  betas = c(linear_predictor_outcome = 1),
+  maxt = 5
+  )
+
+full_toy_data <-
+  dplyr::left_join(
+  pre_toy_data,
+  surv_dat,
+  by = "id"
+  )
+
+toy_data <- dplyr::select(
+  full_toy_data,
+  id, age, sex, bmi, hf, bnp, lvef, palpitation, ca, bin_outcome, afeqt_os, eventtime, status
+)
+# ------------------------------------------------------------
+# 10. Quick checks
+# ------------------------------------------------------------
+
+print(head(toy_data))
+
+tidyr::pivot_longer(toy_data, cols = everything()) |>
+  tinyplot::plt(
+  ~ value, facet = ~ name, facet.args = list(free = TRUE),
+  data = _,
+  type = type_histogram(free = TRUE))
+
+
+
+dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, lvef_risk) |>
+  dplyr::rename(
+    age_rawdata = age,
+    bnp_rawdata = bnp,
+    bmi_rawdata = bmi,
+    lvef_rawdata = lvef
+  ) |>
+  tidyr::pivot_longer(
+    cols = everything(),
+    names_to = c("variable", ".value"),
+    names_pattern = "^(age|bnp|bmi|lvef)_(rawdata|risk)$"
+  ) |>
+  tinyplot::plt(
+    risk ~ rawdata, facet = ~ variable,
+    facet.args = list(free = TRUE),
+    data = _,
+    type = type_loess()
+  )
+
+
+```
+
+
+```{r}
+#| label: DAG-for-ToyData
+
+library(dagitty)
+library(ggdag)
+library(ggplot2)
+library(grid)
+library(dplyr)
+
+dag_text <- "
+dag {
+
+  Age
+  Sex
+  BMI
+
+  HF
+  SES
+  BNP
+  LVEF
+  Palpitation
+
+  CA
+  Outcome
+
+  Age -> HF
+  Age -> BNP
+  Age -> Palpitation
+  Age -> CA
+  Age -> Outcome
+
+  Sex -> HF
+  Sex -> BNP
+  Sex -> Palpitation
+  Sex -> CA
+  Sex -> Outcome
+
+  BMI -> HF
+  BMI -> BNP
+  BMI -> CA
+  BMI -> Outcome
+
+  LVEF -> HF
+  LVEF -> BNP
+  LVEF -> CA
+  LVEF -> Outcome
+
+  SES -> HF
+  SES -> Palpitation
+  SES -> CA
+  SES -> Outcome
+
+  BNP -> CA
+  BNP -> Outcome
+
+  HF -> CA
+  HF -> Outcome
+
+  Palpitation -> CA
+
+  CA -> Outcome
+}
+"
+
+dag <- dagitty(dag_text)
+
+coordinates(dag) <- list(
+  x = c(
+    # background / baseline
+    Age = 0,
+    Sex = 0,
+    BMI = 0,
+    LVEF = 0,
+
+    # intermediate layer 1
+    SES = 0,
+
+    # intermediate layer 2
+    HF = 1,
+    BNP = 1,
+    Palpitation = 1,
+
+    # treatment
+    CA = 2,
+
+    # outcome
+    Outcome = 4
+  ),
+  y = c(
+    # background / baseline
+    Age = 5,
+    Sex = 4,
+    BMI = 3,
+    LVEF = 2,
+    SES = 1,
+
+    # intermediate layer 2
+    HF = 5,
+    BNP = 3,
+    Palpitation = 1,
+
+    # treatment and outcome
+    CA = 3,
+    Outcome = 3
+  )
+)
+
+dag_df <- tidy_dagitty(dag) %>%
+  mutate(
+    node_type = case_when(
+      name == "Frail"   ~ "Unobserved confounder",
+      name == "CA"      ~ "Intervention",
+      name == "Outcome" ~ "Outcome",
+      TRUE              ~ "Confounder"
+    )
+  )
+
+node_df <- dag_df$data %>%
+  distinct(name, x, y, node_type)
+
+edge_df <- dag_df$data %>%
+    filter(!is.na(xend), !is.na(yend)) %>%
+    distinct(name, x, y, xend, yend) %>%
+    mutate(
+        edge_type = case_when(
+            name == "CA" & xend == node_df$x[node_df$name == "Outcome"] &
+                yend == node_df$y[node_df$name == "Outcome"] ~ "CA_to_Outcome",
+            yend > y ~ "up",
+            yend < y ~ "down",
+            TRUE ~ "flat"
+        )
+    ) %>%
+    mutate(
+        dx = xend - x,
+        dy = yend - y,
+        dist = sqrt(dx^2 + dy^2),
+
+        # arrow head が node に隠れないように終点を少し手前にする
+        shorten = 0.18,
+        xend2 = xend - shorten * dx / dist,
+        yend2 = yend - shorten * dy / dist
+    )
+
+ggplot() +
+    # upward curved arrows
+    geom_curve(
+        data = filter(edge_df, edge_type == "up"),
+        aes(x = x, y = y, xend = xend2, yend = yend2),
+        curvature = 0.18,
+        angle = 90,
+        ncp = 10,
+        linewidth = 0.7,
+        color = "grey35",
+        arrow = grid::arrow(
+            length = unit(0.14, "inches"),
+            type = "closed"
+        )
+    ) +
+
+    # downward curved arrows
+    geom_curve(
+        data = filter(edge_df, edge_type == "down"),
+        aes(x = x, y = y, xend = xend2, yend = yend2),
+        curvature = -0.18,
+        angle = 90,
+        ncp = 10,
+        linewidth = 0.7,
+        color = "grey35",
+        arrow = grid::arrow(
+            length = unit(0.14, "inches"),
+            type = "closed"
+        )
+    ) +
+
+    # flat curved arrows except CA -> Outcome
+    geom_curve(
+        data = filter(edge_df, edge_type == "flat"),
+        aes(x = x, y = y, xend = xend2, yend = yend2),
+        curvature = 0.08,
+        angle = 90,
+        ncp = 10,
+        linewidth = 0.7,
+        color = "grey35",
+        arrow = grid::arrow(
+            length = unit(0.14, "inches"),
+            type = "closed"
+        )
+    ) +
+
+    # CA -> Outcome only: straight arrow
+    geom_segment(
+        data = filter(edge_df, edge_type == "CA_to_Outcome"),
+        aes(x = x, y = y, xend = xend2, yend = yend2),
+        linewidth = 0.9,
+        color = "grey20",
+        arrow = grid::arrow(
+            length = unit(0.16, "inches"),
+            type = "closed"
+        )
+    ) +
+
+    # nodes
+    geom_point(
+        data = node_df,
+        aes(x = x, y = y, fill = node_type),
+        shape = 21,
+        color = "black",
+        size = 18
+    ) +
+
+    geom_text(
+        data = node_df,
+        aes(x = x, y = y, label = name),
+        size = 3.8
+    ) +
+
+    scale_fill_manual(
+        values = c(
+            "Confounder" = "#4C78A8",
+            "Unobserved confounder" = "#F58518",
+            "Intervention" = "#E45756",
+            "Outcome" = "#54A24B"
+        )
+    ) +
+
+    theme_dag() +
+    labs(
+        title = "DAG for Toy Causal Data",
+        subtitle = "Hierarchical layout ending with CA → Outcome",
+        fill = "Node type"
+    )
+
+```
+## Dataの説明
+
+- DAGは上記の通り
+- CAがメインのInterventionで解析をするアウトカムは3種類
+    - 連続値のAFEQT-OS
+    - 二値値のbin_outcome(短期の入院の有無など)
+    - 生存分析のeventtime, status(長期の心不全あるいは死亡)
+- ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)
+- SESは観測されない交絡因子
+
+## Simple regression
+
+```{r}
+#| label: simple-regression
+
+
+library(rms)
+library(easystats)
+library(modelsummary)
+
+dd <- rms::datadist(toy_data)
+options(datadist = "dd")
+
+simple_fit <- lm(afeqt_os ~ age + sex + bmi + hf + bnp + lvef + ca, data = toy_data)
+
+rcs_fit <- lm(afeqt_os ~ rcs(age, 4) + sex + rcs(bmi, 4) + hf + rcs(bnp, 4) + rcs(lvef, 4) + ca, data = toy_data)
+
+modelsummary::modelsummary(list(
+  simple = simple_fit,
+  rcs = rcs_fit
+))
+
+```
+
+
+## シンプルな回帰モデルの解釈と問題点
+
+- 複数のパラメータを固定した上での目標としたパラメータを1単位変化した時の効果
+- 線形である事が条件
+- 複雑な関係性を捉えることが出来ない
+    - Model misspecificationの問題
+    - 治療の異質性を捉えられない
+
+## 例えば
+
+```{r}
+
+marginaleffects::plot_predictions(
+  simple_fit, 
+  condition = "bmi")
+
+marginaleffects::plot_predictions(
+  rcs_fit,
+  condition = "bmi")
+
+```
+
+## どうすればRobustになる？
+
+- Propensity score (PS) analysis
+  - PS match, PS weight
+    - ATT, ATC, ATE, ATOなど
+- アウトカムモデル + PS model
+  - Doubly robust model
+    - 最も有名なものはAIPW
+- PS modelを進化させる
+  - PSをUpdateさせるTMLE
+
+## Matchingだと
+
+- 一番有名なのはPropensity score matching
+
+```{r}
+#| label: propensity-score-analysis
+
+library(MatchIt)
+library(WeightIt)
+library(marginaleffects)
+library(modelsummary)
+
+mout <- MatchIt::matchit(ca ~ age + sex + bmi + hf + bnp + lvef, data = toy_data)
+
+m_dat <- MatchIt::match.data(mout)
+
+fit_match <- glm(afeqt_os ~ ca * (age + sex + bmi + hf + bnp + lvef), data = m_dat)
+
+match_res <- marginaleffects::avg_comparisons(
+  fit_match,
+  variable = "ca",
+  vcoc = ~subclass,
+  newdata = subset(ca == 1)
+)
+
+wout <- WeightIt::weightit(ca ~ age + sex + bmi + hf + bnp + lvef, data = toy_data, method = "ipt")
+
+weight_res <- WeightIt::lm_weightit(
+  afeqt_os ~ ca,
+  data = toy_data,
+  weightit = wout,
+  vcov = "HC0"
+)
+
+options("modelsummary_factory_default" = "tinytable")
+
+modelsummary::modelsummary(
+  models = list(
+    `PS match` = match_res,
+    `PS weight` = weight_res
+    ),
+  estimate = "{estimate} [{conf.low}, {conf.high}]"
+
+)
+
+```
+
+## Augumented Inverse Probablity Weighting (AIPW)
+
+```{r}
+library(WeightIt)
+
+ps_fit <- glm(ca ~ age + sex + bmi + hf + bnp + lvef, data = toy_data, family = binomial)
+
+ps_trimmed <- predict(ps_fit, type = "response") |>
+  (\(x)dplyr::case_when(
+    x < 0.01 ~ 0.01,
+    x > 0.99 ~ 0.99,
+    .default = x
+  ))()
+
+outcome_model <- glm(afeqt_os ~ ca * (age + sex + bmi + hf + bnp + lvef), data = toy_data, family = gaussian)
+
+# 全員治療された場合
+toy_data1 <- dplyr::mutate(
+  toy_data, ca = 1
+)
+
+# 全員非治療だった場合
+toy_data0 <- dplyr::mutate(
+  toy_data, ca = 0
+)
+
+toy_data_aipw <- toy_data |>
+  dplyr::mutate(
+    ps = ps_trimmed,
+    mu1 = predict(outcome_model, newdata = toy_data1),
+    mu0 = predict(outcome_model, newdata = toy_data0)
+  ) |>
+  dplyr::mutate(
+# 3. AIPW pseudo-outcome
+    phi1 = mu1 + ca/ps * (afeqt_os - mu1),
+    phi0 = mu0 + (1 - ca) / (1 - ps) * (afeqt_os - mu0)
+  )
+
+# 4. ATE
+psi <- toy_data_aipw$phi1 - toy_data_aipw$phi0
+ate_aipw <- mean(psi)
+se <- sd(psi) / sqrt(length(psi))
+
+ci <- c(
+  ate_aipw - 1.96 * se,
+  ate_aipw + 1.96 * se
+)
+
+
+
+```
+
+## それでもなお、問題が残る
+
+- アウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る
+<!-- Todo: Citationを入れる -->
+- Estimandの問題 = 治療効果の異質性
+  - Subgroup解析と一緒
+  - 自覚的にInteraction termを入れないとちゃんと推定出来ない
+- ここに機械学習を持ち込めないか？
+
+# 機械学習 at glance
+
+
+## 機械学習とは
+
+
+## 代表的な機械学習
+
+- Logistic回帰
+- tree-based model
+  - Random forest
+  - XGBoost
+- Neural network
+
+## 機械学習の強みと弱み
+
+- Pros
+  - データから関係性を柔軟に読み取る
+  - 例えばTree based modelは相互作用を自然に扱うことが出来る
+- Cons
+  - 複雑なモデルはBlack boxになる
+  - Overfittingの問題
+
+# 機械学習と因果推論の出会い
+
+## 因果推論における機械学習の役割
+
+- アウトカムモデル、PS modelを柔軟に扱う
+- Interaction termを自然に扱える
+  - HTEを自然に扱えないか？
+
+## 機械学習を用いた因果推論について
+
+- 大別してMeta learner系とCausal forest系に分けられる
+- 柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest
+- とはいえ、Causal forestだけで良い気もする
+
+```{python}
+#| label: S-learner
+
+from econml.metalearners import SLearner
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.model_selection import train_test_split
+
+toy_data = r.toy_data
+
+X = toy_data.loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef"]]
+y = toy_data['afeqt_os']
+T = toy_data['ca']
+n = toy_data.shape[0]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=T
+    )
+
+T_train = T.loc[y_train.index]
+T_test = T.loc[y_test.index]
+
+# Instantiate S learner
+overall_model = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(491/100))
+S_learner = SLearner(overall_model=overall_model)
+# Train S_learner
+S_learner.fit(y_train, T_train, X=X_train)
+# Estimate treatment effects on test data
+S_te = S_learner.effect(X_test)
+
+print(S_te)
+
+```
+
+## Scratch for S-learner
+
+```{r}
+#| label: scratch-for-S-learner
+
+library(tidymodels)
+library(bonsai)
+
+# 1. データセットの読み込み
+
+
+X = toy_data.loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef"]]
+y = toy_data['afeqt_os']
+n = toy_data.shape[0]
+
+
+# 2. データを学習用（80%）とテスト用（20%）に分割
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 3. モデルの初期化 (scikit-learn API)
+# 引数を指定しない場合、デフォルトのハイパーパラメータが適用されます
+model = lgb.LGBMRegressor(
+  random_state=42,
+  verbosity = -1)
+
+# 4. モデルの学習 (fit)
+print("モデルの学習を開始します...")
+model.fit(X_train, y_train)
+print("学習が完了しました。")
+
+# 5. テストデータでの予測と評価（おまけ）
+y_pred = model.predict(X_test)
+
+y_true = [3, -0.5, 2, 7]
+y_pred = [2.5, 0.0, 2, 8]
+rmse = root_mean_squared_error(y_true, y_pred)
+
+print(f"テストデータのRMSE: {rmse:.4f}")
+
+
+pred_0 = model.predict(X.assign(ca = 0))
+pred_1 = model.predict(X.assign(ca = 1))
+te = np.mean(pred_1 - pred_0)
+
+print(f"平均処置効果の推定値: {te:.4f}")
+
+X_s_learn = (
+    toy_data
+    .loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef", "afeqt_os"]]
+    .assign(
+        ca_0 = 0,
+        effect_0 = pred_0,
+        ca_1 = 1,
+        effect_1 = pred_1,
+        ca_effect = pred_1 - pred_0
+    )
+)
+
+X_s_learn.head()
+
+
+
+```
+
+## T learner
+
+
+![t-learner](figure_list/t-learner.drawio.svg)
+
+
+## Scratch for T-learner
+
+
+```{python}
+#| label: T-learner
+
+
+from econml.metalearners import TLearner
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.model_selection import train_test_split
+
+X = toy_data.loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef"]]
+y = toy_data['afeqt_os']
+T = toy_data['ca']
+n = toy_data.shape[0]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=T
+    )
+
+T_train = T.loc[y_train.index]
+T_test = T.loc[y_test.index]
+
+# Instantiate T learner
+models = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
+T_learner = TLearner(models=models)
+# Train T_learner
+T_learner.fit(y_train, T_train, X=X_train)
+# Estimate treatment effects on test data
+T_te = T_learner.effect(X_test)
+
+print("T learnerでの局所治療効果")
+print(T_te)
+
+```
+
+```{python}
+#| label: meta-learner
+
+
+# Main imports
+from econml.metalearners import TLearner, SLearner, XLearner, DomainAdaptationLearner
+
+# Helper imports
+import numpy as np
+import pandas as pd
+from numpy.random import binomial, multivariate_normal, normal, uniform
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingRegressor
+from sklearn.model_selection import train_test_split
+
+X = toy_data.loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef"]]
+y = toy_data['afeqt_os']
+T = toy_data['ca']
+n = toy_data.shape[0]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=T
+    )
+
+T_train = T.loc[y_train.index]
+T_test = T.loc[y_test.index]
+
+# Instantiate X learner
+models = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
+propensity_model = RandomForestClassifier(n_estimators=100, max_depth=6,
+                                                  min_samples_leaf=int(n/100))
+X_learner = XLearner(models=models, propensity_model=propensity_model)
+# Train X_learner
+X_learner.fit(y_train, T_train, X=X_train)
+# Estimate treatment effects on test data
+X_te = X_learner.effect(X_test)
+
+# Instantiate Domain Adaptation learner
+models = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
+final_models = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
+propensity_model = RandomForestClassifier(n_estimators=100, max_depth=6,
+                                                  min_samples_leaf=int(n/100))
+DA_learner = DomainAdaptationLearner(models=models,
+                                     final_models=final_models,
+                                     propensity_model=propensity_model)
+# Train DA_learner
+DA_learner.fit(y_train, T_train, X=X_train)
+# Estimate treatment effects on test data
+DA_te = DA_learner.effect(X_test)
+
+# Instantiate Doubly Robust Learner
+from econml.dr import DRLearner
+outcome_model = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
+pseudo_treatment_model = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
+propensity_model = RandomForestClassifier(n_estimators=100, max_depth=6,
+                                                  min_samples_leaf=int(n/100))
+
+DR_learner = DRLearner(model_regression=outcome_model, model_propensity=propensity_model,
+                       model_final=pseudo_treatment_model, cv=5)
+# Train DR_learner
+DR_learner.fit(y, T, X=X)
+# Estimate treatment effects on test data
+DR_te = DR_learner.effect(X_test)
+
+```
+## 機械学習の因果推論における使い方
+
+- 交絡因子の調整で機械学習を用いる
+  - AIPW, tlmeなど
+- 因果をダイレクトに推論する学習機を作る
+  - Meta-learner
+- CATEを測定する
+  - Causal forestなど
+
+## 因果forest
+
+- HTEを計測するのに有名
+- Ashey et al 2019
+
+
+## Survival model
+
+```{r}
+library(rms)
+library(Hmisc)
+
+dd <- datadist(toy_data)
+
+options(datadist = "dd")
+
+simple_surv_fit <- npsurv(Surv(eventtime, status) ~ ca, data = toy_data)
+
+survplot(simple_surv_fit)
+
+```
+
+```{r}
+#| label: survival-model
+
+library(tidyverse)
+library(survival)
+library(grf)
+library(policytree)
+
+
+survfit_grf <- grf::causal_survival_forest(
+  X = toy_data[, c("age", "sex", "bmi", "hf", "bnp", "lvef")],
+  Y = toy_data$eventtime,
+  W = toy_data$ca,
+  D = toy_data$status,
+  target = "RMST",
+  horizon = 365*5
+  )
+
+Gamma.matrix <- double_robust_scores(survfit_grf)
+
+head(Gamma.matrix)
+
+surv_tree <- policytree::policy_tree(
+  toy_data[, c("age", "sex", "bmi", "hf", "bnp", "lvef")],
+  Gamma.matrix,
+  depth = 2
+)
+
+# plot(surv_tree, leaf.labels = c("Observation", "Chemotherapy"))
+
+# base plot は knitr が各出力形式向けに自動処理する
+
+
+plot(surv_tree, leaf.labels = c("Observation", "Catheter ablation"))
+# cat(DiagrammeRsvg::export_svg(surv_tree_plot), file = here::here("figure_list", 'treeplot.svg'))
+
+```
+<!-- ![Treeplot](figure_list/treeplot.svg) -->
+
+```{r}
+library(sessioninfo)
+sessioninfo::session_info(info = "all")
+```

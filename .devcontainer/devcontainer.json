@@ -10,7 +10,7 @@
       "installBspm": true
     },
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "jq,curl,wget,git,make,build-essential,pkg-config,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,r-cran-knitr,r-cran-rmarkdown,r-cran-reticulate,r-cran-tidyverse,r-cran-here,r-cran-glue,r-cran-scales,r-cran-gt,r-cran-htmltools,r-cran-survival,r-cran-plotly,r-cran-tidymodels,r-cran-xgboost,r-cran-marginaleffects,r-cran-matchit,r-cran-weightit",
+      "packages": "jq,curl,wget,git,make,build-essential,pkg-config,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,r-cran-here,r-cran-glue,r-cran-knitr,r-cran-rmarkdown,r-cran-reticulate,r-cran-tidyverse,r-cran-easystats,r-cran-tidymodels,r-cran-bonsai,r-cran-lightgbm,r-cran-scales,r-cran-tinytable,r-cran-tinyplot,r-cran-survival,r-cran-plotly,r-cran-xgboost,r-cran-marginaleffects,r-cran-matchit,r-cran-rootsolve,r-cran-weightit,r-cran-modelsummary,r-cran-rms,r-cran-hmisc,r-cran-grf,r-cran-dagitty,r-cran-ggdag,r-cran-sessioninfo,r-cran-grid,",
       "upgradePackages": false
     },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
