@@ -1,17 +1,654 @@
 [
   {
-    "objectID": "medicine/index.html",
-    "href": "medicine/index.html",
-    "title": "医学",
-    "section": "",
-    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です"
+    "objectID": "medicine/pituitary_incidentaloma/index.html#症例",
+    "href": "medicine/pituitary_incidentaloma/index.html#症例",
+    "title": "下垂体偶発種について",
+    "section": "症例",
+    "text": "症例\n\n79歳女性、自宅内転倒で救急搬送\n頭部CTで下垂体腺腫を指摘される\n依頼文にて、「偶発的に下垂体腺腫が指摘されておりそちらの精査もお願いします」と"
   },
   {
-    "objectID": "medicine/index.html#スライド一覧",
-    "href": "medicine/index.html#スライド一覧",
-    "title": "医学",
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種とは",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種とは",
+    "title": "下垂体偶発種について",
+    "section": "下垂体偶発種とは",
+    "text": "下垂体偶発種とは\n\n下垂体に偶発的に見つかった結節を”下垂体偶発種”と言う\n微小の下垂体結節は結構Common\n\n無関係の理由でMRIを撮像したうち、microadenomaは10-38%\nmacroadenomaは0.2%\nAutopsyだと日本人のうち18%程度の有病率と言われている\n\n日本での1000人の連続するAutopsy患者では178人にIncidentalomaがあり、そのうち34%が2mm以上\n\n\n\n[@Teramoto1994-zv]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種の疫学",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種の疫学",
+    "title": "下垂体偶発種について",
+    "section": "下垂体偶発種の疫学",
+    "text": "下垂体偶発種の疫学\n\n\n\n原疾患\n頻度\n\n\n\n\n下垂体腺腫\n80-90%\n\n\n頭蓋咽頭腫\n3%\n\n\nRathke嚢胞\n2%\n\n\n髄膜腫\n1%\n\n\n下垂体炎\n1%未満\n\n\n脳動脈瘤\n1-2%\n\n\n\n[@DynaMed_SellarMass_2026]\n\n今回は最多の下垂体腺腫について話していきます"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の分類",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の分類",
+    "title": "下垂体偶発種について",
+    "section": "下垂体腺腫の分類",
+    "text": "下垂体腺腫の分類\n\n大きさで分けるのが最も重要\n\n10mm以上: macroadenoma\n10mm未満: microadenoma"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の由来",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の由来",
+    "title": "下垂体偶発種について",
+    "section": "下垂体腺腫の由来",
+    "text": "下垂体腺腫の由来\n\n実臨床的にはホルモン産生で分けるのが良い\n\nProlactinoma\nGH産生腫瘍\nACTH産生腫瘍\nTSH産生腫瘍\n非機能性腫瘍(non-functioning pituitary adenoma: NFPA)"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫-at-glance",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫-at-glance",
+    "title": "下垂体偶発種について",
+    "section": "下垂体腺腫 at glance",
+    "text": "下垂体腺腫 at glance\n \n[@Melmed2020-dy]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種を語る上で重要な視点",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種を語る上で重要な視点",
+    "title": "下垂体偶発種について",
+    "section": "下垂体偶発種を語る上で重要な視点",
+    "text": "下垂体偶発種を語る上で重要な視点\n\n上記の通り、Incidentalomaは実は多い\nその為、悉皆調査は基本的には無理\nかつ、分類や下垂体腺腫の種類は本来はOpeしないと分からない\n⇒ 下垂体腺腫の疫学はその臨床現場 (見つかった理由やOpeをしたかなど)に依存する"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#疫学",
+    "href": "medicine/pituitary_incidentaloma/index.html#疫学",
+    "title": "下垂体偶発種について",
+    "section": "疫学",
+    "text": "疫学\n\nIncidentalomaと通常のAdenomaで疫学が変わる\n\n通常のPituitary adenomaの場合\n\n53%がProlactinoma\n30%が非機能性腺腫\n12%がGH産生腫瘍(somatotropinoma)\n4%がACTH産生腫瘍(Corticotropinoma)\n1%がTSH産生腫瘍(thyrotropinoma)\n\nIncidentalomaの場合(約90%がAdenoma)\n\n約50%が非機能性腺腫\n10%がGH産生腫瘍\n15%がGonadothropinoma\n\n\nIncidentalomaだと、非機能性腺腫が多い事は注目に値する\n\n[@Freda2011-fv]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#pituitary-incidentalomaを見たら",
+    "href": "medicine/pituitary_incidentaloma/index.html#pituitary-incidentalomaを見たら",
+    "title": "下垂体偶発種について",
+    "section": "Pituitary incidentalomaを見たら・・・・・・",
+    "text": "Pituitary incidentalomaを見たら・・・・・・\n\n3つの視点で考える\n\n腫瘍によるホルモン過剰産生\n腫瘍による圧排効果による下垂体機能不全\n腫瘍による視交叉の圧排の有無\n\n内科医としてはMEN 1も見逃さない"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#ホルモン検査の原則",
+    "href": "medicine/pituitary_incidentaloma/index.html#ホルモン検査の原則",
+    "title": "下垂体偶発種について",
+    "section": "ホルモン検査の原則",
+    "text": "ホルモン検査の原則\n  [@Takeuchi_ToranomonEndocrineClinicalPractice_2023]\n\nホルモン検査は日内変動が大きい\nPositive/Negative feedbackにより代償されやすい\nホルモン欠乏の検査: 最も分泌が多い時間帯の測定で判断\n\nホルモン分泌を促進する介入した後の検査もあるがRiskが高い\n\nホルモン過剰の検査: ホルモンを抑制する介入をした上で測定"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#基本的な考え方",
+    "href": "medicine/pituitary_incidentaloma/index.html#基本的な考え方",
+    "title": "下垂体偶発種について",
+    "section": "基本的な考え方",
+    "text": "基本的な考え方\n\nMicroincidetanlomaでは稀とされる\nMacroadenoma全体では以下の通り\n\nProlactinomaが53%\nGH産生が12%\nACTH産生が4%\nTSH産生が1%\n\n頻度と治療可能性の観点で考える\n\nPRLは内科的に治療可能\nACTH, GHは_予後不良で手術の治療適応_\n\nPRL, ACTH, GHは検索すべし！！\n\n[@Tritos2023-tk]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#ホルモン過剰産生の各論",
+    "href": "medicine/pituitary_incidentaloma/index.html#ホルモン過剰産生の各論",
+    "title": "下垂体偶発種について",
+    "section": "ホルモン過剰産生の各論",
+    "text": "ホルモン過剰産生の各論\n\n高PRL血症: ルーチンで検査\nCushing syndrome: ルーチンで検査(?)\n先端巨大症(GH excess): ルーチンで検査\n中枢性甲状腺機能亢進症: ルーチンでは行わない"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hyperprl",
+    "href": "medicine/pituitary_incidentaloma/index.html#hyperprl",
+    "title": "下垂体偶発種について",
+    "section": "高PRL血症",
+    "text": "高PRL血症\n\nPRL &gt; 250 mcg/Lは特異度100％でProlactinoma\n一方で中途半端な高値は色々な理由がある\n\n妊娠、薬剤(D2 blocker)や甲状腺機能を確認する\n\n更に下垂体腺腫自身の茎部圧迫によるもの(Stalk effect)のもありうる\n\nStalk effectだけではPRL &lt; 150 mcg/L程度である事が多い\n\n\n[@Tritos2023-tk]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#cushing",
+    "href": "medicine/pituitary_incidentaloma/index.html#cushing",
+    "title": "下垂体偶発種について",
+    "section": "Cushing syndrome",
+    "text": "Cushing syndrome\n\n2011年のガイドラインだと実はルーチン検査ではない (臨床的に疑った時のみ) [@Freda2011-fv]\n個人的には、Macroadenomaならばルーチンで行うべきと考える\n3種類の方法があるが、一番簡単なのはLDST\n\nLDST(1mg Dex負荷試験)：感度98.6%, 特異度90.6%\n24時間蓄尿のFree cortisol:感度94%, 特異度93%\n夜間唾液中cortisol：感度95.8%, 特異度93.4%"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hypergh",
+    "href": "medicine/pituitary_incidentaloma/index.html#hypergh",
+    "title": "下垂体偶発種について",
+    "section": "先端巨大症(GH excess)",
+    "text": "先端巨大症(GH excess)\n\nGHの値だけでは診断出来ない\nIGF-1：年齢調整されたCutoffで感度、特異度はほぼ100% (12-18歳、妊婦以外)\nOGTT検査でGH $$0.4 mcg/L(抑制されない)は 感度85-90%, 特異度は95%を超える"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hypertsh",
+    "href": "medicine/pituitary_incidentaloma/index.html#hypertsh",
+    "title": "下垂体偶発種について",
+    "section": "中枢性甲状腺機能亢進症",
+    "text": "中枢性甲状腺機能亢進症\n\nTSH過剰症の検査はルーチンでは行わない\n\nただし、ホルモン欠乏とか考えると結局検査している\n\n血清FT4高値で、TSHが不適切に正常〜高値の感度は約100%"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする",
+    "href": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする",
+    "title": "下垂体偶発種について",
+    "section": "いつ、どのように検査をする？",
+    "text": "いつ、どのように検査をする？\n\nホルモン過剰について、Macroadenomaにおいても明らかなScreening方法は決まっていない\n\n2011年のガイドラインでは、PRLとGHはルーチンで測定を推奨。 ACTHは臨床所見をみての検査を推奨している。\n\nProlactinomaは経口での治療が可能なため\nGH過剰産生は予後に強く影響する上に初期は無症候である事が多いため\nACTHも同じ理由でExpertによっては検査をするとの事\n\nReview論文だと下垂体のホルモン過剰産生はProlactin, IGF-1の測定で 除外すべきとの記載あり\nUptodateだとPRL、IGF-1、LH、FSH、ACTH、24時間尿中Cortisol推奨\n\n\n[@Boguszewski2019-ne; @Snyder_PituitaryIncidentalomas_2026]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論",
+    "title": "下垂体偶発種について",
+    "section": "下垂体機能不全総論",
+    "text": "下垂体機能不全総論\n\nMicro incidentalomaでの下垂体機能不全は7-66%でMacroincidentalomaでは19-46%とされる\n\nHypogonadismは〜30%\n副腎不全は〜18%\n甲状腺機能低下は〜28%\nGH欠乏は〜8%\n\n腫瘍圧迫による下垂体機能低下の一般論として\n\nGH, FSH, LH↓ → TSH↓ → ACTH↓\n\n副腎不全がある時は汎下垂体機能低下症を疑う\n\n\n2011年のガイドラインだとClass Iでホルモン欠乏の検査の推奨\n\n[@Takeuchi_ToranomonEndocrineClinicalPractice_2023; @Freda2011-fv]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論-1",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論-1",
+    "title": "下垂体偶発種について",
+    "section": "下垂体機能不全総論",
+    "text": "下垂体機能不全総論\n\n生命予後を悪化させるホルモンを重点的にみる\n\n副腎不全\n甲状腺機能低下症\n\n一方で、HypogonadismやGH欠乏は成人だと治療適応も難しい =&gt; 見るべきは、副腎不全、甲状腺機能低下症\n中枢性副腎不全→TSH欠乏→中枢性Hypogonadismの検査\n\nGH欠乏は下垂体腺腫の治療が終わり他のホルモン補充が終わったあとまでは検査しない事を推奨。 [@Higham2016-hs]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全各論",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全各論",
+    "title": "下垂体偶発種について",
+    "section": "下垂体機能不全各論",
+    "text": "下垂体機能不全各論\n\n中枢性副腎不全: ルーチンで検査\n中枢性甲状腺機能低下: ルーチンで検査\nGH欠乏: ルーチンで検査\nHypogonadism: ルーチンで検査\nProlactin欠乏: ルーチンでは行わない\n中枢性尿崩症: ルーチンで検査"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#adrenal_insuf",
+    "href": "medicine/pituitary_incidentaloma/index.html#adrenal_insuf",
+    "title": "下垂体偶発種について",
+    "section": "中枢性副腎不全",
+    "text": "中枢性副腎不全\n\nInsulin tolerance test (ITT) が最も良い検査だが使いにくい\n早朝Cortisolが第一\n\nまずは、8-9時の血清Cortisolを測定する\n\ncortisol &lt; 80 nmol/L (3 mcg/dL)は副腎不全\ncortisol &lt; TODO nmol/L (18 mcg/dL)は副腎不全\n\n\nCortisolが3mcg/dL-15mcg/dLの時 → ACTH負荷試験を行う\n\n250mcgのACTH投与後30/60分後のCortisolが &lt;18mcgで副腎不全\n二次性副腎不全の場合通常ACTHは&lt; 12 pmol/L (52 pg/mL)となる."
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hypothyroid",
+    "href": "medicine/pituitary_incidentaloma/index.html#hypothyroid",
+    "title": "下垂体偶発種について",
+    "section": "中枢性甲状腺機能低下",
+    "text": "中枢性甲状腺機能低下\n\n低T4にも関わらず不適切に低値〜正常範囲のTSHのときに疑う\n特に深く考えないでも良い\nもしも、NTIと区別が難しいときは時間をあけて再検査が現実的"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#GH_def",
+    "href": "medicine/pituitary_incidentaloma/index.html#GH_def",
+    "title": "下垂体偶発種について",
+    "section": "GH欠乏",
+    "text": "GH欠乏\n\nGH欠乏は事前確率が高い状態でのみ疑う(高い事前確率とは以下の基準のうち1つ以上を満たす)\n\n若い男性で正常な下垂体だが低身長でGH欠乏の診断が幼少期にされている\n下垂体の障害が疑われる病歴(下垂体手術、放射線治療、下垂体の画像変化、頭部外傷、脳卒中)\n\nITTがGH欠乏のGold standardだが使いにくい\n\nその他としては、Glucagon刺激試験、Macimorelin test、arginine plus GH-releasing hormone (GHRH) test\nDynamedでは3つ以上の下垂体ホルモン欠乏があり、年齢調整された血清IGF-1が低い時はGH低値と診断して良い\n2011年のガイドラインでは、IGF-1低下のみでGH欠乏の診断は出来ない\n\n\n[@DynaMed_SellarMass_2026; @Freda2011-fv]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hypogonado",
+    "href": "medicine/pituitary_incidentaloma/index.html#hypogonado",
+    "title": "下垂体偶発種について",
+    "section": "Hypogonadism総論",
+    "text": "Hypogonadism総論\n\n男性、女性(閉経前/後)で方法が異なる。\nゴナドトロピン放出ホルモン（GnRH）刺激検査は、基礎ホルモン検査の結果がはっきりしない場合に用いられてきたが、国際的な内分泌学会では推奨されていない"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hypogonadism-各論",
+    "href": "medicine/pituitary_incidentaloma/index.html#hypogonadism-各論",
+    "title": "下垂体偶発種について",
+    "section": "Hypogonadism 各論",
+    "text": "Hypogonadism 各論\n\n男性\n\n早朝(可能なら7-11時前で空腹)のTotal testosteroneを最初に行う\n\nTotal testosteroneが300ng/dL未満で、FSH, LHが2回とも低いか正常であれば、ゴナドトロピン欠乏症と診断可能\nTotal testosterone &lt; 231 ng/dLはTestosterone欠乏\nTotal testosterone &gt; 231 ng/dLかつ&lt; 346 ng/dLでは追加の検査(free or bioavailable testosterone)を考慮する\nTotal testosterone level \\(\\geq\\) 346 ng/dLはTestosterone正常と考えて良い\n\n\n閉経前女性: 無月経あるいは月経不順があり、E2低値および低値〜正常値のFSHとLHだと診断可能\n閉経後女性: FSH, LHが高値でないだけでほぼ診断可能\n\n甲状腺異常やPRL高値について事前に除外する"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#prolactin_def",
+    "href": "medicine/pituitary_incidentaloma/index.html#prolactin_def",
+    "title": "下垂体偶発種について",
+    "section": "Prolactin欠乏",
+    "text": "Prolactin欠乏\n\n血清PRLが&lt; 100 pmol/Lの時に欠乏を示唆する"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#central_di",
+    "href": "medicine/pituitary_incidentaloma/index.html#central_di",
+    "title": "下垂体偶発種について",
+    "section": "中枢性尿崩症",
+    "text": "中枢性尿崩症\n\n虎ノ門の教科書では中枢性尿崩症は術後でない限り下垂体腺腫では起きないとの事\n診断のGold standardは存在しない\n水制限試験がしばしば初期の検査で行われる\n\n多尿 (&gt; 50 mL/kg in 24 hours or 3.5 L/day in a 70kg) の時に血清と尿中浸透圧を同時測定する\n尿糖なしの時に、血清浸透圧 &gt;295 mOsm/kg、尿浸透圧が600 mOsm/kgの時(尿と血清浸透圧の比が2以上)が正常\n尿崩症は血清浸透圧 &gt;295 mOsm/kgの時に尿浸透圧が600 mOsm/kg未満の時(尿と血清浸透圧の比が2未満)で診断される\n\n水分制限試験の亜種として、3%食塩水刺激試験がある [@Takeuchi_ToranomonEndocrineClinicalPractice_2023]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする-1",
+    "href": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする-1",
+    "title": "下垂体偶発種について",
+    "section": "いつ、どのように検査をする？",
+    "text": "いつ、どのように検査をする？\n\nホルモン低下について、複数のScreening方法があり確定的なものはない。\n\n2011年のガイドラインでは意見を2つ載せている\n\nMinimal: FT4, 朝のCortisolとTestosterone\n追加: FT4, 朝のCortisolとTestosteroneに加えてTSH、LH, FSH, IGF-1\nACTHとGH欠乏がBaselineの検査で確定できない時に負荷試験を考慮する。\n\nMicroadenomaだとより分かっていない。UptodateだとPRLだけ推奨だが2011年のEndocrine Society Guidelineとは異なる。\n\n\n[@Freda2011-fv; @Snyder_PituitaryIncidentalomas_2026]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#視野障害について",
+    "href": "medicine/pituitary_incidentaloma/index.html#視野障害について",
+    "title": "下垂体偶発種について",
+    "section": "視野障害について",
+    "text": "視野障害について\n\n[@Molitch2017-zw]\n\n下垂体の真上に視交叉があり押されると両耳側半盲が起こる\n\nMRIで視交叉と腺腫が接している場合は自覚症状がなくても、 正式な視野障害の評価を行う\n海綿静脈洞内に伸展するとIII, IV, V1などが障害される事もある\n\n\n[@Westall2023-rb]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#治療法総論",
+    "href": "medicine/pituitary_incidentaloma/index.html#治療法総論",
+    "title": "下垂体偶発種について",
+    "section": "治療法総論",
+    "text": "治療法総論\n\nCushing syndrome、末端肥大症は外科治療が必要\n非機能性腫瘍で視野障害がある場合は外科治療が必要\n2011年のガイドラインでは、incidentalomaでも ホルモン分泌障害があるときは手術を考慮するとの記載あり\nOpe適応などは専門医にコンサルトが良い"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#hypopituitarismの治療",
+    "href": "medicine/pituitary_incidentaloma/index.html#hypopituitarismの治療",
+    "title": "下垂体偶発種について",
+    "section": "Hypopituitarismの治療",
+    "text": "Hypopituitarismの治療\n\n中枢性副腎不全: Hydrocortisoneを15-20mg/day\n\nfludrocortisoneは不要\nSick dayの説明を忘れない\n\n甲状腺機能低下症: Levothyroxinを1.6 mcg/kg/day\n\n目標としてTSHは使えない\n\nFT4が正常範囲の上半分に入るようにする\n\n\n副腎不全がある場合は先に副腎不全を治療する\nGHや性ホルモンの補充は適応が難しいので専門医にコンサルト\n\n[@Fleseriu2016-pm]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#follow-up",
+    "href": "medicine/pituitary_incidentaloma/index.html#follow-up",
+    "title": "下垂体偶発種について",
+    "section": "Follow up",
+    "text": "Follow up\n\n\nMass effect: MRIでfollow up\n\nMacro/Microadenoma: 6/12ヶ月後\n\nホルモン分泌: hypopituitarismの有無を検査\n\nMacro/Microadenoma: 半年後→1年毎に行う/ルーチンは不要\n\n\n[@Freda2011-fv]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種at-glance",
+    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種at-glance",
+    "title": "下垂体偶発種について",
+    "section": "下垂体偶発種at glance",
+    "text": "下垂体偶発種at glance\n\n[@Boguszewski2019-ne]"
+  },
+  {
+    "objectID": "medicine/pituitary_incidentaloma/index.html#reference",
+    "href": "medicine/pituitary_incidentaloma/index.html#reference",
+    "title": "下垂体偶発種について",
+    "section": "Reference",
+    "text": "Reference"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#agenda",
+    "href": "medicine/hypoglycemia/index.html#agenda",
+    "title": "低血糖についての覚書",
+    "section": "Agenda",
+    "text": "Agenda\n\n症例\n低血糖！とくらいつく前に・・・・・・\nHypoglycemia without DM\n低血糖のModernな分類\nFitting wellの場合\n低血糖の検査の考え方～低血糖の各種の検査～"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#症例",
+    "href": "medicine/hypoglycemia/index.html#症例",
+    "title": "低血糖についての覚書",
+    "section": "症例",
+    "text": "症例\n\n78歳男性\n繰り返す低血糖で入院\n食事摂取低下後の低血糖で入院→退院後に低血糖によるCPAで救急科入院→総合内科転科後も低血糖を繰り返した・・・・・・"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖とくらいつく前に",
+    "href": "medicine/hypoglycemia/index.html#低血糖とくらいつく前に",
+    "title": "低血糖についての覚書",
+    "section": "低血糖！とくらいつく前に・・・",
+    "text": "低血糖！とくらいつく前に・・・\n\n本当に意味のある低血糖？\n意味のある低血糖かどうかはWhippleの3徴を確認する\n\n低血糖症状があるかを確認する\n\n自律神経症状: 振戦、動悸、不安/興奮、発汗、空腹感、\nNeuroglycopenic symptoms: めまい、脱力、意識障害\n\n有症状時に通常の採血で血糖値&lt; 55mg/dLが証明されている\n血糖値が改善したら症状も改善する\n\n若年女性だと絶食期間があると無症状の低血糖になる事は多い"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#人体の空腹への生理的反応",
+    "href": "medicine/hypoglycemia/index.html#人体の空腹への生理的反応",
+    "title": "低血糖についての覚書",
+    "section": "人体の空腹への生理的反応",
+    "text": "人体の空腹への生理的反応\n\n\nInsulinを抑制されて血糖利用が抑制される\nGlucagon分泌が増えて、糖新生が増える\n\n脂質代謝が増えて、ケトン体(βヒドロキシ酪酸)が増加する\n\nAdrenalineおよびCortisol、GHが増加\n\n自律神経症状が出る\n\n更に血糖値が下がる(48-50 mg/dL)と脳が血糖低下に耐えられずにneuroglycopenic symptomを起こす(Rayas and Salehi 2000)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の具体的な症状",
+    "href": "medicine/hypoglycemia/index.html#低血糖の具体的な症状",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の具体的な症状",
+    "text": "低血糖の具体的な症状\n\n例えばInsulinomaで多い症状は以下の通り\n\n77%が自律神経症状\n96%が血糖低下による神経症状\n\n≥ 80%が混乱・異常行動,\n50%が意識消失\n12-19%が痙攣発作"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#症状血糖値はいつ有意",
+    "href": "medicine/hypoglycemia/index.html#症状血糖値はいつ有意",
+    "title": "低血糖についての覚書",
+    "section": "症状×血糖値はいつ有意？",
+    "text": "症状×血糖値はいつ有意？\n\n症候性\n\n65 mg/dL未満で症状があればほぼ有意\n65-79 mg/dLの場合は通常は低血糖によるものではないが、否定は出来ない\n80 mg/dL以上だと症状の原因にはならない\n\n無症候性\n\n40 mg/dL未満は有意: 繰り返す低血糖で症状が出なくなっている可能性\n40-64 mg/dL: 患者背景で考える"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の考え方",
+    "href": "medicine/hypoglycemia/index.html#低血糖の考え方",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の考え方",
+    "text": "低血糖の考え方\n\n栄養不良や吸収不良による低血糖は稀\n血糖を上げるホルモンと下げるホルモンの疾患で考えると良い\n\n血糖を上げるホルモン(原因としては少ない)\n\n甲状腺ホルモン\nGlucagon\nAdrenaline\nGHなど\n\n血糖を下げるホルモン(原因として多い)\n\nInsulin\nInsulin likeなホルモン(IGF-2など)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#ただし",
+    "href": "medicine/hypoglycemia/index.html#ただし",
+    "title": "低血糖についての覚書",
+    "section": "ただし・・・・・・",
+    "text": "ただし・・・・・・\n\n下記理由から、この考え方よりはより実践的な考え方がある"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖のmodernな分類",
+    "href": "medicine/hypoglycemia/index.html#低血糖のmodernな分類",
+    "title": "低血糖についての覚書",
+    "section": "低血糖のModernな分類",
+    "text": "低血糖のModernな分類\n\n昔は、空腹時と食後で分類していた\n\nこの区別は現在では有用性が低いことが知られている\n\n例えば、空腹時血糖の主原因とされるInsulinomaでは27%が食後低血糖を呈する(Martens and Tits 2014)\n患者が自覚できない事もちゃんと病歴を述べられないことも多い\n\n\n現在では以下のように分ける\n\n内服中または内科疾患が明らかにある患者(Ill or medicated)\n健康(そうに見える)患者(Seemingly well)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の鑑別-ill-or-medicated-individual",
+    "href": "medicine/hypoglycemia/index.html#低血糖の鑑別-ill-or-medicated-individual",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の鑑別 ~ Ill or medicated individual",
+    "text": "低血糖の鑑別 ~ Ill or medicated individual\n\n薬剤性\n\nInsulin or insulin分泌促進薬\nアルコール\n\n重症患者(Critical illnesses)\n\n肝/腎/心不全\n敗血症 (malariaを含む)\n\n内分泌疾患(ホルモン分泌不全)\n\n副腎不全(Cortisol分泌不全)\nグルカゴン・ノルアドレナリン分泌不全1\n\nNonislet cell tumor\n\nInsulin分泌不全の糖尿病患者において、下垂体疾患などによる甲状腺機能低下やGH低下で低血糖になりやすい"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#ill-or-medicatedについて",
+    "href": "medicine/hypoglycemia/index.html#ill-or-medicatedについて",
+    "title": "低血糖についての覚書",
+    "section": "Ill or medicatedについて",
+    "text": "Ill or medicatedについて\n\n重症患者の場合はしばしば低血糖になる\n\n食事量低下+(肝臓/腎臓での)糖新生の低下+Insulinのclearanceの低下\nSepsis, 肝/腎不全\n\nこの場合、色々な検査はあまり有用性は低く原病の治療のみ行う\nただし、副腎不全の検査の閾値は低くする\nNonislet cell tumorについては、事前に分かっている可能性が高い"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#nonislet-cell-tumorについて",
+    "href": "medicine/hypoglycemia/index.html#nonislet-cell-tumorについて",
+    "title": "低血糖についての覚書",
+    "section": "Nonislet cell tumorについて",
+    "text": "Nonislet cell tumorについて\n\n膵臓以外の腫瘍による低血糖\n機序として複数あり\n\nIGF-IIを産生する事によりInsulinomaのような病態になる\n悪性腫瘍自身が血糖を消費する　など\n\n巨大な肝臓癌が大きく、70%以上が10cmより大きい\n検査結果として、free IGF-IIが上昇し、IGF-I, Insulinが低下する事が知られている(Martens and Tits 2014)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の鑑別-seemingly-well",
+    "href": "medicine/hypoglycemia/index.html#低血糖の鑑別-seemingly-well",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の鑑別 ~ Seemingly well",
+    "text": "低血糖の鑑別 ~ Seemingly well\n\n内因性の高インシュリン血症\n\nInsulinoma\n機能性Β細胞疾患(Functional beta cell disorders; nesidioblastosis)\n\nNoninsulinoma pancreatogenous hypoglycemia (NIPHS)\nPost-gastric bypass hypoglycemia\n\nインシュリンへの自己免疫関連(Insulin autoimmune hypoglycemia)\n\n抗Insulin抗体 or 抗Insulin受容体抗体\n\nInsulin分泌促進薬\n\n偶発的、あるいは故意による低血糖"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#seemingly-well-individual",
+    "href": "medicine/hypoglycemia/index.html#seemingly-well-individual",
+    "title": "低血糖についての覚書",
+    "section": "Seemingly well individual",
+    "text": "Seemingly well individual\n\n簡単に言うと「きれいな原因の疾患」が隠れている\nインシュリン関連の検査をしつつ、\n頑張って低血糖時の採血をとりに行く！"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#insulinomaについて",
+    "href": "medicine/hypoglycemia/index.html#insulinomaについて",
+    "title": "低血糖についての覚書",
+    "section": "Insulinomaについて",
+    "text": "Insulinomaについて\n\n膵臓のβ細胞の良性腫瘍(10%未満が悪性)\n通常は空腹時だが、食後にも低血糖は起こり得る(前述)\nやや女性に多く、1/250,000人年の発症率\n10%未満がMEN-1と関連する(Martens and Tits 2014)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#niphsについて",
+    "href": "medicine/hypoglycemia/index.html#niphsについて",
+    "title": "低血糖についての覚書",
+    "section": "NIPHSについて",
+    "text": "NIPHSについて\n\n膵島細胞の過形成(nesidioblastosis)および、Lngerhans細胞への分化による稀な疾患\n\n腫瘍のないInsulinomaみたいな感じ\n\n食後2-4時間で低血糖が起こることが特徴で、精神神経症状が起こる(Adrian Vella, n.d.b)\n男性に多い"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#pgbhについて",
+    "href": "medicine/hypoglycemia/index.html#pgbhについて",
+    "title": "低血糖についての覚書",
+    "section": "PGBHについて",
+    "text": "PGBHについて\n\nRoux-en-Y gastric bypass (RYGB) surgeryの後の低血糖\n以前は晩期Dumping症候群と言われていた\nEtiologyははっきり分かっていないが、複数のHormon異常が原因とされている(James C Ellsmere, n.d.)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#insulin-autoimmune-hypoglycemiaについて",
+    "href": "medicine/hypoglycemia/index.html#insulin-autoimmune-hypoglycemiaについて",
+    "title": "低血糖についての覚書",
+    "section": "Insulin autoimmune hypoglycemiaについて",
+    "text": "Insulin autoimmune hypoglycemiaについて\n\n抗Insulin抗体(Insulin autoimmune syndrome)あるいは、Insulin受容体への抗体(type B insulin reistance)で起こる低血糖(Rayas and Salehi 2000)\n抗Insulin抗体は自己抗体が外れた時に低血糖になる\n\n食後すぐの高血糖と数時間経過した後の低血糖が特徴\n日本人だと、MMI内服後に起こりやすい(非Asianだと、血液疾患や自己免疫疾患背景が多い)\n\n抗Insulin受容体抗体はInsulin受容体へのpartial agonistによって起こる\n\n低力価だと低血糖、高力価だと高血糖となる\n背景にSLEなどが多い\n\n代償として血中C-peptide, Insulin濃度が異常高値となる"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#hypoglycemiaの問診",
+    "href": "medicine/hypoglycemia/index.html#hypoglycemiaの問診",
+    "title": "低血糖についての覚書",
+    "section": "Hypoglycemiaの問診",
+    "text": "Hypoglycemiaの問診\n\n日常生活\n\n栄養状態、普段の食事内容、アルコール摂取量\n\n詳細な病歴\n\nいつ・どんな症状が出る？誘発因子は？\n\n患者背景\n\n既往歴や併存症(肝腎不全など)の確認\n\n薬は？\n\nOTC、漢方薬も含めて確認する(Rayas and Salehi 2000)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#薬について",
+    "href": "medicine/hypoglycemia/index.html#薬について",
+    "title": "低血糖についての覚書",
+    "section": "薬について",
+    "text": "薬について\n\n\n\n\n\n\n\nEvidenceレベル\n薬剤名　　　　　　\n\n\n\n\nModerate quality\nCibenzoline, Gatifloxacin, Pentamidine, Quinine, Indomethacin, Glucagon during endoscopy\n\n\nLow qualtiy\nChloroquineoxaline sulfonamide, Artemisin, IGF-1, Lithium, Propoxypherene/Dextropropoxyphene\n\n\n\n\nQuinolones, Pentamidine, Quinine, BB, ACEi, IGF-1が有名\nVery low quality of evidenceは割愛"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#uptodateのアルゴリズム",
+    "href": "medicine/hypoglycemia/index.html#uptodateのアルゴリズム",
+    "title": "低血糖についての覚書",
+    "section": "UptoDateのアルゴリズム",
+    "text": "UptoDateのアルゴリズム\n\n\n副腎不全を否定する\n問診を重視 →理論的というよりは、実践的"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#dynamedのアルゴリズム",
+    "href": "medicine/hypoglycemia/index.html#dynamedのアルゴリズム",
+    "title": "低血糖についての覚書",
+    "section": "Dynamedのアルゴリズム",
+    "text": "Dynamedのアルゴリズム\n\n\n薬剤性を病歴から否定はUptoDateと一緒\n検査結果がPureじゃないconcurrent illnessを除外 →どちらかというと理論派"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#勇気を持って低血糖誘発試験",
+    "href": "medicine/hypoglycemia/index.html#勇気を持って低血糖誘発試験",
+    "title": "低血糖についての覚書",
+    "section": "勇気を持って、低血糖誘発試験",
+    "text": "勇気を持って、低血糖誘発試験\n\nInsulin/IGFによる低血糖疑い or 原因がわからない時に誘発試験の適応\n空腹時血糖 = 絶食試験、食後低血糖 = Mixed-meal test\n低血糖の時に採血を行う\n\n血糖値\nInsulin値\n血清C-peptide\n血清βヒドロキシ酪酸(aka ケトン体)\nプロインシュリン値\n(血糖降下薬のスクリーニング)"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#低血糖の検査の考え方各種の検査の意味",
+    "href": "medicine/hypoglycemia/index.html#低血糖の検査の考え方各種の検査の意味",
+    "title": "低血糖についての覚書",
+    "section": "低血糖の検査の考え方〜各種の検査の意味～",
+    "text": "低血糖の検査の考え方〜各種の検査の意味～\n\n血中Insulin = 内因性+外因性のInsulin\n内因性のInsulinの量をみる検査\n\nProInsulin\n血清C-peptide\n\nInsulinが分泌していないのに血糖が低いときの検査  = 脂肪酸代謝になっている\n\n血清ケトン体"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#負荷試験",
+    "href": "medicine/hypoglycemia/index.html#負荷試験",
+    "title": "低血糖についての覚書",
+    "section": "負荷試験",
+    "text": "負荷試験\n\nMixed-meal testのやり方絶食試験のやり方\n\n\n\n施設ごとでばらつきあり\n\n\n食事前に採血をする\n固形の食事(普段の食事内容)を摂取\n\n施設によって、ここから30分毎に採血\n\n低血糖症状あるいは5時間確認したら採血\n15gの炭水化物をとらせて血糖値の推移と症状の回復を確認\nBS &lt;65 mg/dLかつ症状がある時の検査を有意とする\n\n\n\n\nAM 8時に絶食開始\nカロリー/カフェインフリーの飲み物のみ摂取可\n2hr毎に血糖測定\n70mg/dL未満になったら、30min毎に症状確認と血糖測定\n72時間経過あるいは&lt;55mg/dLまたは無症候でもBS&lt; 45 mg/dLを達成したら修了\nBS&lt; 55 mg/dLの時の採血を行う\nGlucagon 1mg ivし10, 20, 30min後の血糖測定\n\nGlucagon iv後にGluが25 mg/dL以上改善したらInsulin性低血糖を示唆する"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#検査結果の解釈",
+    "href": "medicine/hypoglycemia/index.html#検査結果の解釈",
+    "title": "低血糖についての覚書",
+    "section": "検査結果の解釈",
+    "text": "検査結果の解釈\n\n\n\n\n\n\n\n\n\n\n\n疾患名\nInsulin (microU/mL)\nC-peptide (nmol/L)\nProinsulin (pmol/L)\nβヒドロキシ酪酸 (mmol/L)\ninsulin自己抗体\n\n\n\n\n外因性insulin\n&gt;&gt;3\n&lt;0.2\n&lt;5\n≤2.7\n陰性 (時に陽性)\n\n\nInsulinoma, NIPHS1, PGBH2\n≥3\n≥0.2\n≥5\n≤2.7\n陰性\n\n\n血糖降下薬\n≥3\n≥0.2\n≥5\n≤2.7\n陰性\n\n\nInsulin自己抗体\n&gt;&gt;3\n&gt;&gt;0.2\n&gt;&gt;5\n≤2.7\n陽性\n\n\nIGFによる\n&lt;3\n&lt;0.2\n&lt;5\n≤2.7\n陰性\n\n\nNot insulin (or IGF)-mediated\n&lt;3\n&lt;0.2\n&lt;5\n&gt;2.7\n陰性\n\n\n\n\nNIPHS: noninsulinoma pancreatogenous hypoglycemia syndrome\nPGBH: post-gastric bypass hypoglycemia"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#検査結果の読み方",
+    "href": "medicine/hypoglycemia/index.html#検査結果の読み方",
+    "title": "低血糖についての覚書",
+    "section": "検査結果の読み方",
+    "text": "検査結果の読み方"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#point",
+    "href": "medicine/hypoglycemia/index.html#point",
+    "title": "低血糖についての覚書",
+    "section": "Point",
+    "text": "Point\n\nInsulin ≧3 μU/mLはInsulinによる低血糖を示唆する\nC-peptide, ProInsulinはInsulinが内因性か外因性かを判断する\n\nInsulinによる低血糖の時に、C-peptide &lt;0.2nmol/L(0.6 ng/mL)は外因性のInsulin\nProInsulin &lt;5 pmol/Lは外因性のInsulinを示唆する\nProInsulin, C-peptideが高いと悪性腫瘍を示唆し、Proinsulinが高値なほど未分化\n\nβヒドロキシ酪酸はInsulinまたはIGFによる低血糖では抑制される = 陽性の場合はInsulinやIGFによる低血糖は否定的で、Cortisol欠乏、慢性の低栄養、肝腎不全、薬剤性など\n低血糖時の検査の閾値での結果はInsulinomaに対して感度&gt;90%, 特異度&gt;70%"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#take-home-message",
+    "href": "medicine/hypoglycemia/index.html#take-home-message",
+    "title": "低血糖についての覚書",
+    "section": "Take home message",
+    "text": "Take home message\n\n低血糖を見た時には、Whippleの三徴で真の低血糖かを確認する\n低血糖はseeming wellかmedicated or illで鑑別する\n低血糖の原因はInsulin関連かInsulin以外かで考えると分かりやすい"
+  },
+  {
+    "objectID": "medicine/hypoglycemia/index.html#reference",
+    "href": "medicine/hypoglycemia/index.html#reference",
+    "title": "低血糖についての覚書",
+    "section": "Reference",
+    "text": "Reference\n\n\nAdrian Vella. n.d.a. “Hypoglycemia in Adults Without Diabetes Mellitus: Determining the Etiology.” https://www.uptodate.com.\n\n\n———. n.d.b. “Noninsulinoma Pancreatogenous Hypoglycemia Syndrome.” https://www.uptodate.com.\n\n\nDynaMed. n.d. “Hypoglycemia in Adults - Approach to the Patient Without Diabetes.” https://www.dynamed.com/approach-to/hypoglycemia-in-adults-approach-to-the-patient-without-diabetes; DynaMed.\n\n\nJames C Ellsmere. n.d. “Bariatric Operations: Late Complications with Subacute Presentations.” https://www.uptodate.com.\n\n\nMartens, Pieter, and Jos Tits. 2014. “Approach to the Patient with Spontaneous Hypoglycemia.” European Journal of Internal Medicine 25 (5): 415–21. https://doi.org/10.1016/j.ejim.2014.02.011.\n\n\nRayas, Maria S, and Marzieh Salehi. 2000. “Non-Diabetic Hypoglycemia.” In Endotext. South Dartmouth (MA): MDText.com, Inc."
+  },
+  {
+    "objectID": "statistics/index.html",
+    "href": "statistics/index.html",
+    "title": "統計学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です"
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法"
+  },
+  {
+    "objectID": "statistics/index.html#スライド一覧",
+    "href": "statistics/index.html#スライド一覧",
+    "title": "統計学",
+    "section": "",
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#クイズ",
+    "href": "statistics/bootstrap/index.html#クイズ",
+    "title": "Bootstrapについて",
+    "section": "クイズ",
+    "text": "クイズ\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？\nBootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？\nBootstrap信頼区間の時に良い方法はなんでしょうか？"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#introduction",
+    "href": "statistics/bootstrap/index.html#introduction",
+    "title": "Bootstrapについて",
+    "section": "Introduction",
+    "text": "Introduction\n\n最近研究でbootstrapを使う事が複数回あった\n正直雰囲気でやっていたので、しっかり勉強してみたい"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方",
+    "href": "statistics/bootstrap/index.html#信頼区間の出し方",
+    "title": "Bootstrapについて",
+    "section": "95％信頼区間の出し方",
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.19334\n\n\n2\n16.96660\n\n\n3\n23.49651\n\n\n4\n19.49528\n\n\n5\n19.26215\n\n\n6\n19.01104\n\n\n7\n21.72973\n\n\n8\n21.47534\n\n\n9\n22.48731\n\n\n10\n21.35283\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
+    "href": "statistics/bootstrap/index.html#信頼区間の出し方-1",
+    "title": "Bootstrapについて",
+    "section": "信頼区間の出し方",
+    "text": "信頼区間の出し方\n\n\nこの分布が正規分布に従うとして、t分布の平均と分散を最尤法で推定\nt分布の数表を確認して、1.96×標準偏差で計算する"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#でも",
+    "href": "statistics/bootstrap/index.html#でも",
+    "title": "Bootstrapについて",
+    "section": "でも・・・・・・",
+    "text": "でも・・・・・・\n\n心不全患者のBNPの分布は？\n新しいDeep learningモデルのtest cohortでのAUROCの分散は？\n死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？\n\n医学では正規分布でないものの方が多い！"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapとは",
+    "href": "statistics/bootstrap/index.html#bootstrapとは",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapとは",
+    "text": "Bootstrapとは\n\n\nJackknife法などと同じresampling法の一種\nEfronが1979年に開発した手法\n元のデータからランダムに取り出して新しいデータセットを作成する(Efron 2003)\nこの際に重複を許可するのが特徴 = 使われないのもある"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#おまけbootstrapの名前",
+    "href": "statistics/bootstrap/index.html#おまけbootstrapの名前",
+    "title": "Bootstrapについて",
+    "section": "おまけ〜Bootstrapの名前",
+    "text": "おまけ〜Bootstrapの名前\n\nホラ吹き男爵の冒険のエピソード\n「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある\n読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
+    "href": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
+    "title": "Bootstrapについて",
+    "section": "Bootstrap法〜Jackknifeとの比較",
+    "text": "Bootstrap法〜Jackknifeとの比較\n\nBootstrapの前に、Jackknifeという手法が1949年に開発された\nこれは、1つずつ標本から抜いていくという手法\nどんな時にも使えるから、便利な十徳ナイフという名前が付けられた\nこっちの方が自然なイメージだが問題点があった"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点1",
+    "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
+    "title": "Bootstrapについて",
+    "section": "Jacknife法の問題点1",
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.11967\n186.4749\n\n\n\n2\n73.16721\n195.7337\n\n\n\n3\n72.05834\n204.6609\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
+    "href": "statistics/bootstrap/index.html#jacknife法の問題点2",
+    "title": "Bootstrapについて",
+    "section": "Jacknife法の問題点2",
+    "text": "Jacknife法の問題点2"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#その場合",
+    "href": "statistics/bootstrap/index.html#その場合",
+    "title": "Bootstrapについて",
+    "section": "その場合",
+    "text": "その場合\n\nこのようなデータ(連続じゃない時)の時に分散を広く推定してしまう\nイメージだが、外れ値を何度も数えてしまう (FHを29回数えている)\n平均値とSDは出来るが、中央値とPercentileは苦手"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの前提条件",
+    "href": "statistics/bootstrap/index.html#bootstrapの前提条件",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの前提条件",
+    "text": "Bootstrapの前提条件\n\nPlug in principles\n簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの簡単な例",
+    "href": "statistics/bootstrap/index.html#bootstrapの簡単な例",
+    "title": "Bootstrapについて",
+    "section": "bootstrapの簡単な例",
+    "text": "bootstrapの簡単な例\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nDarth Vader\n202\n136\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nOwen Lars\n178\n120\nHuman\n\n\nBeru Whitesun Lars\n165\n75\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n簡単なものとして、身長の平均値の95%信頼区間を導出してみる"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-1",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-1",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 1",
+    "text": "How to bootstrap 1\n\n\n\n\n [1]  1  2  2  2  3  5  5  8  8 11 12 13 13 14 15 21 21 22 22 22 24 24 26 27 29\n[26] 30 30 32 32 32 34 35 35 43 44 44 45 47 48 48 48 48 48 49 49 50 51 51 52 52\n[51] 52 52 52 53 54 56 56 58 59 60 61 61 62 62 62 63 64 65 65 68 69 69 71 72 74\n[76] 74 75 75 76 78 78 79 80 82 84 84 87\n\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nLeia Organa\n150\n49\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\nR5-D4\n97\n32\nDroid\n\n\nAnakin Skywalker\n188\n84\nHuman\n\n\nWilhuff Tarkin\n180\nNA\nHuman\n\n\nChewbacca\n228\n112\nWookiee\n\n\nChewbacca\n228\n112\nWookiee\n\n\nHan Solo\n180\n80\nHuman\n\n\nGreedo\n173\n74\nRodian\n\n\n\n\n\n\n\n行数の数字をランダムに抽出する\nこの時、重複を許す！"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-2",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-2",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 2",
+    "text": "How to bootstrap 2\n\n同じものが複数ある(C3PO)\nこの状態で身長の平均値を出す。\n身長の平均値 = 175.5595238"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-3",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-3",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 3",
+    "text": "How to bootstrap 3\n\n上記の1と2を繰り返す。"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-4",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-4",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 4",
+    "text": "How to bootstrap 4\n\nここからやり方は複数ある(Bland and Altman 2015)\n代表的なものは以下の3つ\n\n標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法)  → sd = 3.9741878\n2.5% ~ 97.5%の範囲をそのまま提示する(Percentile法)  → [167.0867695, 169.5139372]\n標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)\n\n\n\n\n\n\n\n\nNote\n\n\nどの方法を用いるにせよ必ず1回はHistogramにして分布を確認する！！"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの種類",
+    "href": "statistics/bootstrap/index.html#bootstrapの種類",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの種類",
+    "text": "Bootstrapの種類\n\n最も基本は上記のPercentile法 → ただし、以下の弱点がある\nPercentile法の弱点\n\n収束が遅い\n元データを使っていない → Biasが生まれる(Wicklin, n.d.)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrap法の改善",
+    "href": "statistics/bootstrap/index.html#bootstrap法の改善",
+    "title": "Bootstrapについて",
+    "section": "Bootstrap法の改善",
+    "text": "Bootstrap法の改善\n\nBCa法やBootstrap-t法が考えられている\n\nBiasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法\n\nBootstrap-t法: 分散値を使い、t分布に近似する\n\n分散は理論値やjackknife法で計算する必要がある(汪金芳 and 桜井裕仁 2011)\n\nBCa法: Bootstrapだけでなんとかなるのが利点"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#どれを選べばいいの",
+    "href": "statistics/bootstrap/index.html#どれを選べばいいの",
+    "title": "Bootstrapについて",
+    "section": "どれを選べばいいの？",
+    "text": "どれを選べばいいの？\n\n\n過去の論文(Carpenter and Bithell 2000)では、Flowchartが示されている\n全く分からなければBCa法が無難だと思う\nBootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう(DiCiccio and Efron 1996)\nBCa法はBootstrapの繰り返しが多いがRだと簡単に出来る(Davison and Hinkley 1997)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
+    "href": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
+    "title": "Bootstrapについて",
+    "section": "古典的な信頼区間とBootstrap信頼区間の違い",
+    "text": "古典的な信頼区間とBootstrap信頼区間の違い"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
+    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの素朴な疑問",
+    "text": "Bootstrapの素朴な疑問\n\nnは幾つにすればいいの？\n元データは少なくてもいいの？"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
+    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの素朴な疑問 1",
+    "text": "Bootstrapの素朴な疑問 1\n\nnは幾つにすればいいの？ →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000回程度必要\nコンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる(Chernick 2008)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
+    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの素朴な疑問 2",
+    "text": "Bootstrapの素朴な疑問 2\n\n元データは少なくてもいいの？ →　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ\n経験則だと最低30～50は必要と考えられる(Chernick 2008)が求めたいものと状況による\nロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#クイズの答え",
+    "href": "statistics/bootstrap/index.html#クイズの答え",
+    "title": "Bootstrapについて",
+    "section": "クイズの答え",
+    "text": "クイズの答え\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには1000-2000回繰り返しをする\nBootstrap信頼区間を出す前に必ず統計量のHistogramを確認する！\nBootstrap信頼区間の時にはBCa法を行う！"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#thank-you-for-your-listening",
+    "href": "statistics/bootstrap/index.html#thank-you-for-your-listening",
+    "title": "Bootstrapについて",
+    "section": "Thank you for your listening!!",
+    "text": "Thank you for your listening!!\n\n\nこれが本当にあった話らしい"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#references",
+    "href": "statistics/bootstrap/index.html#references",
+    "title": "Bootstrapについて",
+    "section": "References",
+    "text": "References\n\n\nBland, J Martin, and Douglas G Altman. 2015. “Statistics Notes: Bootstrap Resampling Methods.” BMJ. https://doi.org/10.1136/bmj.h2622.\n\n\nCarpenter, J, and J Bithell. 2000. “Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.” Statistics in Medicine 19 (9): 1141–64. https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f.\n\n\nChernick, Michael R. 2008. Bootstrap Methods a Guide for Practitioners and Researchers. 2nd ed. Hoboken, N.J: Wiley-Interscience.\n\n\nDavison, A. C., and D. V. Hinkley. 1997. Bootstrap Methods and Their Applications. Cambridge: Cambridge University Press. http://statwww.epfl.ch/davison/BMA/.\n\n\nDiCiccio, Thomas J, and Bradley Efron. 1996. “Bootstrap Confidence Intervals.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 11 (3): 189–228. https://doi.org/10.1214/ss/1032280214.\n\n\nEfron, Bradley. 2003. “Second Thoughts on the Bootstrap.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 18 (2): 135–40. https://doi.org/10.1214/ss/1063994968.\n\n\nWicklin, Rick. n.d. “The Bias-Corrected and Accelerated (BCa) Bootstrap Interval.” https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html.\n\n\n汪金芳, and 桜井裕仁. 2011. ブートストラップ入門."
   },
   {
     "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
@@ -336,654 +973,17 @@
     "text": "References\n\n\nConnors, A F, Jr, T Speroff, N V Dawson, C Thomas, F E Harrell Jr, D Wagner, N Desbiens, et al. 1996. “The Effectiveness of Right Heart Catheterization in the Initial Care of Critically Ill Patients. SUPPORT Investigators.” JAMA: The Journal of the American Medical Association 276 (11): 889–97. https://doi.org/10.1001/jama.276.11.889.\n\n\nCummings, Peter. 2009. “The Relative Merits of Risk Ratios and Odds Ratios.” Archives of Pediatrics & Adolescent Medicine 163 (5): 438–45. https://doi.org/10.1001/archpediatrics.2009.31.\n\n\nDahabreh, Issa J, and Kirsten Bibbins-Domingo. 2024. “Causal Inference about the Effects of Interventions from Observational Studies in Medical Journals.” JAMA: The Journal of the American Medical Association 331 (21): 1845–53. https://doi.org/10.1001/jama.2024.7741.\n\n\nGreifer, Noah. 2025. “Estimating Effects After Matching.” https://cran.r-project.org/web/packages/MatchIt/vignettes/estimating-effects.html.\n\n\nHernan, Miguel A. 2024. Causal Inference: What If. Edited by James M. Robins. Boca Raton: Taylor & Francis.\n\n\nKing, Gary, Michael Tomz, and Jason Wittenberg. 2000. “Making the Most of Statistical Analyses: Improving Interpretation and Presentation.” American Journal of Political Science 44 (2): 347–61. https://doi.org/10.2307/2669316.\n\n\nTibshirani, Julie, Susan Athey, Erik Sverdrup, and Stefan Wager. 2024. Grf: Generalized Random Forests. https://github.com/grf-labs/grf."
   },
   {
-    "objectID": "statistics/bootstrap/index.html#クイズ",
-    "href": "statistics/bootstrap/index.html#クイズ",
-    "title": "Bootstrapについて",
-    "section": "クイズ",
-    "text": "クイズ\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？\nBootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？\nBootstrap信頼区間の時に良い方法はなんでしょうか？"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#introduction",
-    "href": "statistics/bootstrap/index.html#introduction",
-    "title": "Bootstrapについて",
-    "section": "Introduction",
-    "text": "Introduction\n\n最近研究でbootstrapを使う事が複数回あった\n正直雰囲気でやっていたので、しっかり勉強してみたい"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方",
-    "href": "statistics/bootstrap/index.html#信頼区間の出し方",
-    "title": "Bootstrapについて",
-    "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n19.05527\n\n\n2\n21.32721\n\n\n3\n19.80856\n\n\n4\n18.93980\n\n\n5\n15.57929\n\n\n6\n19.20927\n\n\n7\n18.97715\n\n\n8\n19.71768\n\n\n9\n21.92015\n\n\n10\n21.17935\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
-    "href": "statistics/bootstrap/index.html#信頼区間の出し方-1",
-    "title": "Bootstrapについて",
-    "section": "信頼区間の出し方",
-    "text": "信頼区間の出し方\n\n\nこの分布が正規分布に従うとして、t分布の平均と分散を最尤法で推定\nt分布の数表を確認して、1.96×標準偏差で計算する"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#でも",
-    "href": "statistics/bootstrap/index.html#でも",
-    "title": "Bootstrapについて",
-    "section": "でも・・・・・・",
-    "text": "でも・・・・・・\n\n心不全患者のBNPの分布は？\n新しいDeep learningモデルのtest cohortでのAUROCの分散は？\n死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？\n\n医学では正規分布でないものの方が多い！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapとは",
-    "href": "statistics/bootstrap/index.html#bootstrapとは",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapとは",
-    "text": "Bootstrapとは\n\n\nJackknife法などと同じresampling法の一種\nEfronが1979年に開発した手法\n元のデータからランダムに取り出して新しいデータセットを作成する(Efron 2003)\nこの際に重複を許可するのが特徴 = 使われないのもある"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#おまけbootstrapの名前",
-    "href": "statistics/bootstrap/index.html#おまけbootstrapの名前",
-    "title": "Bootstrapについて",
-    "section": "おまけ〜Bootstrapの名前",
-    "text": "おまけ〜Bootstrapの名前\n\nホラ吹き男爵の冒険のエピソード\n「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある\n読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
-    "href": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
-    "title": "Bootstrapについて",
-    "section": "Bootstrap法〜Jackknifeとの比較",
-    "text": "Bootstrap法〜Jackknifeとの比較\n\nBootstrapの前に、Jackknifeという手法が1949年に開発された\nこれは、1つずつ標本から抜いていくという手法\nどんな時にも使えるから、便利な十徳ナイフという名前が付けられた\nこっちの方が自然なイメージだが問題点があった"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点1",
-    "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
-    "title": "Bootstrapについて",
-    "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n72.41030\n187.1390\n\n\n\n2\n70.25772\n206.1541\n\n\n\n3\n82.01995\n188.1119\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
-    "href": "statistics/bootstrap/index.html#jacknife法の問題点2",
-    "title": "Bootstrapについて",
-    "section": "Jacknife法の問題点2",
-    "text": "Jacknife法の問題点2"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#その場合",
-    "href": "statistics/bootstrap/index.html#その場合",
-    "title": "Bootstrapについて",
-    "section": "その場合",
-    "text": "その場合\n\nこのようなデータ(連続じゃない時)の時に分散を広く推定してしまう\nイメージだが、外れ値を何度も数えてしまう (FHを29回数えている)\n平均値とSDは出来るが、中央値とPercentileは苦手"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの前提条件",
-    "href": "statistics/bootstrap/index.html#bootstrapの前提条件",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの前提条件",
-    "text": "Bootstrapの前提条件\n\nPlug in principles\n簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの簡単な例",
-    "href": "statistics/bootstrap/index.html#bootstrapの簡単な例",
-    "title": "Bootstrapについて",
-    "section": "bootstrapの簡単な例",
-    "text": "bootstrapの簡単な例\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nDarth Vader\n202\n136\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nOwen Lars\n178\n120\nHuman\n\n\nBeru Whitesun Lars\n165\n75\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n簡単なものとして、身長の平均値の95%信頼区間を導出してみる"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-1",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-1",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 1",
-    "text": "How to bootstrap 1\n\n\n\n\n [1]  1  2  2  2  3  5  5  8  8 11 12 13 13 14 15 21 21 22 22 22 24 24 26 27 29\n[26] 30 30 32 32 32 34 35 35 43 44 44 45 47 48 48 48 48 48 49 49 50 51 51 52 52\n[51] 52 52 52 53 54 56 56 58 59 60 61 61 62 62 62 63 64 65 65 68 69 69 71 72 74\n[76] 74 75 75 76 78 78 79 80 82 84 84 87\n\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nLeia Organa\n150\n49\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\nR5-D4\n97\n32\nDroid\n\n\nAnakin Skywalker\n188\n84\nHuman\n\n\nWilhuff Tarkin\n180\nNA\nHuman\n\n\nChewbacca\n228\n112\nWookiee\n\n\nChewbacca\n228\n112\nWookiee\n\n\nHan Solo\n180\n80\nHuman\n\n\nGreedo\n173\n74\nRodian\n\n\n\n\n\n\n\n行数の数字をランダムに抽出する\nこの時、重複を許す！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-2",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-2",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 2",
-    "text": "How to bootstrap 2\n\n同じものが複数ある(C3PO)\nこの状態で身長の平均値を出す。\n身長の平均値 = 175.5595238"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-3",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-3",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 3",
-    "text": "How to bootstrap 3\n\n上記の1と2を繰り返す。"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-4",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-4",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 4",
-    "text": "How to bootstrap 4\n\nここからやり方は複数ある(Bland and Altman 2015)\n代表的なものは以下の3つ\n\n標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法)  → sd = 3.9741878\n2.5% ~ 97.5%の範囲をそのまま提示する(Percentile法)  → [167.0867695, 169.5139372]\n標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)\n\n\n\n\n\n\n\n\nNote\n\n\nどの方法を用いるにせよ必ず1回はHistogramにして分布を確認する！！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの種類",
-    "href": "statistics/bootstrap/index.html#bootstrapの種類",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの種類",
-    "text": "Bootstrapの種類\n\n最も基本は上記のPercentile法 → ただし、以下の弱点がある\nPercentile法の弱点\n\n収束が遅い\n元データを使っていない → Biasが生まれる(Wicklin, n.d.)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrap法の改善",
-    "href": "statistics/bootstrap/index.html#bootstrap法の改善",
-    "title": "Bootstrapについて",
-    "section": "Bootstrap法の改善",
-    "text": "Bootstrap法の改善\n\nBCa法やBootstrap-t法が考えられている\n\nBiasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法\n\nBootstrap-t法: 分散値を使い、t分布に近似する\n\n分散は理論値やjackknife法で計算する必要がある(汪金芳 and 桜井裕仁 2011)\n\nBCa法: Bootstrapだけでなんとかなるのが利点"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#どれを選べばいいの",
-    "href": "statistics/bootstrap/index.html#どれを選べばいいの",
-    "title": "Bootstrapについて",
-    "section": "どれを選べばいいの？",
-    "text": "どれを選べばいいの？\n\n\n過去の論文(Carpenter and Bithell 2000)では、Flowchartが示されている\n全く分からなければBCa法が無難だと思う\nBootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう(DiCiccio and Efron 1996)\nBCa法はBootstrapの繰り返しが多いがRだと簡単に出来る(Davison and Hinkley 1997)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
-    "href": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
-    "title": "Bootstrapについて",
-    "section": "古典的な信頼区間とBootstrap信頼区間の違い",
-    "text": "古典的な信頼区間とBootstrap信頼区間の違い"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
-    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの素朴な疑問",
-    "text": "Bootstrapの素朴な疑問\n\nnは幾つにすればいいの？\n元データは少なくてもいいの？"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
-    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの素朴な疑問 1",
-    "text": "Bootstrapの素朴な疑問 1\n\nnは幾つにすればいいの？ →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000回程度必要\nコンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる(Chernick 2008)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
-    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの素朴な疑問 2",
-    "text": "Bootstrapの素朴な疑問 2\n\n元データは少なくてもいいの？ →　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ\n経験則だと最低30～50は必要と考えられる(Chernick 2008)が求めたいものと状況による\nロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#クイズの答え",
-    "href": "statistics/bootstrap/index.html#クイズの答え",
-    "title": "Bootstrapについて",
-    "section": "クイズの答え",
-    "text": "クイズの答え\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには1000-2000回繰り返しをする\nBootstrap信頼区間を出す前に必ず統計量のHistogramを確認する！\nBootstrap信頼区間の時にはBCa法を行う！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#thank-you-for-your-listening",
-    "href": "statistics/bootstrap/index.html#thank-you-for-your-listening",
-    "title": "Bootstrapについて",
-    "section": "Thank you for your listening!!",
-    "text": "Thank you for your listening!!\n\n\nこれが本当にあった話らしい"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#references",
-    "href": "statistics/bootstrap/index.html#references",
-    "title": "Bootstrapについて",
-    "section": "References",
-    "text": "References\n\n\nBland, J Martin, and Douglas G Altman. 2015. “Statistics Notes: Bootstrap Resampling Methods.” BMJ. https://doi.org/10.1136/bmj.h2622.\n\n\nCarpenter, J, and J Bithell. 2000. “Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.” Statistics in Medicine 19 (9): 1141–64. https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f.\n\n\nChernick, Michael R. 2008. Bootstrap Methods a Guide for Practitioners and Researchers. 2nd ed. Hoboken, N.J: Wiley-Interscience.\n\n\nDavison, A. C., and D. V. Hinkley. 1997. Bootstrap Methods and Their Applications. Cambridge: Cambridge University Press. http://statwww.epfl.ch/davison/BMA/.\n\n\nDiCiccio, Thomas J, and Bradley Efron. 1996. “Bootstrap Confidence Intervals.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 11 (3): 189–228. https://doi.org/10.1214/ss/1032280214.\n\n\nEfron, Bradley. 2003. “Second Thoughts on the Bootstrap.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 18 (2): 135–40. https://doi.org/10.1214/ss/1063994968.\n\n\nWicklin, Rick. n.d. “The Bias-Corrected and Accelerated (BCa) Bootstrap Interval.” https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html.\n\n\n汪金芳, and 桜井裕仁. 2011. ブートストラップ入門."
-  },
-  {
-    "objectID": "statistics/index.html",
-    "href": "statistics/index.html",
-    "title": "統計学",
+    "objectID": "medicine/index.html",
+    "href": "medicine/index.html",
+    "title": "医学",
     "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法"
+    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です"
   },
   {
-    "objectID": "statistics/index.html#スライド一覧",
-    "href": "statistics/index.html#スライド一覧",
-    "title": "統計学",
+    "objectID": "medicine/index.html#スライド一覧",
+    "href": "medicine/index.html#スライド一覧",
+    "title": "医学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#agenda",
-    "href": "medicine/hypoglycemia/index.html#agenda",
-    "title": "低血糖についての覚書",
-    "section": "Agenda",
-    "text": "Agenda\n\n症例\n低血糖！とくらいつく前に・・・・・・\nHypoglycemia without DM\n低血糖のModernな分類\nFitting wellの場合\n低血糖の検査の考え方～低血糖の各種の検査～"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#症例",
-    "href": "medicine/hypoglycemia/index.html#症例",
-    "title": "低血糖についての覚書",
-    "section": "症例",
-    "text": "症例\n\n78歳男性\n繰り返す低血糖で入院\n食事摂取低下後の低血糖で入院→退院後に低血糖によるCPAで救急科入院→総合内科転科後も低血糖を繰り返した・・・・・・"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖とくらいつく前に",
-    "href": "medicine/hypoglycemia/index.html#低血糖とくらいつく前に",
-    "title": "低血糖についての覚書",
-    "section": "低血糖！とくらいつく前に・・・",
-    "text": "低血糖！とくらいつく前に・・・\n\n本当に意味のある低血糖？\n意味のある低血糖かどうかはWhippleの3徴を確認する\n\n低血糖症状があるかを確認する\n\n自律神経症状: 振戦、動悸、不安/興奮、発汗、空腹感、\nNeuroglycopenic symptoms: めまい、脱力、意識障害\n\n有症状時に通常の採血で血糖値&lt; 55mg/dLが証明されている\n血糖値が改善したら症状も改善する\n\n若年女性だと絶食期間があると無症状の低血糖になる事は多い"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#人体の空腹への生理的反応",
-    "href": "medicine/hypoglycemia/index.html#人体の空腹への生理的反応",
-    "title": "低血糖についての覚書",
-    "section": "人体の空腹への生理的反応",
-    "text": "人体の空腹への生理的反応\n\n\nInsulinを抑制されて血糖利用が抑制される\nGlucagon分泌が増えて、糖新生が増える\n\n脂質代謝が増えて、ケトン体(βヒドロキシ酪酸)が増加する\n\nAdrenalineおよびCortisol、GHが増加\n\n自律神経症状が出る\n\n更に血糖値が下がる(48-50 mg/dL)と脳が血糖低下に耐えられずにneuroglycopenic symptomを起こす(Rayas and Salehi 2000)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖の具体的な症状",
-    "href": "medicine/hypoglycemia/index.html#低血糖の具体的な症状",
-    "title": "低血糖についての覚書",
-    "section": "低血糖の具体的な症状",
-    "text": "低血糖の具体的な症状\n\n例えばInsulinomaで多い症状は以下の通り\n\n77%が自律神経症状\n96%が血糖低下による神経症状\n\n≥ 80%が混乱・異常行動,\n50%が意識消失\n12-19%が痙攣発作"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#症状血糖値はいつ有意",
-    "href": "medicine/hypoglycemia/index.html#症状血糖値はいつ有意",
-    "title": "低血糖についての覚書",
-    "section": "症状×血糖値はいつ有意？",
-    "text": "症状×血糖値はいつ有意？\n\n症候性\n\n65 mg/dL未満で症状があればほぼ有意\n65-79 mg/dLの場合は通常は低血糖によるものではないが、否定は出来ない\n80 mg/dL以上だと症状の原因にはならない\n\n無症候性\n\n40 mg/dL未満は有意: 繰り返す低血糖で症状が出なくなっている可能性\n40-64 mg/dL: 患者背景で考える"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖の考え方",
-    "href": "medicine/hypoglycemia/index.html#低血糖の考え方",
-    "title": "低血糖についての覚書",
-    "section": "低血糖の考え方",
-    "text": "低血糖の考え方\n\n栄養不良や吸収不良による低血糖は稀\n血糖を上げるホルモンと下げるホルモンの疾患で考えると良い\n\n血糖を上げるホルモン(原因としては少ない)\n\n甲状腺ホルモン\nGlucagon\nAdrenaline\nGHなど\n\n血糖を下げるホルモン(原因として多い)\n\nInsulin\nInsulin likeなホルモン(IGF-2など)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#ただし",
-    "href": "medicine/hypoglycemia/index.html#ただし",
-    "title": "低血糖についての覚書",
-    "section": "ただし・・・・・・",
-    "text": "ただし・・・・・・\n\n下記理由から、この考え方よりはより実践的な考え方がある"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖のmodernな分類",
-    "href": "medicine/hypoglycemia/index.html#低血糖のmodernな分類",
-    "title": "低血糖についての覚書",
-    "section": "低血糖のModernな分類",
-    "text": "低血糖のModernな分類\n\n昔は、空腹時と食後で分類していた\n\nこの区別は現在では有用性が低いことが知られている\n\n例えば、空腹時血糖の主原因とされるInsulinomaでは27%が食後低血糖を呈する(Martens and Tits 2014)\n患者が自覚できない事もちゃんと病歴を述べられないことも多い\n\n\n現在では以下のように分ける\n\n内服中または内科疾患が明らかにある患者(Ill or medicated)\n健康(そうに見える)患者(Seemingly well)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖の鑑別-ill-or-medicated-individual",
-    "href": "medicine/hypoglycemia/index.html#低血糖の鑑別-ill-or-medicated-individual",
-    "title": "低血糖についての覚書",
-    "section": "低血糖の鑑別 ~ Ill or medicated individual",
-    "text": "低血糖の鑑別 ~ Ill or medicated individual\n\n薬剤性\n\nInsulin or insulin分泌促進薬\nアルコール\n\n重症患者(Critical illnesses)\n\n肝/腎/心不全\n敗血症 (malariaを含む)\n\n内分泌疾患(ホルモン分泌不全)\n\n副腎不全(Cortisol分泌不全)\nグルカゴン・ノルアドレナリン分泌不全1\n\nNonislet cell tumor\n\nInsulin分泌不全の糖尿病患者において、下垂体疾患などによる甲状腺機能低下やGH低下で低血糖になりやすい"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#ill-or-medicatedについて",
-    "href": "medicine/hypoglycemia/index.html#ill-or-medicatedについて",
-    "title": "低血糖についての覚書",
-    "section": "Ill or medicatedについて",
-    "text": "Ill or medicatedについて\n\n重症患者の場合はしばしば低血糖になる\n\n食事量低下+(肝臓/腎臓での)糖新生の低下+Insulinのclearanceの低下\nSepsis, 肝/腎不全\n\nこの場合、色々な検査はあまり有用性は低く原病の治療のみ行う\nただし、副腎不全の検査の閾値は低くする\nNonislet cell tumorについては、事前に分かっている可能性が高い"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#nonislet-cell-tumorについて",
-    "href": "medicine/hypoglycemia/index.html#nonislet-cell-tumorについて",
-    "title": "低血糖についての覚書",
-    "section": "Nonislet cell tumorについて",
-    "text": "Nonislet cell tumorについて\n\n膵臓以外の腫瘍による低血糖\n機序として複数あり\n\nIGF-IIを産生する事によりInsulinomaのような病態になる\n悪性腫瘍自身が血糖を消費する　など\n\n巨大な肝臓癌が大きく、70%以上が10cmより大きい\n検査結果として、free IGF-IIが上昇し、IGF-I, Insulinが低下する事が知られている(Martens and Tits 2014)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖の鑑別-seemingly-well",
-    "href": "medicine/hypoglycemia/index.html#低血糖の鑑別-seemingly-well",
-    "title": "低血糖についての覚書",
-    "section": "低血糖の鑑別 ~ Seemingly well",
-    "text": "低血糖の鑑別 ~ Seemingly well\n\n内因性の高インシュリン血症\n\nInsulinoma\n機能性Β細胞疾患(Functional beta cell disorders; nesidioblastosis)\n\nNoninsulinoma pancreatogenous hypoglycemia (NIPHS)\nPost-gastric bypass hypoglycemia\n\nインシュリンへの自己免疫関連(Insulin autoimmune hypoglycemia)\n\n抗Insulin抗体 or 抗Insulin受容体抗体\n\nInsulin分泌促進薬\n\n偶発的、あるいは故意による低血糖"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#seemingly-well-individual",
-    "href": "medicine/hypoglycemia/index.html#seemingly-well-individual",
-    "title": "低血糖についての覚書",
-    "section": "Seemingly well individual",
-    "text": "Seemingly well individual\n\n簡単に言うと「きれいな原因の疾患」が隠れている\nインシュリン関連の検査をしつつ、\n頑張って低血糖時の採血をとりに行く！"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#insulinomaについて",
-    "href": "medicine/hypoglycemia/index.html#insulinomaについて",
-    "title": "低血糖についての覚書",
-    "section": "Insulinomaについて",
-    "text": "Insulinomaについて\n\n膵臓のβ細胞の良性腫瘍(10%未満が悪性)\n通常は空腹時だが、食後にも低血糖は起こり得る(前述)\nやや女性に多く、1/250,000人年の発症率\n10%未満がMEN-1と関連する(Martens and Tits 2014)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#niphsについて",
-    "href": "medicine/hypoglycemia/index.html#niphsについて",
-    "title": "低血糖についての覚書",
-    "section": "NIPHSについて",
-    "text": "NIPHSについて\n\n膵島細胞の過形成(nesidioblastosis)および、Lngerhans細胞への分化による稀な疾患\n\n腫瘍のないInsulinomaみたいな感じ\n\n食後2-4時間で低血糖が起こることが特徴で、精神神経症状が起こる(Adrian Vella, n.d.b)\n男性に多い"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#pgbhについて",
-    "href": "medicine/hypoglycemia/index.html#pgbhについて",
-    "title": "低血糖についての覚書",
-    "section": "PGBHについて",
-    "text": "PGBHについて\n\nRoux-en-Y gastric bypass (RYGB) surgeryの後の低血糖\n以前は晩期Dumping症候群と言われていた\nEtiologyははっきり分かっていないが、複数のHormon異常が原因とされている(James C Ellsmere, n.d.)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#insulin-autoimmune-hypoglycemiaについて",
-    "href": "medicine/hypoglycemia/index.html#insulin-autoimmune-hypoglycemiaについて",
-    "title": "低血糖についての覚書",
-    "section": "Insulin autoimmune hypoglycemiaについて",
-    "text": "Insulin autoimmune hypoglycemiaについて\n\n抗Insulin抗体(Insulin autoimmune syndrome)あるいは、Insulin受容体への抗体(type B insulin reistance)で起こる低血糖(Rayas and Salehi 2000)\n抗Insulin抗体は自己抗体が外れた時に低血糖になる\n\n食後すぐの高血糖と数時間経過した後の低血糖が特徴\n日本人だと、MMI内服後に起こりやすい(非Asianだと、血液疾患や自己免疫疾患背景が多い)\n\n抗Insulin受容体抗体はInsulin受容体へのpartial agonistによって起こる\n\n低力価だと低血糖、高力価だと高血糖となる\n背景にSLEなどが多い\n\n代償として血中C-peptide, Insulin濃度が異常高値となる"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#hypoglycemiaの問診",
-    "href": "medicine/hypoglycemia/index.html#hypoglycemiaの問診",
-    "title": "低血糖についての覚書",
-    "section": "Hypoglycemiaの問診",
-    "text": "Hypoglycemiaの問診\n\n日常生活\n\n栄養状態、普段の食事内容、アルコール摂取量\n\n詳細な病歴\n\nいつ・どんな症状が出る？誘発因子は？\n\n患者背景\n\n既往歴や併存症(肝腎不全など)の確認\n\n薬は？\n\nOTC、漢方薬も含めて確認する(Rayas and Salehi 2000)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#薬について",
-    "href": "medicine/hypoglycemia/index.html#薬について",
-    "title": "低血糖についての覚書",
-    "section": "薬について",
-    "text": "薬について\n\n\n\n\n\n\n\nEvidenceレベル\n薬剤名　　　　　　\n\n\n\n\nModerate quality\nCibenzoline, Gatifloxacin, Pentamidine, Quinine, Indomethacin, Glucagon during endoscopy\n\n\nLow qualtiy\nChloroquineoxaline sulfonamide, Artemisin, IGF-1, Lithium, Propoxypherene/Dextropropoxyphene\n\n\n\n\nQuinolones, Pentamidine, Quinine, BB, ACEi, IGF-1が有名\nVery low quality of evidenceは割愛"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#uptodateのアルゴリズム",
-    "href": "medicine/hypoglycemia/index.html#uptodateのアルゴリズム",
-    "title": "低血糖についての覚書",
-    "section": "UptoDateのアルゴリズム",
-    "text": "UptoDateのアルゴリズム\n\n\n副腎不全を否定する\n問診を重視 →理論的というよりは、実践的"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#dynamedのアルゴリズム",
-    "href": "medicine/hypoglycemia/index.html#dynamedのアルゴリズム",
-    "title": "低血糖についての覚書",
-    "section": "Dynamedのアルゴリズム",
-    "text": "Dynamedのアルゴリズム\n\n\n薬剤性を病歴から否定はUptoDateと一緒\n検査結果がPureじゃないconcurrent illnessを除外 →どちらかというと理論派"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#勇気を持って低血糖誘発試験",
-    "href": "medicine/hypoglycemia/index.html#勇気を持って低血糖誘発試験",
-    "title": "低血糖についての覚書",
-    "section": "勇気を持って、低血糖誘発試験",
-    "text": "勇気を持って、低血糖誘発試験\n\nInsulin/IGFによる低血糖疑い or 原因がわからない時に誘発試験の適応\n空腹時血糖 = 絶食試験、食後低血糖 = Mixed-meal test\n低血糖の時に採血を行う\n\n血糖値\nInsulin値\n血清C-peptide\n血清βヒドロキシ酪酸(aka ケトン体)\nプロインシュリン値\n(血糖降下薬のスクリーニング)"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#低血糖の検査の考え方各種の検査の意味",
-    "href": "medicine/hypoglycemia/index.html#低血糖の検査の考え方各種の検査の意味",
-    "title": "低血糖についての覚書",
-    "section": "低血糖の検査の考え方〜各種の検査の意味～",
-    "text": "低血糖の検査の考え方〜各種の検査の意味～\n\n血中Insulin = 内因性+外因性のInsulin\n内因性のInsulinの量をみる検査\n\nProInsulin\n血清C-peptide\n\nInsulinが分泌していないのに血糖が低いときの検査  = 脂肪酸代謝になっている\n\n血清ケトン体"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#負荷試験",
-    "href": "medicine/hypoglycemia/index.html#負荷試験",
-    "title": "低血糖についての覚書",
-    "section": "負荷試験",
-    "text": "負荷試験\n\nMixed-meal testのやり方絶食試験のやり方\n\n\n\n施設ごとでばらつきあり\n\n\n食事前に採血をする\n固形の食事(普段の食事内容)を摂取\n\n施設によって、ここから30分毎に採血\n\n低血糖症状あるいは5時間確認したら採血\n15gの炭水化物をとらせて血糖値の推移と症状の回復を確認\nBS &lt;65 mg/dLかつ症状がある時の検査を有意とする\n\n\n\n\nAM 8時に絶食開始\nカロリー/カフェインフリーの飲み物のみ摂取可\n2hr毎に血糖測定\n70mg/dL未満になったら、30min毎に症状確認と血糖測定\n72時間経過あるいは&lt;55mg/dLまたは無症候でもBS&lt; 45 mg/dLを達成したら修了\nBS&lt; 55 mg/dLの時の採血を行う\nGlucagon 1mg ivし10, 20, 30min後の血糖測定\n\nGlucagon iv後にGluが25 mg/dL以上改善したらInsulin性低血糖を示唆する"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#検査結果の解釈",
-    "href": "medicine/hypoglycemia/index.html#検査結果の解釈",
-    "title": "低血糖についての覚書",
-    "section": "検査結果の解釈",
-    "text": "検査結果の解釈\n\n\n\n\n\n\n\n\n\n\n\n疾患名\nInsulin (microU/mL)\nC-peptide (nmol/L)\nProinsulin (pmol/L)\nβヒドロキシ酪酸 (mmol/L)\ninsulin自己抗体\n\n\n\n\n外因性insulin\n&gt;&gt;3\n&lt;0.2\n&lt;5\n≤2.7\n陰性 (時に陽性)\n\n\nInsulinoma, NIPHS1, PGBH2\n≥3\n≥0.2\n≥5\n≤2.7\n陰性\n\n\n血糖降下薬\n≥3\n≥0.2\n≥5\n≤2.7\n陰性\n\n\nInsulin自己抗体\n&gt;&gt;3\n&gt;&gt;0.2\n&gt;&gt;5\n≤2.7\n陽性\n\n\nIGFによる\n&lt;3\n&lt;0.2\n&lt;5\n≤2.7\n陰性\n\n\nNot insulin (or IGF)-mediated\n&lt;3\n&lt;0.2\n&lt;5\n&gt;2.7\n陰性\n\n\n\n\nNIPHS: noninsulinoma pancreatogenous hypoglycemia syndrome\nPGBH: post-gastric bypass hypoglycemia"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#検査結果の読み方",
-    "href": "medicine/hypoglycemia/index.html#検査結果の読み方",
-    "title": "低血糖についての覚書",
-    "section": "検査結果の読み方",
-    "text": "検査結果の読み方"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#point",
-    "href": "medicine/hypoglycemia/index.html#point",
-    "title": "低血糖についての覚書",
-    "section": "Point",
-    "text": "Point\n\nInsulin ≧3 μU/mLはInsulinによる低血糖を示唆する\nC-peptide, ProInsulinはInsulinが内因性か外因性かを判断する\n\nInsulinによる低血糖の時に、C-peptide &lt;0.2nmol/L(0.6 ng/mL)は外因性のInsulin\nProInsulin &lt;5 pmol/Lは外因性のInsulinを示唆する\nProInsulin, C-peptideが高いと悪性腫瘍を示唆し、Proinsulinが高値なほど未分化\n\nβヒドロキシ酪酸はInsulinまたはIGFによる低血糖では抑制される = 陽性の場合はInsulinやIGFによる低血糖は否定的で、Cortisol欠乏、慢性の低栄養、肝腎不全、薬剤性など\n低血糖時の検査の閾値での結果はInsulinomaに対して感度&gt;90%, 特異度&gt;70%"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#take-home-message",
-    "href": "medicine/hypoglycemia/index.html#take-home-message",
-    "title": "低血糖についての覚書",
-    "section": "Take home message",
-    "text": "Take home message\n\n低血糖を見た時には、Whippleの三徴で真の低血糖かを確認する\n低血糖はseeming wellかmedicated or illで鑑別する\n低血糖の原因はInsulin関連かInsulin以外かで考えると分かりやすい"
-  },
-  {
-    "objectID": "medicine/hypoglycemia/index.html#reference",
-    "href": "medicine/hypoglycemia/index.html#reference",
-    "title": "低血糖についての覚書",
-    "section": "Reference",
-    "text": "Reference\n\n\nAdrian Vella. n.d.a. “Hypoglycemia in Adults Without Diabetes Mellitus: Determining the Etiology.” https://www.uptodate.com.\n\n\n———. n.d.b. “Noninsulinoma Pancreatogenous Hypoglycemia Syndrome.” https://www.uptodate.com.\n\n\nDynaMed. n.d. “Hypoglycemia in Adults - Approach to the Patient Without Diabetes.” https://www.dynamed.com/approach-to/hypoglycemia-in-adults-approach-to-the-patient-without-diabetes; DynaMed.\n\n\nJames C Ellsmere. n.d. “Bariatric Operations: Late Complications with Subacute Presentations.” https://www.uptodate.com.\n\n\nMartens, Pieter, and Jos Tits. 2014. “Approach to the Patient with Spontaneous Hypoglycemia.” European Journal of Internal Medicine 25 (5): 415–21. https://doi.org/10.1016/j.ejim.2014.02.011.\n\n\nRayas, Maria S, and Marzieh Salehi. 2000. “Non-Diabetic Hypoglycemia.” In Endotext. South Dartmouth (MA): MDText.com, Inc."
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#症例",
-    "href": "medicine/pituitary_incidentaloma/index.html#症例",
-    "title": "下垂体偶発種について",
-    "section": "症例",
-    "text": "症例\n\n79歳女性、自宅内転倒で救急搬送\n頭部CTで下垂体腺腫を指摘される\n依頼文にて、「偶発的に下垂体腺腫が指摘されておりそちらの精査もお願いします」と"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種とは",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種とは",
-    "title": "下垂体偶発種について",
-    "section": "下垂体偶発種とは",
-    "text": "下垂体偶発種とは\n\n下垂体に偶発的に見つかった結節を”下垂体偶発種”と言う\n微小の下垂体結節は結構Common\n\n無関係の理由でMRIを撮像したうち、microadenomaは10-38%\nmacroadenomaは0.2%\nAutopsyだと日本人のうち18%程度の有病率と言われている\n\n日本での1000人の連続するAutopsy患者では178人にIncidentalomaがあり、そのうち34%が2mm以上\n\n\n\nRadiology. 1994;193(1):161-164. doi:10.1148/radiology.193.1.8090885"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種の疫学",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種の疫学",
-    "title": "下垂体偶発種について",
-    "section": "下垂体偶発種の疫学",
-    "text": "下垂体偶発種の疫学\n\n\n\n原疾患\n頻度\n\n\n\n\n下垂体腺腫\n80-90%\n\n\n頭蓋咽頭腫\n3%\n\n\nRathke嚢胞\n2%\n\n\n髄膜腫\n1%\n\n\n下垂体炎\n1%未満\n\n\n脳動脈瘤\n1-2%\n\n\n\n\nDynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient\n\n今回は最多の下垂体腺腫について話していきます"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の分類",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の分類",
-    "title": "下垂体偶発種について",
-    "section": "下垂体腺腫の分類",
-    "text": "下垂体腺腫の分類\n\n大きさで分けるのが最も重要\n\n10mm以上: macroadenoma\n10mm未満: microadenoma"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の由来",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫の由来",
-    "title": "下垂体偶発種について",
-    "section": "下垂体腺腫の由来",
-    "text": "下垂体腺腫の由来\n\n実臨床的にはホルモン産生で分けるのが良い\n\nProlactinoma\nGH産生腫瘍\nACTH産生腫瘍\nTSH産生腫瘍\n非機能性腫瘍(non-functioning pituitary adenoma: NFPA)"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫-at-glance",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体腺腫-at-glance",
-    "title": "下垂体偶発種について",
-    "section": "下垂体腺腫 at glance",
-    "text": "下垂体腺腫 at glance\n \nN Engl J Med. 2020;382(10):937-950. doi:10.1056/NEJMra1810772"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種を語る上で重要な視点",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種を語る上で重要な視点",
-    "title": "下垂体偶発種について",
-    "section": "下垂体偶発種を語る上で重要な視点",
-    "text": "下垂体偶発種を語る上で重要な視点\n\n上記の通り、Incidentalomaは実は多い\nその為、悉皆調査は基本的には無理\nかつ、分類や下垂体腺腫の種類は本来はOpeしないと分からない\n⇒ 下垂体腺腫の疫学はその臨床現場 (見つかった理由やOpeをしたかなど)に依存する"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#疫学",
-    "href": "medicine/pituitary_incidentaloma/index.html#疫学",
-    "title": "下垂体偶発種について",
-    "section": "疫学",
-    "text": "疫学\n\nIncidentalomaと通常のAdenomaで疫学が変わる\n\n通常のPituitary adenomaの場合\n\n53%がProlactinoma\n30%が非機能性腺腫\n12%がGH産生腫瘍(somatotropinoma)\n4%がACTH産生腫瘍(Corticotropinoma)\n1%がTSH産生腫瘍(thyrotropinoma)\n\nIncidentalomaの場合(約90%がAdenoma)\n\n約50%が非機能性腺腫\n10%がGH産生腫瘍\n15%がGonadothropinoma\n\n\nIncidentalomaだと、非機能性腺腫が多い事は注目に値する\n\nJ Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#pituitary-incidentalomaを見たら",
-    "href": "medicine/pituitary_incidentaloma/index.html#pituitary-incidentalomaを見たら",
-    "title": "下垂体偶発種について",
-    "section": "Pituitary incidentalomaを見たら・・・・・・",
-    "text": "Pituitary incidentalomaを見たら・・・・・・\n\n3つの視点で考える\n\n腫瘍によるホルモン過剰産生\n腫瘍による圧排効果による下垂体機能不全\n腫瘍による視交叉の圧排の有無\n\n内科医としてはMEN 1も見逃さない"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#ホルモン検査の原則",
-    "href": "medicine/pituitary_incidentaloma/index.html#ホルモン検査の原則",
-    "title": "下垂体偶発種について",
-    "section": "ホルモン検査の原則",
-    "text": "ホルモン検査の原則\n \n竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版 - ホルモン検査は日内変動が大きい - Positive/Negative feedbackにより代償されやすい - ホルモン欠乏の検査: 最も分泌が多い時間帯の測定で判断 - ホルモン分泌を促進する介入した後の検査もあるがRiskが高い - ホルモン過剰の検査: ホルモンを抑制する介入をした上で測定"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#基本的な考え方",
-    "href": "medicine/pituitary_incidentaloma/index.html#基本的な考え方",
-    "title": "下垂体偶発種について",
-    "section": "基本的な考え方",
-    "text": "基本的な考え方\n\nMicroincidetanlomaでは稀とされる\nMacroadenoma全体では以下の通り\n\nProlactinomaが53%\nGH産生が12%\nACTH産生が4%\nTSH産生が1%\n\n頻度と治療可能性の観点で考える\n\nPRLは内科的に治療可能\nACTH, GHは_予後不良で手術の治療適応_\n\nPRL, ACTH, GHは検索すべし！！\n\nJAMA. 2023;329(16):1386-1398. doi:10.1001/jama.2023.5444"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#ホルモン過剰産生の各論",
-    "href": "medicine/pituitary_incidentaloma/index.html#ホルモン過剰産生の各論",
-    "title": "下垂体偶発種について",
-    "section": "ホルモン過剰産生の各論",
-    "text": "ホルモン過剰産生の各論\n\n高PRL血症: ルーチンで検査\nCushing syndrome: ルーチンで検査(?)\n先端巨大症(GH excess): ルーチンで検査\n中枢性甲状腺機能亢進症: ルーチンでは行わない"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hyperprl",
-    "href": "medicine/pituitary_incidentaloma/index.html#hyperprl",
-    "title": "下垂体偶発種について",
-    "section": "高PRL血症",
-    "text": "高PRL血症\n\nPRL &gt; 250 mcg/Lは特異度100％でProlactinoma\n一方で中途半端な高値は色々な理由がある\n\n妊娠、薬剤(D2 blocker)や甲状腺機能を確認する\n\n更に下垂体腺腫自身の茎部圧迫によるもの(Stalk effect)のもありうる\n\nStalk effectだけではPRL &lt; 150 mcg/L程度である事が多い\n\n\nJAMA. 2023;329(16):1386-1398. doi:10.1001/jama.2023.5444"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#cushing",
-    "href": "medicine/pituitary_incidentaloma/index.html#cushing",
-    "title": "下垂体偶発種について",
-    "section": "Cushing syndrome",
-    "text": "Cushing syndrome\n\n2011年のガイドラインだと実はルーチン検査ではない (臨床的に疑った時のみ)\n\nJ Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048 - 個人的には、Macroadenomaならばルーチンで行うべきと考える - 3種類の方法があるが、一番簡単なのはLDST - LDST(1mg Dex負荷試験)：感度98.6%, 特異度90.6% - 24時間蓄尿のFree cortisol:感度94%, 特異度93% - 夜間唾液中cortisol：感度95.8%, 特異度93.4%"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hypergh",
-    "href": "medicine/pituitary_incidentaloma/index.html#hypergh",
-    "title": "下垂体偶発種について",
-    "section": "先端巨大症(GH excess)",
-    "text": "先端巨大症(GH excess)\n\nGHの値だけでは診断出来ない\nIGF-1：年齢調整されたCutoffで感度、特異度はほぼ100% (12-18歳、妊婦以外)\nOGTT検査でGH $$0.4 mcg/L(抑制されない)は 感度85-90%, 特異度は95%を超える"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hypertsh",
-    "href": "medicine/pituitary_incidentaloma/index.html#hypertsh",
-    "title": "下垂体偶発種について",
-    "section": "中枢性甲状腺機能亢進症",
-    "text": "中枢性甲状腺機能亢進症\n\nTSH過剰症の検査はルーチンでは行わない\n\nただし、ホルモン欠乏とか考えると結局検査している\n\n血清FT4高値で、TSHが不適切に正常〜高値の感度は約100%"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする",
-    "href": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする",
-    "title": "下垂体偶発種について",
-    "section": "いつ、どのように検査をする？",
-    "text": "いつ、どのように検査をする？\n\nホルモン過剰について、Macroadenomaにおいても明らかなScreening方法は決まっていない\n\n2011年のガイドラインでは、PRLとGHはルーチンで測定を推奨。 ACTHは臨床所見をみての検査を推奨している。\n\nProlactinomaは経口での治療が可能なため\nGH過剰産生は予後に強く影響する上に初期は無症候である事が多いため\nACTHも同じ理由でExpertによっては検査をするとの事\n\nReview論文だと下垂体のホルモン過剰産生はProlactin, IGF-1の測定で 除外すべきとの記載あり\nUptodateだとPRL、IGF-1、LH、FSH、ACTH、24時間尿中Cortisol推奨\n\n\nBest Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002 Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com."
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論",
-    "title": "下垂体偶発種について",
-    "section": "下垂体機能不全総論",
-    "text": "下垂体機能不全総論\n\nMicro incidentalomaでの下垂体機能不全は7-66%でMacroincidentalomaでは19-46%とされる\n\nHypogonadismは〜30%\n副腎不全は〜18%\n甲状腺機能低下は〜28%\nGH欠乏は〜8%\n\n腫瘍圧迫による下垂体機能低下の一般論として\n\nGH, FSH, LH↓ → TSH↓ → ACTH↓\n\n副腎不全がある時は汎下垂体機能低下症を疑う\n\n\n2011年のガイドラインだとClass Iでホルモン欠乏の検査の推奨\n\n竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版 J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論-1",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全総論-1",
-    "title": "下垂体偶発種について",
-    "section": "下垂体機能不全総論",
-    "text": "下垂体機能不全総論\n\n生命予後を悪化させるホルモンを重点的にみる\n\n副腎不全\n甲状腺機能低下症\n\n一方で、HypogonadismやGH欠乏は成人だと治療適応も難しい =&gt; 見るべきは、副腎不全、甲状腺機能低下症\n中枢性副腎不全→TSH欠乏→中枢性Hypogonadismの検査\n\nGH欠乏は下垂体腺腫の治療が終わり他のホルモン補充が終わったあとまでは検査しない事を推奨。\n\n\nJAMA. 2023;330(15):1472-1483. doi:10.1001/jama.2023.19052"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全各論",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体機能不全各論",
-    "title": "下垂体偶発種について",
-    "section": "下垂体機能不全各論",
-    "text": "下垂体機能不全各論\n\n中枢性副腎不全: ルーチンで検査\n中枢性甲状腺機能低下: ルーチンで検査\nGH欠乏: ルーチンで検査\nHypogonadism: ルーチンで検査\nProlactin欠乏: ルーチンでは行わない\n中枢性尿崩症: ルーチンで検査"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#adrenal_insuf",
-    "href": "medicine/pituitary_incidentaloma/index.html#adrenal_insuf",
-    "title": "下垂体偶発種について",
-    "section": "中枢性副腎不全",
-    "text": "中枢性副腎不全\n\nInsulin tolerance test (ITT) が最も良い検査だが使いにくい\n早朝Cortisolが第一\n\nまずは、8-9時の血清Cortisolを測定する\n\ncortisol &lt; 80 nmol/L (3 mcg/dL)は副腎不全\ncortisol &lt; TODO nmol/L (18 mcg/dL)は副腎不全\n\n\nCortisolが3mcg/dL-15mcg/dLの時 → ACTH負荷試験を行う\n\n250mcgのACTH投与後30/60分後のCortisolが &lt;18mcgで副腎不全\n二次性副腎不全の場合通常ACTHは&lt; 12 pmol/L (52 pg/mL)となる."
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hypothyroid",
-    "href": "medicine/pituitary_incidentaloma/index.html#hypothyroid",
-    "title": "下垂体偶発種について",
-    "section": "中枢性甲状腺機能低下",
-    "text": "中枢性甲状腺機能低下\n\n低T4にも関わらず不適切に低値〜正常範囲のTSHのときに疑う\n特に深く考えないでも良い\nもしも、NTIと区別が難しいときは時間をあけて再検査が現実的"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#GH_def",
-    "href": "medicine/pituitary_incidentaloma/index.html#GH_def",
-    "title": "下垂体偶発種について",
-    "section": "GH欠乏",
-    "text": "GH欠乏\n\nGH欠乏は事前確率が高い状態でのみ疑う(高い事前確率とは以下の基準のうち1つ以上を満たす)\n\n若い男性で正常な下垂体だが低身長でGH欠乏の診断が幼少期にされている\n下垂体の障害が疑われる病歴(下垂体手術、放射線治療、下垂体の画像変化、頭部外傷、脳卒中)\n\nITTがGH欠乏のGold standardだが使いにくい\n\nその他としては、Glucagon刺激試験、Macimorelin test、arginine plus GH-releasing hormone (GHRH) test\nDynamedでは3つ以上の下垂体ホルモン欠乏があり、年齢調整された血清IGF-1が低い時はGH低値と診断して良い\n2011年のガイドラインでは、IGF-1低下のみでGH欠乏の診断は出来ない\n\n\nDynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hypogonado",
-    "href": "medicine/pituitary_incidentaloma/index.html#hypogonado",
-    "title": "下垂体偶発種について",
-    "section": "Hypogonadism総論",
-    "text": "Hypogonadism総論\n\n男性、女性(閉経前/後)で方法が異なる。\nゴナドトロピン放出ホルモン（GnRH）刺激検査は、基礎ホルモン検査の結果がはっきりしない場合に用いられてきたが、国際的な内分泌学会では推奨されていない"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hypogonadism-各論",
-    "href": "medicine/pituitary_incidentaloma/index.html#hypogonadism-各論",
-    "title": "下垂体偶発種について",
-    "section": "Hypogonadism 各論",
-    "text": "Hypogonadism 各論\n\n男性\n\n早朝(可能なら7-11時前で空腹)のTotal testosteroneを最初に行う\n\nTotal testosteroneが300ng/dL未満で、FSH, LHが2回とも低いか正常であれば、ゴナドトロピン欠乏症と診断可能\nTotal testosterone &lt; 231 ng/dLはTestosterone欠乏\nTotal testosterone &gt; 231 ng/dLかつ&lt; 346 ng/dLでは追加の検査(free or bioavailable testosterone)を考慮する\nTotal testosterone level \\(\\geq\\) 346 ng/dLはTestosterone正常と考えて良い\n\n\n閉経前女性: 無月経あるいは月経不順があり、E2低値および低値〜正常値のFSHとLHだと診断可能\n閉経後女性: FSH, LHが高値でないだけでほぼ診断可能\n\n甲状腺異常やPRL高値について事前に除外する"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#prolactin_def",
-    "href": "medicine/pituitary_incidentaloma/index.html#prolactin_def",
-    "title": "下垂体偶発種について",
-    "section": "Prolactin欠乏",
-    "text": "Prolactin欠乏\n\n血清PRLが&lt; 100 pmol/Lの時に欠乏を示唆する"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#central_di",
-    "href": "medicine/pituitary_incidentaloma/index.html#central_di",
-    "title": "下垂体偶発種について",
-    "section": "中枢性尿崩症",
-    "text": "中枢性尿崩症\n\n虎ノ門の教科書では中枢性尿崩症は術後でない限り下垂体腺腫では起きないとの事\n\n竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版 - 診断のGold standardは存在しない - 水制限試験がしばしば初期の検査で行われる - 多尿 (&gt; 50 mL/kg in 24 hours or 3.5 L/day in a 70kg) の時に血清と尿中浸透圧を同時測定する - 尿糖なしの時に、血清浸透圧 &gt;295 mOsm/kg、尿浸透圧が600 mOsm/kgの時(尿と血清浸透圧の比が2以上)が正常 - 尿崩症は血清浸透圧 &gt;295 mOsm/kgの時に尿浸透圧が600 mOsm/kg未満の時(尿と血清浸透圧の比が2未満)で診断される - 水分制限試験の亜種として、3%食塩水刺激試験がある"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする-1",
-    "href": "medicine/pituitary_incidentaloma/index.html#いつどのように検査をする-1",
-    "title": "下垂体偶発種について",
-    "section": "いつ、どのように検査をする？",
-    "text": "いつ、どのように検査をする？\n\nホルモン低下について、複数のScreening方法があり確定的なものはない。\n\n2011年のガイドラインでは意見を2つ載せている\n\nMinimal: FT4, 朝のCortisolとTestosterone\n追加: FT4, 朝のCortisolとTestosteroneに加えてTSH、LH, FSH, IGF-1\nACTHとGH欠乏がBaselineの検査で確定できない時に負荷試験を考慮する。\n\nMicroadenomaだとより分かっていない。UptodateだとPRLだけ推奨だが2011年のEndocrine Society Guidelineとは異なる。\n\n\nJ Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048 Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com."
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#視野障害について",
-    "href": "medicine/pituitary_incidentaloma/index.html#視野障害について",
-    "title": "下垂体偶発種について",
-    "section": "視野障害について",
-    "text": "視野障害について\n \nJAMA. 2017;317(5):516-524. doi:10.1001/jama.2016.19699\n\n下垂体の真上に視交叉があり押されると両耳側半盲が起こる\n\nMRIで視交叉と腺腫が接している場合は自覚症状がなくても、 正式な視野障害の評価を行う\n海綿静脈洞内に伸展するとIII, IV, V1などが障害される事もある\n\n\nClin Med. 2023;23(2):129-134. doi:10.7861/clinmed.2023-0020"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#治療法総論",
-    "href": "medicine/pituitary_incidentaloma/index.html#治療法総論",
-    "title": "下垂体偶発種について",
-    "section": "治療法総論",
-    "text": "治療法総論\n\nCushing syndrome、末端肥大症は外科治療が必要\n非機能性腫瘍で視野障害がある場合は外科治療が必要\n2011年のガイドラインでは、incidentalomaでも ホルモン分泌障害があるときは手術を考慮するとの記載あり\nOpe適応などは専門医にコンサルトが良い"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#hypopituitarismの治療",
-    "href": "medicine/pituitary_incidentaloma/index.html#hypopituitarismの治療",
-    "title": "下垂体偶発種について",
-    "section": "Hypopituitarismの治療",
-    "text": "Hypopituitarismの治療\n\n中枢性副腎不全: Hydrocortisoneを15-20mg/day\n\nfludrocortisoneは不要\nSick dayの説明を忘れない\n\n甲状腺機能低下症: Levothyroxinを1.6 mcg/kg/day\n\n目標としてTSHは使えない\n\nFT4が正常範囲の上半分に入るようにする\n\n\n副腎不全がある場合は先に副腎不全を治療する\nGHや性ホルモンの補充は適応が難しいので専門医にコンサルト\n\nJ Clin Endocrinol Metab. 2016;101(11):3888-3921. doi:10.1210/jc.2016-2118"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#follow-up",
-    "href": "medicine/pituitary_incidentaloma/index.html#follow-up",
-    "title": "下垂体偶発種について",
-    "section": "Follow up",
-    "text": "Follow up\n \nJ Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048\n\nMass effect: MRIでfollow up\n\nMacro/Microadenoma: 6/12ヶ月後\n\nホルモン分泌: hypopituitarismの有無を検査\n\nMacro/Microadenoma: 半年後→1年毎に行う/ルーチンは不要\n\n\nJ Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種at-glance",
-    "href": "medicine/pituitary_incidentaloma/index.html#下垂体偶発種at-glance",
-    "title": "下垂体偶発種について",
-    "section": "下垂体偶発種at glance",
-    "text": "下垂体偶発種at glance\n \nBest Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002"
-  },
-  {
-    "objectID": "medicine/pituitary_incidentaloma/index.html#参考文献",
-    "href": "medicine/pituitary_incidentaloma/index.html#参考文献",
-    "title": "下垂体偶発種について",
-    "section": "参考文献",
-    "text": "参考文献\n\n竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版\nFreda PU, Beckers AM, Katznelson L, et al. Pituitary incidentaloma: an endocrine society clinical practice guideline. J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048\nTeramoto A, Hirakawa K, Sanno N, Osamura Y. Incidental pituitary lesions in 1,000 unselected autopsy specimens. Radiology. 1994;193(1):161-164. doi:10.1148/radiology.193.1.8090885\nAmerican College of Physicians. ACP MKSAP: Medical Knowledge Self-Assessment Program. American College of Physicians; 2025. https://www.acponline.org/featured-products/acp-mksap\nDynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient\nBoguszewski CL, de Castro Musolino NR, Kasuki L. Management of pituitary incidentaloma. Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002\nLee SY, Pearce EN. Hyperthyroidism: A Review. JAMA. 2023;330(15):1472-1483. doi:10.1001/jama.2023.19052\nPeter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.\nWestall SJ, Aung ET, Kejem H, Daousi C, Thondam SK. Management of pituitary incidentalomas. Clin Med. 2023;23(2):129-134. doi:10.7861/clinmed.2023-0020\nMelmed S. Pituitary-tumor endocrinopathies. N Engl J Med. 2020;382(10):937-950. doi:10.1056/NEJMra1810772\nFleseriu M, Hashim IA, Karavitaki N, et al. Hormonal replacement in hypopituitarism in adults: An Endocrine Society clinical practice guideline. J Clin Endocrinol Metab. 2016;101(11):3888-3921. doi:10.1210/jc.2016-2118"
+    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です"
   }
 ]

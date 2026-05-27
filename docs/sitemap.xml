@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://figarofuga.github.io/personal-slides/medicine/index.html</loc>
-    <lastmod>2026-05-23T08:50:36.040Z</lastmod>
-  </url>
-  <url>
-    <loc>https://figarofuga.github.io/personal-slides/statistics/marginaleffects/index.html</loc>
-    <lastmod>2026-05-23T09:21:04.266Z</lastmod>
-  </url>
-  <url>
-    <loc>https://figarofuga.github.io/personal-slides/statistics/bootstrap/index.html</loc>
-    <lastmod>2026-05-23T08:20:48.290Z</lastmod>
-  </url>
-  <url>
-    <loc>https://figarofuga.github.io/personal-slides/statistics/index.html</loc>
-    <lastmod>2026-05-23T09:03:07.470Z</lastmod>
+    <loc>https://figarofuga.github.io/personal-slides/medicine/pituitary_incidentaloma/index.html</loc>
+    <lastmod>2026-05-27T10:05:58.406Z</lastmod>
   </url>
   <url>
     <loc>https://figarofuga.github.io/personal-slides/medicine/hypoglycemia/index.html</loc>
     <lastmod>2026-05-23T08:41:55.137Z</lastmod>
   </url>
   <url>
-    <loc>https://figarofuga.github.io/personal-slides/statistics/PROanalysis/index.html</loc>
-    <lastmod>2026-05-27T08:58:56.532Z</lastmod>
+    <loc>https://figarofuga.github.io/personal-slides/statistics/index.html</loc>
+    <lastmod>2026-05-23T09:03:07.470Z</lastmod>
   </url>
   <url>
-    <loc>https://figarofuga.github.io/personal-slides/medicine/pituitary_incidentaloma/index.html</loc>
-    <lastmod>2026-05-27T09:02:26.316Z</lastmod>
+    <loc>https://figarofuga.github.io/personal-slides/statistics/PROanalysis/index.html</loc>
+    <lastmod>2026-05-27T08:59:38.997Z</lastmod>
+  </url>
+  <url>
+    <loc>https://figarofuga.github.io/personal-slides/statistics/bootstrap/index.html</loc>
+    <lastmod>2026-05-23T08:20:48.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://figarofuga.github.io/personal-slides/statistics/marginaleffects/index.html</loc>
+    <lastmod>2026-05-23T09:21:04.266Z</lastmod>
+  </url>
+  <url>
+    <loc>https://figarofuga.github.io/personal-slides/medicine/index.html</loc>
+    <lastmod>2026-05-27T08:17:40.363Z</lastmod>
   </url>
 </urlset>

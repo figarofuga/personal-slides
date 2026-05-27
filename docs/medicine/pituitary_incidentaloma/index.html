@@ -29,7 +29,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -144,14 +163,6 @@ Nozomi Niimi
 
   <p class="date">2026-05-27</p>
 </section>
-<section class="slide level2">
-
-<!--
-TODO: PituitaryAdenoma.typ からの変換たたき台。
-TODO: Typst/Touying 固有の theme, place, box, grid, columns などのレイアウト指定は省略。
-TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
--->
-</section>
 <section id="症例" class="slide level2">
 <h2>症例</h2>
 <ul>
@@ -174,7 +185,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 </ul></li>
 </ul></li>
 </ul>
-<p><small>Radiology. 1994;193(1):161-164. doi:10.1148/radiology.193.1.8090885</small></p>
+<p><span class="citation" data-cites="Teramoto1994-zv">[@Teramoto1994-zv]</span></p>
 </section>
 <section id="下垂体偶発種の疫学" class="slide level2">
 <h2>下垂体偶発種の疫学</h2>
@@ -212,8 +223,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 </tr>
 </tbody>
 </table>
-<!-- TODO: 手動調整: 元Typstの table レイアウトは簡略化 -->
-<p><small>DynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small></p>
+<p><span class="citation" data-cites="DynaMed_SellarMass_2026">[@DynaMed_SellarMass_2026]</span></p>
 <ul>
 <li>今回は最多の下垂体腺腫について話していきます</li>
 </ul>
@@ -244,7 +254,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <section id="下垂体腺腫-at-glance" class="slide level2">
 <h2>下垂体腺腫 at glance</h2>
 <p><img data-src="images/PA_atglance.png"> <!-- TODO: 手動調整: 元Typst画像高さ 90% --></p>
-<p><small>N Engl J Med. 2020;382(10):937-950. doi:10.1056/NEJMra1810772</small></p>
+<p><span class="citation" data-cites="Melmed2020-dy">[@Melmed2020-dy]</span></p>
 </section>
 <section id="下垂体偶発種を語る上で重要な視点" class="slide level2">
 <h2>下垂体偶発種を語る上で重要な視点</h2>
@@ -277,7 +287,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 </ul></li>
 <li>Incidentalomaだと、非機能性腺腫が多い事は注目に値する</li>
 </ul>
-<p><small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small></p>
+<p><span class="citation" data-cites="Freda2011-fv">[@Freda2011-fv]</span></p>
 </section>
 <section id="pituitary-incidentalomaを見たら" class="slide level2">
 <h2>Pituitary incidentalomaを見たら・・・・・・</h2>
@@ -293,8 +303,16 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 </section>
 <section id="ホルモン検査の原則" class="slide level2">
 <h2>ホルモン検査の原則</h2>
-<p><img data-src="images/PA_hormone.png"> <!-- TODO: 手動調整: 元Typst画像高さ 40% --></p>
-<p><small>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版</small> - ホルモン検査は日内変動が大きい - Positive/Negative feedbackにより代償されやすい - ホルモン欠乏の検査: 最も分泌が多い時間帯の測定で判断 - ホルモン分泌を促進する介入した後の検査もあるがRiskが高い - ホルモン過剰の検査: ホルモンを抑制する介入をした上で測定</p>
+<p><img data-src="images/PA_hormone.png"> <!-- TODO: 手動調整: 元Typst画像高さ 40% --> <span class="citation" data-cites="Takeuchi_ToranomonEndocrineClinicalPractice_2023">[@Takeuchi_ToranomonEndocrineClinicalPractice_2023]</span></p>
+<ul>
+<li>ホルモン検査は日内変動が大きい</li>
+<li>Positive/Negative feedbackにより代償されやすい</li>
+<li>ホルモン欠乏の検査: 最も分泌が多い時間帯の測定で判断
+<ul>
+<li>ホルモン分泌を促進する介入した後の検査もあるがRiskが高い</li>
+</ul></li>
+<li>ホルモン過剰の検査: ホルモンを抑制する介入をした上で測定</li>
+</ul>
 </section>
 <section>
 <section id="ホルモン過剰産生" class="title-slide slide level1 center">
@@ -319,7 +337,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 </ul></li>
 <li>PRL, ACTH, GHは検索すべし！！</li>
 </ul>
-<p><small>JAMA. 2023;329(16):1386-1398. doi:10.1001/jama.2023.5444</small></p>
+<p><span class="citation" data-cites="Tritos2023-tk">[@Tritos2023-tk]</span></p>
 </section>
 <section id="ホルモン過剰産生の各論" class="slide level2">
 <h2>ホルモン過剰産生の各論</h2>
@@ -343,14 +361,20 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>Stalk effectだけではPRL &lt; 150 mcg/L程度である事が多い</li>
 </ul></li>
 </ul>
-<p><small>JAMA. 2023;329(16):1386-1398. doi:10.1001/jama.2023.5444</small></p>
+<p><span class="citation" data-cites="Tritos2023-tk">[@Tritos2023-tk]</span></p>
 </section>
 <section id="cushing" class="slide level2">
 <h2>Cushing syndrome</h2>
 <ul>
-<li>2011年のガイドラインだと実はルーチン検査ではない (臨床的に疑った時のみ)</li>
+<li>2011年のガイドラインだと実はルーチン検査ではない (臨床的に疑った時のみ) <span class="citation" data-cites="Freda2011-fv">[@Freda2011-fv]</span></li>
+<li>個人的には、Macroadenomaならばルーチンで行うべきと考える</li>
+<li>3種類の方法があるが、一番簡単なのはLDST
+<ul>
+<li>LDST(1mg Dex負荷試験)：感度98.6%, 特異度90.6%</li>
+<li>24時間蓄尿のFree cortisol:感度94%, 特異度93%</li>
+<li>夜間唾液中cortisol：感度95.8%, 特異度93.4%</li>
+</ul></li>
 </ul>
-<p><small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small> - 個人的には、Macroadenomaならばルーチンで行うべきと考える - 3種類の方法があるが、一番簡単なのはLDST - LDST(1mg Dex負荷試験)：感度98.6%, 特異度90.6% - 24時間蓄尿のFree cortisol:感度94%, 特異度93% - 夜間唾液中cortisol：感度95.8%, 特異度93.4%</p>
 </section>
 <section id="hypergh" class="slide level2">
 <h2>先端巨大症(GH excess)</h2>
@@ -385,7 +409,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>UptodateだとPRL、IGF-1、LH、FSH、ACTH、24時間尿中Cortisol推奨</li>
 </ul></li>
 </ul>
-<p><small>Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002 Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.</small></p>
+<p><span class="citation" data-cites="Boguszewski2019-ne Snyder_PituitaryIncidentalomas_2026">[@Boguszewski2019-ne; @Snyder_PituitaryIncidentalomas_2026]</span></p>
 </section></section>
 <section>
 <section id="下垂体機能不全" class="title-slide slide level1 center">
@@ -411,7 +435,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 </ul></li>
 <li>2011年のガイドラインだとClass Iでホルモン欠乏の検査の推奨</li>
 </ul>
-<p><small>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版 J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small></p>
+<p><span class="citation" data-cites="Takeuchi_ToranomonEndocrineClinicalPractice_2023 Freda2011-fv">[@Takeuchi_ToranomonEndocrineClinicalPractice_2023; @Freda2011-fv]</span></p>
 </section>
 <section id="下垂体機能不全総論-1" class="slide level2">
 <h2>下垂体機能不全総論</h2>
@@ -424,10 +448,9 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>一方で、HypogonadismやGH欠乏は成人だと治療適応も難しい =&gt; 見るべきは、<em>副腎不全、甲状腺機能低下症</em></li>
 <li>中枢性副腎不全→TSH欠乏→中枢性Hypogonadismの検査
 <ul>
-<li>GH欠乏は下垂体腺腫の治療が終わり他のホルモン補充が終わったあとまでは検査しない事を推奨。</li>
+<li>GH欠乏は下垂体腺腫の治療が終わり他のホルモン補充が終わったあとまでは検査しない事を推奨。 <span class="citation" data-cites="Higham2016-hs">[@Higham2016-hs]</span></li>
 </ul></li>
 </ul>
-<p><small>JAMA. 2023;330(15):1472-1483. doi:10.1001/jama.2023.19052</small></p>
 </section>
 <section id="下垂体機能不全各論" class="slide level2">
 <h2>下垂体機能不全各論</h2>
@@ -482,7 +505,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>2011年のガイドラインでは、IGF-1低下のみでGH欠乏の診断は出来ない</li>
 </ul></li>
 </ul>
-<p><small>DynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small></p>
+<p><span class="citation" data-cites="DynaMed_SellarMass_2026 Freda2011-fv">[@DynaMed_SellarMass_2026; @Freda2011-fv]</span></p>
 </section>
 <section id="hypogonado" class="slide level2">
 <h2>Hypogonadism総論</h2>
@@ -521,8 +544,15 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <h2>中枢性尿崩症</h2>
 <ul>
 <li>虎ノ門の教科書では中枢性尿崩症は術後でない限り下垂体腺腫では起きないとの事</li>
+<li>診断のGold standardは存在しない</li>
+<li>水制限試験がしばしば初期の検査で行われる
+<ul>
+<li>多尿 (&gt; 50 mL/kg in 24 hours or 3.5 L/day in a 70kg) の時に血清と尿中浸透圧を同時測定する</li>
+<li>尿糖なしの時に、血清浸透圧 &gt;295 mOsm/kg、尿浸透圧が600 mOsm/kgの時(尿と血清浸透圧の比が2以上)が正常</li>
+<li>尿崩症は血清浸透圧 &gt;295 mOsm/kgの時に尿浸透圧が600 mOsm/kg未満の時(尿と血清浸透圧の比が2未満)で診断される</li>
+</ul></li>
+<li>水分制限試験の亜種として、3%食塩水刺激試験がある <span class="citation" data-cites="Takeuchi_ToranomonEndocrineClinicalPractice_2023">[@Takeuchi_ToranomonEndocrineClinicalPractice_2023]</span></li>
 </ul>
-<p><small>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版</small> - 診断のGold standardは存在しない - 水制限試験がしばしば初期の検査で行われる - 多尿 (&gt; 50 mL/kg in 24 hours or 3.5 L/day in a 70kg) の時に血清と尿中浸透圧を同時測定する - 尿糖なしの時に、血清浸透圧 &gt;295 mOsm/kg、尿浸透圧が600 mOsm/kgの時(尿と血清浸透圧の比が2以上)が正常 - 尿崩症は血清浸透圧 &gt;295 mOsm/kgの時に尿浸透圧が600 mOsm/kg未満の時(尿と血清浸透圧の比が2未満)で診断される - 水分制限試験の亜種として、3%食塩水刺激試験がある</p>
 </section>
 <section id="いつどのように検査をする-1" class="slide level2">
 <h2>いつ、どのように検査をする？</h2>
@@ -538,12 +568,12 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>Microadenomaだとより分かっていない。UptodateだとPRLだけ推奨だが2011年のEndocrine Society Guidelineとは異なる。</li>
 </ul></li>
 </ul>
-<p><small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048 Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.</small></p>
+<p><span class="citation" data-cites="Freda2011-fv Snyder_PituitaryIncidentalomas_2026">[@Freda2011-fv; @Snyder_PituitaryIncidentalomas_2026]</span></p>
 </section>
 <section id="視野障害について" class="slide level2">
 <h2>視野障害について</h2>
-<p><img data-src="images/PA_anatomy.png"> <!-- TODO: 手動調整: 元Typst画像高さ 45% --></p>
-<p><small>JAMA. 2017;317(5):516-524. doi:10.1001/jama.2016.19699</small></p>
+
+<img data-src="images/PA_anatomy.png" class="r-stretch"><p><span class="citation" data-cites="Molitch2017-zw">[@Molitch2017-zw]</span></p>
 <ul>
 <li>下垂体の真上に視交叉があり押されると<em>両耳側半盲</em>が起こる
 <ul>
@@ -551,7 +581,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>海綿静脈洞内に伸展するとIII, IV, V1などが障害される事もある</li>
 </ul></li>
 </ul>
-<p><small>Clin Med. 2023;23(2):129-134. doi:10.7861/clinmed.2023-0020</small></p>
+<p><span class="citation" data-cites="Westall2023-rb">[@Westall2023-rb]</span></p>
 </section></section>
 <section>
 <section id="治療法" class="title-slide slide level1 center">
@@ -585,13 +615,12 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>副腎不全がある場合は先に副腎不全を治療する</li>
 <li>GHや性ホルモンの補充は適応が難しいので専門医にコンサルト</li>
 </ul>
-<p><small>J Clin Endocrinol Metab. 2016;101(11):3888-3921. doi:10.1210/jc.2016-2118</small></p>
+<p><span class="citation" data-cites="Fleseriu2016-pm">[@Fleseriu2016-pm]</span></p>
 </section>
 <section id="follow-up" class="slide level2">
 <h2>Follow up</h2>
-<p><img data-src="images/PA_followup_guideline.png"> <!-- TODO: 手動調整: 元Typst画像高さ 40% --></p>
-<p><small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small></p>
-<ul>
+
+<img data-src="images/PA_followup_guideline.png" class="r-stretch"><ul>
 <li>Mass effect: MRIでfollow up
 <ul>
 <li>Macro/Microadenoma: 6/12ヶ月後</li>
@@ -601,28 +630,18 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 <li>Macro/Microadenoma: 半年後→1年毎に行う/ルーチンは不要</li>
 </ul></li>
 </ul>
-<p><small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small></p>
+<p><span class="citation" data-cites="Freda2011-fv">[@Freda2011-fv]</span></p>
 </section>
 <section id="下垂体偶発種at-glance" class="slide level2">
 <h2>下垂体偶発種at glance</h2>
-<p><img data-src="images/PA_manage.png"> <!-- TODO: 手動調整: 元Typst画像高さ 80% --></p>
-<p><small>Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002</small></p>
+
+<img data-src="images/PA_manage.png" class="r-stretch"><p><span class="citation" data-cites="Boguszewski2019-ne">[@Boguszewski2019-ne]</span></p>
 </section>
-<section id="参考文献" class="slide level2">
-<h2>参考文献</h2>
-<ol type="1">
-<li>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版</li>
-<li>Freda PU, Beckers AM, Katznelson L, et al.&nbsp;Pituitary incidentaloma: an endocrine society clinical practice guideline. J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</li>
-<li>Teramoto A, Hirakawa K, Sanno N, Osamura Y. Incidental pituitary lesions in 1,000 unselected autopsy specimens. Radiology. 1994;193(1):161-164. doi:10.1148/radiology.193.1.8090885</li>
-<li>American College of Physicians. ACP MKSAP: Medical Knowledge Self-Assessment Program. American College of Physicians; 2025. https://www.acponline.org/featured-products/acp-mksap</li>
-<li>DynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</li>
-<li>Boguszewski CL, de Castro Musolino NR, Kasuki L. Management of pituitary incidentaloma. Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002</li>
-<li>Lee SY, Pearce EN. Hyperthyroidism: A Review. JAMA. 2023;330(15):1472-1483. doi:10.1001/jama.2023.19052</li>
-<li>Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.</li>
-<li>Westall SJ, Aung ET, Kejem H, Daousi C, Thondam SK. Management of pituitary incidentalomas. Clin Med. 2023;23(2):129-134. doi:10.7861/clinmed.2023-0020</li>
-<li>Melmed S. Pituitary-tumor endocrinopathies. N Engl J Med. 2020;382(10):937-950. doi:10.1056/NEJMra1810772</li>
-<li>Fleseriu M, Hashim IA, Karavitaki N, et al.&nbsp;Hormonal replacement in hypopituitarism in adults: An Endocrine Society clinical practice guideline. J Clin Endocrinol Metab. 2016;101(11):3888-3921. doi:10.1210/jc.2016-2118</li>
-</ol>
+<section id="reference" class="slide level2 smaller scrollable">
+<h2>Reference</h2>
+<div id="refs" role="list">
+
+</div>
 
 
 </section></section>

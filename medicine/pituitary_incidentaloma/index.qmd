@@ -15,12 +15,6 @@ execute:
   echo: false
 ---
 
-<!--
-TODO: PituitaryAdenoma.typ からの変換たたき台。
-TODO: Typst/Touying 固有の theme, place, box, grid, columns などのレイアウト指定は省略。
-TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
--->
-
 
 ## 症例
 
@@ -40,9 +34,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
   - Autopsyだと日本人のうち18%程度の有病率と言われている
     - 日本での1000人の連続するAutopsy患者では178人にIncidentalomaがあり、そのうち34%が2mm以上
 
-
-<small>Radiology. 1994;193(1):161-164. doi:10.1148/radiology.193.1.8090885</small>
-
+[@Teramoto1994-zv]
 
 ## 下垂体偶発種の疫学
 
@@ -56,11 +48,7 @@ TODO: 複雑な図・表・強調表示は必要に応じて手動調整。
 | 下垂体炎 | 1%未満 |
 | 脳動脈瘤 | 1-2% |
 
-<!-- TODO: 手動調整: 元Typstの table レイアウトは簡略化 -->
-
-
-<small>DynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日.
-https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
+[@DynaMed_SellarMass_2026]
 
 - 今回は最多の下垂体腺腫について話していきます
 
@@ -90,7 +78,7 @@ https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
 ![](images/PA_atglance.png)
 <!-- TODO: 手動調整: 元Typst画像高さ 90% -->
 
-<small>N Engl J Med. 2020;382(10):937-950. doi:10.1056/NEJMra1810772</small>
+[@Melmed2020-dy]
 
 
 ## 下垂体偶発種を語る上で重要な視点
@@ -119,7 +107,7 @@ https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
     - 15%がGonadothropinoma
 - Incidentalomaだと、非機能性腺腫が多い事は注目に値する
 
-<small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
+[@Freda2011-fv]
 
 
 ## Pituitary incidentalomaを見たら・・・・・・
@@ -137,8 +125,8 @@ https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
 
 ![](images/PA_hormone.png)
 <!-- TODO: 手動調整: 元Typst画像高さ 40% -->
+[@Takeuchi_ToranomonEndocrineClinicalPractice_2023]
 
-<small>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版</small>
 - ホルモン検査は日内変動が大きい
 - Positive/Negative feedbackにより代償されやすい
 - ホルモン欠乏の検査: 最も分泌が多い時間帯の測定で判断
@@ -163,8 +151,7 @@ https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
   - ACTH, GHは_予後不良で手術の治療適応_
 - PRL, ACTH, GHは検索すべし！！
 
-
-<small>JAMA. 2023;329(16):1386-1398. doi:10.1001/jama.2023.5444</small>
+[@Tritos2023-tk]
 
 
 ## ホルモン過剰産生の各論
@@ -188,15 +175,13 @@ https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
 - 更に下垂体腺腫自身の茎部圧迫によるもの(Stalk effect)のもありうる
   - Stalk effectだけではPRL < 150 mcg/L程度である事が多い
 
-<small>JAMA. 2023;329(16):1386-1398. doi:10.1001/jama.2023.5444</small>
+[@Tritos2023-tk]
 
 
 ## Cushing syndrome {#cushing}
 
 
-- 2011年のガイドラインだと実はルーチン検査ではない  (臨床的に疑った時のみ)
-
-<small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
+- 2011年のガイドラインだと実はルーチン検査ではない  (臨床的に疑った時のみ) [@Freda2011-fv]
 - 個人的には、Macroadenomaならばルーチンで行うべきと考える
 - 3種類の方法があるが、一番簡単なのはLDST
   - LDST(1mg Dex負荷試験)：感度98.6%, 特異度90.6%
@@ -231,9 +216,7 @@ https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient</small>
   - Review論文だと下垂体のホルモン過剰産生はProlactin, IGF-1の測定で  除外すべきとの記載あり
   - UptodateだとPRL、IGF-1、LH、FSH、ACTH、24時間尿中Cortisol推奨
 
-
-<small>Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002
-Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.</small>
+[@Boguszewski2019-ne; @Snyder_PituitaryIncidentalomas_2026]
 
 
 # 下垂体機能不全
@@ -252,9 +235,7 @@ Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolt
     - 副腎不全がある時は汎下垂体機能低下症を疑う
 - 2011年のガイドラインだとClass Iでホルモン欠乏の検査の推奨
 
-<small>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版
-J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
-
+[@Takeuchi_ToranomonEndocrineClinicalPractice_2023; @Freda2011-fv]
 
 ## 下垂体機能不全総論
 
@@ -266,9 +247,7 @@ J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
 => 見るべきは、*副腎不全、甲状腺機能低下症*
 - 中枢性副腎不全→TSH欠乏→中枢性Hypogonadismの検査
   - GH欠乏は下垂体腺腫の治療が終わり他のホルモン補充が終わったあとまでは検査しない事を推奨。
-
-<small>JAMA. 2023;330(15):1472-1483. doi:10.1001/jama.2023.19052</small>
-
+[@Higham2016-hs]
 
 ## 下垂体機能不全各論
 
@@ -318,9 +297,7 @@ J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
   - Dynamedでは3つ以上の下垂体ホルモン欠乏があり、年齢調整された血清IGF-1が低い時はGH低値と診断して良い
   - 2011年のガイドラインでは、IGF-1低下のみでGH欠乏の診断は出来ない
 
-<small>DynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient
-J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
-
+[@DynaMed_SellarMass_2026; @Freda2011-fv]
 
 ## Hypogonadism総論 {#hypogonado}
 
@@ -352,15 +329,13 @@ J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
 
 
 - 虎ノ門の教科書では中枢性尿崩症は術後でない限り下垂体腺腫では起きないとの事
-
-<small>竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版</small>
 - 診断のGold standardは存在しない
 - 水制限試験がしばしば初期の検査で行われる
   - 多尿 (> 50 mL/kg in 24 hours or 3.5 L/day in a 70kg) の時に血清と尿中浸透圧を同時測定する
   - 尿糖なしの時に、血清浸透圧 >295 mOsm/kg、尿浸透圧が600 mOsm/kgの時(尿と血清浸透圧の比が2以上)が正常
   - 尿崩症は血清浸透圧 >295 mOsm/kgの時に尿浸透圧が600 mOsm/kg未満の時(尿と血清浸透圧の比が2未満)で診断される
 - 水分制限試験の亜種として、3%食塩水刺激試験がある
-
+[@Takeuchi_ToranomonEndocrineClinicalPractice_2023]
 
 ## いつ、どのように検査をする？
 
@@ -372,24 +347,21 @@ J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
     - ACTHとGH欠乏がBaselineの検査で確定できない時に負荷試験を考慮する。
   - Microadenomaだとより分かっていない。UptodateだとPRLだけ推奨だが2011年のEndocrine Society Guidelineとは異なる。
 
-<small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048
-Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.</small>
+[@Freda2011-fv; @Snyder_PituitaryIncidentalomas_2026]
 
 
 ## 視野障害について
 
 
 ![](images/PA_anatomy.png)
-<!-- TODO: 手動調整: 元Typst画像高さ 45% -->
 
-<small>JAMA. 2017;317(5):516-524. doi:10.1001/jama.2016.19699</small>
+[@Molitch2017-zw]
 
 - 下垂体の真上に視交叉があり押されると*両耳側半盲*が起こる
   - MRIで視交叉と腺腫が接している場合は自覚症状がなくても、 正式な視野障害の評価を行う
   - 海綿静脈洞内に伸展するとIII, IV, V1などが障害される事もある
 
-
-<small>Clin Med. 2023;23(2):129-134. doi:10.7861/clinmed.2023-0020</small>
+[@Westall2023-rb]
 
 
 # 治療法
@@ -416,17 +388,14 @@ Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolt
 - 副腎不全がある場合は先に副腎不全を治療する
 - GHや性ホルモンの補充は適応が難しいので専門医にコンサルト
 
-
-<small>J Clin Endocrinol Metab. 2016;101(11):3888-3921. doi:10.1210/jc.2016-2118</small>
+[@Fleseriu2016-pm]
 
 
 ## Follow up
 
 
 ![](images/PA_followup_guideline.png)
-<!-- TODO: 手動調整: 元Typst画像高さ 40% -->
 
-<small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
 
 - Mass effect: MRIでfollow up
   - Macro/Microadenoma: 6/12ヶ月後
@@ -434,29 +403,16 @@ Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolt
   - Macro/Microadenoma: 半年後→1年毎に行う/ルーチンは不要
 
 
-<small>J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048</small>
-
+[@Freda2011-fv]
 
 ## 下垂体偶発種at glance
 
 
 ![](images/PA_manage.png)
-<!-- TODO: 手動調整: 元Typst画像高さ 80% -->
 
-<small>Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002</small>
+[@Boguszewski2019-ne]
 
+## Reference
 
-## 参考文献
-
-
-1. 竹内靖博・竹下彰・辰島啓太編著(2020).虎の門病院内分泌クリニカルプラクティス―外来・入院からフォローアップまで.クリニコ出版
-2. Freda PU, Beckers AM, Katznelson L, et al. Pituitary incidentaloma: an endocrine society clinical practice guideline. J Clin Endocrinol Metab. 2011;96(4):894-904. doi:10.1210/jc.2010-1048
-3. Teramoto A, Hirakawa K, Sanno N, Osamura Y. Incidental pituitary lesions in 1,000 unselected autopsy specimens. Radiology. 1994;193(1):161-164. doi:10.1148/radiology.193.1.8090885
-4. American College of Physicians. ACP MKSAP: Medical Knowledge Self-Assessment Program. American College of Physicians; 2025. https://www.acponline.org/featured-products/acp-mksap
-5. DynaMed. Sellar Mass - Approach to the Patient. EBSCO Information Services. Accessed 2025年8月2日. https://www.dynamed.com/approach-to/sellar-mass-approach-to-the-patient
-6. Boguszewski CL, de Castro Musolino NR, Kasuki L. Management of pituitary incidentaloma. Best Pract Res Clin Endocrinol Metab. 2019;33(2):101268. doi:10.1016/j.beem.2019.04.002
-7. Lee SY, Pearce EN. Hyperthyroidism: A Review. JAMA. 2023;330(15):1472-1483. doi:10.1001/jama.2023.19052
-8. Peter J Snyder, MD. Pituitary incidentalomas. In: UpToDate, Connor RF (Ed), Wolters Kluwer. Accessed August 15, 2025. https://www.uptodate.com.
-9. Westall SJ, Aung ET, Kejem H, Daousi C, Thondam SK. Management of pituitary incidentalomas. Clin Med. 2023;23(2):129-134. doi:10.7861/clinmed.2023-0020
-10. Melmed S. Pituitary-tumor endocrinopathies. N Engl J Med. 2020;382(10):937-950. doi:10.1056/NEJMra1810772
-11. Fleseriu M, Hashim IA, Karavitaki N, et al. Hormonal replacement in hypopituitarism in adults: An Endocrine Society clinical practice guideline. J Clin Endocrinol Metab. 2016;101(11):3888-3921. doi:10.1210/jc.2016-2118
+::: {#refs}
+:::
