@@ -13,6 +13,7 @@ format:
     incremental: false
 execute:
   echo: false
+bibliography: references.bib
 ---
 
 
