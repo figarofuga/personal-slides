@@ -13,34 +13,34 @@ if (requireNamespace("bspm", quietly = TRUE)) {
   bspm::enable()
 }
 
-pkgs <- c(
-  "here",
-  "glue",
-  "knitr",
-  "rmarkdown",
-  "reticulate",
-  "tidyverse",
-  "easystats",
-  "tidymodels",
+Pkgs <- c(
   "bonsai",
+  "dagitty",
+  "easystats",
+  "ggdag",
+  "glue",
+  "grf",
+  "here",
+  "Hmisc",
+  "knitr",
   "lightgbm",
-  "scales",
-  "tinytable",
-  "tinyplot",
-  "survival",
-  "plotly",
-  "xgboost",
   "marginaleffects",
   "MatchIt",
-  "rootSolve",
-  "WeightIt",
   "modelsummary",
+  "plotly",
+  "reticulate",
+  "rmarkdown",
   "rms",
-  "Hmisc",
-  "grf",
-  "dagitty",
-  "ggdag",
-  "sessioninfo"
+  "rootSolve",
+  "scales",
+  "sessioninfo",
+  "survival",
+  "tidymodels",
+  "tidyverse",
+  "tinyplot",
+  "tinytable",
+  "WeightIt",
+  "xgboost"
 )
 
 to_install <- setdiff(pkgs, rownames(installed.packages()))
