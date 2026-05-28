@@ -62,12 +62,11 @@
       "onAutoForward": "notify"
     },
     "8787": {
-      "label": "RStudio Server",
-      "onAutoForward": "openBrowser"
+      "label": "RStudio Server"
     }
   },
   "postCreateCommand": "bash .devcontainer/postCreate.sh",
   "postAttachCommand": {
-    "rstudio-server": "pgrep -x rserver >/dev/null || rserver"
+    "rstudio-start": "rserver"
   }
 }
