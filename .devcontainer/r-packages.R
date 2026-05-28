@@ -13,7 +13,7 @@ if (requireNamespace("bspm", quietly = TRUE)) {
   bspm::enable()
 }
 
-Pkgs <- c(
+pkgs <- c(
   "bonsai",
   "bootstrap",
   "cowplot",
