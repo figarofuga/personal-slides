@@ -15,19 +15,19 @@ if (requireNamespace("bspm", quietly = TRUE)) {
 
 Pkgs <- c(
   "bonsai",
-  "bootstrap", 
+  "bootstrap",
   "cowplot",
   "dagitty",
   "easystats",
   "ggdag",
-  "ggsurvfit"
+  "ggsurvfit",
   "glue",
-  "gt", 
-  "gtExtras"
+  "gt",
+  "gtExtras",
   "grf",
   "here",
   "Hmisc",
-  "kableExtra"
+  "kableExtra",
   "knitr",
   "lightgbm",
   "marginaleffects",
