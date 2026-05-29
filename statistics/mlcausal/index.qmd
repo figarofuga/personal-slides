@@ -984,7 +984,7 @@ print(S_te)
 
 ## Scratch for S-learner
 
-```{r}
+<!-- ```{r}
 #| label: scratch-for-S-learner
 
 library(tidymodels)
@@ -1046,7 +1046,7 @@ X_s_learn.head()
 
 
 
-```
+``` -->
 
 ## T learner
 
