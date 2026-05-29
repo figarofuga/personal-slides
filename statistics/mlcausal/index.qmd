@@ -5,7 +5,7 @@ format:
   revealjs:
     pdf-separate-fragments: false
     pdf-max-pages-per-slide: 3
-    theme: [default, custom.scss]
+    theme: [default, custom-style.scss]
     embed-resources: false
     self-contained-math: false
     slide-number: true
