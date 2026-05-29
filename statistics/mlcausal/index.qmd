@@ -984,69 +984,60 @@ print(S_te)
 
 ## Scratch for S-learner
 
-<!-- ```{r}
+```{r}
 #| label: scratch-for-S-learner
 
 library(tidymodels)
 library(bonsai)
 
-# 1. データセットの読み込み
+set.seed(42)
 
-
-X = toy_data.loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data['afeqt_os']
-n = toy_data.shape[0]
-
-
-# 2. データを学習用（80%）とテスト用（20%）に分割
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+# toy_data_split <- rsample::initial_split(toy_data)
+# train_data <- rsample::training(toy_data_split)
+# test_data <- rsample::testing(toy_data_split)
 
 # 3. モデルの初期化 (scikit-learn API)
 # 引数を指定しない場合、デフォルトのハイパーパラメータが適用されます
-model = lgb.LGBMRegressor(
-  random_state=42,
-  verbosity = -1)
+# numeric outcome用
+# re78やpseudo outcome Dを回帰する
+lightgbm_spec <- boost_tree() |>
+  set_engine("lightgbm") |> 
+  set_mode("regression")
 
-# 4. モデルの学習 (fit)
-print("モデルの学習を開始します...")
-model.fit(X_train, y_train)
-print("学習が完了しました。")
+# mu1_hat(x): treated群でfit
+lightgbm_fit <- workflow() |>
+  add_formula(afeqt_os ~ age + sex + bmi + hf + bnp + lvef + ca) |>
+  add_model(lightgbm_spec) |>
+  fit(data = toy_data)
 
-# 5. テストデータでの予測と評価（おまけ）
-y_pred = model.predict(X_test)
+fitted_data <- broom::augment(lightgbm_fit, new_data = toy_data)
 
-y_true = [3, -0.5, 2, 7]
-y_pred = [2.5, 0.0, 2, 8]
-rmse = root_mean_squared_error(y_true, y_pred)
+yardstick::rmse(fitted_data, afeqt_os, .pred)
 
-print(f"テストデータのRMSE: {rmse:.4f}")
+data_ca0 <- dplyr::mutate(toy_data, ca = 0)
 
+fitted_data_ca0 <- predict(lightgbm_fit, new_data = data_ca0) |> 
+  dplyr::rename(ca0_pred = .pred)
 
-pred_0 = model.predict(X.assign(ca = 0))
-pred_1 = model.predict(X.assign(ca = 1))
-te = np.mean(pred_1 - pred_0)
+data_ca1 <- dplyr::mutate(toy_data, ca = 1)
 
-print(f"平均処置効果の推定値: {te:.4f}")
+fitted_data_ca1 <- predict(lightgbm_fit, new_data = data_ca1) |> 
+  dplyr::rename(ca1_pred = .pred)
 
-X_s_learn = (
-    toy_data
-    .loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef", "afeqt_os"]]
-    .assign(
-        ca_0 = 0,
-        effect_0 = pred_0,
-        ca_1 = 1,
-        effect_1 = pred_1,
-        ca_effect = pred_1 - pred_0
-    )
-)
+whole_data <- dplyr::bind_cols(
+  fitted_data, 
+  fitted_data_ca0, 
+  fitted_data_ca1
+) |> 
+  dplyr::mutate(
+    ca_diff = ca1_pred - ca0_pred
+  )
 
-X_s_learn.head()
+datawizard::describe_distribution(whole_data, ca_diff)
 
+tinyplot::plt(~ca_diff, data = whole_data, type = type_histogram())
 
-
-``` -->
+```
 
 ## T learner
 
