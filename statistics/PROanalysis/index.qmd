@@ -11,6 +11,7 @@ format:
     embed-resources: false
 execute:
   echo: false
+  dev: svglite
 editor: source
 ---
 
@@ -255,12 +256,74 @@ editor: source
 
 # 実践！
 
--  ここからdatasetの説明など
+- Datasetは乳癌のQOLのデータ
+
 
 # AFEQTの正規性の確認
+```{r}
+library(dplyr)
+library(tinyplot)
+library(datawizard)
+
+br_cancer_dat <- readr::read_csv("statistics/PROanalysis/br_cancer/br_cancer_dat.csv") 
+
+br_cancer_dat_mod <- br_cancer_dat |> 
+    dplyr::filter(
+        !is.na(ql)
+    ) |> 
+    dplyr::mutate(
+        across(
+            c("maritial_status", "education", "alcohol", "bust", "cupsize"), 
+            \(x)as.factor(x)
+        ), 
+        birth_number = dplyr::coalesce(birth_number, pregnancy_number)
+    ) |> 
+    dplyr::select(
+        age, bmi, 
+        maritial_status, education, alcohol, bust, cupsize, 
+        menopause_yn, birth_number,
+        pre_op, cancer_kind_family_1, breastcancer_first, 
+        ql
+    ) |> 
+    stats::na.omit()
+
+
+
+datawizard::describe_distribution(br_cancer_dat_mod$ql)
+
+tinyplot::plt(~ ql, data = br_cancer_dat_mod, type = type_histogram(), 
+    main = "Distribution of QOL")
+
+```
 
 
 # 簡単な解析
+
+```{r}
+library(rms)
+library(Hmisc)
+library(AER)
+
+dd <- datadist(br_cancer_dat_mod)
+
+options(datadist = "dd")
+
+lhs <- "ql"
+rhs <- dplyr::select(br_cancer_dat_mod, -ql) |> 
+    names() |> 
+    paste0(collapse = " + ")
+
+formula <- as.formula(
+    paste0(lhs, " ~ ", rhs)
+)
+
+lm_fit <- ols(formula, data = br_cancer_dat_mod)
+orm_fit <- orm(formula, data = br_cancer_dat_mod)
+tobit_fit <- tobit(
+    formula, left = 0, right = 100, data = br_cancer_dat_mod
+)
+
+```
 
 # Take home message
 

@@ -14,6 +14,7 @@ if (requireNamespace("bspm", quietly = TRUE)) {
 }
 
 pkgs <- c(
+  "AER",
   "bonsai",
   "bootstrap",
   "cowplot",
@@ -43,6 +44,7 @@ pkgs <- c(
   "scales",
   "sessioninfo",
   "simsurv",
+  "skimr",
   "survival",
   "svglite",
   "tidymodels",
