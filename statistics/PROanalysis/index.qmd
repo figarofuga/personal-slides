@@ -264,8 +264,9 @@ editor: source
 library(dplyr)
 library(tinyplot)
 library(datawizard)
+library(here)
 
-br_cancer_dat <- readr::read_csv("statistics/PROanalysis/br_cancer/br_cancer_dat.csv") 
+br_cancer_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "br_cancer", "br_cancer_dat.csv")) 
 
 br_cancer_dat_mod <- br_cancer_dat |> 
     dplyr::filter(
