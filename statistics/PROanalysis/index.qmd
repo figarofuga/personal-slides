@@ -256,7 +256,20 @@ editor: source
 
 # 実践！
 
-- Datasetは乳癌のQOLのデータ
+- Datasetは乳癌のQOLのデータ[@Gebert_DataPROMBaseline_2022]
+The inclusion criteria for this dataset were as follows: 
+-	Patients with a diagnosis of breast cancer, DCIS, fibroadenoma, or other breast diseases
+-	Age 18 or over
+-	German speakers
+The exclusion criteria were as follows:
+-	Non-eligible diagnosis
+-	Diagnosis date after March 31, 2021
+-	Missing diagnosis or diagnosis date
+-	Diagnosis changed into a non-eligible diagnosis type (e.g., diagnosis date > 7 days after initial survey
+-	First survey after treatment initiation
+-	Second opinion
+Most of the patients did not know their definitive diagnosis before the assessment of PROs and before the start of their initial treatment. 
+
 
 
 # AFEQTの正規性の確認
