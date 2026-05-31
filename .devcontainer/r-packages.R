@@ -37,6 +37,7 @@ pkgs <- c(
   "modelsummary",
   "plotly",
   "policytree",
+  "PROreg",
   "reticulate",
   "rmarkdown",
   "rms",

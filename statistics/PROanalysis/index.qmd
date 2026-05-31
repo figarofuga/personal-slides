@@ -289,14 +289,19 @@ br_cancer_dat_mod <- br_cancer_dat |>
     stats::na.omit()
 
 
-
-datawizard::describe_distribution(br_cancer_dat_mod$ql)
-
 tinyplot::plt(~ ql, data = br_cancer_dat_mod, type = type_histogram(), 
     main = "Distribution of QOL")
 
 ```
 
+
+```{r}
+
+datawizard::describe_distribution(br_cancer_dat_mod$ql)
+
+```
+
+- 正規性は全くなさそう
 
 # 簡単な解析
 

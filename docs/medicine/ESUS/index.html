@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="ja"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -10,8 +10,8 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Nozomi Niimi">
-  <meta name="dcterms.date" content="2024-10-10">
-  <title>My personal slides – PROの解析について</title>
+  <meta name="dcterms.date" content="2024-03-06">
+  <title>My personal slides – Cryptogenic strokeとESUS</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -128,7 +128,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">PROの解析について</h1>
+  <h1 class="title">Cryptogenic strokeとESUS</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -138,390 +138,216 @@ Nozomi Niimi
 </div>
 </div>
 
-  <p class="date">2024-10-10</p>
+  <p class="date">2024-03-06</p>
 </section>
-<section id="proとは" class="slide level1">
-<h1>PROとは</h1>
-<ul>
-<li>Patient reported outcomesの略 「 <span style="color:#333333">PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた</span> <span style="color:#333333">患者の健康状態に関するあらゆる報告である</span> 」</li>
-<li>議論は複数あるが、HR-QOLを含む事が多い</li>
-</ul>
-</section>
-<section id="proの代表例" class="slide level1">
-<h1>PROの代表例</h1>
-<p><img data-src="imges/ordered_scale.png"> - 循環器では以下のものが有名 - SIHDで利用するSAQ - 心不全で利用するKCCQ - AFで利用するAFEQT - 循環器の研究におけるPRO</p>
-<p><img data-src="images/num_publish_pro.png"></p>
-<ul>
-<li>High impact journalではPROを含む研究が増えている！！ <span class="citation" data-cites="Eliya2021-yf">[@Eliya2021-yf]</span></li>
-</ul>
-</section>
-<section id="proの特徴" class="slide level1">
-<h1>PROの特徴 <img data-src="images/scale_species.png"></h1>
-<ul>
-<li>値が高い(or 低い)ほうが良いが40点と80点で正確に2倍かどうかは分からない(通常のNumericじゃない)</li>
-<li>順序尺度と間隔尺度の間</li>
-<li>値の下限と上限が決まっている(通常加減は0点、上限は100点が多い)</li>
-<li>分布が歪んでいる</li>
-</ul>
-</section>
-<section id="このproはどうやって解析すればいい" class="slide level1">
-<h1>このPROはどうやって解析すればいい？</h1>
-<ul>
-<li><p>統計学の論文では通常の多変量回帰、beta-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・</p></li>
-<li><p>結局どれがいいの？ <span class="citation" data-cites="Arostegui2012-cb">[@Arostegui2012-cb]</span></p></li>
-</ul>
+<section class="slide level2">
 
-<img data-src="images/pro_analysis_real.png" class="r-stretch"></section>
-<section id="先行研究では" class="slide level1">
-<h1>先行研究では？</h1>
-<p><img data-src="images/pro_analysis_real2.png"> - <strong>多種多様な手法が使われており標準化されていない</strong> <span class="citation" data-cites="Qian2021-rp">[@Qian2021-rp]</span></p>
+<!--
+TODO: out.md と images/ から作成した Quarto reveal.js 用のたたき台。
+TODO: 複雑な画像配置や元スライドの細かなレイアウトは手動調整。
+TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在しないため、最終スライドはテキストのみ。
+-->
 </section>
-<section id="ガイドラインでは" class="slide level1">
-<h1>ガイドラインでは？</h1>
-<p><img data-src="images/guideline_title.jpg"> <span class="citation" data-cites="Coens2020-lz">[@Coens2020-lz]</span></p>
-</section>
-<section id="proの確定的な解析方法は" class="slide level1">
-<h1>PROの確定的な解析方法は！！</h1>
-<blockquote>
-<p>Findings from systematic reviews showed that there was no consensus on appropriate statistical methods for PRO data analysis.</p>
-</blockquote>
+<section id="cryptogenic-strokeとは" class="slide level2">
+<h2>Cryptogenic strokeとは？</h2>
 <ul>
-<li><em>ない！</em> ・・・・・・</li>
+<li><strong>Cryptogenic stroke</strong></li>
+<li>Cryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時</li>
+<li>その中で近位の動脈の狭窄や心原性が見つからない時の塞栓性脳梗塞を ESUS（Embolic stroke of undetermined source: 原因不明の脳塞栓症）という</li>
 </ul>
-<p>それだけだと虚しいのでもう少し読み込みましょう</p>
 </section>
-<section id="proの解析において必須の要素" class="slide level1">
-<h1>PROの解析において必須の要素</h1>
+<section id="cryptogenic-strokeの疫学" class="slide level2">
+<h2>Cryptogenic strokeの疫学</h2>
+<p><img data-src="images/slide-02-epidemiology-japan.png"></p>
+<p><img data-src="images/slide-02-epidemiology-esus.png"></p>
 <ul>
-<li>明瞭なResearch question</li>
-<li>適切な解析方法に必要な要素</li>
-<li>欠損値について</li>
-</ul>
-<p>について検討が必要</p>
-</section>
-<section id="research-object" class="slide level1 smaller">
-<h1>Research object</h1>
+<li>定義により異なるが 10-40% と言われている
 <ul>
-<li><span style="color:#ff0000"><strong>PRO研究の目的を明確にする</strong></span>
-<ul>
-<li>治療効果・臨床的効果の証明？</li>
-<li>記述統計・探索的研究？</li>
-<li>群の差を、同等性・非劣性か優越性かしっかり決める</li>
+<li>日本でも同じくらいの割合</li>
 </ul></li>
-<li>患者個人間あるいは治療群間でのPROの解析を明確にする
+<li>Cryptogenic stroke のうち ESUS は大体 80-90%</li>
+<li>参考
 <ul>
-<li><em>個々の患者に焦点を当てる場合</em>
-<ul>
-<li>“どの患者に”有効か？ = レスポンダーに興味がある</li>
-<li>イベント発生までの時間やレスポンダーの割合などがエンドポイント</li>
-</ul></li>
-<li><em>群に焦点を当てる場合</em>
-<ul>
-<li>“どちらの(治療)群がより有効か？ = 群間の平均的な差に興味がある</li>
-<li>PROの変化の大きさなどがエンドポイント</li>
-</ul></li>
+<li><a href="https://www.jstage.jst.go.jp/article/jstroke/38/2/38_10416/_pdf/-char/en" class="uri">https://www.jstage.jst.go.jp/article/jstroke/38/2/38_10416/_pdf/-char/en</a></li>
+<li><em>N Engl J Med.</em> 2016;374(21):2065-2074.</li>
 </ul></li>
 </ul>
 </section>
-<section id="pro解析方法での考慮点" class="slide level1">
-<h1>PRO解析方法での考慮点</h1>
+<section id="cryptogenic-strokeの機序は" class="slide level2">
+<h2>Cryptogenic strokeの機序は？</h2>
 <ul>
-<li>必須条件
+<li>単一ではなく複数の機序が提唱されている</li>
+<li><span style="color: red;"><em>潜在性の pAF</em></span></li>
+<li>大動脈の粥腫やその他の心原性</li>
+<li><span style="color: red;"><em>PFO や ASD などによる奇異性塞栓</em></span></li>
+<li>血栓傾向</li>
+<li>脳血管疾患（血管奇形など）</li>
+<li>年齢で多い原因は異なる
 <ul>
-<li>2群以上で比較可能な方法: RCTなどで治療法による影響をみたい</li>
-<li>定量化可能なparametricな手法: 臨床的に意味がある結果を提供できる</li>
+<li>18-30歳: 動脈解離や血栓傾向、先天性心疾患</li>
+<li>31-60歳: 若年性の動脈硬化、後天性の心疾患</li>
+<li>61歳以上: 潜在性 AF</li>
 </ul></li>
-<li>あるとより良い条件
-<ul>
-<li>多変量回帰: ベースラインのPROの影響を考慮したい</li>
-<li>個人差を考慮した解析(Cluster/Mixed model): 同じ人で時間をあけて何度も取り直す事も多い</li>
-</ul></li>
-<li>欠損値をうまく扱える手法: 欠損値がMNARの可能性が高い</li>
 </ul>
 </section>
-<section id="具体的な推奨される統計手法" class="slide level1">
-<h1>具体的な推奨される統計手法</h1>
-<ul>
-<li>1回のみfollow-upするdesign: 線形回帰</li>
-</ul>
-<p><img data-src="images/pro_linear_exam.png"></p>
-<ul>
-<li>2回以上のfollow-upをするdesign: Linear mixed model
-<ul>
-<li>時間は離散変数とする</li>
-<li>Trajectoryの場合は時間X治療の相互作用項を入れる</li>
-</ul></li>
-<li>Time-to-event解析: Cox回帰</li>
-</ul>
-<p><img data-src="images/pro_km_exam.png"></p>
-<p><span style="color:#ff0000"><strong>これらの解析ではMICを考慮する事が強く推奨！</strong></span></p>
-<p><span class="citation" data-cites="Lapin2020-gz Calvert2013-sn">[@Lapin2020-gz; @Calvert2013-sn]</span></p>
-</section>
-<section id="線形回帰でいいの" class="slide level1">
-<h1>線形回帰でいいの？</h1>
-<p>7種類以下のカテゴリカルの場合は(とても良い/やや良い/普通/やや悪い/とても悪い)などではOrdinal regressionが良いかもしれない</p>
-<p>分布(残差)が偏っていても、通常のOLSはRobustであり問題ない</p>
-<p><span class="citation" data-cites="Arostegui2012-cb Piantadosi2022-wx">[@Arostegui2012-cb; @Piantadosi2022-wx]</span></p>
-</section>
-<section id="ただし" class="slide level1">
-<h1>ただし・・・・・・</h1>
+<section id="どうやって診断する" class="slide level2">
+<h2>どうやって診断する？</h2>
 
-<img data-src="images/pro_bad_exam.png" class="r-stretch"><ul>
-<li>差をアウトカムに回帰はやらないほうが良い！
+<img data-src="images/slide-04-diagnostic-approach.jpg" class="r-stretch"><ul>
+<li>検査の程度によるため、世界的に決まった基準はない</li>
+<li>古典的な TOAST 分類が一つの基準
 <ul>
-<li>Baselineが良い患者ほど予後不良になってしまう</li>
+<li>これだと <em>Cryptogenic が増える</em></li>
 </ul></li>
-<li>BaselineのPROで補正をした上で＊年後のPROを予測するほうが良い <span class="citation" data-cites="Harrell_BBR_Change_2025">[@Harrell_BBR_Change_2025]</span></li>
-</ul>
-</section>
-<section id="欠損値について" class="slide level1">
-<h1>欠損値について</h1>
+<li>ASCOD、CCS systems を使うと <em>Cryptogenic が減る</em> とされる
 <ul>
-<li>PRO cohortと研究全体のcohortの違いを考える
-<ul>
-<li>何を代表した母集団か考えて解析する</li>
+<li>ただしデータはまだ少ない</li>
 </ul></li>
-<li>死亡した患者のPROは解析できない為、単なる欠損値としない</li>
-<li>欠損率は複数の方法で報告
-<ul>
-<li>variable denominator: その時点でPROを出せる患者を分母とする欠損率</li>
-<li>fixed denominator: 研究のコホート全体を分母とする欠損率</li>
-</ul></li>
-<li>明示的なSingle imputation(平均値やLOCF)は避けよ</li>
-<li>最低2種類の欠損値の対処方法を用いて感度分析とせよ</li>
 </ul>
 </section>
-<section id="欠損値の対処法について" class="slide level1">
-<h1>欠損値の対処法について</h1>
-<ul>
-<li>明示的なものは推奨されない→分散が減ってしまう
-<ul>
-<li>平均値、LOCF、中央値代入など</li>
-</ul></li>
-<li>現実的には多重代入でPattern mixture modelを使う事も</li>
-<li>MAR：多重代入</li>
-<li>MNAR：Pattern mixture modelを用いたMI</li>
-</ul>
-</section>
-<section id="pattern-mixture-model" class="slide level1">
-<h1>Pattern mixture model</h1>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Y0</th>
-<th>Y1</th>
-<th>Y2</th>
-<th>Y3</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>パターンA</td>
-<td>○</td>
-<td>○</td>
-<td>○</td>
-<td>○</td>
-</tr>
-<tr class="even">
-<td>パターンB</td>
-<td>○</td>
-<td>○</td>
-<td>○</td>
-<td>×</td>
-</tr>
-<tr class="odd">
-<td>パターンC</td>
-<td>○</td>
-<td>○</td>
-<td>×</td>
-<td>×</td>
-</tr>
-<tr class="even">
-<td>パターンD</td>
-<td>○</td>
-<td>×</td>
-<td>×</td>
-<td>×</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>MNARの時の感度分析で用いる手法</li>
-<li>欠損パターンが似ている情報+制約(=仮定)をおく事によって、補完する</li>
-<li>イメージだとデータがある人とない人の結果の差Δを他のすべてのデータを用いて埋めるイメージ</li>
-</ul>
-</section>
-<section id="死亡の扱いをどうする" class="slide level1">
-<h1>死亡の扱いをどうする？</h1>
-<ul>
-<li>単なる欠損値にしてはいけない！</li>
-<li>PROをメインの解析において、複数の方法がある
-<ul>
-<li>0/1のWorse outcomeを作って、その中に死亡を入れ込む</li>
-<li>複数回計測している場合はBayesian Joint modelを行う</li>
-<li>Ordinal regressionの応用を行う(後述)</li>
-</ul></li>
-<li>直感的かつ簡単なのは1だがPowerが減る。RCTやる人は2か3が良いかも</li>
-</ul>
-<p><span class="citation" data-cites="Arnold2013-ss Spertus2019-za">[@Arnold2013-ss; @Spertus2019-za]</span></p>
-</section>
-<section id="visualizationについて" class="slide level1">
-<h1>Visualizationについて</h1>
-<p><img data-src="images/pro_visualize.jpg"></p>
-<p><img data-src="images/pro_piechart.png"></p>
-<ul>
-<li><p><strong>個々人のPROMデータ: bar or Line plotが良い</strong></p></li>
-<li><p><strong>治療群の平均のPROMデータ：Line plot, Pie chart &gt; bar chart</strong></p></li>
-</ul>
-<p><span class="citation" data-cites="Albers2022-wt">[@Albers2022-wt]</span></p>
-</section>
-<section id="よりよい可視化のために" class="slide level1">
-<h1>よりよい可視化のために</h1>
+<section id="ccs-systems" class="slide level2">
+<h2>CCS systems</h2>
 
-<img data-src="images/pro_linechart_advanced.png" class="r-stretch"><ul>
-<li><strong>警告点を書く</strong></li>
-<li><strong>悪い結果を赤にする</strong></li>
+<img data-src="images/slide-05-ccs-system.png" class="r-stretch"><ul>
+<li><a href="https://ccs.mgh.harvard.edu/ccs_title.php" class="uri">https://ccs.mgh.harvard.edu/ccs_title.php</a></li>
 </ul>
-<p><span class="citation" data-cites="Snyder2019-uw">[@Snyder2019-uw]</span></p>
 </section>
-<section id="群レベルのvisualization" class="slide level1">
-<h1>群レベルのVisualization</h1>
+<section id="cryptogenic-stroke患者への問診と身体所見" class="slide level2">
+<h2>Cryptogenic stroke患者への問診と身体所見</h2>
 
-<img data-src="images/pro_linechart_addci.png" class="r-stretch"><ul>
-<li>95%信頼区間を記述する</li>
+<img data-src="images/slide-06-history-physical.png" class="r-stretch"><ul>
+<li>左右の上肢の血圧差: AoD</li>
+<li>皮膚の網状皮斑: APS</li>
+<li>黄色腫: FH</li>
+<li>心雑音: IE、先天性心疾患</li>
+<li>脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病</li>
+<li>DVT: 血栓傾向、奇異性塞栓</li>
+<li>頸部外傷やマッサージ: 椎骨脳底動脈の乖離</li>
+<li>片頭痛: 片頭痛性脳梗塞 / CADASIL</li>
+<li>違法薬物: IE、血管攣縮、HIV など</li>
+<li><span style="color: red; font-weight: bold;">息こらえの後の発症: 奇異性塞栓</span></li>
+<li>若年の ASCVD の家族歴: 遺伝性疾患</li>
+<li>妊娠: CVT、子癇</li>
+<li><em>N Engl J Med.</em> 2016;374(21):2065-2074.</li>
 </ul>
-<p><span class="citation" data-cites="Snyder2019-uw">[@Snyder2019-uw]</span></p>
 </section>
-<section id="一応特殊な手法を2つほど" class="slide level1">
-<h1>一応、特殊な手法を2つほど・・・・・・・</h1>
+<section id="検査について" class="slide level2">
+<h2>検査について</h2>
 <ul>
-<li>Ceiling/Floorがあるときに使えるCensored regression ( = tobit model)</li>
-<li>Ordered regression model</li>
+<li>どこまでやるべきか、決まっていない</li>
+<li>最低限の検査
+<ul>
+<li>基本的な血算</li>
+<li>凝固系</li>
+<li>頭部 MRI</li>
+<li>発症 24 時間の心電図モニター</li>
+<li>頸動脈エコー</li>
+<li>TTE</li>
+</ul></li>
+<li>NEJM では段階的なアプローチが推奨されている</li>
+<li>特に重要なのは <span style="color: red; font-weight: bold;">潜在性の pAF 検索</span></li>
+<li><em>N Engl J Med.</em> 2016;374(21):2065-2074.</li>
 </ul>
+</section>
+<section id="esusにおけるafの検索" class="slide level2">
+<h2>ESUSにおけるAFの検索</h2>
+<p><img data-src="images/slide-08-af-monitoring-trial-1.jpg"></p>
+<p><img data-src="images/slide-08-af-monitoring-trial-2.png"></p>
+<ul>
+<li>ESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる</li>
+<li>ループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある</li>
+<li>UpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨</li>
+<li>参考
+<ul>
+<li><em>N Engl J Med.</em> 2014;370(26):2478-2486.</li>
+<li><em>N Engl J Med.</em> 2014;370(26):2467-2477.</li>
+<li><em>N Engl J Med.</em> 2023;389(13):1167-1179.</li>
+</ul></li>
+</ul>
+</section>
+<section id="cryptogenic-strokeの治療" class="slide level2">
+<h2>Cryptogenic strokeの治療</h2>
+<ul>
+<li>基本は原疾患により分けることが大事</li>
+<li>原因が見つからない時は、基本は ASA</li>
+<li>ESUS で DOAC vs.&nbsp;ASA があるが、基本的に DOAC が負けている
+<ul>
+<li>NAVIGATE-ESUS</li>
+<li>RE-SPECT ESUS</li>
+<li>ARCADIA trial</li>
+</ul></li>
+<li>特異的な治療がある疾患もある
+<ul>
+<li>APS だと DOAC でなく Wf を選択</li>
+<li><span style="color: red; font-weight: bold;">PFO による奇異性塞栓 → PFO 閉鎖</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="pfoってなんだ" class="slide level2">
+<h2>PFOってなんだ？</h2>
+<p><img data-src="images/slide-10-pfo-anatomy.jpg"></p>
+<p><img data-src="images/slide-10-pfo-shunt.png"></p>
+<ul>
+<li>胎児循環の時は右房圧が高く、右房 → 左房に血流がある</li>
+<li>出生とともに肺血管抵抗が低下して、左房圧が高くなり閉鎖する</li>
+<li>卵円孔が開存していると、普段は閉じているが、いきんだ時に右房圧が上がり右房 → 左房の血流になる</li>
+<li>そこに DVT からの血栓が流れると右房 → 左房で脳梗塞になる</li>
+</ul>
+</section>
+<section id="pfoによる奇異性塞栓への閉鎖術" class="slide level2">
+<h2>PFOによる奇異性塞栓への閉鎖術</h2>
+<p><img data-src="images/slide-11-pfo-closure-trials.png"></p>
+<p><img data-src="images/slide-11-pfo-closure-trial-1.jpg"></p>
+<p><img data-src="images/slide-11-pfo-closure-trial-2.jpg"></p>
+<p><img data-src="images/slide-11-pfo-closure-summary.png"></p>
+<!-- TODO: 手動調整: 元スライドでは複数図を配置。Quarto上で見やすいようにサイズやcolumns調整を検討。 -->
+</section>
+<section id="じゃあ全例でpfoの検査を行う" class="slide level2">
+<h2>じゃあ全例でPFOの検査を行う？</h2>
 
-<img data-src="images/pro_tobit_exam.png" class="r-stretch"></section>
-<section id="tobit-modelとは" class="slide level1">
-<h1>Tobit modelとは</h1>
+<img data-src="images/slide-12-pfo-prevalence.png" class="r-stretch"><ul>
+<li>卵円孔開存は common
 <ul>
-<li>ある範囲外の値が丸め込まれる(打ち切られる)ときの回帰
-<ul>
-<li>テストの点数(上限が100点)など</li>
+<li>通常人口で 25%</li>
+<li>Cryptogenic stroke に限定すると 50%</li>
 </ul></li>
-<li>打ち切られた点が実はもっと高い値がありうると想定した上で回帰を行う</li>
-<li>上限、下限ともに対応可能</li>
-<li>実は生存分析はこの一種</li>
+<li>PFO があっても、それが原因かは不明瞭</li>
+<li>探せばいいってもんじゃない</li>
 </ul>
 </section>
-<section id="ordinary-regression-modelとは" class="slide level1">
-<h1>Ordinary regression modelとは</h1>
+<section id="いつpfoの検査をする" class="slide level2">
+<h2>いつPFOの検査をする？</h2>
+<p><img data-src="images/slide-13-pfo-testing.png"></p>
+<p><img data-src="images/slide-13-rope-score.jpg"></p>
 <ul>
-<li>順序のあるカテゴリー変数で3種類以上の応答の時に使える
+<li><em>JAMA.</em> 2021;326(22):2277-2286.</li>
+<li>治療適応は原則 60歳以下</li>
+<li>RoPE score &lt; 7 だと治療効果がないかもしれない</li>
+<li>治療を見据えて検査を行う</li>
+</ul>
+</section>
+<section id="まとめ" class="slide level2">
+<h2>まとめ</h2>
 <ul>
-<li>Ex) NYHAなど</li>
+<li>通常診療で etiology が分からない脳梗塞を Cryptogenic stroke という</li>
+<li>その中で塞栓性のものを ESUS という
+<ul>
+<li>ESUS &lt; Cryptogenic stroke</li>
 </ul></li>
-<li>Proportional odds仮定があり、常に上の段階に行くときには似たような方向性がある</li>
-<li>厳密に差が一緒じゃなくても一つ一つのOdds比の平均値として1つの値が出る</li>
-<li>実は仮定が少なくRobustな上に、検出力も高い</li>
-</ul>
-</section>
-<section id="ordered-regression-modelの応用" class="slide level1">
-<h1>Ordered regression modelの応用</h1>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Y</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>103</td>
-<td>Cardiovascular death</td>
-</tr>
-<tr class="even">
-<td>102</td>
-<td>Non-cardiovascular death</td>
-</tr>
-<tr class="odd">
-<td>101</td>
-<td>Hospitalization for HF/Renal Disease</td>
-</tr>
-<tr class="even">
-<td>100</td>
-<td>KCCQ=0</td>
-</tr>
-<tr class="odd">
-<td>99</td>
-<td>KCCQ=1</td>
-</tr>
-<tr class="even">
-<td>..</td>
-<td>…</td>
-</tr>
-<tr class="odd">
-<td>1</td>
-<td>KCCQ=99</td>
-</tr>
-<tr class="even">
-<td>0</td>
-<td>KCCQ=100</td>
-</tr>
-</tbody>
-</table>
+<li>ESUS を見つけた時に最も重要なのは AF 探し</li>
+<li>治療適応があり、有効そうな患者では PFO 探しが意味あるかも</li>
+<li>分からない時は ASA が良い
 <ul>
-<li>死亡をアウトカムの1つに組み入れてしまう
-<ul>
-<li>負の値がだめなので反転させている</li>
-<li>CV deathの方が介入で意義がありそうなので高い値にしている</li>
+<li>DOAC は使わない</li>
 </ul></li>
-<li>この方法だと、かなり高い検出力を出せる</li>
-<li>しかし、KCCQの1点の差と心不全入院と非心血管死亡のOdds比が一緒という仮定の値のみ得られる</li>
-<li>→ 傾向には有用だが、数値の大小の意味が薄れる</li>
-</ul>
-<p><span class="citation" data-cites="Harrell_POP_2024">[@Harrell_POP_2024]</span></p>
-</section>
-<section id="実践" class="slide level1">
-<h1>実践！</h1>
-<ul>
-<li>Datasetは乳癌のQOLのデータ</li>
 </ul>
 </section>
-<section id="afeqtの正規性の確認" class="slide level1">
-<h1>AFEQTの正規性の確認</h1>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code> Mean |    SD |   IQR |          Range | Skewness | Kurtosis |    n | n_Missing
--------------------------------------------------------------------------------
-67.24 | 22.41 | 33.33 | [0.00, 100.00] |    -0.67 |     0.05 | 1434 |         0</code></pre>
-</div>
-</div>
+<section id="thank-you-for-listening" class="slide level2">
+<h2>Thank you for listening</h2>
 <ul>
-<li>正規性は全くなさそう</li>
+<li>ご清聴ありがとうございました</li>
 </ul>
-</section>
-<section id="簡単な解析" class="slide level1">
-<h1>簡単な解析</h1>
-</section>
-<section id="take-home-message" class="slide level1">
-<h1>Take home message</h1>
-<ul>
-<li>PROをメインとした解析をする時は
-<ul>
-<li>Research questionを明確にする</li>
-<li>BaselineのPROの調整を検討</li>
-<li>欠損値の扱いについて　　　　　十分に検討する</li>
-</ul></li>
-<li>MCIDなどを使って、解釈可能な解析をする</li>
-<li>細かい解析法はあまり重要じゃなく、Linear (mixed) regression位で良い</li>
-<li>死亡の扱いに要注意！！</li>
-</ul>
-</section>
-<section id="わかりやすい参考文献" class="slide level1">
-<h1>わかりやすい参考文献</h1>
-<p><a href="https://www.lifescience.co.jp/pro/index.html"><em>患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)</em></a></p>
-<p><a href="https://www.lifescience.co.jp/pro/article02-2-9.html#main"><em>https://www.lifescience.co.jp/pro/article02-2-9.html#main</em></a></p>
+<!-- TODO: 元Markdownは Crypogenic_stroke_16.jpg を参照していたが、images/ に該当ファイルなし。 -->
 
 
 </section>
@@ -740,44 +566,6 @@ Nozomi Niimi
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
@@ -800,12 +588,12 @@ Nozomi Niimi
           // flash "checked"
           button.classList.add('code-copy-button-checked');
           var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
+          button.setAttribute("title", "コピーしました");
           let tooltip;
           if (window.bootstrap) {
             button.setAttribute("data-bs-toggle", "tooltip");
             button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
+            button.setAttribute("data-bs-title", "コピーしました");
             tooltip = new bootstrap.Tooltip(button, 
               { trigger: "manual", 
                 customClass: "code-copy-button-tooltip",
