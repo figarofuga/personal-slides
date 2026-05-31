@@ -264,8 +264,20 @@ editor: source
     - 6か月目のEQ-VAS(0-100)だが、死亡は入らない
     - 死亡は26.9%で起こっているので悩ましい
 
+|  値 | 意味                                 |
+| -: | ---------------------------------- |
+|  0 | 症状なし                               |
+|  1 | 症状は少しあるが日常生活に支障なし                  |
+|  2 | 症状により生活は変わったが、自分の身の回りのことは可能        |
+|  3 | 症状により生活が大きく変わり、身の回りのことに一部介助が必要     |
+|  4 | かなり重い症状で他者の助けが必要。ただし昼夜を問わずの介護までは不要 |
+|  5 | 重度の障害があり、昼夜を問わず常時介護が必要             |
+|  6 | 死亡                                 |
 
-# AFEQTの正規性の確認
+OHS
+
+
+# QOL outcomeの正規性の確認
 ```{r}
 library(dplyr)
 library(tinyplot)
@@ -277,65 +289,77 @@ library(here)
 ist3_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "ist3", "ist3_dat.csv"))
 
 ist3_dat_mod <- ist3_dat |> 
-    dplyr::filter(
-        !is.na(ql)
-    ) |> 
     dplyr::mutate(
-        across(
-            c("maritial_status", "education", "alcohol", "bust", "cupsize"), 
-            \(x)as.factor(x)
-        ), 
-        birth_number = dplyr::coalesce(birth_number, pregnancy_number)
-    ) |> 
-    dplyr::select(
-        age, bmi, 
-        maritial_status, education, alcohol, bust, cupsize, 
-        menopause_yn, birth_number,
-        pre_op, cancer_kind_family_1, breastcancer_first, 
-        ql
-    ) |> 
-    stats::na.omit()
+        sexm1 = gender - 1,
+        sevendaycase = dplyr::if_else(sevendaycase == 0, "No event", "Event"), 
+        stroketype = dplyr::recode_values(
+            stroketype, 
+            1 ~ "TACI", 
+            2 ~ "PACI", 
+            3 ~ "LACI", 
+            4 ~ "POCI", 
+            5 ~ "Other")) |> 
+    dplyr::select(itt_treat, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6)
 
 
-tinyplot::plt(~ ql, data = br_cancer_dat_mod, type = type_histogram(), 
-    main = "Distribution of QOL")
 
-```
+par(mfrow = c(1,2))
+tinyplot::plt(~ ohs6, data = ist3_dat_mod, type = type_barplot(), 
+    main = "Distribution of Oxford Handicap Score")
 
-
-```{r}
-
-datawizard::describe_distribution(br_cancer_dat_mod$ql)
+tinyplot::plt(~ euroqol6, data = ist3_dat_mod, type = type_histogram(), 
+    main = "Distribution of EURO QOL score")
 
 ```
 
-- 正規性は全くなさそう
+- 6種類の方は正規性は全くなさそう
+- Euro QOL scoreは正規性がありそうだが死亡の扱いにこまる
 
-# 簡単な解析
+# 分類が少ないOHSの解析
 
 ```{r}
 library(rms)
 library(Hmisc)
 library(AER)
+library(modelsummary)
 
-dd <- datadist(br_cancer_dat_mod)
+dd <- rms::datadist(ist3_dat_mod)
 
 options(datadist = "dd")
 
-lhs <- "ql"
-rhs <- dplyr::select(br_cancer_dat_mod, -ql) |> 
-    names() |> 
-    paste0(collapse = " + ")
+ohs_formula <- as.formula(ohs6 ~ itt_treat + age + sexm1 + indepinadl_rand + antiplat_rand + atrialfib_rand + sbprand + dbprand + gcs_score_rand + nihss + sevendaycase + stroketype + R_infarct_size)
 
-formula <- as.formula(
-    paste0(lhs, " ~ ", rhs)
-)
-
-lm_fit <- ols(formula, data = br_cancer_dat_mod)
-orm_fit <- orm(formula, data = br_cancer_dat_mod)
+ols_fit <- ols(ohs_formula, data = ist3_dat_mod)
+orm_fit <- orm(ohs_formula, data = ist3_dat_mod)
 tobit_fit <- tobit(
-    formula, left = 0, right = 100, data = br_cancer_dat_mod
+    ohs_formula, left = 0, right = 6, data = ist3_dat_mod
 )
+
+
+```
+
+
+
+# Euroqolの解析
+
+```{r}
+library(rms)
+library(Hmisc)
+library(AER)
+library(modelsummary)
+
+dd <- rms::datadist(ist3_dat_mod)
+
+options(datadist = "dd")
+
+# euroqol_formula <- as.formula(euroqol6 ~ itt_treat + age + sexm1 + indepinadl_rand + antiplat_rand + atrialfib_rand + sbprand + dbprand + gcs_score_rand + nihss + sevendaycase + stroketype + R_infarct_size)
+
+# ols_fit <- ols(ohs_formula, data = ist3_dat_mod)
+# orm_fit <- orm(ohs_formula, data = ist3_dat_mod)
+# tobit_fit <- tobit(
+#     ohs_formula, left = 0, right = 6, data = ist3_dat_mod
+# )
+
 
 ```
 

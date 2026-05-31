@@ -12,3 +12,4 @@ title: "統計学"
 |---|---|
 | [ブートストラップ入門](bootstrap/) | 通常の計算が難しい時の信頼区間の出し方 |
 | [g-computation入門](marginaleffects/) | 統計モデルのより良い解釈の方法 |
+<!-- | [PRO(patient reported outcomes) analysis入門](PROanalysis/) | PROの解析時の注意点です | -->
