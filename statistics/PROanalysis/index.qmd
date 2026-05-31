@@ -256,20 +256,13 @@ editor: source
 
 # 実践！
 
-- Datasetは乳癌のQOLのデータ[@Gebert_DataPROMBaseline_2022]
-The inclusion criteria for this dataset were as follows: 
--	Patients with a diagnosis of breast cancer, DCIS, fibroadenoma, or other breast diseases
--	Age 18 or over
--	German speakers
-The exclusion criteria were as follows:
--	Non-eligible diagnosis
--	Diagnosis date after March 31, 2021
--	Missing diagnosis or diagnosis date
--	Diagnosis changed into a non-eligible diagnosis type (e.g., diagnosis date > 7 days after initial survey
--	First survey after treatment initiation
--	Second opinion
-Most of the patients did not know their definitive diagnosis before the assessment of PROs and before the start of their initial treatment. 
+- IST3のデータセット[@Sandercock_IST3_2016]
 
+- rt-PAの効果をみた脳梗塞のデータセット
+- アウトカムとしては2種類
+    - 6か月 Oxford Handicap Scoreのohs6(最良が0, 死亡が6)
+    - 6か月目のEQ-VAS(0-100)だが、死亡は入らない
+    - 死亡は26.9%で起こっているので悩ましい
 
 
 # AFEQTの正規性の確認
@@ -279,9 +272,11 @@ library(tinyplot)
 library(datawizard)
 library(here)
 
-br_cancer_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "br_cancer", "br_cancer_dat.csv")) 
+# br_cancer_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "br_cancer", "br_cancer_dat.csv")) 
 
-br_cancer_dat_mod <- br_cancer_dat |> 
+ist3_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "ist3", "ist3_dat.csv"))
+
+ist3_dat_mod <- ist3_dat |> 
     dplyr::filter(
         !is.na(ql)
     ) |> 
