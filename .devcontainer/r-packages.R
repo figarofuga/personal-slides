@@ -21,6 +21,7 @@ pkgs <- c(
   "dagitty",
   "DiagrammeR",
   "easystats",
+  "ggcube",
   "ggdag",
   "ggsurvfit",
   "glmmTMB",

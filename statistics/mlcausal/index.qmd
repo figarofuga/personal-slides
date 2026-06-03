@@ -494,6 +494,14 @@ dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, 
   )
 
 
+full_toy_data |> 
+  tidyr::crossing(target = 0:100) |> 
+  dplyr::mutate(diff = abs(lvef - target)) |> 
+  dplyr::slice_min(diff, n = 1, with_ties = FALSE, by = target) |>
+  ggplot(aes(age, lvef, treatment_effect)) + 
+  geom_smooth_3d() + 
+  coord_3d()
+
 ```
 
 
