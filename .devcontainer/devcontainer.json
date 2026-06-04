@@ -18,10 +18,6 @@
       "version": "latest",
       "installTinyTex": false,
       "installChromium": true
-    },
-    "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {
-      "version": "stable",
-      "singleUser": true
     }
   },
   "overrideFeatureInstallOrder": [
@@ -60,13 +56,7 @@
     "8000": {
       "label": "Static docs preview",
       "onAutoForward": "notify"
-    },
-    "8787": {
-      "label": "RStudio Server"
     }
   },
-  "postCreateCommand": "bash .devcontainer/postCreate.sh",
-  "postAttachCommand": {
-    "rstudio-start": "rserver"
-  }
+  "postCreateCommand": "bash .devcontainer/postCreate.sh"
 }
