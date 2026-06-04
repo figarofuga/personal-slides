@@ -361,14 +361,23 @@ dd <- rms::datadist(ist3_dat_mod)
 
 options(datadist = "dd")
 
-# euroqol_formula <- as.formula(euroqol6 ~ itt_treat + age + sexm1 + indepinadl_rand + antiplat_rand + atrialfib_rand + sbprand + dbprand + gcs_score_rand + nihss + sevendaycase + stroketype + R_infarct_size)
+euroqol_formula <- as.formula(euroqol6 ~ itt_treat + age + sexm1 + indepinadl_rand + antiplat_rand + atrialfib_rand + sbprand + dbprand + gcs_score_rand + nihss + sevendaycase + stroketype + R_infarct_size)
 
-# ols_fit <- ols(ohs_formula, data = ist3_dat_mod)
-# orm_fit <- orm(ohs_formula, data = ist3_dat_mod)
-# tobit_fit <- tobit(
-#     ohs_formula, left = 0, right = 6, data = ist3_dat_mod
-# )
+ols_fit_euroqol <- rms::ols(euroqol_formula, data = ist3_dat_mod)
+orm_fit_euroqol <- rms::orm(euroqol_formula, data = ist3_dat_mod)
+tobit_fit_euroqol <- AER::tobit(
+    euroqol_formula, left = 0, right = 100, data = ist3_dat_mod
+)
 
+modelsummary::modelsummary(
+    list(
+        "Linear regression" = ols_fit_euroqol, 
+        "Ordinal regression" = orm_fit_euroqol, 
+        "Tobit regression" = tobit_fit_euroqol
+    ), 
+    estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
+    coef_omit = "^(?!itt_treat)"
+)
 
 ```
 
