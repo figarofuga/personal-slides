@@ -335,6 +335,15 @@ tobit_fit <- tobit(
     ohs_formula, left = 0, right = 6, data = ist3_dat_mod
 )
 
+modelsummary::modelsummary(
+    list(
+        "Linear regression" = ols_fit, 
+        "Ordinal regression" = orm_fit, 
+        "Tobit regression" = tobit_fit
+    ), 
+    estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
+    coef_omit = "^(?!itt_treat)"
+)
 
 ```
 
