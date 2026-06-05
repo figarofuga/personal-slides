@@ -290,7 +290,8 @@ ist3_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "ist3", "ist
 
 ist3_dat_mod <- ist3_dat |> 
     dplyr::mutate(
-        sexm1 = gender - 1,
+        sexm1 = gender - 1, 
+        missing_euroqol = dplyr::if_else(is.na(euroqol6), 1, 0), 
         sevendaycase = dplyr::if_else(sevendaycase == 0, "No event", "Event"), 
         stroketype = dplyr::recode_values(
             stroketype, 
@@ -299,7 +300,7 @@ ist3_dat_mod <- ist3_dat |>
             3 ~ "LACI", 
             4 ~ "POCI", 
             5 ~ "Other")) |> 
-    dplyr::select(itt_treat, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6)
+    dplyr::select(itt_treat, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, missing_euroqol)
 
 
 
@@ -314,6 +315,39 @@ tinyplot::plt(~ euroqol6, data = ist3_dat_mod, type = type_histogram(),
 
 - 6種類の方は正規性は全くなさそう
 - Euro QOL scoreは正規性がありそうだが死亡の扱いにこまる
+
+# Missing dataと死亡の扱い
+
+```{r}
+library(gtsummary)
+
+gtsummary::tbl_summary(
+    ist3_dat_mod, by = missing_euroqol, 
+    include = -c(euroqol6, dead6mo), 
+    value = list(
+        sevendaycase ~ "Event", 
+        indepinadl_rand ~ 1, 
+        atrialfib_rand ~ 1, 
+        antiplat_rand ~ 1
+    )
+) |> 
+    gtsummary::add_p(
+    test = all_categorical() ~ "fisher.test",
+    test.args = all_tests("fisher.test") ~ list(simulate.p.value = TRUE)
+    )
+
+```
+
+# Missingの解析
+
+```{r}
+library(naniar)
+
+naniar::vis_miss(ist3_dat_mod)
+
+naniar::gg_miss_fct(x = ist3_dat_mod, fct = stroketype)
+
+```
 
 # 分類が少ないOHSの解析
 
