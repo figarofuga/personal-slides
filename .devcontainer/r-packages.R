@@ -27,6 +27,7 @@ pkgs <- c(
   "glmmTMB",
   "glue",
   "gt",
+  "gtsummary", 
   "gtExtras",
   "grf",
   "here",
