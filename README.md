@@ -35,10 +35,5 @@ git commit -m "Update rendered slides"
 git push
 
 ```
-To start rstudio server
-
-```bash
-sudo rstudio-server start
-```
 
 TODO: complete PROanalysis, mlcausal, ESUS, and pituitary_incidentaloma. 
