@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Nozomi Niimi">
-  <meta name="dcterms.date" content="2026-05-30">
+  <meta name="dcterms.date" content="2026-06-07">
   <title>My personal slides – 機械学習を用いた因果推論</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -143,7 +143,7 @@ Nozomi Niimi
 </div>
 </div>
 
-  <p class="date">May 30, 2026</p>
+  <p class="date">June 7, 2026</p>
 </section>
 <section>
 <section id="因果推論-at-glance" class="title-slide slide level1 center">
@@ -300,6 +300,13 @@ Nozomi Niimi
 <div>
 <figure>
 <p><img data-src="index_files/figure-revealjs/Make-ToyData-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/Make-ToyData-3.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -651,14 +658,14 @@ Nozomi Niimi
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-2.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-2.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -894,70 +901,21 @@ Nozomi Niimi
 </section>
 <section id="scratch-for-s-learner" class="slide level2">
 <h2>Scratch for S-learner</h2>
-<!-- ```{r}
-#| label: scratch-for-S-learner
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 rmse    standard        14.0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variable |     Mean |   SD |  IQR |         Range | Skewness | Kurtosis |    n | n_Missing
+------------------------------------------------------------------------------------------
+ca_diff  | 6.85e-03 | 1.39 | 0.82 | [-9.25, 7.16] |    -0.41 |     5.02 | 6000 |         0</code></pre>
+</div>
 
-library(tidymodels)
-library(bonsai)
-
-# 1. データセットの読み込み
-
-
-X = toy_data.loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data['afeqt_os']
-n = toy_data.shape[0]
-
-
-# 2. データを学習用（80%）とテスト用（20%）に分割
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
-# 3. モデルの初期化 (scikit-learn API)
-# 引数を指定しない場合、デフォルトのハイパーパラメータが適用されます
-model = lgb.LGBMRegressor(
-  random_state=42,
-  verbosity = -1)
-
-# 4. モデルの学習 (fit)
-print("モデルの学習を開始します...")
-model.fit(X_train, y_train)
-print("学習が完了しました。")
-
-# 5. テストデータでの予測と評価（おまけ）
-y_pred = model.predict(X_test)
-
-y_true = [3, -0.5, 2, 7]
-y_pred = [2.5, 0.0, 2, 8]
-rmse = root_mean_squared_error(y_true, y_pred)
-
-print(f"テストデータのRMSE: {rmse:.4f}")
-
-
-pred_0 = model.predict(X.assign(ca = 0))
-pred_1 = model.predict(X.assign(ca = 1))
-te = np.mean(pred_1 - pred_0)
-
-print(f"平均処置効果の推定値: {te:.4f}")
-
-X_s_learn = (
-    toy_data
-    .loc[:,["age", "sex", "bmi", "hf", "bnp", "lvef", "afeqt_os"]]
-    .assign(
-        ca_0 = 0,
-        effect_0 = pred_0,
-        ca_1 = 1,
-        effect_1 = pred_1,
-        ca_effect = pred_1 - pred_0
-    )
-)
-
-X_s_learn.head()
-
-
-
-``` -->
-</section>
+</div>
+<img data-src="index_files/figure-revealjs/scratch-for-S-learner-1.png" width="960" class="r-stretch"></section>
 <section id="t-learner" class="slide level2">
 <h2>T learner</h2>
 
@@ -1017,7 +975,7 @@ X_s_learn.head()
 <section id="survival-model" class="slide level2">
 <h2>Survival model</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><div class="cell">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>         control     treated
 [1,] -0.07987349  0.07987349
@@ -1045,118 +1003,153 @@ X_s_learn.head()
  collate  ja_JP.UTF-8
  ctype    ja_JP.UTF-8
  tz       Asia/Tokyo
- date     2026-05-30
+ date     2026-06-07
  pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)
  quarto   1.8.26 @ /opt/quarto/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package         * version   date (UTC) lib source
- backports         1.5.1     2026-04-03 [2] CRAN (R 4.5.3)
- base64enc         0.1-6     2026-02-02 [2] CRAN (R 4.5.2)
- bayestestR      * 0.18.0    2026-05-21 [2] CRAN (R 4.6.0)
- boot              1.3-32    2025-08-29 [2] RSPM (R 4.5.0)
- bspm              0.5.7     2024-04-10 [1] CRAN (R 4.5.2)
- checkmate         2.3.4     2026-02-03 [2] CRAN (R 4.5.2)
- cli               3.6.6     2026-04-09 [2] CRAN (R 4.5.3)
- cluster           2.1.8.2   2026-02-05 [2] CRAN (R 4.5.2)
- codetools         0.2-20    2024-03-31 [2] RSPM (R 4.4.0)
- colorspace        2.1-2     2025-09-22 [2] RSPM (R 4.5.0)
- correlation     * 0.8.8     2025-07-08 [2] RSPM (R 4.5.0)
- curl              7.1.0     2026-04-22 [2] CRAN (R 4.5.3)
- dagitty         * 0.3-4     2023-12-07 [2] RSPM (R 4.4.0)
- data.table        1.18.4    2026-05-06 [2] CRAN (R 4.6.0)
- datawizard      * 1.3.1     2026-04-26 [2] CRAN (R 4.5.3)
- DiagrammeR        1.0.12    2026-04-27 [2] CRAN (R 4.5.3)
- digest            0.6.39    2025-11-19 [2] CRAN (R 4.5.2)
- dplyr           * 1.2.1     2026-04-03 [2] CRAN (R 4.5.3)
- easystats       * 0.7.5     2025-07-11 [2] RSPM (R 4.5.0)
- effectsize      * 1.0.2     2026-03-11 [2] CRAN (R 4.5.2)
- evaluate          1.0.5     2025-08-27 [2] RSPM (R 4.5.0)
- farver            2.1.2     2024-05-13 [2] RSPM (R 4.4.2)
- fastmap           1.2.0     2024-05-15 [2] RSPM (R 4.4.2)
- forcats         * 1.0.1     2025-09-25 [2] RSPM (R 4.5.0)
- foreign           0.8-90    2025-03-31 [2] RSPM (R 4.4.0)
- Formula           1.2-5     2023-02-24 [2] RSPM (R 4.4.0)
- generics          0.1.4     2025-05-09 [2] RSPM (R 4.5.0)
- ggdag           * 0.2.13    2024-07-22 [2] RSPM (R 4.4.0)
- ggplot2         * 4.0.3     2026-04-22 [2] CRAN (R 4.5.3)
- glue              1.8.1     2026-04-17 [2] CRAN (R 4.5.3)
- grf             * 2.6.1     2026-03-04 [2] CRAN (R 4.5.2)
- gridExtra         2.3       2017-09-09 [2] RSPM (R 4.4.0)
- gtable            0.3.6     2024-10-25 [2] RSPM (R 4.4.0)
- Hmisc           * 5.2-5     2026-01-09 [2] CRAN (R 4.5.2)
- hms               1.1.4     2025-10-17 [2] RSPM (R 4.5.0)
- htmlTable         2.5.0     2026-04-22 [2] CRAN (R 4.5.3)
- htmltools         0.5.9     2025-12-04 [2] CRAN (R 4.5.2)
- htmlwidgets       1.6.4     2023-12-06 [2] RSPM (R 4.4.0)
- igraph            2.3.1     2026-05-04 [2] CRAN (R 4.6.0)
- insight         * 1.5.1     2026-05-21 [2] CRAN (R 4.6.0)
- jsonlite          2.0.0     2025-03-27 [2] RSPM (R 4.4.0)
- knitr             1.51      2025-12-20 [2] CRAN (R 4.5.2)
- lattice           0.22-9    2026-02-09 [2] CRAN (R 4.5.2)
- lifecycle         1.0.5     2026-01-08 [2] CRAN (R 4.5.2)
- lubridate       * 1.9.5     2026-02-04 [2] CRAN (R 4.5.2)
- magrittr          2.0.5     2026-04-04 [2] CRAN (R 4.5.3)
- marginaleffects * 0.32.0    2026-02-14 [2] CRAN (R 4.5.2)
- MASS              7.3-65    2025-02-28 [2] RSPM (R 4.4.0)
- MatchIt         * 4.7.2     2025-05-30 [2] RSPM (R 4.5.0)
- Matrix            1.7-5     2026-03-21 [2] CRAN (R 4.5.3)
- MatrixModels      0.5-4     2025-03-26 [2] RSPM (R 4.4.0)
- modelbased      * 0.15.0    2026-05-10 [2] CRAN (R 4.6.0)
- modelsummary    * 2.6.0     2026-02-13 [2] CRAN (R 4.5.2)
- multcomp          1.4-30    2026-03-09 [2] CRAN (R 4.5.2)
- mvtnorm           1.3-7     2026-04-15 [2] CRAN (R 4.5.3)
- nlme              3.1-168   2025-03-31 [2] RSPM (R 4.4.0)
- nnet              7.3-20    2025-01-01 [2] RSPM (R 4.4.2)
- otel              0.2.0     2025-08-29 [2] RSPM (R 4.5.0)
- parameters      * 0.29.0    2026-05-09 [2] CRAN (R 4.6.0)
- performance     * 0.17.0    2026-05-21 [2] CRAN (R 4.6.0)
- pillar            1.11.1    2025-09-17 [2] RSPM (R 4.5.0)
- pkgconfig         2.0.3     2019-09-22 [2] RSPM (R 4.4.0)
- png               0.1-9     2026-03-15 [2] CRAN (R 4.5.2)
- policytree      * 1.2.4     2026-02-18 [2] CRAN (R 4.5.2)
- polspline         1.1.25    2024-05-10 [2] RSPM (R 4.4.0)
- purrr           * 1.2.2     2026-04-10 [2] CRAN (R 4.5.3)
- quantreg          6.1       2025-03-10 [2] RSPM (R 4.4.0)
- R6                2.6.1     2025-02-15 [2] RSPM (R 4.4.0)
- RColorBrewer      1.1-3     2022-04-03 [2] RSPM (R 4.4.0)
- Rcpp              1.1.1-1.1 2026-04-24 [2] CRAN (R 4.5.3)
- readr           * 2.2.0     2026-02-19 [2] CRAN (R 4.5.2)
- report          * 0.6.4     2026-05-04 [2] CRAN (R 4.6.0)
- reticulate      * 1.46.0    2026-04-09 [2] CRAN (R 4.5.3)
- rlang             1.2.0     2026-04-06 [2] CRAN (R 4.6.0)
- rmarkdown         2.31      2026-03-26 [2] CRAN (R 4.5.3)
- rms             * 8.1-1     2026-02-18 [2] CRAN (R 4.5.2)
- rpart             4.1.27    2026-03-27 [2] CRAN (R 4.5.3)
- rstudioapi        0.18.0    2026-01-16 [2] CRAN (R 4.5.2)
- S7                0.2.2     2026-04-22 [2] CRAN (R 4.5.3)
- sandwich          3.1-1     2024-09-15 [2] RSPM (R 4.4.0)
- scales            1.4.0     2025-04-24 [2] RSPM (R 4.4.0)
- see             * 0.13.0    2026-01-30 [2] CRAN (R 4.5.2)
- sessioninfo     * 1.2.3     2025-02-05 [2] RSPM (R 4.4.0)
- simsurv         * 1.0.1     2026-01-22 [2] CRAN (R 4.5.2)
- SparseM           1.84-2    2024-07-17 [2] RSPM (R 4.4.2)
- stringi           1.8.7     2025-03-27 [2] RSPM (R 4.4.0)
- stringr         * 1.6.0     2025-11-04 [2] RSPM (R 4.5.0)
- survival        * 3.8-6     2026-01-16 [2] CRAN (R 4.5.2)
- tables            0.9.33    2025-12-15 [2] CRAN (R 4.5.2)
- TH.data           1.1-5     2025-11-17 [2] CRAN (R 4.5.2)
- tibble          * 3.3.1     2026-01-11 [2] CRAN (R 4.5.2)
- tidygraph         1.3.1     2024-01-30 [2] CRAN (R 4.6.0)
- tidyr           * 1.3.2     2025-12-19 [2] CRAN (R 4.5.2)
- tidyselect        1.2.1     2024-03-11 [2] RSPM (R 4.4.0)
- tidyverse       * 2.0.0     2023-02-22 [2] RSPM (R 4.4.0)
- timechange        0.4.0     2026-01-29 [2] CRAN (R 4.5.2)
- tinyplot        * 0.6.1     2026-03-28 [2] CRAN (R 4.5.3)
- tzdb              0.5.0     2025-03-15 [2] RSPM (R 4.4.0)
- V8                8.2.0     2026-04-21 [2] CRAN (R 4.5.3)
- vctrs             0.7.3     2026-04-11 [2] CRAN (R 4.6.0)
- visNetwork        2.1.4     2025-09-04 [2] RSPM (R 4.5.0)
- WeightIt        * 1.7.0     2026-04-22 [2] CRAN (R 4.5.3)
- withr             3.0.2     2024-10-28 [2] RSPM (R 4.4.0)
- xfun              0.57      2026-03-20 [2] CRAN (R 4.5.3)
- yaml              2.3.12    2025-12-10 [2] CRAN (R 4.5.2)
- zoo               1.8-15    2025-12-15 [2] CRAN (R 4.5.2)
+ package         * version    date (UTC) lib source
+ backports         1.5.1      2026-04-03 [2] CRAN (R 4.5.3)
+ base64enc         0.1-6      2026-02-02 [2] CRAN (R 4.5.2)
+ bayestestR      * 0.18.0     2026-05-21 [2] CRAN (R 4.6.0)
+ bonsai          * 0.4.1      2026-05-21 [2] CRAN (R 4.6.0)
+ boot              1.3-32     2025-08-29 [2] RSPM (R 4.5.0)
+ broom           * 1.0.13     2026-05-14 [2] CRAN (R 4.6.0)
+ bspm              0.5.7      2024-04-10 [1] CRAN (R 4.5.2)
+ checkmate         2.3.4      2026-02-03 [2] CRAN (R 4.5.2)
+ class             7.3-23     2025-01-01 [2] RSPM (R 4.4.0)
+ cli               3.6.6      2026-04-09 [2] CRAN (R 4.5.3)
+ cluster           2.1.8.2    2026-02-05 [2] CRAN (R 4.5.2)
+ codetools         0.2-20     2024-03-31 [2] RSPM (R 4.4.0)
+ colorspace        2.1-2      2025-09-22 [2] RSPM (R 4.5.0)
+ correlation     * 0.8.8      2025-07-08 [2] RSPM (R 4.5.0)
+ curl              7.1.0      2026-04-22 [2] CRAN (R 4.5.3)
+ dagitty         * 0.3-4      2023-12-07 [2] RSPM (R 4.4.0)
+ data.table        1.18.4     2026-05-06 [2] CRAN (R 4.6.0)
+ datawizard      * 1.3.1      2026-04-26 [2] CRAN (R 4.5.3)
+ dials           * 1.4.3      2026-04-11 [2] CRAN (R 4.5.3)
+ DiceDesign        1.10       2023-12-07 [2] RSPM (R 4.4.0)
+ digest            0.6.39     2025-11-19 [2] CRAN (R 4.5.2)
+ dplyr           * 1.2.1      2026-04-03 [2] CRAN (R 4.5.3)
+ easystats       * 0.7.5      2025-07-11 [2] RSPM (R 4.5.0)
+ effectsize      * 1.0.2      2026-03-11 [2] CRAN (R 4.5.2)
+ evaluate          1.0.5      2025-08-27 [2] RSPM (R 4.5.0)
+ farver            2.1.2      2024-05-13 [2] RSPM (R 4.4.2)
+ fastmap           1.2.0      2024-05-15 [2] RSPM (R 4.4.2)
+ forcats         * 1.0.1      2025-09-25 [2] RSPM (R 4.5.0)
+ foreign           0.8-90     2025-03-31 [2] RSPM (R 4.4.0)
+ Formula           1.2-5      2023-02-24 [2] RSPM (R 4.4.0)
+ furrr             0.4.0      2026-03-31 [2] CRAN (R 4.5.3)
+ future            1.70.0     2026-03-14 [2] CRAN (R 4.5.2)
+ future.apply      1.20.2     2026-02-20 [2] CRAN (R 4.5.2)
+ generics          0.1.4      2025-05-09 [2] RSPM (R 4.5.0)
+ ggcube          * 0.1.0      2026-05-27 [2] CRAN (R 4.6.0)
+ ggdag           * 0.2.13     2024-07-22 [2] RSPM (R 4.4.0)
+ ggplot2         * 4.0.3      2026-04-22 [2] CRAN (R 4.5.3)
+ globals           0.19.1     2026-03-13 [2] CRAN (R 4.5.2)
+ glue              1.8.1      2026-04-17 [2] CRAN (R 4.5.3)
+ gower             1.0.2      2024-12-17 [2] RSPM (R 4.4.2)
+ grf             * 2.6.1      2026-03-04 [2] CRAN (R 4.5.2)
+ gridExtra         2.3        2017-09-09 [2] RSPM (R 4.4.0)
+ gtable            0.3.6      2024-10-25 [2] RSPM (R 4.4.0)
+ hardhat           1.4.3      2026-04-04 [2] CRAN (R 4.5.3)
+ Hmisc           * 5.2-5      2026-01-09 [2] CRAN (R 4.5.2)
+ hms               1.1.4      2025-10-17 [2] RSPM (R 4.5.0)
+ htmlTable         2.5.0      2026-04-22 [2] CRAN (R 4.5.3)
+ htmltools         0.5.9      2025-12-04 [2] CRAN (R 4.5.2)
+ htmlwidgets       1.6.4      2023-12-06 [2] RSPM (R 4.4.0)
+ igraph            2.3.1      2026-05-04 [2] CRAN (R 4.6.0)
+ infer           * 1.1.0      2025-12-18 [2] CRAN (R 4.5.2)
+ insight         * 1.5.1      2026-05-21 [2] CRAN (R 4.6.0)
+ ipred             0.9-15     2024-07-18 [2] RSPM (R 4.4.0)
+ isoband           0.3.0      2025-12-07 [2] CRAN (R 4.5.2)
+ jsonlite          2.0.0      2025-03-27 [2] RSPM (R 4.4.0)
+ knitr             1.51       2025-12-20 [2] CRAN (R 4.5.2)
+ labeling          0.4.3      2023-08-29 [2] RSPM (R 4.4.0)
+ lattice           0.22-9     2026-02-09 [2] CRAN (R 4.5.2)
+ lava              1.9.1      2026-05-14 [2] CRAN (R 4.6.0)
+ lifecycle         1.0.5      2026-01-08 [2] CRAN (R 4.5.2)
+ lightgbm          4.6.0      2025-02-13 [2] RSPM (R 4.4.0)
+ listenv           0.10.1     2026-03-10 [2] CRAN (R 4.5.2)
+ lubridate       * 1.9.5      2026-02-04 [2] CRAN (R 4.5.2)
+ magrittr          2.0.5      2026-04-04 [2] CRAN (R 4.5.3)
+ marginaleffects * 0.32.0     2026-02-14 [2] CRAN (R 4.5.2)
+ MASS              7.3-65     2025-02-28 [2] RSPM (R 4.4.0)
+ MatchIt         * 4.7.2      2025-05-30 [2] RSPM (R 4.5.0)
+ Matrix            1.7-5      2026-03-21 [2] CRAN (R 4.5.3)
+ MatrixModels      0.5-4      2025-03-26 [2] RSPM (R 4.4.0)
+ modelbased      * 0.15.0     2026-05-10 [2] CRAN (R 4.6.0)
+ modeldata       * 1.5.1      2025-08-22 [2] RSPM (R 4.5.0)
+ modelenv          0.2.0      2024-10-14 [2] RSPM (R 4.4.0)
+ modelsummary    * 2.6.0      2026-02-13 [2] CRAN (R 4.5.2)
+ multcomp          1.4-30     2026-03-09 [2] CRAN (R 4.5.2)
+ mvtnorm           1.3-7      2026-04-15 [2] CRAN (R 4.5.3)
+ nlme              3.1-168    2025-03-31 [2] RSPM (R 4.4.0)
+ nnet              7.3-20     2025-01-01 [2] RSPM (R 4.4.2)
+ otel              0.2.0      2025-08-29 [2] RSPM (R 4.5.0)
+ parallelly        1.47.0     2026-04-17 [2] CRAN (R 4.5.3)
+ parameters      * 0.29.0     2026-05-09 [2] CRAN (R 4.6.0)
+ parsnip         * 1.6.0      2026-05-14 [2] CRAN (R 4.6.0)
+ performance     * 0.17.0     2026-05-21 [2] CRAN (R 4.6.0)
+ pillar            1.11.1     2025-09-17 [2] RSPM (R 4.5.0)
+ pkgconfig         2.0.3      2019-09-22 [2] RSPM (R 4.4.0)
+ png               0.1-9      2026-03-15 [2] CRAN (R 4.5.2)
+ policytree      * 1.2.4      2026-02-18 [2] CRAN (R 4.5.2)
+ polspline         1.1.25     2024-05-10 [2] RSPM (R 4.4.0)
+ polyclip          1.10-7     2024-07-23 [2] RSPM (R 4.4.2)
+ prodlim           2026.03.11 2026-03-11 [2] CRAN (R 4.5.2)
+ purrr           * 1.2.2      2026-04-10 [2] CRAN (R 4.5.3)
+ quantreg          6.1        2025-03-10 [2] RSPM (R 4.4.0)
+ R6                2.6.1      2025-02-15 [2] RSPM (R 4.4.0)
+ RColorBrewer      1.1-3      2022-04-03 [2] RSPM (R 4.4.0)
+ Rcpp              1.1.1-1.1  2026-04-24 [2] CRAN (R 4.5.3)
+ readr           * 2.2.0      2026-02-19 [2] CRAN (R 4.5.2)
+ recipes         * 1.3.2      2026-04-02 [2] CRAN (R 4.5.3)
+ report          * 0.6.4      2026-05-04 [2] CRAN (R 4.6.0)
+ reticulate      * 1.46.0     2026-04-09 [2] CRAN (R 4.5.3)
+ rlang             1.2.0      2026-04-06 [2] CRAN (R 4.6.0)
+ rmarkdown         2.31       2026-03-26 [2] CRAN (R 4.5.3)
+ rms             * 8.1-1      2026-02-18 [2] CRAN (R 4.5.2)
+ rpart             4.1.27     2026-03-27 [2] CRAN (R 4.5.3)
+ rsample         * 1.3.2      2026-01-30 [2] CRAN (R 4.5.2)
+ rstudioapi        0.18.0     2026-01-16 [2] CRAN (R 4.5.2)
+ S7                0.2.2      2026-04-22 [2] CRAN (R 4.5.3)
+ sandwich          3.1-1      2024-09-15 [2] RSPM (R 4.4.0)
+ scales          * 1.4.0      2025-04-24 [2] RSPM (R 4.4.0)
+ see             * 0.13.0     2026-01-30 [2] CRAN (R 4.5.2)
+ sessioninfo     * 1.2.3      2025-02-05 [2] RSPM (R 4.4.0)
+ simsurv         * 1.0.1      2026-01-22 [2] CRAN (R 4.5.2)
+ SparseM           1.84-2     2024-07-17 [2] RSPM (R 4.4.2)
+ sparsevctrs       0.3.6      2026-01-27 [2] CRAN (R 4.5.2)
+ stringi           1.8.7      2025-03-27 [2] RSPM (R 4.4.0)
+ stringr         * 1.6.0      2025-11-04 [2] RSPM (R 4.5.0)
+ survival        * 3.8-6      2026-01-16 [2] CRAN (R 4.5.2)
+ systemfonts       1.3.2      2026-03-05 [2] CRAN (R 4.5.2)
+ tables            0.9.33     2025-12-15 [2] CRAN (R 4.5.2)
+ tailor          * 0.1.0      2025-08-25 [2] RSPM (R 4.5.0)
+ TH.data           1.1-5      2025-11-17 [2] CRAN (R 4.5.2)
+ tibble          * 3.3.1      2026-01-11 [2] CRAN (R 4.5.2)
+ tidygraph         1.3.1      2024-01-30 [2] CRAN (R 4.6.0)
+ tidymodels      * 1.5.0      2026-04-23 [2] CRAN (R 4.5.3)
+ tidyr           * 1.3.2      2025-12-19 [2] CRAN (R 4.5.2)
+ tidyselect        1.2.1      2024-03-11 [2] RSPM (R 4.4.0)
+ tidyverse       * 2.0.0      2023-02-22 [2] RSPM (R 4.4.0)
+ timechange        0.4.0      2026-01-29 [2] CRAN (R 4.5.2)
+ timeDate          4052.112   2026-01-28 [2] CRAN (R 4.5.2)
+ tinyplot        * 0.6.1      2026-03-28 [2] CRAN (R 4.5.3)
+ tune            * 2.1.0      2026-04-17 [2] CRAN (R 4.5.3)
+ tzdb              0.5.0      2025-03-15 [2] RSPM (R 4.4.0)
+ utf8              1.2.6      2025-06-08 [2] RSPM (R 4.5.0)
+ V8                8.2.0      2026-04-21 [2] CRAN (R 4.5.3)
+ vctrs             0.7.3      2026-04-11 [2] CRAN (R 4.6.0)
+ WeightIt        * 1.7.0      2026-04-22 [2] CRAN (R 4.5.3)
+ withr             3.0.2      2024-10-28 [2] RSPM (R 4.4.0)
+ workflows       * 1.3.0      2025-08-27 [2] RSPM (R 4.5.0)
+ workflowsets    * 1.1.1      2025-05-27 [2] RSPM (R 4.5.0)
+ xfun              0.57       2026-03-20 [2] CRAN (R 4.5.3)
+ yaml              2.3.12     2025-12-10 [2] CRAN (R 4.5.2)
+ yardstick       * 1.4.0      2026-04-07 [2] CRAN (R 4.5.3)
+ zoo               1.8-15     2025-12-15 [2] CRAN (R 4.5.2)
 
  [1] /usr/local/lib/R/site-library
  [2] /usr/lib/R/site-library

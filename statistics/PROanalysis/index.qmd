@@ -17,16 +17,16 @@ editor: source
 
 # PROとは
 
--   Patient reported outcomesの略 「 [PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた]{style="color:#333333"} [患者の健康状態に関するあらゆる報告である]{style="color:#333333"} 」 
+-   Patient reported outcomesの略 「 [PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた]{style="color:#333333"} [患者の健康状態に関するあらゆる報告である]{style="color:#333333"} 」
 - 議論は複数あるが、HR-QOLを含む事が多い
 
 # PROの代表例
 
-![](imges/ordered_scale.png) 
-- 循環器では以下のものが有名 
-    - SIHDで利用するSAQ 
-    - 心不全で利用するKCCQ 
-    - AFで利用するAFEQT 
+![](imges/ordered_scale.png)
+- 循環器では以下のものが有名
+    - SIHDで利用するSAQ
+    - 心不全で利用するKCCQ
+    - AFで利用するAFEQT
     - 循環器の研究におけるPRO
 
 ![](images/num_publish_pro.png)
@@ -50,20 +50,20 @@ editor: source
 
 # 先行研究では？
 
-![](images/pro_analysis_real2.png) 
+![](images/pro_analysis_real2.png)
 -   **多種多様な手法が使われており標準化されていない** [@Qian2021-rp]
 
 
 # ガイドラインでは？
 
-![](images/guideline_title.jpg) 
+![](images/guideline_title.jpg)
 [@Coens2020-lz]
 
 # PROの確定的な解析方法は！！
 
-> Findings from systematic reviews showed that there was 
-> no consensus on appropriate statistical methods for PRO 
-> data analysis. 
+> Findings from systematic reviews showed that there was
+> no consensus on appropriate statistical methods for PRO
+> data analysis.
 
 -  *ない！* ・・・・・・
 
@@ -284,43 +284,43 @@ library(tinyplot)
 library(datawizard)
 library(here)
 
-# br_cancer_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "br_cancer", "br_cancer_dat.csv")) 
+# br_cancer_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "br_cancer", "br_cancer_dat.csv"))
 
 ist3_dat <- readr::read_csv(here::here("statistics", "PROanalysis", "ist3", "ist3_dat.csv"))
 
-ist3_dat_mod <- ist3_dat |> 
+ist3_dat_mod <- ist3_dat |>
     dplyr::mutate(
-        sexm1 = gender - 1, 
-        missing_euroqol = dplyr::if_else(is.na(euroqol6), 1, 0), 
-        sevendaycase = dplyr::if_else(sevendaycase == 0, "No event", "Event"), 
+        sexm1 = gender - 1,
+        missing_euroqol = dplyr::if_else(is.na(euroqol6), 1, 0),
+        sevendaycase = dplyr::if_else(sevendaycase == 0, "No event", "Event"),
         stroketype = dplyr::recode_values(
-            stroketype, 
-            1 ~ "TACI", 
-            2 ~ "PACI", 
-            3 ~ "LACI", 
-            4 ~ "POCI", 
-            5 ~ "Other"), 
+            stroketype,
+            1 ~ "TACI",
+            2 ~ "PACI",
+            3 ~ "LACI",
+            4 ~ "POCI",
+            5 ~ "Other"),
         reverse_euroqol_comp = dplyr::if_else(
-            dead6mo == 1, 
-            101, 
+            dead6mo == 1,
+            101,
             100 - euroqol6
         )
-        ) |> 
+        ) |>
     dplyr::select(itt_treat, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, reverse_euroqol_comp, missing_euroqol)
 
 
 
 par(mfrow = c(2,2))
-tinyplot::plt(~ ohs6, data = ist3_dat_mod, type = type_barplot(), 
-    main = "Distribution of Oxford Handicap Score", 
+tinyplot::plt(~ ohs6, data = ist3_dat_mod, type = type_barplot(),
+    main = "Distribution of Oxford Handicap Score",
     sub = "Low value is better status")
 
-tinyplot::plt(~ euroqol6, data = ist3_dat_mod, type = type_histogram(), 
-    main = "Distribution of EURO QOL score", 
+tinyplot::plt(~ euroqol6, data = ist3_dat_mod, type = type_histogram(),
+    main = "Distribution of EURO QOL score",
     sub = "High value is better status")
 
-tinyplot::plt(~ reverse_euroqol_comp, data = ist3_dat_mod, type = type_histogram(), 
-    main = "Distribution of reversed EURO QOL score with Death", 
+tinyplot::plt(~ reverse_euroqol_comp, data = ist3_dat_mod, type = type_histogram(),
+    main = "Distribution of reversed EURO QOL score with Death",
     sub = "Low value is better status and 101 is death")
 
 ```
@@ -334,15 +334,15 @@ tinyplot::plt(~ reverse_euroqol_comp, data = ist3_dat_mod, type = type_histogram
 library(gtsummary)
 
 gtsummary::tbl_summary(
-    ist3_dat_mod, by = missing_euroqol, 
-    include = -c(euroqol6, dead6mo), 
+    ist3_dat_mod, by = missing_euroqol,
+    include = -c(euroqol6, dead6mo, reverse_euroqol_comp),
     value = list(
-        sevendaycase ~ "Event", 
-        indepinadl_rand ~ 1, 
-        atrialfib_rand ~ 1, 
+        sevendaycase ~ "Event",
+        indepinadl_rand ~ 1,
+        atrialfib_rand ~ 1,
         antiplat_rand ~ 1
     )
-) |> 
+) |>
     gtsummary::add_p(
     test = all_categorical() ~ "fisher.test",
     test.args = all_tests("fisher.test") ~ list(simulate.p.value = TRUE)
@@ -383,20 +383,24 @@ tobit_fit <- tobit(
 
 modelsummary::modelsummary(
     list(
-        "Linear regression" = ols_fit, 
-        "Ordinal regression" = orm_fit, 
+        "Linear regression" = ols_fit,
+        "Ordinal regression" = orm_fit,
         "Tobit regression" = tobit_fit
-    ), 
+    ),
     estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
-    coef_omit = "^(?!itt_treat)", 
+    coef_omit = "^(?!itt_treat)",
     gof_omit = ".*"
 )
 
 ```
 
-- 小さい数ほど良い予後と関連する
+::: {.callout-note}
 
-# Euroqolの解析
+小さい数ほど良い予後と関連する
+
+:::
+
+# 死亡を考慮しないEuroqolの解析
 
 ```{r}
 library(rms)
@@ -418,16 +422,22 @@ tobit_fit_euroqol <- AER::tobit(
 
 modelsummary::modelsummary(
     list(
-        "Linear regression" = ols_fit_euroqol, 
-        "Ordinal regression" = orm_fit_euroqol, 
+        "Linear regression" = ols_fit_euroqol,
+        "Ordinal regression" = orm_fit_euroqol,
         "Tobit regression" = tobit_fit_euroqol
-    ), 
+    ),
     estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
-    coef_omit = "^(?!itt_treat)", 
+    coef_omit = "^(?!itt_treat)",
     gof_omit = ".*"
 )
 
 ```
+
+::: {.callout-note}
+
+大きい数ほど良い予後と関連する
+
+:::
 
 # 死亡を考慮した解析～①
 ```{r}
@@ -450,20 +460,25 @@ tobit_fit_euroqol <- AER::tobit(
 
 modelsummary::modelsummary(
     list(
-        "Linear regression" = ols_fit_euroqol, 
-        "Ordinal regression" = orm_fit_euroqol, 
+        "Linear regression" = ols_fit_euroqol,
+        "Ordinal regression" = orm_fit_euroqol,
         "Tobit regression" = tobit_fit_euroqol
-    ), 
+    ),
     estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
-    coef_omit = "^(?!itt_treat)", 
+    coef_omit = "^(?!itt_treat)",
     gof_omit = ".*"
 )
 
 
 ```
 
+::: {.callout-note}
+
 - 0～100を反転させて101を死亡にする
     - 値が小さいほどよい
+
+:::
+
 
 # 死亡を考慮した解析～②
 ```{r}
