@@ -13,6 +13,7 @@ execute:
   echo: false
   dev: svglite
 editor: source
+bibliography: references.bib
 ---
 
 # PROとは
