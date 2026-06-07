@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Nozomi Niimi">
+  <meta name="dcterms.date" content="2024-10-10">
+  <title>My personal slides – PROの解析について</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">PROの解析について</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nozomi Niimi 
+</div>
+</div>
+</div>
+
+  <p class="date">2024-10-10</p>
+</section>
+<section id="proとは" class="slide level1">
+<h1>PROとは</h1>
+<ul>
+<li>Patient reported outcomesの略 「 <span style="color:#333333">PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた</span> <span style="color:#333333">患者の健康状態に関するあらゆる報告である</span> 」</li>
+<li>議論は複数あるが、HR-QOLを含む事が多い</li>
+</ul>
+</section>
+<section id="proの代表例" class="slide level1">
+<h1>PROの代表例</h1>
+<p><img data-src="imges/ordered_scale.png"> - 循環器では以下のものが有名 - SIHDで利用するSAQ - 心不全で利用するKCCQ - AFで利用するAFEQT - 循環器の研究におけるPRO</p>
+<p><img data-src="images/num_publish_pro.png"></p>
+<ul>
+<li>High impact journalではPROを含む研究が増えている！！ <span class="citation" data-cites="Eliya2021-yf">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Eliya et al. 2021</a>)</span></li>
+</ul>
+</section>
+<section id="proの特徴" class="slide level1">
+<h1>PROの特徴 <img data-src="images/scale_species.png"></h1>
+<ul>
+<li>値が高い(or 低い)ほうが良いが40点と80点で正確に2倍かどうかは分からない(通常のNumericじゃない)</li>
+<li>順序尺度と間隔尺度の間</li>
+<li>値の下限と上限が決まっている(通常加減は0点、上限は100点が多い)</li>
+<li>分布が歪んでいる</li>
+</ul>
+</section>
+<section id="このproはどうやって解析すればいい" class="slide level1">
+<h1>このPROはどうやって解析すればいい？</h1>
+<ul>
+<li><p>統計学の論文では通常の多変量回帰、beta-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・</p></li>
+<li><p>結局どれがいいの？ <span class="citation" data-cites="Arostegui2012-cb">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Arostegui, Núñez-Antón, and Quintana 2012</a>)</span></p></li>
+</ul>
+
+<img data-src="images/pro_analysis_real.png" class="r-stretch"></section>
+<section id="先行研究では" class="slide level1">
+<h1>先行研究では？</h1>
+<p><img data-src="images/pro_analysis_real2.png"> - <strong>多種多様な手法が使われており標準化されていない</strong> <span class="citation" data-cites="Qian2021-rp">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Qian et al. 2021</a>)</span></p>
+</section>
+<section id="ガイドラインでは" class="slide level1">
+<h1>ガイドラインでは？</h1>
+<p><img data-src="images/guideline_title.jpg"> <span class="citation" data-cites="Coens2020-lz">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Coens et al. 2020</a>)</span></p>
+</section>
+<section id="proの確定的な解析方法は" class="slide level1">
+<h1>PROの確定的な解析方法は！！</h1>
+<blockquote>
+<p>Findings from systematic reviews showed that there was no consensus on appropriate statistical methods for PRO data analysis.</p>
+</blockquote>
+<ul>
+<li><em>ない！</em> ・・・・・・</li>
+</ul>
+<p>それだけだと虚しいのでもう少し読み込みましょう</p>
+</section>
+<section id="proの解析において必須の要素" class="slide level1">
+<h1>PROの解析において必須の要素</h1>
+<ul>
+<li>明瞭なResearch question</li>
+<li>適切な解析方法に必要な要素</li>
+<li>欠損値について</li>
+</ul>
+<p>について検討が必要</p>
+</section>
+<section id="research-object" class="slide level1 smaller">
+<h1>Research object</h1>
+<ul>
+<li><span style="color:#ff0000"><strong>PRO研究の目的を明確にする</strong></span>
+<ul>
+<li>治療効果・臨床的効果の証明？</li>
+<li>記述統計・探索的研究？</li>
+<li>群の差を、同等性・非劣性か優越性かしっかり決める</li>
+</ul></li>
+<li>患者個人間あるいは治療群間でのPROの解析を明確にする
+<ul>
+<li><em>個々の患者に焦点を当てる場合</em>
+<ul>
+<li>“どの患者に”有効か？ = レスポンダーに興味がある</li>
+<li>イベント発生までの時間やレスポンダーの割合などがエンドポイント</li>
+</ul></li>
+<li><em>群に焦点を当てる場合</em>
+<ul>
+<li>“どちらの(治療)群がより有効か？ = 群間の平均的な差に興味がある</li>
+<li>PROの変化の大きさなどがエンドポイント</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="pro解析方法での考慮点" class="slide level1">
+<h1>PRO解析方法での考慮点</h1>
+<ul>
+<li>必須条件
+<ul>
+<li>2群以上で比較可能な方法: RCTなどで治療法による影響をみたい</li>
+<li>定量化可能なparametricな手法: 臨床的に意味がある結果を提供できる</li>
+</ul></li>
+<li>あるとより良い条件
+<ul>
+<li>多変量回帰: ベースラインのPROの影響を考慮したい</li>
+<li>個人差を考慮した解析(Cluster/Mixed model): 同じ人で時間をあけて何度も取り直す事も多い</li>
+</ul></li>
+<li>欠損値をうまく扱える手法: 欠損値がMNARの可能性が高い</li>
+</ul>
+</section>
+<section id="具体的な推奨される統計手法" class="slide level1">
+<h1>具体的な推奨される統計手法</h1>
+<ul>
+<li>1回のみfollow-upするdesign: 線形回帰</li>
+</ul>
+<p><img data-src="images/pro_linear_exam.png"></p>
+<ul>
+<li>2回以上のfollow-upをするdesign: Linear mixed model
+<ul>
+<li>時間は離散変数とする</li>
+<li>Trajectoryの場合は時間X治療の相互作用項を入れる</li>
+</ul></li>
+<li>Time-to-event解析: Cox回帰</li>
+</ul>
+<p><img data-src="images/pro_km_exam.png"></p>
+<p><span style="color:#ff0000"><strong>これらの解析ではMICを考慮する事が強く推奨！</strong></span></p>
+<p><span class="citation" data-cites="Lapin2020-gz Calvert2013-sn">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Lapin 2020</a>; <a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Calvert et al. 2013</a>)</span></p>
+</section>
+<section id="線形回帰でいいの" class="slide level1">
+<h1>線形回帰でいいの？</h1>
+<p>7種類以下のカテゴリカルの場合は(とても良い/やや良い/普通/やや悪い/とても悪い)などではOrdinal regressionが良いかもしれない</p>
+<p>分布(残差)が偏っていても、通常のOLSはRobustであり問題ない</p>
+<p><span class="citation" data-cites="Arostegui2012-cb Piantadosi2022-wx">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Arostegui, Núñez-Antón, and Quintana 2012</a>; <a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Piantadosi and Meinert 2022</a>)</span></p>
+</section>
+<section id="ただし" class="slide level1">
+<h1>ただし・・・・・・</h1>
+
+<img data-src="images/pro_bad_exam.png" class="r-stretch"><ul>
+<li>差をアウトカムに回帰はやらないほうが良い！
+<ul>
+<li>Baselineが良い患者ほど予後不良になってしまう</li>
+</ul></li>
+<li>BaselineのPROで補正をした上で＊年後のPROを予測するほうが良い <span class="citation" data-cites="Harrell_BBR_Change_2025">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Harrell 2025</a>)</span></li>
+</ul>
+</section>
+<section id="欠損値について" class="slide level1">
+<h1>欠損値について</h1>
+<ul>
+<li>PRO cohortと研究全体のcohortの違いを考える
+<ul>
+<li>何を代表した母集団か考えて解析する</li>
+</ul></li>
+<li>死亡した患者のPROは解析できない為、単なる欠損値としない</li>
+<li>欠損率は複数の方法で報告
+<ul>
+<li>variable denominator: その時点でPROを出せる患者を分母とする欠損率</li>
+<li>fixed denominator: 研究のコホート全体を分母とする欠損率</li>
+</ul></li>
+<li>明示的なSingle imputation(平均値やLOCF)は避けよ</li>
+<li>最低2種類の欠損値の対処方法を用いて感度分析とせよ</li>
+</ul>
+</section>
+<section id="欠損値の対処法について" class="slide level1">
+<h1>欠損値の対処法について</h1>
+<ul>
+<li>明示的なものは推奨されない→分散が減ってしまう
+<ul>
+<li>平均値、LOCF、中央値代入など</li>
+</ul></li>
+<li>現実的には多重代入でPattern mixture modelを使う事も</li>
+<li>MAR：多重代入</li>
+<li>MNAR：Pattern mixture modelを用いたMI</li>
+</ul>
+</section>
+<section id="pattern-mixture-model" class="slide level1">
+<h1>Pattern mixture model</h1>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Y0</th>
+<th>Y1</th>
+<th>Y2</th>
+<th>Y3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>パターンA</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+</tr>
+<tr class="even">
+<td>パターンB</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>×</td>
+</tr>
+<tr class="odd">
+<td>パターンC</td>
+<td>○</td>
+<td>○</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr class="even">
+<td>パターンD</td>
+<td>○</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>MNARの時の感度分析で用いる手法</li>
+<li>欠損パターンが似ている情報+制約(=仮定)をおく事によって、補完する</li>
+<li>イメージだとデータがある人とない人の結果の差Δを他のすべてのデータを用いて埋めるイメージ</li>
+</ul>
+</section>
+<section id="死亡の扱いをどうする" class="slide level1">
+<h1>死亡の扱いをどうする？</h1>
+<ul>
+<li>単なる欠損値にしてはいけない！</li>
+<li>PROをメインの解析において、複数の方法がある
+<ul>
+<li>0/1のWorse outcomeを作って、その中に死亡を入れ込む</li>
+<li>複数回計測している場合はBayesian Joint modelを行う</li>
+<li>Ordinal regressionの応用を行う(後述)</li>
+</ul></li>
+<li>直感的かつ簡単なのは1だがPowerが減る。RCTやる人は2か3が良いかも</li>
+</ul>
+<p><span class="citation" data-cites="Arnold2013-ss Spertus2019-za">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Arnold et al. 2013</a>; <a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Spertus et al. 2019</a>)</span></p>
+</section>
+<section id="visualizationについて" class="slide level1">
+<h1>Visualizationについて</h1>
+<p><img data-src="images/pro_visualize.jpg"></p>
+<p><img data-src="images/pro_piechart.png"></p>
+<ul>
+<li><p><strong>個々人のPROMデータ: bar or Line plotが良い</strong></p></li>
+<li><p><strong>治療群の平均のPROMデータ：Line plot, Pie chart &gt; bar chart</strong></p></li>
+</ul>
+<p><span class="citation" data-cites="Albers2022-wt">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Albers et al. 2022</a>)</span></p>
+</section>
+<section id="よりよい可視化のために" class="slide level1">
+<h1>よりよい可視化のために</h1>
+
+<img data-src="images/pro_linechart_advanced.png" class="r-stretch"><ul>
+<li><strong>警告点を書く</strong></li>
+<li><strong>悪い結果を赤にする</strong></li>
+</ul>
+<p><span class="citation" data-cites="Snyder2019-uw">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Snyder et al. 2019</a>)</span></p>
+</section>
+<section id="群レベルのvisualization" class="slide level1">
+<h1>群レベルのVisualization</h1>
+
+<img data-src="images/pro_linechart_addci.png" class="r-stretch"><ul>
+<li>95%信頼区間を記述する</li>
+</ul>
+<p><span class="citation" data-cites="Snyder2019-uw">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Snyder et al. 2019</a>)</span></p>
+</section>
+<section id="一応特殊な手法を2つほど" class="slide level1">
+<h1>一応、特殊な手法を2つほど・・・・・・・</h1>
+<ul>
+<li>Ceiling/Floorがあるときに使えるCensored regression ( = tobit model)</li>
+<li>Ordered regression model</li>
+</ul>
+
+<img data-src="images/pro_tobit_exam.png" class="r-stretch"></section>
+<section id="tobit-modelとは" class="slide level1">
+<h1>Tobit modelとは</h1>
+<ul>
+<li>ある範囲外の値が丸め込まれる(打ち切られる)ときの回帰
+<ul>
+<li>テストの点数(上限が100点)など</li>
+</ul></li>
+<li>打ち切られた点が実はもっと高い値がありうると想定した上で回帰を行う</li>
+<li>上限、下限ともに対応可能</li>
+<li>実は生存分析はこの一種</li>
+</ul>
+</section>
+<section id="ordinary-regression-modelとは" class="slide level1">
+<h1>Ordinary regression modelとは</h1>
+<ul>
+<li>順序のあるカテゴリー変数で3種類以上の応答の時に使える
+<ul>
+<li>Ex) NYHAなど</li>
+</ul></li>
+<li>Proportional odds仮定があり、常に上の段階に行くときには似たような方向性がある</li>
+<li>厳密に差が一緒じゃなくても一つ一つのOdds比の平均値として1つの値が出る</li>
+<li>実は仮定が少なくRobustな上に、検出力も高い</li>
+</ul>
+</section>
+<section id="ordered-regression-modelの応用" class="slide level1">
+<h1>Ordered regression modelの応用</h1>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Y</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>103</td>
+<td>Cardiovascular death</td>
+</tr>
+<tr class="even">
+<td>102</td>
+<td>Non-cardiovascular death</td>
+</tr>
+<tr class="odd">
+<td>101</td>
+<td>Hospitalization for HF/Renal Disease</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>KCCQ=0</td>
+</tr>
+<tr class="odd">
+<td>99</td>
+<td>KCCQ=1</td>
+</tr>
+<tr class="even">
+<td>..</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>KCCQ=99</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>KCCQ=100</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>死亡をアウトカムの1つに組み入れてしまう
+<ul>
+<li>負の値がだめなので反転させている</li>
+<li>CV deathの方が介入で意義がありそうなので高い値にしている</li>
+</ul></li>
+<li>この方法だと、かなり高い検出力を出せる</li>
+<li>しかし、KCCQの1点の差と心不全入院と非心血管死亡のOdds比が一緒という仮定の値のみ得られる</li>
+<li>→ 傾向には有用だが、数値の大小の意味が薄れる</li>
+</ul>
+<p><span class="citation" data-cites="Harrell_POP_2024">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Harrell 2024</a>)</span></p>
+</section>
+<section id="実践" class="slide level1">
+<h1>実践！</h1>
+<ul>
+<li><p>IST3のデータセット<span class="citation" data-cites="Sandercock_IST3_2016">(<a href="#/わかりやすい参考文献" role="doc-biblioref" onclick="">Sandercock et al. 2016</a>)</span></p></li>
+<li><p>rt-PAの効果をみた脳梗塞のデータセット</p></li>
+<li><p>アウトカムとしては2種類</p>
+<ul>
+<li>6か月 Oxford Handicap Scoreのohs6(最良が0, 死亡が6)</li>
+<li>6か月目のEQ-VAS(0-100)だが、死亡は入らない</li>
+<li>死亡は26.9%で起こっているので悩ましい</li>
+</ul></li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 94%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">値</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td>症状なし</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>症状は少しあるが日常生活に支障なし</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>症状により生活は変わったが、自分の身の回りのことは可能</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td>症状により生活が大きく変わり、身の回りのことに一部介助が必要</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td>かなり重い症状で他者の助けが必要。ただし昼夜を問わずの介護までは不要</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td>重度の障害があり、昼夜を問わず常時介護が必要</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td>死亡</td>
+</tr>
+</tbody>
+</table>
+<p>OHS</p>
+</section>
+<section id="qol-outcomeの正規性の確認" class="slide level1">
+<h1>QOL outcomeの正規性の確認</h1>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><ul>
+<li>6種類の方は正規性は全くなさそう</li>
+<li>Euro QOL scoreは正規性がありそうだが死亡の扱いにこまる</li>
+</ul>
+</section>
+<section id="missing-dataと死亡の扱い" class="slide level1">
+<h1>Missing dataと死亡の扱い</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div id="pcutxcgxxb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pcutxcgxxb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pcutxcgxxb thead, #pcutxcgxxb tbody, #pcutxcgxxb tfoot, #pcutxcgxxb tr, #pcutxcgxxb td, #pcutxcgxxb th {
+  border-style: none;
+}
+
+#pcutxcgxxb p {
+  margin: 0;
+  padding: 0;
+}
+
+#pcutxcgxxb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pcutxcgxxb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pcutxcgxxb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pcutxcgxxb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pcutxcgxxb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pcutxcgxxb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pcutxcgxxb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pcutxcgxxb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pcutxcgxxb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pcutxcgxxb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pcutxcgxxb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pcutxcgxxb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pcutxcgxxb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pcutxcgxxb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pcutxcgxxb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcutxcgxxb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pcutxcgxxb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pcutxcgxxb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pcutxcgxxb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcutxcgxxb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pcutxcgxxb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcutxcgxxb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pcutxcgxxb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcutxcgxxb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pcutxcgxxb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcutxcgxxb .gt_left {
+  text-align: left;
+}
+
+#pcutxcgxxb .gt_center {
+  text-align: center;
+}
+
+#pcutxcgxxb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pcutxcgxxb .gt_font_normal {
+  font-weight: normal;
+}
+
+#pcutxcgxxb .gt_font_bold {
+  font-weight: bold;
+}
+
+#pcutxcgxxb .gt_font_italic {
+  font-style: italic;
+}
+
+#pcutxcgxxb .gt_super {
+  font-size: 65%;
+}
+
+#pcutxcgxxb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pcutxcgxxb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pcutxcgxxb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pcutxcgxxb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pcutxcgxxb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pcutxcgxxb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pcutxcgxxb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pcutxcgxxb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pcutxcgxxb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>0</strong><br>
+N = 1,918<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>1</strong><br>
+N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">itt_treat</td>
+<td class="gt_row gt_center" headers="stat_1">954 (50%)</td>
+<td class="gt_row gt_center" headers="stat_2">566 (51%)</td>
+<td class="gt_row gt_center" headers="p.value">0.6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">age</td>
+<td class="gt_row gt_center" headers="stat_1">79 (68, 84)</td>
+<td class="gt_row gt_center" headers="stat_2">84 (78, 88)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">sexm1</td>
+<td class="gt_row gt_center" headers="stat_1">1,005 (52%)</td>
+<td class="gt_row gt_center" headers="stat_2">460 (41%)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">indepinadl_rand</td>
+<td class="gt_row gt_center" headers="stat_1">1,911 (100%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,107 (99%)</td>
+<td class="gt_row gt_center" headers="p.value">0.076</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">antiplat_rand</td>
+<td class="gt_row gt_center" headers="stat_1">940 (49%)</td>
+<td class="gt_row gt_center" headers="stat_2">622 (56%)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">atrialfib_rand</td>
+<td class="gt_row gt_center" headers="stat_1">458 (24%)</td>
+<td class="gt_row gt_center" headers="stat_2">456 (41%)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">sbprand</td>
+<td class="gt_row gt_center" headers="stat_1">155 (140, 170)</td>
+<td class="gt_row gt_center" headers="stat_2">156 (138, 172)</td>
+<td class="gt_row gt_center" headers="p.value">0.7</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">dbprand</td>
+<td class="gt_row gt_center" headers="stat_1">81 (72, 91)</td>
+<td class="gt_row gt_center" headers="stat_2">80 (70, 92)</td>
+<td class="gt_row gt_center" headers="p.value">0.092</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">16</td>
+<td class="gt_row gt_center" headers="stat_2">3</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">gcs_score_rand</td>
+<td class="gt_row gt_center" headers="stat_1">15.00 (13.00, 15.00)</td>
+<td class="gt_row gt_center" headers="stat_2">13.00 (11.00, 15.00)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">nihss</td>
+<td class="gt_row gt_center" headers="stat_1">8 (5, 14)</td>
+<td class="gt_row gt_center" headers="stat_2">16 (10, 21)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">sevendaycase</td>
+<td class="gt_row gt_center" headers="stat_1">169 (8.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">419 (38%)</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">stroketype</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;LACI</td>
+<td class="gt_row gt_center" headers="stat_1">277 (14%)</td>
+<td class="gt_row gt_center" headers="stat_2">55 (4.9%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
+<td class="gt_row gt_center" headers="stat_1">5 (0.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;PACI</td>
+<td class="gt_row gt_center" headers="stat_1">828 (43%)</td>
+<td class="gt_row gt_center" headers="stat_2">318 (28%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;POCI</td>
+<td class="gt_row gt_center" headers="stat_1">197 (10%)</td>
+<td class="gt_row gt_center" headers="stat_2">49 (4.4%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;TACI</td>
+<td class="gt_row gt_center" headers="stat_1">611 (32%)</td>
+<td class="gt_row gt_center" headers="stat_2">695 (62%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">R_infarct_size</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;0</td>
+<td class="gt_row gt_center" headers="stat_1">1,234 (65%)</td>
+<td class="gt_row gt_center" headers="stat_2">571 (51%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+<td class="gt_row gt_center" headers="stat_1">142 (7.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">57 (5.1%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;2</td>
+<td class="gt_row gt_center" headers="stat_1">299 (16%)</td>
+<td class="gt_row gt_center" headers="stat_2">198 (18%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;3</td>
+<td class="gt_row gt_center" headers="stat_1">138 (7.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">123 (11%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;4</td>
+<td class="gt_row gt_center" headers="stat_1">93 (4.9%)</td>
+<td class="gt_row gt_center" headers="stat_2">162 (15%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">12</td>
+<td class="gt_row gt_center" headers="stat_2">6</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">ohs6</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;0</td>
+<td class="gt_row gt_center" headers="stat_1">235 (12%)</td>
+<td class="gt_row gt_center" headers="stat_2">19 (1.7%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+<td class="gt_row gt_center" headers="stat_1">402 (21%)</td>
+<td class="gt_row gt_center" headers="stat_2">27 (2.4%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;2</td>
+<td class="gt_row gt_center" headers="stat_1">359 (19%)</td>
+<td class="gt_row gt_center" headers="stat_2">46 (4.1%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;3</td>
+<td class="gt_row gt_center" headers="stat_1">399 (21%)</td>
+<td class="gt_row gt_center" headers="stat_2">29 (2.6%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;4</td>
+<td class="gt_row gt_center" headers="stat_1">225 (12%)</td>
+<td class="gt_row gt_center" headers="stat_2">30 (2.7%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;5</td>
+<td class="gt_row gt_center" headers="stat_1">298 (16%)</td>
+<td class="gt_row gt_center" headers="stat_2">151 (14%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;6</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">815 (73%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_footnotes odd">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%); Median (Q1, Q3)</td>
+</tr>
+<tr class="gt_footnotes even">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> Fisher’s exact test; Wilcoxon rank sum test; Fisher’s Exact Test for Count Data with simulated p-value (based on 2000 replicates)</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="missingの解析" class="slide level1">
+<h1>Missingの解析</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="分類が少ないohsの解析" class="slide level1">
+<h1>分類が少ないOHSの解析</h1>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_5w4adm3f37tc2jcr0cq1 = TinyTable.createTableFunctions("tinytable_5w4adm3f37tc2jcr0cq1");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_fjfwxio2pl4pj8gs0scu',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_n8jgof1coaovapmce1bp',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_e2tozcms1ebp9cj6rnmo',}, 
+          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_4aizfl57vzrpyu3yogjd',}, 
+          { positions: [ { i: '1', j: 1 } ], css_id: 'tinytable_css_fxdomr5wqzxgbohtzqya',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_oesg475bf5z7gozr9xc6',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_5w4adm3f37tc2jcr0cq1.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_5w4adm3f37tc2jcr0cq1 td.tinytable_css_fjfwxio2pl4pj8gs0scu, #tinytable_5w4adm3f37tc2jcr0cq1 th.tinytable_css_fjfwxio2pl4pj8gs0scu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_5w4adm3f37tc2jcr0cq1 td.tinytable_css_n8jgof1coaovapmce1bp, #tinytable_5w4adm3f37tc2jcr0cq1 th.tinytable_css_n8jgof1coaovapmce1bp { text-align: center }
+    #tinytable_5w4adm3f37tc2jcr0cq1 td.tinytable_css_e2tozcms1ebp9cj6rnmo, #tinytable_5w4adm3f37tc2jcr0cq1 th.tinytable_css_e2tozcms1ebp9cj6rnmo {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_5w4adm3f37tc2jcr0cq1 td.tinytable_css_4aizfl57vzrpyu3yogjd, #tinytable_5w4adm3f37tc2jcr0cq1 th.tinytable_css_4aizfl57vzrpyu3yogjd {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_5w4adm3f37tc2jcr0cq1 td.tinytable_css_fxdomr5wqzxgbohtzqya, #tinytable_5w4adm3f37tc2jcr0cq1 th.tinytable_css_fxdomr5wqzxgbohtzqya { text-align: left }
+    #tinytable_5w4adm3f37tc2jcr0cq1 td.tinytable_css_oesg475bf5z7gozr9xc6, #tinytable_5w4adm3f37tc2jcr0cq1 th.tinytable_css_oesg475bf5z7gozr9xc6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_5w4adm3f37tc2jcr0cq1" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">Linear regression</th>
+                <th scope="col" data-row="0" data-col="3">Ordinal regression</th>
+                <th scope="col" data-row="0" data-col="4">Tobit regression</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">itt_treat</td>
+                  <td data-row="1" data-col="2">0.278 [0.167, 0.390], &lt;0.001</td>
+                  <td data-row="1" data-col="3">0.310 [0.177, 0.444], &lt;0.001</td>
+                  <td data-row="1" data-col="4">0.395 [0.231, 0.560], &lt;0.001</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(0.057)</td>
+                  <td data-row="2" data-col="3">(0.068)</td>
+                  <td data-row="2" data-col="4">(0.084)</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>小さい数ほど良い予後と関連する</p>
+</div>
+</div>
+</div>
+</section>
+<section id="死亡を考慮しないeuroqolの解析" class="slide level1">
+<h1>死亡を考慮しないEuroqolの解析</h1>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_ujnbo794p9027u57gbuw = TinyTable.createTableFunctions("tinytable_ujnbo794p9027u57gbuw");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_34toxupxilt90fca3676',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_ep2my9yln54u4z27eyee',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_s3w4cswsoxfjhfx3s2ug',}, 
+          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_7hpyb18ppmmpjm4af2mx',}, 
+          { positions: [ { i: '1', j: 1 } ], css_id: 'tinytable_css_i0t2nec04bu3dse13uzm',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_aenwvmf58tbul6csf2em',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_ujnbo794p9027u57gbuw.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_ujnbo794p9027u57gbuw td.tinytable_css_34toxupxilt90fca3676, #tinytable_ujnbo794p9027u57gbuw th.tinytable_css_34toxupxilt90fca3676 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_ujnbo794p9027u57gbuw td.tinytable_css_ep2my9yln54u4z27eyee, #tinytable_ujnbo794p9027u57gbuw th.tinytable_css_ep2my9yln54u4z27eyee { text-align: center }
+    #tinytable_ujnbo794p9027u57gbuw td.tinytable_css_s3w4cswsoxfjhfx3s2ug, #tinytable_ujnbo794p9027u57gbuw th.tinytable_css_s3w4cswsoxfjhfx3s2ug {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_ujnbo794p9027u57gbuw td.tinytable_css_7hpyb18ppmmpjm4af2mx, #tinytable_ujnbo794p9027u57gbuw th.tinytable_css_7hpyb18ppmmpjm4af2mx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_ujnbo794p9027u57gbuw td.tinytable_css_i0t2nec04bu3dse13uzm, #tinytable_ujnbo794p9027u57gbuw th.tinytable_css_i0t2nec04bu3dse13uzm { text-align: left }
+    #tinytable_ujnbo794p9027u57gbuw td.tinytable_css_aenwvmf58tbul6csf2em, #tinytable_ujnbo794p9027u57gbuw th.tinytable_css_aenwvmf58tbul6csf2em {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_ujnbo794p9027u57gbuw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">Linear regression</th>
+                <th scope="col" data-row="0" data-col="3">Ordinal regression</th>
+                <th scope="col" data-row="0" data-col="4">Tobit regression</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">itt_treat</td>
+                  <td data-row="1" data-col="2">-3.387 [-5.326, -1.448], &lt;0.001</td>
+                  <td data-row="1" data-col="3">-0.289 [-0.447, -0.131], &lt;0.001</td>
+                  <td data-row="1" data-col="4">-3.391 [-5.379, -1.402], &lt;0.001</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(0.989)</td>
+                  <td data-row="2" data-col="3">(0.081)</td>
+                  <td data-row="2" data-col="4">(1.015)</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>大きい数ほど良い予後と関連する</p>
+</div>
+</div>
+</div>
+</section>
+<section id="死亡を考慮した解析①" class="slide level1">
+<h1>死亡を考慮した解析～①</h1>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_jtz3raxwk7fpgdmoc9bh = TinyTable.createTableFunctions("tinytable_jtz3raxwk7fpgdmoc9bh");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_itigb7n5opbiuxoqfw9a',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_n660k68tc0v5l88a8xjn',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_ufmglu116a8s6umo81dk',}, 
+          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_9bsnmc7ejt0aay1eryyt',}, 
+          { positions: [ { i: '1', j: 1 } ], css_id: 'tinytable_css_2dq4pw554zb3787iu1my',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_f3qm4a56hkpx30v939wn',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_jtz3raxwk7fpgdmoc9bh.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_jtz3raxwk7fpgdmoc9bh td.tinytable_css_itigb7n5opbiuxoqfw9a, #tinytable_jtz3raxwk7fpgdmoc9bh th.tinytable_css_itigb7n5opbiuxoqfw9a {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_jtz3raxwk7fpgdmoc9bh td.tinytable_css_n660k68tc0v5l88a8xjn, #tinytable_jtz3raxwk7fpgdmoc9bh th.tinytable_css_n660k68tc0v5l88a8xjn { text-align: center }
+    #tinytable_jtz3raxwk7fpgdmoc9bh td.tinytable_css_ufmglu116a8s6umo81dk, #tinytable_jtz3raxwk7fpgdmoc9bh th.tinytable_css_ufmglu116a8s6umo81dk {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_jtz3raxwk7fpgdmoc9bh td.tinytable_css_9bsnmc7ejt0aay1eryyt, #tinytable_jtz3raxwk7fpgdmoc9bh th.tinytable_css_9bsnmc7ejt0aay1eryyt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_jtz3raxwk7fpgdmoc9bh td.tinytable_css_2dq4pw554zb3787iu1my, #tinytable_jtz3raxwk7fpgdmoc9bh th.tinytable_css_2dq4pw554zb3787iu1my { text-align: left }
+    #tinytable_jtz3raxwk7fpgdmoc9bh td.tinytable_css_f3qm4a56hkpx30v939wn, #tinytable_jtz3raxwk7fpgdmoc9bh th.tinytable_css_f3qm4a56hkpx30v939wn {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_jtz3raxwk7fpgdmoc9bh" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">Linear regression</th>
+                <th scope="col" data-row="0" data-col="3">Ordinal regression</th>
+                <th scope="col" data-row="0" data-col="4">Tobit regression</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">itt_treat</td>
+                  <td data-row="1" data-col="2">4.528 [2.532, 6.523], &lt;0.001</td>
+                  <td data-row="1" data-col="3">0.306 [0.166, 0.446], &lt;0.001</td>
+                  <td data-row="1" data-col="4">5.919 [3.103, 8.735], &lt;0.001</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(1.018)</td>
+                  <td data-row="2" data-col="3">(0.071)</td>
+                  <td data-row="2" data-col="4">(1.437)</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>0～100を反転させて101を死亡にする
+<ul>
+<li>値が小さいほどよい</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="死亡を考慮した解析②" class="slide level1">
+<h1>死亡を考慮した解析～②</h1>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_ib8aoed1a69kcc5o125p = TinyTable.createTableFunctions("tinytable_ib8aoed1a69kcc5o125p");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 2 } ], css_id: 'tinytable_css_1s4nrvl3jbchh2z78eay',}, 
+          { positions: [ { i: '1', j: 2 } ], css_id: 'tinytable_css_ihqd1mvmqvf7ltehrkeu',}, 
+          { positions: [ { i: '0', j: 2 } ], css_id: 'tinytable_css_6rbz8s2s7enajqcg2ut7',}, 
+          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_0r8atlofrfpv6m8iz9h7',}, 
+          { positions: [ { i: '1', j: 1 } ], css_id: 'tinytable_css_k4yv2tz9f5euful36gkz',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_muo1o7sfaocow1csv4dk',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_ib8aoed1a69kcc5o125p.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_ib8aoed1a69kcc5o125p td.tinytable_css_1s4nrvl3jbchh2z78eay, #tinytable_ib8aoed1a69kcc5o125p th.tinytable_css_1s4nrvl3jbchh2z78eay {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_ib8aoed1a69kcc5o125p td.tinytable_css_ihqd1mvmqvf7ltehrkeu, #tinytable_ib8aoed1a69kcc5o125p th.tinytable_css_ihqd1mvmqvf7ltehrkeu { text-align: center }
+    #tinytable_ib8aoed1a69kcc5o125p td.tinytable_css_6rbz8s2s7enajqcg2ut7, #tinytable_ib8aoed1a69kcc5o125p th.tinytable_css_6rbz8s2s7enajqcg2ut7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_ib8aoed1a69kcc5o125p td.tinytable_css_0r8atlofrfpv6m8iz9h7, #tinytable_ib8aoed1a69kcc5o125p th.tinytable_css_0r8atlofrfpv6m8iz9h7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_ib8aoed1a69kcc5o125p td.tinytable_css_k4yv2tz9f5euful36gkz, #tinytable_ib8aoed1a69kcc5o125p th.tinytable_css_k4yv2tz9f5euful36gkz { text-align: left }
+    #tinytable_ib8aoed1a69kcc5o125p td.tinytable_css_muo1o7sfaocow1csv4dk, #tinytable_ib8aoed1a69kcc5o125p th.tinytable_css_muo1o7sfaocow1csv4dk {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_ib8aoed1a69kcc5o125p" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">Logistic regression</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">itt_treat</td>
+                  <td data-row="1" data-col="2">1.442 [1.180, 1.764], &lt;0.001</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(0.148)</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>値が大きいほどQOL不良と関連</p>
+</div>
+</div>
+</div>
+</section>
+<section id="結論として" class="slide level1">
+<h1>結論として</h1>
+<ul>
+<li>何故かtPAが6ヶ月後の予後不良と関連している結果となってしまった</li>
+<li>一方で、どの解析も同じような結果だった</li>
+</ul>
+</section>
+<section id="take-home-message" class="slide level1">
+<h1>Take home message</h1>
+<ul>
+<li>PROをメインとした解析をする時は
+<ul>
+<li>Research questionを明確にする</li>
+<li>BaselineのPROの調整を検討</li>
+<li>欠損値の扱いについて　　　　　十分に検討する</li>
+</ul></li>
+<li>MCIDなどを使って、解釈可能な解析をする</li>
+<li>細かい解析法はあまり重要じゃなく、Linear (mixed) regression位で良い</li>
+<li>死亡の扱いに要注意！！</li>
+</ul>
+</section>
+<section id="わかりやすい参考文献" class="slide level1 smaller scrollable">
+<h1>わかりやすい参考文献</h1>
+<p><a href="https://www.lifescience.co.jp/pro/index.html"><em>患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)</em></a></p>
+<p><a href="https://www.lifescience.co.jp/pro/article02-2-9.html#main"><em>https://www.lifescience.co.jp/pro/article02-2-9.html#main</em></a></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Albers2022-wt" class="csl-entry" role="listitem">
+Albers, Elaine A C, Itske Fraterman, Iris Walraven, Erica Wilthagen, Sanne B Schagen, Iris M van der Ploeg, Michel W J M Wouters, Lonneke V van de Poll-Franse, and Kelly M de Ligt. 2022. <span>“Visualization Formats of Patient-Reported Outcome Measures in Clinical Practice: A Systematic Review about Preferences and Interpretation Accuracy.”</span> <em>Journal of Patient-Reported Outcomes</em> 6 (1): 18. <a href="https://doi.org/10.1186/s41687-022-00424-3">https://doi.org/10.1186/s41687-022-00424-3</a>.
+</div>
+<div id="ref-Arnold2013-ss" class="csl-entry" role="listitem">
+Arnold, Suzanne V, John A Spertus, Yang Lei, Philip Green, Ajay J Kirtane, Samir Kapadia, Vinod H Thourani, et al. 2013. <span>“How to Define a Poor Outcome After Transcatheter Aortic Valve Replacement.”</span> <em>Circulation. Cardiovascular Quality and Outcomes</em> 6 (5): 591–97. <a href="https://doi.org/10.1161/CIRCOUTCOMES.113.000354">https://doi.org/10.1161/CIRCOUTCOMES.113.000354</a>.
+</div>
+<div id="ref-Arostegui2012-cb" class="csl-entry" role="listitem">
+Arostegui, Inmaculada, Vicente Núñez-Antón, and José M Quintana. 2012. <span>“Statistical Approaches to Analyse Patient-Reported Outcomes as Response Variables: An Application to Health-Related Quality of Life.”</span> <em>Statistical Methods in Medical Research</em> 21 (2): 189–214. <a href="https://doi.org/10.1177/0962280210379079">https://doi.org/10.1177/0962280210379079</a>.
+</div>
+<div id="ref-Calvert2013-sn" class="csl-entry" role="listitem">
+Calvert, Melanie, Jane Blazeby, Douglas G Altman, Dennis A Revicki, David Moher, Michael D Brundage, and for the CONSORT PRO Group. 2013. <span>“Reporting of Patient-Reported Outcomes in Randomized Trials.”</span> <em>JAMA: The Journal of the American Medical Association</em> 309 (8): 814. <a href="https://doi.org/10.1001/jama.2013.879">https://doi.org/10.1001/jama.2013.879</a>.
+</div>
+<div id="ref-Coens2020-lz" class="csl-entry" role="listitem">
+Coens, Corneel, Madeline Pe, Amylou C Dueck, Jeff Sloan, Ethan Basch, Melanie Calvert, Alicyn Campbell, et al. 2020. <span>“International Standards for the Analysis of Quality-of-Life and Patient-Reported Outcome Endpoints in Cancer Randomised Controlled Trials: Recommendations of the <span>SISAQOL</span> Consortium.”</span> <em>The Lancet Oncology</em> 21 (2): e83–96. <a href="https://doi.org/10.1016/S1470-2045(19)30790-9">https://doi.org/10.1016/S1470-2045(19)30790-9</a>.
+</div>
+<div id="ref-Eliya2021-yf" class="csl-entry" role="listitem">
+Eliya, Yousif, Tauben Averbuch, Nhatchinh Le, Feng Xie, Lehana Thabane, Mamas A Mamas, and Harriette G C Van Spall. 2021. <span>“Temporal Trends and Factors Associated with the Inclusion of Patient-Reported Outcomes in Heart Failure Randomized Controlled Trials: A Systematic Review.”</span> <em>Journal of the American Heart Association</em> 10 (21): e022353. <a href="https://doi.org/10.1161/JAHA.121.022353">https://doi.org/10.1161/JAHA.121.022353</a>.
+</div>
+<div id="ref-Harrell_POP_2024" class="csl-entry" role="listitem">
+Harrell, Frank E. 2024. <span>“Proportional Odds Model Power Calculations for Ordinal and Mixed Ordinal/Continuous Outcomes.”</span> <em>Statistical Thinking</em>. <a href="https://www.fharrell.com/post/pop/">https://www.fharrell.com/post/pop/</a>.
+</div>
+<div id="ref-Harrell_BBR_Change_2025" class="csl-entry" role="listitem">
+———. 2025. <span>“Transformations, Measuring Change, and Regression to the Mean.”</span> <a href="https://hbiostat.org/bbr/change">https://hbiostat.org/bbr/change</a>.
+</div>
+<div id="ref-Lapin2020-gz" class="csl-entry" role="listitem">
+Lapin, Brittany R. 2020. <span>“Considerations for Reporting and Reviewing Studies Including Health-Related Quality of Life.”</span> <em>Chest</em> 158 (1S): S49–56. <a href="https://doi.org/10.1016/j.chest.2020.03.007">https://doi.org/10.1016/j.chest.2020.03.007</a>.
+</div>
+<div id="ref-Piantadosi2022-wx" class="csl-entry" role="listitem">
+Piantadosi, Steven, and Curtis L Meinert. 2022. <em>Principles and Practice of Clinical Trials</em>. Edited by Curtis L Meinert. 1st ed. Principles and Practice of Clinical Trials. Cham, Switzerland: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-52636-2">https://doi.org/10.1007/978-3-319-52636-2</a>.
+</div>
+<div id="ref-Qian2021-rp" class="csl-entry" role="listitem">
+Qian, Yirui, Stephen J Walters, Richard Jacques, and Laura Flight. 2021. <span>“Comprehensive Review of Statistical Methods for Analysing Patient-Reported Outcomes (<span>PROs</span>) Used as Primary Outcomes in Randomised Controlled Trials (<span>RCTs</span>) Published by the <span>UK</span>’s Health Technology Assessment (<span>HTA</span>) Journal (1997-2020).”</span> <em>BMJ Open</em> 11 (9): e051673. <a href="https://doi.org/10.1136/bmjopen-2021-051673">https://doi.org/10.1136/bmjopen-2021-051673</a>.
+</div>
+<div id="ref-Sandercock_IST3_2016" class="csl-entry" role="listitem">
+Sandercock, P., Joanna Wardlaw, R. Lindley, G. Cohen, and W. Whiteley. 2016. <span>“The Third International Stroke Trial (IST-3), 2000–2015.”</span> University of Edinburgh; Edinburgh Clinical Trials Unit. <a href="https://doi.org/10.7488/ds/1350">https://doi.org/10.7488/ds/1350</a>.
+</div>
+<div id="ref-Snyder2019-uw" class="csl-entry" role="listitem">
+Snyder, Claire, Katherine Smith, Bernhard Holzner, Yonaira M Rivera, Elissa Bantug, Michael Brundage, and PRO Data Presentation Delphi Panel. 2019. <span>“Making a Picture Worth a Thousand Numbers: Recommendations for Graphically Displaying Patient-Reported Outcomes Data.”</span> <em>Quality of Life Research: An International Journal of Quality of Life Aspects of Treatment, Care and Rehabilitation</em> 28 (2): 345–56. <a href="https://doi.org/10.1007/s11136-018-2020-3">https://doi.org/10.1007/s11136-018-2020-3</a>.
+</div>
+<div id="ref-Spertus2019-za" class="csl-entry" role="listitem">
+Spertus, Jacob V, Laura A Hatfield, David J Cohen, Suzanne V Arnold, Martin Ho, Philip G Jones, Martin Leon, Bram Zuckerman, and John A Spertus. 2019. <span>“Integrating Quality of Life and Survival Outcomes in Cardiovascular Clinical Trials: Results from the <span>PARTNER</span> Trial.”</span> <em>Circulation. Cardiovascular Quality and Outcomes</em> 12 (6). <a href="https://doi.org/10.1161/circoutcomes.118.005420">https://doi.org/10.1161/circoutcomes.118.005420</a>.
+</div>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/figarofuga\.github\.io\/personal-slides\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
