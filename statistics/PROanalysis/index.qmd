@@ -304,9 +304,14 @@ ist3_dat_mod <- ist3_dat |>
             dead6mo == 1,
             101,
             100 - euroqol6
+        ),
+        bad_euroqol_comp_bin = dplyr::if_else(
+          dead6mo == 1 | euroqol6 < 25,
+          1,
+          0
         )
         ) |>
-    dplyr::select(itt_treat, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, reverse_euroqol_comp, missing_euroqol)
+    dplyr::select(itt_treat, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, reverse_euroqol_comp, bad_euroqol_comp_bin, missing_euroqol)
 
 
 
@@ -335,7 +340,7 @@ library(gtsummary)
 
 gtsummary::tbl_summary(
     ist3_dat_mod, by = missing_euroqol,
-    include = -c(euroqol6, dead6mo, reverse_euroqol_comp),
+    include = -c(euroqol6, dead6mo, reverse_euroqol_comp, bad_euroqol_comp_bin),
     value = list(
         sevendaycase ~ "Event",
         indepinadl_rand ~ 1,
@@ -482,11 +487,34 @@ modelsummary::modelsummary(
 
 # 死亡を考慮した解析～②
 ```{r}
+library(modelsummary)
 
+
+euroqol_formula <- as.formula(bad_euroqol_comp_bin ~ itt_treat + age + sexm1 + indepinadl_rand + antiplat_rand + atrialfib_rand + sbprand + dbprand + gcs_score_rand + nihss + sevendaycase + stroketype + R_infarct_size)
+
+logistic_fit_bin <- glm(euroqol_formula, data = ist3_dat_mod, family = binomial)
+
+modelsummary::modelsummary(
+    list(
+        "Logistic regression" = logistic_fit_bin
+    ),
+    exponentiate = TRUE,
+    estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
+    coef_omit = "^(?!itt_treat)",
+    gof_omit = ".*"
+)
 
 ```
+::: {.callout-note}
 
-- Composite outcomeとする
+値が大きいほどQOL不良と関連
+
+:::
+
+# 結論として
+
+- 何故かtPAが6ヶ月後の予後不良と関連している結果となってしまった
+- 一方で、どの解析も同じような結果だった
 
 # Take home message
 
