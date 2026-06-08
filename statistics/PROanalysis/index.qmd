@@ -9,6 +9,8 @@ format:
     transition: slide
     incremental: false
     embed-resources: false
+    smaller: true
+    scrollable: true
 execute:
   echo: false
   dev: svglite
@@ -313,7 +315,7 @@ ist3_dat_mod <- ist3_dat |>
           0
         )
         ) |>
-    dplyr::select(treatment_dbl, treatment, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, reverse_euroqol_comp, bad_euroqol_comp_bin, missing_euroqol)
+    dplyr::select(treatment_dbl, treatment, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, euroqol18, reverse_euroqol_comp, bad_euroqol_comp_bin, missing_euroqol)
 
 
 
@@ -334,6 +336,40 @@ tinyplot::plt(~ reverse_euroqol_comp, data = ist3_dat_mod, type = type_histogram
 
 - 6種類の方は正規性は全くなさそう
 - Euro QOL scoreは正規性がありそうだが死亡の扱いにこまる
+
+# Visualizationについて
+```{r}
+
+ist3_visdat <- ist3_dat |>
+  dplyr::select(treatment, euroqol6, euroqol18) |>
+  dplyr::mutate(
+    dplyr::across(
+      c(euroqol6, euroqol18),
+      \(x) {
+        dplyr::case_when(
+          x >= 90 ~ "Good",
+          x >= 50 & x < 90 ~ "Normal",
+          x < 50 ~ "Bad",
+          TRUE ~ NA_character_
+        ) |>
+          factor(levels = c("Bad", "Normal", "Good"))
+      },
+      .names = "{.col}_fct"
+    )
+  )
+
+# ggpubr::ggpie(
+
+# )
+
+
+# tinyplot::plt(~ euroqol6_fct, data = ist3_visdat, type = type_)
+
+```
+
+- rt-PAとplaceboで6ヶ月後、18ヶ月後のQOLについて記載
+- 具体的な値の差を95%CIを追加して記述
+- 一応90以上をGood、50未満をBadとした時の割合の差時系列を円グラフで
 
 # Missing dataと死亡の扱い
 
