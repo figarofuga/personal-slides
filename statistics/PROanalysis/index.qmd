@@ -429,9 +429,9 @@ parameters::compare_parameters(
         "Linear regression" = ols_fit,
         "Ordinal regression" = orm_fit,
         "Tobit regression" = tobit_fit
-    ), 
+    ),
     keep = "treatment_dbl"
-) 
+)
 
 ```
 
@@ -466,9 +466,9 @@ parameters::compare_parameters(
         "Linear regression" = ols_fit_euroqol,
         "Ordinal regression" = orm_fit_euroqol,
         "Tobit regression" = tobit_fit_euroqol
-    ), 
+    ),
     keep = "treatment_dbl"
-) 
+)
 
 
 ```
@@ -503,9 +503,9 @@ parameters::compare_parameters(
         "Linear regression" = ols_fit_euroqol2,
         "Ordinal regression" = orm_fit_euroqol2,
         "Tobit regression" = tobit_fit_euroqol2
-    ), 
+    ),
     keep = "treatment_dbl"
-) 
+)
 
 
 
@@ -547,8 +547,8 @@ modelsummary::modelsummary(
 
 # 結論として
 
-- tPAha6ヶ月後の良いQOLと関連している結果となってしまった
-- 一方で、どの解析も同じような結果だった
+- tPAは6ヶ月後の良いQOLと関連している結果だった
+    - 全ての解析手法で同じような結果だった
 
 # Take home message
 
