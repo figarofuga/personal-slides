@@ -47,31 +47,35 @@ bibliography: references.bib
 
 :::: {.columns}
 
-::: {.column width="20%"}
-contents...
+::: {.column width="25%"}
+
+![](images/pro_analysis_real.png)
+
 :::
 
-::: {.column width="60%"}
-contents...
-:::
-
-::::
+::: {.column width="75%"}
 
 -   統計学の論文では通常の多変量回帰、beta-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・
 
 -   結局どれがいいの？ [@Arostegui2012-cb]
 
-![](images/pro_analysis_real.png)
+:::
+
+::::
+
+
 
 # 先行研究では？
 
-![](images/pro_analysis_real2.png)
+![](images/pro_analysis_real2.png){height=60%}
+
 -   **多種多様な手法が使われており標準化されていない** [@Qian2021-rp]
 
 
 # ガイドラインでは？
 
 ![](images/guideline_title.jpg)
+
 [@Coens2020-lz]
 
 # PROの確定的な解析方法は！！
@@ -92,7 +96,7 @@ contents...
 
 について検討が必要
 
-# Research object {.smaller}
+# Research object
 
 -   [**PRO研究の目的を明確にする**]{style="color:#ff0000"}
     -   治療効果・臨床的効果の証明？
@@ -118,9 +122,18 @@ contents...
 
 # 具体的な推奨される統計手法
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 - 1回のみfollow-upするdesign: 線形回帰
 
-![](images/pro_linear_exam.png)
+![](images/pro_linear_exam.png){width=45%}
+
+
+:::
+
+::: {.column width="50%"}
 
 -   2回以上のfollow-upをするdesign: Linear mixed model
     -   時間は離散変数とする
@@ -128,7 +141,12 @@ contents...
 
 - Time-to-event解析: Cox回帰
 
-![](images/pro_km_exam.png)
+![](images/pro_km_exam.png){width=60%}
+
+:::
+
+::::
+
 
 [**これらの解析ではMICを考慮する事が強く推奨！**]{style="color:#ff0000"}
 
@@ -196,9 +214,9 @@ contents...
 
 # Visualizationについて
 
-![](images/pro_visualize.jpg)
+![](images/pro_visualize.jpg){height=70%}
 
-![](images/pro_piechart.png)
+![](images/pro_piechart.png){height=70%}
 
 - **個々人のPROMデータ: bar or Line plotが良い**
 
@@ -218,7 +236,7 @@ contents...
 
 # 群レベルのVisualization
 
-![](images/pro_linechart_addci.png)
+![](images/pro_linechart_addci.png){height=80%}
 
 - 95%信頼区間を記述する
 
@@ -229,9 +247,10 @@ contents...
 - Ceiling/Floorがあるときに使えるCensored regression ( = tobit model)
 - Ordered regression model
 
-![](images/pro_tobit_exam.png)
 
 # Tobit modelとは
+
+![](images/pro_tobit_exam.png)
 
 -   ある範囲外の値が丸め込まれる(打ち切られる)ときの回帰
     -   テストの点数(上限が100点)など
@@ -288,8 +307,6 @@ contents...
 |  4 | かなり重い症状で他者の助けが必要。ただし昼夜を問わずの介護までは不要 |
 |  5 | 重度の障害があり、昼夜を問わず常時介護が必要             |
 |  6 | 死亡                                 |
-
-OHS
 
 
 # QOL outcomeの正規性の確認
@@ -351,6 +368,7 @@ tinyplot::plt(~ reverse_euroqol_comp, data = ist3_dat_mod, type = type_histogram
 
 # Visualizationについて
 ```{r}
+library(ggpubr)
 
 ist3_visdat <- ist3_dat |>
   dplyr::select(treatment, euroqol6, euroqol18) |>
@@ -370,12 +388,49 @@ ist3_visdat <- ist3_dat |>
     )
   )
 
-# ggpubr::ggpie(
 
-# )
+pieplot_list <- tidyr::pivot_longer(
+    ist3_visdat, 
+    cols = c("euroqol6_fct", "euroqol18_fct")
+) |> 
+  tidyr::drop_na(value) |> 
+  dplyr::count(
+  treatment, name, value
+  ) |> 
+  dplyr::mutate(
+    sum = sum(n), .by = c(treatment, name)
+  ) |> 
+  dplyr::mutate(
+    label = paste0(
+        value, ": ", round(n/sum*100), "%"
+    )
+  ) |> 
+  dplyr::group_nest(
+    treatment, name
+  ) |> 
+  dplyr::mutate(
+    pieplot = purrr::map(data, \(dat){
+        ggpubr::ggpie(
+            dat, 
+            x = "n", 
+            label = "label", 
+            fill = "value"
+        )
+    })
+  )
 
+lineplot <- tidyr::pivot_longer(
+    ist3_visdat, 
+    cols = c("euroqol6", "euroqol18")
+) |> 
+  tidyr::drop_na(value) |> 
+    ggpubr::ggline(
+        x = "name", 
+        y = "value", 
+        color = "treatment", 
+        add = "mean_se"
+    )
 
-# tinyplot::plt(~ euroqol6_fct, data = ist3_visdat, type = type_)
 
 ```
 
@@ -387,6 +442,7 @@ ist3_visdat <- ist3_dat |>
 
 ```{r}
 library(gtsummary)
+library(finalfit)
 
 gtsummary::tbl_summary(
     ist3_dat_mod, by = missing_euroqol,
