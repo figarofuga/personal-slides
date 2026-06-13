@@ -448,368 +448,109 @@
     "text": "Reference\n\n\nAdrian Vella. n.d.a. “Hypoglycemia in Adults Without Diabetes Mellitus: Determining the Etiology.” https://www.uptodate.com.\n\n\n———. n.d.b. “Noninsulinoma Pancreatogenous Hypoglycemia Syndrome.” https://www.uptodate.com.\n\n\nDynaMed. n.d. “Hypoglycemia in Adults - Approach to the Patient Without Diabetes.” https://www.dynamed.com/approach-to/hypoglycemia-in-adults-approach-to-the-patient-without-diabetes; DynaMed.\n\n\nJames C Ellsmere. n.d. “Bariatric Operations: Late Complications with Subacute Presentations.” https://www.uptodate.com.\n\n\nMartens, Pieter, and Jos Tits. 2014. “Approach to the Patient with Spontaneous Hypoglycemia.” European Journal of Internal Medicine 25 (5): 415–21. https://doi.org/10.1016/j.ejim.2014.02.011.\n\n\nRayas, Maria S, and Marzieh Salehi. 2000. “Non-Diabetic Hypoglycemia.” In Endotext. South Dartmouth (MA): MDText.com, Inc."
   },
   {
-    "objectID": "statistics/mlcausal/index.html#因果関係",
-    "href": "statistics/mlcausal/index.html#因果関係",
-    "title": "機械学習を用いた因果推論",
-    "section": "因果関係",
-    "text": "因果関係\n\n医学研究の第一の目標と言っても過言ではない\nAの薬を使うと患者の予後は良くなるか？\n実際は口で言うほど簡単ではない"
+    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeとは",
+    "href": "medicine/ESUS/index.html#cryptogenic-strokeとは",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "Cryptogenic strokeとは？",
+    "text": "Cryptogenic strokeとは？\n\nCryptogenic stroke\nCryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時\nその中で近位の動脈の狭窄や心原性が見つからない時の塞栓性脳梗塞を ESUS（Embolic stroke of undetermined source: 原因不明の脳塞栓症）という"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#因果関係の考え方",
-    "href": "statistics/mlcausal/index.html#因果関係の考え方",
-    "title": "機械学習を用いた因果推論",
-    "section": "因果関係の考え方",
-    "text": "因果関係の考え方\n\n大きく分けて2つの考え方がある\n\n潜在的アウトカムを考えるRubin流\nDAGを作り、do operatorを使うPearl流\n\n詳細は省くが、今回はPearl流のDAGを中心に考える"
+    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの疫学",
+    "href": "medicine/ESUS/index.html#cryptogenic-strokeの疫学",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "Cryptogenic strokeの疫学",
+    "text": "Cryptogenic strokeの疫学\n\n\n\n定義により異なるが 10-40% と言われている\n\n日本でも同じくらいの割合\n\nCryptogenic stroke のうち ESUS は大体 80-90%\n参考\n\nhttps://www.jstage.jst.go.jp/article/jstroke/38/2/38_10416/_pdf/-char/en\nN Engl J Med. 2016;374(21):2065-2074."
   },
   {
-    "objectID": "statistics/mlcausal/index.html#dagの基本",
-    "href": "statistics/mlcausal/index.html#dagの基本",
-    "title": "機械学習を用いた因果推論",
-    "section": "DAGの基本",
-    "text": "DAGの基本\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.6.0 (2026-04-24)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-05-30\n pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)\n quarto   1.8.26 @ /opt/quarto/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version   date (UTC) lib source\n boot           1.3-32    2025-08-29 [2] RSPM (R 4.5.0)\n bspm           0.5.7     2024-04-10 [1] CRAN (R 4.5.2)\n cli            3.6.6     2026-04-09 [2] CRAN (R 4.5.3)\n curl           7.1.0     2026-04-22 [2] CRAN (R 4.5.3)\n dagitty      * 0.3-4     2023-12-07 [2] RSPM (R 4.4.0)\n digest         0.6.39    2025-11-19 [2] CRAN (R 4.5.2)\n dplyr        * 1.2.1     2026-04-03 [2] CRAN (R 4.5.3)\n evaluate       1.0.5     2025-08-27 [2] RSPM (R 4.5.0)\n farver         2.1.2     2024-05-13 [2] RSPM (R 4.4.2)\n fastmap        1.2.0     2024-05-15 [2] RSPM (R 4.4.2)\n generics       0.1.4     2025-05-09 [2] RSPM (R 4.5.0)\n ggdag        * 0.2.13    2024-07-22 [2] RSPM (R 4.4.0)\n ggplot2      * 4.0.3     2026-04-22 [2] CRAN (R 4.5.3)\n glue           1.8.1     2026-04-17 [2] CRAN (R 4.5.3)\n gtable         0.3.6     2024-10-25 [2] RSPM (R 4.4.0)\n htmltools      0.5.9     2025-12-04 [2] CRAN (R 4.5.2)\n igraph         2.3.1     2026-05-04 [2] CRAN (R 4.6.0)\n jsonlite       2.0.0     2025-03-27 [2] RSPM (R 4.4.0)\n knitr          1.51      2025-12-20 [2] CRAN (R 4.5.2)\n lattice        0.22-9    2026-02-09 [2] CRAN (R 4.5.2)\n lifecycle      1.0.5     2026-01-08 [2] CRAN (R 4.5.2)\n magrittr       2.0.5     2026-04-04 [2] CRAN (R 4.5.3)\n MASS           7.3-65    2025-02-28 [2] RSPM (R 4.4.0)\n Matrix         1.7-5     2026-03-21 [2] CRAN (R 4.5.3)\n otel           0.2.0     2025-08-29 [2] RSPM (R 4.5.0)\n pillar         1.11.1    2025-09-17 [2] RSPM (R 4.5.0)\n pkgconfig      2.0.3     2019-09-22 [2] RSPM (R 4.4.0)\n png            0.1-9     2026-03-15 [2] CRAN (R 4.5.2)\n purrr          1.2.2     2026-04-10 [2] CRAN (R 4.5.3)\n R6             2.6.1     2025-02-15 [2] RSPM (R 4.4.0)\n RColorBrewer   1.1-3     2022-04-03 [2] RSPM (R 4.4.0)\n Rcpp           1.1.1-1.1 2026-04-24 [2] CRAN (R 4.5.3)\n reticulate   * 1.46.0    2026-04-09 [2] CRAN (R 4.5.3)\n rlang          1.2.0     2026-04-06 [2] CRAN (R 4.6.0)\n rmarkdown      2.31      2026-03-26 [2] CRAN (R 4.5.3)\n S7             0.2.2     2026-04-22 [2] CRAN (R 4.5.3)\n scales         1.4.0     2025-04-24 [2] RSPM (R 4.4.0)\n sessioninfo  * 1.2.3     2025-02-05 [2] RSPM (R 4.4.0)\n tibble         3.3.1     2026-01-11 [2] CRAN (R 4.5.2)\n tidygraph      1.3.1     2024-01-30 [2] CRAN (R 4.6.0)\n tidyr          1.3.2     2025-12-19 [2] CRAN (R 4.5.2)\n tidyselect     1.2.1     2024-03-11 [2] RSPM (R 4.4.0)\n V8             8.2.0     2026-04-21 [2] CRAN (R 4.5.3)\n vctrs          0.7.3     2026-04-11 [2] CRAN (R 4.6.0)\n withr          3.0.2     2024-10-28 [2] RSPM (R 4.4.0)\n xfun           0.57      2026-03-20 [2] CRAN (R 4.5.3)\n yaml           2.3.12    2025-12-10 [2] CRAN (R 4.5.2)\n\n [1] /usr/local/lib/R/site-library\n [2] /usr/lib/R/site-library\n [3] /usr/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.0\n cairoFT\n pango          1.52.1\n png            1.6.43\n jpeg           8.0\n tiff           LIBTIFF, Version 4.5.1\n tcl            8.6\n curl           8.5.0\n zlib           1.3\n bzlib          1.0.8, 13-Jul-2019\n xz             5.4.5\n deflate        1.19\n zstd           1.5.5\n PCRE           10.42 2022-12-11\n ICU            74.2\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          glibc 2.39\n readline       8.2\n BLAS           /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0\n lapack         /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n Python is not available\n\n──────────────────────────────────────────────────────────────────────────────"
+    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの機序は",
+    "href": "medicine/ESUS/index.html#cryptogenic-strokeの機序は",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "Cryptogenic strokeの機序は？",
+    "text": "Cryptogenic strokeの機序は？\n\n単一ではなく複数の機序が提唱されている\n潜在性の pAF\n大動脈の粥腫やその他の心原性\nPFO や ASD などによる奇異性塞栓\n血栓傾向\n脳血管疾患（血管奇形など）\n年齢で多い原因は異なる\n\n18-30歳: 動脈解離や血栓傾向、先天性心疾患\n31-60歳: 若年性の動脈硬化、後天性の心疾患\n61歳以上: 潜在性 AF"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#世界は結構複雑にできている",
-    "href": "statistics/mlcausal/index.html#世界は結構複雑にできている",
-    "title": "機械学習を用いた因果推論",
-    "section": "世界は結構複雑にできている",
-    "text": "世界は結構複雑にできている\n\n\n# A tibble: 6 × 13\n     id   age   sex   bmi    hf   bnp  lvef palpitation    ca bin_outcome\n  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;\n1     1    47     1  31.7     0    56    43           1     1           1\n2     2    62     0  19.1     0   180    43           0     0           1\n3     3    57     1  19.3     0    73    62           1     0           0\n4     4    59     0  17.7     1    74    43           0     1           1\n5     5    85     0  37.2     0   169    48           1     1           1\n6     6    53     1  18.7     1   120    46           0     1           1\n# ℹ 3 more variables: afeqt_os &lt;dbl&gt;, eventtime &lt;dbl&gt;, status &lt;int&gt;"
+    "objectID": "medicine/ESUS/index.html#どうやって診断する",
+    "href": "medicine/ESUS/index.html#どうやって診断する",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "どうやって診断する？",
+    "text": "どうやって診断する？\n\n\n検査の程度によるため、世界的に決まった基準はない\n古典的な TOAST 分類が一つの基準\n\nこれだと Cryptogenic が増える\n\nASCOD、CCS systems を使うと Cryptogenic が減る とされる\n\nただしデータはまだ少ない"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#dataの説明",
-    "href": "statistics/mlcausal/index.html#dataの説明",
-    "title": "機械学習を用いた因果推論",
-    "section": "Dataの説明",
-    "text": "Dataの説明\n\nDAGは上記の通り\nCAがメインのInterventionで解析をするアウトカムは3種類\n\n連続値のAFEQT-OS\n二値値のbin_outcome(短期の入院の有無など)\n生存分析のeventtime, status(長期の心不全あるいは死亡)\n\nほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)\nSESは観測されない交絡因子"
+    "objectID": "medicine/ESUS/index.html#ccs-systems",
+    "href": "medicine/ESUS/index.html#ccs-systems",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "CCS systems",
+    "text": "CCS systems\n\n\nhttps://ccs.mgh.harvard.edu/ccs_title.php"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#simple-regression",
-    "href": "statistics/mlcausal/index.html#simple-regression",
-    "title": "機械学習を用いた因果推論",
-    "section": "Simple regression",
-    "text": "Simple regression\n\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                simple\n                rcs\n              \n        \n        \n        \n                \n                  (Intercept)\n                  66.464\n                  65.771\n                \n                \n                  \n                  (2.587)\n                  (7.234)\n                \n                \n                  age\n                  0.018\n                  \n                \n                \n                  \n                  (0.030)\n                  \n                \n                \n                  sex\n                  0.264\n                  0.268\n                \n                \n                  \n                  (0.445)\n                  (0.446)\n                \n                \n                  bmi\n                  0.072\n                  \n                \n                \n                  \n                  (0.049)\n                  \n                \n                \n                  hf\n                  0.616\n                  0.590\n                \n                \n                  \n                  (0.540)\n                  (0.542)\n                \n                \n                  bnp\n                  -0.001\n                  \n                \n                \n                  \n                  (0.001)\n                  \n                \n                \n                  lvef\n                  -0.035\n                  \n                \n                \n                  \n                  (0.028)\n                  \n                \n                \n                  ca\n                  -0.163\n                  -0.101\n                \n                \n                  \n                  (0.480)\n                  (0.489)\n                \n                \n                  rcs(age, 4)age\n                  \n                  -0.029\n                \n                \n                  \n                  \n                  (0.089)\n                \n                \n                  rcs(age, 4)age'\n                  \n                  0.138\n                \n                \n                  \n                  \n                  (0.260)\n                \n                \n                  rcs(age, 4)age''\n                  \n                  -0.478\n                \n                \n                  \n                  \n                  (0.962)\n                \n                \n                  rcs(bmi, 4)bmi\n                  \n                  0.055\n                \n                \n                  \n                  \n                  (0.214)\n                \n                \n                  rcs(bmi, 4)bmi'\n                  \n                  0.047\n                \n                \n                  \n                  \n                  (0.792)\n                \n                \n                  rcs(bmi, 4)bmi''\n                  \n                  -0.110\n                \n                \n                  \n                  \n                  (2.387)\n                \n                \n                  rcs(bnp, 4)bnp\n                  \n                  0.020\n                \n                \n                  \n                  \n                  (0.013)\n                \n                \n                  rcs(bnp, 4)bnp'\n                  \n                  -0.424\n                \n                \n                  \n                  \n                  (0.262)\n                \n                \n                  rcs(bnp, 4)bnp''\n                  \n                  0.701\n                \n                \n                  \n                  \n                  (0.434)\n                \n                \n                  rcs(lvef, 4)lvef\n                  \n                  0.020\n                \n                \n                  \n                  \n                  (0.097)\n                \n                \n                  rcs(lvef, 4)lvef'\n                  \n                  -0.151\n                \n                \n                  \n                  \n                  (0.261)\n                \n                \n                  rcs(lvef, 4)lvef''\n                  \n                  0.564\n                \n                \n                  \n                  \n                  (0.992)\n                \n                \n                  Num.Obs.\n                  6000\n                  6000\n                \n                \n                  R2\n                  0.001\n                  0.002\n                \n                \n                  R2 Adj.\n                  -0.000\n                  -0.001\n                \n                \n                  AIC\n                  50429.6\n                  50442.4\n                \n                \n                  BIC\n                  50489.9\n                  50556.2\n                \n                \n                  Log.Lik.\n                  -25205.796\n                  -25204.176\n                \n                \n                  F\n                  0.844\n                  0.609\n                \n                \n                  RMSE\n                  16.15\n                  16.15"
+    "objectID": "medicine/ESUS/index.html#cryptogenic-stroke患者への問診と身体所見",
+    "href": "medicine/ESUS/index.html#cryptogenic-stroke患者への問診と身体所見",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "Cryptogenic stroke患者への問診と身体所見",
+    "text": "Cryptogenic stroke患者への問診と身体所見\n\n\n左右の上肢の血圧差: AoD\n皮膚の網状皮斑: APS\n黄色腫: FH\n心雑音: IE、先天性心疾患\n脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病\nDVT: 血栓傾向、奇異性塞栓\n頸部外傷やマッサージ: 椎骨脳底動脈の乖離\n片頭痛: 片頭痛性脳梗塞 / CADASIL\n違法薬物: IE、血管攣縮、HIV など\n息こらえの後の発症: 奇異性塞栓\n若年の ASCVD の家族歴: 遺伝性疾患\n妊娠: CVT、子癇\nN Engl J Med. 2016;374(21):2065-2074."
   },
   {
-    "objectID": "statistics/mlcausal/index.html#シンプルな回帰モデルの解釈と問題点",
-    "href": "statistics/mlcausal/index.html#シンプルな回帰モデルの解釈と問題点",
-    "title": "機械学習を用いた因果推論",
-    "section": "シンプルな回帰モデルの解釈と問題点",
-    "text": "シンプルな回帰モデルの解釈と問題点\n\n複数のパラメータを固定した上での目標としたパラメータを1単位変化した時の効果\n線形である事が条件\n複雑な関係性を捉えることが出来ない\n\nModel misspecificationの問題\n治療の異質性を捉えられない"
+    "objectID": "medicine/ESUS/index.html#検査について",
+    "href": "medicine/ESUS/index.html#検査について",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "検査について",
+    "text": "検査について\n\nどこまでやるべきか、決まっていない\n最低限の検査\n\n基本的な血算\n凝固系\n頭部 MRI\n発症 24 時間の心電図モニター\n頸動脈エコー\nTTE\n\nNEJM では段階的なアプローチが推奨されている\n特に重要なのは 潜在性の pAF 検索\nN Engl J Med. 2016;374(21):2065-2074."
   },
   {
-    "objectID": "statistics/mlcausal/index.html#例えば",
-    "href": "statistics/mlcausal/index.html#例えば",
-    "title": "機械学習を用いた因果推論",
-    "section": "例えば",
-    "text": "例えば"
+    "objectID": "medicine/ESUS/index.html#esusにおけるafの検索",
+    "href": "medicine/ESUS/index.html#esusにおけるafの検索",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "ESUSにおけるAFの検索",
+    "text": "ESUSにおけるAFの検索\n\n\n\nESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる\nループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある\nUpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨\n参考\n\nN Engl J Med. 2014;370(26):2478-2486.\nN Engl J Med. 2014;370(26):2467-2477.\nN Engl J Med. 2023;389(13):1167-1179."
   },
   {
-    "objectID": "statistics/mlcausal/index.html#どうすればrobustになる",
-    "href": "statistics/mlcausal/index.html#どうすればrobustになる",
-    "title": "機械学習を用いた因果推論",
-    "section": "どうすればRobustになる？",
-    "text": "どうすればRobustになる？\n\nPropensity score (PS) analysis\n\nPS match, PS weight\n\nATT, ATC, ATE, ATOなど\n\n\nアウトカムモデル + PS model\n\nDoubly robust model\n\n最も有名なものはAIPW\n\n\nPS modelを進化させる\n\nPSをUpdateさせるTMLE"
+    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの治療",
+    "href": "medicine/ESUS/index.html#cryptogenic-strokeの治療",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "Cryptogenic strokeの治療",
+    "text": "Cryptogenic strokeの治療\n\n基本は原疾患により分けることが大事\n原因が見つからない時は、基本は ASA\nESUS で DOAC vs. ASA があるが、基本的に DOAC が負けている\n\nNAVIGATE-ESUS\nRE-SPECT ESUS\nARCADIA trial\n\n特異的な治療がある疾患もある\n\nAPS だと DOAC でなく Wf を選択\nPFO による奇異性塞栓 → PFO 閉鎖"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#matchingだと",
-    "href": "statistics/mlcausal/index.html#matchingだと",
-    "title": "機械学習を用いた因果推論",
-    "section": "Matchingだと",
-    "text": "Matchingだと\n\n一番有名なのはPropensity score matching\n\n\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                PS match\n                PS weight\n              \n        \n        \n        \n                \n                  ca\n                  -0.291 [-1.441, 0.859]\n                  0.023 [-1.051, 1.096]\n                \n                \n                  \n                  (0.587)\n                  (0.548)\n                \n                \n                  (Intercept)\n                  \n                  67.637 [66.840, 68.434]\n                \n                \n                  \n                  \n                  (0.407)\n                \n                \n                  Num.Obs.\n                  5636\n                  6000\n                \n                \n                  R2\n                  0.001\n                  \n                \n                \n                  AIC\n                  47364.7\n                  65800.0\n                \n                \n                  BIC\n                  47464.2\n                  65820.1\n                \n                \n                  Log.Lik.\n                  -23667.344\n                  -32897.016\n                \n                \n                  F\n                  0.564\n                  0.002\n                \n                \n                  RMSE\n                  16.13\n                  16.16"
+    "objectID": "medicine/ESUS/index.html#pfoってなんだ",
+    "href": "medicine/ESUS/index.html#pfoってなんだ",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "PFOってなんだ？",
+    "text": "PFOってなんだ？\n\n\n\n胎児循環の時は右房圧が高く、右房 → 左房に血流がある\n出生とともに肺血管抵抗が低下して、左房圧が高くなり閉鎖する\n卵円孔が開存していると、普段は閉じているが、いきんだ時に右房圧が上がり右房 → 左房の血流になる\nそこに DVT からの血栓が流れると右房 → 左房で脳梗塞になる"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#augumented-inverse-probablity-weighting-aipw",
-    "href": "statistics/mlcausal/index.html#augumented-inverse-probablity-weighting-aipw",
-    "title": "機械学習を用いた因果推論",
-    "section": "Augumented Inverse Probablity Weighting (AIPW)",
-    "text": "Augumented Inverse Probablity Weighting (AIPW)"
+    "objectID": "medicine/ESUS/index.html#pfoによる奇異性塞栓への閉鎖術",
+    "href": "medicine/ESUS/index.html#pfoによる奇異性塞栓への閉鎖術",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "PFOによる奇異性塞栓への閉鎖術",
+    "text": "PFOによる奇異性塞栓への閉鎖術"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#それでもなお問題が残る",
-    "href": "statistics/mlcausal/index.html#それでもなお問題が残る",
-    "title": "機械学習を用いた因果推論",
-    "section": "それでもなお、問題が残る",
-    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？"
+    "objectID": "medicine/ESUS/index.html#じゃあ全例でpfoの検査を行う",
+    "href": "medicine/ESUS/index.html#じゃあ全例でpfoの検査を行う",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "じゃあ全例でPFOの検査を行う？",
+    "text": "じゃあ全例でPFOの検査を行う？\n\n\n卵円孔開存は common\n\n通常人口で 25%\nCryptogenic stroke に限定すると 50%\n\nPFO があっても、それが原因かは不明瞭\n探せばいいってもんじゃない"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#機械学習とは",
-    "href": "statistics/mlcausal/index.html#機械学習とは",
-    "title": "機械学習を用いた因果推論",
-    "section": "機械学習とは",
-    "text": "機械学習とは"
+    "objectID": "medicine/ESUS/index.html#いつpfoの検査をする",
+    "href": "medicine/ESUS/index.html#いつpfoの検査をする",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "いつPFOの検査をする？",
+    "text": "いつPFOの検査をする？\n\n\n\nJAMA. 2021;326(22):2277-2286.\n治療適応は原則 60歳以下\nRoPE score &lt; 7 だと治療効果がないかもしれない\n治療を見据えて検査を行う"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#代表的な機械学習",
-    "href": "statistics/mlcausal/index.html#代表的な機械学習",
-    "title": "機械学習を用いた因果推論",
-    "section": "代表的な機械学習",
-    "text": "代表的な機械学習\n\nLogistic回帰\ntree-based model\n\nRandom forest\nXGBoost\n\nNeural network"
+    "objectID": "medicine/ESUS/index.html#まとめ",
+    "href": "medicine/ESUS/index.html#まとめ",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "まとめ",
+    "text": "まとめ\n\n通常診療で etiology が分からない脳梗塞を Cryptogenic stroke という\nその中で塞栓性のものを ESUS という\n\nESUS &lt; Cryptogenic stroke\n\nESUS を見つけた時に最も重要なのは AF 探し\n治療適応があり、有効そうな患者では PFO 探しが意味あるかも\n分からない時は ASA が良い\n\nDOAC は使わない"
   },
   {
-    "objectID": "statistics/mlcausal/index.html#機械学習の強みと弱み",
-    "href": "statistics/mlcausal/index.html#機械学習の強みと弱み",
-    "title": "機械学習を用いた因果推論",
-    "section": "機械学習の強みと弱み",
-    "text": "機械学習の強みと弱み\n\nPros\n\nデータから関係性を柔軟に読み取る\n例えばTree based modelは相互作用を自然に扱うことが出来る\n\nCons\n\n複雑なモデルはBlack boxになる\nOverfittingの問題"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#因果推論における機械学習の役割",
-    "href": "statistics/mlcausal/index.html#因果推論における機械学習の役割",
-    "title": "機械学習を用いた因果推論",
-    "section": "因果推論における機械学習の役割",
-    "text": "因果推論における機械学習の役割\n\nアウトカムモデル、PS modelを柔軟に扱う\nInteraction termを自然に扱える\n\nHTEを自然に扱えないか？"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
-    "href": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
-    "title": "機械学習を用いた因果推論",
-    "section": "機械学習を用いた因果推論について",
-    "text": "機械学習を用いた因果推論について\n\n大別してMeta learner系とCausal forest系に分けられる\n柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest\nとはいえ、Causal forestだけで良い気もする\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x74318d9bef30&gt;\n\n\n[ 1.36099145  0.99076761 -0.22381373 ...  0.         -1.00593965\n  0.04658836]"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#scratch-for-s-learner",
-    "href": "statistics/mlcausal/index.html#scratch-for-s-learner",
-    "title": "機械学習を用いた因果推論",
-    "section": "Scratch for S-learner",
-    "text": "Scratch for S-learner\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 rmse    standard        14.0\n\n\nVariable |     Mean |   SD |  IQR |         Range | Skewness | Kurtosis |    n | n_Missing\n------------------------------------------------------------------------------------------\nca_diff  | 6.85e-03 | 1.39 | 0.82 | [-9.25, 7.16] |    -0.41 |     5.02 | 6000 |         0"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#t-learner",
-    "href": "statistics/mlcausal/index.html#t-learner",
-    "title": "機械学習を用いた因果推論",
-    "section": "T learner",
-    "text": "T learner\n\nt-learner"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#scratch-for-t-learner",
-    "href": "statistics/mlcausal/index.html#scratch-for-t-learner",
-    "title": "機械学習を用いた因果推論",
-    "section": "Scratch for T-learner",
-    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x74318d90b410&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 3.16970827  4.26806602 -1.45357206 ...  0.8124753  -1.37567113\n  3.3748413 ]\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x74318e8ebda0&gt;\n\n\n&lt;econml.metalearners._metalearners.DomainAdaptationLearner object at 0x74318d5 &gt;\n\n&gt; 2f320&gt;\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x74318d527a10&gt;"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
-    "href": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
-    "title": "機械学習を用いた因果推論",
-    "section": "機械学習の因果推論における使い方",
-    "text": "機械学習の因果推論における使い方\n\n交絡因子の調整で機械学習を用いる\n\nAIPW, tlmeなど\n\n因果をダイレクトに推論する学習機を作る\n\nMeta-learner\n\nCATEを測定する\n\nCausal forestなど"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#因果forest",
-    "href": "statistics/mlcausal/index.html#因果forest",
-    "title": "機械学習を用いた因果推論",
-    "section": "因果forest",
-    "text": "因果forest\n\nHTEを計測するのに有名\nAshey et al 2019"
-  },
-  {
-    "objectID": "statistics/mlcausal/index.html#survival-model",
-    "href": "statistics/mlcausal/index.html#survival-model",
-    "title": "機械学習を用いた因果推論",
-    "section": "Survival model",
-    "text": "Survival model\n\n\n\n         control     treated\n[1,] -0.07987349  0.07987349\n[2,] -0.04125118  0.04125118\n[3,]  0.02343951 -0.02343951\n[4,]  0.01011981 -0.01011981\n[5,]  4.86985832 -4.86985832\n[6,] -0.44629810  0.44629810\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.6.0 (2026-04-24)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-06-07\n pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)\n quarto   1.8.26 @ /opt/quarto/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n backports         1.5.1      2026-04-03 [2] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [2] CRAN (R 4.5.2)\n bayestestR      * 0.18.0     2026-05-21 [2] CRAN (R 4.6.0)\n bonsai          * 0.4.1      2026-05-21 [2] CRAN (R 4.6.0)\n boot              1.3-32     2025-08-29 [2] RSPM (R 4.5.0)\n broom           * 1.0.13     2026-05-14 [2] CRAN (R 4.6.0)\n bspm              0.5.7      2024-04-10 [1] CRAN (R 4.5.2)\n checkmate         2.3.4      2026-02-03 [2] CRAN (R 4.5.2)\n class             7.3-23     2025-01-01 [2] RSPM (R 4.4.0)\n cli               3.6.6      2026-04-09 [2] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [2] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [2] RSPM (R 4.4.0)\n colorspace        2.1-2      2025-09-22 [2] RSPM (R 4.5.0)\n correlation     * 0.8.8      2025-07-08 [2] RSPM (R 4.5.0)\n curl              7.1.0      2026-04-22 [2] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [2] RSPM (R 4.4.0)\n data.table        1.18.4     2026-05-06 [2] CRAN (R 4.6.0)\n datawizard      * 1.3.1      2026-04-26 [2] CRAN (R 4.5.3)\n dials           * 1.4.3      2026-04-11 [2] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [2] RSPM (R 4.4.0)\n digest            0.6.39     2025-11-19 [2] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [2] CRAN (R 4.5.3)\n easystats       * 0.7.5      2025-07-11 [2] RSPM (R 4.5.0)\n effectsize      * 1.0.2      2026-03-11 [2] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [2] RSPM (R 4.5.0)\n farver            2.1.2      2024-05-13 [2] RSPM (R 4.4.2)\n fastmap           1.2.0      2024-05-15 [2] RSPM (R 4.4.2)\n forcats         * 1.0.1      2025-09-25 [2] RSPM (R 4.5.0)\n foreign           0.8-90     2025-03-31 [2] RSPM (R 4.4.0)\n Formula           1.2-5      2023-02-24 [2] RSPM (R 4.4.0)\n furrr             0.4.0      2026-03-31 [2] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [2] CRAN (R 4.5.2)\n future.apply      1.20.2     2026-02-20 [2] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [2] RSPM (R 4.5.0)\n ggcube          * 0.1.0      2026-05-27 [2] CRAN (R 4.6.0)\n ggdag           * 0.2.13     2024-07-22 [2] RSPM (R 4.4.0)\n ggplot2         * 4.0.3      2026-04-22 [2] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [2] CRAN (R 4.5.2)\n glue              1.8.1      2026-04-17 [2] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [2] RSPM (R 4.4.2)\n grf             * 2.6.1      2026-03-04 [2] CRAN (R 4.5.2)\n gridExtra         2.3        2017-09-09 [2] RSPM (R 4.4.0)\n gtable            0.3.6      2024-10-25 [2] RSPM (R 4.4.0)\n hardhat           1.4.3      2026-04-04 [2] CRAN (R 4.5.3)\n Hmisc           * 5.2-5      2026-01-09 [2] CRAN (R 4.5.2)\n hms               1.1.4      2025-10-17 [2] RSPM (R 4.5.0)\n htmlTable         2.5.0      2026-04-22 [2] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [2] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [2] RSPM (R 4.4.0)\n igraph            2.3.1      2026-05-04 [2] CRAN (R 4.6.0)\n infer           * 1.1.0      2025-12-18 [2] CRAN (R 4.5.2)\n insight         * 1.5.1      2026-05-21 [2] CRAN (R 4.6.0)\n ipred             0.9-15     2024-07-18 [2] RSPM (R 4.4.0)\n isoband           0.3.0      2025-12-07 [2] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [2] RSPM (R 4.4.0)\n knitr             1.51       2025-12-20 [2] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [2] RSPM (R 4.4.0)\n lattice           0.22-9     2026-02-09 [2] CRAN (R 4.5.2)\n lava              1.9.1      2026-05-14 [2] CRAN (R 4.6.0)\n lifecycle         1.0.5      2026-01-08 [2] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [2] RSPM (R 4.4.0)\n listenv           0.10.1     2026-03-10 [2] CRAN (R 4.5.2)\n lubridate       * 1.9.5      2026-02-04 [2] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [2] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [2] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [2] RSPM (R 4.4.0)\n MatchIt         * 4.7.2      2025-05-30 [2] RSPM (R 4.5.0)\n Matrix            1.7-5      2026-03-21 [2] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [2] RSPM (R 4.4.0)\n modelbased      * 0.15.0     2026-05-10 [2] CRAN (R 4.6.0)\n modeldata       * 1.5.1      2025-08-22 [2] RSPM (R 4.5.0)\n modelenv          0.2.0      2024-10-14 [2] RSPM (R 4.4.0)\n modelsummary    * 2.6.0      2026-02-13 [2] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [2] CRAN (R 4.5.2)\n mvtnorm           1.3-7      2026-04-15 [2] CRAN (R 4.5.3)\n nlme              3.1-168    2025-03-31 [2] RSPM (R 4.4.0)\n nnet              7.3-20     2025-01-01 [2] RSPM (R 4.4.2)\n otel              0.2.0      2025-08-29 [2] RSPM (R 4.5.0)\n parallelly        1.47.0     2026-04-17 [2] CRAN (R 4.5.3)\n parameters      * 0.29.0     2026-05-09 [2] CRAN (R 4.6.0)\n parsnip         * 1.6.0      2026-05-14 [2] CRAN (R 4.6.0)\n performance     * 0.17.0     2026-05-21 [2] CRAN (R 4.6.0)\n pillar            1.11.1     2025-09-17 [2] RSPM (R 4.5.0)\n pkgconfig         2.0.3      2019-09-22 [2] RSPM (R 4.4.0)\n png               0.1-9      2026-03-15 [2] CRAN (R 4.5.2)\n policytree      * 1.2.4      2026-02-18 [2] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [2] RSPM (R 4.4.0)\n polyclip          1.10-7     2024-07-23 [2] RSPM (R 4.4.2)\n prodlim           2026.03.11 2026-03-11 [2] CRAN (R 4.5.2)\n purrr           * 1.2.2      2026-04-10 [2] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [2] RSPM (R 4.4.0)\n R6                2.6.1      2025-02-15 [2] RSPM (R 4.4.0)\n RColorBrewer      1.1-3      2022-04-03 [2] RSPM (R 4.4.0)\n Rcpp              1.1.1-1.1  2026-04-24 [2] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [2] CRAN (R 4.5.2)\n recipes         * 1.3.2      2026-04-02 [2] CRAN (R 4.5.3)\n report          * 0.6.4      2026-05-04 [2] CRAN (R 4.6.0)\n reticulate      * 1.46.0     2026-04-09 [2] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [2] CRAN (R 4.6.0)\n rmarkdown         2.31       2026-03-26 [2] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [2] CRAN (R 4.5.2)\n rpart             4.1.27     2026-03-27 [2] CRAN (R 4.5.3)\n rsample         * 1.3.2      2026-01-30 [2] CRAN (R 4.5.2)\n rstudioapi        0.18.0     2026-01-16 [2] CRAN (R 4.5.2)\n S7                0.2.2      2026-04-22 [2] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [2] RSPM (R 4.4.0)\n scales          * 1.4.0      2025-04-24 [2] RSPM (R 4.4.0)\n see             * 0.13.0     2026-01-30 [2] CRAN (R 4.5.2)\n sessioninfo     * 1.2.3      2025-02-05 [2] RSPM (R 4.4.0)\n simsurv         * 1.0.1      2026-01-22 [2] CRAN (R 4.5.2)\n SparseM           1.84-2     2024-07-17 [2] RSPM (R 4.4.2)\n sparsevctrs       0.3.6      2026-01-27 [2] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [2] RSPM (R 4.4.0)\n stringr         * 1.6.0      2025-11-04 [2] RSPM (R 4.5.0)\n survival        * 3.8-6      2026-01-16 [2] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [2] CRAN (R 4.5.2)\n tables            0.9.33     2025-12-15 [2] CRAN (R 4.5.2)\n tailor          * 0.1.0      2025-08-25 [2] RSPM (R 4.5.0)\n TH.data           1.1-5      2025-11-17 [2] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [2] CRAN (R 4.5.2)\n tidygraph         1.3.1      2024-01-30 [2] CRAN (R 4.6.0)\n tidymodels      * 1.5.0      2026-04-23 [2] CRAN (R 4.5.3)\n tidyr           * 1.3.2      2025-12-19 [2] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [2] RSPM (R 4.4.0)\n tidyverse       * 2.0.0      2023-02-22 [2] RSPM (R 4.4.0)\n timechange        0.4.0      2026-01-29 [2] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [2] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [2] CRAN (R 4.5.3)\n tune            * 2.1.0      2026-04-17 [2] CRAN (R 4.5.3)\n tzdb              0.5.0      2025-03-15 [2] RSPM (R 4.4.0)\n utf8              1.2.6      2025-06-08 [2] RSPM (R 4.5.0)\n V8                8.2.0      2026-04-21 [2] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [2] CRAN (R 4.6.0)\n WeightIt        * 1.7.0      2026-04-22 [2] CRAN (R 4.5.3)\n withr             3.0.2      2024-10-28 [2] RSPM (R 4.4.0)\n workflows       * 1.3.0      2025-08-27 [2] RSPM (R 4.5.0)\n workflowsets    * 1.1.1      2025-05-27 [2] RSPM (R 4.5.0)\n xfun              0.57       2026-03-20 [2] CRAN (R 4.5.3)\n yaml              2.3.12     2025-12-10 [2] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [2] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [2] CRAN (R 4.5.2)\n\n [1] /usr/local/lib/R/site-library\n [2] /usr/lib/R/site-library\n [3] /usr/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.0\n cairoFT\n pango          1.52.1\n png            1.6.43\n jpeg           8.0\n tiff           LIBTIFF, Version 4.5.1\n tcl            8.6\n curl           8.5.0\n zlib           1.3\n bzlib          1.0.8, 13-Jul-2019\n xz             5.4.5\n deflate        1.19\n zstd           1.5.5\n PCRE           10.42 2022-12-11\n ICU            74.2\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          glibc 2.39\n readline       8.2\n BLAS           /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0\n lapack         /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n Python is not available\n\n──────────────────────────────────────────────────────────────────────────────"
-  },
-  {
-    "objectID": "statistics/index.html",
-    "href": "statistics/index.html",
-    "title": "統計学",
-    "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です"
-  },
-  {
-    "objectID": "statistics/index.html#スライド一覧",
-    "href": "statistics/index.html#スライド一覧",
-    "title": "統計学",
-    "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#クイズ",
-    "href": "statistics/bootstrap/index.html#クイズ",
-    "title": "Bootstrapについて",
-    "section": "クイズ",
-    "text": "クイズ\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？\nBootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？\nBootstrap信頼区間の時に良い方法はなんでしょうか？"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#introduction",
-    "href": "statistics/bootstrap/index.html#introduction",
-    "title": "Bootstrapについて",
-    "section": "Introduction",
-    "text": "Introduction\n\n最近研究でbootstrapを使う事が複数回あった\n正直雰囲気でやっていたので、しっかり勉強してみたい"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方",
-    "href": "statistics/bootstrap/index.html#信頼区間の出し方",
-    "title": "Bootstrapについて",
-    "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n17.42947\n\n\n2\n21.31685\n\n\n3\n20.40893\n\n\n4\n20.04185\n\n\n5\n20.87438\n\n\n6\n23.36431\n\n\n7\n18.45231\n\n\n8\n24.02848\n\n\n9\n19.74968\n\n\n10\n19.43595\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
-    "href": "statistics/bootstrap/index.html#信頼区間の出し方-1",
-    "title": "Bootstrapについて",
-    "section": "信頼区間の出し方",
-    "text": "信頼区間の出し方\n\n\nこの分布が正規分布に従うとして、t分布の平均と分散を最尤法で推定\nt分布の数表を確認して、1.96×標準偏差で計算する"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#でも",
-    "href": "statistics/bootstrap/index.html#でも",
-    "title": "Bootstrapについて",
-    "section": "でも・・・・・・",
-    "text": "でも・・・・・・\n\n心不全患者のBNPの分布は？\n新しいDeep learningモデルのtest cohortでのAUROCの分散は？\n死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？\n\n医学では正規分布でないものの方が多い！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapとは",
-    "href": "statistics/bootstrap/index.html#bootstrapとは",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapとは",
-    "text": "Bootstrapとは\n\n\nJackknife法などと同じresampling法の一種\nEfronが1979年に開発した手法\n元のデータからランダムに取り出して新しいデータセットを作成する(Efron 2003)\nこの際に重複を許可するのが特徴 = 使われないのもある"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#おまけbootstrapの名前",
-    "href": "statistics/bootstrap/index.html#おまけbootstrapの名前",
-    "title": "Bootstrapについて",
-    "section": "おまけ〜Bootstrapの名前",
-    "text": "おまけ〜Bootstrapの名前\n\nホラ吹き男爵の冒険のエピソード\n「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある\n読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
-    "href": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
-    "title": "Bootstrapについて",
-    "section": "Bootstrap法〜Jackknifeとの比較",
-    "text": "Bootstrap法〜Jackknifeとの比較\n\nBootstrapの前に、Jackknifeという手法が1949年に開発された\nこれは、1つずつ標本から抜いていくという手法\nどんな時にも使えるから、便利な十徳ナイフという名前が付けられた\nこっちの方が自然なイメージだが問題点があった"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点1",
-    "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
-    "title": "Bootstrapについて",
-    "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.22828\n198.4023\n\n\n\n2\n72.87755\n172.8362\n\n\n\n3\n71.23429\n184.4299\n\n\n\n30\n25.00000\n300.0000\nFH&lt;U+306E&gt;&lt;U+60A3&gt;&lt;U+8005&gt;\n\n\n31\n35.00000\n75.0000\n&lt;U+7279&gt;&lt;U+767A&gt;&lt;U+6027&gt;&lt;U+51A0&gt;&lt;U+52D5&gt;&lt;U+8108&gt;&lt;U+89E3&gt;&lt;U+96E2&gt;"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
-    "href": "statistics/bootstrap/index.html#jacknife法の問題点2",
-    "title": "Bootstrapについて",
-    "section": "Jacknife法の問題点2",
-    "text": "Jacknife法の問題点2"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#その場合",
-    "href": "statistics/bootstrap/index.html#その場合",
-    "title": "Bootstrapについて",
-    "section": "その場合",
-    "text": "その場合\n\nこのようなデータ(連続じゃない時)の時に分散を広く推定してしまう\nイメージだが、外れ値を何度も数えてしまう (FHを29回数えている)\n平均値とSDは出来るが、中央値とPercentileは苦手"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの前提条件",
-    "href": "statistics/bootstrap/index.html#bootstrapの前提条件",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの前提条件",
-    "text": "Bootstrapの前提条件\n\nPlug in principles\n簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの簡単な例",
-    "href": "statistics/bootstrap/index.html#bootstrapの簡単な例",
-    "title": "Bootstrapについて",
-    "section": "bootstrapの簡単な例",
-    "text": "bootstrapの簡単な例\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nDarth Vader\n202\n136\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nOwen Lars\n178\n120\nHuman\n\n\nBeru Whitesun Lars\n165\n75\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n簡単なものとして、身長の平均値の95%信頼区間を導出してみる"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-1",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-1",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 1",
-    "text": "How to bootstrap 1\n\n\n\n\n [1]  1  2  2  2  3  5  5  8  8 11 12 13 13 14 15 21 21 22 22 22 24 24 26 27 29\n[26] 30 30 32 32 32 34 35 35 43 44 44 45 47 48 48 48 48 48 49 49 50 51 51 52 52\n[51] 52 52 52 53 54 56 56 58 59 60 61 61 62 62 62 63 64 65 65 68 69 69 71 72 74\n[76] 74 75 75 76 78 78 79 80 82 84 84 87\n\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nLeia Organa\n150\n49\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\nR5-D4\n97\n32\nDroid\n\n\nAnakin Skywalker\n188\n84\nHuman\n\n\nWilhuff Tarkin\n180\nNA\nHuman\n\n\nChewbacca\n228\n112\nWookiee\n\n\nChewbacca\n228\n112\nWookiee\n\n\nHan Solo\n180\n80\nHuman\n\n\nGreedo\n173\n74\nRodian\n\n\n\n\n\n\n\n行数の数字をランダムに抽出する\nこの時、重複を許す！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-2",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-2",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 2",
-    "text": "How to bootstrap 2\n\n同じものが複数ある(C3PO)\nこの状態で身長の平均値を出す。\n身長の平均値 = 175.5595238"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-3",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-3",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 3",
-    "text": "How to bootstrap 3\n\n上記の1と2を繰り返す。"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-4",
-    "href": "statistics/bootstrap/index.html#how-to-bootstrap-4",
-    "title": "Bootstrapについて",
-    "section": "How to bootstrap 4",
-    "text": "How to bootstrap 4\n\nここからやり方は複数ある(Bland and Altman 2015)\n代表的なものは以下の3つ\n\n標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法)  → sd = 3.9741878\n2.5% ~ 97.5%の範囲をそのまま提示する(Percentile法)  → [167.0867695, 169.5139372]\n標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)\n\n\n\n\n\n\n\n\nNote\n\n\nどの方法を用いるにせよ必ず1回はHistogramにして分布を確認する！！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの種類",
-    "href": "statistics/bootstrap/index.html#bootstrapの種類",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの種類",
-    "text": "Bootstrapの種類\n\n最も基本は上記のPercentile法 → ただし、以下の弱点がある\nPercentile法の弱点\n\n収束が遅い\n元データを使っていない → Biasが生まれる(Wicklin, n.d.)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrap法の改善",
-    "href": "statistics/bootstrap/index.html#bootstrap法の改善",
-    "title": "Bootstrapについて",
-    "section": "Bootstrap法の改善",
-    "text": "Bootstrap法の改善\n\nBCa法やBootstrap-t法が考えられている\n\nBiasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法\n\nBootstrap-t法: 分散値を使い、t分布に近似する\n\n分散は理論値やjackknife法で計算する必要がある(汪金芳 and 桜井裕仁 2011)\n\nBCa法: Bootstrapだけでなんとかなるのが利点"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#どれを選べばいいの",
-    "href": "statistics/bootstrap/index.html#どれを選べばいいの",
-    "title": "Bootstrapについて",
-    "section": "どれを選べばいいの？",
-    "text": "どれを選べばいいの？\n\n\n過去の論文(Carpenter and Bithell 2000)では、Flowchartが示されている\n全く分からなければBCa&lt;U+6CD5&gt;が無難だと思う\nBootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう(DiCiccio and Efron 1996)\nBCa法はBootstrapの繰り返しが多いがRだと簡単に出来る(Davison and Hinkley 1997)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
-    "href": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
-    "title": "Bootstrapについて",
-    "section": "古典的な信頼区間とBootstrap信頼区間の違い",
-    "text": "古典的な信頼区間とBootstrap信頼区間の違い"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
-    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの素朴な疑問",
-    "text": "Bootstrapの素朴な疑問\n\nnは幾つにすればいいの？\n元データは少なくてもいいの？"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
-    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの素朴な疑問 1",
-    "text": "Bootstrapの素朴な疑問 1\n\nnは幾つにすればいいの？ →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000&lt;U+56DE&gt;&lt;U+7A0B&gt;&lt;U+5EA6&gt;必要\nコンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる(Chernick 2008)"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
-    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
-    "title": "Bootstrapについて",
-    "section": "Bootstrapの素朴な疑問 2",
-    "text": "Bootstrapの素朴な疑問 2\n\n元データは少なくてもいいの？ →　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ\n経験則だと最低30～50は必要と考えられる(Chernick 2008)が求めたいものと状況による\nロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#クイズの答え",
-    "href": "statistics/bootstrap/index.html#クイズの答え",
-    "title": "Bootstrapについて",
-    "section": "クイズの答え",
-    "text": "クイズの答え\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには1000-2000回繰り返しをする\nBootstrap信頼区間を出す前に必ず統計量のHistogramを確認する！\nBootstrap信頼区間の時にはBCa法を行う！"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#thank-you-for-your-listening",
-    "href": "statistics/bootstrap/index.html#thank-you-for-your-listening",
-    "title": "Bootstrapについて",
-    "section": "Thank you for your listening!!",
-    "text": "Thank you for your listening!!\n\n\nこれが本当にあった話らしい"
-  },
-  {
-    "objectID": "statistics/bootstrap/index.html#references",
-    "href": "statistics/bootstrap/index.html#references",
-    "title": "Bootstrapについて",
-    "section": "References",
-    "text": "References\n\n\nBland, J Martin, and Douglas G Altman. 2015. “Statistics Notes: Bootstrap Resampling Methods.” BMJ. https://doi.org/10.1136/bmj.h2622.\n\n\nCarpenter, J, and J Bithell. 2000. “Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.” Statistics in Medicine 19 (9): 1141–64. https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f.\n\n\nChernick, Michael R. 2008. Bootstrap Methods a Guide for Practitioners and Researchers. 2nd ed. Hoboken, N.J: Wiley-Interscience.\n\n\nDavison, A. C., and D. V. Hinkley. 1997. Bootstrap Methods and Their Applications. Cambridge: Cambridge University Press. http://statwww.epfl.ch/davison/BMA/.\n\n\nDiCiccio, Thomas J, and Bradley Efron. 1996. “Bootstrap Confidence Intervals.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 11 (3): 189–228. https://doi.org/10.1214/ss/1032280214.\n\n\nEfron, Bradley. 2003. “Second Thoughts on the Bootstrap.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 18 (2): 135–40. https://doi.org/10.1214/ss/1063994968.\n\n\nWicklin, Rick. n.d. “The Bias-Corrected and Accelerated (BCa) Bootstrap Interval.” https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html.\n\n\n汪金芳, and 桜井裕仁. 2011. ブートストラップ入門."
+    "objectID": "medicine/ESUS/index.html#thank-you-for-listening",
+    "href": "medicine/ESUS/index.html#thank-you-for-listening",
+    "title": "Cryptogenic strokeとESUS",
+    "section": "Thank you for listening",
+    "text": "Thank you for listening\n\nご清聴ありがとうございました"
   },
   {
     "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
@@ -1134,109 +875,592 @@
     "text": "References\n\n\nConnors, A F, Jr, T Speroff, N V Dawson, C Thomas, F E Harrell Jr, D Wagner, N Desbiens, et al. 1996. “The Effectiveness of Right Heart Catheterization in the Initial Care of Critically Ill Patients. SUPPORT Investigators.” JAMA: The Journal of the American Medical Association 276 (11): 889–97. https://doi.org/10.1001/jama.276.11.889.\n\n\nCummings, Peter. 2009. “The Relative Merits of Risk Ratios and Odds Ratios.” Archives of Pediatrics & Adolescent Medicine 163 (5): 438–45. https://doi.org/10.1001/archpediatrics.2009.31.\n\n\nDahabreh, Issa J, and Kirsten Bibbins-Domingo. 2024. “Causal Inference about the Effects of Interventions from Observational Studies in Medical Journals.” JAMA: The Journal of the American Medical Association 331 (21): 1845–53. https://doi.org/10.1001/jama.2024.7741.\n\n\nGreifer, Noah. 2025. “Estimating Effects After Matching.” https://cran.r-project.org/web/packages/MatchIt/vignettes/estimating-effects.html.\n\n\nHernan, Miguel A. 2024. Causal Inference: What If. Edited by James M. Robins. Boca Raton: Taylor & Francis.\n\n\nKing, Gary, Michael Tomz, and Jason Wittenberg. 2000. “Making the Most of Statistical Analyses: Improving Interpretation and Presentation.” American Journal of Political Science 44 (2): 347–61. https://doi.org/10.2307/2669316.\n\n\nTibshirani, Julie, Susan Athey, Erik Sverdrup, and Stefan Wager. 2024. Grf: Generalized Random Forests. https://github.com/grf-labs/grf."
   },
   {
-    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeとは",
-    "href": "medicine/ESUS/index.html#cryptogenic-strokeとは",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "Cryptogenic strokeとは？",
-    "text": "Cryptogenic strokeとは？\n\nCryptogenic stroke\nCryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時\nその中で近位の動脈の狭窄や心原性が見つからない時の塞栓性脳梗塞を ESUS（Embolic stroke of undetermined source: 原因不明の脳塞栓症）という"
+    "objectID": "statistics/bootstrap/index.html#クイズ",
+    "href": "statistics/bootstrap/index.html#クイズ",
+    "title": "Bootstrapについて",
+    "section": "クイズ",
+    "text": "クイズ\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？\nBootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？\nBootstrap信頼区間の時に良い方法はなんでしょうか？"
   },
   {
-    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの疫学",
-    "href": "medicine/ESUS/index.html#cryptogenic-strokeの疫学",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "Cryptogenic strokeの疫学",
-    "text": "Cryptogenic strokeの疫学\n\n\n\n定義により異なるが 10-40% と言われている\n\n日本でも同じくらいの割合\n\nCryptogenic stroke のうち ESUS は大体 80-90%\n参考\n\nhttps://www.jstage.jst.go.jp/article/jstroke/38/2/38_10416/_pdf/-char/en\nN Engl J Med. 2016;374(21):2065-2074."
+    "objectID": "statistics/bootstrap/index.html#introduction",
+    "href": "statistics/bootstrap/index.html#introduction",
+    "title": "Bootstrapについて",
+    "section": "Introduction",
+    "text": "Introduction\n\n最近研究でbootstrapを使う事が複数回あった\n正直雰囲気でやっていたので、しっかり勉強してみたい"
   },
   {
-    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの機序は",
-    "href": "medicine/ESUS/index.html#cryptogenic-strokeの機序は",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "Cryptogenic strokeの機序は？",
-    "text": "Cryptogenic strokeの機序は？\n\n単一ではなく複数の機序が提唱されている\n潜在性の pAF\n大動脈の粥腫やその他の心原性\nPFO や ASD などによる奇異性塞栓\n血栓傾向\n脳血管疾患（血管奇形など）\n年齢で多い原因は異なる\n\n18-30歳: 動脈解離や血栓傾向、先天性心疾患\n31-60歳: 若年性の動脈硬化、後天性の心疾患\n61歳以上: 潜在性 AF"
+    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方",
+    "href": "statistics/bootstrap/index.html#信頼区間の出し方",
+    "title": "Bootstrapについて",
+    "section": "95％信頼区間の出し方",
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n20.71009\n\n\n2\n21.75128\n\n\n3\n23.33512\n\n\n4\n20.85028\n\n\n5\n21.61825\n\n\n6\n21.44519\n\n\n7\n23.09146\n\n\n8\n24.88520\n\n\n9\n22.03823\n\n\n10\n20.92178\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
-    "objectID": "medicine/ESUS/index.html#どうやって診断する",
-    "href": "medicine/ESUS/index.html#どうやって診断する",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "どうやって診断する？",
-    "text": "どうやって診断する？\n\n\n検査の程度によるため、世界的に決まった基準はない\n古典的な TOAST 分類が一つの基準\n\nこれだと Cryptogenic が増える\n\nASCOD、CCS systems を使うと Cryptogenic が減る とされる\n\nただしデータはまだ少ない"
+    "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
+    "href": "statistics/bootstrap/index.html#信頼区間の出し方-1",
+    "title": "Bootstrapについて",
+    "section": "信頼区間の出し方",
+    "text": "信頼区間の出し方\n\n\nこの分布が正規分布に従うとして、t分布の平均と分散を最尤法で推定\nt分布の数表を確認して、1.96×標準偏差で計算する"
   },
   {
-    "objectID": "medicine/ESUS/index.html#ccs-systems",
-    "href": "medicine/ESUS/index.html#ccs-systems",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "CCS systems",
-    "text": "CCS systems\n\n\nhttps://ccs.mgh.harvard.edu/ccs_title.php"
+    "objectID": "statistics/bootstrap/index.html#でも",
+    "href": "statistics/bootstrap/index.html#でも",
+    "title": "Bootstrapについて",
+    "section": "でも・・・・・・",
+    "text": "でも・・・・・・\n\n心不全患者のBNPの分布は？\n新しいDeep learningモデルのtest cohortでのAUROCの分散は？\n死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？\n\n医学では正規分布でないものの方が多い！"
   },
   {
-    "objectID": "medicine/ESUS/index.html#cryptogenic-stroke患者への問診と身体所見",
-    "href": "medicine/ESUS/index.html#cryptogenic-stroke患者への問診と身体所見",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "Cryptogenic stroke患者への問診と身体所見",
-    "text": "Cryptogenic stroke患者への問診と身体所見\n\n\n左右の上肢の血圧差: AoD\n皮膚の網状皮斑: APS\n黄色腫: FH\n心雑音: IE、先天性心疾患\n脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病\nDVT: 血栓傾向、奇異性塞栓\n頸部外傷やマッサージ: 椎骨脳底動脈の乖離\n片頭痛: 片頭痛性脳梗塞 / CADASIL\n違法薬物: IE、血管攣縮、HIV など\n息こらえの後の発症: 奇異性塞栓\n若年の ASCVD の家族歴: 遺伝性疾患\n妊娠: CVT、子癇\nN Engl J Med. 2016;374(21):2065-2074."
+    "objectID": "statistics/bootstrap/index.html#bootstrapとは",
+    "href": "statistics/bootstrap/index.html#bootstrapとは",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapとは",
+    "text": "Bootstrapとは\n\n\nJackknife法などと同じresampling法の一種\nEfronが1979年に開発した手法\n元のデータからランダムに取り出して新しいデータセットを作成する(Efron 2003)\nこの際に重複を許可するのが特徴 = 使われないのもある"
   },
   {
-    "objectID": "medicine/ESUS/index.html#検査について",
-    "href": "medicine/ESUS/index.html#検査について",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "検査について",
-    "text": "検査について\n\nどこまでやるべきか、決まっていない\n最低限の検査\n\n基本的な血算\n凝固系\n頭部 MRI\n発症 24 時間の心電図モニター\n頸動脈エコー\nTTE\n\nNEJM では段階的なアプローチが推奨されている\n特に重要なのは 潜在性の pAF 検索\nN Engl J Med. 2016;374(21):2065-2074."
+    "objectID": "statistics/bootstrap/index.html#おまけbootstrapの名前",
+    "href": "statistics/bootstrap/index.html#おまけbootstrapの名前",
+    "title": "Bootstrapについて",
+    "section": "おまけ〜Bootstrapの名前",
+    "text": "おまけ〜Bootstrapの名前\n\nホラ吹き男爵の冒険のエピソード\n「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある\n読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)"
   },
   {
-    "objectID": "medicine/ESUS/index.html#esusにおけるafの検索",
-    "href": "medicine/ESUS/index.html#esusにおけるafの検索",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "ESUSにおけるAFの検索",
-    "text": "ESUSにおけるAFの検索\n\n\n\nESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる\nループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある\nUpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨\n参考\n\nN Engl J Med. 2014;370(26):2478-2486.\nN Engl J Med. 2014;370(26):2467-2477.\nN Engl J Med. 2023;389(13):1167-1179."
+    "objectID": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
+    "href": "statistics/bootstrap/index.html#bootstrap法jackknifeとの比較",
+    "title": "Bootstrapについて",
+    "section": "Bootstrap法〜Jackknifeとの比較",
+    "text": "Bootstrap法〜Jackknifeとの比較\n\nBootstrapの前に、Jackknifeという手法が1949年に開発された\nこれは、1つずつ標本から抜いていくという手法\nどんな時にも使えるから、便利な十徳ナイフという名前が付けられた\nこっちの方が自然なイメージだが問題点があった"
   },
   {
-    "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの治療",
-    "href": "medicine/ESUS/index.html#cryptogenic-strokeの治療",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "Cryptogenic strokeの治療",
-    "text": "Cryptogenic strokeの治療\n\n基本は原疾患により分けることが大事\n原因が見つからない時は、基本は ASA\nESUS で DOAC vs. ASA があるが、基本的に DOAC が負けている\n\nNAVIGATE-ESUS\nRE-SPECT ESUS\nARCADIA trial\n\n特異的な治療がある疾患もある\n\nAPS だと DOAC でなく Wf を選択\nPFO による奇異性塞栓 → PFO 閉鎖"
+    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点1",
+    "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
+    "title": "Bootstrapについて",
+    "section": "Jacknife法の問題点1",
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n76.25126\n201.0281\n\n\n\n2\n75.90225\n172.3884\n\n\n\n3\n74.01515\n187.6721\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
   },
   {
-    "objectID": "medicine/ESUS/index.html#pfoってなんだ",
-    "href": "medicine/ESUS/index.html#pfoってなんだ",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "PFOってなんだ？",
-    "text": "PFOってなんだ？\n\n\n\n胎児循環の時は右房圧が高く、右房 → 左房に血流がある\n出生とともに肺血管抵抗が低下して、左房圧が高くなり閉鎖する\n卵円孔が開存していると、普段は閉じているが、いきんだ時に右房圧が上がり右房 → 左房の血流になる\nそこに DVT からの血栓が流れると右房 → 左房で脳梗塞になる"
+    "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
+    "href": "statistics/bootstrap/index.html#jacknife法の問題点2",
+    "title": "Bootstrapについて",
+    "section": "Jacknife法の問題点2",
+    "text": "Jacknife法の問題点2"
   },
   {
-    "objectID": "medicine/ESUS/index.html#pfoによる奇異性塞栓への閉鎖術",
-    "href": "medicine/ESUS/index.html#pfoによる奇異性塞栓への閉鎖術",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "PFOによる奇異性塞栓への閉鎖術",
-    "text": "PFOによる奇異性塞栓への閉鎖術"
+    "objectID": "statistics/bootstrap/index.html#その場合",
+    "href": "statistics/bootstrap/index.html#その場合",
+    "title": "Bootstrapについて",
+    "section": "その場合",
+    "text": "その場合\n\nこのようなデータ(連続じゃない時)の時に分散を広く推定してしまう\nイメージだが、外れ値を何度も数えてしまう (FHを29回数えている)\n平均値とSDは出来るが、中央値とPercentileは苦手"
   },
   {
-    "objectID": "medicine/ESUS/index.html#じゃあ全例でpfoの検査を行う",
-    "href": "medicine/ESUS/index.html#じゃあ全例でpfoの検査を行う",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "じゃあ全例でPFOの検査を行う？",
-    "text": "じゃあ全例でPFOの検査を行う？\n\n\n卵円孔開存は common\n\n通常人口で 25%\nCryptogenic stroke に限定すると 50%\n\nPFO があっても、それが原因かは不明瞭\n探せばいいってもんじゃない"
+    "objectID": "statistics/bootstrap/index.html#bootstrapの前提条件",
+    "href": "statistics/bootstrap/index.html#bootstrapの前提条件",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの前提条件",
+    "text": "Bootstrapの前提条件\n\nPlug in principles\n簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの"
   },
   {
-    "objectID": "medicine/ESUS/index.html#いつpfoの検査をする",
-    "href": "medicine/ESUS/index.html#いつpfoの検査をする",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "いつPFOの検査をする？",
-    "text": "いつPFOの検査をする？\n\n\n\nJAMA. 2021;326(22):2277-2286.\n治療適応は原則 60歳以下\nRoPE score &lt; 7 だと治療効果がないかもしれない\n治療を見据えて検査を行う"
+    "objectID": "statistics/bootstrap/index.html#bootstrapの簡単な例",
+    "href": "statistics/bootstrap/index.html#bootstrapの簡単な例",
+    "title": "Bootstrapについて",
+    "section": "bootstrapの簡単な例",
+    "text": "bootstrapの簡単な例\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nDarth Vader\n202\n136\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nOwen Lars\n178\n120\nHuman\n\n\nBeru Whitesun Lars\n165\n75\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n簡単なものとして、身長の平均値の95%信頼区間を導出してみる"
   },
   {
-    "objectID": "medicine/ESUS/index.html#まとめ",
-    "href": "medicine/ESUS/index.html#まとめ",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "まとめ",
-    "text": "まとめ\n\n通常診療で etiology が分からない脳梗塞を Cryptogenic stroke という\nその中で塞栓性のものを ESUS という\n\nESUS &lt; Cryptogenic stroke\n\nESUS を見つけた時に最も重要なのは AF 探し\n治療適応があり、有効そうな患者では PFO 探しが意味あるかも\n分からない時は ASA が良い\n\nDOAC は使わない"
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-1",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-1",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 1",
+    "text": "How to bootstrap 1\n\n\n\n\n [1]  1  2  2  2  3  5  5  8  8 11 12 13 13 14 15 21 21 22 22 22 24 24 26 27 29\n[26] 30 30 32 32 32 34 35 35 43 44 44 45 47 48 48 48 48 48 49 49 50 51 51 52 52\n[51] 52 52 52 53 54 56 56 58 59 60 61 61 62 62 62 63 64 65 65 68 69 69 71 72 74\n[76] 74 75 75 76 78 78 79 80 82 84 84 87\n\n\n\n\n\n\n\n\nname\nheight\nmass\nspecies\n\n\n\n\nLuke Skywalker\n172\n77\nHuman\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nC-3PO\n167\n75\nDroid\n\n\nR2-D2\n96\n32\nDroid\n\n\nLeia Organa\n150\n49\nHuman\n\n\nLeia Organa\n150\n49\nHuman\n\n\nR5-D4\n97\n32\nDroid\n\n\nR5-D4\n97\n32\nDroid\n\n\nAnakin Skywalker\n188\n84\nHuman\n\n\nWilhuff Tarkin\n180\nNA\nHuman\n\n\nChewbacca\n228\n112\nWookiee\n\n\nChewbacca\n228\n112\nWookiee\n\n\nHan Solo\n180\n80\nHuman\n\n\nGreedo\n173\n74\nRodian\n\n\n\n\n\n\n\n行数の数字をランダムに抽出する\nこの時、重複を許す！"
   },
   {
-    "objectID": "medicine/ESUS/index.html#thank-you-for-listening",
-    "href": "medicine/ESUS/index.html#thank-you-for-listening",
-    "title": "Cryptogenic strokeとESUS",
-    "section": "Thank you for listening",
-    "text": "Thank you for listening\n\nご清聴ありがとうございました"
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-2",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-2",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 2",
+    "text": "How to bootstrap 2\n\n同じものが複数ある(C3PO)\nこの状態で身長の平均値を出す。\n身長の平均値 = 175.5595238"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-3",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-3",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 3",
+    "text": "How to bootstrap 3\n\n上記の1と2を繰り返す。"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#how-to-bootstrap-4",
+    "href": "statistics/bootstrap/index.html#how-to-bootstrap-4",
+    "title": "Bootstrapについて",
+    "section": "How to bootstrap 4",
+    "text": "How to bootstrap 4\n\nここからやり方は複数ある(Bland and Altman 2015)\n代表的なものは以下の3つ\n\n標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法)  → sd = 3.9741878\n2.5% ~ 97.5%の範囲をそのまま提示する(Percentile法)  → [167.0867695, 169.5139372]\n標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)\n\n\n\n\n\n\n\n\nNote\n\n\nどの方法を用いるにせよ必ず1回はHistogramにして分布を確認する！！"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの種類",
+    "href": "statistics/bootstrap/index.html#bootstrapの種類",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの種類",
+    "text": "Bootstrapの種類\n\n最も基本は上記のPercentile法 → ただし、以下の弱点がある\nPercentile法の弱点\n\n収束が遅い\n元データを使っていない → Biasが生まれる(Wicklin, n.d.)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrap法の改善",
+    "href": "statistics/bootstrap/index.html#bootstrap法の改善",
+    "title": "Bootstrapについて",
+    "section": "Bootstrap法の改善",
+    "text": "Bootstrap法の改善\n\nBCa法やBootstrap-t法が考えられている\n\nBiasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法\n\nBootstrap-t法: 分散値を使い、t分布に近似する\n\n分散は理論値やjackknife法で計算する必要がある(汪金芳 and 桜井裕仁 2011)\n\nBCa法: Bootstrapだけでなんとかなるのが利点"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#どれを選べばいいの",
+    "href": "statistics/bootstrap/index.html#どれを選べばいいの",
+    "title": "Bootstrapについて",
+    "section": "どれを選べばいいの？",
+    "text": "どれを選べばいいの？\n\n\n過去の論文(Carpenter and Bithell 2000)では、Flowchartが示されている\n全く分からなければBCa法が無難だと思う\nBootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう(DiCiccio and Efron 1996)\nBCa法はBootstrapの繰り返しが多いがRだと簡単に出来る(Davison and Hinkley 1997)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
+    "href": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
+    "title": "Bootstrapについて",
+    "section": "古典的な信頼区間とBootstrap信頼区間の違い",
+    "text": "古典的な信頼区間とBootstrap信頼区間の違い"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
+    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの素朴な疑問",
+    "text": "Bootstrapの素朴な疑問\n\nnは幾つにすればいいの？\n元データは少なくてもいいの？"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
+    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの素朴な疑問 1",
+    "text": "Bootstrapの素朴な疑問 1\n\nnは幾つにすればいいの？ →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000回程度必要\nコンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる(Chernick 2008)"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
+    "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",
+    "title": "Bootstrapについて",
+    "section": "Bootstrapの素朴な疑問 2",
+    "text": "Bootstrapの素朴な疑問 2\n\n元データは少なくてもいいの？ →　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ\n経験則だと最低30～50は必要と考えられる(Chernick 2008)が求めたいものと状況による\nロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#クイズの答え",
+    "href": "statistics/bootstrap/index.html#クイズの答え",
+    "title": "Bootstrapについて",
+    "section": "クイズの答え",
+    "text": "クイズの答え\n\n\n\n\n\n\nBootstrapは靴の中のどの部分でしょうか？\nBootstrap信頼区間を出すときには1000-2000回繰り返しをする\nBootstrap信頼区間を出す前に必ず統計量のHistogramを確認する！\nBootstrap信頼区間の時にはBCa法を行う！"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#thank-you-for-your-listening",
+    "href": "statistics/bootstrap/index.html#thank-you-for-your-listening",
+    "title": "Bootstrapについて",
+    "section": "Thank you for your listening!!",
+    "text": "Thank you for your listening!!\n\n\nこれが本当にあった話らしい"
+  },
+  {
+    "objectID": "statistics/bootstrap/index.html#references",
+    "href": "statistics/bootstrap/index.html#references",
+    "title": "Bootstrapについて",
+    "section": "References",
+    "text": "References\n\n\nBland, J Martin, and Douglas G Altman. 2015. “Statistics Notes: Bootstrap Resampling Methods.” BMJ. https://doi.org/10.1136/bmj.h2622.\n\n\nCarpenter, J, and J Bithell. 2000. “Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.” Statistics in Medicine 19 (9): 1141–64. https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f.\n\n\nChernick, Michael R. 2008. Bootstrap Methods a Guide for Practitioners and Researchers. 2nd ed. Hoboken, N.J: Wiley-Interscience.\n\n\nDavison, A. C., and D. V. Hinkley. 1997. Bootstrap Methods and Their Applications. Cambridge: Cambridge University Press. http://statwww.epfl.ch/davison/BMA/.\n\n\nDiCiccio, Thomas J, and Bradley Efron. 1996. “Bootstrap Confidence Intervals.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 11 (3): 189–228. https://doi.org/10.1214/ss/1032280214.\n\n\nEfron, Bradley. 2003. “Second Thoughts on the Bootstrap.” Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO 18 (2): 135–40. https://doi.org/10.1214/ss/1063994968.\n\n\nWicklin, Rick. n.d. “The Bias-Corrected and Accelerated (BCa) Bootstrap Interval.” https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html.\n\n\n汪金芳, and 桜井裕仁. 2011. ブートストラップ入門."
+  },
+  {
+    "objectID": "statistics/index.html",
+    "href": "statistics/index.html",
+    "title": "統計学",
+    "section": "",
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です"
+  },
+  {
+    "objectID": "statistics/index.html#スライド一覧",
+    "href": "statistics/index.html#スライド一覧",
+    "title": "統計学",
+    "section": "",
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#因果関係",
+    "href": "statistics/mlcausal/index.html#因果関係",
+    "title": "機械学習を用いた因果推論",
+    "section": "因果関係",
+    "text": "因果関係\n\n医学研究の第一の目標と言っても過言ではない\nAの薬を使うと患者の予後は良くなるか？\n実際は口で言うほど簡単ではない"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#因果関係の考え方",
+    "href": "statistics/mlcausal/index.html#因果関係の考え方",
+    "title": "機械学習を用いた因果推論",
+    "section": "因果関係の考え方",
+    "text": "因果関係の考え方\n\n大きく分けて2つの考え方がある\n\n潜在的アウトカムを考えるRubin流\nDAGを作り、do operatorを使うPearl流\n\n詳細は省くが、今回はPearl流のDAGを中心に考える"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#dagの基本",
+    "href": "statistics/mlcausal/index.html#dagの基本",
+    "title": "機械学習を用いた因果推論",
+    "section": "DAGの基本",
+    "text": "DAGの基本\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.6.0 (2026-04-24)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-05-30\n pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)\n quarto   1.8.26 @ /opt/quarto/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version   date (UTC) lib source\n boot           1.3-32    2025-08-29 [2] RSPM (R 4.5.0)\n bspm           0.5.7     2024-04-10 [1] CRAN (R 4.5.2)\n cli            3.6.6     2026-04-09 [2] CRAN (R 4.5.3)\n curl           7.1.0     2026-04-22 [2] CRAN (R 4.5.3)\n dagitty      * 0.3-4     2023-12-07 [2] RSPM (R 4.4.0)\n digest         0.6.39    2025-11-19 [2] CRAN (R 4.5.2)\n dplyr        * 1.2.1     2026-04-03 [2] CRAN (R 4.5.3)\n evaluate       1.0.5     2025-08-27 [2] RSPM (R 4.5.0)\n farver         2.1.2     2024-05-13 [2] RSPM (R 4.4.2)\n fastmap        1.2.0     2024-05-15 [2] RSPM (R 4.4.2)\n generics       0.1.4     2025-05-09 [2] RSPM (R 4.5.0)\n ggdag        * 0.2.13    2024-07-22 [2] RSPM (R 4.4.0)\n ggplot2      * 4.0.3     2026-04-22 [2] CRAN (R 4.5.3)\n glue           1.8.1     2026-04-17 [2] CRAN (R 4.5.3)\n gtable         0.3.6     2024-10-25 [2] RSPM (R 4.4.0)\n htmltools      0.5.9     2025-12-04 [2] CRAN (R 4.5.2)\n igraph         2.3.1     2026-05-04 [2] CRAN (R 4.6.0)\n jsonlite       2.0.0     2025-03-27 [2] RSPM (R 4.4.0)\n knitr          1.51      2025-12-20 [2] CRAN (R 4.5.2)\n lattice        0.22-9    2026-02-09 [2] CRAN (R 4.5.2)\n lifecycle      1.0.5     2026-01-08 [2] CRAN (R 4.5.2)\n magrittr       2.0.5     2026-04-04 [2] CRAN (R 4.5.3)\n MASS           7.3-65    2025-02-28 [2] RSPM (R 4.4.0)\n Matrix         1.7-5     2026-03-21 [2] CRAN (R 4.5.3)\n otel           0.2.0     2025-08-29 [2] RSPM (R 4.5.0)\n pillar         1.11.1    2025-09-17 [2] RSPM (R 4.5.0)\n pkgconfig      2.0.3     2019-09-22 [2] RSPM (R 4.4.0)\n png            0.1-9     2026-03-15 [2] CRAN (R 4.5.2)\n purrr          1.2.2     2026-04-10 [2] CRAN (R 4.5.3)\n R6             2.6.1     2025-02-15 [2] RSPM (R 4.4.0)\n RColorBrewer   1.1-3     2022-04-03 [2] RSPM (R 4.4.0)\n Rcpp           1.1.1-1.1 2026-04-24 [2] CRAN (R 4.5.3)\n reticulate   * 1.46.0    2026-04-09 [2] CRAN (R 4.5.3)\n rlang          1.2.0     2026-04-06 [2] CRAN (R 4.6.0)\n rmarkdown      2.31      2026-03-26 [2] CRAN (R 4.5.3)\n S7             0.2.2     2026-04-22 [2] CRAN (R 4.5.3)\n scales         1.4.0     2025-04-24 [2] RSPM (R 4.4.0)\n sessioninfo  * 1.2.3     2025-02-05 [2] RSPM (R 4.4.0)\n tibble         3.3.1     2026-01-11 [2] CRAN (R 4.5.2)\n tidygraph      1.3.1     2024-01-30 [2] CRAN (R 4.6.0)\n tidyr          1.3.2     2025-12-19 [2] CRAN (R 4.5.2)\n tidyselect     1.2.1     2024-03-11 [2] RSPM (R 4.4.0)\n V8             8.2.0     2026-04-21 [2] CRAN (R 4.5.3)\n vctrs          0.7.3     2026-04-11 [2] CRAN (R 4.6.0)\n withr          3.0.2     2024-10-28 [2] RSPM (R 4.4.0)\n xfun           0.57      2026-03-20 [2] CRAN (R 4.5.3)\n yaml           2.3.12    2025-12-10 [2] CRAN (R 4.5.2)\n\n [1] /usr/local/lib/R/site-library\n [2] /usr/lib/R/site-library\n [3] /usr/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.0\n cairoFT\n pango          1.52.1\n png            1.6.43\n jpeg           8.0\n tiff           LIBTIFF, Version 4.5.1\n tcl            8.6\n curl           8.5.0\n zlib           1.3\n bzlib          1.0.8, 13-Jul-2019\n xz             5.4.5\n deflate        1.19\n zstd           1.5.5\n PCRE           10.42 2022-12-11\n ICU            74.2\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          glibc 2.39\n readline       8.2\n BLAS           /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0\n lapack         /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n Python is not available\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#世界は結構複雑にできている",
+    "href": "statistics/mlcausal/index.html#世界は結構複雑にできている",
+    "title": "機械学習を用いた因果推論",
+    "section": "世界は結構複雑にできている",
+    "text": "世界は結構複雑にできている\n\n\n# A tibble: 6 × 13\n     id   age   sex   bmi    hf   bnp  lvef palpitation    ca bin_outcome\n  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;\n1     1    47     1  31.7     0    56    43           1     1           1\n2     2    62     0  19.1     0   180    43           0     0           1\n3     3    57     1  19.3     0    73    62           1     0           0\n4     4    59     0  17.7     1    74    43           0     1           1\n5     5    85     0  37.2     0   169    48           1     1           1\n6     6    53     1  18.7     1   120    46           0     1           1\n# ℹ 3 more variables: afeqt_os &lt;dbl&gt;, eventtime &lt;dbl&gt;, status &lt;int&gt;"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#dataの説明",
+    "href": "statistics/mlcausal/index.html#dataの説明",
+    "title": "機械学習を用いた因果推論",
+    "section": "Dataの説明",
+    "text": "Dataの説明\n\nDAGは上記の通り\nCAがメインのInterventionで解析をするアウトカムは3種類\n\n連続値のAFEQT-OS\n二値値のbin_outcome(短期の入院の有無など)\n生存分析のeventtime, status(長期の心不全あるいは死亡)\n\nほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)\nSESは観測されない交絡因子"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#simple-regression",
+    "href": "statistics/mlcausal/index.html#simple-regression",
+    "title": "機械学習を用いた因果推論",
+    "section": "Simple regression",
+    "text": "Simple regression\n\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                simple\n                rcs\n              \n        \n        \n        \n                \n                  (Intercept)\n                  66.464\n                  65.771\n                \n                \n                  \n                  (2.587)\n                  (7.234)\n                \n                \n                  age\n                  0.018\n                  \n                \n                \n                  \n                  (0.030)\n                  \n                \n                \n                  sex\n                  0.264\n                  0.268\n                \n                \n                  \n                  (0.445)\n                  (0.446)\n                \n                \n                  bmi\n                  0.072\n                  \n                \n                \n                  \n                  (0.049)\n                  \n                \n                \n                  hf\n                  0.616\n                  0.590\n                \n                \n                  \n                  (0.540)\n                  (0.542)\n                \n                \n                  bnp\n                  -0.001\n                  \n                \n                \n                  \n                  (0.001)\n                  \n                \n                \n                  lvef\n                  -0.035\n                  \n                \n                \n                  \n                  (0.028)\n                  \n                \n                \n                  ca\n                  -0.163\n                  -0.101\n                \n                \n                  \n                  (0.480)\n                  (0.489)\n                \n                \n                  rcs(age, 4)age\n                  \n                  -0.029\n                \n                \n                  \n                  \n                  (0.089)\n                \n                \n                  rcs(age, 4)age'\n                  \n                  0.138\n                \n                \n                  \n                  \n                  (0.260)\n                \n                \n                  rcs(age, 4)age''\n                  \n                  -0.478\n                \n                \n                  \n                  \n                  (0.962)\n                \n                \n                  rcs(bmi, 4)bmi\n                  \n                  0.055\n                \n                \n                  \n                  \n                  (0.214)\n                \n                \n                  rcs(bmi, 4)bmi'\n                  \n                  0.047\n                \n                \n                  \n                  \n                  (0.792)\n                \n                \n                  rcs(bmi, 4)bmi''\n                  \n                  -0.110\n                \n                \n                  \n                  \n                  (2.387)\n                \n                \n                  rcs(bnp, 4)bnp\n                  \n                  0.020\n                \n                \n                  \n                  \n                  (0.013)\n                \n                \n                  rcs(bnp, 4)bnp'\n                  \n                  -0.424\n                \n                \n                  \n                  \n                  (0.262)\n                \n                \n                  rcs(bnp, 4)bnp''\n                  \n                  0.701\n                \n                \n                  \n                  \n                  (0.434)\n                \n                \n                  rcs(lvef, 4)lvef\n                  \n                  0.020\n                \n                \n                  \n                  \n                  (0.097)\n                \n                \n                  rcs(lvef, 4)lvef'\n                  \n                  -0.151\n                \n                \n                  \n                  \n                  (0.261)\n                \n                \n                  rcs(lvef, 4)lvef''\n                  \n                  0.564\n                \n                \n                  \n                  \n                  (0.992)\n                \n                \n                  Num.Obs.\n                  6000\n                  6000\n                \n                \n                  R2\n                  0.001\n                  0.002\n                \n                \n                  R2 Adj.\n                  -0.000\n                  -0.001\n                \n                \n                  AIC\n                  50429.6\n                  50442.4\n                \n                \n                  BIC\n                  50489.9\n                  50556.2\n                \n                \n                  Log.Lik.\n                  -25205.796\n                  -25204.176\n                \n                \n                  F\n                  0.844\n                  0.609\n                \n                \n                  RMSE\n                  16.15\n                  16.15"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#シンプルな回帰モデルの解釈と問題点",
+    "href": "statistics/mlcausal/index.html#シンプルな回帰モデルの解釈と問題点",
+    "title": "機械学習を用いた因果推論",
+    "section": "シンプルな回帰モデルの解釈と問題点",
+    "text": "シンプルな回帰モデルの解釈と問題点\n\n複数のパラメータを固定した上での目標としたパラメータを1単位変化した時の効果\n線形である事が条件\n複雑な関係性を捉えることが出来ない\n\nModel misspecificationの問題\n治療の異質性を捉えられない"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#例えば",
+    "href": "statistics/mlcausal/index.html#例えば",
+    "title": "機械学習を用いた因果推論",
+    "section": "例えば",
+    "text": "例えば"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#どうすればrobustになる",
+    "href": "statistics/mlcausal/index.html#どうすればrobustになる",
+    "title": "機械学習を用いた因果推論",
+    "section": "どうすればRobustになる？",
+    "text": "どうすればRobustになる？\n\nPropensity score (PS) analysis\n\nPS match, PS weight\n\nATT, ATC, ATE, ATOなど\n\n\nアウトカムモデル + PS model\n\nDoubly robust model\n\n最も有名なものはAIPW\n\n\nPS modelを進化させる\n\nPSをUpdateさせるTMLE"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#matchingだと",
+    "href": "statistics/mlcausal/index.html#matchingだと",
+    "title": "機械学習を用いた因果推論",
+    "section": "Matchingだと",
+    "text": "Matchingだと\n\n一番有名なのはPropensity score matching\n\n\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                PS match\n                PS weight\n              \n        \n        \n        \n                \n                  ca\n                  -0.291 [-1.441, 0.859]\n                  0.023 [-1.051, 1.096]\n                \n                \n                  \n                  (0.587)\n                  (0.548)\n                \n                \n                  (Intercept)\n                  \n                  67.637 [66.840, 68.434]\n                \n                \n                  \n                  \n                  (0.407)\n                \n                \n                  Num.Obs.\n                  5636\n                  6000\n                \n                \n                  R2\n                  0.001\n                  \n                \n                \n                  AIC\n                  47364.7\n                  65800.0\n                \n                \n                  BIC\n                  47464.2\n                  65820.1\n                \n                \n                  Log.Lik.\n                  -23667.344\n                  -32897.016\n                \n                \n                  F\n                  0.564\n                  0.002\n                \n                \n                  RMSE\n                  16.13\n                  16.16"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#augumented-inverse-probablity-weighting-aipw",
+    "href": "statistics/mlcausal/index.html#augumented-inverse-probablity-weighting-aipw",
+    "title": "機械学習を用いた因果推論",
+    "section": "Augumented Inverse Probablity Weighting (AIPW)",
+    "text": "Augumented Inverse Probablity Weighting (AIPW)"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#それでもなお問題が残る",
+    "href": "statistics/mlcausal/index.html#それでもなお問題が残る",
+    "title": "機械学習を用いた因果推論",
+    "section": "それでもなお、問題が残る",
+    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#機械学習とは",
+    "href": "statistics/mlcausal/index.html#機械学習とは",
+    "title": "機械学習を用いた因果推論",
+    "section": "機械学習とは",
+    "text": "機械学習とは"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#代表的な機械学習",
+    "href": "statistics/mlcausal/index.html#代表的な機械学習",
+    "title": "機械学習を用いた因果推論",
+    "section": "代表的な機械学習",
+    "text": "代表的な機械学習\n\nLogistic回帰\ntree-based model\n\nRandom forest\nXGBoost\n\nNeural network"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#機械学習の強みと弱み",
+    "href": "statistics/mlcausal/index.html#機械学習の強みと弱み",
+    "title": "機械学習を用いた因果推論",
+    "section": "機械学習の強みと弱み",
+    "text": "機械学習の強みと弱み\n\nPros\n\nデータから関係性を柔軟に読み取る\n例えばTree based modelは相互作用を自然に扱うことが出来る\n\nCons\n\n複雑なモデルはBlack boxになる\nOverfittingの問題"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#因果推論における機械学習の役割",
+    "href": "statistics/mlcausal/index.html#因果推論における機械学習の役割",
+    "title": "機械学習を用いた因果推論",
+    "section": "因果推論における機械学習の役割",
+    "text": "因果推論における機械学習の役割\n\nアウトカムモデル、PS modelを柔軟に扱う\nInteraction termを自然に扱える\n\nHTEを自然に扱えないか？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
+    "href": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
+    "title": "機械学習を用いた因果推論",
+    "section": "機械学習を用いた因果推論について",
+    "text": "機械学習を用いた因果推論について\n\n大別してMeta learner系とCausal forest系に分けられる\n柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest\nとはいえ、Causal forestだけで良い気もする\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x74318d9bef30&gt;\n\n\n[ 1.36099145  0.99076761 -0.22381373 ...  0.         -1.00593965\n  0.04658836]"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#scratch-for-s-learner",
+    "href": "statistics/mlcausal/index.html#scratch-for-s-learner",
+    "title": "機械学習を用いた因果推論",
+    "section": "Scratch for S-learner",
+    "text": "Scratch for S-learner\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 rmse    standard        14.0\n\n\nVariable |     Mean |   SD |  IQR |         Range | Skewness | Kurtosis |    n | n_Missing\n------------------------------------------------------------------------------------------\nca_diff  | 6.85e-03 | 1.39 | 0.82 | [-9.25, 7.16] |    -0.41 |     5.02 | 6000 |         0"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#t-learner",
+    "href": "statistics/mlcausal/index.html#t-learner",
+    "title": "機械学習を用いた因果推論",
+    "section": "T learner",
+    "text": "T learner\n\nt-learner"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#scratch-for-t-learner",
+    "href": "statistics/mlcausal/index.html#scratch-for-t-learner",
+    "title": "機械学習を用いた因果推論",
+    "section": "Scratch for T-learner",
+    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x74318d90b410&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 3.16970827  4.26806602 -1.45357206 ...  0.8124753  -1.37567113\n  3.3748413 ]\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x74318e8ebda0&gt;\n\n\n&lt;econml.metalearners._metalearners.DomainAdaptationLearner object at 0x74318d5 &gt;\n\n&gt; 2f320&gt;\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x74318d527a10&gt;"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
+    "href": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
+    "title": "機械学習を用いた因果推論",
+    "section": "機械学習の因果推論における使い方",
+    "text": "機械学習の因果推論における使い方\n\n交絡因子の調整で機械学習を用いる\n\nAIPW, tlmeなど\n\n因果をダイレクトに推論する学習機を作る\n\nMeta-learner\n\nCATEを測定する\n\nCausal forestなど"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#因果forest",
+    "href": "statistics/mlcausal/index.html#因果forest",
+    "title": "機械学習を用いた因果推論",
+    "section": "因果forest",
+    "text": "因果forest\n\nHTEを計測するのに有名\nAshey et al 2019"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#survival-model",
+    "href": "statistics/mlcausal/index.html#survival-model",
+    "title": "機械学習を用いた因果推論",
+    "section": "Survival model",
+    "text": "Survival model\n\n\n\n         control     treated\n[1,] -0.07987349  0.07987349\n[2,] -0.04125118  0.04125118\n[3,]  0.02343951 -0.02343951\n[4,]  0.01011981 -0.01011981\n[5,]  4.86985832 -4.86985832\n[6,] -0.44629810  0.44629810\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.6.0 (2026-04-24)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-06-07\n pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)\n quarto   1.8.26 @ /opt/quarto/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n backports         1.5.1      2026-04-03 [2] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [2] CRAN (R 4.5.2)\n bayestestR      * 0.18.0     2026-05-21 [2] CRAN (R 4.6.0)\n bonsai          * 0.4.1      2026-05-21 [2] CRAN (R 4.6.0)\n boot              1.3-32     2025-08-29 [2] RSPM (R 4.5.0)\n broom           * 1.0.13     2026-05-14 [2] CRAN (R 4.6.0)\n bspm              0.5.7      2024-04-10 [1] CRAN (R 4.5.2)\n checkmate         2.3.4      2026-02-03 [2] CRAN (R 4.5.2)\n class             7.3-23     2025-01-01 [2] RSPM (R 4.4.0)\n cli               3.6.6      2026-04-09 [2] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [2] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [2] RSPM (R 4.4.0)\n colorspace        2.1-2      2025-09-22 [2] RSPM (R 4.5.0)\n correlation     * 0.8.8      2025-07-08 [2] RSPM (R 4.5.0)\n curl              7.1.0      2026-04-22 [2] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [2] RSPM (R 4.4.0)\n data.table        1.18.4     2026-05-06 [2] CRAN (R 4.6.0)\n datawizard      * 1.3.1      2026-04-26 [2] CRAN (R 4.5.3)\n dials           * 1.4.3      2026-04-11 [2] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [2] RSPM (R 4.4.0)\n digest            0.6.39     2025-11-19 [2] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [2] CRAN (R 4.5.3)\n easystats       * 0.7.5      2025-07-11 [2] RSPM (R 4.5.0)\n effectsize      * 1.0.2      2026-03-11 [2] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [2] RSPM (R 4.5.0)\n farver            2.1.2      2024-05-13 [2] RSPM (R 4.4.2)\n fastmap           1.2.0      2024-05-15 [2] RSPM (R 4.4.2)\n forcats         * 1.0.1      2025-09-25 [2] RSPM (R 4.5.0)\n foreign           0.8-90     2025-03-31 [2] RSPM (R 4.4.0)\n Formula           1.2-5      2023-02-24 [2] RSPM (R 4.4.0)\n furrr             0.4.0      2026-03-31 [2] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [2] CRAN (R 4.5.2)\n future.apply      1.20.2     2026-02-20 [2] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [2] RSPM (R 4.5.0)\n ggcube          * 0.1.0      2026-05-27 [2] CRAN (R 4.6.0)\n ggdag           * 0.2.13     2024-07-22 [2] RSPM (R 4.4.0)\n ggplot2         * 4.0.3      2026-04-22 [2] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [2] CRAN (R 4.5.2)\n glue              1.8.1      2026-04-17 [2] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [2] RSPM (R 4.4.2)\n grf             * 2.6.1      2026-03-04 [2] CRAN (R 4.5.2)\n gridExtra         2.3        2017-09-09 [2] RSPM (R 4.4.0)\n gtable            0.3.6      2024-10-25 [2] RSPM (R 4.4.0)\n hardhat           1.4.3      2026-04-04 [2] CRAN (R 4.5.3)\n Hmisc           * 5.2-5      2026-01-09 [2] CRAN (R 4.5.2)\n hms               1.1.4      2025-10-17 [2] RSPM (R 4.5.0)\n htmlTable         2.5.0      2026-04-22 [2] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [2] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [2] RSPM (R 4.4.0)\n igraph            2.3.1      2026-05-04 [2] CRAN (R 4.6.0)\n infer           * 1.1.0      2025-12-18 [2] CRAN (R 4.5.2)\n insight         * 1.5.1      2026-05-21 [2] CRAN (R 4.6.0)\n ipred             0.9-15     2024-07-18 [2] RSPM (R 4.4.0)\n isoband           0.3.0      2025-12-07 [2] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [2] RSPM (R 4.4.0)\n knitr             1.51       2025-12-20 [2] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [2] RSPM (R 4.4.0)\n lattice           0.22-9     2026-02-09 [2] CRAN (R 4.5.2)\n lava              1.9.1      2026-05-14 [2] CRAN (R 4.6.0)\n lifecycle         1.0.5      2026-01-08 [2] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [2] RSPM (R 4.4.0)\n listenv           0.10.1     2026-03-10 [2] CRAN (R 4.5.2)\n lubridate       * 1.9.5      2026-02-04 [2] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [2] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [2] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [2] RSPM (R 4.4.0)\n MatchIt         * 4.7.2      2025-05-30 [2] RSPM (R 4.5.0)\n Matrix            1.7-5      2026-03-21 [2] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [2] RSPM (R 4.4.0)\n modelbased      * 0.15.0     2026-05-10 [2] CRAN (R 4.6.0)\n modeldata       * 1.5.1      2025-08-22 [2] RSPM (R 4.5.0)\n modelenv          0.2.0      2024-10-14 [2] RSPM (R 4.4.0)\n modelsummary    * 2.6.0      2026-02-13 [2] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [2] CRAN (R 4.5.2)\n mvtnorm           1.3-7      2026-04-15 [2] CRAN (R 4.5.3)\n nlme              3.1-168    2025-03-31 [2] RSPM (R 4.4.0)\n nnet              7.3-20     2025-01-01 [2] RSPM (R 4.4.2)\n otel              0.2.0      2025-08-29 [2] RSPM (R 4.5.0)\n parallelly        1.47.0     2026-04-17 [2] CRAN (R 4.5.3)\n parameters      * 0.29.0     2026-05-09 [2] CRAN (R 4.6.0)\n parsnip         * 1.6.0      2026-05-14 [2] CRAN (R 4.6.0)\n performance     * 0.17.0     2026-05-21 [2] CRAN (R 4.6.0)\n pillar            1.11.1     2025-09-17 [2] RSPM (R 4.5.0)\n pkgconfig         2.0.3      2019-09-22 [2] RSPM (R 4.4.0)\n png               0.1-9      2026-03-15 [2] CRAN (R 4.5.2)\n policytree      * 1.2.4      2026-02-18 [2] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [2] RSPM (R 4.4.0)\n polyclip          1.10-7     2024-07-23 [2] RSPM (R 4.4.2)\n prodlim           2026.03.11 2026-03-11 [2] CRAN (R 4.5.2)\n purrr           * 1.2.2      2026-04-10 [2] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [2] RSPM (R 4.4.0)\n R6                2.6.1      2025-02-15 [2] RSPM (R 4.4.0)\n RColorBrewer      1.1-3      2022-04-03 [2] RSPM (R 4.4.0)\n Rcpp              1.1.1-1.1  2026-04-24 [2] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [2] CRAN (R 4.5.2)\n recipes         * 1.3.2      2026-04-02 [2] CRAN (R 4.5.3)\n report          * 0.6.4      2026-05-04 [2] CRAN (R 4.6.0)\n reticulate      * 1.46.0     2026-04-09 [2] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [2] CRAN (R 4.6.0)\n rmarkdown         2.31       2026-03-26 [2] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [2] CRAN (R 4.5.2)\n rpart             4.1.27     2026-03-27 [2] CRAN (R 4.5.3)\n rsample         * 1.3.2      2026-01-30 [2] CRAN (R 4.5.2)\n rstudioapi        0.18.0     2026-01-16 [2] CRAN (R 4.5.2)\n S7                0.2.2      2026-04-22 [2] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [2] RSPM (R 4.4.0)\n scales          * 1.4.0      2025-04-24 [2] RSPM (R 4.4.0)\n see             * 0.13.0     2026-01-30 [2] CRAN (R 4.5.2)\n sessioninfo     * 1.2.3      2025-02-05 [2] RSPM (R 4.4.0)\n simsurv         * 1.0.1      2026-01-22 [2] CRAN (R 4.5.2)\n SparseM           1.84-2     2024-07-17 [2] RSPM (R 4.4.2)\n sparsevctrs       0.3.6      2026-01-27 [2] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [2] RSPM (R 4.4.0)\n stringr         * 1.6.0      2025-11-04 [2] RSPM (R 4.5.0)\n survival        * 3.8-6      2026-01-16 [2] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [2] CRAN (R 4.5.2)\n tables            0.9.33     2025-12-15 [2] CRAN (R 4.5.2)\n tailor          * 0.1.0      2025-08-25 [2] RSPM (R 4.5.0)\n TH.data           1.1-5      2025-11-17 [2] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [2] CRAN (R 4.5.2)\n tidygraph         1.3.1      2024-01-30 [2] CRAN (R 4.6.0)\n tidymodels      * 1.5.0      2026-04-23 [2] CRAN (R 4.5.3)\n tidyr           * 1.3.2      2025-12-19 [2] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [2] RSPM (R 4.4.0)\n tidyverse       * 2.0.0      2023-02-22 [2] RSPM (R 4.4.0)\n timechange        0.4.0      2026-01-29 [2] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [2] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [2] CRAN (R 4.5.3)\n tune            * 2.1.0      2026-04-17 [2] CRAN (R 4.5.3)\n tzdb              0.5.0      2025-03-15 [2] RSPM (R 4.4.0)\n utf8              1.2.6      2025-06-08 [2] RSPM (R 4.5.0)\n V8                8.2.0      2026-04-21 [2] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [2] CRAN (R 4.6.0)\n WeightIt        * 1.7.0      2026-04-22 [2] CRAN (R 4.5.3)\n withr             3.0.2      2024-10-28 [2] RSPM (R 4.4.0)\n workflows       * 1.3.0      2025-08-27 [2] RSPM (R 4.5.0)\n workflowsets    * 1.1.1      2025-05-27 [2] RSPM (R 4.5.0)\n xfun              0.57       2026-03-20 [2] CRAN (R 4.5.3)\n yaml              2.3.12     2025-12-10 [2] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [2] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [2] CRAN (R 4.5.2)\n\n [1] /usr/local/lib/R/site-library\n [2] /usr/lib/R/site-library\n [3] /usr/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.0\n cairoFT\n pango          1.52.1\n png            1.6.43\n jpeg           8.0\n tiff           LIBTIFF, Version 4.5.1\n tcl            8.6\n curl           8.5.0\n zlib           1.3\n bzlib          1.0.8, 13-Jul-2019\n xz             5.4.5\n deflate        1.19\n zstd           1.5.5\n PCRE           10.42 2022-12-11\n ICU            74.2\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          glibc 2.39\n readline       8.2\n BLAS           /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0\n lapack         /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n Python is not available\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#代替栄養とは-1",
+    "href": "medicine/PEG/index.html#代替栄養とは-1",
+    "title": "PEGについての覚書",
+    "section": "代替栄養とは",
+    "text": "代替栄養とは\n\n代替栄養（Artificial Nutrition）は、経口摂取が困難な患者に対して、栄養を補給するための医療行為\n主に、経管栄養（Enteral Nutrition）と静脈栄養（Parenteral Nutrition）の2つに分類される\n経管栄養は、口から胃や腸に直接栄養を供給する方法で、PEGもその一つ\n静脈栄養は、CVポートや中心静脈カテーテルを通じて行う\n皮下点滴も一応入れたり入れなかったり"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#代替栄養の利点欠点",
+    "href": "medicine/PEG/index.html#代替栄養の利点欠点",
+    "title": "PEGについての覚書",
+    "section": "代替栄養の利点・欠点",
+    "text": "代替栄養の利点・欠点\n\n\n\n\n\n\n\n\n方法\nメリット\nデメリット\n\n\n\n\n経鼻胃管\n簡単に入る合併症はほぼない十分に栄養が入る\n抑制が必要長期使用は難しい\n\n\n胃瘻\n十分に栄養が入る長期に使える抑制は不要な可能性が高い\n倫理的問題作成時の合併症の発症\n\n\nCVポート\n比較的侵襲性は低い十分な栄養が入る\n肝障害感染症のリスク"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#代替栄養を考える時",
+    "href": "medicine/PEG/index.html#代替栄養を考える時",
+    "title": "PEGについての覚書",
+    "section": "代替栄養を考える時",
+    "text": "代替栄養を考える時\n\n嚥下機能低下\n意識障害\n消化管の機能不全 など"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#例えば",
+    "href": "medicine/PEG/index.html#例えば",
+    "title": "PEGについての覚書",
+    "section": "例えば",
+    "text": "例えば\n\n脳梗塞後で嚥下の回復が見込めるが時間がかかる時\n\n2-3週間以上、経鼻胃管が必要な時は胃瘻造設が考慮される (Powers ほか 2018)\n咽頭部癌の術後、食道癌で経口摂取が困難な時など\n4週間を超える経管栄養で経鼻胃管よりPEGを推奨 (Tae ほか 2024)\n\n認知機能低下や年齢により恒久的に嚥下機能が低下している時"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#我々が思う悩む時",
+    "href": "medicine/PEG/index.html#我々が思う悩む時",
+    "title": "PEGについての覚書",
+    "section": "我々が思う悩む時",
+    "text": "我々が思う悩む時\n\n患者の思い\n家族の思い\n医学的適応\n倫理的適応 などを確認する"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#家族の思いとは世界",
+    "href": "medicine/PEG/index.html#家族の思いとは世界",
+    "title": "PEGについての覚書",
+    "section": "家族の思いとは？～世界",
+    "text": "家族の思いとは？～世界\n\n2/3の認知症がある施設の居住者はCareの第一目標は安楽である\n26%は非侵襲的な治療のみ希望している(抗菌薬、経静脈治療)\nわずか7%が寿命延伸を第一目標としている\n\n(Stall ほか 2025)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#日本においては",
+    "href": "medicine/PEG/index.html#日本においては",
+    "title": "PEGについての覚書",
+    "section": "日本においては？",
+    "text": "日本においては？\n \n\n無回答の解釈が難しいが、医師も一般国民もほぼ同じ比率\n\n約10%が胃瘻を望み、約85%が望まない\n\n\n(人生の最終段階における医療・ケアに関する意識調査事業 2022)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの適応の決定方法",
+    "href": "medicine/PEG/index.html#pegの適応の決定方法",
+    "title": "PEGについての覚書",
+    "section": "PEGの適応の決定方法",
+    "text": "PEGの適応の決定方法\n\n大きく分けて\n\n倫理的適応\n身体的適応 に分けられる"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの倫理的適応",
+    "href": "medicine/PEG/index.html#pegの倫理的適応",
+    "title": "PEGについての覚書",
+    "section": "PEGの倫理的適応",
+    "text": "PEGの倫理的適応"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの身体的適応",
+    "href": "medicine/PEG/index.html#pegの身体的適応",
+    "title": "PEGについての覚書",
+    "section": "PEGの身体的適応",
+    "text": "PEGの身体的適応"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegとは-1",
+    "href": "medicine/PEG/index.html#pegとは-1",
+    "title": "PEGについての覚書",
+    "section": "PEGとは",
+    "text": "PEGとは\n\nPEG（Percutaneous Endoscopic Gastrostomy）は、内視鏡を 用いて胃瘻を作成する手法\n1979年に米国で開発され、世界中に広まった\n\n1980年代には世界中の人工栄養の主流となった\n\n\n(鈴木 2012)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの構造",
+    "href": "medicine/PEG/index.html#pegの構造",
+    "title": "PEGについての覚書",
+    "section": "PEGの構造",
+    "text": "PEGの構造\n \n(横浜 と 青島 2009)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの種類",
+    "href": "medicine/PEG/index.html#pegの種類",
+    "title": "PEGについての覚書",
+    "section": "PEGの種類",
+    "text": "PEGの種類\n \n\n外部ストッパーと内部ストッパーで大別される\n\n外部ストッパー: ボタン型/チューブ型\n内部ストッパー: バルーン/バンパー型"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#外部ストッパーについて",
+    "href": "medicine/PEG/index.html#外部ストッパーについて",
+    "title": "PEGについての覚書",
+    "section": "外部ストッパーについて",
+    "text": "外部ストッパーについて\n\n\n\n\n\n\n\n\n外部ストッパー\nメリット\nデメリット\n\n\n\n\nボタン型\n自己抜去のリスクが少ないカテーテル汚染が少ない\n栄養剤との接続が複雑交換時までシャフト長を変更できない\n\n\nチューブ型\n栄養剤との接続が容易\n自己抜去のリスクが高い\n\n\n\n\n\nボタン型が良いのは\n\n若くて理解力がある元気な患者\n逆に自己抜去のRiskが非常に高い患者で良い適応\n\nチューブ型が良いのは\n\n理解力があるが麻痺などで細かい作業が困難な患者で良い適応"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの入れ方",
+    "href": "medicine/PEG/index.html#pegの入れ方",
+    "title": "PEGについての覚書",
+    "section": "PEGの入れ方",
+    "text": "PEGの入れ方\n \n\n基本的には内視鏡を用いて皮膚から胃壁を通して胃にカテーテルを挿入する\n\n開腹でやる事もある\n入れ方でpush/pull法、Introducer法などがある\n当院では基本的にはIntroducer法/Introducer変法との事"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの短期死亡率",
+    "href": "medicine/PEG/index.html#pegの短期死亡率",
+    "title": "PEGについての覚書",
+    "section": "PEGの短期死亡率",
+    "text": "PEGの短期死亡率\n\n日本の2007-2010年のDPCデータ(n = 64,219)\n\n30日死亡は6.2%, 院内死亡は11.9%\n特に、男性、高齢者などが高リスク\n\n\n\n\n\nsubgroup\n粗の院内死亡率\n\n\n\n\n70-89歳 vs. 90歳以上\n12.0% vs. 14.6%\n\n\n男性 vs. 女性\n12.4% vs. 9.6%\n\n\n認知症のみ vs. 認知症+肺炎\n4.8% vs. 12.1%\n\n\n脳血管疾患のみ vs. 脳血管疾患+肺炎\n5.6% vs. 14.7%\n\n\n\n\n(Sako ほか 2014)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの周術期合併症",
+    "href": "medicine/PEG/index.html#pegの周術期合併症",
+    "title": "PEGについての覚書",
+    "section": "PEGの周術期合併症",
+    "text": "PEGの周術期合併症\n\n2週間以内の早期合併症と晩期合併症に別れる\n\n早期合併症の方が予後が悪い\n\n大きく分けて、感染症、出血、消化管穿孔、その他に分けられる\n\n感染症は創部感染、腹膜炎、肺炎など\n出血は胃粘膜の損傷、血管損傷\n消化管穿孔は胃壁の損傷、腸管損傷\n\nPEG特有なのはバンパー埋没症候群やボールバルブ症候群"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの周術期合併症の発症率",
+    "href": "medicine/PEG/index.html#pegの周術期合併症の発症率",
+    "title": "PEGについての覚書",
+    "section": "PEGの周術期合併症の発症率",
+    "text": "PEGの周術期合併症の発症率\n\n世界的には5-20% (Stein ほか 2021) (Stenberg ほか 2022)\n合併症自身と死亡は相関しない (Anderloni ほか 2019)\n日本でも同程度(上記、DPCデータだと約5%、単施設だと約20%)\n\n感染症が80%で最多(肺炎は約25%、創部感染が約8%)\n緊急手術が必要な状態はPEG施行のうち1.6% (Mawatari ほか 2020)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#合併症各論バンパー埋没症候群とは",
+    "href": "medicine/PEG/index.html#合併症各論バンパー埋没症候群とは",
+    "title": "PEGについての覚書",
+    "section": "合併症各論～バンパー埋没症候群とは",
+    "text": "合併症各論～バンパー埋没症候群とは\n \n\nPEGの内部のバンパーの締まりが強すぎて 胃粘膜の血流障害を起こすこと\n\n内部バンパーは徐々に胃壁に埋没してしまう\n\n適切なタイミングでバンパーを緩める必要がある\n\n当院では24時間後\n\n\n(NPO法人PDN, 日付なし)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#合併症各論ボールバルブ症候群とは",
+    "href": "medicine/PEG/index.html#合併症各論ボールバルブ症候群とは",
+    "title": "PEGについての覚書",
+    "section": "合併症各論～ボールバルブ症候群とは",
+    "text": "合併症各論～ボールバルブ症候群とは\n \n\nバルーン型カテーテルの先端バルーンが十二指腸に嵌頓してしまう\n嘔吐を繰り返すが胆汁や栄養剤が出てこないのが特徴\nバルーンを虚脱させ、胃内に戻す\n\n(NPO法人PDN, 日付なし)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの交換",
+    "href": "medicine/PEG/index.html#pegの交換",
+    "title": "PEGについての覚書",
+    "section": "PEGの交換",
+    "text": "PEGの交換\n\n日本では\n\nバルーン型だと1-2ヶ月毎が多い\n日本ではバンパー型だと4-6ヶ月毎が多い (NPO法人PDN, 日付なし)\n\n海外のガイドラインではバルーン型だと3-6ヶ月毎 (Tae ほか 2023)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの交換方法",
+    "href": "medicine/PEG/index.html#pegの交換方法",
+    "title": "PEGについての覚書",
+    "section": "PEGの交換方法",
+    "text": "PEGの交換方法\n\nカテーテル非切断法とカテーテル切断法がある\n\nカテーテル切断法は内部ストッパーを一旦切り離し、古いカテーテルを抜き去った後、新しいカテーテルを用手的に挿入した後、内視鏡で古い内部ストッパーを回収する方法\n\nいずれにせよ、PEG交換後の胃内の留置確認が必要"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#peg交換後の胃内留置確認法",
+    "href": "medicine/PEG/index.html#peg交換後の胃内留置確認法",
+    "title": "PEGについての覚書",
+    "section": "PEG交換後の胃内留置確認法",
+    "text": "PEG交換後の胃内留置確認法\n\n\n\n\n\n\n\n確認法\n内容\n\n\n\n\n間接確認法\n送気音による確認（非推奨）胃内容物の吸引による確認（非推奨）色素液注入による確認（スカイブルー法）レントゲン設備を利用した確認\n\n\n直接確認法\n経胃瘻カテーテル内視鏡による確認経鼻/経口内視鏡による確認\n\n\n\n\n(NPO法人PDN, 日付なし)\n\n当院だと、非切断法でインジゴカルミン液を用いたスカイブルー法の併用が多い"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#pegの長期予後総論",
+    "href": "medicine/PEG/index.html#pegの長期予後総論",
+    "title": "PEGについての覚書",
+    "section": "PEGの長期予後総論",
+    "text": "PEGの長期予後総論\n\nPEGの患者の観察研究の予後はかなり差がある\n\n傾向として日本だと長く、欧米だと短い\n\nこれはPEGをやっている患者層の差が大きそう"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#重症認知症の場合",
+    "href": "medicine/PEG/index.html#重症認知症の場合",
+    "title": "PEGについての覚書",
+    "section": "重症認知症の場合",
+    "text": "重症認知症の場合\n \n\n2009年のCASCADE trialにおいて、肺炎合併の重度認知症患者の中央値は6ヶ月\n\n(Mitchell ほか 2009)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#重症認知症のsystematic-review",
+    "href": "medicine/PEG/index.html#重症認知症のsystematic-review",
+    "title": "PEGについての覚書",
+    "section": "重症認知症のSystematic review",
+    "text": "重症認知症のSystematic review\n\n最低限抑えるべきSystematic review\nFAST 7C+以降の患者において、PEGは\n\n生命予後\n栄養状態\nQOL をいずれも改善しない\n\n\n(Davies ほか 2021)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#非重症認知症の場合は",
+    "href": "medicine/PEG/index.html#非重症認知症の場合は",
+    "title": "PEGについての覚書",
+    "section": "非重症認知症の場合は",
+    "text": "非重症認知症の場合は\n\n2014-2018年のカナダの大規模データ\n65歳以上の認知症のPEG患者(実際の平均年齢は約84歳、 n = 1,312)\n1年生存率は約50%\n\n(Lennon ほか 2023)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#日本のデータ",
+    "href": "medicine/PEG/index.html#日本のデータ",
+    "title": "PEGについての覚書",
+    "section": "日本のデータ",
+    "text": "日本のデータ\n \n\n聖隷浜松病院のデータ\n全体だと、誤嚥性肺炎患者のうち半数は1年以内に亡くなる\n特に、経口摂取できないと誤嚥性肺炎の予後は極めて悪い\n\n(Honda ほか 2024)"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#とは言え",
+    "href": "medicine/PEG/index.html#とは言え",
+    "title": "PEGについての覚書",
+    "section": "とは言え",
+    "text": "とは言え\n\nPEGの患者の研究の予後は研究によってめちゃくちゃ違う\n\n古い日本の研究だと、2年以上生きている人も半数超えるものもある (Suzuki ほか 2010)\n\nやはり、手技というよりは患者背景による\n特にRCTがないので、非PEG患者の予後との比較は不可能\n一つ一つの症例で悩むくらいが良いのかも"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#take-home-message",
+    "href": "medicine/PEG/index.html#take-home-message",
+    "title": "PEGについての覚書",
+    "section": "Take home message",
+    "text": "Take home message\n\nPEGの適応は倫理的適応と身体的適応を考慮する\nPEGの短期合併症はそこそこあるが、適切に管理すれば問題ない\nPEGの長期予後は患者背景によるが、一人ひとり迷うくらいがちょうど良い"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#最後に",
+    "href": "medicine/PEG/index.html#最後に",
+    "title": "PEGについての覚書",
+    "section": "最後に",
+    "text": "最後に\n \n(Estrada, Malani, と Vitale 2025)\n\n最後まで手で食べることが重要なんだと思う"
+  },
+  {
+    "objectID": "medicine/PEG/index.html#references",
+    "href": "medicine/PEG/index.html#references",
+    "title": "PEGについての覚書",
+    "section": "References",
+    "text": "References\n\n\nAnderloni, Andrea, Milena Di Leo, Franco Barzaghi, Rossella Semeraro, Gianmichele Meucci, Roberta Marino, Loretta Amato, ほか. 2019. 「Complications and early mortality in percutaneous endoscopic gastrostomy placement in lombardy: A multicenter prospective cohort study」. Digestive and liver disease: official journal of the Italian Society of Gastroenterology and the Italian Association for the Study of the Liver 51 (10): 1380–87. https://doi.org/10.1016/j.dld.2019.03.024.\n\n\nDavies, Nathan, Yolanda Barrado-Martín, Victoria Vickerstaff, Greta Rait, Akiko Fukui, Bridget Candy, Christina H Smith, Jill Manthorpe, Kirsten J Moore, と Elizabeth L Sampson. 2021. 「Enteral tube feeding for people with severe dementia」. Cochrane database of systematic reviews 8 (8): CD013503. https://doi.org/10.1002/14651858.CD013503.pub2.\n\n\nEstrada, Leah V, Preeti N Malani, と Caroline A Vitale. 2025. 「Eating and swallowing problems in people with advanced dementia」. JAMA: the journal of the American Medical Association 334 (6): 550. https://doi.org/10.1001/jama.2025.7857.\n\n\nHonda, Yuki, Yoichiro Homma, Mieko Nakamura, Toshiyuki Ojima, と Kazuhito Saito. 2024. 「Extremely poor post-discharge prognosis in aspiration pneumonia and its prognostic factors: A retrospective cohort study」. Dysphagia 39 (5): 837–45. https://doi.org/10.1007/s00455-023-10665-z.\n\n\nLennon, Matthew J, Ben Chun Pan Lam, Darren M Lipnicki, John D Crawford, Ruth Peters, Aletta E Schutte, Henry Brodaty, ほか. 2023. 「Use of antihypertensives, blood pressure, and estimated risk of dementia in late life: An Individual Participant Data meta-analysis」. JAMA Network Open 6 (9): e2333353. https://doi.org/10.1001/jamanetworkopen.2023.33353.\n\n\nMawatari, Fumihiro, Hisamitsu Miyaaki, Tetsuhiko Arima, Hiroyuki Ito, Kei Matsuki, Sachiko Fukuda, Yoshiko Kita, Aiko Fukahori, Yoshito Ikematsu, と Kazuhiko Nakao. 2020. 「Procedure-related complications and survival after gastrostomy: Results from a Japanese cohort」. Annals of nutrition & metabolism 76 (6): 413–21. https://doi.org/10.1159/000513616.\n\n\nMitchell, Susan L, Joan M Teno, Dan K Kiely, Michele L Shaffer, Richard N Jones, Holly G Prigerson, Ladislav Volicer, Jane L Givens, と Mary Beth Hamel. 2009. 「The clinical course of advanced dementia」. The New England Journal of Medicine 361 (16): 1529–38. https://doi.org/10.1056/NEJMoa0902234.\n\n\nNPO法人PDN. 日付なし. 「PDNレクチャー Chapter1 PEG」. 編集者： 敏郎, 髙橋美香子, 順博, 聡, と 徹. NPO法人PDN. https://www.peg.or.jp/lecture/peg/.\n\n\nPowers, William J, Alejandro A Rabinstein, Teri Ackerson, Opeolu M Adeoye, Nicholas C Bambakidis, Kyra Becker, José Biller, ほか. 2018. 「2018 guidelines for the early management of patients with acute ischemic stroke: A guideline for healthcare professionals from the American Heart Association/American stroke association」. Stroke; a journal of cerebral circulation 49 (3): e46–110. https://doi.org/10.1161/STR.0000000000000158.\n\n\nSako, Akahito, Hideo Yasunaga, Hiromasa Horiguchi, Kiyohide Fushimi, Hidekatsu Yanai, と Naomi Uemura. 2014. 「Prevalence and in-hospital mortality of gastrostomy and jejunostomy in Japan: a retrospective study with a national administrative database」. Gastrointestinal endoscopy 80 (1): 88–96. https://doi.org/10.1016/j.gie.2013.12.006.\n\n\nStall, Nathan M, Kieran L Quinn, Jenny T van der Steen, Johanna Trimble, A Mark Clarfield, と Susan L Mitchell. 2025. 「Enteral tube feeding in people with advanced dementia」. BMJ (Clinical research ed.) 389 (5月): e075326. https://doi.org/10.1136/bmj-2023-075326.\n\n\nStein, Daniel J, Matthew B Moore, Gila Hoffman, と Joseph D Feuerstein. 2021. 「Improving all-cause inpatient mortality after percutaneous endoscopic gastrostomy」. Digestive diseases and sciences 66 (5): 1593–99. https://doi.org/10.1007/s10620-020-06396-y.\n\n\nStenberg, K, A Eriksson, C Odensten, と D Darehed. 2022. 「Mortality and complications after percutaneous endoscopic gastrostomy: a retrospective multicentre study」. BMC gastroenterology 22 (1): 361. https://doi.org/10.1186/s12876-022-02429-0.\n\n\nSuzuki, Yutaka, Seryna Tamez, Akihiko Murakami, Akihiko Taira, Akihiro Mizuhara, Akira Horiuchi, Chie Mihara, ほか. 2010. 「Survival of geriatric patients after percutaneous endoscopic gastrostomy in Japan」. World journal of gastroenterology: WJG 16 (40): 5084–91. https://doi.org/10.3748/wjg.v16.i40.5084.\n\n\nTae, Chung Hyun, Ju Yup Lee, Moon Kyung Joo, Chan Hyuk Park, Eun Jeong Gong, Cheol Min Shin, Hyun Lim, ほか. 2023. 「Clinical practice guidelines for percutaneous endoscopic gastrostomy」. Clinical endoscopy 56 (4): 391–408. https://doi.org/10.5946/ce.2023.062.\n\n\n———, ほか. 2024. 「Clinical practice guideline for percutaneous endoscopic gastrostomy」. Gut and liver 18 (1): 10–26. https://doi.org/10.5009/gnl230146.\n\n\n人生の最終段階における医療・ケアに関する意識調査事業. 2022. 「人生の最終段階における医療・ケアに関する意識調査報告書」. https://www.mhlw.go.jp/toukei/list/dl/saisyuiryo_a_r04.pdf.\n\n\n横浜吏郎, と 青島優. 2009. 「経皮内視鏡的胃瘻造設術後の早期死亡とその危険因子に関する検討」. Nihon Shokakibyo Gakkai zasshi [The Japanese journal of gastro-enterology] 106 (9): 1313–20. https://doi.org/10.11405/nisshoshi.106.1313.\n\n\n鈴木裕. 2012. 「胃ろう栄養の適応と問題点」. 日本老年医学会雑誌 = Japanese journal of geriatrics 49 (2): 126–29."
   },
   {
     "objectID": "medicine/index.html",

@@ -31,7 +31,8 @@ If make slides, do as follows.
 quarto render
 touch docs/.nojekyll
 git add .
-git commit -m "Update rendered slides"
+# git commit -m "Update rendered slides"
+git commit -m "Add PEG slides"
 git push
 
 ```
