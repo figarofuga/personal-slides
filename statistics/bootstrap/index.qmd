@@ -3,7 +3,7 @@ title: "Bootstrapについて"
 author: "Nozomi Niimi"
 date: "2/10/2023"
 format:
-  revealjs:
+  clean-revealjs:
     smaller: true
 height: 700
 width: 960

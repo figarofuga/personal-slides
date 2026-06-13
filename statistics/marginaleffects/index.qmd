@@ -2,7 +2,7 @@
 title: Marginal effectsとその周辺
 subtitle: 多変量回帰・・・好きですか？
 format:
-  revealjs:
+  clean-revealjs:
     toc: true
     toc-depth: 1
     width: 1600

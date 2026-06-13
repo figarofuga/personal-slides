@@ -2,7 +2,7 @@
 title: "機械学習を用いた因果推論"
 author: "Nozomi Niimi"
 format:
-  revealjs:
+  clean-revealjs:
     pdf-separate-fragments: false
     pdf-max-pages-per-slide: 3
     theme: [default, custom-style.scss]

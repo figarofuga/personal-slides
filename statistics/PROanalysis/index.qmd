@@ -3,7 +3,7 @@ title: "PROの解析について"
 author: "Nozomi Niimi"
 date: "2024-10-10"
 format:
-  revealjs:
+  clean-revealjs:
     slide-level: 1
     theme: default
     transition: slide
@@ -32,7 +32,7 @@ bibliography: references.bib
     - AFで利用するAFEQT
     - 循環器の研究におけるPRO
 
-![](images/num_publish_pro.png)
+![](images/num_publish_pro.png){height=70%}
 
 - High impact journalではPROを含む研究が増えている！！ [@Eliya2021-yf]
 
@@ -44,6 +44,18 @@ bibliography: references.bib
 -   分布が歪んでいる
 
 # このPROはどうやって解析すればいい？
+
+:::: {.columns}
+
+::: {.column width="20%"}
+contents...
+:::
+
+::: {.column width="60%"}
+contents...
+:::
+
+::::
 
 -   統計学の論文では通常の多変量回帰、beta-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・
 

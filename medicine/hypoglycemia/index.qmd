@@ -2,7 +2,7 @@
 title: 低血糖についての覚書
 subtitle: 低血糖の機序と実践
 format:
-  revealjs:
+  clean-revealjs:
     width: 1200
     height: 800
     theme: [default, custom-style.scss]

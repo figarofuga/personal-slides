@@ -6,7 +6,7 @@ date: "2026-06-10"
 lang: ja
 bibliography: references.bib
 format:
-  revealjs:
+  clean-revealjs:
     slide-level: 2
     theme: default
     transition: slide
