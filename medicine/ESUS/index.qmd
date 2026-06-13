@@ -3,12 +3,15 @@ title: "Cryptogenic strokeとESUS"
 author: "Nozomi Niimi"
 date: "2024-03-06"
 lang: ja
+bibliography: references.bib
 format:
   revealjs:
     slide-level: 2
     theme: default
     transition: slide
     incremental: false
+    scrollable: true
+    embed-resources: true
 execute:
   echo: false
 ---
@@ -34,9 +37,7 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 - 定義により異なるが 10-40% と言われている
   - 日本でも同じくらいの割合
 - Cryptogenic stroke のうち ESUS は大体 80-90%
-- 参考
-  - <https://www.jstage.jst.go.jp/article/jstroke/38/2/38_10416/_pdf/-char/en>
-  - _N Engl J Med._ 2016;374(21):2065-2074.
+[@Toyoda2016-nv; @Hart2018-ld]
 
 ## Cryptogenic strokeの機序は？
 
@@ -65,11 +66,11 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 ![](images/slide-05-ccs-system.png)
 
-- <https://ccs.mgh.harvard.edu/ccs_title.php>
+[@CCS_IschemicStroke_v2]
 
 ## Cryptogenic stroke患者への問診と身体所見
 
-![](images/slide-06-history-physical.png)
+![](images/slide-06-history-physical.png){width=60%}
 
 - 左右の上肢の血圧差: AoD
 - 皮膚の網状皮斑: APS
@@ -83,7 +84,7 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 - <span style="color: red; font-weight: bold;">息こらえの後の発症: 奇異性塞栓</span>
 - 若年の ASCVD の家族歴: 遺伝性疾患
 - 妊娠: CVT、子癇
-- _N Engl J Med._ 2016;374(21):2065-2074.
+[@Saver2016-xj]
 
 ## 検査について
 
@@ -97,7 +98,7 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
   - TTE
 - NEJM では段階的なアプローチが推奨されている
 - 特に重要なのは <span style="color: red; font-weight: bold;">潜在性の pAF 検索</span>
-- _N Engl J Med._ 2016;374(21):2065-2074.
+[@Saver2016-xj]
 
 ## ESUSにおけるAFの検索
 
@@ -108,10 +109,7 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 - ESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる
 - ループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある
 - UpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨
-- 参考
-  - _N Engl J Med._ 2014;370(26):2478-2486.
-  - _N Engl J Med._ 2014;370(26):2467-2477.
-  - _N Engl J Med._ 2023;389(13):1167-1179.
+[@Gladstone2014-gd; @Sanna2014-lw; @Kirchhof2023-cl]
 
 ## Cryptogenic strokeの治療
 
@@ -164,10 +162,11 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 ![](images/slide-13-rope-score.jpg)
 
-- _JAMA._ 2021;326(22):2277-2286.
 - 治療適応は原則 60歳以下
 - RoPE score < 7 だと治療効果がないかもしれない
 - 治療を見据えて検査を行う
+
+[@Kent2021-iu]
 
 ## まとめ
 
@@ -183,4 +182,7 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 - ご清聴ありがとうございました
 
-<!-- TODO: 元Markdownは Crypogenic_stroke_16.jpg を参照していたが、images/ に該当ファイルなし。 -->
+## Reference
+
+::: {#refs}
+:::

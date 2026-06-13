@@ -459,7 +459,7 @@
     "href": "medicine/ESUS/index.html#cryptogenic-strokeの疫学",
     "title": "Cryptogenic strokeとESUS",
     "section": "Cryptogenic strokeの疫学",
-    "text": "Cryptogenic strokeの疫学\n\n\n\n定義により異なるが 10-40% と言われている\n\n日本でも同じくらいの割合\n\nCryptogenic stroke のうち ESUS は大体 80-90%\n参考\n\nhttps://www.jstage.jst.go.jp/article/jstroke/38/2/38_10416/_pdf/-char/en\nN Engl J Med. 2016;374(21):2065-2074."
+    "text": "Cryptogenic strokeの疫学\n\n\n\n定義により異なるが 10-40% と言われている\n\n日本でも同じくらいの割合\n\nCryptogenic stroke のうち ESUS は大体 80-90% (Toyoda ほか 2016; Hart ほか 2018)"
   },
   {
     "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの機序は",
@@ -480,28 +480,28 @@
     "href": "medicine/ESUS/index.html#ccs-systems",
     "title": "Cryptogenic strokeとESUS",
     "section": "CCS systems",
-    "text": "CCS systems\n\n\nhttps://ccs.mgh.harvard.edu/ccs_title.php"
+    "text": "CCS systems\n\n(Massachusetts General Hospital Stroke Service と A. A. Martinos Center for Biomedical Imaging, 日付なし)"
   },
   {
     "objectID": "medicine/ESUS/index.html#cryptogenic-stroke患者への問診と身体所見",
     "href": "medicine/ESUS/index.html#cryptogenic-stroke患者への問診と身体所見",
     "title": "Cryptogenic strokeとESUS",
     "section": "Cryptogenic stroke患者への問診と身体所見",
-    "text": "Cryptogenic stroke患者への問診と身体所見\n\n\n左右の上肢の血圧差: AoD\n皮膚の網状皮斑: APS\n黄色腫: FH\n心雑音: IE、先天性心疾患\n脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病\nDVT: 血栓傾向、奇異性塞栓\n頸部外傷やマッサージ: 椎骨脳底動脈の乖離\n片頭痛: 片頭痛性脳梗塞 / CADASIL\n違法薬物: IE、血管攣縮、HIV など\n息こらえの後の発症: 奇異性塞栓\n若年の ASCVD の家族歴: 遺伝性疾患\n妊娠: CVT、子癇\nN Engl J Med. 2016;374(21):2065-2074."
+    "text": "Cryptogenic stroke患者への問診と身体所見\n\n\n左右の上肢の血圧差: AoD\n皮膚の網状皮斑: APS\n黄色腫: FH\n心雑音: IE、先天性心疾患\n脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病\nDVT: 血栓傾向、奇異性塞栓\n頸部外傷やマッサージ: 椎骨脳底動脈の乖離\n片頭痛: 片頭痛性脳梗塞 / CADASIL\n違法薬物: IE、血管攣縮、HIV など\n息こらえの後の発症: 奇異性塞栓\n若年の ASCVD の家族歴: 遺伝性疾患\n妊娠: CVT、子癇 (Saver 2016)"
   },
   {
     "objectID": "medicine/ESUS/index.html#検査について",
     "href": "medicine/ESUS/index.html#検査について",
     "title": "Cryptogenic strokeとESUS",
     "section": "検査について",
-    "text": "検査について\n\nどこまでやるべきか、決まっていない\n最低限の検査\n\n基本的な血算\n凝固系\n頭部 MRI\n発症 24 時間の心電図モニター\n頸動脈エコー\nTTE\n\nNEJM では段階的なアプローチが推奨されている\n特に重要なのは 潜在性の pAF 検索\nN Engl J Med. 2016;374(21):2065-2074."
+    "text": "検査について\n\nどこまでやるべきか、決まっていない\n最低限の検査\n\n基本的な血算\n凝固系\n頭部 MRI\n発症 24 時間の心電図モニター\n頸動脈エコー\nTTE\n\nNEJM では段階的なアプローチが推奨されている\n特に重要なのは 潜在性の pAF 検索 (Saver 2016)"
   },
   {
     "objectID": "medicine/ESUS/index.html#esusにおけるafの検索",
     "href": "medicine/ESUS/index.html#esusにおけるafの検索",
     "title": "Cryptogenic strokeとESUS",
     "section": "ESUSにおけるAFの検索",
-    "text": "ESUSにおけるAFの検索\n\n\n\nESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる\nループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある\nUpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨\n参考\n\nN Engl J Med. 2014;370(26):2478-2486.\nN Engl J Med. 2014;370(26):2467-2477.\nN Engl J Med. 2023;389(13):1167-1179."
+    "text": "ESUSにおけるAFの検索\n\n\n\nESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる\nループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある\nUpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨 (Gladstone ほか 2014; Sanna ほか 2014; Kirchhof ほか 2023)"
   },
   {
     "objectID": "medicine/ESUS/index.html#cryptogenic-strokeの治療",
@@ -536,7 +536,7 @@
     "href": "medicine/ESUS/index.html#いつpfoの検査をする",
     "title": "Cryptogenic strokeとESUS",
     "section": "いつPFOの検査をする？",
-    "text": "いつPFOの検査をする？\n\n\n\nJAMA. 2021;326(22):2277-2286.\n治療適応は原則 60歳以下\nRoPE score &lt; 7 だと治療効果がないかもしれない\n治療を見据えて検査を行う"
+    "text": "いつPFOの検査をする？\n\n\n\n治療適応は原則 60歳以下\nRoPE score &lt; 7 だと治療効果がないかもしれない\n治療を見据えて検査を行う\n\n(Kent ほか 2021)"
   },
   {
     "objectID": "medicine/ESUS/index.html#まとめ",
@@ -550,7 +550,7 @@
     "href": "medicine/ESUS/index.html#thank-you-for-listening",
     "title": "Cryptogenic strokeとESUS",
     "section": "Thank you for listening",
-    "text": "Thank you for listening\n\nご清聴ありがとうございました"
+    "text": "Thank you for listening\n\nご清聴ありがとうございました\n\n\n\n\n\nGladstone, David J, Melanie Spring, Paul Dorian, Val Panzov, Kevin E Thorpe, Judith Hall, Haris Vaid, ほか. 2014. 「Atrial fibrillation in patients with cryptogenic stroke」. The New England journal of medicine 370 (26): 2467–77. https://doi.org/10.1056/NEJMoa1311376.\n\n\nHart, Robert G, Mukul Sharma, Hardi Mundl, Scott E Kasner, Shrikant I Bangdiwala, Scott D Berkowitz, Balakumar Swaminathan, ほか. 2018. 「Rivaroxaban for stroke prevention after embolic stroke of undetermined source」. The New England Journal of Medicine 378 (23): 2191–201. https://doi.org/10.1056/NEJMoa1802686.\n\n\nKent, David M, Jeffrey L Saver, Scott E Kasner, Jason Nelson, John D Carroll, Gilles Chatellier, Geneviève Derumeaux, ほか. 2021. 「Heterogeneity of treatment effects in an analysis of pooled individual patient data from randomized trials of device closure of patent foramen ovale after stroke」. The Journal of the American Medical Association 326 (22): 2277–86. https://doi.org/10.1001/jama.2021.20956.\n\n\nKirchhof, Paulus, Tobias Toennis, Andreas Goette, A John Camm, Hans Christoph Diener, Nina Becher, Emanuele Bertaglia, ほか. 2023. 「Anticoagulation with Edoxaban in Patients with Atrial High-Rate Episodes」. The New England journal of medicine 389 (13): 1167–79. https://doi.org/10.1056/NEJMoa2303062.\n\n\nMassachusetts General Hospital Stroke Service, と A. A. Martinos Center for Biomedical Imaging. 日付なし. 「Causative Classification System for Ischemic Stroke (CCS)」. Massachusetts General Hospital, Harvard Medical School. https://ccs.mgh.harvard.edu/ccs_title.php.\n\n\nSanna, Tommaso, Hans-Christoph Diener, Rod S Passman, Vincenzo Di Lazzaro, Richard A Bernstein, Carlos A Morillo, Marilyn Mollman Rymer, ほか. 2014. 「Cryptogenic stroke and underlying atrial fibrillation」. The New England journal of medicine 370 (26): 2478–86. https://doi.org/10.1056/NEJMoa1313600.\n\n\nSaver, Jeffrey L. 2016. 「CLINICAL PRACTICE. Cryptogenic stroke」. The New England Journal of Medicine 374 (21): 2065–74. https://doi.org/10.1056/NEJMcp1503946.\n\n\nToyoda, Kazunori, Ken Okumura, Yoichiro Hashimoto, Takanori Ikeda, Takashi Komatsu, Teruyuki Hirano, Haruhisa Fukuda, Kazuo Matsumoto, と Masahiro Yasaka. 2016. 「Cryptogenic ischemic stroke and embolic stroke of undetermined source: clinical implications and importance for detection of covert atrial fibrillation in Japan」. Nosotchu 38 (2): 77–85. https://doi.org/10.3995/jstroke.10416."
   },
   {
     "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
