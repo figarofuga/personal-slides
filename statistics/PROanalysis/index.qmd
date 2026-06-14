@@ -409,18 +409,21 @@ pieplot_list <- tidyr::pivot_longer(
     treatment, name
   ) |> 
   dplyr::mutate(
-    pieplot = purrr::map(data, \(dat){
+    pieplot = purrr::map2(data, treatment, \(dat, treatment){
+        
         ggpubr::ggpie(
             dat, 
             x = "n", 
             label = "label", 
-            fill = "value"
-        )
+            fill = "value", 
+            main = treatment
+        ) + theme(legend.position = "none")
     })
-  )
+  ) |> 
+    dplyr::arrange(desc(name))
 
-lineplot <- tidyr::pivot_longer(
-    ist3_visdat, 
+lineplot <- dplyr::filter(ist3_visdat, !is.na(euroqol18)) |> 
+        tidyr::pivot_longer(
     cols = c("euroqol6", "euroqol18")
 ) |> 
   tidyr::drop_na(value) |> 
@@ -428,9 +431,23 @@ lineplot <- tidyr::pivot_longer(
         x = "name", 
         y = "value", 
         color = "treatment", 
-        add = "mean_se"
+        add = "mean_se", 
+        xlab = "Timing of EuroQOL", 
+        ylab = "EuroQOL score"
     )
 
+
+
+pies <- cowplot::plot_grid(
+    plotlist = pieplot_list$pieplot, nrow = 1, 
+    labels = c("EuroQOL at 6 month", "", "EuroQOL at 18 month", "")
+)
+
+plots <- cowplot::plot_grid(
+    plotlist = list(pies, lineplot), nrow = 2
+)
+
+plots
 
 ```
 
@@ -442,7 +459,6 @@ lineplot <- tidyr::pivot_longer(
 
 ```{r}
 library(gtsummary)
-library(finalfit)
 
 gtsummary::tbl_summary(
     ist3_dat_mod, by = missing_euroqol,
@@ -464,11 +480,34 @@ gtsummary::tbl_summary(
 # Missingの解析
 
 ```{r}
+library(mice)
+
+md.pattern(dplyr::select(ist3_dat_mod, -reverse_euroqol_comp, -missing_euroqol, -bad_euroqol_comp_bin))
+
+```
+
+# Missingの解析~組み合わせ
+
+```{r}
 library(naniar)
+library(cowplot)
 
-naniar::vis_miss(ist3_dat_mod)
+miss_dat <- dplyr::select(ist3_dat_mod, -treatment_dbl, -reverse_euroqol_comp, 
+-missing_euroqol, -bad_euroqol_comp_bin) |> 
+    dplyr::mutate(
+        dead6mo = as.factor(dead6mo), 
+        sexm1 = as.factor(sexm1), 
+        )
 
-naniar::gg_miss_fct(x = ist3_dat_mod, fct = stroketype)
+p1 <- naniar::gg_miss_fct(x = miss_dat, fct = stroketype)
+
+p2 <- naniar::gg_miss_fct(x = miss_dat, fct = sexm1)
+
+p3 <- naniar::gg_miss_fct(x = miss_dat, fct = age)
+
+p4 <- naniar::gg_miss_fct(x = miss_dat, fct = sbprand)
+
+cowplot::plot_grid(plotlist = list(p1, p2, p3, p4), nrow = 2)
 
 ```
 
