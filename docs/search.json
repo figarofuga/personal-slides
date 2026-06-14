@@ -900,7 +900,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n20.58819\n\n\n2\n18.81909\n\n\n3\n21.04918\n\n\n4\n20.01130\n\n\n5\n18.06844\n\n\n6\n21.76983\n\n\n7\n25.01080\n\n\n8\n20.62325\n\n\n9\n23.32283\n\n\n10\n17.20023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n18.61435\n\n\n2\n22.64461\n\n\n3\n23.00908\n\n\n4\n23.50335\n\n\n5\n21.95799\n\n\n6\n21.70531\n\n\n7\n19.76553\n\n\n8\n18.00178\n\n\n9\n20.70169\n\n\n10\n19.98814\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -942,7 +942,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n73.60392\n175.5743\n\n\n\n2\n69.31981\n207.9928\n\n\n\n3\n79.11277\n209.6166\n\n\n\n30\n25.00000\n300.0000\nFHの患者 |\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離 |"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n74.92512\n206.5281\n\n\n\n2\n79.86259\n176.9275\n\n\n\n3\n73.84384\n206.7112\n\n\n\n30\n25.00000\n300.0000\nFH&lt;U+306E&gt;&lt;U+60A3&gt;&lt;U+8005&gt;\n\n\n31\n35.00000\n75.0000\n&lt;U+7279&gt;&lt;U+767A&gt;&lt;U+6027&gt;&lt;U+51A0&gt;&lt;U+52D5&gt;&lt;U+8108&gt;&lt;U+89E3&gt;&lt;U+96E2&gt;"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -1019,7 +1019,7 @@
     "href": "statistics/bootstrap/index.html#どれを選べばいいの",
     "title": "Bootstrapについて",
     "section": "どれを選べばいいの？",
-    "text": "どれを選べばいいの？\n\n\n過去の論文(Carpenter and Bithell 2000)では、Flowchartが示されている\n全く分からなければBCa法が無難だと思う\nBootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう(DiCiccio and Efron 1996)\nBCa法はBootstrapの繰り返しが多いがRだと簡単に出来る(Davison and Hinkley 1997)"
+    "text": "どれを選べばいいの？\n\n\n過去の論文(Carpenter and Bithell 2000)では、Flowchartが示されている\n全く分からなければBCa&lt;U+6CD5&gt;が無難だと思う\nBootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう(DiCiccio and Efron 1996)\nBCa法はBootstrapの繰り返しが多いがRだと簡単に出来る(Davison and Hinkley 1997)"
   },
   {
     "objectID": "statistics/bootstrap/index.html#古典的な信頼区間とbootstrap信頼区間の違い",
@@ -1040,7 +1040,7 @@
     "href": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-1",
     "title": "Bootstrapについて",
     "section": "Bootstrapの素朴な疑問 1",
-    "text": "Bootstrapの素朴な疑問 1\n\nnは幾つにすればいいの？ →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000回程度必要\nコンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる(Chernick 2008)"
+    "text": "Bootstrapの素朴な疑問 1\n\nnは幾つにすればいいの？ →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000&lt;U+56DE&gt;&lt;U+7A0B&gt;&lt;U+5EA6&gt;必要\nコンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる(Chernick 2008)"
   },
   {
     "objectID": "statistics/bootstrap/index.html#bootstrapの素朴な疑問-2",

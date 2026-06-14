@@ -25,7 +25,7 @@ bibliography: references.bib
 
 # PROの代表例
 
-![](imges/ordered_scale.png)
+![](imges/ordered_scale.png){height=70%}
 - 循環器では以下のものが有名
     - SIHDで利用するSAQ
     - 心不全で利用するKCCQ
@@ -36,7 +36,9 @@ bibliography: references.bib
 
 - High impact journalではPROを含む研究が増えている！！ [@Eliya2021-yf]
 
-# PROの特徴 ![](images/scale_species.png)
+# PROの特徴 
+
+![](images/scale_species.png)
 
 -   値が高い(or 低い)ほうが良いが40点と80点で正確に2倍かどうかは分からない(通常のNumericじゃない)
 -   順序尺度と間隔尺度の間
@@ -67,7 +69,7 @@ bibliography: references.bib
 
 # 先行研究では？
 
-![](images/pro_analysis_real2.png){height=60%}
+![](images/pro_analysis_real2.png){height=40%}
 
 -   **多種多様な手法が使われており標準化されていない** [@Qian2021-rp]
 
@@ -126,14 +128,15 @@ bibliography: references.bib
 
 ::: {.column width="50%"}
 
-- 1回のみfollow-upするdesign: 線形回帰
-
 ![](images/pro_linear_exam.png){width=45%}
 
+- 1回のみfollow-upするdesign: 線形回帰
 
 :::
 
 ::: {.column width="50%"}
+
+![](images/pro_km_exam.png){width=60%}
 
 -   2回以上のfollow-upをするdesign: Linear mixed model
     -   時間は離散変数とする
@@ -141,7 +144,6 @@ bibliography: references.bib
 
 - Time-to-event解析: Cox回帰
 
-![](images/pro_km_exam.png){width=60%}
 
 :::
 
@@ -215,8 +217,6 @@ bibliography: references.bib
 # Visualizationについて
 
 ![](images/pro_visualize.jpg){height=70%}
-
-![](images/pro_piechart.png){height=70%}
 
 - **個々人のPROMデータ: bar or Line plotが良い**
 
@@ -538,7 +538,8 @@ parameters::compare_parameters(
         "Tobit regression" = tobit_fit
     ),
     keep = "treatment_dbl"
-)
+) |> 
+    parameters::display(format = "html")
 
 ```
 
@@ -574,8 +575,10 @@ parameters::compare_parameters(
         "Ordinal regression" = orm_fit_euroqol,
         "Tobit regression" = tobit_fit_euroqol
     ),
-    keep = "treatment_dbl"
-)
+    keep = "treatment_dbl", 
+        select = "{estimate} [{ci_low} - {ci_high}], {p}"
+) |> 
+    parameters::display(format = "html")
 
 
 ```
@@ -611,8 +614,10 @@ parameters::compare_parameters(
         "Ordinal regression" = orm_fit_euroqol2,
         "Tobit regression" = tobit_fit_euroqol2
     ),
-    keep = "treatment_dbl"
-)
+    keep = "treatment_dbl", 
+        select = "{estimate} [{ci_low} - {ci_high}], {p}"
+) |> 
+    parameters::display(format = "html")
 
 
 
@@ -635,17 +640,17 @@ euroqol_formula <- as.formula(bad_euroqol_comp_bin ~ treatment + age + sexm1 + i
 
 logistic_fit_bin <- glm(euroqol_formula, data = ist3_dat_mod, family = binomial)
 
-modelsummary::modelsummary(
-    list(
-        "Logistic regression" = logistic_fit_bin
-    ),
-    exponentiate = TRUE,
-    estimate = "{estimate} [{conf.low}, {conf.high}], {p.value}",
-    coef_omit = "^(?!treatment)",
-    gof_omit = ".*"
-)
+parameters::model_parameters(
+        model = logistic_fit_bin,
+        exponentiate = TRUE,
+        keep = "treatment"
+) |> 
+    parameters::display(
+        format = "html", 
+        select = "{estimate}, [{ci_low} - {ci_high}], {p}")
 
 ```
+
 ::: {.callout-note}
 
 値が大きいほどQOL不良と関連
@@ -672,3 +677,8 @@ modelsummary::modelsummary(
 [*患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)*](https://www.lifescience.co.jp/pro/index.html)
 
 [*https://www.lifescience.co.jp/pro/article02-2-9.html#main*](https://www.lifescience.co.jp/pro/article02-2-9.html#main)
+
+# References
+
+::: {#refs}
+:::
