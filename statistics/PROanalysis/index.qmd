@@ -36,7 +36,7 @@ bibliography: references.bib
 
 - High impact journalではPROを含む研究が増えている！！ [@Eliya2021-yf]
 
-# PROの特徴 
+# PROの特徴
 
 ![](images/scale_species.png)
 
@@ -128,19 +128,37 @@ bibliography: references.bib
 
 ::: {.column width="50%"}
 
-![](images/pro_linear_exam.png){width=45%}
+```{r}
+
+test_df <- tibble::tibble(
+  x = seq(1:10)
+) |>
+  dplyr::mutate(
+    y = log(x) * 40 + runif(n = 1, min = 5, max = 8)
+  )
+
+tinyplot::plt(
+  y ~ x, data = test_df, type = "o"
+)
+
+```
 
 - 1回のみfollow-upするdesign: 線形回帰
+- 2回以上のfollow-upをするdesign: Linear mixed model
+    - 時間は離散変数とする
+    - Trajectoryの場合は時間X治療の相互作用項を入れる
 
 :::
 
 ::: {.column width="50%"}
 
-![](images/pro_km_exam.png){width=60%}
+```{r}
+library(survival)
+library(rms)
 
--   2回以上のfollow-upをするdesign: Linear mixed model
-    -   時間は離散変数とする
-    -   Trajectoryの場合は時間X治療の相互作用項を入れる
+rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
+
+```
 
 - Time-to-event解析: Cox回帰
 
@@ -390,56 +408,56 @@ ist3_visdat <- ist3_dat |>
 
 
 pieplot_list <- tidyr::pivot_longer(
-    ist3_visdat, 
+    ist3_visdat,
     cols = c("euroqol6_fct", "euroqol18_fct")
-) |> 
-  tidyr::drop_na(value) |> 
+) |>
+  tidyr::drop_na(value) |>
   dplyr::count(
   treatment, name, value
-  ) |> 
+  ) |>
   dplyr::mutate(
     sum = sum(n), .by = c(treatment, name)
-  ) |> 
+  ) |>
   dplyr::mutate(
     label = paste0(
         value, ": ", round(n/sum*100), "%"
     )
-  ) |> 
+  ) |>
   dplyr::group_nest(
     treatment, name
-  ) |> 
+  ) |>
   dplyr::mutate(
     pieplot = purrr::map2(data, treatment, \(dat, treatment){
-        
+
         ggpubr::ggpie(
-            dat, 
-            x = "n", 
-            label = "label", 
-            fill = "value", 
+            dat,
+            x = "n",
+            label = "label",
+            fill = "value",
             main = treatment
         ) + theme(legend.position = "none")
     })
-  ) |> 
+  ) |>
     dplyr::arrange(desc(name))
 
-lineplot <- dplyr::filter(ist3_visdat, !is.na(euroqol18)) |> 
+lineplot <- dplyr::filter(ist3_visdat, !is.na(euroqol18)) |>
         tidyr::pivot_longer(
     cols = c("euroqol6", "euroqol18")
-) |> 
-  tidyr::drop_na(value) |> 
+) |>
+  tidyr::drop_na(value) |>
     ggpubr::ggline(
-        x = "name", 
-        y = "value", 
-        color = "treatment", 
-        add = "mean_se", 
-        xlab = "Timing of EuroQOL", 
+        x = "name",
+        y = "value",
+        color = "treatment",
+        add = "mean_se",
+        xlab = "Timing of EuroQOL",
         ylab = "EuroQOL score"
     )
 
 
 
 pies <- cowplot::plot_grid(
-    plotlist = pieplot_list$pieplot, nrow = 1, 
+    plotlist = pieplot_list$pieplot, nrow = 1,
     labels = c("EuroQOL at 6 month", "", "EuroQOL at 18 month", "")
 )
 
@@ -492,11 +510,11 @@ md.pattern(dplyr::select(ist3_dat_mod, -reverse_euroqol_comp, -missing_euroqol, 
 library(naniar)
 library(cowplot)
 
-miss_dat <- dplyr::select(ist3_dat_mod, -treatment_dbl, -reverse_euroqol_comp, 
--missing_euroqol, -bad_euroqol_comp_bin) |> 
+miss_dat <- dplyr::select(ist3_dat_mod, -treatment_dbl, -reverse_euroqol_comp,
+-missing_euroqol, -bad_euroqol_comp_bin) |>
     dplyr::mutate(
-        dead6mo = as.factor(dead6mo), 
-        sexm1 = as.factor(sexm1), 
+        dead6mo = as.factor(dead6mo),
+        sexm1 = as.factor(sexm1),
         )
 
 p1 <- naniar::gg_miss_fct(x = miss_dat, fct = stroketype)
@@ -538,7 +556,7 @@ parameters::compare_parameters(
         "Tobit regression" = tobit_fit
     ),
     keep = "treatment_dbl"
-) |> 
+) |>
     parameters::display(format = "html")
 
 ```
@@ -575,9 +593,9 @@ parameters::compare_parameters(
         "Ordinal regression" = orm_fit_euroqol,
         "Tobit regression" = tobit_fit_euroqol
     ),
-    keep = "treatment_dbl", 
+    keep = "treatment_dbl",
         select = "{estimate} [{ci_low} - {ci_high}], {p}"
-) |> 
+) |>
     parameters::display(format = "html")
 
 
@@ -614,9 +632,9 @@ parameters::compare_parameters(
         "Ordinal regression" = orm_fit_euroqol2,
         "Tobit regression" = tobit_fit_euroqol2
     ),
-    keep = "treatment_dbl", 
+    keep = "treatment_dbl",
         select = "{estimate} [{ci_low} - {ci_high}], {p}"
-) |> 
+) |>
     parameters::display(format = "html")
 
 
@@ -644,9 +662,9 @@ parameters::model_parameters(
         model = logistic_fit_bin,
         exponentiate = TRUE,
         keep = "treatment"
-) |> 
+) |>
     parameters::display(
-        format = "html", 
+        format = "html",
         select = "{estimate}, [{ci_low} - {ci_high}], {p}")
 
 ```
