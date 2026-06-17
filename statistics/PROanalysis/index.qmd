@@ -13,7 +13,10 @@ format:
     scrollable: true
 execute:
   echo: false
-  dev: svglite
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
 editor: source
 bibliography: references.bib
 ---

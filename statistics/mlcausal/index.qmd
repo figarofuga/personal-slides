@@ -17,6 +17,10 @@ execute:
   error: false
 date: today
 date-format: long
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
 ---
 
 # 因果推論 at glance

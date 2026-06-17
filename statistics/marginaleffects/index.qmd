@@ -24,6 +24,10 @@ execute:
   echo: false
   cache: true
 bibliography: references.bib
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
 ---
 
 ```{r}
