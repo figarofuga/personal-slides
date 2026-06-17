@@ -1,0 +1,23 @@
+---
+title: "Personal Slides"
+---
+
+::: {.grid}
+
+::: {.g-col-6}
+## Medicine
+
+Clinical medicine slides.
+
+[Open Medicine slides](medicine/)
+:::
+
+::: {.g-col-6}
+## Statistics
+
+Statistics and R analysis slides.
+
+[Open Statistics slides](statistics/)
+:::
+
+:::
