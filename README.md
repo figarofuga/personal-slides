@@ -32,7 +32,7 @@ quarto render
 touch docs/.nojekyll
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "slides figure with svg"
+git commit -m "slides figure centerd in ESUS slides"
 git push
 
 ```

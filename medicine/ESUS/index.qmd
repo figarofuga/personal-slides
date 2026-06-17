@@ -11,8 +11,6 @@ format:
     transition: slide
     incremental: false
     scrollable: true
-    embed-resources: true
-    fig-align: center
 execute:
   echo: false
 ---
@@ -21,7 +19,7 @@ execute:
 ## Cryptogenic strokeとは？
 
 
-![](images/esusimages.png)
+![](images/esusimages.png){fig-align="center"}
 
 - **Cryptogenic stroke**
 - Cryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時
@@ -29,7 +27,7 @@ execute:
 
 ## Cryptogenic strokeの疫学
 
-![](images/slide-02-epidemiology-japan.png)
+![](images/slide-02-epidemiology-japan.png){fig-align="center"}
 
 - 定義により異なるが 10-40% と言われている
   - 日本でも同じくらいの割合
@@ -51,7 +49,7 @@ execute:
 
 ## どうやって診断する？
 
-![](images/slide-04-diagnostic-approach.jpg)
+![](images/slide-04-diagnostic-approach.jpg){fig-align="center"}
 
 - 検査の程度によるため、世界的に決まった基準はない
 - 古典的な TOAST 分類が一つの基準
@@ -61,13 +59,13 @@ execute:
 
 ## CCS systems
 
-![](images/slide-05-ccs-system.png)
+![](images/slide-05-ccs-system.png){fig-align="center"}
 
 [@CCS_IschemicStroke_v2]
 
 ## Cryptogenic stroke患者への問診と身体所見
 
-![](images/slide-06-history-physical.png){width=60%}
+![](images/slide-06-history-physical.png){fig-align="center" width=60%}
 
 - 左右の上肢の血圧差: AoD
 - 皮膚の網状皮斑: APS
@@ -99,7 +97,7 @@ execute:
 
 ## ESUSにおけるAFの検索
 
-![](images/esus-af-monitoring.png)
+![](images/esus-af-monitoring.png){fig-align="center"}
 
 
 - ESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる
@@ -121,7 +119,7 @@ execute:
 
 ## PFOってなんだ？
 
-![](images/pfo-anatomy.png)
+![](images/pfo-anatomy.png){fig-align="center"}
 
 - 胎児循環の時は右房圧が高く、右房 → 左房に血流がある
 - 出生とともに肺血管抵抗が低下して、左房圧が高くなり閉鎖する
@@ -130,11 +128,11 @@ execute:
 
 ## PFOによる奇異性塞栓への閉鎖術
 
-![](images/pfo-treatmenteffect.png)
+![](images/pfo-treatmenteffect.png){fig-align="center"}
 
 ## じゃあ全例でPFOの検査を行う？
 
-![](images/slide-11-pfo-closure-summary.png)
+![](images/slide-11-pfo-closure-summary.png){fig-align="center"}
 
 - 卵円孔開存は common
   - 通常人口で 25%
@@ -144,7 +142,7 @@ execute:
 
 ## いつPFOの検査をする？
 
-![](images/rope-score.png)
+![](images/rope-score.png){fig-align="center"}
 
 
 - 治療適応は原則 60歳以下
