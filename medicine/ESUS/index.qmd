@@ -5,7 +5,7 @@ date: "2024-03-06"
 lang: ja
 bibliography: references.bib
 format:
-  revealjs:
+  clean-revealjs:
     slide-level: 2
     theme: default
     transition: slide
@@ -16,13 +16,11 @@ execute:
   echo: false
 ---
 
-<!--
-TODO: out.md と images/ から作成した Quarto reveal.js 用のたたき台。
-TODO: 複雑な画像配置や元スライドの細かなレイアウトは手動調整。
-TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在しないため、最終スライドはテキストのみ。
--->
 
 ## Cryptogenic strokeとは？
+
+
+![](images/esusimages.png)
 
 - **Cryptogenic stroke**
 - Cryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時
@@ -31,8 +29,6 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 ## Cryptogenic strokeの疫学
 
 ![](images/slide-02-epidemiology-japan.png)
-
-![](images/slide-02-epidemiology-esus.png)
 
 - 定義により異なるが 10-40% と言われている
   - 日本でも同じくらいの割合
@@ -102,9 +98,8 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 ## ESUSにおけるAFの検索
 
-![](images/slide-08-af-monitoring-trial-1.jpg)
+![](images/esus-af-monitoring.png)
 
-![](images/slide-08-af-monitoring-trial-2.png)
 
 - ESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる
 - ループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある
@@ -125,9 +120,7 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 ## PFOってなんだ？
 
-![](images/slide-10-pfo-anatomy.jpg)
-
-![](images/slide-10-pfo-shunt.png)
+![](images/pfo-anatomy.png)
 
 - 胎児循環の時は右房圧が高く、右房 → 左房に血流がある
 - 出生とともに肺血管抵抗が低下して、左房圧が高くなり閉鎖する
@@ -136,19 +129,11 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 ## PFOによる奇異性塞栓への閉鎖術
 
-![](images/slide-11-pfo-closure-trials.png)
-
-![](images/slide-11-pfo-closure-trial-1.jpg)
-
-![](images/slide-11-pfo-closure-trial-2.jpg)
-
-![](images/slide-11-pfo-closure-summary.png)
-
-<!-- TODO: 手動調整: 元スライドでは複数図を配置。Quarto上で見やすいようにサイズやcolumns調整を検討。 -->
+![](images/pfo-treatmenteffect.png)
 
 ## じゃあ全例でPFOの検査を行う？
 
-![](images/slide-12-pfo-prevalence.png)
+![](images/slide-11-pfo-closure-summary.png)
 
 - 卵円孔開存は common
   - 通常人口で 25%
@@ -158,9 +143,8 @@ TODO: 元Markdownにあった Crypogenic_stroke_16.jpg は抽出画像に存在�
 
 ## いつPFOの検査をする？
 
-![](images/slide-13-pfo-testing.png)
+![](images/rope-score.png)
 
-![](images/slide-13-rope-score.jpg)
 
 - 治療適応は原則 60歳以下
 - RoPE score < 7 だと治療効果がないかもしれない

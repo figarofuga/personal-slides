@@ -32,7 +32,7 @@ quarto render
 touch docs/.nojekyll
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Update PRO analsysi slides"
+git commit -m "Update ESUS slides"
 git push
 
 ```
