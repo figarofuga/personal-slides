@@ -12,6 +12,7 @@ format:
     incremental: false
     scrollable: true
     embed-resources: true
+    fig-align: center
 execute:
   echo: false
 ---
