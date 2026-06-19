@@ -28,14 +28,17 @@ bibliography: references.bib
 
 # PROの代表例
 
-![](imges/ordered_scale.png){height=70%}
+![](imges/ordered_scale.png){height="50vh"}
+
 - 循環器では以下のものが有名
     - SIHDで利用するSAQ
     - 心不全で利用するKCCQ
     - AFで利用するAFEQT
     - 循環器の研究におけるPRO
 
-![](images/num_publish_pro.png){height=70%}
+# PROの研究は増えている！
+
+![](images/num_publish_pro.png){height="70vh"}
 
 - High impact journalではPROを含む研究が増えている！！ [@Eliya2021-yf]
 
@@ -72,7 +75,7 @@ bibliography: references.bib
 
 # 先行研究では？
 
-![](images/pro_analysis_real2.png){height=40%}
+![](images/pro_analysis_real2.png){height="30vh"}
 
 -   **多種多様な手法が使われており標準化されていない** [@Qian2021-rp]
 
@@ -237,7 +240,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 # Visualizationについて
 
-![](images/pro_visualize.jpg){height=70%}
+![](images/pro_visualize.jpg){height="50vh"}
 
 - **個々人のPROMデータ: bar or Line plotが良い**
 
@@ -247,7 +250,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 # よりよい可視化のために
 
-![](images/pro_linechart_advanced.png)
+![](images/pro_linechart_advanced.png){fig-align="center"}
 
 - **警告点を書く**
 -  **悪い結果を赤にする**
@@ -257,7 +260,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 # 群レベルのVisualization
 
-![](images/pro_linechart_addci.png){height=80%}
+![](images/pro_linechart_addci.png){height="50vh"}
 
 - 95%信頼区間を記述する
 
@@ -483,10 +486,9 @@ library(gtsummary)
 
 gtsummary::tbl_summary(
     ist3_dat_mod, by = missing_euroqol,
-    include = -c(euroqol6, dead6mo, reverse_euroqol_comp, bad_euroqol_comp_bin, treatment_dbl),
+    include = c(age, sexm1, antiplat_rand, atrialfib_rand, sbprand, gcs_score_rand, sevendaycase, stroketype, ohs6),
     value = list(
         sevendaycase ~ "Event",
-        indepinadl_rand ~ 1,
         atrialfib_rand ~ 1,
         antiplat_rand ~ 1
     )
@@ -498,12 +500,15 @@ gtsummary::tbl_summary(
 
 ```
 
+- Missingがある患者は明らかに高齢者が多く、GCSも低い
+- OHSをみると死亡による欠損が多いことがわかる
+
 # Missingの解析
 
 ```{r}
-library(mice)
+library(ggmice)
 
-md.pattern(dplyr::select(ist3_dat_mod, -reverse_euroqol_comp, -missing_euroqol, -bad_euroqol_comp_bin))
+ggmice::plot_pattern(dplyr::select(ist3_dat_mod, -reverse_euroqol_comp, -missing_euroqol, -bad_euroqol_comp_bin))
 
 ```
 
@@ -531,6 +536,9 @@ p4 <- naniar::gg_miss_fct(x = miss_dat, fct = sbprand)
 cowplot::plot_grid(plotlist = list(p1, p2, p3, p4), nrow = 2)
 
 ```
+
+- Missingの主要因が6か月までの死亡であるためか、予後不良因子がある患者ほどMissingが多い
+- Missingは単にDeleteするのは問題がありそう
 
 # 分類が少ないOHSの解析
 
