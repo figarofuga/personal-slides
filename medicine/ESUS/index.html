@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-571be45e92f7de119d35a443a5857257.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Nozomi Niimi">
-  <title>My personal slides – 統計学</title>
+  <meta name="dcterms.date" content="2024-03-06">
+  <title>My personal slides – Cryptogenic strokeとESUS</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -47,12 +32,31 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -142,13 +146,13 @@
     }
   </style>
 </head>
-<body class="quarto-light fullcontent">
+<body class="quarto-light">
 <script src="mathjax-config.js"></script>
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">統計学</h1>
+  <h1 class="title">Cryptogenic strokeとESUS</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -164,46 +168,217 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
     </div>
 </div>
 
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#/統計学" id="/toc-統計学">統計学</a></li>
+  <p class="date">2024-03-06</p>
+</section>
+<section id="cryptogenic-strokeとは" class="slide level2">
+<h2>Cryptogenic strokeとは？</h2>
+
+<img data-src="images/esusimages.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li><strong>Cryptogenic stroke</strong></li>
+<li>Cryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時</li>
+<li>その中で近位の動脈の狭窄や心原性が見つからない時の塞栓性脳梗塞を ESUS（Embolic stroke of undetermined source: 原因不明の脳塞栓症）という</li>
 </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html"><i class="bi bi-file-slides"></i>RevealJS (clean)</a></li></ul></div></nav>
 </section>
-<section>
-<section id="統計学" class="title-slide slide level1 center">
-<h1>統計学</h1>
-<p>統計学関連のスライドをまとめています。</p>
+<section id="cryptogenic-strokeの疫学" class="slide level2">
+<h2>Cryptogenic strokeの疫学</h2>
+
+<img data-src="images/slide-02-epidemiology-japan.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>定義により異なるが 10-40% と言われている
+<ul>
+<li>日本でも同じくらいの割合</li>
+</ul></li>
+<li>Cryptogenic stroke のうち ESUS は大体 80-90% <span class="citation" data-cites="Toyoda2016-nv Hart2018-ld">(<a href="#/reference" role="doc-biblioref" onclick="">Toyoda et al. 2016</a>; <a href="#/reference" role="doc-biblioref" onclick="">Hart et al. 2018</a>)</span></li>
+</ul>
 </section>
-<section id="スライド一覧" class="slide level2">
-<h2>スライド一覧</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>タイトル</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="bootstrap/">ブートストラップ入門</a></td>
-<td>通常の計算が難しい時の信頼区間の出し方</td>
-</tr>
-<tr class="even">
-<td><a href="marginaleffects/">g-computation入門</a></td>
-<td>統計モデルのより良い解釈の方法</td>
-</tr>
-<tr class="odd">
-<td><a href="PROanalysis/">PRO(patient reported outcomes) analysis入門</a></td>
-<td>PROの解析時の注意点です</td>
-</tr>
-</tbody>
-</table>
+<section id="cryptogenic-strokeの機序は" class="slide level2">
+<h2>Cryptogenic strokeの機序は？</h2>
+<ul>
+<li>単一ではなく複数の機序が提唱されている</li>
+<li><span style="color: red;"><em>潜在性の pAF</em></span></li>
+<li>大動脈の粥腫やその他の心原性</li>
+<li><span style="color: red;"><em>PFO や ASD などによる奇異性塞栓</em></span></li>
+<li>血栓傾向</li>
+<li>脳血管疾患（血管奇形など）</li>
+<li>年齢で多い原因は異なる
+<ul>
+<li>18-30歳: 動脈解離や血栓傾向、先天性心疾患</li>
+<li>31-60歳: 若年性の動脈硬化、後天性の心疾患</li>
+<li>61歳以上: 潜在性 AF</li>
+</ul></li>
+</ul>
+</section>
+<section id="どうやって診断する" class="slide level2">
+<h2>どうやって診断する？</h2>
+
+<img data-src="images/slide-04-diagnostic-approach.jpg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>検査の程度によるため、世界的に決まった基準はない</li>
+<li>古典的な TOAST 分類が一つの基準
+<ul>
+<li>これだと <em>Cryptogenic が増える</em></li>
+</ul></li>
+<li>ASCOD、CCS systems を使うと <em>Cryptogenic が減る</em> とされる
+<ul>
+<li>ただしデータはまだ少ない</li>
+</ul></li>
+</ul>
+</section>
+<section id="ccs-systems" class="slide level2">
+<h2>CCS systems</h2>
+
+<img data-src="images/slide-05-ccs-system.png" class="quarto-figure quarto-figure-center r-stretch"><p><span class="citation" data-cites="CCS_IschemicStroke_v2">(<a href="#/reference" role="doc-biblioref" onclick="">Massachusetts General Hospital Stroke Service and A. A. Martinos Center for Biomedical Imaging, n.d.</a>)</span></p>
+</section>
+<section id="cryptogenic-stroke患者への問診と身体所見" class="slide level2">
+<h2>Cryptogenic stroke患者への問診と身体所見</h2>
+
+<img data-src="images/slide-06-history-physical.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"><ul>
+<li>左右の上肢の血圧差: AoD</li>
+<li>皮膚の網状皮斑: APS</li>
+<li>黄色腫: FH</li>
+<li>心雑音: IE、先天性心疾患</li>
+<li>脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病</li>
+<li>DVT: 血栓傾向、奇異性塞栓</li>
+<li>頸部外傷やマッサージ: 椎骨脳底動脈の乖離</li>
+<li>片頭痛: 片頭痛性脳梗塞 / CADASIL</li>
+<li>違法薬物: IE、血管攣縮、HIV など</li>
+<li><span style="color: red; font-weight: bold;">息こらえの後の発症: 奇異性塞栓</span></li>
+<li>若年の ASCVD の家族歴: 遺伝性疾患</li>
+<li>妊娠: CVT、子癇 <span class="citation" data-cites="Saver2016-xj">(<a href="#/reference" role="doc-biblioref" onclick="">Saver 2016</a>)</span></li>
+</ul>
+</section>
+<section id="検査について" class="slide level2">
+<h2>検査について</h2>
+<ul>
+<li>どこまでやるべきか、決まっていない</li>
+<li>最低限の検査
+<ul>
+<li>基本的な血算</li>
+<li>凝固系</li>
+<li>頭部 MRI</li>
+<li>発症 24 時間の心電図モニター</li>
+<li>頸動脈エコー</li>
+<li>TTE</li>
+</ul></li>
+<li>NEJM では段階的なアプローチが推奨されている</li>
+<li>特に重要なのは <span style="color: red; font-weight: bold;">潜在性の pAF 検索</span> <span class="citation" data-cites="Saver2016-xj">(<a href="#/reference" role="doc-biblioref" onclick="">Saver 2016</a>)</span></li>
+</ul>
+</section>
+<section id="esusにおけるafの検索" class="slide level2">
+<h2>ESUSにおけるAFの検索</h2>
+
+<img data-src="images/esus-af-monitoring.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>ESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる</li>
+<li>ループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある</li>
+<li>UpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨 <span class="citation" data-cites="Gladstone2014-gd Sanna2014-lw Kirchhof2023-cl">(<a href="#/reference" role="doc-biblioref" onclick="">Gladstone et al. 2014</a>; <a href="#/reference" role="doc-biblioref" onclick="">Sanna et al. 2014</a>; <a href="#/reference" role="doc-biblioref" onclick="">Kirchhof et al. 2023</a>)</span></li>
+</ul>
+</section>
+<section id="cryptogenic-strokeの治療" class="slide level2">
+<h2>Cryptogenic strokeの治療</h2>
+<ul>
+<li>基本は原疾患により分けることが大事</li>
+<li>原因が見つからない時は、基本は ASA</li>
+<li>ESUS で DOAC vs.&nbsp;ASA があるが、基本的に DOAC が負けている
+<ul>
+<li>NAVIGATE-ESUS</li>
+<li>RE-SPECT ESUS</li>
+<li>ARCADIA trial</li>
+</ul></li>
+<li>特異的な治療がある疾患もある
+<ul>
+<li>APS だと DOAC でなく Wf を選択</li>
+<li><span style="color: red; font-weight: bold;">PFO による奇異性塞栓 → PFO 閉鎖</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="pfoってなんだ" class="slide level2">
+<h2>PFOってなんだ？</h2>
+
+<img data-src="images/pfo-anatomy.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>胎児循環の時は右房圧が高く、右房 → 左房に血流がある</li>
+<li>出生とともに肺血管抵抗が低下して、左房圧が高くなり閉鎖する</li>
+<li>卵円孔が開存していると、普段は閉じているが、いきんだ時に右房圧が上がり右房 → 左房の血流になる</li>
+<li>そこに DVT からの血栓が流れると右房 → 左房で脳梗塞になる</li>
+</ul>
+</section>
+<section id="pfoによる奇異性塞栓への閉鎖術" class="slide level2">
+<h2>PFOによる奇異性塞栓への閉鎖術</h2>
+
+<img data-src="images/pfo-treatmenteffect.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="じゃあ全例でpfoの検査を行う" class="slide level2">
+<h2>じゃあ全例でPFOの検査を行う？</h2>
+
+<img data-src="images/slide-11-pfo-closure-summary.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>卵円孔開存は common
+<ul>
+<li>通常人口で 25%</li>
+<li>Cryptogenic stroke に限定すると 50%</li>
+</ul></li>
+<li>PFO があっても、それが原因かは不明瞭</li>
+<li>探せばいいってもんじゃない</li>
+</ul>
+</section>
+<section id="いつpfoの検査をする" class="slide level2">
+<h2>いつPFOの検査をする？</h2>
+
+<img data-src="images/rope-score.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>治療適応は原則 60歳以下</li>
+<li>RoPE score &lt; 7 だと治療効果がないかもしれない</li>
+<li>治療を見据えて検査を行う</li>
+</ul>
+<p><span class="citation" data-cites="Kent2021-iu">(<a href="#/reference" role="doc-biblioref" onclick="">Kent et al. 2021</a>)</span></p>
+</section>
+<section id="まとめ" class="slide level2">
+<h2>まとめ</h2>
+<ul>
+<li>通常診療で etiology が分からない脳梗塞を Cryptogenic stroke という</li>
+<li>その中で塞栓性のものを ESUS という
+<ul>
+<li>ESUS &lt; Cryptogenic stroke</li>
+</ul></li>
+<li>ESUS を見つけた時に最も重要なのは AF 探し</li>
+<li>治療適応があり、有効そうな患者では PFO 探しが意味あるかも</li>
+<li>分からない時は ASA が良い
+<ul>
+<li>DOAC は使わない</li>
+</ul></li>
+</ul>
+</section>
+<section id="thank-you-for-listening" class="slide level2">
+<h2>Thank you for listening</h2>
+<ul>
+<li>ご清聴ありがとうございました</li>
+</ul>
+</section>
+<section id="reference" class="slide level2 smaller scrollable">
+<h2>Reference</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Gladstone2014-gd" class="csl-entry" role="listitem">
+Gladstone, David J, Melanie Spring, Paul Dorian, et al. 2014. <span>“Atrial Fibrillation in Patients with Cryptogenic Stroke.”</span> <em>The New England Journal of Medicine</em> 370 (26): 2467–77. <a href="https://doi.org/10.1056/NEJMoa1311376">https://doi.org/10.1056/NEJMoa1311376</a>.
+</div>
+<div id="ref-Hart2018-ld" class="csl-entry" role="listitem">
+Hart, Robert G, Mukul Sharma, Hardi Mundl, et al. 2018. <span>“Rivaroxaban for Stroke Prevention After Embolic Stroke of Undetermined Source.”</span> <em>The New England Journal of Medicine</em> 378 (23): 2191–201. <a href="https://doi.org/10.1056/NEJMoa1802686">https://doi.org/10.1056/NEJMoa1802686</a>.
+</div>
+<div id="ref-Kent2021-iu" class="csl-entry" role="listitem">
+Kent, David M, Jeffrey L Saver, Scott E Kasner, et al. 2021. <span>“Heterogeneity of Treatment Effects in an Analysis of Pooled Individual Patient Data from Randomized Trials of Device Closure of Patent Foramen Ovale After Stroke.”</span> <em>The Journal of the American Medical Association</em> 326 (22): 2277–86. <a href="https://doi.org/10.1001/jama.2021.20956">https://doi.org/10.1001/jama.2021.20956</a>.
+</div>
+<div id="ref-Kirchhof2023-cl" class="csl-entry" role="listitem">
+Kirchhof, Paulus, Tobias Toennis, Andreas Goette, et al. 2023. <span>“Anticoagulation with Edoxaban in Patients with Atrial High-Rate Episodes.”</span> <em>The New England Journal of Medicine</em> 389 (13): 1167–79. <a href="https://doi.org/10.1056/NEJMoa2303062">https://doi.org/10.1056/NEJMoa2303062</a>.
+</div>
+<div id="ref-CCS_IschemicStroke_v2" class="csl-entry" role="listitem">
+Massachusetts General Hospital Stroke Service, and A. A. Martinos Center for Biomedical Imaging. n.d. <em>Causative Classification System for Ischemic Stroke (CCS)</em>. Version 2.0. Massachusetts General Hospital, Harvard Medical School. <a href="https://ccs.mgh.harvard.edu/ccs_title.php">https://ccs.mgh.harvard.edu/ccs_title.php</a>.
+</div>
+<div id="ref-Sanna2014-lw" class="csl-entry" role="listitem">
+Sanna, Tommaso, Hans-Christoph Diener, Rod S Passman, et al. 2014. <span>“Cryptogenic Stroke and Underlying Atrial Fibrillation.”</span> <em>The New England Journal of Medicine</em> 370 (26): 2478–86. <a href="https://doi.org/10.1056/NEJMoa1313600">https://doi.org/10.1056/NEJMoa1313600</a>.
+</div>
+<div id="ref-Saver2016-xj" class="csl-entry" role="listitem">
+Saver, Jeffrey L. 2016. <span>“<span>CLINICAL</span> <span>PRACTICE</span>. Cryptogenic Stroke.”</span> <em>The New England Journal of Medicine</em> 374 (21): 2065–74. <a href="https://doi.org/10.1056/NEJMcp1503946">https://doi.org/10.1056/NEJMcp1503946</a>.
+</div>
+<div id="ref-Toyoda2016-nv" class="csl-entry" role="listitem">
+Toyoda, Kazunori, Ken Okumura, Yoichiro Hashimoto, et al. 2016. <span>“Cryptogenic Ischemic Stroke and Embolic Stroke of Undetermined Source: Clinical Implications and Importance for Detection of Covert Atrial Fibrillation in Japan.”</span> <em>Nosotchu</em> 38 (2): 77–85. <a href="https://doi.org/10.3995/jstroke.10416">https://doi.org/10.3995/jstroke.10416</a>.
+</div>
+</div>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -212,19 +387,19 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

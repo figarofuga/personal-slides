@@ -1,5 +1,6 @@
 ---
 title: "統計学"
+format: html
 ---
 
 # 統計学
