@@ -1,18 +1,8 @@
 ---
 title: "Bootstrapについて"
 author: "Nozomi Niimi"
-date: "2/10/2023"
-format:
-  clean-revealjs:
-    smaller: true
-height: 700
-width: 960
-engine: knitr
+date: "2023-02-10"
 bibliography: reference.bib
-knitr: 
-  opts_chunk: 
-    dev: svglite
-    fig-format: svg
 ---
 
 ```{r, setup, include=FALSE}

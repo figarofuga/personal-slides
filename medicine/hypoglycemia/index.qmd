@@ -1,20 +1,7 @@
 ---
 title: 低血糖についての覚書
 subtitle: 低血糖の機序と実践
-format:
-  clean-revealjs:
-    width: 1200
-    height: 800
-    theme: [default, custom-style.scss]
-    incremental: false
-    scrollable: true
-    embed-resources: true
-author:
-  - name: Nozomi Niimi
-    orcid: 0000-0002-6909-0740
-    email: figarofuga@gmail.com
-    affiliations: 東京医療センター総合内科
-date: last-modified
+date: "2026-05-01"
 bibliography: references.bib
 nocite: |
   @DynaMed_hypoglycemia, @Adrian-hypoglycemia-determining

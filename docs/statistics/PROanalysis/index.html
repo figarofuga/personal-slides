@@ -162,19 +162,65 @@ Nozomi Niimi
 </div>
 </div>
 
-  <p class="date">October 10, 2024</p>
+  <p class="date">2024-10-10</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/proとは" id="/toc-proとは">PROとは</a></li>
+<li><a href="#/proの代表例" id="/toc-proの代表例">PROの代表例</a></li>
+<li><a href="#/proの研究は増えている" id="/toc-proの研究は増えている">PROの研究は増えている！</a></li>
+<li><a href="#/proの特徴" id="/toc-proの特徴">PROの特徴</a></li>
+<li><a href="#/このproはどうやって解析すればいい" id="/toc-このproはどうやって解析すればいい">このPROはどうやって解析すればいい？</a></li>
+<li><a href="#/先行研究では" id="/toc-先行研究では">先行研究では？</a></li>
+<li><a href="#/ガイドラインでは" id="/toc-ガイドラインでは">ガイドラインでは？</a></li>
+<li><a href="#/proの確定的な解析方法は" id="/toc-proの確定的な解析方法は">PROの確定的な解析方法は！！</a></li>
+<li><a href="#/proの解析において必須の要素" id="/toc-proの解析において必須の要素">PROの解析において必須の要素</a></li>
+<li><a href="#/research-object" id="/toc-research-object">Research object</a></li>
+<li><a href="#/pro解析方法での考慮点" id="/toc-pro解析方法での考慮点">PRO解析方法での考慮点</a></li>
+<li><a href="#/具体的な推奨される統計手法" id="/toc-具体的な推奨される統計手法">具体的な推奨される統計手法</a></li>
+<li><a href="#/線形回帰でいいの" id="/toc-線形回帰でいいの">線形回帰でいいの？</a></li>
+<li><a href="#/ただし" id="/toc-ただし">ただし・・・・・・</a></li>
+<li><a href="#/欠損値について" id="/toc-欠損値について">欠損値について</a></li>
+<li><a href="#/欠損値の対処法について" id="/toc-欠損値の対処法について">欠損値の対処法について</a></li>
+<li><a href="#/pattern-mixture-model" id="/toc-pattern-mixture-model">Pattern mixture model</a></li>
+<li><a href="#/死亡の扱いをどうする" id="/toc-死亡の扱いをどうする">死亡の扱いをどうする？</a></li>
+<li><a href="#/visualizationについて" id="/toc-visualizationについて">Visualizationについて</a></li>
+<li><a href="#/よりよい可視化のために" id="/toc-よりよい可視化のために">よりよい可視化のために</a></li>
+<li><a href="#/群レベルのvisualization" id="/toc-群レベルのvisualization">群レベルのVisualization</a></li>
+<li><a href="#/一応特殊な手法を2つほど" id="/toc-一応特殊な手法を2つほど">一応、特殊な手法を2つほど・・・・・・・</a></li>
+<li><a href="#/tobit-modelとは" id="/toc-tobit-modelとは">Tobit modelとは</a></li>
+<li><a href="#/ordinary-regression-modelとは" id="/toc-ordinary-regression-modelとは">Ordinary regression modelとは</a></li>
+<li><a href="#/ordered-regression-modelの応用" id="/toc-ordered-regression-modelの応用">Ordered regression modelの応用</a></li>
+<li><a href="#/実践" id="/toc-実践">実践！</a></li>
+<li><a href="#/qol-outcomeの正規性の確認" id="/toc-qol-outcomeの正規性の確認">QOL outcomeの正規性の確認</a></li>
+<li><a href="#/visualizationについて-1" id="/toc-visualizationについて-1">Visualizationについて</a></li>
+<li><a href="#/missing-dataと死亡の扱い" id="/toc-missing-dataと死亡の扱い">Missing dataと死亡の扱い</a></li>
+<li><a href="#/missingの解析" id="/toc-missingの解析">Missingの解析</a></li>
+<li><a href="#/missingの解析組み合わせ" id="/toc-missingの解析組み合わせ">Missingの解析~組み合わせ</a></li>
+<li><a href="#/分類が少ないohsの解析" id="/toc-分類が少ないohsの解析">分類が少ないOHSの解析</a></li>
+<li><a href="#/死亡を考慮しないeuroqolの解析" id="/toc-死亡を考慮しないeuroqolの解析">死亡を考慮しないEuroqolの解析</a></li>
+<li><a href="#/死亡を考慮した解析①" id="/toc-死亡を考慮した解析①">死亡を考慮した解析～①</a></li>
+<li><a href="#/死亡を考慮した解析②" id="/toc-死亡を考慮した解析②">死亡を考慮した解析～②</a></li>
+<li><a href="#/結論として" id="/toc-結論として">結論として</a></li>
+<li><a href="#/take-home-message" id="/toc-take-home-message">Take home message</a></li>
+<li><a href="#/わかりやすい参考文献" id="/toc-わかりやすい参考文献">わかりやすい参考文献</a></li>
+<li><a href="#/references" id="/toc-references">References</a></li>
+</ul>
+</nav>
 </section>
-<section id="proとは" class="slide level1">
+<section id="proとは" class="title-slide slide level1 center">
 <h1>PROとは</h1>
 <ul>
 <li>Patient reported outcomesの略 「 <span style="color:#333333">PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた</span> <span style="color:#333333">患者の健康状態に関するあらゆる報告である</span> 」</li>
 <li>議論は複数あるが、HR-QOLを含む事が多い</li>
 </ul>
 </section>
-<section id="proの代表例" class="slide level1">
+
+<section id="proの代表例" class="title-slide slide level1 center">
 <h1>PROの代表例</h1>
 
-<img data-src="imges/ordered_scale.png" class="r-stretch"><ul>
+<img data-src="images/ordered_scale.png" class="r-stretch"><ul>
 <li>循環器では以下のものが有名
 <ul>
 <li>SIHDで利用するSAQ</li>
@@ -184,14 +230,16 @@ Nozomi Niimi
 </ul></li>
 </ul>
 </section>
-<section id="proの研究は増えている" class="slide level1">
+
+<section id="proの研究は増えている" class="title-slide slide level1 center">
 <h1>PROの研究は増えている！</h1>
 
 <img data-src="images/num_publish_pro.png" class="r-stretch"><ul>
 <li>High impact journalではPROを含む研究が増えている！！ <span class="citation" data-cites="Eliya2021-yf">(<a href="#/references" role="doc-biblioref" onclick="">Eliya et al. 2021</a>)</span></li>
 </ul>
 </section>
-<section id="proの特徴" class="slide level1">
+
+<section id="proの特徴" class="title-slide slide level1 center">
 <h1>PROの特徴</h1>
 
 <img data-src="images/scale_species.png" class="r-stretch"><ul>
@@ -201,7 +249,8 @@ Nozomi Niimi
 <li>分布が歪んでいる</li>
 </ul>
 </section>
-<section id="このproはどうやって解析すればいい" class="slide level1">
+
+<section id="このproはどうやって解析すればいい" class="title-slide slide level1 center">
 <h1>このPROはどうやって解析すればいい？</h1>
 <div class="columns">
 <div class="column" style="width:25%;">
@@ -213,19 +262,22 @@ Nozomi Niimi
 </ul>
 </div></div>
 </section>
-<section id="先行研究では" class="slide level1">
+
+<section id="先行研究では" class="title-slide slide level1 center">
 <h1>先行研究では？</h1>
 
 <img data-src="images/pro_analysis_real2.png" class="r-stretch"><ul>
 <li><strong>多種多様な手法が使われており標準化されていない</strong> <span class="citation" data-cites="Qian2021-rp">(<a href="#/references" role="doc-biblioref" onclick="">Qian et al. 2021</a>)</span></li>
 </ul>
 </section>
-<section id="ガイドラインでは" class="slide level1">
+
+<section id="ガイドラインでは" class="title-slide slide level1 center">
 <h1>ガイドラインでは？</h1>
 
 <img data-src="images/guideline_title.jpg" class="r-stretch"><p><span class="citation" data-cites="Coens2020-lz">(<a href="#/references" role="doc-biblioref" onclick="">Coens et al. 2020</a>)</span></p>
 </section>
-<section id="proの確定的な解析方法は" class="slide level1">
+
+<section id="proの確定的な解析方法は" class="title-slide slide level1 center">
 <h1>PROの確定的な解析方法は！！</h1>
 <blockquote>
 <p>Findings from systematic reviews showed that there was no consensus on appropriate statistical methods for PRO data analysis.</p>
@@ -235,7 +287,8 @@ Nozomi Niimi
 </ul>
 <p>それだけだと虚しいのでもう少し読み込みましょう</p>
 </section>
-<section id="proの解析において必須の要素" class="slide level1">
+
+<section id="proの解析において必須の要素" class="title-slide slide level1 center">
 <h1>PROの解析において必須の要素</h1>
 <ul>
 <li>明瞭なResearch question</li>
@@ -244,7 +297,8 @@ Nozomi Niimi
 </ul>
 <p>について検討が必要</p>
 </section>
-<section id="research-object" class="slide level1">
+
+<section id="research-object" class="title-slide slide level1 center">
 <h1>Research object</h1>
 <ul>
 <li><span style="color:#ff0000"><strong>PRO研究の目的を明確にする</strong></span>
@@ -268,7 +322,8 @@ Nozomi Niimi
 </ul></li>
 </ul>
 </section>
-<section id="pro解析方法での考慮点" class="slide level1">
+
+<section id="pro解析方法での考慮点" class="title-slide slide level1 center">
 <h1>PRO解析方法での考慮点</h1>
 <ul>
 <li>必須条件
@@ -284,7 +339,8 @@ Nozomi Niimi
 <li>欠損値をうまく扱える手法: 欠損値がMNARの可能性が高い</li>
 </ul>
 </section>
-<section id="具体的な推奨される統計手法" class="slide level1">
+
+<section id="具体的な推奨される統計手法" class="title-slide slide level1 center">
 <h1>具体的な推奨される統計手法</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -322,16 +378,18 @@ Nozomi Niimi
 <p><span style="color:#ff0000"><strong>これらの解析ではMICを考慮する事が強く推奨！</strong></span></p>
 <p><span class="citation" data-cites="Lapin2020-gz Calvert2013-sn">(<a href="#/references" role="doc-biblioref" onclick="">Lapin 2020</a>; <a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Calvert et al.</span> 2013</a>)</span></p>
 </section>
-<section id="線形回帰でいいの" class="slide level1">
+
+<section id="線形回帰でいいの" class="title-slide slide level1 center">
 <h1>線形回帰でいいの？</h1>
 <p>7種類以下のカテゴリカルの場合は(とても良い/やや良い/普通/やや悪い/とても悪い)などではOrdinal regressionが良いかもしれない</p>
 <p>分布(残差)が偏っていても、通常のOLSはRobustであり問題ない</p>
 <p><span class="citation" data-cites="Arostegui2012-cb Piantadosi2022-wx">(<a href="#/references" role="doc-biblioref" onclick="">Arostegui et al. 2012</a>; <a href="#/references" role="doc-biblioref" onclick="">Piantadosi and Meinert 2022</a>)</span></p>
 </section>
-<section id="ただし" class="slide level1">
+
+<section id="ただし" class="title-slide slide level1 center">
 <h1>ただし・・・・・・</h1>
 
-<img data-src="images/pro_bad_exam.png" class="r-stretch"><ul>
+<img data-src="images/pro_bad_exam.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>差をアウトカムに回帰はやらないほうが良い！
 <ul>
 <li>Baselineが良い患者ほど予後不良になってしまう</li>
@@ -339,7 +397,8 @@ Nozomi Niimi
 <li>BaselineのPROで補正をした上で＊年後のPROを予測するほうが良い <span class="citation" data-cites="Harrell_BBR_Change_2025">(<a href="#/references" role="doc-biblioref" onclick="">Harrell 2025</a>)</span></li>
 </ul>
 </section>
-<section id="欠損値について" class="slide level1">
+
+<section id="欠損値について" class="title-slide slide level1 center">
 <h1>欠損値について</h1>
 <ul>
 <li>PRO cohortと研究全体のcohortの違いを考える
@@ -356,7 +415,8 @@ Nozomi Niimi
 <li>最低2種類の欠損値の対処方法を用いて感度分析とせよ</li>
 </ul>
 </section>
-<section id="欠損値の対処法について" class="slide level1">
+
+<section id="欠損値の対処法について" class="title-slide slide level1 center">
 <h1>欠損値の対処法について</h1>
 <ul>
 <li>明示的なものは推奨されない→分散が減ってしまう
@@ -368,7 +428,8 @@ Nozomi Niimi
 <li>MNAR：Pattern mixture modelを用いたMI</li>
 </ul>
 </section>
-<section id="pattern-mixture-model" class="slide level1">
+
+<section id="pattern-mixture-model" class="title-slide slide level1 center">
 <h1>Pattern mixture model</h1>
 <table class="caption-top">
 <thead>
@@ -417,7 +478,8 @@ Nozomi Niimi
 <li>イメージだとデータがある人とない人の結果の差Δを他のすべてのデータを用いて埋めるイメージ</li>
 </ul>
 </section>
-<section id="死亡の扱いをどうする" class="slide level1">
+
+<section id="死亡の扱いをどうする" class="title-slide slide level1 center">
 <h1>死亡の扱いをどうする？</h1>
 <ul>
 <li>単なる欠損値にしてはいけない！</li>
@@ -431,7 +493,8 @@ Nozomi Niimi
 </ul>
 <p><span class="citation" data-cites="Arnold2013-ss Spertus2019-za">(<a href="#/references" role="doc-biblioref" onclick="">Arnold et al. 2013</a>; <a href="#/references" role="doc-biblioref" onclick="">Spertus et al. 2019</a>)</span></p>
 </section>
-<section id="visualizationについて" class="slide level1">
+
+<section id="visualizationについて" class="title-slide slide level1 center">
 <h1>Visualizationについて</h1>
 
 <img data-src="images/pro_visualize.jpg" class="r-stretch"><ul>
@@ -440,7 +503,8 @@ Nozomi Niimi
 </ul>
 <p><span class="citation" data-cites="Albers2022-wt">(<a href="#/references" role="doc-biblioref" onclick="">Albers et al. 2022</a>)</span></p>
 </section>
-<section id="よりよい可視化のために" class="slide level1">
+
+<section id="よりよい可視化のために" class="title-slide slide level1 center">
 <h1>よりよい可視化のために</h1>
 
 <img data-src="images/pro_linechart_advanced.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
@@ -449,7 +513,8 @@ Nozomi Niimi
 </ul>
 <p><span class="citation" data-cites="Snyder2019-uw">(<a href="#/references" role="doc-biblioref" onclick="">Snyder et al. 2019</a>)</span></p>
 </section>
-<section id="群レベルのvisualization" class="slide level1">
+
+<section id="群レベルのvisualization" class="title-slide slide level1 center">
 <h1>群レベルのVisualization</h1>
 
 <img data-src="images/pro_linechart_addci.png" class="r-stretch"><ul>
@@ -457,14 +522,16 @@ Nozomi Niimi
 </ul>
 <p><span class="citation" data-cites="Snyder2019-uw">(<a href="#/references" role="doc-biblioref" onclick="">Snyder et al. 2019</a>)</span></p>
 </section>
-<section id="一応特殊な手法を2つほど" class="slide level1">
+
+<section id="一応特殊な手法を2つほど" class="title-slide slide level1 center">
 <h1>一応、特殊な手法を2つほど・・・・・・・</h1>
 <ul>
 <li>Ceiling/Floorがあるときに使えるCensored regression ( = tobit model)</li>
 <li>Ordered regression model</li>
 </ul>
 </section>
-<section id="tobit-modelとは" class="slide level1">
+
+<section id="tobit-modelとは" class="title-slide slide level1 center">
 <h1>Tobit modelとは</h1>
 
 <img data-src="images/pro_tobit_exam.png" class="r-stretch"><ul>
@@ -477,7 +544,8 @@ Nozomi Niimi
 <li>実は生存分析はこの一種</li>
 </ul>
 </section>
-<section id="ordinary-regression-modelとは" class="slide level1">
+
+<section id="ordinary-regression-modelとは" class="title-slide slide level1 center">
 <h1>Ordinary regression modelとは</h1>
 <ul>
 <li>順序のあるカテゴリー変数で3種類以上の応答の時に使える
@@ -489,7 +557,8 @@ Nozomi Niimi
 <li>実は仮定が少なくRobustな上に、検出力も高い</li>
 </ul>
 </section>
-<section id="ordered-regression-modelの応用" class="slide level1">
+
+<section id="ordered-regression-modelの応用" class="title-slide slide level1 center">
 <h1>Ordered regression modelの応用</h1>
 <table class="caption-top">
 <thead>
@@ -545,7 +614,8 @@ Nozomi Niimi
 </ul>
 <p><span class="citation" data-cites="Harrell_POP_2024">(<a href="#/references" role="doc-biblioref" onclick="">Harrell 2024</a>)</span></p>
 </section>
-<section id="実践" class="slide level1">
+
+<section id="実践" class="title-slide slide level1 center">
 <h1>実践！</h1>
 <ul>
 <li><p>IST3のデータセット<span class="citation" data-cites="Sandercock_IST3_2016">(<a href="#/references" role="doc-biblioref" onclick="">Sandercock et al. 2016</a>)</span></p></li>
@@ -600,7 +670,8 @@ Nozomi Niimi
 </tbody>
 </table>
 </section>
-<section id="qol-outcomeの正規性の確認" class="slide level1">
+
+<section id="qol-outcomeの正規性の確認" class="title-slide slide level1 center">
 <h1>QOL outcomeの正規性の確認</h1>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960" class="r-stretch"><ul>
@@ -608,7 +679,8 @@ Nozomi Niimi
 <li>Euro QOL scoreは正規性がありそうだが死亡の扱いにこまる</li>
 </ul>
 </section>
-<section id="visualizationについて-1" class="slide level1">
+
+<section id="visualizationについて-1" class="title-slide slide level1 center">
 <h1>Visualizationについて</h1>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960" class="r-stretch"><ul>
@@ -617,27 +689,28 @@ Nozomi Niimi
 <li>一応90以上をGood、50未満をBadとした時の割合の差時系列を円グラフで</li>
 </ul>
 </section>
-<section id="missing-dataと死亡の扱い" class="slide level1">
+
+<section id="missing-dataと死亡の扱い" class="title-slide slide level1 center">
 <h1>Missing dataと死亡の扱い</h1>
 <div class="cell">
 <div class="cell-output-display">
-<div id="psqnafdiam" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#psqnafdiam table {
+<div id="xjraalrxjf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xjraalrxjf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#psqnafdiam thead, #psqnafdiam tbody, #psqnafdiam tfoot, #psqnafdiam tr, #psqnafdiam td, #psqnafdiam th {
+#xjraalrxjf thead, #xjraalrxjf tbody, #xjraalrxjf tfoot, #xjraalrxjf tr, #xjraalrxjf td, #xjraalrxjf th {
   border-style: none;
 }
 
-#psqnafdiam p {
+#xjraalrxjf p {
   margin: 0;
   padding: 0;
 }
 
-#psqnafdiam .gt_table {
+#xjraalrxjf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -663,12 +736,12 @@ Nozomi Niimi
   border-left-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_caption {
+#xjraalrxjf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#psqnafdiam .gt_title {
+#xjraalrxjf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -680,7 +753,7 @@ Nozomi Niimi
   border-bottom-width: 0;
 }
 
-#psqnafdiam .gt_subtitle {
+#xjraalrxjf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -692,7 +765,7 @@ Nozomi Niimi
   border-top-width: 0;
 }
 
-#psqnafdiam .gt_heading {
+#xjraalrxjf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -704,13 +777,13 @@ Nozomi Niimi
   border-right-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_bottom_border {
+#xjraalrxjf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_col_headings {
+#xjraalrxjf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -725,7 +798,7 @@ Nozomi Niimi
   border-right-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_col_heading {
+#xjraalrxjf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -745,7 +818,7 @@ Nozomi Niimi
   overflow-x: hidden;
 }
 
-#psqnafdiam .gt_column_spanner_outer {
+#xjraalrxjf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -757,15 +830,15 @@ Nozomi Niimi
   padding-right: 4px;
 }
 
-#psqnafdiam .gt_column_spanner_outer:first-child {
+#xjraalrxjf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#psqnafdiam .gt_column_spanner_outer:last-child {
+#xjraalrxjf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#psqnafdiam .gt_column_spanner {
+#xjraalrxjf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -777,11 +850,11 @@ Nozomi Niimi
   width: 100%;
 }
 
-#psqnafdiam .gt_spanner_row {
+#xjraalrxjf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#psqnafdiam .gt_group_heading {
+#xjraalrxjf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -807,7 +880,7 @@ Nozomi Niimi
   text-align: left;
 }
 
-#psqnafdiam .gt_empty_group_heading {
+#xjraalrxjf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -822,15 +895,15 @@ Nozomi Niimi
   vertical-align: middle;
 }
 
-#psqnafdiam .gt_from_md > :first-child {
+#xjraalrxjf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#psqnafdiam .gt_from_md > :last-child {
+#xjraalrxjf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#psqnafdiam .gt_row {
+#xjraalrxjf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -849,7 +922,7 @@ Nozomi Niimi
   overflow-x: hidden;
 }
 
-#psqnafdiam .gt_stub {
+#xjraalrxjf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -862,7 +935,7 @@ Nozomi Niimi
   padding-right: 5px;
 }
 
-#psqnafdiam .gt_stub_row_group {
+#xjraalrxjf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -876,15 +949,15 @@ Nozomi Niimi
   vertical-align: top;
 }
 
-#psqnafdiam .gt_row_group_first td {
+#xjraalrxjf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#psqnafdiam .gt_row_group_first th {
+#xjraalrxjf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#psqnafdiam .gt_summary_row {
+#xjraalrxjf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -894,16 +967,16 @@ Nozomi Niimi
   padding-right: 5px;
 }
 
-#psqnafdiam .gt_first_summary_row {
+#xjraalrxjf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_first_summary_row.thick {
+#xjraalrxjf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#psqnafdiam .gt_last_summary_row {
+#xjraalrxjf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -913,7 +986,7 @@ Nozomi Niimi
   border-bottom-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_grand_summary_row {
+#xjraalrxjf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -923,7 +996,7 @@ Nozomi Niimi
   padding-right: 5px;
 }
 
-#psqnafdiam .gt_first_grand_summary_row {
+#xjraalrxjf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -933,7 +1006,7 @@ Nozomi Niimi
   border-top-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_last_grand_summary_row_top {
+#xjraalrxjf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -943,11 +1016,11 @@ Nozomi Niimi
   border-bottom-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_striped {
+#xjraalrxjf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#psqnafdiam .gt_table_body {
+#xjraalrxjf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -956,7 +1029,7 @@ Nozomi Niimi
   border-bottom-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_footnotes {
+#xjraalrxjf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -970,7 +1043,7 @@ Nozomi Niimi
   border-right-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_footnote {
+#xjraalrxjf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -979,7 +1052,7 @@ Nozomi Niimi
   padding-right: 5px;
 }
 
-#psqnafdiam .gt_sourcenotes {
+#xjraalrxjf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -993,7 +1066,7 @@ Nozomi Niimi
   border-right-color: #D3D3D3;
 }
 
-#psqnafdiam .gt_sourcenote {
+#xjraalrxjf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1001,72 +1074,72 @@ Nozomi Niimi
   padding-right: 5px;
 }
 
-#psqnafdiam .gt_left {
+#xjraalrxjf .gt_left {
   text-align: left;
 }
 
-#psqnafdiam .gt_center {
+#xjraalrxjf .gt_center {
   text-align: center;
 }
 
-#psqnafdiam .gt_right {
+#xjraalrxjf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#psqnafdiam .gt_font_normal {
+#xjraalrxjf .gt_font_normal {
   font-weight: normal;
 }
 
-#psqnafdiam .gt_font_bold {
+#xjraalrxjf .gt_font_bold {
   font-weight: bold;
 }
 
-#psqnafdiam .gt_font_italic {
+#xjraalrxjf .gt_font_italic {
   font-style: italic;
 }
 
-#psqnafdiam .gt_super {
+#xjraalrxjf .gt_super {
   font-size: 65%;
 }
 
-#psqnafdiam .gt_footnote_marks {
+#xjraalrxjf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#psqnafdiam .gt_asterisk {
+#xjraalrxjf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#psqnafdiam .gt_indent_1 {
+#xjraalrxjf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#psqnafdiam .gt_indent_2 {
+#xjraalrxjf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#psqnafdiam .gt_indent_3 {
+#xjraalrxjf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#psqnafdiam .gt_indent_4 {
+#xjraalrxjf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#psqnafdiam .gt_indent_5 {
+#xjraalrxjf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#psqnafdiam .katex-display {
+#xjraalrxjf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#psqnafdiam div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xjraalrxjf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1250,11 +1323,13 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <li>OHSをみると死亡による欠損が多いことがわかる</li>
 </ul>
 </section>
-<section id="missingの解析" class="slide level1">
+
+<section id="missingの解析" class="title-slide slide level1 center">
 <h1>Missingの解析</h1>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" width="960" class="r-stretch"></section>
-<section id="missingの解析組み合わせ" class="slide level1">
+
+<section id="missingの解析組み合わせ" class="title-slide slide level1 center">
 <h1>Missingの解析~組み合わせ</h1>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.svg" width="960" class="r-stretch"><ul>
@@ -1262,27 +1337,28 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <li>Missingは単にDeleteするのは問題がありそう</li>
 </ul>
 </section>
-<section id="分類が少ないohsの解析" class="slide level1">
+
+<section id="分類が少ないohsの解析" class="title-slide slide level1 center">
 <h1>分類が少ないOHSの解析</h1>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nrbkkiobjf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nrbkkiobjf table {
+<div id="mgwteibiub" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mgwteibiub table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nrbkkiobjf thead, #nrbkkiobjf tbody, #nrbkkiobjf tfoot, #nrbkkiobjf tr, #nrbkkiobjf td, #nrbkkiobjf th {
+#mgwteibiub thead, #mgwteibiub tbody, #mgwteibiub tfoot, #mgwteibiub tr, #mgwteibiub td, #mgwteibiub th {
   border-style: none;
 }
 
-#nrbkkiobjf p {
+#mgwteibiub p {
   margin: 0;
   padding: 0;
 }
 
-#nrbkkiobjf .gt_table {
+#mgwteibiub .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1308,12 +1384,12 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_caption {
+#mgwteibiub .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nrbkkiobjf .gt_title {
+#mgwteibiub .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1325,7 +1401,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#nrbkkiobjf .gt_subtitle {
+#mgwteibiub .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1337,7 +1413,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#nrbkkiobjf .gt_heading {
+#mgwteibiub .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1349,13 +1425,13 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_bottom_border {
+#mgwteibiub .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_col_headings {
+#mgwteibiub .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1370,7 +1446,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_col_heading {
+#mgwteibiub .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1390,7 +1466,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#nrbkkiobjf .gt_column_spanner_outer {
+#mgwteibiub .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1402,15 +1478,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#nrbkkiobjf .gt_column_spanner_outer:first-child {
+#mgwteibiub .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nrbkkiobjf .gt_column_spanner_outer:last-child {
+#mgwteibiub .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nrbkkiobjf .gt_column_spanner {
+#mgwteibiub .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1422,11 +1498,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#nrbkkiobjf .gt_spanner_row {
+#mgwteibiub .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nrbkkiobjf .gt_group_heading {
+#mgwteibiub .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1452,7 +1528,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#nrbkkiobjf .gt_empty_group_heading {
+#mgwteibiub .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1467,15 +1543,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#nrbkkiobjf .gt_from_md > :first-child {
+#mgwteibiub .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nrbkkiobjf .gt_from_md > :last-child {
+#mgwteibiub .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nrbkkiobjf .gt_row {
+#mgwteibiub .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -1494,7 +1570,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#nrbkkiobjf .gt_stub {
+#mgwteibiub .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1507,7 +1583,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#nrbkkiobjf .gt_stub_row_group {
+#mgwteibiub .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1521,15 +1597,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#nrbkkiobjf .gt_row_group_first td {
+#mgwteibiub .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nrbkkiobjf .gt_row_group_first th {
+#mgwteibiub .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nrbkkiobjf .gt_summary_row {
+#mgwteibiub .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1539,16 +1615,16 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#nrbkkiobjf .gt_first_summary_row {
+#mgwteibiub .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_first_summary_row.thick {
+#mgwteibiub .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nrbkkiobjf .gt_last_summary_row {
+#mgwteibiub .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1558,7 +1634,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_grand_summary_row {
+#mgwteibiub .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1568,7 +1644,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#nrbkkiobjf .gt_first_grand_summary_row {
+#mgwteibiub .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1578,7 +1654,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_last_grand_summary_row_top {
+#mgwteibiub .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1588,11 +1664,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_striped {
+#mgwteibiub .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nrbkkiobjf .gt_table_body {
+#mgwteibiub .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1601,7 +1677,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_footnotes {
+#mgwteibiub .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1615,7 +1691,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_footnote {
+#mgwteibiub .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1624,7 +1700,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#nrbkkiobjf .gt_sourcenotes {
+#mgwteibiub .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1638,7 +1714,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#nrbkkiobjf .gt_sourcenote {
+#mgwteibiub .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1646,72 +1722,72 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#nrbkkiobjf .gt_left {
+#mgwteibiub .gt_left {
   text-align: left;
 }
 
-#nrbkkiobjf .gt_center {
+#mgwteibiub .gt_center {
   text-align: center;
 }
 
-#nrbkkiobjf .gt_right {
+#mgwteibiub .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nrbkkiobjf .gt_font_normal {
+#mgwteibiub .gt_font_normal {
   font-weight: normal;
 }
 
-#nrbkkiobjf .gt_font_bold {
+#mgwteibiub .gt_font_bold {
   font-weight: bold;
 }
 
-#nrbkkiobjf .gt_font_italic {
+#mgwteibiub .gt_font_italic {
   font-style: italic;
 }
 
-#nrbkkiobjf .gt_super {
+#mgwteibiub .gt_super {
   font-size: 65%;
 }
 
-#nrbkkiobjf .gt_footnote_marks {
+#mgwteibiub .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nrbkkiobjf .gt_asterisk {
+#mgwteibiub .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nrbkkiobjf .gt_indent_1 {
+#mgwteibiub .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nrbkkiobjf .gt_indent_2 {
+#mgwteibiub .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nrbkkiobjf .gt_indent_3 {
+#mgwteibiub .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nrbkkiobjf .gt_indent_4 {
+#mgwteibiub .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nrbkkiobjf .gt_indent_5 {
+#mgwteibiub .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nrbkkiobjf .katex-display {
+#mgwteibiub .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nrbkkiobjf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mgwteibiub div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1770,27 +1846,28 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </div>
 </div>
 </section>
-<section id="死亡を考慮しないeuroqolの解析" class="slide level1">
+
+<section id="死亡を考慮しないeuroqolの解析" class="title-slide slide level1 center">
 <h1>死亡を考慮しないEuroqolの解析</h1>
 <div class="cell">
 <div class="cell-output-display">
-<div id="lgvqisxttk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lgvqisxttk table {
+<div id="rpgdovwhss" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rpgdovwhss table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lgvqisxttk thead, #lgvqisxttk tbody, #lgvqisxttk tfoot, #lgvqisxttk tr, #lgvqisxttk td, #lgvqisxttk th {
+#rpgdovwhss thead, #rpgdovwhss tbody, #rpgdovwhss tfoot, #rpgdovwhss tr, #rpgdovwhss td, #rpgdovwhss th {
   border-style: none;
 }
 
-#lgvqisxttk p {
+#rpgdovwhss p {
   margin: 0;
   padding: 0;
 }
 
-#lgvqisxttk .gt_table {
+#rpgdovwhss .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1816,12 +1893,12 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_caption {
+#rpgdovwhss .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lgvqisxttk .gt_title {
+#rpgdovwhss .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1833,7 +1910,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#lgvqisxttk .gt_subtitle {
+#rpgdovwhss .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1845,7 +1922,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#lgvqisxttk .gt_heading {
+#rpgdovwhss .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1857,13 +1934,13 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_bottom_border {
+#rpgdovwhss .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_col_headings {
+#rpgdovwhss .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1878,7 +1955,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_col_heading {
+#rpgdovwhss .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1898,7 +1975,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#lgvqisxttk .gt_column_spanner_outer {
+#rpgdovwhss .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1910,15 +1987,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#lgvqisxttk .gt_column_spanner_outer:first-child {
+#rpgdovwhss .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lgvqisxttk .gt_column_spanner_outer:last-child {
+#rpgdovwhss .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lgvqisxttk .gt_column_spanner {
+#rpgdovwhss .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1930,11 +2007,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#lgvqisxttk .gt_spanner_row {
+#rpgdovwhss .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lgvqisxttk .gt_group_heading {
+#rpgdovwhss .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1960,7 +2037,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#lgvqisxttk .gt_empty_group_heading {
+#rpgdovwhss .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1975,15 +2052,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#lgvqisxttk .gt_from_md > :first-child {
+#rpgdovwhss .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lgvqisxttk .gt_from_md > :last-child {
+#rpgdovwhss .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lgvqisxttk .gt_row {
+#rpgdovwhss .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -2002,7 +2079,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#lgvqisxttk .gt_stub {
+#rpgdovwhss .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2015,7 +2092,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#lgvqisxttk .gt_stub_row_group {
+#rpgdovwhss .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2029,15 +2106,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#lgvqisxttk .gt_row_group_first td {
+#rpgdovwhss .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lgvqisxttk .gt_row_group_first th {
+#rpgdovwhss .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lgvqisxttk .gt_summary_row {
+#rpgdovwhss .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2047,16 +2124,16 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#lgvqisxttk .gt_first_summary_row {
+#rpgdovwhss .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_first_summary_row.thick {
+#rpgdovwhss .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lgvqisxttk .gt_last_summary_row {
+#rpgdovwhss .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2066,7 +2143,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_grand_summary_row {
+#rpgdovwhss .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2076,7 +2153,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#lgvqisxttk .gt_first_grand_summary_row {
+#rpgdovwhss .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2086,7 +2163,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_last_grand_summary_row_top {
+#rpgdovwhss .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2096,11 +2173,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_striped {
+#rpgdovwhss .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lgvqisxttk .gt_table_body {
+#rpgdovwhss .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2109,7 +2186,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_footnotes {
+#rpgdovwhss .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2123,7 +2200,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_footnote {
+#rpgdovwhss .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2132,7 +2209,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#lgvqisxttk .gt_sourcenotes {
+#rpgdovwhss .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2146,7 +2223,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#lgvqisxttk .gt_sourcenote {
+#rpgdovwhss .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2154,72 +2231,72 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#lgvqisxttk .gt_left {
+#rpgdovwhss .gt_left {
   text-align: left;
 }
 
-#lgvqisxttk .gt_center {
+#rpgdovwhss .gt_center {
   text-align: center;
 }
 
-#lgvqisxttk .gt_right {
+#rpgdovwhss .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lgvqisxttk .gt_font_normal {
+#rpgdovwhss .gt_font_normal {
   font-weight: normal;
 }
 
-#lgvqisxttk .gt_font_bold {
+#rpgdovwhss .gt_font_bold {
   font-weight: bold;
 }
 
-#lgvqisxttk .gt_font_italic {
+#rpgdovwhss .gt_font_italic {
   font-style: italic;
 }
 
-#lgvqisxttk .gt_super {
+#rpgdovwhss .gt_super {
   font-size: 65%;
 }
 
-#lgvqisxttk .gt_footnote_marks {
+#rpgdovwhss .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lgvqisxttk .gt_asterisk {
+#rpgdovwhss .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lgvqisxttk .gt_indent_1 {
+#rpgdovwhss .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lgvqisxttk .gt_indent_2 {
+#rpgdovwhss .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lgvqisxttk .gt_indent_3 {
+#rpgdovwhss .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lgvqisxttk .gt_indent_4 {
+#rpgdovwhss .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lgvqisxttk .gt_indent_5 {
+#rpgdovwhss .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lgvqisxttk .katex-display {
+#rpgdovwhss .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lgvqisxttk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rpgdovwhss div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2272,27 +2349,28 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </div>
 </div>
 </section>
-<section id="死亡を考慮した解析①" class="slide level1">
+
+<section id="死亡を考慮した解析①" class="title-slide slide level1 center">
 <h1>死亡を考慮した解析～①</h1>
 <div class="cell">
 <div class="cell-output-display">
-<div id="zvjdjracvr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zvjdjracvr table {
+<div id="crzutywcqc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#crzutywcqc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zvjdjracvr thead, #zvjdjracvr tbody, #zvjdjracvr tfoot, #zvjdjracvr tr, #zvjdjracvr td, #zvjdjracvr th {
+#crzutywcqc thead, #crzutywcqc tbody, #crzutywcqc tfoot, #crzutywcqc tr, #crzutywcqc td, #crzutywcqc th {
   border-style: none;
 }
 
-#zvjdjracvr p {
+#crzutywcqc p {
   margin: 0;
   padding: 0;
 }
 
-#zvjdjracvr .gt_table {
+#crzutywcqc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2318,12 +2396,12 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_caption {
+#crzutywcqc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zvjdjracvr .gt_title {
+#crzutywcqc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2335,7 +2413,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#zvjdjracvr .gt_subtitle {
+#crzutywcqc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2347,7 +2425,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#zvjdjracvr .gt_heading {
+#crzutywcqc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2359,13 +2437,13 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_bottom_border {
+#crzutywcqc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_col_headings {
+#crzutywcqc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2380,7 +2458,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_col_heading {
+#crzutywcqc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2400,7 +2478,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#zvjdjracvr .gt_column_spanner_outer {
+#crzutywcqc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2412,15 +2490,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#zvjdjracvr .gt_column_spanner_outer:first-child {
+#crzutywcqc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zvjdjracvr .gt_column_spanner_outer:last-child {
+#crzutywcqc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zvjdjracvr .gt_column_spanner {
+#crzutywcqc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2432,11 +2510,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#zvjdjracvr .gt_spanner_row {
+#crzutywcqc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zvjdjracvr .gt_group_heading {
+#crzutywcqc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2462,7 +2540,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#zvjdjracvr .gt_empty_group_heading {
+#crzutywcqc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2477,15 +2555,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#zvjdjracvr .gt_from_md > :first-child {
+#crzutywcqc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zvjdjracvr .gt_from_md > :last-child {
+#crzutywcqc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zvjdjracvr .gt_row {
+#crzutywcqc .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -2504,7 +2582,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#zvjdjracvr .gt_stub {
+#crzutywcqc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2517,7 +2595,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#zvjdjracvr .gt_stub_row_group {
+#crzutywcqc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2531,15 +2609,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#zvjdjracvr .gt_row_group_first td {
+#crzutywcqc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zvjdjracvr .gt_row_group_first th {
+#crzutywcqc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zvjdjracvr .gt_summary_row {
+#crzutywcqc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2549,16 +2627,16 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#zvjdjracvr .gt_first_summary_row {
+#crzutywcqc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_first_summary_row.thick {
+#crzutywcqc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zvjdjracvr .gt_last_summary_row {
+#crzutywcqc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2568,7 +2646,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_grand_summary_row {
+#crzutywcqc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2578,7 +2656,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#zvjdjracvr .gt_first_grand_summary_row {
+#crzutywcqc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2588,7 +2666,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_last_grand_summary_row_top {
+#crzutywcqc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2598,11 +2676,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_striped {
+#crzutywcqc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zvjdjracvr .gt_table_body {
+#crzutywcqc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2611,7 +2689,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_footnotes {
+#crzutywcqc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2625,7 +2703,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_footnote {
+#crzutywcqc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2634,7 +2712,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#zvjdjracvr .gt_sourcenotes {
+#crzutywcqc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2648,7 +2726,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#zvjdjracvr .gt_sourcenote {
+#crzutywcqc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2656,72 +2734,72 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#zvjdjracvr .gt_left {
+#crzutywcqc .gt_left {
   text-align: left;
 }
 
-#zvjdjracvr .gt_center {
+#crzutywcqc .gt_center {
   text-align: center;
 }
 
-#zvjdjracvr .gt_right {
+#crzutywcqc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zvjdjracvr .gt_font_normal {
+#crzutywcqc .gt_font_normal {
   font-weight: normal;
 }
 
-#zvjdjracvr .gt_font_bold {
+#crzutywcqc .gt_font_bold {
   font-weight: bold;
 }
 
-#zvjdjracvr .gt_font_italic {
+#crzutywcqc .gt_font_italic {
   font-style: italic;
 }
 
-#zvjdjracvr .gt_super {
+#crzutywcqc .gt_super {
   font-size: 65%;
 }
 
-#zvjdjracvr .gt_footnote_marks {
+#crzutywcqc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zvjdjracvr .gt_asterisk {
+#crzutywcqc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zvjdjracvr .gt_indent_1 {
+#crzutywcqc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zvjdjracvr .gt_indent_2 {
+#crzutywcqc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zvjdjracvr .gt_indent_3 {
+#crzutywcqc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zvjdjracvr .gt_indent_4 {
+#crzutywcqc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zvjdjracvr .gt_indent_5 {
+#crzutywcqc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zvjdjracvr .katex-display {
+#crzutywcqc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zvjdjracvr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#crzutywcqc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2779,27 +2857,28 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </div>
 </div>
 </section>
-<section id="死亡を考慮した解析②" class="slide level1">
+
+<section id="死亡を考慮した解析②" class="title-slide slide level1 center">
 <h1>死亡を考慮した解析～②</h1>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mhrwukssoe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mhrwukssoe table {
+<div id="lhdvwearui" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lhdvwearui table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mhrwukssoe thead, #mhrwukssoe tbody, #mhrwukssoe tfoot, #mhrwukssoe tr, #mhrwukssoe td, #mhrwukssoe th {
+#lhdvwearui thead, #lhdvwearui tbody, #lhdvwearui tfoot, #lhdvwearui tr, #lhdvwearui td, #lhdvwearui th {
   border-style: none;
 }
 
-#mhrwukssoe p {
+#lhdvwearui p {
   margin: 0;
   padding: 0;
 }
 
-#mhrwukssoe .gt_table {
+#lhdvwearui .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2825,12 +2904,12 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_caption {
+#lhdvwearui .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mhrwukssoe .gt_title {
+#lhdvwearui .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2842,7 +2921,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#mhrwukssoe .gt_subtitle {
+#lhdvwearui .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2854,7 +2933,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#mhrwukssoe .gt_heading {
+#lhdvwearui .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2866,13 +2945,13 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_bottom_border {
+#lhdvwearui .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_col_headings {
+#lhdvwearui .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2887,7 +2966,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_col_heading {
+#lhdvwearui .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2907,7 +2986,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#mhrwukssoe .gt_column_spanner_outer {
+#lhdvwearui .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2919,15 +2998,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#mhrwukssoe .gt_column_spanner_outer:first-child {
+#lhdvwearui .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mhrwukssoe .gt_column_spanner_outer:last-child {
+#lhdvwearui .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mhrwukssoe .gt_column_spanner {
+#lhdvwearui .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2939,11 +3018,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#mhrwukssoe .gt_spanner_row {
+#lhdvwearui .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mhrwukssoe .gt_group_heading {
+#lhdvwearui .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2969,7 +3048,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#mhrwukssoe .gt_empty_group_heading {
+#lhdvwearui .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2984,15 +3063,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#mhrwukssoe .gt_from_md > :first-child {
+#lhdvwearui .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mhrwukssoe .gt_from_md > :last-child {
+#lhdvwearui .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mhrwukssoe .gt_row {
+#lhdvwearui .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -3011,7 +3090,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#mhrwukssoe .gt_stub {
+#lhdvwearui .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3024,7 +3103,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#mhrwukssoe .gt_stub_row_group {
+#lhdvwearui .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3038,15 +3117,15 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#mhrwukssoe .gt_row_group_first td {
+#lhdvwearui .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mhrwukssoe .gt_row_group_first th {
+#lhdvwearui .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mhrwukssoe .gt_summary_row {
+#lhdvwearui .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3056,16 +3135,16 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#mhrwukssoe .gt_first_summary_row {
+#lhdvwearui .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_first_summary_row.thick {
+#lhdvwearui .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mhrwukssoe .gt_last_summary_row {
+#lhdvwearui .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3075,7 +3154,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_grand_summary_row {
+#lhdvwearui .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3085,7 +3164,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#mhrwukssoe .gt_first_grand_summary_row {
+#lhdvwearui .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3095,7 +3174,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_last_grand_summary_row_top {
+#lhdvwearui .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3105,11 +3184,11 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_striped {
+#lhdvwearui .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mhrwukssoe .gt_table_body {
+#lhdvwearui .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3118,7 +3197,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_footnotes {
+#lhdvwearui .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3132,7 +3211,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_footnote {
+#lhdvwearui .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3141,7 +3220,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#mhrwukssoe .gt_sourcenotes {
+#lhdvwearui .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3155,7 +3234,7 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#mhrwukssoe .gt_sourcenote {
+#lhdvwearui .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3163,72 +3242,72 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#mhrwukssoe .gt_left {
+#lhdvwearui .gt_left {
   text-align: left;
 }
 
-#mhrwukssoe .gt_center {
+#lhdvwearui .gt_center {
   text-align: center;
 }
 
-#mhrwukssoe .gt_right {
+#lhdvwearui .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mhrwukssoe .gt_font_normal {
+#lhdvwearui .gt_font_normal {
   font-weight: normal;
 }
 
-#mhrwukssoe .gt_font_bold {
+#lhdvwearui .gt_font_bold {
   font-weight: bold;
 }
 
-#mhrwukssoe .gt_font_italic {
+#lhdvwearui .gt_font_italic {
   font-style: italic;
 }
 
-#mhrwukssoe .gt_super {
+#lhdvwearui .gt_super {
   font-size: 65%;
 }
 
-#mhrwukssoe .gt_footnote_marks {
+#lhdvwearui .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mhrwukssoe .gt_asterisk {
+#lhdvwearui .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mhrwukssoe .gt_indent_1 {
+#lhdvwearui .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mhrwukssoe .gt_indent_2 {
+#lhdvwearui .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mhrwukssoe .gt_indent_3 {
+#lhdvwearui .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mhrwukssoe .gt_indent_4 {
+#lhdvwearui .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mhrwukssoe .gt_indent_5 {
+#lhdvwearui .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mhrwukssoe .katex-display {
+#lhdvwearui .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mhrwukssoe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lhdvwearui div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3268,7 +3347,8 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </div>
 </div>
 </section>
-<section id="結論として" class="slide level1">
+
+<section id="結論として" class="title-slide slide level1 center">
 <h1>結論として</h1>
 <ul>
 <li>tPAは6ヶ月後の良いQOLと関連している結果だった
@@ -3277,7 +3357,8 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </ul></li>
 </ul>
 </section>
-<section id="take-home-message" class="slide level1">
+
+<section id="take-home-message" class="title-slide slide level1 center">
 <h1>Take home message</h1>
 <ul>
 <li>PROをメインとした解析をする時は
@@ -3291,12 +3372,14 @@ N = 1,117<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <li>死亡の扱いに要注意！！</li>
 </ul>
 </section>
-<section id="わかりやすい参考文献" class="slide level1">
+
+<section id="わかりやすい参考文献" class="title-slide slide level1 center">
 <h1>わかりやすい参考文献</h1>
 <p><a href="https://www.lifescience.co.jp/pro/index.html"><em>患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)</em></a></p>
 <p><a href="https://www.lifescience.co.jp/pro/article02-2-9.html#main"><em>https://www.lifescience.co.jp/pro/article02-2-9.html#main</em></a></p>
 </section>
-<section id="references" class="slide level1 smaller scrollable">
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
 <h1>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Albers2022-wt" class="csl-entry" role="listitem">
@@ -3380,6 +3463,7 @@ Spertus, Jacob V, Laura A Hatfield, David J Cohen, et al. 2019. <span>“Integra
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': true,
  

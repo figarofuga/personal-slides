@@ -7,7 +7,7 @@ title: "Personal Slides"
 ::: {.g-col-6}
 ## Medicine
 
-Clinical medicine slides.
+臨床でちょっとした調べもののまとめです.
 
 [Open Medicine slides](medicine/)
 :::
@@ -15,7 +15,7 @@ Clinical medicine slides.
 ::: {.g-col-6}
 ## Statistics
 
-Statistics and R analysis slides.
+Rを基に統計の勉強をしたまとめです.
 
 [Open Statistics slides](statistics/)
 :::

@@ -1,19 +1,7 @@
 ---
 title: "下垂体偶発種について"
 subtitle: "なんで頭部CT撮ってんだよ！"
-author: "Nozomi Niimi"
 date: "2026-05-27"
-institute: "東京医療センター総合内科"
-format:
-  clean-revealjs:
-    smaller: true
-    scrollable: true
-    slide-level: 2
-    theme: default
-    transition: slide
-    incremental: false
-execute:
-  echo: false
 bibliography: references.bib
 ---
 

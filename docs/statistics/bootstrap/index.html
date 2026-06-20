@@ -68,6 +68,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -163,9 +164,9 @@ Nozomi Niimi
 </div>
 </div>
 
-  <p class="date">February 10, 2023</p>
+  <p class="date">2023-02-10</p>
 </section>
-<section id="クイズ" class="slide level2">
+<section id="クイズ" class="slide level2 scrollable">
 <h2>クイズ</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -202,43 +203,43 @@ Nozomi Niimi
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">19.52821</td>
+<td style="text-align: right;">19.52206</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">19.31610</td>
+<td style="text-align: right;">19.07359</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">17.98903</td>
+<td style="text-align: right;">23.86829</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">20.32815</td>
+<td style="text-align: right;">21.42111</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">22.38491</td>
+<td style="text-align: right;">23.01223</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">18.80504</td>
+<td style="text-align: right;">22.74053</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">23.23099</td>
+<td style="text-align: right;">22.83794</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">8</td>
-<td style="text-align: right;">19.26670</td>
+<td style="text-align: right;">22.22644</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">23.23281</td>
+<td style="text-align: right;">23.33659</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">21.00592</td>
+<td style="text-align: right;">24.74354</td>
 </tr>
 </tbody>
 </table>
@@ -334,20 +335,20 @@ Nozomi Niimi
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">77.75412</td>
-<td style="text-align: right;">184.0186</td>
+<td style="text-align: right;">77.47760</td>
+<td style="text-align: right;">185.7697</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">68.52405</td>
-<td style="text-align: right;">174.4295</td>
+<td style="text-align: right;">77.53896</td>
+<td style="text-align: right;">206.5548</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">76.35626</td>
-<td style="text-align: right;">180.4311</td>
+<td style="text-align: right;">72.28054</td>
+<td style="text-align: right;">207.1921</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
@@ -637,7 +638,7 @@ Nozomi Niimi
 </ul>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
-<section id="how-to-bootstrap-4" class="slide level2">
+<section id="how-to-bootstrap-4" class="slide level2 scrollable">
 <h2>How to bootstrap 4</h2>
 <ul>
 <li>ここからやり方は複数ある<span class="citation" data-cites="Bland2015-gy">(<a href="#/references" role="doc-biblioref" onclick="">Bland and Altman 2015</a>)</span></li>
@@ -662,7 +663,7 @@ Nozomi Niimi
 </div>
 </div>
 </section>
-<section id="bootstrapの種類" class="slide level2">
+<section id="bootstrapの種類" class="slide level2 scrollable">
 <h2>Bootstrapの種類</h2>
 <ul>
 <li>最も基本は上記の<strong>Percentile法</strong> → ただし、<strong>以下の弱点</strong>がある</li>
@@ -723,7 +724,7 @@ Nozomi Niimi
 <li>ロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない</li>
 </ul>
 </section>
-<section id="クイズの答え" class="slide level2">
+<section id="クイズの答え" class="slide level2 scrollable">
 <h2>クイズの答え</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -810,6 +811,7 @@ Wicklin, Rick. n.d. <em>The Bias-Corrected and Accelerated (<span>BCa</span>) Bo
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': true,
  
@@ -936,7 +938,7 @@ Wicklin, Rick. n.d. <em>The Bias-Corrected and Accelerated (<span>BCa</span>) Bo
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -956,7 +958,7 @@ Wicklin, Rick. n.d. <em>The Bias-Corrected and Accelerated (<span>BCa</span>) Bo
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 960,
+        width: 1050,
 
         height: 700,
 

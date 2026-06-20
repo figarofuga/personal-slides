@@ -1,26 +1,7 @@
 ---
 title: "機械学習を用いた因果推論"
 author: "Nozomi Niimi"
-format:
-  clean-revealjs:
-    pdf-separate-fragments: false
-    pdf-max-pages-per-slide: 3
-    theme: [default, custom-style.scss]
-    embed-resources: false
-    self-contained-math: false
-    slide-number: true
-execute:
-  freeze: auto
-  cache: true
-  echo: false
-  warning: false
-  error: false
-date: today
-date-format: long
-knitr: 
-  opts_chunk: 
-    dev: svglite
-    fig-format: svg
+date: "2026-08-01"
 ---
 
 # 因果推論 at glance

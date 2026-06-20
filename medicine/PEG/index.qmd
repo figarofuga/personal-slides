@@ -5,16 +5,6 @@ author: "Nozomi Niimi"
 date: "2026-06-10"
 lang: ja
 bibliography: references.bib
-format:
-  clean-revealjs:
-    slide-level: 2
-    theme: default
-    transition: slide
-    incremental: false
-    scrollable: true
-    embed-resources: true
-execute:
-  echo: false
 ---
 
 <!--

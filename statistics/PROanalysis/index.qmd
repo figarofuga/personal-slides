@@ -2,22 +2,6 @@
 title: "PROの解析について"
 author: "Nozomi Niimi"
 date: "2024-10-10"
-format:
-  clean-revealjs:
-    slide-level: 1
-    theme: default
-    transition: slide
-    incremental: false
-    embed-resources: false
-    smaller: true
-    scrollable: true
-execute:
-  echo: false
-knitr: 
-  opts_chunk: 
-    dev: svglite
-    fig-format: svg
-editor: source
 bibliography: references.bib
 ---
 
@@ -28,7 +12,7 @@ bibliography: references.bib
 
 # PROの代表例
 
-![](imges/ordered_scale.png){height="50vh"}
+![](images/ordered_scale.png){height="50vh"}
 
 - 循環器では以下のものが有名
     - SIHDで利用するSAQ
@@ -188,7 +172,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 # ただし・・・・・・
 
-![](images/pro_bad_exam.png)
+![](images/pro_bad_exam.png){fig-align="center"}
 
 -   差をアウトカムに回帰はやらないほうが良い！
     -   Baselineが良い患者ほど予後不良になってしまう
