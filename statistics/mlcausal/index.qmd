@@ -846,6 +846,8 @@ modelsummary::modelsummary(
 ## Augumented Inverse Probablity Weighting (AIPW)
 
 ```{r}
+#| label: scratch-for-AIPW
+
 library(WeightIt)
 
 ps_fit <- glm(ca ~ age + sex + bmi + hf + bnp + lvef, data = toy_data, family = binomial)
@@ -903,6 +905,127 @@ ci <- c(
   - Subgroup解析と一緒
   - 自覚的にInteraction termを入れないとちゃんと推定出来ない
 - ここに機械学習を持ち込めないか？
+
+```{r}
+#| label: scratch-for-TMLE
+
+# --- 0) 準備 ---------------------------------------------------------------
+library(MatchIt)
+
+# 処置・アウトカム・共変量
+A <- toy_data$ca
+Y <- toy_data$afeqt_os
+
+W <- toy_data[, c("age","sex","bmi","hf","bnp","lvef","palpitation")]
+
+n <- nrow(toy_data)
+
+# --- 1) まずは素朴な推定（比較用） ----------------------------------------
+naive_diff <- mean(Y[A==1]) - mean(Y[A==0])
+
+# --- 2) gモデル（傾向スコア）: P(A=1|W) -----------------------------------
+g_fit <- glm(A ~ age + sex + bmi + hf + bnp + lvef + palpitation, data = toy_data, family = binomial())
+g_hat <- predict(g_fit, type = "response")
+
+# 実務では positivity の極端さ対策で truncation をよく入れる
+g_hat <- pmin(pmax(g_hat, 0.01), 0.99)
+
+# --- 3) Qモデル（アウトカム回帰）: E(Y|A,W) ---------------------------------
+Q_fit <- glm(Y ~ A + age + sex + bmi + hf + bnp + lvef + palpitation, data = toy_data, family = gaussian())
+
+# 観測された A の下での予測 Q(A,W)
+Q_aw <- predict(Q_fit, type = "response")
+
+# 介入した世界（A=1, A=0）の下での予測 Q(1,W), Q(0,W)
+Q1_w <- predict(Q_fit, newdata = data.frame(A=1, W), type = "response")
+Q0_w <- predict(Q_fit, newdata = data.frame(A=0, W), type = "response")
+
+# ここまでが「G-computation（回帰による反実仮想平均）」の素材
+gcomp_ate <- mean(Q1_w - Q0_w)
+
+# --- 4) clever covariate（IPWっぽい重み） -----------------------------------
+# 連続アウトカムの基本形では、H1, H0 を使って Q を "必要な方向に" だけ更新する
+H1 <- as.numeric(A==1) / g_hat
+H0 <- as.numeric(A==0) / (1 - g_hat)
+
+# --- 5) targeting step：epsilon を推定して Q を更新 --------------------------
+# 連続(Y)の簡単な形： (Y - Q_aw) を H1, H0 で回帰（切片なし）して epsilon を得る
+eps_fit <- lm(I(Y - Q_aw) ~ -1 + H1 + H0)
+eps <- coef(eps_fit)
+eps1 <- unname(eps["H1"])
+eps0 <- unname(eps["H0"])
+
+# 更新後の Q*（observed と intervention の両方）
+Qstar_aw <- Q_aw + eps1 * H1 + eps0 * H0
+Qstar_1w <- Q1_w + eps1 * (1 / g_hat)
+Qstar_0w <- Q0_w + eps0 * (1 / (1 - g_hat))
+
+tmle_ate <- mean(Qstar_1w - Qstar_0w)
+
+# --- 6) 標準誤差（influence function の分散で） ----------------------------
+# IC = H1*(Y - Q*) - H0*(Y - Q*) + (Q*(1,W)-Q*(0,W)) - psi
+IC <- (H1 - H0) * (Y - Qstar_aw) + (Qstar_1w - Qstar_0w) - tmle_ate
+se <- sd(IC) / sqrt(n)
+ci <- tmle_ate + c(-1, 1) * 1.96 * se
+
+# --- 7) 結果表示 -----------------------------------------------------------
+cat("n =", n, "\n")
+cat("Naive diff (unadjusted):", naive_diff, "\n")
+cat("G-computation ATE (Q-model only):", gcomp_ate, "\n")
+cat("TMLE ATE (targeted):", tmle_ate, "\n")
+cat("TMLE 95% CI:", ci[1], "to", ci[2], "\n")
+
+```
+
+```{r}
+#| label: scratch-for-orthogonalization
+
+dat_ortho <- toy_data
+
+fit_full <- glm(afeqt_os ~ ca + age + sex + bmi + hf + bnp + lvef + palpitation, data = dat_ortho, family = gaussian())
+
+summary(fit_full)
+
+coef(fit_full)["ca"]
+
+# predict Y for covs
+
+fit_y <- glm(
+  afeqt_os ~ age + sex + bmi + hf + bnp + lvef + palpitation, 
+  data = dat_ortho, 
+  family = gaussian()
+)
+
+dat_ortho <- dat_ortho |> 
+  dplyr::mutate(
+    `.fitted` = predict(fit_y, type = "response"),
+    y_resid = afeqt_os - .fitted
+  )
+
+fit_a_lpm <- glm(
+  ca ~ age + sex + bmi + hf + bnp + lvef + palpitation,
+  family = gaussian(),
+  data = dat_ortho
+)
+
+dat_ortho <- dat_ortho |> 
+  dplyr::mutate(
+    a_hat_lpm = predict(fit_a_lpm, type = "response"), 
+    a_resid_lpm = ca - a_hat_lpm
+  ) 
+
+fit_orth_lpm <- glm(
+  y_resid ~ 0 + a_resid_lpm,
+  family = gaussian(),
+  data = dat_ortho
+)
+
+summary(fit_orth_lpm)
+
+coef(fit_orth_lpm)["a_resid_lpm"]
+
+
+```
 
 # 機械学習 at glance
 
