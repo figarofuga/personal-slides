@@ -3,6 +3,8 @@ title: Marginal effectsとその周辺
 subtitle: 多変量回帰・・・好きですか？
 date: "2025-12-13"
 bibliography: references.bib
+metadata-files:
+  - ../../_metadata/revealjs.yml
 ---
 
 ```{r}

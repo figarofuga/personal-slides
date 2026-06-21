@@ -2,6 +2,8 @@
 title: "機械学習を用いた因果推論"
 author: "Nozomi Niimi"
 date: "2026-08-01"
+metadata-files:
+  - ../../_metadata/revealjs.yml
 ---
 
 # 因果推論 at glance

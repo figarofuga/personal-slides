@@ -3,6 +3,8 @@ title: "下垂体偶発種について"
 subtitle: "なんで頭部CT撮ってんだよ！"
 date: "2026-05-27"
 bibliography: references.bib
+metadata-files:
+  - ../../_metadata/revealjs.yml
 ---
 
 

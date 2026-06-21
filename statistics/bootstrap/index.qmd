@@ -3,6 +3,8 @@ title: "Bootstrapについて"
 author: "Nozomi Niimi"
 date: "2023-02-10"
 bibliography: reference.bib
+metadata-files:
+  - ../../_metadata/revealjs.yml
 ---
 
 ```{r, setup, include=FALSE}

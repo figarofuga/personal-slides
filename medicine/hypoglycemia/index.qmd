@@ -3,6 +3,8 @@ title: 低血糖についての覚書
 subtitle: 低血糖の機序と実践
 date: "2026-05-01"
 bibliography: references.bib
+metadata-files:
+  - ../../_metadata/revealjs.yml
 nocite: |
   @DynaMed_hypoglycemia, @Adrian-hypoglycemia-determining
 ---

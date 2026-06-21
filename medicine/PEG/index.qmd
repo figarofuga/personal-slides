@@ -5,6 +5,8 @@ author: "Nozomi Niimi"
 date: "2026-06-10"
 lang: ja
 bibliography: references.bib
+metadata-files:
+  - ../../_metadata/revealjs.yml
 ---
 
 <!--
