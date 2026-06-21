@@ -2,6 +2,35 @@
 title: Marginal effectsとその周辺
 subtitle: 多変量回帰・・・好きですか？
 date: "2025-12-13"
+format:
+  clean-revealjs:
+    toc: true
+    toc-depth: 1
+    slide-level: 2
+    theme: default
+    scrollable: true
+    smaller: true
+    transition: slide
+    incremental: false
+    pdf-separate-fragments: false
+    pdf-max-pages-per-slide: 3
+    slide-number: true
+author:
+  - name: Nozomi Niimi
+    orcid: 0000-0002-6909-0740
+    email: figarofuga@gmail.com
+    affiliations: 東京医療センター総合内科
+date-format: "YYYY-MM-DD"
+engine: knitr
+execute: 
+  error: false
+  warning: false
+  echo: false
+  cache: true
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
 bibliography: references.bib
 ---
 
