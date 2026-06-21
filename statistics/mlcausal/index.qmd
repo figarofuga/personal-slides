@@ -25,10 +25,18 @@ metadata-files:
 
 ```{r}
 #| label: setup
+#| include: false
 
 library(sessioninfo)
 library(reticulate)
+library(here)
 
+reticulate::use_python(
+  here::here(".venv", "bin", "python"),
+  required = TRUE
+)
+
+reticulate::py_config()
 
 library(dagitty)
 library(ggdag)
@@ -36,9 +44,6 @@ library(dplyr)
 library(ggplot2)
 library(grid)
 
-Sys.setenv(RETICULATE_PYTHON="managed")
-
-reticulate::py_require(packages = c("numpy", "pandas", "matplotlib", "seaborn", "scikit-learn", "lightgbm", "xgboost", "causallib", "econml", "causal-learn", "causalml", "dowhy", "doubleml", "scikit-survival"))
 
 
 sessioninfo::session_info(info = "all")
