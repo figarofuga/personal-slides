@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Nozomi Niimi">
+  <meta name="dcterms.date" content="2023-02-10">
+  <title>My personal slides – Bootstrapについて</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+<script src="mathjax-config.js"></script>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Bootstrapについて</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:figarofuga@gmail.com">figarofuga@gmail.com</a>
+</div>
+        <p class="quarto-title-affiliation">
+            東京医療センター総合内科
+          </p>
+    </div>
+</div>
+
+  <p class="date">2023-02-10</p>
+</section>
+<section id="クイズ" class="slide level2 scrollable">
+<h2>クイズ</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bootstrap_quiz.jpeg" class="quarto-figure quarto-figure-center" height="300"></p>
+</figure>
+</div>
+<ol type="1">
+<li>Bootstrapは靴の中のどの部分でしょうか？</li>
+<li>Bootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？</li>
+<li>Bootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？</li>
+<li>Bootstrap信頼区間の時に良い方法はなんでしょうか？</li>
+</ol>
+</section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li>最近研究でbootstrapを使う事が複数回あった</li>
+<li>正直雰囲気でやっていたので、しっかり勉強してみたい</li>
+</ul>
+</section>
+<section id="信頼区間の出し方" class="slide level2">
+<h2>95％信頼区間の出し方</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bmi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20.54809</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">21.12042</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">22.25056</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">22.63935</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">23.58004</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">20.07821</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">21.19848</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">18.63633</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">23.12713</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">18.50752</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/mi-hist-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li>例えば、患者のBMIを出すときはどう考えるか？</li>
+</ul>
+</section>
+<section id="信頼区間の出し方-1" class="slide level2">
+<h2>信頼区間の出し方</h2>
+
+<img data-src="images/ci_image.jpg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>この分布が<strong>正規分布に従うとして</strong>、t分布の平均と分散を最尤法で推定</li>
+<li>t分布の数表を確認して、1.96×標準偏差で計算する</li>
+</ul>
+</section>
+<section id="でも" class="slide level2">
+<h2>でも・・・・・・</h2>
+<ul>
+<li>心不全患者のBNPの分布は？</li>
+<li>新しいDeep learningモデルのtest cohortでのAUROCの分散は？</li>
+<li>死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？</li>
+</ul>
+<p>医学では<span style="color: red"><strong>正規分布</strong></span>でないものの方が多い！</p>
+</section>
+<section id="bootstrapとは" class="slide level2">
+<h2>Bootstrapとは</h2>
+
+<img data-src="images/efron.JPG" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Jackknife法などと同じresampling法の一種</li>
+<li>Efronが1979年に開発した手法</li>
+<li>元のデータからランダムに取り出して新しいデータセットを作成する<span class="citation" data-cites="Efron2003-pq">(<a href="#/references" role="doc-biblioref" onclick="">Efron 2003</a>)</span></li>
+<li>この際に<span style="color: red"><strong>重複を許可する</strong></span>のが特徴 = 使われないのもある</li>
+</ul>
+</section>
+<section id="おまけbootstrapの名前" class="slide level2">
+<h2>おまけ〜Bootstrapの名前</h2>
+<ul>
+<li>ホラ吹き男爵の冒険のエピソード</li>
+<li>「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある</li>
+<li>読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bootstrap_horafuki.jpg" class="quarto-figure quarto-figure-center" height="300"></p>
+</figure>
+</div>
+</section>
+<section id="bootstrap法jackknifeとの比較" class="slide level2">
+<h2>Bootstrap法〜Jackknifeとの比較</h2>
+<ul>
+<li>Bootstrapの前に、Jackknifeという手法が1949年に開発された</li>
+<li>これは、1つずつ標本から抜いていくという手法</li>
+<li>どんな時にも使えるから、便利な十徳ナイフという名前が付けられた</li>
+<li>こっちの方が自然なイメージだが<strong>問題点</strong>があった</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Jackknife.png" class="quarto-figure quarto-figure-center" height="300"></p>
+</figure>
+</div>
+</section>
+<section id="jacknife法の問題点1" class="slide level2">
+<h2>Jacknife法の問題点1</h2>
+<ul>
+<li>　MIを起こした患者の年齢とLDLを見たデータがあるとする</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">age</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ldl</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">75.59151</td>
+<td style="text-align: right;">171.7341</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">81.69513</td>
+<td style="text-align: right;">170.1596</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">71.52459</td>
+<td style="text-align: right;">207.3049</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right; font-weight: bold; background-color: lightgrey !important;">30</td>
+<td style="text-align: right; font-weight: bold; background-color: lightgrey !important;">25.00000</td>
+<td style="text-align: right; font-weight: bold; background-color: lightgrey !important;">300.0000</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgrey !important;">FHの患者 |</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; font-weight: bold; background-color: lightgrey !important;">31</td>
+<td style="text-align: right; font-weight: bold; background-color: lightgrey !important;">35.00000</td>
+<td style="text-align: right; font-weight: bold; background-color: lightgrey !important;">75.0000</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgrey !important;">特発性冠動脈解離 |</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="jacknife法の問題点2" class="slide level2">
+<h2>Jacknife法の問題点2</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="その場合" class="slide level2">
+<h2>その場合</h2>
+<ul>
+<li>このようなデータ(連続じゃない時)の時に分散を広く推定してしまう</li>
+<li>イメージだが、外れ値を何度も数えてしまう (FHを29回数えている)</li>
+<li>平均値とSDは出来るが、中央値とPercentileは苦手</li>
+</ul>
+</section>
+<section id="bootstrapの前提条件" class="slide level2">
+<h2>Bootstrapの前提条件</h2>
+<ul>
+<li>Plug in principles</li>
+<li>簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bootstrap_image.jpg" class="quarto-figure quarto-figure-center" height="350"></p>
+</figure>
+</div>
+</section>
+<section id="bootstrapの簡単な例" class="slide level2">
+<h2>bootstrapの簡単な例</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">height</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mass</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Luke Skywalker</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C-3PO</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2-D2</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Darth Vader</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leia Organa</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Owen Lars</td>
+<td style="text-align: right;">178</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Beru Whitesun Lars</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R5-D4</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li>簡単なものとして、身長の平均値の95%信頼区間を導出してみる</li>
+</ul>
+</section>
+<section id="how-to-bootstrap-1" class="slide level2">
+<h2>How to bootstrap 1</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  2  2  3  5  5  8  8 11 12 13 13 14 15 21 21 22 22 22 24 24 26 27 29
+[26] 30 30 32 32 32 34 35 35 43 44 44 45 47 48 48 48 48 48 49 49 50 51 51 52 52
+[51] 52 52 52 53 54 56 56 58 59 60 61 61 62 62 62 63 64 65 65 68 69 69 71 72 74
+[76] 74 75 75 76 78 78 79 80 82 84 84 87</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top" style="font-size: 16px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">height</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mass</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Luke Skywalker</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C-3PO</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C-3PO</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C-3PO</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2-D2</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leia Organa</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leia Organa</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R5-D4</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R5-D4</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Droid</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Anakin Skywalker</td>
+<td style="text-align: right;">188</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wilhuff Tarkin</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chewbacca</td>
+<td style="text-align: right;">228</td>
+<td style="text-align: right;">112</td>
+<td style="text-align: left;">Wookiee</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chewbacca</td>
+<td style="text-align: right;">228</td>
+<td style="text-align: right;">112</td>
+<td style="text-align: left;">Wookiee</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Han Solo</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">Human</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Greedo</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: left;">Rodian</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div>
+<ul>
+<li>行数の数字をランダムに抽出する<br></li>
+<li>この時、重複を許す！</li>
+</ul>
+</section>
+<section id="how-to-bootstrap-2" class="slide level2">
+<h2>How to bootstrap 2</h2>
+<ul>
+<li>同じものが複数ある(C3PO)</li>
+<li>この状態で身長の平均値を出す。</li>
+<li>身長の平均値 = 175.5595238</li>
+</ul>
+</section>
+<section id="how-to-bootstrap-3" class="slide level2">
+<h2>How to bootstrap 3</h2>
+<ul>
+<li>上記の1と2を繰り返す。</li>
+</ul>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="how-to-bootstrap-4" class="slide level2 scrollable">
+<h2>How to bootstrap 4</h2>
+<ul>
+<li>ここからやり方は複数ある<span class="citation" data-cites="Bland2015-gy">(<a href="#/references" role="doc-biblioref" onclick="">Bland and Altman 2015</a>)</span></li>
+<li>代表的なものは以下の3つ
+<ol type="1">
+<li>標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法) <br> → sd = 3.9741878</li>
+<li>2.5% ~ 97.5%の範囲をそのまま提示する(Percentile法) <br> → [167.0867695, 169.5139372]</li>
+<li>標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)</li>
+</ol></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>どの方法を用いるにせよ必ず1回は<strong>Histogram</strong>にして分布を確認する！！</p>
+</div>
+</div>
+</div>
+</section>
+<section id="bootstrapの種類" class="slide level2 scrollable">
+<h2>Bootstrapの種類</h2>
+<ul>
+<li>最も基本は上記の<strong>Percentile法</strong> → ただし、<strong>以下の弱点</strong>がある</li>
+<li>Percentile法の弱点
+<ol type="1">
+<li>収束が遅い</li>
+<li>元データを使っていない → Biasが生まれる<span class="citation" data-cites="Wicklin_undated-xu">(<a href="#/references" role="doc-biblioref" onclick="">Wicklin, n.d.</a>)</span></li>
+</ol></li>
+</ul>
+</section>
+<section id="bootstrap法の改善" class="slide level2">
+<h2>Bootstrap法の改善</h2>
+<ul>
+<li>BCa法やBootstrap-t法が考えられている
+<ul>
+<li>Biasを修正する為に複数のパラメーターを使う手法が考えられている: <span style="color: red"><strong>BCa法</strong></span>、Bootstrap-t法</li>
+</ul></li>
+<li>Bootstrap-t法: 分散値を使い、t分布に近似する
+<ul>
+<li>分散は理論値やjackknife法で計算する必要がある<span class="citation" data-cites="Kaneyoshi2011">(<a href="#/references" role="doc-biblioref" onclick="">汪金芳 and 桜井裕仁 2011</a>)</span></li>
+</ul></li>
+<li>BCa法: Bootstrapだけでなんとかなるのが利点</li>
+</ul>
+</section>
+<section id="どれを選べばいいの" class="slide level2">
+<h2>どれを選べばいいの？</h2>
+<p><img data-src="images/choice_bootstrap.png" height="300"></p>
+<ul>
+<li>過去の論文<span class="citation" data-cites="Carpenter2000-fo">(<a href="#/references" role="doc-biblioref" onclick="">Carpenter and Bithell 2000</a>)</span>では、Flowchartが示されている</li>
+<li>全く分からなければ<span style=" font-weight: bold;    color: red !important;font-size: 32px;">BCa法</span>が無難だと思う</li>
+<li>Bootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう<span class="citation" data-cites="DiCiccio1996-wt">(<a href="#/references" role="doc-biblioref" onclick="">DiCiccio and Efron 1996</a>)</span></li>
+<li>BCa法はBootstrapの繰り返しが多いがRだと簡単に出来る<span class="citation" data-cites="boot1997">(<a href="#/references" role="doc-biblioref" onclick="">Davison and Hinkley 1997</a>)</span></li>
+</ul>
+</section>
+<section id="古典的な信頼区間とbootstrap信頼区間の違い" class="slide level2">
+<h2>古典的な信頼区間とBootstrap信頼区間の違い</h2>
+
+<img data-src="images/imagine_bootstrap.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="bootstrapの素朴な疑問" class="slide level2">
+<h2>Bootstrapの素朴な疑問</h2>
+<ul>
+<li>nは幾つにすればいいの？</li>
+<li>元データは少なくてもいいの？</li>
+</ul>
+</section>
+<section id="bootstrapの素朴な疑問-1" class="slide level2">
+<h2>Bootstrapの素朴な疑問 1</h2>
+<ul>
+<li>nは幾つにすればいいの？<br> →　Efron曰く、分散だけなら200程度、信頼区間なら<span style=" font-weight: bold;    color: red !important;font-size: 32px;">1000-2000回程度</span>必要</li>
+<li>コンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる<span class="citation" data-cites="Chernick2008-zx">(<a href="#/references" role="doc-biblioref" onclick="">Chernick 2008</a>)</span></li>
+</ul>
+</section>
+<section id="bootstrapの素朴な疑問-2" class="slide level2">
+<h2>Bootstrapの素朴な疑問 2</h2>
+<ul>
+<li>元データは少なくてもいいの？ →　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ</li>
+<li>経験則だと最低30～50は必要と考えられる<span class="citation" data-cites="Chernick2008-zx">(<a href="#/references" role="doc-biblioref" onclick="">Chernick 2008</a>)</span>が求めたいものと状況による</li>
+<li>ロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない</li>
+</ul>
+</section>
+<section id="クイズの答え" class="slide level2 scrollable">
+<h2>クイズの答え</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/boostrap_answer.jpeg" class="quarto-figure quarto-figure-center" height="300"></p>
+</figure>
+</div>
+<ol type="1">
+<li>Bootstrapは靴の中のどの部分でしょうか？</li>
+<li>Bootstrap信頼区間を出すときには<span style="color: red"><strong>1000-2000回</strong></span>繰り返しをする</li>
+<li>Bootstrap信頼区間を出す前に必ず<span style="color: red"><strong>統計量のHistogram</strong></span>を確認する！</li>
+<li>Bootstrap信頼区間の時には<span style="color: red"><strong>BCa法</strong></span>を行う！</li>
+</ol>
+</section>
+<section id="thank-you-for-your-listening" class="slide level2">
+<h2>Thank you for your listening!!</h2>
+
+<img data-src="images/hair_bootstrap.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>これが本当にあった話らしい</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bland2015-gy" class="csl-entry" role="listitem">
+Bland, J Martin, and Douglas G Altman. 2015. <span>“Statistics Notes: Bootstrap Resampling Methods.”</span> <em>BMJ</em>, ahead of print. <a href="https://doi.org/10.1136/bmj.h2622">https://doi.org/10.1136/bmj.h2622</a>.
+</div>
+<div id="ref-Carpenter2000-fo" class="csl-entry" role="listitem">
+Carpenter, J, and J Bithell. 2000. <span>“Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.”</span> <em>Statistics in Medicine</em> 19 (9): 1141–64. <a href="https://doi.org/10.1002/(sici)1097-0258(20000515)19:9<1141::aid-sim479>3.0.co;2-f">https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f</a>.
+</div>
+<div id="ref-Chernick2008-zx" class="csl-entry" role="listitem">
+Chernick, Michael R. 2008. <em>Bootstrap Methods a Guide for Practitioners and Researchers</em>. 2nd ed. Wiley-Interscience.
+</div>
+<div id="ref-boot1997" class="csl-entry" role="listitem">
+Davison, A. C., and D. V. Hinkley. 1997. <em>Bootstrap Methods and Their Applications</em>. Cambridge University Press. <a href="http://statwww.epfl.ch/davison/BMA/">http://statwww.epfl.ch/davison/BMA/</a>.
+</div>
+<div id="ref-DiCiccio1996-wt" class="csl-entry" role="listitem">
+DiCiccio, Thomas J, and Bradley Efron. 1996. <span>“Bootstrap Confidence Intervals.”</span> <em>Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO</em> 11 (3): 189–228. <a href="https://doi.org/10.1214/ss/1032280214">https://doi.org/10.1214/ss/1032280214</a>.
+</div>
+<div id="ref-Efron2003-pq" class="csl-entry" role="listitem">
+Efron, Bradley. 2003. <span>“Second Thoughts on the Bootstrap.”</span> <em>Schweizerische Monatsschrift Fur Zahnheilkunde = Revue Mensuelle Suisse d’odonto-Stomatologie / SSO</em> 18 (2): 135–40. <a href="https://doi.org/10.1214/ss/1063994968">https://doi.org/10.1214/ss/1063994968</a>.
+</div>
+<div id="ref-Wicklin_undated-xu" class="csl-entry" role="listitem">
+Wicklin, Rick. n.d. <em>The Bias-Corrected and Accelerated (<span>BCa</span>) Bootstrap Interval</em>. <a href="https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html" class="uri">Https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html</a>.
+</div>
+<div id="ref-Kaneyoshi2011" class="csl-entry" role="listitem">
+汪金芳, and 桜井裕仁. 2011. <em>ブートストラップ入門</em>.
+</div>
+</div>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/figarofuga\.github\.io\/personal-slides\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

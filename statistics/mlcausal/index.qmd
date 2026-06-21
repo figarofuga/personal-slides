@@ -1,6 +1,5 @@
 ---
 title: "機械学習を用いた因果推論"
-author: "Nozomi Niimi"
 format:
   clean-revealjs:
     toc: true
