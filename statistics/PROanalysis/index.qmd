@@ -3,8 +3,6 @@ title: "PROの解析について"
 author: "Nozomi Niimi"
 date: "2024-10-10"
 bibliography: references.bib
-metadata-files:
-  - ../../_metadata/revealjs.yml
 ---
 
 # PROとは
