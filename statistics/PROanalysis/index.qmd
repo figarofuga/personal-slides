@@ -395,7 +395,13 @@ ist3_visdat <- ist3_dat |>
           factor(levels = c("Bad", "Normal", "Good"))
       },
       .names = "{.col}_fct"
-    )
+    ), 
+    delta_euroqol = euroqol18 - euroqol6, 
+    delta_cat = dplyr::case_when(
+        delta_euroqol >= 10 ~ "Improve", 
+        10 > delta_euroqol & delta_euroqol > -10 ~ "No change", 
+        -10 > delta_euroqol ~ "Worse"
+    ) |> forcats::fct_relevel(c("Improve", "No change", "Worse"))
   )
 
 
@@ -446,15 +452,30 @@ lineplot <- dplyr::filter(ist3_visdat, !is.na(euroqol18)) |>
         ylab = "EuroQOL score"
     )
 
+barplot_dat <- dplyr::select(ist3_visdat, treatment, delta_cat) |> 
+    tidyr::drop_na() |>  
+    dplyr::count(treatment, delta_cat) |> 
+    dplyr::mutate(total = sum(n), .by = treatment) |> 
+    dplyr::mutate(
+        percent = n / total, 
+        percent_lab = scales::percent(percent, accuracy = .1)) 
 
+barplot <- ggpubr::ggbarplot(
+    data = barplot_dat, 
+    x = "treatment", y = "percent", fill = "delta_cat", 
+    label = barplot_dat$percent_lab, lab.pos = "in")
 
-pies <- cowplot::plot_grid(
+upper <- cowplot::plot_grid(
     plotlist = pieplot_list$pieplot, nrow = 1,
     labels = c("EuroQOL at 6 month", "", "EuroQOL at 18 month", "")
 )
 
+lower <- cowplot::plot_grid(
+    plotlist = list(lineplot, barplot), nrow = 1
+)
+
 plots <- cowplot::plot_grid(
-    plotlist = list(pies, lineplot), nrow = 2
+    plotlist = list(upper, lower), nrow = 2
 )
 
 plots
