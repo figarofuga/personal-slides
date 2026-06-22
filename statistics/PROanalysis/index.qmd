@@ -179,7 +179,6 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 - Time-to-event解析: Cox回帰
 
-
 :::
 
 ::::
