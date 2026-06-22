@@ -32,7 +32,7 @@ quarto render
 touch docs/.nojekyll
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "remove metadata root directory retry"
+git commit -m "Update PRO analysis slides"
 git push
 
 ```
