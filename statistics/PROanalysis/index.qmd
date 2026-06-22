@@ -14,6 +14,7 @@ format:
     pdf-separate-fragments: false
     pdf-max-pages-per-slide: 3
     slide-number: true
+    auto-stretch: false
 author:
   - name: Nozomi Niimi
     orcid: 0000-0002-6909-0740
@@ -200,7 +201,30 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 # ただし・・・・・・
 
-![](images/pro_bad_exam.png){fig-align="center"}
+```{r}
+library(dplyr)
+library(tibble)
+library(tinyplot)
+
+set.seed(42)
+diff_plot_dat <- tibble::tibble(
+    pre = rnorm(n = 300, mean = 75, sd = 20), 
+    post = rnorm(n = 300, mean = 80, sd = 20)
+) |> 
+    dplyr::mutate(
+        across(everything(), \(x)dplyr::if_else(x >= 100, 100, x)), 
+        diff = post - pre, 
+        diff = if_else(diff < -30, diff/2, diff)
+    )
+
+tinyplot::plt(diff ~ pre, data = diff_plot_dat, type = "lm", 
+xlab = "Baseline PROM", ylab = "Difference of PROM", 
+ylim = c(-30, 100)
+)
+tinyplot::tinyplot_add(type = "p", alpha = 0.6, col = "steelblue")
+tinyplot::tinyplot_add(type = type_hline(h = 0), lty = 2)
+
+```
 
 -   差をアウトカムに回帰はやらないほうが良い！
     -   Baselineが良い患者ほど予後不良になってしまう
