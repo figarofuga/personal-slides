@@ -33,12 +33,12 @@ knitr:
 bibliography: references.bib
 ---
 
-# PROとは
+## PROとは
 
 -   Patient reported outcomesの略 「 [PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた]{style="color:#333333"} [患者の健康状態に関するあらゆる報告である]{style="color:#333333"} 」
 - 議論は複数あるが、HR-QOLを含む事が多い
 
-# PROの代表例
+## PROの代表例
 
 ![](images/ordered_scale.png){height="50vh"}
 
@@ -48,13 +48,13 @@ bibliography: references.bib
     - AFで利用するAFEQT
     - 循環器の研究におけるPRO
 
-# PROの研究は増えている！
+## PROの研究は増えている！
 
 ![](images/num_publish_pro.png){height="70vh"}
 
 - High impact journalではPROを含む研究が増えている！！ [@Eliya2021-yf]
 
-# PROの特徴
+## PROの特徴
 
 ![](images/scale_species.png)
 
@@ -63,7 +63,7 @@ bibliography: references.bib
 -   値の下限と上限が決まっている(通常加減は0点、上限は100点が多い)
 -   分布が歪んでいる
 
-# このPROはどうやって解析すればいい？
+## このPROはどうやって解析すればいい？
 
 :::: {.columns}
 
@@ -85,20 +85,20 @@ bibliography: references.bib
 
 
 
-# 先行研究では？
+## 先行研究では？
 
 ![](images/pro_analysis_real2.png){height="30vh"}
 
 -   **多種多様な手法が使われており標準化されていない** [@Qian2021-rp]
 
 
-# ガイドラインでは？
+## ガイドラインでは？
 
 ![](images/guideline_title.jpg)
 
 [@Coens2020-lz]
 
-# PROの確定的な解析方法は！！
+## PROの確定的な解析方法は！！
 
 > Findings from systematic reviews showed that there was
 > no consensus on appropriate statistical methods for PRO
@@ -108,7 +108,7 @@ bibliography: references.bib
 
 それだけだと虚しいのでもう少し読み込みましょう
 
-# PROの解析において必須の要素
+## PROの解析において必須の要素
 
 -   明瞭なResearch question
 -   適切な解析方法に必要な要素
@@ -116,7 +116,7 @@ bibliography: references.bib
 
 について検討が必要
 
-# Research object
+## Research object
 
 -   [**PRO研究の目的を明確にする**]{style="color:#ff0000"}
     -   治療効果・臨床的効果の証明？
@@ -130,7 +130,7 @@ bibliography: references.bib
         -   “どちらの(治療)群がより有効か？ = 群間の平均的な差に興味がある
         -   PROの変化の大きさなどがエンドポイント
 
-# PRO解析方法での考慮点
+## PRO解析方法での考慮点
 
 - 必須条件
     - 2群以上で比較可能な方法: RCTなどで治療法による影響をみたい
@@ -140,25 +140,24 @@ bibliography: references.bib
     - 個人差を考慮した解析(Cluster/Mixed model): 同じ人で時間をあけて何度も取り直す事も多い
 - 欠損値をうまく扱える手法: 欠損値がMNARの可能性が高い
 
-# 具体的な推奨される統計手法
+## 具体的な推奨される統計手法
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
 ```{r}
-
 test_df <- tibble::tibble(
-  x = seq(1:10)
+    x = seq(1:10)
 ) |>
-  dplyr::mutate(
-    y = log(x) * 40 + runif(n = 1, min = 5, max = 8)
-  )
+    dplyr::mutate(
+        y = log(x) * 40 + runif(n = 1, min = 5, max = 8)
+    )
 
 tinyplot::plt(
-  y ~ x, data = test_df, type = "o"
+    y ~ x,
+    data = test_df, type = "o"
 )
-
 ```
 
 - 1回のみfollow-upするdesign: 線形回帰
@@ -175,7 +174,6 @@ library(survival)
 library(rms)
 
 rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
-
 ```
 
 - Time-to-event解析: Cox回帰
@@ -190,7 +188,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 [@Lapin2020-gz; @Calvert2013-sn]
 
-# 線形回帰でいいの？
+## 線形回帰でいいの？
 
 7種類以下のカテゴリカルの場合は(とても良い/やや良い/普通/やや悪い/とても悪い)などではOrdinal regressionが良いかもしれない
 
@@ -198,7 +196,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 [@Arostegui2012-cb; @Piantadosi2022-wx]
 
-# ただし・・・・・・
+## ただし・・・・・・
 
 ![](images/pro_bad_exam.png){fig-align="center"}
 
@@ -207,7 +205,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 -   BaselineのPROで補正をした上で＊年後のPROを予測するほうが良い [@Harrell_BBR_Change_2025]
 
 
-# 欠損値について
+## 欠損値について
 
 -   PRO cohortと研究全体のcohortの違いを考える
     -   何を代表した母集団か考えて解析する
@@ -218,7 +216,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 -   明示的なSingle imputation(平均値やLOCF)は避けよ
 -   最低2種類の欠損値の対処方法を用いて感度分析とせよ
 
-# 欠損値の対処法について
+## 欠損値の対処法について
 
 -   明示的なものは推奨されない→分散が減ってしまう
     -   平均値、LOCF、中央値代入など
@@ -226,7 +224,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 -   MAR：多重代入
 -   MNAR：Pattern mixture modelを用いたMI
 
-# Pattern mixture model
+## Pattern mixture model
 
 |              | Y0 | Y1 | Y2 | Y3 |
 |--------------|----|----|----|----|
@@ -239,7 +237,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 - 欠損パターンが似ている情報+制約(=仮定)をおく事によって、補完する
 - イメージだとデータがある人とない人の結果の差Δを他のすべてのデータを用いて埋めるイメージ
 
-# 死亡の扱いをどうする？
+## 死亡の扱いをどうする？
 
 - 単なる欠損値にしてはいけない！
 - PROをメインの解析において、複数の方法がある
@@ -250,7 +248,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 [@Arnold2013-ss; @Spertus2019-za]
 
-# Visualizationについて
+## Visualizationについて
 
 ![](images/pro_visualize.jpg){height="50vh"}
 
@@ -260,7 +258,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 [@Albers2022-wt]
 
-# よりよい可視化のために
+## よりよい可視化のために
 
 ![](images/pro_linechart_advanced.png){fig-align="center"}
 
@@ -270,7 +268,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 [@Snyder2019-uw]
 
 
-# 群レベルのVisualization
+## 群レベルのVisualization
 
 ![](images/pro_linechart_addci.png){height="50vh"}
 
@@ -278,13 +276,13 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 [@Snyder2019-uw]
 
-# 一応、特殊な手法を2つほど・・・・・・・
+## 一応、特殊な手法を2つほど・・・・・・・
 
 - Ceiling/Floorがあるときに使えるCensored regression ( = tobit model)
 - Ordered regression model
 
 
-# Tobit modelとは
+## Tobit modelとは
 
 ![](images/pro_tobit_exam.png)
 
@@ -294,7 +292,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 -   上限、下限ともに対応可能
 -   実は生存分析はこの一種
 
-# Ordinary regression modelとは
+## Ordinary regression modelとは
 
 -   順序のあるカテゴリー変数で3種類以上の応答の時に使える
     -   Ex\) NYHAなど
@@ -302,7 +300,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 -   厳密に差が一緒じゃなくても一つ一つのOdds比の平均値として1つの値が出る
 -   実は仮定が少なくRobustな上に、検出力も高い
 
-# Ordered regression modelの応用
+## Ordered regression modelの応用
 
 | Y   | Meaning                                |
 |-----|----------------------------------------|
@@ -324,7 +322,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 
 [@Harrell_POP_2024]
 
-# 実践！
+## 実践！
 
 - IST3のデータセット[@Sandercock_IST3_2016]
 
@@ -345,7 +343,7 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 |  6 | 死亡                                 |
 
 
-# QOL outcomeの正規性の確認
+## QOL outcomeの正規性の確認
 ```{r}
 library(tidyverse)
 library(tinyplot)
@@ -368,107 +366,111 @@ ist3_dat_mod <- ist3_dat |>
             2 ~ "PACI",
             3 ~ "LACI",
             4 ~ "POCI",
-            5 ~ "Other"),
+            5 ~ "Other"
+        ),
         reverse_euroqol_comp = dplyr::if_else(
             dead6mo == 1,
             101,
             100 - euroqol6
         ),
         bad_euroqol_comp_bin = dplyr::if_else(
-          dead6mo == 1 | euroqol6 < 25,
-          1,
-          0
+            dead6mo == 1 | euroqol6 < 25,
+            1,
+            0
         )
-        ) |>
+    ) |>
     dplyr::select(treatment_dbl, treatment, age, sexm1, indepinadl_rand, antiplat_rand, atrialfib_rand, sbprand, dbprand, gcs_score_rand, nihss, sevendaycase, stroketype, R_infarct_size, ohs6, dead6mo, euroqol6, euroqol18, reverse_euroqol_comp, bad_euroqol_comp_bin, missing_euroqol)
 
 
-
-par(mfrow = c(2,2))
-tinyplot::plt(~ ohs6, data = ist3_dat_mod, type = type_barplot(),
+par(mfrow = c(2, 2))
+tinyplot::plt(~ohs6,
+    data = ist3_dat_mod, type = type_barplot(),
     main = "Distribution of Oxford Handicap Score",
-    sub = "Low value is better status")
+    sub = "Low value is better status"
+)
 
-tinyplot::plt(~ euroqol6, data = ist3_dat_mod, type = type_histogram(),
+tinyplot::plt(~euroqol6,
+    data = ist3_dat_mod, type = type_histogram(),
     main = "Distribution of EURO QOL score",
-    sub = "High value is better status")
+    sub = "High value is better status"
+)
 
-tinyplot::plt(~ reverse_euroqol_comp, data = ist3_dat_mod, type = type_histogram(),
+tinyplot::plt(~reverse_euroqol_comp,
+    data = ist3_dat_mod, type = type_histogram(),
     main = "Distribution of reversed EURO QOL score with Death",
-    sub = "Low value is better status and 101 is death")
-
+    sub = "Low value is better status and 101 is death"
+)
 ```
 
 - 6種類の方は正規性は全くなさそう
 - Euro QOL scoreは正規性がありそうだが死亡の扱いにこまる
 
-# Visualizationについて
+## Visualizationについて
 ```{r}
 library(ggpubr)
 
 ist3_visdat <- ist3_dat |>
-  dplyr::select(treatment, euroqol6, euroqol18) |>
-  dplyr::mutate(
-    dplyr::across(
-      c(euroqol6, euroqol18),
-      \(x) {
-        dplyr::case_when(
-          x >= 90 ~ "Good",
-          x >= 50 & x < 90 ~ "Normal",
-          x < 50 ~ "Bad",
-          TRUE ~ NA_character_
-        ) |>
-          factor(levels = c("Bad", "Normal", "Good"))
-      },
-      .names = "{.col}_fct"
-    ), 
-    delta_euroqol = euroqol18 - euroqol6, 
-    delta_cat = dplyr::case_when(
-        delta_euroqol >= 10 ~ "Improve", 
-        10 > delta_euroqol & delta_euroqol > -10 ~ "No change", 
-        -10 > delta_euroqol ~ "Worse"
-    ) |> forcats::fct_relevel(c("Improve", "No change", "Worse"))
-  )
+    dplyr::select(treatment, euroqol6, euroqol18) |>
+    dplyr::mutate(
+        dplyr::across(
+            c(euroqol6, euroqol18),
+            \(x) {
+                dplyr::case_when(
+                    x >= 90 ~ "Good",
+                    x >= 50 & x < 90 ~ "Normal",
+                    x < 50 ~ "Bad",
+                    TRUE ~ NA_character_
+                ) |>
+                    factor(levels = c("Bad", "Normal", "Good"))
+            },
+            .names = "{.col}_fct"
+        ),
+        delta_euroqol = euroqol18 - euroqol6,
+        delta_cat = dplyr::case_when(
+            delta_euroqol >= 10 ~ "Improve",
+            10 > delta_euroqol & delta_euroqol > -10 ~ "No change",
+            -10 > delta_euroqol ~ "Worse"
+        ) |> forcats::fct_relevel(c("Improve", "No change", "Worse"))
+    )
 
 
 pieplot_list <- tidyr::pivot_longer(
     ist3_visdat,
     cols = c("euroqol6_fct", "euroqol18_fct")
 ) |>
-  tidyr::drop_na(value) |>
-  dplyr::count(
-  treatment, name, value
-  ) |>
-  dplyr::mutate(
-    sum = sum(n), .by = c(treatment, name)
-  ) |>
-  dplyr::mutate(
-    label = paste0(
-        value, ": ", round(n/sum*100), "%"
-    )
-  ) |>
-  dplyr::group_nest(
-    treatment, name
-  ) |>
-  dplyr::mutate(
-    pieplot = purrr::map2(data, treatment, \(dat, treatment){
-
-        ggpubr::ggpie(
-            dat,
-            x = "n",
-            label = "label",
-            fill = "value",
-            main = treatment
-        ) + theme(legend.position = "none")
-    })
-  ) |>
+    tidyr::drop_na(value) |>
+    dplyr::count(
+        treatment, name, value
+    ) |>
+    dplyr::mutate(
+        sum = sum(n), .by = c(treatment, name)
+    ) |>
+    dplyr::mutate(
+        label = paste0(
+            value, ": ", round(n / sum * 100), "%"
+        )
+    ) |>
+    dplyr::group_nest(
+        treatment, name
+    ) |>
+    dplyr::mutate(
+        pieplot = purrr::map2(data, treatment, \(dat, treatment){
+            ggpubr::ggpie(
+                dat,
+                x = "n",
+                label = "label",
+                fill = "value",
+                main = treatment
+            ) + theme(legend.position = "none")
+        })
+    ) |>
     dplyr::arrange(desc(name))
 
 lineplot <- dplyr::filter(ist3_visdat, !is.na(euroqol18)) |>
-        tidyr::pivot_longer(
-    cols = c("euroqol6", "euroqol18")
-) |>
-  tidyr::drop_na(value) |>
+    tidyr::pivot_longer(
+        cols = c("euroqol6", "euroqol18")
+    ) |>
+    tidyr::drop_na(value) |>
     ggpubr::ggline(
         x = "name",
         y = "value",
@@ -478,18 +480,20 @@ lineplot <- dplyr::filter(ist3_visdat, !is.na(euroqol18)) |>
         ylab = "EuroQOL score"
     )
 
-barplot_dat <- dplyr::select(ist3_visdat, treatment, delta_cat) |> 
-    tidyr::drop_na() |>  
-    dplyr::count(treatment, delta_cat) |> 
-    dplyr::mutate(total = sum(n), .by = treatment) |> 
+barplot_dat <- dplyr::select(ist3_visdat, treatment, delta_cat) |>
+    tidyr::drop_na() |>
+    dplyr::count(treatment, delta_cat) |>
+    dplyr::mutate(total = sum(n), .by = treatment) |>
     dplyr::mutate(
-        percent = n / total, 
-        percent_lab = scales::percent(percent, accuracy = .1)) 
+        percent = n / total,
+        percent_lab = scales::percent(percent, accuracy = .1)
+    )
 
 barplot <- ggpubr::ggbarplot(
-    data = barplot_dat, 
-    x = "treatment", y = "percent", fill = "delta_cat", 
-    label = barplot_dat$percent_lab, lab.pos = "in")
+    data = barplot_dat,
+    x = "treatment", y = "percent", fill = "delta_cat",
+    label = barplot_dat$percent_lab, lab.pos = "in"
+)
 
 upper <- cowplot::plot_grid(
     plotlist = pieplot_list$pieplot, nrow = 1,
@@ -505,20 +509,20 @@ plots <- cowplot::plot_grid(
 )
 
 plots
-
 ```
 
 - rt-PAとplaceboで6ヶ月後、18ヶ月後のQOLについて記載
 - 具体的な値の差を95%CIを追加して記述
 - 一応90以上をGood、50未満をBadとした時の割合の差時系列を円グラフで
 
-# Missing dataと死亡の扱い
+## Missing dataと死亡の扱い
 
 ```{r}
 library(gtsummary)
 
 gtsummary::tbl_summary(
-    ist3_dat_mod, by = missing_euroqol,
+    ist3_dat_mod,
+    by = missing_euroqol,
     include = c(age, sexm1, antiplat_rand, atrialfib_rand, sbprand, gcs_score_rand, sevendaycase, stroketype, ohs6),
     value = list(
         sevendaycase ~ "Event",
@@ -527,36 +531,36 @@ gtsummary::tbl_summary(
     )
 ) |>
     gtsummary::add_p(
-    test = all_categorical() ~ "fisher.test",
-    test.args = all_tests("fisher.test") ~ list(simulate.p.value = TRUE)
+        test = all_categorical() ~ "fisher.test",
+        test.args = all_tests("fisher.test") ~ list(simulate.p.value = TRUE)
     )
-
 ```
 
 - Missingがある患者は明らかに高齢者が多く、GCSも低い
 - OHSをみると死亡による欠損が多いことがわかる
 
-# Missingの解析
+## Missingの解析
 
 ```{r}
 library(ggmice)
 
 ggmice::plot_pattern(dplyr::select(ist3_dat_mod, -reverse_euroqol_comp, -missing_euroqol, -bad_euroqol_comp_bin))
-
 ```
 
-# Missingの解析~組み合わせ
+## Missingの解析~組み合わせ
 
 ```{r}
 library(naniar)
 library(cowplot)
 
-miss_dat <- dplyr::select(ist3_dat_mod, -treatment_dbl, -reverse_euroqol_comp,
--missing_euroqol, -bad_euroqol_comp_bin) |>
+miss_dat <- dplyr::select(
+    ist3_dat_mod, -treatment_dbl, -reverse_euroqol_comp,
+    -missing_euroqol, -bad_euroqol_comp_bin
+) |>
     dplyr::mutate(
         dead6mo = as.factor(dead6mo),
         sexm1 = as.factor(sexm1),
-        )
+    )
 
 p1 <- naniar::gg_miss_fct(x = miss_dat, fct = stroketype)
 
@@ -567,13 +571,12 @@ p3 <- naniar::gg_miss_fct(x = miss_dat, fct = age)
 p4 <- naniar::gg_miss_fct(x = miss_dat, fct = sbprand)
 
 cowplot::plot_grid(plotlist = list(p1, p2, p3, p4), nrow = 2)
-
 ```
 
 - Missingの主要因が6か月までの死亡であるためか、予後不良因子がある患者ほどMissingが多い
 - Missingは単にDeleteするのは問題がありそう
 
-# 分類が少ないOHSの解析
+## 分類が少ないOHSの解析
 
 ```{r}
 library(rms)
@@ -590,7 +593,8 @@ ohs_formula <- as.formula(ohs6 ~ treatment_dbl + age + sexm1 + indepinadl_rand +
 ols_fit <- ols(ohs_formula, data = ist3_dat_mod)
 orm_fit <- orm(ohs_formula, data = ist3_dat_mod)
 tobit_fit <- tobit(
-    ohs_formula, left = 0, right = 6, data = ist3_dat_mod
+    ohs_formula,
+    left = 0, right = 6, data = ist3_dat_mod
 )
 
 parameters::compare_parameters(
@@ -602,7 +606,6 @@ parameters::compare_parameters(
     keep = "treatment_dbl"
 ) |>
     parameters::display(format = "html")
-
 ```
 
 ::: {.callout-note}
@@ -611,7 +614,7 @@ parameters::compare_parameters(
 
 :::
 
-# 死亡を考慮しないEuroqolの解析
+## 死亡を考慮しないEuroqolの解析
 
 ```{r}
 library(rms)
@@ -628,7 +631,8 @@ euroqol_formula <- as.formula(euroqol6 ~ treatment_dbl + age + sexm1 + indepinad
 ols_fit_euroqol <- rms::ols(euroqol_formula, data = ist3_dat_mod)
 orm_fit_euroqol <- rms::orm(euroqol_formula, data = ist3_dat_mod)
 tobit_fit_euroqol <- AER::tobit(
-    euroqol_formula, left = 0, right = 100, data = ist3_dat_mod
+    euroqol_formula,
+    left = 0, right = 100, data = ist3_dat_mod
 )
 
 parameters::compare_parameters(
@@ -638,11 +642,9 @@ parameters::compare_parameters(
         "Tobit regression" = tobit_fit_euroqol
     ),
     keep = "treatment_dbl",
-        select = "{estimate} [{ci_low} - {ci_high}], {p}"
+    select = "{estimate} [{ci_low} - {ci_high}], {p}"
 ) |>
     parameters::display(format = "html")
-
-
 ```
 
 ::: {.callout-note}
@@ -651,7 +653,7 @@ parameters::compare_parameters(
 
 :::
 
-# 死亡を考慮した解析～①
+## 死亡を考慮した解析～①
 ```{r}
 library(rms)
 library(Hmisc)
@@ -667,7 +669,8 @@ euroqol_formula2 <- as.formula(reverse_euroqol_comp ~ treatment_dbl + age + sexm
 ols_fit_euroqol2 <- rms::ols(euroqol_formula2, data = ist3_dat_mod)
 orm_fit_euroqol2 <- rms::orm(euroqol_formula2, data = ist3_dat_mod)
 tobit_fit_euroqol2 <- AER::tobit(
-    euroqol_formula2, left = 0, right = 101, data = ist3_dat_mod
+    euroqol_formula2,
+    left = 0, right = 101, data = ist3_dat_mod
 )
 
 parameters::compare_parameters(
@@ -677,12 +680,9 @@ parameters::compare_parameters(
         "Tobit regression" = tobit_fit_euroqol2
     ),
     keep = "treatment_dbl",
-        select = "{estimate} [{ci_low} - {ci_high}], {p}"
+    select = "{estimate} [{ci_low} - {ci_high}], {p}"
 ) |>
     parameters::display(format = "html")
-
-
-
 ```
 
 ::: {.callout-note}
@@ -693,7 +693,7 @@ parameters::compare_parameters(
 :::
 
 
-# 死亡を考慮した解析～②
+## 死亡を考慮した解析～②
 ```{r}
 library(modelsummary)
 
@@ -703,14 +703,14 @@ euroqol_formula <- as.formula(bad_euroqol_comp_bin ~ treatment + age + sexm1 + i
 logistic_fit_bin <- glm(euroqol_formula, data = ist3_dat_mod, family = binomial)
 
 parameters::model_parameters(
-        model = logistic_fit_bin,
-        exponentiate = TRUE,
-        keep = "treatment"
+    model = logistic_fit_bin,
+    exponentiate = TRUE,
+    keep = "treatment"
 ) |>
     parameters::display(
         format = "html",
-        select = "{estimate}, [{ci_low} - {ci_high}], {p}")
-
+        select = "{estimate}, [{ci_low} - {ci_high}], {p}"
+    )
 ```
 
 ::: {.callout-note}
@@ -719,12 +719,12 @@ parameters::model_parameters(
 
 :::
 
-# 結論として
+## 結論として
 
 - tPAは6ヶ月後の良いQOLと関連している結果だった
     - 全ての解析手法で同じような結果だった
 
-# Take home message
+## Take home message
 
 -   PROをメインとした解析をする時は
     -   Research questionを明確にする
@@ -734,13 +734,13 @@ parameters::model_parameters(
 -   細かい解析法はあまり重要じゃなく、Linear (mixed) regression位で良い
 -   死亡の扱いに要注意！！
 
-# わかりやすい参考文献
+## わかりやすい参考文献
 
 [*患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)*](https://www.lifescience.co.jp/pro/index.html)
 
 [*https://www.lifescience.co.jp/pro/article02-2-9.html#main*](https://www.lifescience.co.jp/pro/article02-2-9.html#main)
 
-# References
+## References
 
 ::: {#refs}
 :::
