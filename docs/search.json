@@ -1,0 +1,275 @@
+[
+  {
+    "objectID": "statistics/PROanalysis/index.html#proとは",
+    "href": "statistics/PROanalysis/index.html#proとは",
+    "title": "PROの解析について",
+    "section": "PROとは",
+    "text": "PROとは\n\nPatient reported outcomesの略 「 PROとは、臨床家その他の誰の解釈も介さず、患者から直接得られた 患者の健康状態に関するあらゆる報告である 」\n議論は複数あるが、HR-QOLを含む事が多い"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#proの代表例",
+    "href": "statistics/PROanalysis/index.html#proの代表例",
+    "title": "PROの解析について",
+    "section": "PROの代表例",
+    "text": "PROの代表例\n\n\n循環器では以下のものが有名\n\nSIHDで利用するSAQ\n心不全で利用するKCCQ\nAFで利用するAFEQT\n循環器の研究におけるPRO"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#proの研究は増えている",
+    "href": "statistics/PROanalysis/index.html#proの研究は増えている",
+    "title": "PROの解析について",
+    "section": "PROの研究は増えている！",
+    "text": "PROの研究は増えている！\n\n\nHigh impact journalではPROを含む研究が増えている！！ (Eliya et al. 2021)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#proの特徴",
+    "href": "statistics/PROanalysis/index.html#proの特徴",
+    "title": "PROの解析について",
+    "section": "PROの特徴",
+    "text": "PROの特徴\n\n\n値が高い(or 低い)ほうが良いが40点と80点で正確に2倍かどうかは分からない(通常のNumericじゃない)\n順序尺度と間隔尺度の間\n値の下限と上限が決まっている(通常加減は0点、上限は100点が多い)\n分布が歪んでいる"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#このproはどうやって解析すればいい",
+    "href": "statistics/PROanalysis/index.html#このproはどうやって解析すればいい",
+    "title": "PROの解析について",
+    "section": "このPROはどうやって解析すればいい？",
+    "text": "このPROはどうやって解析すればいい？\n\n\n\n\n\n統計学の論文では通常の多変量回帰、beta-binomial回帰、Tobit回帰、Ordinal回帰などなど言われている・・・・・・\n結局どれがいいの？ (Arostegui et al. 2012)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#先行研究では",
+    "href": "statistics/PROanalysis/index.html#先行研究では",
+    "title": "PROの解析について",
+    "section": "先行研究では？",
+    "text": "先行研究では？\n\n\n多種多様な手法が使われており標準化されていない (Qian et al. 2021)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#ガイドラインでは",
+    "href": "statistics/PROanalysis/index.html#ガイドラインでは",
+    "title": "PROの解析について",
+    "section": "ガイドラインでは？",
+    "text": "ガイドラインでは？\n\n(Coens et al. 2020)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#proの確定的な解析方法は",
+    "href": "statistics/PROanalysis/index.html#proの確定的な解析方法は",
+    "title": "PROの解析について",
+    "section": "PROの確定的な解析方法は！！",
+    "text": "PROの確定的な解析方法は！！\n\nFindings from systematic reviews showed that there was no consensus on appropriate statistical methods for PRO data analysis.\n\n\nない！ ・・・・・・\n\nそれだけだと虚しいのでもう少し読み込みましょう"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#proの解析において必須の要素",
+    "href": "statistics/PROanalysis/index.html#proの解析において必須の要素",
+    "title": "PROの解析について",
+    "section": "PROの解析において必須の要素",
+    "text": "PROの解析において必須の要素\n\n明瞭なResearch question\n適切な解析方法に必要な要素\n欠損値について\n\nについて検討が必要"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#research-object",
+    "href": "statistics/PROanalysis/index.html#research-object",
+    "title": "PROの解析について",
+    "section": "Research object",
+    "text": "Research object\n\nPRO研究の目的を明確にする\n\n治療効果・臨床的効果の証明？\n記述統計・探索的研究？\n群の差を、同等性・非劣性か優越性かしっかり決める\n\n患者個人間あるいは治療群間でのPROの解析を明確にする\n\n個々の患者に焦点を当てる場合\n\n“どの患者に”有効か？ = レスポンダーに興味がある\nイベント発生までの時間やレスポンダーの割合などがエンドポイント\n\n群に焦点を当てる場合\n\n“どちらの(治療)群がより有効か？ = 群間の平均的な差に興味がある\nPROの変化の大きさなどがエンドポイント"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#pro解析方法での考慮点",
+    "href": "statistics/PROanalysis/index.html#pro解析方法での考慮点",
+    "title": "PROの解析について",
+    "section": "PRO解析方法での考慮点",
+    "text": "PRO解析方法での考慮点\n\n必須条件\n\n2群以上で比較可能な方法: RCTなどで治療法による影響をみたい\n定量化可能なparametricな手法: 臨床的に意味がある結果を提供できる\n\nあるとより良い条件\n\n多変量回帰: ベースラインのPROの影響を考慮したい\n個人差を考慮した解析(Cluster/Mixed model): 同じ人で時間をあけて何度も取り直す事も多い\n\n欠損値をうまく扱える手法: 欠損値がMNARの可能性が高い"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#具体的な推奨される統計手法",
+    "href": "statistics/PROanalysis/index.html#具体的な推奨される統計手法",
+    "title": "PROの解析について",
+    "section": "具体的な推奨される統計手法",
+    "text": "具体的な推奨される統計手法\n\n\n\n\n\n\n\n\n\n\n\n\n1回のみfollow-upするdesign: 線形回帰\n2回以上のfollow-upをするdesign: Linear mixed model\n\n時間は離散変数とする\nTrajectoryの場合は時間X治療の相互作用項を入れる\n\n\n\n\n\n\n\n\n\n\n\n\n\nTime-to-event解析: Cox回帰\n\n\nこれらの解析ではMICを考慮する事が強く推奨！\n(Lapin 2020; Calvert et al. 2013)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#線形回帰でいいの",
+    "href": "statistics/PROanalysis/index.html#線形回帰でいいの",
+    "title": "PROの解析について",
+    "section": "線形回帰でいいの？",
+    "text": "線形回帰でいいの？\n7種類以下のカテゴリカルの場合は(とても良い/やや良い/普通/やや悪い/とても悪い)などではOrdinal regressionが良いかもしれない\n分布(残差)が偏っていても、通常のOLSはRobustであり問題ない\n(Arostegui et al. 2012; Piantadosi and Meinert 2022)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#ただし",
+    "href": "statistics/PROanalysis/index.html#ただし",
+    "title": "PROの解析について",
+    "section": "ただし・・・・・・",
+    "text": "ただし・・・・・・\n\n\n差をアウトカムに回帰はやらないほうが良い！\n\nBaselineが良い患者ほど予後不良になってしまう\n\nBaselineのPROで補正をした上で＊年後のPROを予測するほうが良い (Harrell 2025)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#欠損値について",
+    "href": "statistics/PROanalysis/index.html#欠損値について",
+    "title": "PROの解析について",
+    "section": "欠損値について",
+    "text": "欠損値について\n\nPRO cohortと研究全体のcohortの違いを考える\n\n何を代表した母集団か考えて解析する\n\n死亡した患者のPROは解析できない為、単なる欠損値としない\n欠損率は複数の方法で報告\n\nvariable denominator: その時点でPROを出せる患者を分母とする欠損率\nfixed denominator: 研究のコホート全体を分母とする欠損率\n\n明示的なSingle imputation(平均値やLOCF)は避けよ\n最低2種類の欠損値の対処方法を用いて感度分析とせよ"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#欠損値の対処法について",
+    "href": "statistics/PROanalysis/index.html#欠損値の対処法について",
+    "title": "PROの解析について",
+    "section": "欠損値の対処法について",
+    "text": "欠損値の対処法について\n\n明示的なものは推奨されない→分散が減ってしまう\n\n平均値、LOCF、中央値代入など\n\n現実的には多重代入でPattern mixture modelを使う事も\nMAR：多重代入\nMNAR：Pattern mixture modelを用いたMI"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#pattern-mixture-model",
+    "href": "statistics/PROanalysis/index.html#pattern-mixture-model",
+    "title": "PROの解析について",
+    "section": "Pattern mixture model",
+    "text": "Pattern mixture model\n\n\n\n\nY0\nY1\nY2\nY3\n\n\n\n\nパターンA\n○\n○\n○\n○\n\n\nパターンB\n○\n○\n○\n×\n\n\nパターンC\n○\n○\n×\n×\n\n\nパターンD\n○\n×\n×\n×\n\n\n\n\nMNARの時の感度分析で用いる手法\n欠損パターンが似ている情報+制約(=仮定)をおく事によって、補完する\nイメージだとデータがある人とない人の結果の差Δを他のすべてのデータを用いて埋めるイメージ"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#死亡の扱いをどうする",
+    "href": "statistics/PROanalysis/index.html#死亡の扱いをどうする",
+    "title": "PROの解析について",
+    "section": "死亡の扱いをどうする？",
+    "text": "死亡の扱いをどうする？\n\n単なる欠損値にしてはいけない！\nPROをメインの解析において、複数の方法がある\n\n0/1のWorse outcomeを作って、その中に死亡を入れ込む\n複数回計測している場合はBayesian Joint modelを行う\nOrdinal regressionの応用を行う(後述)\n\n直感的かつ簡単なのは1だがPowerが減る。RCTやる人は2か3が良いかも\n\n(Arnold et al. 2013; Spertus et al. 2019)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#visualizationについて",
+    "href": "statistics/PROanalysis/index.html#visualizationについて",
+    "title": "PROの解析について",
+    "section": "Visualizationについて",
+    "text": "Visualizationについて\n\n\n個々人のPROMデータ: bar or Line plotが良い\n治療群の平均のPROMデータ：Line plot, Pie chart &gt; bar chart\n\n(Albers et al. 2022)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#よりよい可視化のために",
+    "href": "statistics/PROanalysis/index.html#よりよい可視化のために",
+    "title": "PROの解析について",
+    "section": "よりよい可視化のために",
+    "text": "よりよい可視化のために\n\n\n警告点を書く\n悪い結果を赤にする\n\n(Snyder et al. 2019)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#群レベルのvisualization",
+    "href": "statistics/PROanalysis/index.html#群レベルのvisualization",
+    "title": "PROの解析について",
+    "section": "群レベルのVisualization",
+    "text": "群レベルのVisualization\n\n\n95%信頼区間を記述する\n\n(Snyder et al. 2019)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#一応特殊な手法を2つほど",
+    "href": "statistics/PROanalysis/index.html#一応特殊な手法を2つほど",
+    "title": "PROの解析について",
+    "section": "一応、特殊な手法を2つほど・・・・・・・",
+    "text": "一応、特殊な手法を2つほど・・・・・・・\n\nCeiling/Floorがあるときに使えるCensored regression ( = tobit model)\nOrdered regression model"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#tobit-modelとは",
+    "href": "statistics/PROanalysis/index.html#tobit-modelとは",
+    "title": "PROの解析について",
+    "section": "Tobit modelとは",
+    "text": "Tobit modelとは\n\n\nある範囲外の値が丸め込まれる(打ち切られる)ときの回帰\n\nテストの点数(上限が100点)など\n\n打ち切られた点が実はもっと高い値がありうると想定した上で回帰を行う\n上限、下限ともに対応可能\n実は生存分析はこの一種"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#ordinary-regression-modelとは",
+    "href": "statistics/PROanalysis/index.html#ordinary-regression-modelとは",
+    "title": "PROの解析について",
+    "section": "Ordinary regression modelとは",
+    "text": "Ordinary regression modelとは\n\n順序のあるカテゴリー変数で3種類以上の応答の時に使える\n\nEx) NYHAなど\n\nProportional odds仮定があり、常に上の段階に行くときには似たような方向性がある\n厳密に差が一緒じゃなくても一つ一つのOdds比の平均値として1つの値が出る\n実は仮定が少なくRobustな上に、検出力も高い"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#ordered-regression-modelの応用",
+    "href": "statistics/PROanalysis/index.html#ordered-regression-modelの応用",
+    "title": "PROの解析について",
+    "section": "Ordered regression modelの応用",
+    "text": "Ordered regression modelの応用\n\n\n\nY\nMeaning\n\n\n\n\n103\nCardiovascular death\n\n\n102\nNon-cardiovascular death\n\n\n101\nHospitalization for HF/Renal Disease\n\n\n100\nKCCQ=0\n\n\n99\nKCCQ=1\n\n\n..\n…\n\n\n1\nKCCQ=99\n\n\n0\nKCCQ=100\n\n\n\n\n死亡をアウトカムの1つに組み入れてしまう\n\n負の値がだめなので反転させている\nCV deathの方が介入で意義がありそうなので高い値にしている\n\nこの方法だと、かなり高い検出力を出せる\nしかし、KCCQの1点の差と心不全入院と非心血管死亡のOdds比が一緒という仮定の値のみ得られる\n→ 傾向には有用だが、数値の大小の意味が薄れる\n\n(Harrell 2024)"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#実践",
+    "href": "statistics/PROanalysis/index.html#実践",
+    "title": "PROの解析について",
+    "section": "実践！",
+    "text": "実践！\n\nIST3のデータセット(Sandercock et al. 2016)\nrt-PAの効果をみた脳梗塞のデータセット\nアウトカムとしては2種類\n\n6か月 Oxford Handicap Scoreのohs6(最良が0, 死亡が6)\n6か月目のEQ-VAS(0-100)だが、死亡は入らない\n死亡は26.9%で起こっているので悩ましい\n\n\n\n\n\n\n\n\n\n値\n意味\n\n\n\n\n0\n症状なし\n\n\n1\n症状は少しあるが日常生活に支障なし\n\n\n2\n症状により生活は変わったが、自分の身の回りのことは可能\n\n\n3\n症状により生活が大きく変わり、身の回りのことに一部介助が必要\n\n\n4\nかなり重い症状で他者の助けが必要。ただし昼夜を問わずの介護までは不要\n\n\n5\n重度の障害があり、昼夜を問わず常時介護が必要\n\n\n6\n死亡"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#qol-outcomeの正規性の確認",
+    "href": "statistics/PROanalysis/index.html#qol-outcomeの正規性の確認",
+    "title": "PROの解析について",
+    "section": "QOL outcomeの正規性の確認",
+    "text": "QOL outcomeの正規性の確認\n\n\n6種類の方は正規性は全くなさそう\nEuro QOL scoreは正規性がありそうだが死亡の扱いにこまる"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#visualizationについて-1",
+    "href": "statistics/PROanalysis/index.html#visualizationについて-1",
+    "title": "PROの解析について",
+    "section": "Visualizationについて",
+    "text": "Visualizationについて\n\n\nrt-PAとplaceboで6ヶ月後、18ヶ月後のQOLについて記載\n具体的な値の差を95%CIを追加して記述\n一応90以上をGood、50未満をBadとした時の割合の差時系列を円グラフで"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#missing-dataと死亡の扱い",
+    "href": "statistics/PROanalysis/index.html#missing-dataと死亡の扱い",
+    "title": "PROの解析について",
+    "section": "Missing dataと死亡の扱い",
+    "text": "Missing dataと死亡の扱い\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n0\nN = 1,9181\n1\nN = 1,1171\np-value2\n\n\n\n\nage\n79 (68, 84)\n84 (78, 88)\n&lt;0.001\n\n\nsexm1\n1,005 (52%)\n460 (41%)\n&lt;0.001\n\n\nantiplat_rand\n940 (49%)\n622 (56%)\n&lt;0.001\n\n\natrialfib_rand\n458 (24%)\n456 (41%)\n&lt;0.001\n\n\nsbprand\n155 (140, 170)\n156 (138, 172)\n0.7\n\n\ngcs_score_rand\n15.00 (13.00, 15.00)\n13.00 (11.00, 15.00)\n&lt;0.001\n\n\nsevendaycase\n169 (8.8%)\n419 (38%)\n&lt;0.001\n\n\nstroketype\n\n\n\n\n&lt;0.001\n\n\n    LACI\n277 (14%)\n55 (4.9%)\n\n\n\n\n    Other\n5 (0.3%)\n0 (0%)\n\n\n\n\n    PACI\n828 (43%)\n318 (28%)\n\n\n\n\n    POCI\n197 (10%)\n49 (4.4%)\n\n\n\n\n    TACI\n611 (32%)\n695 (62%)\n\n\n\n\nohs6\n\n\n\n\n&lt;0.001\n\n\n    0\n235 (12%)\n19 (1.7%)\n\n\n\n\n    1\n402 (21%)\n27 (2.4%)\n\n\n\n\n    2\n359 (19%)\n46 (4.1%)\n\n\n\n\n    3\n399 (21%)\n29 (2.6%)\n\n\n\n\n    4\n225 (12%)\n30 (2.7%)\n\n\n\n\n    5\n298 (16%)\n151 (14%)\n\n\n\n\n    6\n0 (0%)\n815 (73%)\n\n\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n2 Wilcoxon rank sum test; Fisher’s exact test; Fisher’s Exact Test for Count Data with simulated p-value (based on 2000 replicates)\n\n\n\n\n\n\n\n\n\nMissingがある患者は明らかに高齢者が多く、GCSも低い\nOHSをみると死亡による欠損が多いことがわかる"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#missingの解析",
+    "href": "statistics/PROanalysis/index.html#missingの解析",
+    "title": "PROの解析について",
+    "section": "Missingの解析",
+    "text": "Missingの解析"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#missingの解析組み合わせ",
+    "href": "statistics/PROanalysis/index.html#missingの解析組み合わせ",
+    "title": "PROの解析について",
+    "section": "Missingの解析~組み合わせ",
+    "text": "Missingの解析~組み合わせ\n\n\nMissingの主要因が6か月までの死亡であるためか、予後不良因子がある患者ほどMissingが多い\nMissingは単にDeleteするのは問題がありそう"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#分類が少ないohsの解析",
+    "href": "statistics/PROanalysis/index.html#分類が少ないohsの解析",
+    "title": "PROの解析について",
+    "section": "分類が少ないOHSの解析",
+    "text": "分類が少ないOHSの解析\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nParameter\nLinear regression\nOrdinal regression\nTobit regression\n\n\n\n\ntreatment dbl\n-0.28(-0.39, -0.17)\n-0.31(-0.44, -0.18)\n-0.40(-0.56, -0.23)\n\n\n\n\n\n\n\n\nObservations\n2998\n2998\n2998\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n小さい数ほど良い予後と関連する"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#死亡を考慮しないeuroqolの解析",
+    "href": "statistics/PROanalysis/index.html#死亡を考慮しないeuroqolの解析",
+    "title": "PROの解析について",
+    "section": "死亡を考慮しないEuroqolの解析",
+    "text": "死亡を考慮しないEuroqolの解析\n\n\n\n\n\n\n\n\nParameter\nLinear regression\nOrdinal regression\nTobit regression\n\n\n\n\ntreatment dbl\n3.39 [1.45 - 5.33], &lt;0.001\n0.29 [0.13 - 0.45], &lt;0.001\n3.39 [1.40 - 5.38], &lt;0.001\n\n\n\n\n\n\n\n\nObservations\n1890\n1890\n1890\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n大きい数ほど良い予後と関連する"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#死亡を考慮した解析①",
+    "href": "statistics/PROanalysis/index.html#死亡を考慮した解析①",
+    "title": "PROの解析について",
+    "section": "死亡を考慮した解析～①",
+    "text": "死亡を考慮した解析～①\n\n\n\n\n\n\n\n\nParameter\nLinear regression\nOrdinal regression\nTobit regression\n\n\n\n\ntreatment dbl\n-4.53 [-6.52 - -2.53], &lt;0.001\n-0.31 [-0.45 - -0.17], &lt;0.001\n-5.91 [-8.72 - -3.09], &lt;0.001\n\n\n\n\n\n\n\n\nObservations\n2698\n2698\n2698\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n0～100を反転させて101を死亡にする\n\n値が小さいほどよい"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#死亡を考慮した解析②",
+    "href": "statistics/PROanalysis/index.html#死亡を考慮した解析②",
+    "title": "PROの解析について",
+    "section": "死亡を考慮した解析～②",
+    "text": "死亡を考慮した解析～②\n\n\n\n\n\n\n\n\nModel Summary\n\n\nParameter\nCoefficient, [ci_low - ci_high], p\n\n\n\n\ntreatment (rt-PA)\n0.69, [0.57 - 0.85], &lt;0.001\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n値が大きいほどQOL不良と関連"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#結論として",
+    "href": "statistics/PROanalysis/index.html#結論として",
+    "title": "PROの解析について",
+    "section": "結論として",
+    "text": "結論として\n\ntPAは6ヶ月後の良いQOLと関連している結果だった\n\n全ての解析手法で同じような結果だった"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#take-home-message",
+    "href": "statistics/PROanalysis/index.html#take-home-message",
+    "title": "PROの解析について",
+    "section": "Take home message",
+    "text": "Take home message\n\nPROをメインとした解析をする時は\n\nResearch questionを明確にする\nBaselineのPROの調整を検討\n欠損値の扱いについて　　　　　十分に検討する\n\nMCIDなどを使って、解釈可能な解析をする\n細かい解析法はあまり重要じゃなく、Linear (mixed) regression位で良い\n死亡の扱いに要注意！！"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#わかりやすい参考文献",
+    "href": "statistics/PROanalysis/index.html#わかりやすい参考文献",
+    "title": "PROの解析について",
+    "section": "わかりやすい参考文献",
+    "text": "わかりやすい参考文献\n患者報告アウトカム（PRO）使用ガイダンス集：厚生労働省科学研究班｜トップページ (lifescience.co.jp)\nhttps://www.lifescience.co.jp/pro/article02-2-9.html#main"
+  },
+  {
+    "objectID": "statistics/PROanalysis/index.html#references",
+    "href": "statistics/PROanalysis/index.html#references",
+    "title": "PROの解析について",
+    "section": "References",
+    "text": "References\n\n\nAlbers, Elaine A C, Itske Fraterman, Iris Walraven, et al. 2022. “Visualization Formats of Patient-Reported Outcome Measures in Clinical Practice: A Systematic Review about Preferences and Interpretation Accuracy.” Journal of Patient-Reported Outcomes 6 (1): 18. https://doi.org/10.1186/s41687-022-00424-3.\n\n\nArnold, Suzanne V, John A Spertus, Yang Lei, et al. 2013. “How to Define a Poor Outcome After Transcatheter Aortic Valve Replacement.” Circulation. Cardiovascular Quality and Outcomes 6 (5): 591–97. https://doi.org/10.1161/CIRCOUTCOMES.113.000354.\n\n\nArostegui, Inmaculada, Vicente Núñez-Antón, and José M Quintana. 2012. “Statistical Approaches to Analyse Patient-Reported Outcomes as Response Variables: An Application to Health-Related Quality of Life.” Statistical Methods in Medical Research 21 (2): 189–214. https://doi.org/10.1177/0962280210379079.\n\n\nCalvert, Melanie, Jane Blazeby, Douglas G Altman, et al. 2013. “Reporting of Patient-Reported Outcomes in Randomized Trials.” JAMA: The Journal of the American Medical Association 309 (8): 814. https://doi.org/10.1001/jama.2013.879.\n\n\nCoens, Corneel, Madeline Pe, Amylou C Dueck, et al. 2020. “International Standards for the Analysis of Quality-of-Life and Patient-Reported Outcome Endpoints in Cancer Randomised Controlled Trials: Recommendations of the SISAQOL Consortium.” The Lancet Oncology 21 (2): e83–96. https://doi.org/10.1016/S1470-2045(19)30790-9.\n\n\nEliya, Yousif, Tauben Averbuch, Nhatchinh Le, et al. 2021. “Temporal Trends and Factors Associated with the Inclusion of Patient-Reported Outcomes in Heart Failure Randomized Controlled Trials: A Systematic Review.” Journal of the American Heart Association 10 (21): e022353. https://doi.org/10.1161/JAHA.121.022353.\n\n\nHarrell, Frank E. 2024. “Proportional Odds Model Power Calculations for Ordinal and Mixed Ordinal/Continuous Outcomes.” In Statistical Thinking. https://www.fharrell.com/post/pop/.\n\n\nHarrell, Frank E. 2025. Transformations, Measuring Change, and Regression to the Mean. https://hbiostat.org/bbr/change.\n\n\nLapin, Brittany R. 2020. “Considerations for Reporting and Reviewing Studies Including Health-Related Quality of Life.” Chest 158 (1S): S49–56. https://doi.org/10.1016/j.chest.2020.03.007.\n\n\nPiantadosi, Steven, and Curtis L Meinert. 2022. Principles and Practice of Clinical Trials. 1st ed. Edited by Curtis L Meinert. Principles and Practice of Clinical Trials. Springer International Publishing. https://doi.org/10.1007/978-3-319-52636-2.\n\n\nQian, Yirui, Stephen J Walters, Richard Jacques, and Laura Flight. 2021. “Comprehensive Review of Statistical Methods for Analysing Patient-Reported Outcomes (PROs) Used as Primary Outcomes in Randomised Controlled Trials (RCTs) Published by the UK’s Health Technology Assessment (HTA) Journal (1997-2020).” BMJ Open 11 (9): e051673. https://doi.org/10.1136/bmjopen-2021-051673.\n\n\nSandercock, P., Joanna Wardlaw, R. Lindley, G. Cohen, and W. Whiteley. 2016. The Third International Stroke Trial (IST-3), 2000–2015. University of Edinburgh; Edinburgh Clinical Trials Unit. https://doi.org/10.7488/ds/1350.\n\n\nSnyder, Claire, Katherine Smith, Bernhard Holzner, et al. 2019. “Making a Picture Worth a Thousand Numbers: Recommendations for Graphically Displaying Patient-Reported Outcomes Data.” Quality of Life Research: An International Journal of Quality of Life Aspects of Treatment, Care and Rehabilitation 28 (2): 345–56. https://doi.org/10.1007/s11136-018-2020-3.\n\n\nSpertus, Jacob V, Laura A Hatfield, David J Cohen, et al. 2019. “Integrating Quality of Life and Survival Outcomes in Cardiovascular Clinical Trials: Results from the PARTNER Trial.” Circulation. Cardiovascular Quality and Outcomes 12 (6). https://doi.org/10.1161/circoutcomes.118.005420."
+  }
+]

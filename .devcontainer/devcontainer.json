@@ -11,7 +11,7 @@
       "installRadian": true
     },
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "jq,curl,wget,git,make,build-essential,pkg-config,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,libcurl4-openssl-dev,libssl-dev,libxml2-dev,libfontconfig1-dev,libfreetype6-dev,libharfbuzz-dev,libfribidi-dev,libpng-dev,libjpeg-dev,libtiff5-dev",
+      "packages": "jq,curl,wget,git,make,build-essential,gfortran,cmake,pkg-config,liblas-dev,liblapack-dev,libnlopt-dev,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,libcurl4-openssl-dev,libssl-dev,libxml2-dev,libfontconfig1-dev,libfreetype6-dev,libharfbuzz-dev,libfribidi-dev,libpng-dev,libjpeg-dev,libtiff5-dev",
       "upgradePackages": false
     },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
