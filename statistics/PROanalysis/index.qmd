@@ -199,9 +199,12 @@ rms::survplot(rms::npsurv(Surv(time, status) ~ adhere, data = colon))
 ## ただし・・・・・・
 
 ```{r}
+#| layout-ncol: 2
+
 library(dplyr)
 library(tibble)
 library(tinyplot)
+library(performance)
 
 set.seed(42)
 diff_plot_dat <- tibble::tibble(
@@ -220,6 +223,10 @@ ylim = c(-30, 100)
 )
 tinyplot::tinyplot_add(type = "p", alpha = 0.6, col = "steelblue")
 tinyplot::tinyplot_add(type = type_hline(h = 0), lty = 2)
+
+bad_fit <- lm(post ~ pre, data = diff_plot_dat)
+
+performance::check_model(bad_fit, check = c("qq", "normality", "linearity", "homogeneity"))
 
 ```
 
@@ -249,12 +256,12 @@ tinyplot::tinyplot_add(type = type_hline(h = 0), lty = 2)
 
 ## Pattern mixture model
 
-|              | Y0 | Y1 | Y2 | Y3 |
-|--------------|----|----|----|----|
-| パターンA    | ○  | ○  | ○  | ○  |
-| パターンB    | ○  | ○  | ○  | ×  |
-| パターンC    | ○  | ○  | ×  | ×  |
-| パターンD    | ○  | ×  | ×  | ×  |
+|                        |    Y0   |    Y1   |    Y2   |    Y3   |
+|------------------------|---------|---------|---------|---------|
+| パターンA               |    ○    |    ○    |    ○    |    ○    |
+| パターンB               |    ○    |    ○    |    ○    |    ×    |
+| パターンC               |    ○    |    ○    |    ×    |    ×    |
+| パターンD               |    ○    |    ×    |    ×    |    ×    |
 
 - MNARの時の感度分析で用いる手法
 - 欠損パターンが似ている情報+制約(=仮定)をおく事によって、補完する
@@ -306,6 +313,40 @@ tinyplot::tinyplot_add(type = type_hline(h = 0), lty = 2)
 
 
 ## Tobit modelとは
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tibble)
+library(AER)
+
+set.seed(42)
+
+tobit_df <- tibble::tibble(x = rnorm(100, mean = 55, sd = 16)) |> 
+    dplyr::mutate(
+        y = 1.6 * x + rnorm(n = 100, sd = 5), 
+        y_ceil = dplyr::if_else(y >= 100, 100, y)
+    )
+
+lm_fit <- lm(y_ceil ~ x, data = tobit_df)
+
+lm_txt <- paste0("y = ", round(lm_fit$coefficients['(Intercept)'], digits = 1), " + ", round(lm_fit$coefficients['x'], digits = 1), "x")
+
+tobit_fit <- AER::tobit(y_ceil ~ x, left = 0, right = 100, data = tobit_df)
+tobit_txt <- paste0("y = ", round(tobit_fit$coefficients['(Intercept)'], digits = 1), " + ", round(tobit_fit$coefficients['x'], digits = 1), "x")
+
+ggplot() + 
+    geom_point(data = dplyr::filter(tobit_df, y > 100), mapping = aes(x = x, y = y), alpha = 0.1, colour = "red") + 
+    geom_point(data = tobit_df, mapping = aes(x = x, y = y_ceil), alpha = 0.5, colour = "steelblue") + 
+    geom_smooth(data = tobit_df, method = lm, mapping = aes(x = x, y = y_ceil), 
+    formula = y ~ x, colour = "steelblue", se = FALSE) + 
+    geom_abline(intercept = tobit_fit$coefficients['(Intercept)'], slope = tobit_fit$coefficients['x'], colour = "red") + 
+    geom_text(aes(x = 20, y = 60), label = lm_txt, colour = "steelblue") + 
+    geom_text(aes(x = 28, y = 10), label = tobit_txt, colour = "red") + 
+    xlim(c(0, 100)) + ylim(c(0, 160)) +
+    theme_classic() 
+
+```
 
 ![](images/pro_tobit_exam.png)
 

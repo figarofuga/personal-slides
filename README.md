@@ -32,9 +32,9 @@ quarto render
 touch docs/.nojekyll
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Update PRO analysis slides"
+git commit -m "Update PRO analysis slides for tobit"
 git push
 
 ```
 
-TODO: complete PROanalysis, mlcausal, ESUS, and pituitary_incidentaloma. 
+TODO: complete PROanalysis, mlcausal, ESUS, and pituitary_incidentaloma.
