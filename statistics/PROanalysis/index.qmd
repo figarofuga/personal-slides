@@ -348,8 +348,6 @@ ggplot() +
 
 ```
 
-![](images/pro_tobit_exam.png)
-
 -   ある範囲外の値が丸め込まれる(打ち切られる)ときの回帰
     -   テストの点数(上限が100点)など
 -   打ち切られた点が実はもっと高い値がありうると想定した上で回帰を行う
@@ -357,6 +355,29 @@ ggplot() +
 -   実は生存分析はこの一種
 
 ## Ordinary regression modelとは
+
+```{r}
+library(tibble)
+library(ggpubr)
+
+ordinal_dat <- tibble::tribble(
+    ~ class, ~ percent, 
+    "Very good", 10, 
+    "Good", 33, 
+    "Normal", 20, 
+    "Bad", 30, 
+    "Very bad", 7
+)
+
+ggbarplot(
+    data = ordinal_dat, 
+    y = "percent", 
+    position = position_stack(), 
+    fill = "class", 
+    ggtheme = theme_void()) + 
+        ggpubr::rotate()
+
+```
 
 -   順序のあるカテゴリー変数で3種類以上の応答の時に使える
     -   Ex\) NYHAなど
