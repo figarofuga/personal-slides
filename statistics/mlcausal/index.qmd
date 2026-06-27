@@ -25,7 +25,7 @@ execute:
   error: false
   warning: false
   echo: false
-  cache: true
+  cache: false
 knitr: 
   opts_chunk: 
     dev: svglite
@@ -59,7 +59,7 @@ library(reticulate)
 library(here)
 
 reticulate::use_python(
-  here::here(".venv", "bin", "python"),
+  here::here(".venv", "bin", "python3.12"),
   required = TRUE
 )
 
@@ -1303,11 +1303,13 @@ DR_te = DR_learner.effect(X_test)
 
 from econml.cate_interpreter import SingleTreeCateInterpreter
 
-intrp = SingleTreeCateInterpreter(include_model_uncertainty=True, max_depth=2, min_samples_leaf=10)
+intrp = SingleTreeCateInterpreter(
+    include_model_uncertainty=False, max_depth=2, min_samples_leaf=10
+)
 # We interpret the CATE model's behavior based on the features used for heterogeneity
 intrp.interpret(DR_learner, X)
 # Plot the tree
-intrp.plot(feature_names=['A', 'B', 'C'], fontsize=12)
+intrp.plot(feature_names=["age", "sex", "bmi", "hf", "bnp", "lvef"], fontsize=12)
 
 ```
 

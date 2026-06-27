@@ -1,7 +1,7 @@
 # %%
 import pandas as pd
 
-toy_data = pd.read_csv("statistics/mlcausal/toy_data.csv")
+toy_data = pd.read_csv("./toy_data.csv")
 
 
 # Main imports
@@ -60,3 +60,5 @@ intrp = SingleTreeCateInterpreter(
 intrp.interpret(DR_learner, X)
 # Plot the tree
 intrp.plot(feature_names=["age", "sex", "bmi", "hf", "bnp", "lvef"], fontsize=12)
+
+# %%
