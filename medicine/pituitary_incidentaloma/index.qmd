@@ -15,6 +15,7 @@ format:
     pdf-separate-fragments: false
     pdf-max-pages-per-slide: 3
     slide-number: true
+    footer: '<a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a>'
 author:
   - name: Nozomi Niimi
     orcid: 0000-0002-6909-0740
@@ -32,10 +33,11 @@ knitr:
     dev: svglite
     fig-format: svg
 bibliography: references.bib
+
 ---
 
 
-## 症例
+## 症例 {#title-slide}
 
 
 - 79歳女性、自宅内転倒で救急搬送
@@ -430,6 +432,12 @@ bibliography: references.bib
 ![](images/PA_manage.png)
 
 [@Boguszewski2019-ne]
+
+::: {.slide-links}
+[🏠 サイトトップ](../../index.html)
+[📚 このカテゴリのスライド一覧](../index.html)
+[↩ 最初のスライド](#/title-slide)
+:::
 
 ## Reference
 

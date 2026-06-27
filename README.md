@@ -32,7 +32,7 @@ quarto render
 touch docs/.nojekyll
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Update PRO analysis slides for tobit"
+git commit -m "Add footer to return main page"
 git push
 
 ```

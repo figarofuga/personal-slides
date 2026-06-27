@@ -14,6 +14,7 @@ format:
     pdf-separate-fragments: false
     pdf-max-pages-per-slide: 3
     slide-number: true
+    footer: '<a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a>'
 author:
   - name: Nozomi Niimi
     orcid: 0000-0002-6909-0740
