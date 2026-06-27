@@ -37,7 +37,7 @@ bibliography: references.bib
 ---
 
 
-## 症例 {#title-slide}
+## 症例 
 
 
 - 79歳女性、自宅内転倒で救急搬送
@@ -433,11 +433,6 @@ bibliography: references.bib
 
 [@Boguszewski2019-ne]
 
-::: {.slide-links}
-[🏠 サイトトップ](../../index.html)
-[📚 このカテゴリのスライド一覧](../index.html)
-[↩ 最初のスライド](#/title-slide)
-:::
 
 ## Reference
 
