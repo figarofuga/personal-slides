@@ -84,7 +84,15 @@ bibliography: references.bib
 
 ## Cryptogenic stroke患者への問診と身体所見
 
-![](images/slide-06-history-physical.png){fig-align="center" width=60%}
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![](images/slide-06-history-physical.png){fig-align="center"}
+
+:::
+
+::: {.column width="60%"}
 
 - 左右の上肢の血圧差: AoD
 - 皮膚の網状皮斑: APS
@@ -99,6 +107,13 @@ bibliography: references.bib
 - 若年の ASCVD の家族歴: 遺伝性疾患
 - 妊娠: CVT、子癇
 [@Saver2016-xj]
+
+:::
+
+::::
+
+
+
 
 ## 検査について
 

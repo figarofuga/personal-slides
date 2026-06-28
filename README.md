@@ -33,7 +33,7 @@ If make slides, do as follows.
 ./scripts/render-site.sh
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add footer to return main page"
+git commit -m "make two columns in ESUS slides"
 git push
 
 ```
