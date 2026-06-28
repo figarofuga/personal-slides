@@ -380,7 +380,7 @@ treatment_effect <- ifelse(
   sex == 1,
   -0.20 - 0.45 * age_risk - 0.55 * bnp_risk - 0.20 * bmi_risk_z - 0.25 * lvef_risk_z,
   -0.20 - 0.25 * age_risk - 0.55 * bnp_risk - 0.45 * bmi_risk_z - 0.25 * lvef_risk_z
-  )
+  ) * (-1)
 
 # ------------------------------------------------------------
 # 8. Outcome
@@ -400,7 +400,7 @@ linear_predictor_outcome <-
   0.55 * bnp_risk +
   0.04 * bmi_risk +
   0.1 * lvef_risk +
-  ca * treatment_effect
+  ca * (-1) * treatment_effect
 
 p_bin_outcome <- inv_logit(linear_predictor_outcome)
 
@@ -525,7 +525,32 @@ full_toy_data |>
   dplyr::slice_min(diff, n = 1, with_ties = FALSE, by = target) |>
   ggplot(aes(age, lvef, treatment_effect)) + 
   geom_smooth_3d(aes(fill = factor(sex)), alpha = 0.5) + 
-  coord_3d()
+  coord_3d() + 
+  theme_bw()
+  
+
+full_toy_data |> 
+  dplyr::select(sex, age, lvef, treatment_effect) |> 
+  dplyr::mutate(
+    age_cat = base::cut(age, breaks = seq(30, 100, 10)), 
+    lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10))
+    ) |> 
+  dplyr::summarise(
+    mean_trt_eff = mean(treatment_effect), 
+    .by = c(age_cat, lvef_cat, sex)
+  ) |> 
+  ggplot(aes(x = age_cat, y = lvef_cat, fill = mean_trt_eff)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(mean_trt_eff, 2)), size = 3) +
+  scale_fill_gradient2(midpoint = 0) +
+  labs(
+    x = "Age category",
+    y = "LVEF category",
+    fill = "Mean treatment effect"
+  ) +
+  facet_grid(~sex) + 
+  theme_bw()
+
 
 ```
 
