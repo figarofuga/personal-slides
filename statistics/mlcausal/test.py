@@ -1,17 +1,29 @@
 # %%
 import pandas as pd
+from pathlib import Path
 
-toy_data = pd.read_csv("./toy_data.csv")
+try:
+    # python test.py として通常実行した場合
+    here = Path(__file__).resolve().parent
+except NameError:
+    # VS Code Interactive / Jupyter cell の場合
+    here = Path.cwd()
+
+csv_path = here /"statistics"/"mlcausal"/"toy_data.csv"
+
+toy_data = pd.read_csv(csv_path)
+
 
 
 # Main imports
 # Helper imports
 import numpy as np
 import pandas as pd
-from econml.dr import DRLearner
+from econml.metalearners import XLearner
 from numpy.random import binomial, multivariate_normal, normal, uniform
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestClassifier
 from sklearn.model_selection import train_test_split
+
 
 X = toy_data.loc[:, ["age", "sex", "bmi", "hf", "bnp", "lvef"]]
 y = toy_data["afeqt_os"]
@@ -25,28 +37,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 T_train = T.loc[y_train.index]
 T_test = T.loc[y_test.index]
 
-# Instantiate Doubly Robust Learner
-
-outcome_model = GradientBoostingRegressor(
-    n_estimators=100, max_depth=6, min_samples_leaf=int(n / 100)
-)
-pseudo_treatment_model = GradientBoostingRegressor(
-    n_estimators=100, max_depth=6, min_samples_leaf=int(n / 100)
-)
-propensity_model = RandomForestClassifier(
-    n_estimators=100, max_depth=6, min_samples_leaf=int(n / 100)
-)
-
-DR_learner = DRLearner(
-    model_regression=outcome_model,
-    model_propensity=propensity_model,
-    model_final=pseudo_treatment_model,
-    cv=5,
-)
-# Train DR_learner
-DR_learner.fit(y, T, X=X)
-# Estimate treatment effects on test data
-DR_te = DR_learner.effect(X_test)
+# モデルの構築
+models = GradientBoostingRegressor(max_depth=3, random_state=0)
+propensity_model = RandomForestClassifier()
+X_learner = XLearner(models=models, propensity_model=propensity_model)
+X_learner.fit(y_train, T_train, X=X_train)
 
 
 # %%
