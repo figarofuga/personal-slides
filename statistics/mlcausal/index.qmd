@@ -1244,6 +1244,51 @@ print(T_te)
 
 ```
 
+## X-learner
+
+
+![x-learner](images/x-learner.drawio.svg)
+
+```{python}
+#| label: X-learner
+
+# Main imports
+# Helper imports
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from econml.metalearners import XLearner
+from numpy.random import binomial, multivariate_normal, normal, uniform
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+
+X = toy_data.loc[:, ["age", "sex", "bmi", "hf", "bnp", "lvef"]]
+y = toy_data["afeqt_os"]
+T = toy_data["ca"]
+n = toy_data.shape[0]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=T
+)
+
+T_train = T.loc[y_train.index]
+T_test = T.loc[y_test.index]
+
+# モデルの構築
+models = GradientBoostingRegressor(max_depth=3, random_state=0)
+propensity_model = RandomForestClassifier()
+X_learner = XLearner(models=models, propensity_model=propensity_model)
+X_learner.fit(y_train, T_train, X=X_train)
+
+# Estimate treatment effects on test data
+X_te = X_learner.effect(X_test)
+
+sns.scatterplot(x=X_test['age'], y=X_te)
+
+```
+
+## DR-learner
 ```{python}
 #| label: DR-learner
 

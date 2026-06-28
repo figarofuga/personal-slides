@@ -28,8 +28,9 @@ If make slides, do as follows.
 
 ```bash
 
-quarto render
-touch docs/.nojekyll
+# quarto render
+# touch docs/.nojekyll
+./scripts/render-site.sh
 git add .
 # git commit -m "Update rendered slides"
 git commit -m "Add footer to return main page"
@@ -37,4 +38,4 @@ git push
 
 ```
 
-TODO: complete PROanalysis, mlcausal, ESUS, and pituitary_incidentaloma.
+TODO: mlcausal, ESUS, and pituitary_incidentaloma.
