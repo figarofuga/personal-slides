@@ -37,10 +37,39 @@ bibliography: references.bib
 
 ## Cryptogenic strokeとは？
 
+```{=html}
+<div style="display: flex; justify-content: center;">
+<svg style="width: 80%; max-width: 720px;"
+     viewBox="0 0 720 430"
+     xmlns="http://www.w3.org/2000/svg">
 
-![](images/esusimages.png){fig-align="center"}
+  <rect x="5" y="5" width="710" height="420"
+        fill="white" stroke="black" stroke-width="1"/>
 
-- **Cryptogenic stroke**
+  <ellipse cx="360" cy="190" rx="340" ry="170"
+           fill="#eeeeee" stroke="black" stroke-width="1.2"/>
+
+  <ellipse cx="360" cy="245" rx="220" ry="85"
+           fill="#eeeeee" stroke="black" stroke-width="1.2"/>
+
+  <text x="360" y="115"
+        text-anchor="middle"
+        font-size="28"
+        font-family="Arial, sans-serif">
+    Cryptogenic stroke
+  </text>
+
+  <text x="360" y="255"
+        text-anchor="middle"
+        font-size="28"
+        font-family="Arial, sans-serif">
+    ESUS
+  </text>
+
+</svg>
+</div>
+```
+
 - Cryptogenic stroke（潜因性脳梗塞）とは、脳梗塞を包括的に精査したのに心原性・アテローム性・ラクナのいずれでもない時
 - その中で近位の動脈の狭窄や心原性が見つからない時の塞栓性脳梗塞を ESUS（Embolic stroke of undetermined source: 原因不明の脳塞栓症）という
 
@@ -71,10 +100,8 @@ bibliography: references.bib
 ![](images/slide-04-diagnostic-approach.jpg){fig-align="center"}
 
 - 検査の程度によるため、世界的に決まった基準はない
-- 古典的な TOAST 分類が一つの基準
-  - これだと _Cryptogenic が増える_
-- ASCOD、CCS systems を使うと _Cryptogenic が減る_ とされる
-  - ただしデータはまだ少ない
+- 古典的な TOAST 分類が一つの基準だが、_Cryptogenic が増える_
+- ASCOD、CCS systems を使うと**Cryptogenic が減る**とされるがデータはまだ少ない
 
 ## CCS systems
 
@@ -82,17 +109,24 @@ bibliography: references.bib
 
 [@CCS_IschemicStroke_v2]
 
+- Internet上でで診断可能
+- `https://ccs.mgh.harvard.edu/ccs_title.php`
+
 ## Cryptogenic stroke患者への問診と身体所見
 
 :::: {.columns}
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 
-![](images/slide-06-history-physical.png){fig-align="center"}
-
+- 頸部外傷やマッサージ: 椎骨脳底動脈の乖離
+- 片頭痛: 片頭痛性脳梗塞 / CADASIL
+- 違法薬物: IE、血管攣縮、HIV など
+- <span style="color: red; font-weight: bold;">息こらえの後の発症: 奇異性塞栓</span>
+- 若年の ASCVD の家族歴: 遺伝性疾患
+- 妊娠: CVT、子癇
 :::
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 - 左右の上肢の血圧差: AoD
 - 皮膚の網状皮斑: APS
@@ -100,12 +134,7 @@ bibliography: references.bib
 - 心雑音: IE、先天性心疾患
 - 脈拍の消失: 重度の動脈硬化、Coarctation、AoD、高安病
 - DVT: 血栓傾向、奇異性塞栓
-- 頸部外傷やマッサージ: 椎骨脳底動脈の乖離
-- 片頭痛: 片頭痛性脳梗塞 / CADASIL
-- 違法薬物: IE、血管攣縮、HIV など
-- <span style="color: red; font-weight: bold;">息こらえの後の発症: 奇異性塞栓</span>
-- 若年の ASCVD の家族歴: 遺伝性疾患
-- 妊娠: CVT、子癇
+
 [@Saver2016-xj]
 
 :::
@@ -117,6 +146,9 @@ bibliography: references.bib
 
 ## 検査について
 
+:::: {.columns}
+
+::: {.column width="40%"}
 - どこまでやるべきか、決まっていない
 - 最低限の検査
   - 基本的な血算
@@ -129,24 +161,33 @@ bibliography: references.bib
 - 特に重要なのは <span style="color: red; font-weight: bold;">潜在性の pAF 検索</span>
 [@Saver2016-xj]
 
+:::
+
+::: {.column width="60%"}
+
+![](images/slide-06-history-physical.png){fig-align="center"}
+
+:::
+
+::::
+
+
 ## ESUSにおけるAFの検索
 
 ![](images/esus-af-monitoring.png){fig-align="center"}
 
 
 - ESUS 患者でループレコーダーを用いると、6ヶ月で 8.9% の新規 AF が見つかる
-- ループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある
+- ループレコーダーで見つかった小さな AF に意味があるかはまだ疑問がある[@Kirchhof2023-cl]
 - UpToDate では、50歳以上、P波異常、心房拡大、BNP高値などで 30日間の monitoring を推奨
-[@Gladstone2014-gd; @Sanna2014-lw; @Kirchhof2023-cl]
+[@Gladstone2014-gd; @Sanna2014-lw]
 
 ## Cryptogenic strokeの治療
 
 - 基本は原疾患により分けることが大事
 - 原因が見つからない時は、基本は ASA
 - ESUS で DOAC vs. ASA があるが、基本的に DOAC が負けている
-  - NAVIGATE-ESUS
-  - RE-SPECT ESUS
-  - ARCADIA trial
+  - 脳卒中再発率は差がなく(OR 0.90), 出血はDOACが多い(OR 1.6)[@Chi2025-zi]
 - 特異的な治療がある疾患もある
   - APS だと DOAC でなく Wf を選択
   - <span style="color: red; font-weight: bold;">PFO による奇異性塞栓 → PFO 閉鎖</span>
@@ -169,10 +210,8 @@ bibliography: references.bib
 ![](images/slide-11-pfo-closure-summary.png){fig-align="center"}
 
 - 卵円孔開存は common
-  - 通常人口で 25%
-  - Cryptogenic stroke に限定すると 50%
-- PFO があっても、それが原因かは不明瞭
-- 探せばいいってもんじゃない
+  - 通常人口で 25%, Cryptogenic stroke に限定すると **50%**
+- PFO があっても、それが原因かは不明瞭 → 探せばいいってもんじゃない
 
 ## いつPFOの検査をする？
 
@@ -181,9 +220,7 @@ bibliography: references.bib
 
 - 治療適応は原則 60歳以下
 - RoPE score < 7 だと治療効果がないかもしれない
-- 治療を見据えて検査を行う
-
-[@Kent2021-iu]
+  - 治療を見据えて検査を行う [@Kent2021-iu]
 
 ## まとめ
 

@@ -135,7 +135,7 @@ tidy_dagitty(dag) |>
 ## 世界は結構複雑にできている {.scrollable}
 
 ```{r} 
-
+#| label: Make-Toydata
 
 # ============================================================
 # Toy data generation according to DAG
@@ -484,7 +484,7 @@ toy_data <- dplyr::select(
 ```
 
 ```{r}
-#| label: Make-ToyData
+#| label: Visualize-ToyData
 
 library(tidyverse)
 library(ggcube)
@@ -519,14 +519,14 @@ dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, 
   )
 
 
-full_toy_data |> 
-  tidyr::crossing(target = 0:100) |> 
-  dplyr::mutate(diff = abs(lvef - target)) |> 
-  dplyr::slice_min(diff, n = 1, with_ties = FALSE, by = target) |>
-  ggplot(aes(age, lvef, treatment_effect)) + 
-  geom_smooth_3d(aes(fill = factor(sex)), alpha = 0.5) + 
-  coord_3d() + 
-  theme_bw()
+# full_toy_data |> 
+#   tidyr::crossing(target = 0:100) |> 
+#   dplyr::mutate(diff = abs(lvef - target)) |> 
+#   dplyr::slice_min(diff, n = 1, with_ties = FALSE, by = target) |>
+#   ggplot(aes(age, lvef, treatment_effect)) + 
+#   geom_smooth_3d(aes(fill = factor(sex)), alpha = 0.5) + 
+#   coord_3d() + 
+#   theme_bw()
   
 
 full_toy_data |> 

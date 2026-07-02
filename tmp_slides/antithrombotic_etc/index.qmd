@@ -1,53 +1,125 @@
 ---
 title: "脳梗塞予防の抗血栓薬のエトセトラ"
-author: "Nozomi Niimi"
-date: "2026-07-06"
 lang: ja
+format:
+  clean-revealjs:
+    toc: true
+    toc-depth: 1
+    slide-level: 2
+    theme: default
+    scrollable: true
+    smaller: true
+    transition: slide
+    incremental: false
+    pdf-separate-fragments: false
+    pdf-max-pages-per-slide: 3
+    slide-number: true
+    footer: '<a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a>'
+author:
+  - name: Nozomi Niimi
+    orcid: 0000-0002-6909-0740
+    email: figarofuga@gmail.com
+    affiliations: 東京医療センター総合内科
+date-format: "YYYY-MM-DD"
+engine: knitr
+execute: 
+  error: false
+  warning: false
+  echo: false
+  cache: false
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
+date: "2026-09-01"
 bibliography: references.bib
 ---
 
-
 ## 本スライドの目的
-
-
-
 
 ## 脳梗塞の抗血小板薬の基本
 
-
 ## いつDAPTをするの？
 
+- 基本は「発症早期」の「非心原性」のHigh risk TIAまたは軽症脳梗塞
+
+  - TIAとしてはABCD2 4点以上で脳梗塞としてはNIHSS 5点以下
+
+| Trial名 | Inclusion | 発症からの時間 | 介入 | NNT |
+|---------------|---------------|---------------|---------------|---------------|
+| CHANCE | ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞 | 24hr | ASA+CLOを21日 | 28 |
+| POINT | ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞 | 12hr | ASA+CLOを90日 | 67 |
+| THALES | ABCD2≧6のTIAあるいはNIHSS≦5の脳梗塞 | 24hr | ASA+CLOを30日 | 91 |
+| CHANCE2 | ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞かつCYP2C19のloss-of-function allele | 24hr | ASA+Ticagrelorを21日 | 63 |
+| INSPIRES | ABCD2≧4のTIAあるいはNIHSS≦5の脳梗塞かつアテローム性を疑う | 72hr | ASA+CLOを21日 | 53 |
+
+[@Prabhakaran2026-dz]
 
 ## いつ抗凝固を開始するの？
 
+- 心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い
+- 一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い
+- そのため、早期の抗凝固による予防 vs. 出血のRiskのせめぎあいがあった
+- 心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで
+  - 予後改善なし
+  - 出血のみ増加
+- →
+
+## いつ抗凝固を開始するの？
+
+- 心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い
+- 一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い
+- そのため、早期の抗凝固による予防 vs. 出血のRiskのせめぎあいがあった
+- 心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで
+  - 予後改善なし
+  - 出血のみ増加(Todo: Refつける)
+- 結局、**なんとなく弱めにHeparinを開始したりバイアスピリンを早期に導入していた**
+
+## DOAC時代
+
+- DOACはWFに比べて明らかに脳出血を減らし、さらに調整が容易
+
+- 脳塞栓に対して、DOACなら早期導入でよいのではないか？という推定あり
+
+- 4つのRCTがあり、それをまとめると[@Dehbi2025-cu]
+
+  - 早期導入により30日以内の脳梗塞の再発はわずかに減らす(1.68% vs. 2.55%)
+
+  - 早期導入により症候性の脳出血のRiskは変わらない(0.37% vs. 0.36%)
+
+  - ただし、早期導入は4日以内のようなやや曖昧な感じ
 
 ## 脳梗塞診療で悩ましいとき
 
-# 抗血小板薬と抗凝固の両者が適応の時
+# 答えはないけれど・・・・・・
 
-## 答えはないけれど・・・・・・
-
+## 抗血小板薬と抗凝固の両者が適応の時
 
 ## 外堀を埋める事実～非心原性脳梗塞の抗血小板薬の治療効果
 
+- WARSS trialではWFは非心原性脳梗塞患者に対してASAと同等の予防効果を認めた[@Mohr2001-ga]
+
+  - 死亡または脳梗塞はWFでやや多いが17.8% vs. 16%で有意差なし
+
+  - 出血はMinorな出血で20.8% vs. 12.9%でWFで有意に多い
+
 ## 外堀を埋める事実～心原性脳梗塞の抗凝固の治療効果
 
+- EAFT trialではAF+脳塞栓症の患者に対してPlaceboに比べて再発を1/3まで減らす(OR 0.34, 95% CI 0.20–0.56)[@Klijn2019-ex]
 
 ## 外堀を埋める事実～抗凝固の非心原性脳梗塞の予防効果
 
+- 複数のRCTのSystematic reviewだと約15%低下はしていたが統計学的に有意ではなかった[@Klijn2019-ex]
 
 ## 外堀を埋める事実～抗血小板と抗凝固の併用の出血Risk
 
-
 ## 外堀を埋める事実～AF+PCIの時は？
-
 
 # DOAC内服中に脳梗塞を再発した時
 
 ## 外堀を埋める事実～DOAC内服中の脳梗塞再発率
 
 ## 外堀を埋める事実～DOAC内服中の脳梗塞再発の観察研究
-
 
 ## Thank you for listening
 
