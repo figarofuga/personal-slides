@@ -1360,6 +1360,343 @@ DR_te = DR_learner.effect(X_test)
 
 ```
 
+
+
+```{r}
+#| label: scratch-DR-learner
+
+library(tidymodels)
+library(dplyr)
+
+set.seed(123)
+
+# ============================================================
+# 0. 勉強用のシミュレーションデータを作る
+# ============================================================
+# 想定:
+#   X: 共変量
+#   A: 処置 0/1
+#   Y: アウトカム
+#   tau_true: 本当のCATE = E[Y(1) - Y(0) | X]
+#
+# 実データでは tau_true は観測できません。
+# ここでは答え合わせ用に持たせています。
+
+n <- 2000
+
+x1 <- rnorm(n)
+x2 <- rnorm(n)
+x3 <- rbinom(n, size = 1, prob = 0.5)
+x4 <- runif(n, min = -1, max = 1)
+
+# 真の傾向スコア P(A = 1 | X)
+e_true <- plogis( -0.2 + 0.5 * x1 - 0.4 * x2 + 0.4 * x3 + 0.2 * x4)
+
+# 処置割付
+A <- rbinom(n, size = 1, prob = e_true)
+
+# Y(0) の条件付き平均
+mu0_true <- 1 +
+  1.0 * x1 +
+  0.5 * x2 -
+  0.7 * x3 +
+  0.3 * x4
+
+# 真のCATE
+tau_true <- 1 +
+  0.7 * x1 -
+  0.4 * x2 +
+  0.5 * x3
+
+# 観測アウトカム
+Y <- mu0_true + A * tau_true + rnorm(n, sd = 1)
+
+dat <- tibble(
+  id = 1:n,
+  Y = Y,
+  A = A,
+  # parsnipのlogistic_reg用に処置をfactorにもしておく
+  A_fac = factor(if_else(A == 1, "treated", "control"), levels = c("control", "treated")),
+  x1 = x1,
+  x2 = x2,
+  x3 = x3,
+  x4 = x4,
+  e_true = e_true,
+  mu0_true = mu0_true,
+  tau_true = tau_true
+)
+
+# ============================================================
+# 1. 2-fold cross-fitting 用のfoldを作る
+# ============================================================
+# DR-learnerでは、同じデータで nuisance model を学習して
+# 同じデータに予測を返すと過学習の影響が入りやすいので、
+# ここでは一番簡単な2-fold cross-fittingを手で書きます。
+#
+# fold 1 の予測には fold 2 で学習したモデルを使う。
+# fold 2 の予測には fold 1 で学習したモデルを使う。
+
+dat <- dat %>%
+  mutate(fold = sample(rep(1:2, length.out = n)))
+
+# ============================================================
+# 2. tidymodelsで使うglmモデルを定義
+# ============================================================
+# glmだけ使うため、engine = "glm" を明示します。
+
+propensity_spec <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification")
+
+outcome_spec <- linear_reg() %>%
+  set_engine("glm") %>%
+  set_mode("regression")
+
+cate_spec <- linear_reg() %>%
+  set_engine("glm") %>%
+  set_mode("regression")
+
+# ============================================================
+# 3. fold 1 に対する nuisance 予測を作る
+# ============================================================
+# fold 1 の各観測について、
+#   e_hat(X)   = P(A = 1 | X)
+#   mu1_hat(X) = E[Y | A = 1, X]
+#   mu0_hat(X) = E[Y | A = 0, X]
+# を作ります。
+#
+# ただし、モデルの学習には fold 1 を使わず、fold 2 だけを使います。
+
+train_for_fold1 <- dat %>%
+  filter(fold != 1)
+
+test_fold1 <- dat %>%
+  filter(fold == 1)
+
+# 傾向スコアモデル: A ~ X
+e_model_fold1 <- propensity_spec %>%
+  fit(
+    A_fac ~ x1 + x2 + x3 + x4,
+    data = train_for_fold1
+  )
+
+# アウトカムモデル: Y ~ A, X, A:X
+# Aとの交互作用を入れて、処置効果の異質性を表現できるようにしています。
+m_model_fold1 <- outcome_spec %>%
+  fit(
+    Y ~ A * (x1 + x2 + x3 + x4),
+    data = train_for_fold1
+  )
+
+# 同じXに対して、仮にA=1だったら、仮にA=0だったら、を予測する
+test_fold1_A1 <- test_fold1 %>%
+  mutate(A = 1)
+
+test_fold1_A0 <- test_fold1 %>%
+  mutate(A = 0)
+
+fold1_dr_parts <- test_fold1 %>%
+  mutate(
+    e_hat = predict(
+      e_model_fold1,
+      new_data = test_fold1,
+      type = "prob"
+    )$.pred_treated,
+
+    mu1_hat = predict(
+      m_model_fold1,
+      new_data = test_fold1_A1
+    )$.pred,
+
+    mu0_hat = predict(
+      m_model_fold1,
+      new_data = test_fold1_A0
+    )$.pred
+  )
+
+# ============================================================
+# 4. fold 2 に対する nuisance 予測を作る
+# ============================================================
+# 今度は逆に、fold 2 の予測のために fold 1 だけで学習します。
+
+train_for_fold2 <- dat %>%
+  filter(fold != 2)
+
+test_fold2 <- dat %>%
+  filter(fold == 2)
+
+e_model_fold2 <- propensity_spec %>%
+  fit(
+    A_fac ~ x1 + x2 + x3 + x4,
+    data = train_for_fold2
+  )
+
+m_model_fold2 <- outcome_spec %>%
+  fit(
+    Y ~ A * (x1 + x2 + x3 + x4),
+    data = train_for_fold2
+  )
+
+test_fold2_A1 <- test_fold2 %>%
+  mutate(A = 1)
+
+test_fold2_A0 <- test_fold2 %>%
+  mutate(A = 0)
+
+fold2_dr_parts <- test_fold2 %>%
+  mutate(
+    e_hat = predict(
+      e_model_fold2,
+      new_data = test_fold2,
+      type = "prob"
+    )$.pred_treated,
+
+    mu1_hat = predict(
+      m_model_fold2,
+      new_data = test_fold2_A1
+    )$.pred,
+
+    mu0_hat = predict(
+      m_model_fold2,
+      new_data = test_fold2_A0
+    )$.pred
+  )
+
+# ============================================================
+# 5. fold 1 と fold 2 の予測を結合する
+# ============================================================
+
+dr_data <- bind_rows(fold1_dr_parts, fold2_dr_parts) %>%
+  arrange(id)
+
+# 傾向スコアが0や1に近すぎると割り算が暴れるので、
+# 勉強用に軽くクリップしておきます。
+dr_data <- dr_data %>%
+  mutate(
+    e_hat_raw = e_hat,
+    e_hat = pmin(pmax(e_hat, 0.01), 0.99)
+  )
+
+# ============================================================
+# 6. DR疑似アウトカムを作る
+# ============================================================
+# Aが0/1のとき、DR-learnerの疑似アウトカムは
+#
+# phi =
+#   mu1_hat(X) - mu0_hat(X)
+#   + A       * {Y - mu1_hat(X)} / e_hat(X)
+#   - (1 - A) * {Y - mu0_hat(X)} / {1 - e_hat(X)}
+#
+# です。
+#
+# 直感:
+#   mu1_hat - mu0_hat
+#     -> アウトカムモデルによる処置効果の予測
+#
+#   A * (Y - mu1_hat) / e_hat
+#     -> 処置群で、実際のYとmu1_hatのズレを補正
+#
+#   -(1 - A) * (Y - mu0_hat) / (1 - e_hat)
+#     -> 対照群で、実際のYとmu0_hatのズレを補正
+#
+# この「アウトカムモデル + IPW的な残差補正」が doubly robust な部分です。
+
+dr_data <- dr_data %>%
+  mutate(
+    phi_dr =
+      (mu1_hat - mu0_hat) +
+      A * (Y - mu1_hat) / e_hat -
+      (1 - A) * (Y - mu0_hat) / (1 - e_hat)
+  )
+
+# 疑似アウトカムを少し見る
+dr_data %>%
+  select(id, Y, A, e_hat, mu1_hat, mu0_hat, phi_dr, tau_true) %>%
+  head()
+
+# ============================================================
+# 7. 疑似アウトカムをXに回帰してCATEモデルを作る
+# ============================================================
+# ここがDR-learnerの最終段階です。
+#
+#   E[phi_dr | X = x]
+#
+# を推定します。
+#
+# 今回はglmだけ使うので、ここも linear_reg(engine = "glm") です。
+
+cate_model <- cate_spec %>%
+  fit(
+    phi_dr ~ x1 + x2 + x3 + x4,
+    data = dr_data
+  )
+
+# 各個体の CATE 推定値 tau_hat(X) を得る
+dr_data <- dr_data %>%
+  mutate(
+    tau_hat = predict(
+      cate_model,
+      new_data = dr_data
+    )$.pred
+  )
+
+# ============================================================
+# 8. ATEも確認する
+# ============================================================
+# DR疑似アウトカムの平均はATE推定量としても見られます。
+# シミュレーションなので真のATEとも比較できます。
+
+ate_check <- tibble(
+  estimand = c(
+    "true ATE: mean(tau_true)",
+    "DR ATE: mean(phi_dr)",
+    "plug-in ATE: mean(mu1_hat - mu0_hat)",
+    "naive difference in means"
+  ),
+  value = c(
+    mean(dr_data$tau_true),
+    mean(dr_data$phi_dr),
+    mean(dr_data$mu1_hat - dr_data$mu0_hat),
+    mean(dr_data$Y[dr_data$A == 1]) -
+      mean(dr_data$Y[dr_data$A == 0])
+  )
+)
+
+ate_check
+
+# ============================================================
+# 9. CATEの答え合わせ
+# ============================================================
+# 実データでは tau_true は分かりません。
+# ここではシミュレーションなので、推定CATEと真のCATEを比べます。
+
+cate_check <- dr_data %>%
+  summarise(
+    true_ate = mean(tau_true),
+    estimated_ate_from_tau_hat = mean(tau_hat),
+    cate_rmse = sqrt(mean((tau_hat - tau_true)^2)),
+    cate_correlation = cor(tau_hat, tau_true)
+  )
+
+cate_check
+
+# ============================================================
+# 10. 可視化
+# ============================================================
+# tau_hat が tau_true に近ければ、点が45度線の近くに並びます。
+
+ggplot(dr_data, aes(x = tau_true, y = tau_hat)) +
+  geom_point(alpha = 0.25) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2) +
+  labs(
+    x = "True CATE",
+    y = "Estimated CATE by DR-learner",
+    title = "DR-learner with tidymodels glm only"
+  )
+
+```
+
+
 ## 機械学習の因果推論における使い方
 
 - 交絡因子の調整で機械学習を用いる
