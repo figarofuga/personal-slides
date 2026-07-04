@@ -33,12 +33,12 @@ If make slides, do as follows.
 ./scripts/render-site.sh
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Complete ESUS slides"
+git commit -m "Complete pituitary incidentaloma slides"
 git push
 
 ```
 
-TODO: mlcausal and pituitary_incidentaloma.
+TODO: mlcausal.
 
 # Plans: 
 

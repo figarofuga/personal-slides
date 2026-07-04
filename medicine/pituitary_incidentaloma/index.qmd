@@ -36,6 +36,52 @@ bibliography: references.bib
 
 ---
 
+```{css}
+<style>
+/* スライド幅の 1/2 */
+.half-table {
+  width: 50%;
+}
+
+.half-table table {
+  width: 100%;
+}
+
+/* スライド幅の 1/4 */
+.quad-table {
+  width: 25%;
+}
+
+.quad-table table {
+  width: 100%;
+}
+
+/* 中央寄せしたい場合 */
+.center-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 左寄せしたい場合 */
+.left-table {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* 表を少しコンパクトに */
+.compact-table table {
+  font-size: 0.75em;
+}
+
+.compact-table th,
+.compact-table td {
+  padding: 0.25em 0.45em;
+  line-height: 1.1;
+}
+</style>
+```
+
+# はじめに
 
 ## 症例 
 
@@ -53,21 +99,25 @@ bibliography: references.bib
   - 無関係の理由でMRIを撮像したうち、microadenomaは10-38%
   - macroadenomaは0.2%
   - Autopsyだと日本人のうち18%程度の有病率と言われている
-    - 日本での1000人の連続するAutopsy患者では178人にIncidentalomaがあり、そのうち34%が2mm以上
+    - 日本での1000人の連続するAutopsy患者では178人にIncidentalomaがあり、  
+    そのうち34%が2mm以上
 
 [@Teramoto1994-zv]
 
 ## 下垂体偶発種の疫学
 
+::: {.half-table .center-table}
 
-| 原疾患 | 頻度 |
-|---|---|
-| 下垂体腺腫 | 80-90% |
-| 頭蓋咽頭腫 | 3% |
-| Rathke嚢胞 | 2% |
-| 髄膜腫 | 1% |
-| 下垂体炎 | 1%未満 |
-| 脳動脈瘤 | 1-2% |
+|        原疾患         |    頻度    |
+|:--------------------:|:----------:|
+|     下垂体腺腫        |   80-90%   |
+|     頭蓋咽頭腫        |     3%     |
+|     Rathke嚢胞        |    2%      |
+|      髄膜腫           |     1%     |
+|      下垂体炎         |     1%未満 |
+|      脳動脈瘤         |     1-2%   |
+
+:::
 
 [@DynaMed_SellarMass_2026]
 
@@ -97,7 +147,7 @@ bibliography: references.bib
 
 
 ![](images/PA_atglance.png)
-<!-- TODO: 手動調整: 元Typst画像高さ 90% -->
+
 
 [@Melmed2020-dy]
 
@@ -117,13 +167,13 @@ bibliography: references.bib
 - Incidentalomaと通常のAdenomaで疫学が変わる
   - 通常のPituitary adenomaの場合
     - 53%がProlactinoma
-    - <span style="color: red; font-weight: bold;">30%が非機能性腺腫</span>
+    - <span style="color: red; font-weight: bold;; font-size: 1.5em;">30%が非機能性腺腫</span>
     - 12%がGH産生腫瘍(somatotropinoma)
     - 4%がACTH産生腫瘍(Corticotropinoma)
     - 1%がTSH産生腫瘍(thyrotropinoma)
 
   - Incidentalomaの場合(約90%がAdenoma)
-    - <span style="color: red; font-weight: bold;">約50%が非機能性腺腫</span>
+    - <span style="color: red; font-weight: bold; font-size: 1.5em;">約50%が非機能性腺腫</span>
     - 10%がGH産生腫瘍
     - 15%がGonadothropinoma
 - Incidentalomaだと、非機能性腺腫が多い事は注目に値する
@@ -140,22 +190,23 @@ bibliography: references.bib
   3. 腫瘍による視交叉の圧排の有無
 - 内科医としてはMEN 1も見逃さない
 
+# ホルモン検査について
 
 ## ホルモン検査の原則
 
 
-![](images/PA_hormone.png)
-<!-- TODO: 手動調整: 元Typst画像高さ 40% -->
+![](images/PA_hormone.png){fig-align="center"}
+
 [@Takeuchi_ToranomonEndocrineClinicalPractice_2023]
 
 - ホルモン検査は日内変動が大きい
 - Positive/Negative feedbackにより代償されやすい
-- ホルモン欠乏の検査: 最も分泌が多い時間帯の測定で判断
+- ホルモン欠乏の検査: <span style="color: red; font-weight: bold;; font-size: 1.5em;">最も分泌が多い時間帯の測定</span>で判断
   - ホルモン分泌を促進する介入した後の検査もあるがRiskが高い
-- ホルモン過剰の検査: ホルモンを抑制する介入をした上で測定
+- ホルモン過剰の検査: <span style="color: red; font-weight: bold;; font-size: 1.5em;">ホルモンを抑制する介入をした上の測定</span>で判断
 
 
-# ホルモン過剰産生
+# ホルモン過剰産生の考え方
 
 
 ## 基本的な考え方
@@ -169,8 +220,8 @@ bibliography: references.bib
   - TSH産生が1%
 - 頻度と治療可能性の観点で考える
   - PRLは<span style="color: red; font-weight: bold;">内科的に治療可能</span>
-  - ACTH, GHは_予後不良で手術の治療適応_
-- PRL, ACTH, GHは検索すべし！！
+  - ACTH, GHは<span style="color: red; font-weight: bold;">予後不良で手術の治療適応</span>
+- **PRL, ACTH, GHは検索すべし！！**
 
 [@Tritos2023-tk]
 
@@ -192,8 +243,8 @@ bibliography: references.bib
 
 - PRL > 250 mcg/Lは特異度100％でProlactinoma
 - 一方で中途半端な高値は色々な理由がある
-  - 妊娠、薬剤(D2 blocker)や甲状腺機能を確認する
-- 更に下垂体腺腫自身の茎部圧迫によるもの(Stalk effect)のもありうる
+  - <span style="color: red; font-weight: bold;">妊娠、薬剤(D2 blocker)や甲状腺機能</span>を確認する
+- 更に**下垂体腺腫自身の茎部圧迫によるもの(Stalk effect)**のもありうる
   - Stalk effectだけではPRL < 150 mcg/L程度である事が多い
 
 [@Tritos2023-tk]
@@ -226,11 +277,13 @@ bibliography: references.bib
 - 血清FT4高値で、TSHが不適切に正常〜高値の感度は約100%
 
 
-## いつ、どのように検査をする？
+# いつ、どのように検査をする？
 
+## ホルモン過剰のScreeningの方法
 
 - ホルモン過剰について、Macroadenomaにおいても明らかなScreening方法は決まっていない
-  - 2011年のガイドラインでは、PRLとGHはルーチンで測定を推奨。 ACTHは臨床所見をみての検査を推奨している。
+  - 2011年のガイドラインでは、PRLとGHはルーチンで測定を推奨。  
+  ACTHは臨床所見をみての検査を推奨している。
     - Prolactinomaは経口での治療が可能なため
     - GH過剰産生は予後に強く影響する上に初期は無症候である事が多いため
     - ACTHも同じ理由でExpertによっては検査をするとの事
@@ -240,7 +293,7 @@ bibliography: references.bib
 [@Boguszewski2019-ne; @Snyder_PituitaryIncidentalomas_2026]
 
 
-# 下垂体機能不全
+# ホルモン欠乏の考え方
 
 
 ## 下垂体機能不全総論
@@ -262,10 +315,9 @@ bibliography: references.bib
 
 
 - 生命予後を悪化させるホルモンを重点的にみる
-  - <span style="color: red; font-weight: bold;">副腎不全</span>
-  - <span style="color: red; font-weight: bold;">甲状腺機能低下症</span>
+  - <span style="color: red; font-weight: bold; font-size: 1.5em;">副腎不全</span>
+  - <span style="color: red; font-weight: bold; font-size: 1.5em;">甲状腺機能低下症</span>
 - 一方で、HypogonadismやGH欠乏は成人だと治療適応も難しい
-=> 見るべきは、*副腎不全、甲状腺機能低下症*
 - 中枢性副腎不全→TSH欠乏→中枢性Hypogonadismの検査
   - GH欠乏は下垂体腺腫の治療が終わり他のホルモン補充が終わったあとまでは検査しない事を推奨。
 [@Higham2016-hs]
@@ -293,10 +345,10 @@ bibliography: references.bib
 - 早朝Cortisolが第一
   - まずは、8-9時の血清Cortisolを測定する
     - cortisol < 80 nmol/L (3 mcg/dL)は副腎不全
-    - cortisol < TODO nmol/L (18 mcg/dL)は副腎不全
+    - cortisol < 500 nmol/L (18 mcg/dL)は副腎不全は除外
 - Cortisolが3mcg/dL-15mcg/dLの時 → ACTH負荷試験を行う
-    - 250mcgのACTH投与後30/60分後のCortisolが <18mcgで副腎不全
-    - 二次性副腎不全の場合通常ACTHは< 12 pmol/L (52 pg/mL)となる.
+    - 250mcgのACTH投与後30/60分後のCortisol <18mcgで副腎不全
+    - 二次性副腎不全の場合通常ACTHは< 12 pmol/L (52 pg/mL)となる
 
 
 ## 中枢性甲状腺機能低下 {#hypothyroid}
@@ -311,12 +363,13 @@ bibliography: references.bib
 
 
 - GH欠乏は事前確率が高い状態でのみ疑う(高い事前確率とは以下の基準のうち1つ以上を満たす)
-  - 若い男性で正常な下垂体だが低身長でGH欠乏の診断が幼少期にされている
-  - 下垂体の障害が疑われる病歴(下垂体手術、放射線治療、下垂体の画像変化、頭部外傷、脳卒中)
-- ITTがGH欠乏のGold standardだが使いにくい
-  - その他としては、Glucagon刺激試験、Macimorelin test、arginine plus GH-releasing hormone (GHRH) test
-  - Dynamedでは3つ以上の下垂体ホルモン欠乏があり、年齢調整された血清IGF-1が低い時はGH低値と診断して良い
-  - 2011年のガイドラインでは、IGF-1低下のみでGH欠乏の診断は出来ない
+  1. 若い男性で正常な下垂体だが低身長でGH欠乏の診断が幼少期にされている
+  2. 下垂体の障害が疑われる病歴(下垂体手術、放射線治療、下垂体の画像変化、頭部外傷、脳卒中)
+- Insulin tolerance test (ITT)がGH欠乏のGold standardだが使いにくい
+  - その他としては、Glucagon刺激試験、Macimorelin test、GHRH test
+  - Dynamedでは3つ以上の下垂体ホルモン欠乏があり、年齢調整された血清IGF-1が低い時はGH低値と診断して良い  
+  vs.  
+   2011年のガイドラインでは、IGF-1低下のみでGH欠乏の診断は出来ない
 
 [@DynaMed_SellarMass_2026; @Freda2011-fv]
 
@@ -324,7 +377,8 @@ bibliography: references.bib
 
 
 - 男性、女性(閉経前/後)で方法が異なる。
-- ゴナドトロピン放出ホルモン（GnRH）刺激検査は、基礎ホルモン検査の結果がはっきりしない場合に用いられてきたが、国際的な内分泌学会では*推奨されていない*
+- ゴナドトロピン放出ホルモン（GnRH）刺激検査は、基礎ホルモン検査の結果がはっきりしない場合に用いられてきたが、<span style="color: blue; font-weight: bold; font-size: 1.5em;">国際的な内分泌学会では推奨されていない</span>
+
 
 
 ## Hypogonadism 各論
@@ -349,46 +403,49 @@ bibliography: references.bib
 ## 中枢性尿崩症 {#central_di}
 
 
-- 虎ノ門の教科書では中枢性尿崩症は術後でない限り下垂体腺腫では起きないとの事
+- 虎ノ門の教科書では中枢性尿崩症は術後でない限り下垂体腺腫では起きないとの事[@Takeuchi_ToranomonEndocrineClinicalPractice_2023]
 - 診断のGold standardは存在しない
 - 水制限試験がしばしば初期の検査で行われる
   - 多尿 (> 50 mL/kg in 24 hours or 3.5 L/day in a 70kg) の時に血清と尿中浸透圧を同時測定する
   - 尿糖なしの時に、血清浸透圧 >295 mOsm/kg、尿浸透圧が600 mOsm/kgの時(尿と血清浸透圧の比が2以上)が正常
   - 尿崩症は血清浸透圧 >295 mOsm/kgの時に尿浸透圧が600 mOsm/kg未満の時(尿と血清浸透圧の比が2未満)で診断される
 - 水分制限試験の亜種として、3%食塩水刺激試験がある
-[@Takeuchi_ToranomonEndocrineClinicalPractice_2023]
 
-## いつ、どのように検査をする？
 
+# いつ、どのように検査をする？
+
+## ホルモン欠乏の検査方法
 
 - ホルモン低下について、複数のScreening方法があり確定的なものはない。
   - 2011年のガイドラインでは意見を2つ載せている
     - Minimal: FT4, 朝のCortisolとTestosterone
-    - 追加: FT4, 朝のCortisolとTestosteroneに加えてTSH、LH, FSH, IGF-1
-    - ACTHとGH欠乏がBaselineの検査で確定できない時に負荷試験を考慮する。
-  - Microadenomaだとより分かっていない。UptodateだとPRLだけ推奨だが2011年のEndocrine Society Guidelineとは異なる。
+    - 追加版: FT4, 朝のCortisolとTestosteroneに加えてTSH、LH, FSH, IGF-1
+    - ACTHとGH欠乏がBaselineの検査で確定できない時に負荷試験を考慮する
+  - Microadenomaだとより分かっていない。UptodateだとPRLだけ推奨だが2011年の  
+  Endocrine Society Guidelineとは異なる。
 
 [@Freda2011-fv; @Snyder_PituitaryIncidentalomas_2026]
 
 
-## 視野障害について
+# 視野障害について
 
+## 下垂体腺腫と視野障害
 
 ![](images/PA_anatomy.png)
 
 [@Molitch2017-zw]
 
-- 下垂体の真上に視交叉があり押されると*両耳側半盲*が起こる
+- 下垂体の真上に視交叉があり押されると<span style="color: red; font-weight: bold; font-size: 1.5em;">両耳側半盲</span>が起こる
   - MRIで視交叉と腺腫が接している場合は自覚症状がなくても、 正式な視野障害の評価を行う
   - 海綿静脈洞内に伸展するとIII, IV, V1などが障害される事もある
 
 [@Westall2023-rb]
 
 
-# 治療法
+# 下垂体腺腫の治療
 
 
-## 治療法総論
+## 下垂体腺腫の治療適応
 
 
 - Cushing syndrome、末端肥大症は外科治療が必要
@@ -404,8 +461,7 @@ bibliography: references.bib
   - fludrocortisoneは不要
   - Sick dayの説明を忘れない
 - 甲状腺機能低下症: Levothyroxinを1.6 mcg/kg/day
-  - 目標としてTSHは使えない
-    - FT4が正常範囲の上半分に入るようにする
+  - 目標としてTSHは使えないため、**FT4が正常範囲の上半分に入るように**する
 - 副腎不全がある場合は先に副腎不全を治療する
 - GHや性ホルモンの補充は適応が難しいので専門医にコンサルト
 
@@ -415,18 +471,16 @@ bibliography: references.bib
 ## Follow up
 
 
-![](images/PA_followup_guideline.png)
+![](images/PA_followup_guideline.png){fig-align="center"}
 
 
 - Mass effect: MRIでfollow up
   - Macro/Microadenoma: 6/12ヶ月後
 - ホルモン分泌: hypopituitarismの有無を検査
   - Macro/Microadenoma: 半年後→1年毎に行う/ルーチンは不要
-
-
 [@Freda2011-fv]
 
-## 下垂体偶発種at glance
+## 下垂体偶発腫 at glance
 
 
 ![](images/PA_manage.png)

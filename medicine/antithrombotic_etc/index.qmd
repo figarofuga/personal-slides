@@ -3,6 +3,7 @@ title: "脳梗塞予防の抗血栓薬のエトセトラ"
 lang: ja
 format:
   clean-revealjs:
+  # revealjs:
     toc: true
     toc-depth: 1
     slide-level: 2
