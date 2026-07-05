@@ -24,7 +24,7 @@ slides/
 └── docs/
 ```
 
-If make slides, do as follows.
+If we made qmd file for slides, then do as follows.
 
 ```bash
 
@@ -38,9 +38,9 @@ git push
 
 ```
 
-TODO: mlcausal.
+TODO: complete mlcausal, and systemic amyloidosis.
 
 # Plans: 
 
-- Medicine: Eosinophilia, Systemic Amyloidosis, hypokalemia, treatment of acute severe hyponatremia, sepsis hydration, Whipple disease, thrombotic test, and antithrombosis drugs.
+- Medicine: Eosinophilia, hypokalemia, treatment of acute severe hyponatremia, sepsis hydration, Whipple disease, thrombophlic test for VTE, and antithrombosis drugs.
 - Stats: Clustering, DAG, Model performance, visualizations, Advanced survival analysis including time-varying cox, splines, propensity score analysis, and multiple imputations

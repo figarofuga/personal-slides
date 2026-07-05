@@ -56,10 +56,6 @@ knitr:
 </style>
 ```
 
-## Systemic amyloidosisとは
-
-Nozomi Niimi  
-2024/12/4
 
 ## Amyloidとは？
 

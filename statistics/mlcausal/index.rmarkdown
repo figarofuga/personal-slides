@@ -515,11 +515,7 @@ pre_toy_data <- tibble::tibble(
   bmi_risk = bmi_risk,
   lvef_risk = lvef_risk,
   treatment_effect = treatment_effect,
-  linear_predictor_outcome_a0 = linear_predictor_outcome_a0, 
-  linear_predictor_outcome_a1 = linear_predictor_outcome_a1, 
-  linear_predictor_outcome = linear_predictor_outcome, 
-  p_bin_outcome_a0 = p_bin_outcome_a0, 
-  p_bin_outcome_a0 = p_bin_outcome_a1, 
+  linear_predictor_outcome = linear_predictor_outcome,
   p_bin_outcome = p_bin_outcome,
   bin_outcome = bin_outcome,
   afeqt_treatment_effect = afeqt_treatment_effect,
@@ -1862,3 +1858,4 @@ plot(surv_tree, leaf.labels = c("Observation", "Catheter ablation"))
 library(sessioninfo)
 sessioninfo::session_info(info = "all")
 ```
+
