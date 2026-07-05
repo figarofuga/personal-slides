@@ -35,27 +35,6 @@ date: "2026-08-01"
 
 # 因果推論 at glance
 
-## 因果関係
-
-- 医学研究の第一の目標と言っても過言ではない
-- Aの薬を使うと患者の予後は良くなるか？
-- 実際は口で言うほど簡単ではない
-
-## どうして難しいか？
-
-- 数多くのBiasが存在する
-- ConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある
-- 観察研究はConfounderがコントロール出来ない
-
-## 因果関係の考え方
-
-- 大きく分けて2つの考え方がある
-  - 潜在的アウトカムを考えるRubin流
-  - DAGを作り、do operatorを使うPearl流
-- 詳細は省くが、今回はPearl流のDAGを中心に考える
-
-## DAGの基本
-
 ```{r}
 #| label: setup
 #| include: false
@@ -77,11 +56,29 @@ library(dplyr)
 library(ggplot2)
 library(grid)
 
-
-
-sessioninfo::session_info(info = "all")
-
 ```
+
+## 因果関係
+
+- 医学研究の第一の目標と言っても過言ではない
+- Aの薬を使うと患者の予後は良くなるか？
+- 実際は口で言うほど簡単ではない
+
+## どうして難しいか？
+
+- 数多くのBiasが存在する
+- ConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある
+- 観察研究はConfounderがコントロール出来ない
+
+## 因果関係の考え方
+
+- 大きく分けて2つの考え方がある
+  - 潜在的アウトカムを考えるRubin流
+  - DAGを作り、do operatorを使うPearl流
+- 詳細は省くが、今回はPearl流のDAGを中心に考える
+
+## DAGの基本
+
 
 
 ```{r}
@@ -136,15 +133,139 @@ tidy_dagitty(dag) |>
 
 ```
 
+<!-- Todo: ここにColiderと交絡因子の説明、何を補正すべきかを書く -->
+
+
 ## 世界は結構複雑にできている
+
+- 交絡因子の制御は実際はかなり難しい
+- 何を、どう補正するか？
+- Stratification、Matching、Weighting・・・・・・
+
+
+## Test-dataset
+
+- 治療効果は各々別個にいれてある
+- DAGは上記の通り
+- CAがメインのInterventionで解析をするアウトカムは3種類
+    - 連続値のAFEQT-OS
+    - 二値値のbin_outcome(短期の入院の有無など)
+    - 生存分析のeventtime, status(長期の心不全あるいは死亡)
+- ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)
+- SESは観測されない交絡因子
+
+## 通常の回帰
+
+- 連続値をrestricted cubic splineに入れるなど
+- ただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」
+- その上で、CAの交絡因子が補正しきれるかは不明
+
+## 次の手
+
+- Propensity score weighting
+- IPTW、Overlap weightingなど多くの方法がある
+- weighted meanを用いる
+- 重み付けの方法で、Estimandをどこにするかも指定可能
+
+## さらなる補正
+
+- AIPW, TMLEなど
+- Outcome modelとPropensity modelを用いてDoubly robustにする
+- 自由度は上昇した
+
+## しかしながら・・・・・・
 
 - 上記以外にも、「誰に」「どの程度」の治療効果があるか分からない
   - 治療効果の異質性
-- 「因果推論の根本的問題」
-  - 同じ人間で介入をする/しないを観察出来ない
-- RCTですら
+- RCTですら群レベルでの平均的な治療効果しか分からない
+  - この治療は眼の前の患者さんに有益ですか？
 
-## Test-dataset
+## 通常の回帰だとどうすればいい？
+
+- 簡単にいうとSubgroup解析
+  - 恣意的にInteraction項を作らないといけない
+- あるいは複雑なモデルにした上でG-computation
+- いずれにせよ、線形が前提となる
+- 柔軟なモデルで治療の異質性を捉えたい？
+
+
+# 機械学習 at glance
+
+
+## 機械学習とは
+
+
+## 代表的な機械学習
+
+- Logistic回帰
+- tree-based model
+  - Random forest
+  - XGBoost
+- Neural network
+
+## 機械学習の強みと弱み
+
+- Pros
+  - データから関係性を柔軟に読み取る
+  - 例えばTree based modelは相互作用を自然に扱うことが出来る
+- Cons
+  - 複雑なモデルはBlack boxになる
+  - Overfittingの問題
+
+# 機械学習と因果推論の出会い
+
+## 因果推論における機械学習の役割
+
+- アウトカムモデル、PS modelを柔軟に扱う
+- Interaction termを自然に扱える
+  - HTEを自然に扱えないか？
+
+## 機械学習を用いた因果推論について
+
+- 大別してMeta learner系とCausal forest系に分けられる
+- 柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest
+- とはいえ、Causal forestだけで良い気もする
+
+# meta-learner系
+
+## S-learner
+
+## T-learner
+
+## X-learner
+
+## DR-learner
+
+## 注意点
+
+- cross-fittingを行う
+
+# Causal forestについて
+
+## Random forestについて
+
+## Causal forestの原理
+
+- HTE専用の機械学習
+- 基本はRandom forest
+- 治療効果の差が最も出やすいように木をTrainingする
+
+## Causal forestの強み
+
+# 機械学習Basedの因果推論の問題
+
+## Overfittingの問題
+
+- cross-fitting
+- Honest
+
+## 機械学習の解釈の問題
+
+- Modelを深堀る: SHAP
+- Modelの妥当性を確認: RATE
+- Modelを分かりやすく変更: Surrogate tree、Policy tree
+
+## Thank you for your listening
 
 ```{r} 
 #| label: Make-Toydata
@@ -519,7 +640,7 @@ pre_toy_data <- tibble::tibble(
   linear_predictor_outcome_a1 = linear_predictor_outcome_a1, 
   linear_predictor_outcome = linear_predictor_outcome, 
   p_bin_outcome_a0 = p_bin_outcome_a0, 
-  p_bin_outcome_a0 = p_bin_outcome_a1, 
+  p_bin_outcome_a1 = p_bin_outcome_a1, 
   p_bin_outcome = p_bin_outcome,
   bin_outcome = bin_outcome,
   afeqt_treatment_effect = afeqt_treatment_effect,
@@ -865,15 +986,7 @@ ggplot() +
     )
 
 ```
-## Dataの説明
 
-- DAGは上記の通り
-- CAがメインのInterventionで解析をするアウトカムは3種類
-    - 連続値のAFEQT-OS
-    - 二値値のbin_outcome(短期の入院の有無など)
-    - 生存分析のeventtime, status(長期の心不全あるいは死亡)
-- ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)
-- SESは観測されない交絡因子
 
 ## Simple regression
 
@@ -1164,42 +1277,6 @@ coef(fit_orth_lpm)["a_resid_lpm"]
 
 ```
 
-# 機械学習 at glance
-
-
-## 機械学習とは
-
-
-## 代表的な機械学習
-
-- Logistic回帰
-- tree-based model
-  - Random forest
-  - XGBoost
-- Neural network
-
-## 機械学習の強みと弱み
-
-- Pros
-  - データから関係性を柔軟に読み取る
-  - 例えばTree based modelは相互作用を自然に扱うことが出来る
-- Cons
-  - 複雑なモデルはBlack boxになる
-  - Overfittingの問題
-
-# 機械学習と因果推論の出会い
-
-## 因果推論における機械学習の役割
-
-- アウトカムモデル、PS modelを柔軟に扱う
-- Interaction termを自然に扱える
-  - HTEを自然に扱えないか？
-
-## 機械学習を用いた因果推論について
-
-- 大別してMeta learner系とCausal forest系に分けられる
-- 柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest
-- とはいえ、Causal forestだけで良い気もする
 
 ```{python}
 #| label: S-learner
