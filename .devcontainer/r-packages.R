@@ -20,6 +20,7 @@ pkgs <- c(
   "cowplot",
   "dagitty",
   "DiagrammeR",
+  "DoubleML",
   "easystats",
   "finalfit",
   "ggcube",

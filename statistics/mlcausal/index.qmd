@@ -244,10 +244,16 @@ tidy_dagitty(dag) |>
 
 ## DR-learner
 
-## 実践
+## どれがいいの？
 
-- Pythonだとeconmlがデファクトスタンダード
-- Rでmeta-learner系で有名なものはない
+- S-learnerが最も直感的ではあるが・・・・・・
+- 過去のReviewだとDR-learnerが良さそう
+
+以下のTableをまとめる
+
+    Inoue K, Adomi M, Efthimiou O, et al. Machine learning approaches to evaluate heterogeneous treatment effects in randomized controlled trials: a scoping review. J Clin Epidemiol. 2024;176(111538):111538. doi:10.1016/j.jclinepi.2024.111538
+  
+
 
 # Causal forestについて
 
@@ -261,6 +267,8 @@ tidy_dagitty(dag) |>
 
 ## Causal forestの強み
 
+## どれがいいの？
+
 
 ## 機械学習の解釈の問題
 
@@ -268,12 +276,16 @@ tidy_dagitty(dag) |>
 - Modelの妥当性を確認: RATE
 - Modelを分かりやすく変更: Surrogate tree、Policy tree
 
-## Thank you for your listening
+## Advanced 
+
+- 95%信頼区間が出せるかどうか？
+- Missingnessについて
+- Sensitivity analysisはどうすればいい？
 
 # 実践！
 
 
-## Test-dataset
+## Test-dataset①
 
 - 治療効果は各々別個にいれてある
 - DAGは上記の通り
@@ -284,6 +296,7 @@ tidy_dagitty(dag) |>
 - ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)
 - SESは観測されない交絡因子
 
+## Test-dataset②
 
 ```{r} 
 #| label: Make-Toydata
@@ -1004,6 +1017,11 @@ ggplot() +
     )
 
 ```
+
+## Thank you for your listening
+
+
+
 
 
 ## Simple regression

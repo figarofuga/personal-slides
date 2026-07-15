@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja"><head>
+<html lang="en"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -10,8 +10,8 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Nozomi Niimi">
-  <meta name="dcterms.date" content="2026-09-01">
-  <title>My personal slides – 脳梗塞予防の抗血栓薬のエトセトラ</title>
+  <meta name="dcterms.date" content="2025-02-04">
+  <title>My personal slides – 機械学習を用いた因果推論</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -145,6 +145,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
 <script src="mathjax-config.js"></script>
@@ -152,7 +155,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">脳梗塞予防の抗血栓薬のエトセトラ</h1>
+  <h1 class="title">機械学習を用いた因果推論</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -168,201 +171,295 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
     </div>
 </div>
 
-  <p class="date">2026-09-01</p>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">目次</h2>
-<ul>
-<li><a href="#/答えはないけれど" id="/toc-答えはないけれど">答えはないけれど・・・・・・</a></li>
-<li><a href="#/doac内服中に脳梗塞を再発した時" id="/toc-doac内服中に脳梗塞を再発した時">DOAC内服中に脳梗塞を再発した時</a></li>
-</ul>
-</nav>
+  <p class="date">2025-02-04</p>
 </section>
-<section id="本スライドの目的" class="slide level2">
-<h2>本スライドの目的</h2>
-</section>
-<section id="脳梗塞の抗血小板薬の基本" class="slide level2">
-<h2>脳梗塞の抗血小板薬の基本</h2>
-</section>
-<section id="いつdaptをするの" class="slide level2">
-<h2>いつDAPTをするの？</h2>
-<ul>
-<li><p>基本は「発症早期」の「非心原性」のHigh risk TIAまたは軽症脳梗塞</p>
-<ul>
-<li>TIAとしてはABCD2 4点以上で脳梗塞としてはNIHSS 5点以下</li>
-</ul></li>
-</ul>
-<table class="caption-top">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Trial名</th>
-<th>Inclusion</th>
-<th>発症からの時間</th>
-<th>介入</th>
-<th>NNT</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>CHANCE</td>
-<td>ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞</td>
-<td>24hr</td>
-<td>ASA+CLOを21日</td>
-<td>28</td>
-</tr>
-<tr class="even">
-<td>POINT</td>
-<td>ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞</td>
-<td>12hr</td>
-<td>ASA+CLOを90日</td>
-<td>67</td>
-</tr>
-<tr class="odd">
-<td>THALES</td>
-<td>ABCD2≧6のTIAあるいはNIHSS≦5の脳梗塞</td>
-<td>24hr</td>
-<td>ASA+CLOを30日</td>
-<td>91</td>
-</tr>
-<tr class="even">
-<td>CHANCE2</td>
-<td>ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞かつCYP2C19のloss-of-function allele</td>
-<td>24hr</td>
-<td>ASA+Ticagrelorを21日</td>
-<td>63</td>
-</tr>
-<tr class="odd">
-<td>INSPIRES</td>
-<td>ABCD2≧4のTIAあるいはNIHSS≦5の脳梗塞かつアテローム性を疑う</td>
-<td>72hr</td>
-<td>ASA+CLOを21日</td>
-<td>53</td>
-</tr>
-</tbody>
-</table>
-<p><span class="citation" data-cites="Prabhakaran2026-dz">(<a href="#/reference" role="doc-biblioref" onclick="">Prabhakaran ほか 2026年</a>)</span></p>
-</section>
-<section id="いつ抗凝固を開始するの" class="slide level2">
-<h2>いつ抗凝固を開始するの？</h2>
-<ul>
-<li>心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い
-<ul>
-<li>古い研究では最初の48時間で4.8%が再発し、抗凝固されないと10日で13%が全身性の塞栓症を発症していた<span class="citation" data-cites="Kleindorfer2021-uv Hart1983-wi">(<a href="#/reference" role="doc-biblioref" onclick="">Kleindorfer ほか 2021年</a>; <a href="#/reference" role="doc-biblioref" onclick="">Hart ほか 1983年</a>)</span></li>
-</ul></li>
-<li>一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い</li>
-<li>そのため、早期の抗凝固による予防 vs.&nbsp;出血のRiskのせめぎあいがあった</li>
-<li>心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで
-<ul>
-<li>予後改善なし</li>
-<li>出血のみ増加<span class="citation" data-cites="Wang2021-ty">(<a href="#/reference" role="doc-biblioref" onclick="">Wang ほか 2021年</a>)</span></li>
-</ul></li>
-<li>結局、<strong>なんとなく弱めにHeparinを開始したりバイアスピリンを早期に導入していた</strong></li>
-</ul>
-</section>
-<section id="doac時代" class="slide level2">
-<h2>DOAC時代</h2>
-<ul>
-<li><p>DOACはWFに比べて明らかに脳出血を減らし、さらに調整が容易</p></li>
-<li><p>脳塞栓に対して、DOACなら早期導入でよいのではないか？という推定あり</p></li>
-<li><p>4つのRCTがあり、それをまとめると<span class="citation" data-cites="Dehbi2025-cu">(<a href="#/reference" role="doc-biblioref" onclick="">Dehbi ほか 2025年</a>)</span></p>
-<ul>
-<li>早期導入により30日以内の脳梗塞の再発はわずかに減らす(1.68% vs.&nbsp;2.55%)</li>
-<li>早期導入により症候性の脳出血のRiskは変わらない(0.37% vs.&nbsp;0.36%)</li>
-<li>ただし、早期導入は4日以内のようなやや曖昧な感じ</li>
-</ul></li>
-</ul>
-</section>
-<section id="脳梗塞診療で悩ましいとき" class="slide level2">
-<h2>脳梗塞診療で悩ましいとき</h2>
-</section>
-<section>
-<section id="答えはないけれど" class="title-slide slide level1 center">
-<h1>答えはないけれど・・・・・・</h1>
+<section class="slide level2">
 
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.5em;
+  margin-top: 0.7em;
+  text-align: right;
+}
+.reveal .big-message {
+  font-size: 1.35em;
+  text-align: center;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+.reveal img {
+  max-height: 68vh;
+}
+</style>
 </section>
-<section id="抗血小板薬と抗凝固の両者が適応の時" class="slide level2">
-<h2>抗血小板薬と抗凝固の両者が適応の時</h2>
+<section id="症例" class="slide level2">
+<h2>症例</h2>
+<ul>
+<li>26歳女性</li>
+<li>当院で発熱・汎発性腹膜炎で入院</li>
+<li>その後1ヶ月半周期で2回同様の入院歴あり</li>
+<li>これはFMFでは？</li>
+</ul>
 </section>
-<section id="外堀を埋める事実非心原性脳梗塞の抗血小板薬の治療効果" class="slide level2">
-<h2>外堀を埋める事実～非心原性脳梗塞の抗血小板薬の治療効果</h2>
+<section id="fmfとは" class="slide level2">
+<h2>FMFとは</h2>
 <ul>
-<li><p>WARSS trialではWFは非心原性脳梗塞患者に対してASAと同等の予防効果を認めた<span class="citation" data-cites="Mohr2001-ga">(<a href="#/reference" role="doc-biblioref" onclick="">Mohr ほか 2001年</a>)</span></p>
+<li>自然免疫による自己炎症性疾患の1つ</li>
+<li>成人発症でも良い数少ない疾患（それ以外だとPPFAくらい）</li>
+<li>家族性地中海熱は<strong>常染色体劣性（潜性）遺伝形式</strong>で遺伝</li>
+<li><strong>自己炎症性疾患</strong> vs.&nbsp;<del>自己免疫疾患</del></li>
+</ul>
+</section>
+<section id="自己免疫疾患" class="slide level2">
+<h2>自己免疫疾患</h2>
+
+<img data-src="images/autoinflammation.png" style="width:58.0%" alt="自己炎症と自己免疫の模式図" class="r-stretch"><ul>
+<li>好中球による炎症反応
 <ul>
-<li><p>死亡または脳梗塞はWFでやや多いが17.8% vs.&nbsp;16%で有意差なし</p></li>
-<li><p>出血はMinorな出血で20.8% vs.&nbsp;12.9%でWFで有意に多い</p></li>
+<li>抗原暴露によるリンパ球による獲得免疫ではない</li>
+</ul></li>
+<li>PAMs, DAMPsの刺激から始まる</li>
+<li>成人発症でも良い数少ない疾患（他にはAOSD, TRAPS, PPFA, VEXAS症候群） <span class="citation" data-cites="takagishi2024_flowchart">(<a href="#/references" role="doc-biblioref" onclick="">勝繁 2024</a>)</span></li>
+</ul>
+</section>
+<section id="膠原病の考え方" class="slide level2">
+<h2>膠原病の考え方</h2>
+
+<img data-src="images/jikoensho_jikomenneki.jpeg" alt="自己炎症と自己免疫の考え方" class="r-stretch"><ul>
+<li>自己炎症 vs.&nbsp;自己免疫で大きく分かれる
+<ul>
+<li>自己免疫はリンパ球に、自己炎症は好中球によって生じる</li>
 </ul></li>
 </ul>
 </section>
-<section id="外堀を埋める事実心原性脳梗塞の抗凝固の治療効果" class="slide level2">
-<h2>外堀を埋める事実～心原性脳梗塞の抗凝固の治療効果</h2>
+<section id="自己免疫疾患と自己炎症性疾患" class="slide level2">
+<h2>自己免疫疾患と自己炎症性疾患</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
 <ul>
-<li>EAFT trialではAF+脳塞栓症の患者に対してPlaceboに比べて再発を1/3まで減らす(OR 0.34, 95% CI 0.20–0.56)<span class="citation" data-cites="Klijn2019-ex">(<a href="#/reference" role="doc-biblioref" onclick="">Klijn ほか 2019年</a>)</span></li>
+<li>自己免疫も自己炎症もスペクトラム</li>
+<li>境界領域の疾患が存在する
+<ul>
+<li>簡単にいうとコルヒチンが効く疾患は全部自己炎症寄り
+<ul>
+<li>再発性心外膜炎</li>
+<li>成人Still病</li>
+<li>ベーチェット病</li>
+<li>SpA</li>
+<li>壊疽性膿皮症</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img data-src="images/jikoensho_spect.jpeg" style="width:100.0%" alt="自己免疫疾患と自己炎症性疾患のスペクトラム"></p>
+</div></div>
+</section>
+<section id="fmfの疫学" class="slide level2">
+<h2>FMFの疫学</h2>
+<ul>
+<li><p>トルコ人に多い（シルクロード）</p></li>
+<li><p>2009年の研究だと日本人で約500人で男女差はない <span class="citation" data-cites="nanbyou_fmf">(<a href="#/references" role="doc-biblioref" onclick="">難病情報センター, n.d.</a>)</span></p></li>
+<li><p>潜在的にはもっとたくさんいると思われている</p></li>
 </ul>
 </section>
-<section id="外堀を埋める事実抗凝固の非心原性脳梗塞の予防効果" class="slide level2">
-<h2>外堀を埋める事実～抗凝固の非心原性脳梗塞の予防効果</h2>
+<section id="fmfの症状" class="slide level2">
+<h2>FMFの症状</h2>
 <ul>
-<li>複数のRCTのSystematic reviewだと約15%低下はしていたが統計学的に有意ではなかった<span class="citation" data-cites="Klijn2019-ex">(<a href="#/reference" role="doc-biblioref" onclick="">Klijn ほか 2019年</a>)</span></li>
+<li>中核症状として、高熱が半日〜3日間持続</li>
+<li>ある程度決まった間隔（4週間が最多だが個人差あり）での発作
+<ul>
+<li>ストレスや感染症、月経などに影響される。期間の長さは個人差がある</li>
+</ul></li>
+<li>発熱以外に複数の症状がある
+<ul>
+<li><strong>腹痛</strong></li>
+<li>関節炎</li>
+<li>胸膜炎</li>
+<li>筋痛</li>
+<li>皮膚症状 <span class="citation" data-cites="padeh2016_fmf">(<a href="#/references" role="doc-biblioref" onclick="">Padeh and Berkun 2016</a>)</span></li>
+</ul></li>
 </ul>
 </section>
-<section id="外堀を埋める事実抗血小板と抗凝固の併用の出血risk" class="slide level2">
-<h2>外堀を埋める事実～抗血小板と抗凝固の併用の出血Risk</h2>
-</section>
-<section id="外堀を埋める事実afpciの時は" class="slide level2">
-<h2>外堀を埋める事実～AF+PCIの時は？</h2>
-</section></section>
-<section>
-<section id="doac内服中に脳梗塞を再発した時" class="title-slide slide level1 center">
-<h1>DOAC内服中に脳梗塞を再発した時</h1>
+<section id="よくわからない" class="slide level2">
+<h2>よくわからない！</h2>
 
-</section>
-<section id="外堀を埋める事実doac内服中の脳梗塞再発率" class="slide level2">
-<h2>外堀を埋める事実～DOAC内服中の脳梗塞再発率</h2>
-</section>
-<section id="外堀を埋める事実doac内服中の脳梗塞再発の観察研究" class="slide level2">
-<h2>外堀を埋める事実～DOAC内服中の脳梗塞再発の観察研究</h2>
-</section>
-<section id="thank-you-for-listening" class="slide level2">
-<h2>Thank you for listening</h2>
+<img data-src="images/fmf_symp_jp.jpeg" alt="FMFの症状" class="r-stretch"><ul>
+<li>高熱が半日〜3日間持続</li>
+<li>ある程度決まった間隔（4週間が最多だが個人差あり）での発作
 <ul>
-<li>ご清聴ありがとうございました</li>
+<li>ストレスや感染症、月経などに影響される。期間の長さは個人差がある</li>
+</ul></li>
+<li>発作間は症状がないのが特徴</li>
+<li>急性腹症、胸膜炎などの漿膜炎や関節炎などが特徴的</li>
 </ul>
 </section>
-<section id="reference" class="slide level2 smaller scrollable">
-<h2>Reference</h2>
+<section id="fmfを一言で言うなら" class="slide level2">
+<h2>FMFを一言で言うなら</h2>
+<div class="big-message">
+<p>イメージは <span style="color: red;"><strong>定期的な発熱 + 繰り返す虫垂炎</strong></span></p>
+</div>
+</section>
+<section id="fmfの鑑別診断" class="slide level2">
+<h2>FMFの鑑別診断</h2>
+<ul>
+<li>SLEなどの自己免疫性疾患</li>
+<li>IgA血管炎などの血管炎の発作</li>
+<li>IBDのような局所的な自己免疫性疾患</li>
+<li>Porphyriaなどの代謝性疾患</li>
+<li>遺伝性血管神経性浮腫などの急性腹症の希少疾患</li>
+</ul>
+</section>
+<section id="fmfの診断" class="slide level2">
+<h2>FMFの診断</h2>
+
+<img data-src="images/fmf_diagnosis_jp.jpeg" alt="FMFの診断基準" class="r-stretch"><ul>
+<li>Tel-Hashomer基準は特異度が高すぎると言われている</li>
+<li>日本だと厚生労働省が別個に定めている</li>
+</ul>
+</section>
+<section id="fmfの診断日本の事情" class="slide level2">
+<h2>FMFの診断～日本の事情</h2>
+<ul>
+<li>日本人は海外症例と比べて患者背景が大きく異なる
+<ul>
+<li>発症年齢が高い</li>
+<li>腹膜炎症状が少ない</li>
+<li>アミロイドーシス合併が少ない</li>
+</ul></li>
+<li>日本人のFMFのうち非典型例とされるのが4割ほどいるとされる</li>
+</ul>
+</section>
+<section id="fmfの診断は簡単" class="slide level2">
+<h2>FMFの診断は簡単？</h2>
+<ul>
+<li>典型例は知識があれば診断は簡単</li>
+<li>一方で、基準を満たさない、“FMF崩れ”みたいな症状が多いと言われている</li>
+<li>大まかなゲシュタルトとして若年者の<br>「繰り返す発熱と腹痛（+高CRP）」を忘れない</li>
+</ul>
+</section>
+<section id="fmfの診断-1" class="slide level2">
+<h2>FMFの診断</h2>
+<ul>
+<li>遺伝子検査は必須ではない
+<ul>
+<li>遺伝子異常があっても発症しない事も多い（浸透率が高くない）</li>
+<li>逆に遺伝子異常がない人もFMFを発症することもある</li>
+</ul></li>
+<li>常に<strong>臨床診断</strong></li>
+<li>特に重要なのは<strong>コルヒチンの反応性</strong></li>
+</ul>
+</section>
+<section id="fmfの診断遺伝子検査" class="slide level2">
+<h2>FMFの診断～遺伝子検査</h2>
+<ul>
+<li>16番染色体上の16p 13.3領域のMEFV遺伝子が関連遺伝子と知られている</li>
+<li>関連がある遺伝子異常は300以上あると言われている</li>
+<li>日本人のデータだと</li>
+<li>非典型例だとMEFV遺伝子エクソン10の変異は少ない
+<ul>
+<li>エクソン1（E84K）</li>
+<li>エクソン2（E148Q，L110P-E148Q）</li>
+<li>エクソン3（P369S-R408Q）</li>
+<li>エクソン5（S503C）</li>
+</ul></li>
+<li>遺伝子検査の判定は難しい</li>
+</ul>
+</section>
+<section id="fmfの診断プラクティカルアプローチ" class="slide level2">
+<h2>FMFの診断～プラクティカルアプローチ</h2>
+<!-- TODO: 元スライドは images/fmf_flowchart.png の画像。ここでは内容を Mermaid 化した下書きとして再構成。必要なら画像版も併記する。 -->
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  A["FMF疑い例"] --&gt; B["典型例に当てはまらない症例"]
+  A --&gt; C["FMF典型例"]
+  C --&gt; Z["FMF"]
+  B --&gt; D["MEFV遺伝子解析"]
+  D --&gt; E["変異なし"]
+  D --&gt; F["Exon10以外の変異あり&lt;br&gt;E84K, E148Q, L110P-E148Q,&lt;br&gt;P369S-R408Q, R202Q,&lt;br&gt;G304R, S503C&lt;br&gt;※ヘテロの変異を含む"]
+  D --&gt; G["Exon10の変異あり&lt;br&gt;M694I, M680I,&lt;br&gt;M694V, V726A&lt;br&gt;※ヘテロの変異を含む"]
+  E --&gt; H["コルヒチン（診断的投与）"]
+  F --&gt; H
+  H --&gt; I["反応なし"]
+  H --&gt; J["反応あり"]
+  I --&gt; K["他疾患の検索&lt;br&gt;感染症・悪性疾患・&lt;br&gt;自己免疫疾患・&lt;br&gt;他の自己炎症性疾患等"]
+  J --&gt; L["FMF非典型例"]
+  G --&gt; Z
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="遺伝子検査の方法" class="slide level2">
+<h2>遺伝子検査の方法</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>東京女子医大学に依頼</li>
+<li>東北大学病院 血液内科・<br>リウマチ膠原病内科</li>
+<li>筑波大学医学医療系小児科</li>
+<li>東京医科歯科大学膠原病・リウマチ<br>先端治療センター</li>
+<li>東京女子医科大学膠原病リウマチ<br>痛風センター</li>
+<li>国立成育医療研究センター免疫科</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>信州大学医学部附属病院脳神経内科／<br>リウマチ・膠原病内科</li>
+<li>岐阜大学医学部附属病院小児科</li>
+<li>藤田医科大学病院臨床遺伝科</li>
+<li>兵庫医科大学病院アレルギー・<br>リウマチ内科</li>
+<li>川崎医科大学附属病院リウマチ・<br>膠原病科</li>
+<li>九州大学医学部 小児科</li>
+<li>久留米大学医学部 小児科学教室</li>
+</ul>
+</div></div>
+<p><span class="citation" data-cites="qlife_genetics_fmf">(<a href="#/references" role="doc-biblioref" onclick="">遺伝性疾患プラス, n.d.</a>)</span></p>
+</section>
+<section id="fmfの治療" class="slide level2">
+<h2>FMFの治療</h2>
+<ul>
+<li>QOLの改善とAmyloidosis予防が目的</li>
+<li>コルヒチンは90%以上で有用</li>
+<li>コルヒチンが無効な場合はIL-1β阻害薬を使う</li>
+</ul>
+</section>
+<section id="take-home-message" class="slide level2">
+<h2>Take home message</h2>
+<ul>
+<li>若年女性の繰り返す発熱と腹痛はFMFを疑う</li>
+<li>診断は臨床第一、コルヒチンの診断的治療をためらわない！
+<ul>
+<li>家族歴がなくても良い！</li>
+<li>遺伝子異常がなくても良い！</li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="slide level2 scrollable smaller">
+<h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Dehbi2025-cu" class="csl-entry" role="listitem">
-Dehbi, Hakim-Moulay, Urs Fischer, Signild Åsberg, ほか. 2025年. <span>「Collaboration on the optimal timing of anticoagulation after ischaemic stroke and atrial fibrillation: a systematic review and prospective individual participant data meta-analysis of randomised controlled trials (<span>CATALYST</span>)」</span>. <em>Lancet</em> 406 (10498): 43–51. <a href="https://doi.org/10.1016/S0140-6736(25)00439-8">https://doi.org/10.1016/S0140-6736(25)00439-8</a>.
+<div id="ref-padeh2016_fmf" class="csl-entry" role="listitem">
+Padeh, Shai, and Yackov Berkun. 2016. <span>“Familial Mediterranean Fever.”</span> <em>Current Opinion in Rheumatology</em> 28 (5): 523–29. <a href="https://doi.org/10.1097/BOR.0000000000000315">https://doi.org/10.1097/BOR.0000000000000315</a>.
 </div>
-<div id="ref-Hart1983-wi" class="csl-entry" role="listitem">
-Hart, R G, B M Coull, と D Hart. 1983年. <span>「Early recurrent embolism associated with nonvalvular atrial fibrillation: a retrospective study」</span>. <em>Stroke; a Journal of Cerebral Circulation</em> 14 (5): 688–93. <a href="https://doi.org/10.1161/01.str.14.5.688">https://doi.org/10.1161/01.str.14.5.688</a>.
+<div id="ref-takagishi2024_flowchart" class="csl-entry" role="listitem">
+勝繁. 2024. <em>ホスピタリストのための内科診療フローチャート: 専門的対応が求められる疾患の診療の流れとエビデンス</em>. 第3版 ed. シーニュ.
 </div>
-<div id="ref-Kleindorfer2021-uv" class="csl-entry" role="listitem">
-Kleindorfer, Dawn O, Amytis Towfighi, Seemant Chaturvedi, ほか. 2021年. <span>「2021 guideline for the prevention of stroke in patients with stroke and transient ischemic attack: A guideline from the American heart association/American stroke association」</span>. <em>Stroke; a Journal of Cerebral Circulation</em> 52 (7): e364–467. <a href="https://doi.org/10.1161/STR.0000000000000375">https://doi.org/10.1161/STR.0000000000000375</a>.
+<div id="ref-qlife_genetics_fmf" class="csl-entry" role="listitem">
+遺伝性疾患プラス. n.d. <em>家族性地中海熱</em>. <a href="https://genetics.qlife.jp/diseases/familial-mediterranean-fever/">https://genetics.qlife.jp/diseases/familial-mediterranean-fever/</a>.
 </div>
-<div id="ref-Klijn2019-ex" class="csl-entry" role="listitem">
-Klijn, Catharina Jm, Maurizio Paciaroni, Eivind Berge, ほか. 2019年. <span>「Antithrombotic treatment for secondary prevention of stroke and other thromboembolic events in patients with stroke or transient ischemic attack and non-valvular atrial fibrillation: A European Stroke Organisation guideline」</span>. <em>European Stroke Journal</em> 4 (3): 198–223. <a href="https://doi.org/10.1177/2396987319841187">https://doi.org/10.1177/2396987319841187</a>.
-</div>
-<div id="ref-Mohr2001-ga" class="csl-entry" role="listitem">
-Mohr, J P, J L Thompson, R M Lazar, ほか. 2001年. <span>「A comparison of warfarin and aspirin for the prevention of recurrent ischemic stroke」</span>. <em>The New England Journal of Medicine</em> 345 (20): 1444–51. <a href="https://doi.org/10.1056/NEJMoa011258">https://doi.org/10.1056/NEJMoa011258</a>.
-</div>
-<div id="ref-Prabhakaran2026-dz" class="csl-entry" role="listitem">
-Prabhakaran, Shyam, Nestor R Gonzalez, Kori S Zachrison, ほか. 2026年. <span>「2026 guideline for the Early Management of Patients With acute ischemic stroke: A guideline from the American heart association/American stroke association」</span>. <em>Stroke; a Journal of Cerebral Circulation</em>, no. STR.0000000000000513 (1月). <a href="https://doi.org/10.1161/STR.0000000000000513">https://doi.org/10.1161/STR.0000000000000513</a>.
-</div>
-<div id="ref-Wang2021-ty" class="csl-entry" role="listitem">
-Wang, Xia, Menglu Ouyang, Jie Yang, Lili Song, Min Yang, と Craig S Anderson. 2021年. <span>「Anticoagulants for acute ischaemic stroke」</span>. <em>Cochrane Database of Systematic Reviews</em> 10 (12): CD000024. <a href="https://doi.org/10.1002/14651858.CD000024.pub5">https://doi.org/10.1002/14651858.CD000024.pub5</a>.
+<div id="ref-nanbyou_fmf" class="csl-entry" role="listitem">
+難病情報センター. n.d. <em>家族性地中海熱（指定難病266）</em>. <a href="https://www.nanbyou.or.jp/entry/4447">https://www.nanbyou.or.jp/entry/4447</a>.
 </div>
 </div>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -639,12 +736,12 @@ Wang, Xia, Menglu Ouyang, Jie Yang, Lili Song, Min Yang, と Craig S Anderson. 2
           // flash "checked"
           button.classList.add('code-copy-button-checked');
           var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "コピーしました");
+          button.setAttribute("title", "Copied!");
           let tooltip;
           if (window.bootstrap) {
             button.setAttribute("data-bs-toggle", "tooltip");
             button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "コピーしました");
+            button.setAttribute("data-bs-title", "Copied!");
             tooltip = new bootstrap.Tooltip(button, 
               { trigger: "manual", 
                 customClass: "code-copy-button-tooltip",

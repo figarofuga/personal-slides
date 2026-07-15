@@ -36,18 +36,10 @@ knitr:
 bibliography: references.bib
 ---
 
-<!--
-TODO: PEG.typ から Quarto reveal.js 用に変換した叩き台。
-TODO: Typst/Touying 固有の theme, place, box, grid, columns, tall-slide などのレイアウト指定は省略。
-TODO: 複雑な図・表・画像サイズは必要に応じて手動調整。
--->
-
-
 # 代替栄養とは
 
 
 ## 代替栄養とは
-
 
 - 代替栄養（Artificial Nutrition）は、経口摂取が困難な患者に対して、栄養を補給するための医療行為
 - 主に、経管栄養（Enteral Nutrition）と静脈栄養（Parenteral Nutrition）の2つに分類される

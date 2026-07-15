@@ -28,17 +28,19 @@ If we made qmd file for slides, then do as follows.
 
 ```bash
 
+source .venv/bin/activate
+
 # quarto render
 # touch docs/.nojekyll
 ./scripts/render-site.sh
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Complete pituitary incidentaloma slides"
+git commit -m "Progress mlcausal slides"
 git push
 
 ```
 
-TODO: complete mlcausal, and systemic amyloidosis.
+TODO: complete mlcausal, FMF, and systemic amyloidosis.
 
 # Plans: 
 

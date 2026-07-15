@@ -1404,7 +1404,7 @@
     "href": "statistics/mlcausal/index.html#世界は結構複雑にできている",
     "title": "機械学習を用いた因果推論",
     "section": "世界は結構複雑にできている",
-    "text": "世界は結構複雑にできている\n\n上記以外にも、「誰に」「どの程度」の治療効果があるか分からない\n\n治療効果の異質性\n\n「因果推論の根本的問題」\n\n同じ人間で介入をする/しないを観察出来ない\n\nRCTですら"
+    "text": "世界は結構複雑にできている\n\n交絡因子の制御は実際はかなり難しい\n何を、どう補正するか？\nStratification、Matching、Weighting・・・・・・"
   },
   {
     "objectID": "statistics/mlcausal/index.html#dataの説明",
@@ -1460,7 +1460,7 @@
     "href": "statistics/mlcausal/index.html#それでもなお問題が残る",
     "title": "機械学習を用いた因果推論",
     "section": "それでもなお、問題が残る",
-    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？\n\n\n\nn = 6000 \n\n\nNaive diff (unadjusted): 8.265991 \n\n\nG-computation ATE (Q-model only): 8.839814 \n\n\nTMLE ATE (targeted): 9.068977 \n\n\nTMLE 95% CI: 8.246636 to 9.891317 \n\n\n\n\n\nCall:\nglm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + \n    lvef + palpitation, family = gaussian(), data = dat_ortho)\n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***\nca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***\nage         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***\nsexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***\nbmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***\nhf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***\nbnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***\nlvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***\npalpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.57486)\n\n    Null deviance: 1316132  on 5999  degrees of freedom\nResidual deviance:  482724  on 5991  degrees of freedom\nAIC: 43373\n\nNumber of Fisher Scoring iterations: 2\n\n\n      ca \n8.839814 \n\n\n\nCall:\nglm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), \n    data = dat_ortho)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \na_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.46741)\n\n    Null deviance: 566906  on 6000  degrees of freedom\nResidual deviance: 482724  on 5999  degrees of freedom\nAIC: 43357\n\nNumber of Fisher Scoring iterations: 2\n\n\na_resid_lpm \n   8.839814"
+    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？\n\n\n\nn = 6000 \n\n\nNaive diff (unadjusted): 8.265991 \n\n\nG-computation ATE (Q-model only): 8.839814 \n\n\nTMLE ATE (targeted): 9.068977 \n\n\nTMLE 95% CI: 8.246636 to 9.891317 \n\n\n\n\n\nCall:\nglm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + \n    lvef + palpitation, family = gaussian(), data = dat_ortho)\n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***\nca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***\nage         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***\nsexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***\nbmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***\nhf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***\nbnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***\nlvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***\npalpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.57486)\n\n    Null deviance: 1316132  on 5999  degrees of freedom\nResidual deviance:  482724  on 5991  degrees of freedom\nAIC: 43373\n\nNumber of Fisher Scoring iterations: 2\n\n\n      ca \n8.839814 \n\n\n\nCall:\nglm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), \n    data = dat_ortho)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \na_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.46741)\n\n    Null deviance: 566906  on 6000  degrees of freedom\nResidual deviance: 482724  on 5999  degrees of freedom\nAIC: 43357\n\nNumber of Fisher Scoring iterations: 2\n\n\na_resid_lpm \n   8.839814 \n\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x751c1a2a4f80&gt;\n\n\n[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習とは",
@@ -1495,7 +1495,7 @@
     "href": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
     "title": "機械学習を用いた因果推論",
     "section": "機械学習を用いた因果推論について",
-    "text": "機械学習を用いた因果推論について\n\n大別してMeta learner系とCausal forest系に分けられる\n柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest\nとはいえ、Causal forestだけで良い気もする\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x780147e9f200&gt;\n\n\n[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]"
+    "text": "機械学習を用いた因果推論について\n\n大別してMeta learner系とCausal forest系に分けられる\n柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest\nとはいえ、Causal forestだけで良い気もする"
   },
   {
     "objectID": "statistics/mlcausal/index.html#scratch-for-s-learner",
@@ -1508,22 +1508,22 @@
     "objectID": "statistics/mlcausal/index.html#t-learner",
     "href": "statistics/mlcausal/index.html#t-learner",
     "title": "機械学習を用いた因果推論",
-    "section": "T learner",
-    "text": "T learner\n\nt-learner"
+    "section": "T-learner",
+    "text": "T-learner"
   },
   {
     "objectID": "statistics/mlcausal/index.html#scratch-for-t-learner",
     "href": "statistics/mlcausal/index.html#scratch-for-t-learner",
     "title": "機械学習を用いた因果推論",
     "section": "Scratch for T-learner",
-    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x7801476ed1c0&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834\n 10.7685034 ]"
+    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x751c1a2638c0&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834\n 10.7685034 ]"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
     "href": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
     "title": "機械学習を用いた因果推論",
     "section": "機械学習の因果推論における使い方",
-    "text": "機械学習の因果推論における使い方\n\n交絡因子の調整で機械学習を用いる\n\nAIPW, tlmeなど\n\n因果をダイレクトに推論する学習機を作る\n\nMeta-learner\n\nCATEを測定する\n\nCausal forestなど\n\n\n\n\n&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x7 &gt;\n\n&gt; 8013ed941d0&gt;"
+    "text": "機械学習の因果推論における使い方\n\n交絡因子の調整で機械学習を用いる\n\nAIPW, tlmeなど\n\n因果をダイレクトに推論する学習機を作る\n\nMeta-learner\n\nCATEを測定する\n\nCausal forestなど\n\n\n\n\n&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x7 &gt;\n\n&gt; 51c12e68410&gt;"
   },
   {
     "objectID": "statistics/mlcausal/index.html#因果forest",
@@ -1537,7 +1537,7 @@
     "href": "statistics/mlcausal/index.html#survival-model",
     "title": "機械学習を用いた因果推論",
     "section": "Survival model",
-    "text": "Survival model\n\n\n\n          control      treated\n[1,] -0.096239271  0.096239271\n[2,] -0.023472267  0.023472267\n[3,] -0.350801733  0.350801733\n[4,] -0.004023857  0.004023857\n[5,]  3.260398228 -3.260398228\n[6,] -0.009254241  0.009254241\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.6.0 (2026-04-24)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-07-05\n pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)\n quarto   1.9.38 @ /opt/quarto/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n arg               0.1.1      2026-05-27 [2] CRAN (R 4.6.0)\n backports         1.5.1      2026-04-03 [2] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [2] CRAN (R 4.5.2)\n bayestestR      * 0.18.1     2026-05-24 [2] CRAN (R 4.6.0)\n bonsai          * 0.4.1      2026-05-21 [2] CRAN (R 4.6.0)\n boot              1.3-32     2025-08-29 [2] RSPM (R 4.5.0)\n broom           * 1.0.13     2026-05-14 [2] CRAN (R 4.6.0)\n bspm              0.5.8      2026-01-29 [1] CRAN (R 4.6.0)\n cachem            1.1.0      2024-05-16 [2] RSPM (R 4.4.0)\n checkmate         2.3.4      2026-02-03 [2] CRAN (R 4.5.2)\n chk               0.10.0     2025-01-24 [2] RSPM (R 4.4.0)\n class             7.3-23     2025-01-01 [2] RSPM (R 4.4.0)\n cli               3.6.6      2026-04-09 [2] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [2] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [2] RSPM (R 4.4.0)\n colorspace        2.1-2      2025-09-22 [2] RSPM (R 4.5.0)\n correlation     * 0.8.8      2025-07-08 [2] RSPM (R 4.5.0)\n curl              7.1.0      2026-04-22 [2] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [2] RSPM (R 4.4.0)\n data.table        1.18.4     2026-05-06 [2] CRAN (R 4.6.0)\n datawizard      * 1.3.1      2026-04-26 [2] CRAN (R 4.5.3)\n DiagrammeR        1.0.12     2026-04-27 [2] CRAN (R 4.5.3)\n dials           * 1.4.3      2026-04-11 [2] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [2] RSPM (R 4.4.0)\n digest            0.6.39     2025-11-19 [2] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [2] CRAN (R 4.5.3)\n easystats       * 0.7.6      2026-05-24 [2] CRAN (R 4.6.0)\n effectsize      * 1.0.2      2026-03-11 [2] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [2] RSPM (R 4.5.0)\n farver            2.1.2      2024-05-13 [2] RSPM (R 4.4.2)\n fastmap           1.2.0      2024-05-15 [2] RSPM (R 4.4.2)\n forcats         * 1.0.1      2025-09-25 [2] RSPM (R 4.5.0)\n foreign           0.8-90     2025-03-31 [2] RSPM (R 4.4.0)\n Formula           1.2-5      2023-02-24 [2] RSPM (R 4.4.0)\n furrr             0.4.0      2026-03-31 [2] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [2] CRAN (R 4.5.2)\n future.apply      1.20.2     2026-02-20 [2] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [2] RSPM (R 4.5.0)\n ggcube          * 0.1.0      2026-05-27 [2] CRAN (R 4.6.0)\n ggdag           * 0.2.13     2024-07-22 [2] RSPM (R 4.4.0)\n ggforce           0.5.0      2025-06-18 [2] RSPM (R 4.5.0)\n ggplot2         * 4.0.3      2026-04-22 [2] CRAN (R 4.5.3)\n ggraph            2.2.2      2025-08-24 [2] RSPM (R 4.5.0)\n ggrepel           0.9.8      2026-03-17 [2] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [2] CRAN (R 4.5.2)\n glue              1.8.1      2026-04-17 [2] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [2] RSPM (R 4.4.2)\n graphlayouts      1.2.3      2026-02-21 [2] CRAN (R 4.5.2)\n grf             * 2.6.1      2026-03-04 [2] CRAN (R 4.5.2)\n gridExtra         2.3        2017-09-09 [2] CRAN (R 4.0.1)\n gtable            0.3.6      2024-10-25 [2] RSPM (R 4.4.0)\n hardhat           1.4.3      2026-04-04 [2] CRAN (R 4.5.3)\n here            * 1.0.2      2025-09-15 [2] RSPM (R 4.5.0)\n Hmisc           * 5.2-5      2026-01-09 [2] CRAN (R 4.5.2)\n hms               1.1.4      2025-10-17 [2] RSPM (R 4.5.0)\n htmlTable         2.5.0      2026-04-22 [2] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [2] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [2] RSPM (R 4.4.0)\n igraph            2.3.2      2026-05-29 [2] CRAN (R 4.6.0)\n infer           * 1.1.0      2025-12-18 [2] CRAN (R 4.5.2)\n insight         * 1.5.1      2026-05-21 [2] CRAN (R 4.6.0)\n ipred             0.9-15     2024-07-18 [2] RSPM (R 4.4.0)\n isoband           0.3.0      2025-12-07 [2] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [2] RSPM (R 4.4.0)\n knitr             1.51       2025-12-20 [2] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [2] RSPM (R 4.4.0)\n lattice           0.22-9     2026-02-09 [2] CRAN (R 4.5.2)\n lava              1.9.1      2026-05-14 [2] CRAN (R 4.6.0)\n lifecycle         1.0.5      2026-01-08 [2] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [2] RSPM (R 4.4.0)\n listenv           0.10.1     2026-03-10 [2] CRAN (R 4.5.2)\n litedown          0.9        2025-12-18 [2] CRAN (R 4.5.2)\n lmtest            0.9-40     2022-03-21 [2] RSPM (R 4.4.0)\n lubridate       * 1.9.5      2026-02-04 [2] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [2] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [2] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [2] RSPM (R 4.4.0)\n MatchIt         * 4.7.2      2025-05-30 [2] RSPM (R 4.5.0)\n Matrix            1.7-5      2026-03-21 [2] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [2] RSPM (R 4.4.0)\n memoise           2.0.1      2021-11-26 [2] RSPM (R 4.4.0)\n modelbased      * 0.15.0     2026-05-10 [2] CRAN (R 4.6.0)\n modeldata       * 1.5.1      2025-08-22 [2] RSPM (R 4.5.0)\n modelenv          0.2.0      2024-10-14 [2] RSPM (R 4.4.0)\n modelsummary    * 2.6.0      2026-02-13 [2] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [2] CRAN (R 4.5.2)\n mvtnorm           1.4-1      2026-06-06 [2] CRAN (R 4.6.0)\n nlme              3.1-168    2025-03-31 [2] RSPM (R 4.4.0)\n nnet              7.3-20     2025-01-01 [2] RSPM (R 4.4.2)\n otel              0.2.0      2025-08-29 [2] RSPM (R 4.5.0)\n parallelly        1.47.0     2026-04-17 [2] CRAN (R 4.5.3)\n parameters      * 0.29.1     2026-05-24 [2] CRAN (R 4.6.0)\n parsnip         * 1.6.0      2026-05-14 [2] CRAN (R 4.6.0)\n performance     * 0.17.0     2026-05-21 [2] CRAN (R 4.6.0)\n pillar            1.11.1     2025-09-17 [2] RSPM (R 4.5.0)\n pkgconfig         2.0.3      2019-09-22 [2] RSPM (R 4.4.0)\n png               0.1-9      2026-03-15 [2] CRAN (R 4.5.2)\n policytree      * 1.2.4      2026-02-18 [2] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [2] RSPM (R 4.4.0)\n polyclip          1.10-7     2024-07-23 [2] RSPM (R 4.4.2)\n prodlim           2026.03.11 2026-03-11 [2] CRAN (R 4.5.2)\n purrr           * 1.2.2      2026-04-10 [2] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [2] RSPM (R 4.4.0)\n R6                2.6.1      2025-02-15 [2] RSPM (R 4.4.0)\n RColorBrewer      1.1-3      2022-04-03 [2] RSPM (R 4.4.0)\n Rcpp              1.1.1-1.1  2026-04-24 [2] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [2] CRAN (R 4.5.2)\n recipes         * 1.3.3      2026-05-30 [2] CRAN (R 4.6.0)\n report          * 0.6.4      2026-05-04 [2] CRAN (R 4.6.0)\n reticulate      * 1.46.0     2026-04-09 [2] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [2] CRAN (R 4.6.0)\n rmarkdown         2.31       2026-03-26 [2] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [2] CRAN (R 4.5.2)\n rootSolve         1.8.2.4    2023-09-21 [2] RSPM (R 4.4.0)\n rpart             4.1.27     2026-03-27 [2] CRAN (R 4.5.3)\n rprojroot         2.1.1      2025-08-26 [2] RSPM (R 4.5.0)\n rsample         * 1.3.2      2026-01-30 [2] CRAN (R 4.5.2)\n rstudioapi        0.19.0     2026-06-11 [2] CRAN (R 4.6.0)\n S7                0.2.2      2026-04-22 [2] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [2] RSPM (R 4.4.0)\n scales          * 1.4.0      2025-04-24 [2] RSPM (R 4.4.0)\n see             * 0.14.0     2026-05-24 [2] CRAN (R 4.6.0)\n sessioninfo     * 1.2.4      2026-06-04 [2] CRAN (R 4.6.0)\n simsurv         * 1.0.1      2026-01-22 [2] CRAN (R 4.5.2)\n SparseM           1.84-2     2024-07-17 [2] RSPM (R 4.4.2)\n sparsevctrs       0.3.6      2026-01-27 [2] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [2] RSPM (R 4.4.0)\n stringr         * 1.6.0      2025-11-04 [2] RSPM (R 4.5.0)\n survival        * 3.8-6      2026-01-16 [2] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [2] CRAN (R 4.5.2)\n tables            0.9.35     2026-06-04 [2] CRAN (R 4.6.0)\n tailor          * 0.1.0      2025-08-25 [2] RSPM (R 4.5.0)\n TH.data           1.1-5      2025-11-17 [2] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [2] CRAN (R 4.5.2)\n tidygraph         1.3.1      2024-01-30 [2] CRAN (R 4.6.0)\n tidymodels      * 1.5.0      2026-04-23 [2] CRAN (R 4.5.3)\n tidyr           * 1.3.2      2025-12-19 [2] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [2] RSPM (R 4.4.0)\n tidyverse       * 2.0.0      2023-02-22 [2] RSPM (R 4.4.0)\n timechange        0.4.0      2026-01-29 [2] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [2] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [2] CRAN (R 4.5.3)\n tinytable         0.16.0     2026-02-11 [2] CRAN (R 4.5.2)\n tune            * 2.1.0      2026-04-17 [2] CRAN (R 4.5.3)\n tweenr            2.0.3      2024-02-26 [2] CRAN (R 4.6.0)\n tzdb              0.5.0      2025-03-15 [2] RSPM (R 4.4.0)\n utf8              1.2.6      2025-06-08 [2] RSPM (R 4.5.0)\n V8                8.2.0      2026-04-21 [2] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [2] CRAN (R 4.6.0)\n viridis           0.6.5      2024-01-29 [2] RSPM (R 4.4.0)\n viridisLite       0.4.3      2026-02-04 [2] CRAN (R 4.5.2)\n visNetwork        2.1.4      2025-09-04 [2] RSPM (R 4.5.0)\n WeightIt        * 1.7.0      2026-04-22 [2] CRAN (R 4.5.3)\n withr             3.0.2      2024-10-28 [2] RSPM (R 4.4.0)\n workflows       * 1.3.0      2025-08-27 [2] RSPM (R 4.5.0)\n workflowsets    * 1.1.1      2025-05-27 [2] RSPM (R 4.5.0)\n xfun              0.58       2026-06-01 [2] CRAN (R 4.6.0)\n yaml              2.3.12     2025-12-10 [2] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [2] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [2] CRAN (R 4.5.2)\n\n [1] /usr/local/lib/R/site-library\n [2] /usr/lib/R/site-library\n [3] /usr/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.0\n cairoFT\n pango          1.52.1\n png            1.6.43\n jpeg           8.0\n tiff           LIBTIFF, Version 4.5.1\n tcl            8.6\n curl           8.5.0\n zlib           1.3\n bzlib          1.0.8, 13-Jul-2019\n xz             5.4.5\n deflate        1.19\n zstd           1.5.5\n PCRE           10.42 2022-12-11\n ICU            74.2\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          glibc 2.39\n readline       8.2\n BLAS           /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0\n lapack         /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n python:         /home/figarofuga/analysis/personal-slides/.venv/bin/python3.12\n libpython:      /usr/lib/python3.12/config-3.12-x86_64-linux-gnu/libpython3.12.so\n pythonhome:     /home/figarofuga/analysis/personal-slides/.venv:/home/figarofuga/analysis/personal-slides/.venv\n virtualenv:     /home/figarofuga/analysis/personal-slides/.venv/bin/activate_this.py\n version:        3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]\n numpy:          /home/figarofuga/analysis/personal-slides/.venv/lib/python3.12/site-packages/numpy\n numpy_version:  2.4.6\n \n NOTE: Python version was forced by use_python() function\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "Survival model\n\n\n\n          control      treated\n[1,] -0.096239271  0.096239271\n[2,] -0.023472267  0.023472267\n[3,] -0.350801733  0.350801733\n[4,] -0.004023857  0.004023857\n[5,]  3.260398228 -3.260398228\n[6,] -0.009254241  0.009254241\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.6.0 (2026-04-24)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-07-15\n pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)\n quarto   1.9.38 @ /opt/quarto/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n arg               0.1.1      2026-05-27 [2] CRAN (R 4.6.0)\n backports         1.5.1      2026-04-03 [2] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [2] CRAN (R 4.5.2)\n bayestestR      * 0.18.1     2026-05-24 [2] CRAN (R 4.6.0)\n bonsai          * 0.4.1      2026-05-21 [2] CRAN (R 4.6.0)\n boot              1.3-32     2025-08-29 [2] RSPM (R 4.5.0)\n broom           * 1.0.13     2026-05-14 [2] CRAN (R 4.6.0)\n bspm              0.5.8      2026-01-29 [1] CRAN (R 4.6.0)\n cachem            1.1.0      2024-05-16 [2] RSPM (R 4.4.0)\n checkmate         2.3.4      2026-02-03 [2] CRAN (R 4.5.2)\n chk               0.10.0     2025-01-24 [2] RSPM (R 4.4.0)\n class             7.3-23     2025-01-01 [2] RSPM (R 4.4.0)\n cli               3.6.6      2026-04-09 [2] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [2] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [2] RSPM (R 4.4.0)\n colorspace        2.1-2      2025-09-22 [2] RSPM (R 4.5.0)\n correlation     * 0.8.8      2025-07-08 [2] RSPM (R 4.5.0)\n curl              7.1.0      2026-04-22 [2] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [2] RSPM (R 4.4.0)\n data.table        1.18.4     2026-05-06 [2] CRAN (R 4.6.0)\n datawizard      * 1.3.1      2026-04-26 [2] CRAN (R 4.5.3)\n DiagrammeR        1.0.12     2026-04-27 [2] CRAN (R 4.5.3)\n dials           * 1.4.3      2026-04-11 [2] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [2] RSPM (R 4.4.0)\n digest            0.6.39     2025-11-19 [2] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [2] CRAN (R 4.5.3)\n easystats       * 0.7.6      2026-05-24 [2] CRAN (R 4.6.0)\n effectsize      * 1.0.2      2026-03-11 [2] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [2] RSPM (R 4.5.0)\n farver            2.1.2      2024-05-13 [2] RSPM (R 4.4.2)\n fastmap           1.2.0      2024-05-15 [2] RSPM (R 4.4.2)\n forcats         * 1.0.1      2025-09-25 [2] RSPM (R 4.5.0)\n foreign           0.8-90     2025-03-31 [2] RSPM (R 4.4.0)\n Formula           1.2-5      2023-02-24 [2] RSPM (R 4.4.0)\n furrr             0.4.0      2026-03-31 [2] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [2] CRAN (R 4.5.2)\n future.apply      1.20.2     2026-02-20 [2] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [2] RSPM (R 4.5.0)\n ggcube          * 0.1.0      2026-05-27 [2] CRAN (R 4.6.0)\n ggdag           * 0.2.13     2024-07-22 [2] RSPM (R 4.4.0)\n ggforce           0.5.0      2025-06-18 [2] RSPM (R 4.5.0)\n ggplot2         * 4.0.3      2026-04-22 [2] CRAN (R 4.5.3)\n ggraph            2.2.2      2025-08-24 [2] RSPM (R 4.5.0)\n ggrepel           0.9.8      2026-03-17 [2] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [2] CRAN (R 4.5.2)\n glue              1.8.1      2026-04-17 [2] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [2] RSPM (R 4.4.2)\n graphlayouts      1.2.3      2026-02-21 [2] CRAN (R 4.5.2)\n grf             * 2.6.1      2026-03-04 [2] CRAN (R 4.5.2)\n gridExtra         2.3        2017-09-09 [2] CRAN (R 4.0.1)\n gtable            0.3.6      2024-10-25 [2] RSPM (R 4.4.0)\n hardhat           1.4.3      2026-04-04 [2] CRAN (R 4.5.3)\n here            * 1.0.2      2025-09-15 [2] RSPM (R 4.5.0)\n Hmisc           * 5.2-5      2026-01-09 [2] CRAN (R 4.5.2)\n hms               1.1.4      2025-10-17 [2] RSPM (R 4.5.0)\n htmlTable         2.5.0      2026-04-22 [2] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [2] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [2] RSPM (R 4.4.0)\n igraph            2.3.2      2026-05-29 [2] CRAN (R 4.6.0)\n infer           * 1.1.0      2025-12-18 [2] CRAN (R 4.5.2)\n insight         * 1.5.1      2026-05-21 [2] CRAN (R 4.6.0)\n ipred             0.9-15     2024-07-18 [2] RSPM (R 4.4.0)\n isoband           0.3.0      2025-12-07 [2] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [2] RSPM (R 4.4.0)\n knitr             1.51       2025-12-20 [2] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [2] RSPM (R 4.4.0)\n lattice           0.22-9     2026-02-09 [2] CRAN (R 4.5.2)\n lava              1.9.1      2026-05-14 [2] CRAN (R 4.6.0)\n lifecycle         1.0.5      2026-01-08 [2] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [2] RSPM (R 4.4.0)\n listenv           0.10.1     2026-03-10 [2] CRAN (R 4.5.2)\n litedown          0.9        2025-12-18 [2] CRAN (R 4.5.2)\n lmtest            0.9-40     2022-03-21 [2] RSPM (R 4.4.0)\n lubridate       * 1.9.5      2026-02-04 [2] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [2] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [2] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [2] RSPM (R 4.4.0)\n MatchIt         * 4.7.2      2025-05-30 [2] RSPM (R 4.5.0)\n Matrix            1.7-5      2026-03-21 [2] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [2] RSPM (R 4.4.0)\n memoise           2.0.1      2021-11-26 [2] RSPM (R 4.4.0)\n modelbased      * 0.15.0     2026-05-10 [2] CRAN (R 4.6.0)\n modeldata       * 1.5.1      2025-08-22 [2] RSPM (R 4.5.0)\n modelenv          0.2.0      2024-10-14 [2] RSPM (R 4.4.0)\n modelsummary    * 2.6.0      2026-02-13 [2] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [2] CRAN (R 4.5.2)\n mvtnorm           1.4-1      2026-06-06 [2] CRAN (R 4.6.0)\n nlme              3.1-168    2025-03-31 [2] RSPM (R 4.4.0)\n nnet              7.3-20     2025-01-01 [2] RSPM (R 4.4.2)\n otel              0.2.0      2025-08-29 [2] RSPM (R 4.5.0)\n parallelly        1.47.0     2026-04-17 [2] CRAN (R 4.5.3)\n parameters      * 0.29.1     2026-05-24 [2] CRAN (R 4.6.0)\n parsnip         * 1.6.0      2026-05-14 [2] CRAN (R 4.6.0)\n performance     * 0.17.0     2026-05-21 [2] CRAN (R 4.6.0)\n pillar            1.11.1     2025-09-17 [2] RSPM (R 4.5.0)\n pkgconfig         2.0.3      2019-09-22 [2] RSPM (R 4.4.0)\n png               0.1-9      2026-03-15 [2] CRAN (R 4.5.2)\n policytree      * 1.2.4      2026-02-18 [2] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [2] RSPM (R 4.4.0)\n polyclip          1.10-7     2024-07-23 [2] RSPM (R 4.4.2)\n prodlim           2026.03.11 2026-03-11 [2] CRAN (R 4.5.2)\n purrr           * 1.2.2      2026-04-10 [2] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [2] RSPM (R 4.4.0)\n R6                2.6.1      2025-02-15 [2] RSPM (R 4.4.0)\n RColorBrewer      1.1-3      2022-04-03 [2] RSPM (R 4.4.0)\n Rcpp              1.1.1-1.1  2026-04-24 [2] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [2] CRAN (R 4.5.2)\n recipes         * 1.3.3      2026-05-30 [2] CRAN (R 4.6.0)\n report          * 0.6.4      2026-05-04 [2] CRAN (R 4.6.0)\n reticulate      * 1.46.0     2026-04-09 [2] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [2] CRAN (R 4.6.0)\n rmarkdown         2.31       2026-03-26 [2] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [2] CRAN (R 4.5.2)\n rootSolve         1.8.2.4    2023-09-21 [2] RSPM (R 4.4.0)\n rpart             4.1.27     2026-03-27 [2] CRAN (R 4.5.3)\n rprojroot         2.1.1      2025-08-26 [2] RSPM (R 4.5.0)\n rsample         * 1.3.2      2026-01-30 [2] CRAN (R 4.5.2)\n rstudioapi        0.19.0     2026-06-11 [2] CRAN (R 4.6.0)\n S7                0.2.2      2026-04-22 [2] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [2] RSPM (R 4.4.0)\n scales          * 1.4.0      2025-04-24 [2] RSPM (R 4.4.0)\n see             * 0.14.0     2026-05-24 [2] CRAN (R 4.6.0)\n sessioninfo     * 1.2.4      2026-06-04 [2] CRAN (R 4.6.0)\n simsurv         * 1.0.1      2026-01-22 [2] CRAN (R 4.5.2)\n SparseM           1.84-2     2024-07-17 [2] RSPM (R 4.4.2)\n sparsevctrs       0.3.6      2026-01-27 [2] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [2] RSPM (R 4.4.0)\n stringr         * 1.6.0      2025-11-04 [2] RSPM (R 4.5.0)\n survival        * 3.8-6      2026-01-16 [2] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [2] CRAN (R 4.5.2)\n tables            0.9.35     2026-06-04 [2] CRAN (R 4.6.0)\n tailor          * 0.1.0      2025-08-25 [2] RSPM (R 4.5.0)\n TH.data           1.1-5      2025-11-17 [2] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [2] CRAN (R 4.5.2)\n tidygraph         1.3.1      2024-01-30 [2] CRAN (R 4.6.0)\n tidymodels      * 1.5.0      2026-04-23 [2] CRAN (R 4.5.3)\n tidyr           * 1.3.2      2025-12-19 [2] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [2] RSPM (R 4.4.0)\n tidyverse       * 2.0.0      2023-02-22 [2] RSPM (R 4.4.0)\n timechange        0.4.0      2026-01-29 [2] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [2] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [2] CRAN (R 4.5.3)\n tinytable         0.16.0     2026-02-11 [2] CRAN (R 4.5.2)\n tune            * 2.1.0      2026-04-17 [2] CRAN (R 4.5.3)\n tweenr            2.0.3      2024-02-26 [2] CRAN (R 4.6.0)\n tzdb              0.5.0      2025-03-15 [2] RSPM (R 4.4.0)\n utf8              1.2.6      2025-06-08 [2] RSPM (R 4.5.0)\n V8                8.2.0      2026-04-21 [2] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [2] CRAN (R 4.6.0)\n viridis           0.6.5      2024-01-29 [2] RSPM (R 4.4.0)\n viridisLite       0.4.3      2026-02-04 [2] CRAN (R 4.5.2)\n visNetwork        2.1.4      2025-09-04 [2] RSPM (R 4.5.0)\n WeightIt        * 1.7.0      2026-04-22 [2] CRAN (R 4.5.3)\n withr             3.0.2      2024-10-28 [2] RSPM (R 4.4.0)\n workflows       * 1.3.0      2025-08-27 [2] RSPM (R 4.5.0)\n workflowsets    * 1.1.1      2025-05-27 [2] RSPM (R 4.5.0)\n xfun              0.58       2026-06-01 [2] CRAN (R 4.6.0)\n yaml              2.3.12     2025-12-10 [2] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [2] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [2] CRAN (R 4.5.2)\n\n [1] /usr/local/lib/R/site-library\n [2] /usr/lib/R/site-library\n [3] /usr/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.0\n cairoFT\n pango          1.52.1\n png            1.6.43\n jpeg           8.0\n tiff           LIBTIFF, Version 4.5.1\n tcl            8.6\n curl           8.5.0\n zlib           1.3\n bzlib          1.0.8, 13-Jul-2019\n xz             5.4.5\n deflate        1.19\n zstd           1.5.5\n PCRE           10.42 2022-12-11\n ICU            74.2\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          glibc 2.39\n readline       8.2\n BLAS           /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0\n lapack         /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n python:         /home/figarofuga/analysis/personal-slides/.venv/bin/python3.12\n libpython:      /usr/lib/python3.12/config-3.12-x86_64-linux-gnu/libpython3.12.so\n pythonhome:     /home/figarofuga/analysis/personal-slides/.venv:/home/figarofuga/analysis/personal-slides/.venv\n virtualenv:     /home/figarofuga/analysis/personal-slides/.venv/bin/activate_this.py\n version:        3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]\n numpy:          /home/figarofuga/analysis/personal-slides/.venv/lib/python3.12/site-packages/numpy\n numpy_version:  2.4.6\n \n NOTE: Python version was forced by use_python() function\n\n──────────────────────────────────────────────────────────────────────────────"
   },
   {
     "objectID": "medicine/PEG/index.html#代替栄養とは-1",
@@ -1782,14 +1782,14 @@
     "href": "statistics/mlcausal/index.html#x-learner",
     "title": "機械学習を用いた因果推論",
     "section": "X-learner",
-    "text": "X-learner\n\n\n\nx-learner\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x78013ed677a0&gt;"
+    "text": "X-learner"
   },
   {
     "objectID": "statistics/mlcausal/index.html#dr-learner",
     "href": "statistics/mlcausal/index.html#dr-learner",
     "title": "機械学習を用いた因果推論",
     "section": "DR-learner",
-    "text": "DR-learner\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x78013c90e420&gt;\n\n\n\n\n# A tibble: 6 × 8\n     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true\n  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 \n2     2  1.16      0 0.339   1.57    0.955  0.303    0.744\n3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 \n4     4  2.74      1 0.268   2.18    1.74   2.53     0.562\n5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 \n6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 \n\n\n# A tibble: 4 × 2\n  estimand                             value\n  &lt;chr&gt;                                &lt;dbl&gt;\n1 true ATE: mean(tau_true)              1.27\n2 DR ATE: mean(phi_dr)                  1.19\n3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21\n4 naive difference in means             1.70\n\n\n# A tibble: 1 × 4\n  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation\n     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n1     1.27                       1.19     0.122            0.996"
+    "text": "DR-learner"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#本スライドの目的",
@@ -1817,7 +1817,7 @@
     "href": "medicine/antithrombotic_etc/index.html#いつ抗凝固を開始するの",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "いつ抗凝固を開始するの？",
-    "text": "いつ抗凝固を開始するの？\n\n心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い\n一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い\nそのため、早期の抗凝固による予防 vs. 出血のRiskのせめぎあいがあった\n心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで\n\n予後改善なし\n出血のみ増加\n\n→"
+    "text": "いつ抗凝固を開始するの？\n\n心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い\n\n古い研究では最初の48時間で4.8%が再発し、抗凝固されないと10日で13%が全身性の塞栓症を発症していた(Kleindorfer ほか 2021年; Hart ほか 1983年)\n\n一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い\nそのため、早期の抗凝固による予防 vs. 出血のRiskのせめぎあいがあった\n心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで\n\n予後改善なし\n出血のみ増加(Wang ほか 2021年)\n\n結局、なんとなく弱めにHeparinを開始したりバイアスピリンを早期に導入していた"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#いつ抗凝固を開始するの-1",
@@ -1908,7 +1908,7 @@
     "href": "medicine/antithrombotic_etc/index.html#reference",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "Reference",
-    "text": "Reference\n\n\nDehbi, Hakim-Moulay, Urs Fischer, Signild Åsberg, ほか. 2025年. 「Collaboration on the optimal timing of anticoagulation after ischaemic stroke and atrial fibrillation: a systematic review and prospective individual participant data meta-analysis of randomised controlled trials (CATALYST)」. Lancet 406 (10498): 43–51. https://doi.org/10.1016/S0140-6736(25)00439-8.\n\n\nKlijn, Catharina Jm, Maurizio Paciaroni, Eivind Berge, ほか. 2019年. 「Antithrombotic treatment for secondary prevention of stroke and other thromboembolic events in patients with stroke or transient ischemic attack and non-valvular atrial fibrillation: A European Stroke Organisation guideline」. European Stroke Journal 4 (3): 198–223. https://doi.org/10.1177/2396987319841187.\n\n\nMohr, J P, J L Thompson, R M Lazar, ほか. 2001年. 「A comparison of warfarin and aspirin for the prevention of recurrent ischemic stroke」. The New England Journal of Medicine 345 (20): 1444–51. https://doi.org/10.1056/NEJMoa011258.\n\n\nPrabhakaran, Shyam, Nestor R Gonzalez, Kori S Zachrison, ほか. 2026年. 「2026 guideline for the Early Management of Patients With acute ischemic stroke: A guideline from the American heart association/American stroke association」. Stroke; a Journal of Cerebral Circulation, no. STR.0000000000000513 (1月). https://doi.org/10.1161/STR.0000000000000513."
+    "text": "Reference\n\n\nDehbi, Hakim-Moulay, Urs Fischer, Signild Åsberg, ほか. 2025年. 「Collaboration on the optimal timing of anticoagulation after ischaemic stroke and atrial fibrillation: a systematic review and prospective individual participant data meta-analysis of randomised controlled trials (CATALYST)」. Lancet 406 (10498): 43–51. https://doi.org/10.1016/S0140-6736(25)00439-8.\n\n\nHart, R G, B M Coull, と D Hart. 1983年. 「Early recurrent embolism associated with nonvalvular atrial fibrillation: a retrospective study」. Stroke; a Journal of Cerebral Circulation 14 (5): 688–93. https://doi.org/10.1161/01.str.14.5.688.\n\n\nKleindorfer, Dawn O, Amytis Towfighi, Seemant Chaturvedi, ほか. 2021年. 「2021 guideline for the prevention of stroke in patients with stroke and transient ischemic attack: A guideline from the American heart association/American stroke association」. Stroke; a Journal of Cerebral Circulation 52 (7): e364–467. https://doi.org/10.1161/STR.0000000000000375.\n\n\nKlijn, Catharina Jm, Maurizio Paciaroni, Eivind Berge, ほか. 2019年. 「Antithrombotic treatment for secondary prevention of stroke and other thromboembolic events in patients with stroke or transient ischemic attack and non-valvular atrial fibrillation: A European Stroke Organisation guideline」. European Stroke Journal 4 (3): 198–223. https://doi.org/10.1177/2396987319841187.\n\n\nMohr, J P, J L Thompson, R M Lazar, ほか. 2001年. 「A comparison of warfarin and aspirin for the prevention of recurrent ischemic stroke」. The New England Journal of Medicine 345 (20): 1444–51. https://doi.org/10.1056/NEJMoa011258.\n\n\nPrabhakaran, Shyam, Nestor R Gonzalez, Kori S Zachrison, ほか. 2026年. 「2026 guideline for the Early Management of Patients With acute ischemic stroke: A guideline from the American heart association/American stroke association」. Stroke; a Journal of Cerebral Circulation, no. STR.0000000000000513 (1月). https://doi.org/10.1161/STR.0000000000000513.\n\n\nWang, Xia, Menglu Ouyang, Jie Yang, Lili Song, Min Yang, と Craig S Anderson. 2021年. 「Anticoagulants for acute ischaemic stroke」. Cochrane Database of Systematic Reviews 10 (12): CD000024. https://doi.org/10.1002/14651858.CD000024.pub5."
   },
   {
     "objectID": "medicine/pituitary_incidentaloma/index.html#ホルモン過剰のscreeningの方法",
@@ -1958,5 +1958,488 @@
     "title": "機械学習を用いた因果推論",
     "section": "Test-dataset",
     "text": "Test-dataset\n\n\n# A tibble: 6 × 14\n     id   age sexm1   bmi    hf   bnp  lvef palpitation    ca bin_outcome\n  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;\n1     1    47     1  31.7     0    56    43           1     1           1\n2     2    62     0  19.1     0   180    43           0     0           1\n3     3    57     1  19.3     0    73    62           1     0           0\n4     4    59     0  17.7     1    74    43           0     1           1\n5     5    85     0  37.2     0   169    48           1     1           1\n6     6    53     1  18.7     1   120    46           0     1           1\n# ℹ 4 more variables: afeqt_treatment_effect &lt;dbl&gt;, afeqt_os &lt;dbl&gt;,\n#   eventtime &lt;dbl&gt;, status &lt;int&gt;"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfとは",
+    "href": "medicine/FMF/index.html#fmfとは",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFとは",
+    "text": "FMFとは\n\n自然免疫による自己炎症性疾患の1つ\n成人発症でも良い数少ない疾患（それ以外だとPPFAくらい）\n家族性地中海熱は常染色体劣性（潜性）遺伝形式で遺伝\n自己炎症性疾患 vs. 自己免疫疾患"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#症例",
+    "href": "medicine/FMF/index.html#症例",
+    "title": "機械学習を用いた因果推論",
+    "section": "症例",
+    "text": "症例\n\n26歳女性\n当院で発熱・汎発性腹膜炎で入院\nその後1ヶ月半周期で2回同様の入院歴あり\nこれはFMFでは？"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfとは-1",
+    "href": "medicine/FMF/index.html#fmfとは-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFとは",
+    "text": "FMFとは\n\n自然免疫による自己炎症性疾患の1つ\n成人発症でも良い数少ない疾患（それ以外だとPPFAくらい）\n家族性地中海熱は常染色体劣性（潜性）遺伝形式で遺伝\n自己炎症性疾患 vs. 自己免疫疾患"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#自己免疫疾患",
+    "href": "medicine/FMF/index.html#自己免疫疾患",
+    "title": "機械学習を用いた因果推論",
+    "section": "自己免疫疾患",
+    "text": "自己免疫疾患\n\n\n好中球による炎症反応\n\n抗原暴露によるリンパ球による獲得免疫ではない\n\nPAMs, DAMPsの刺激から始まる\n成人発症でも良い数少ない疾患（他にはAOSD, TRAPS, PPFA, VEXAS症候群） (勝繁 2024)"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#膠原病の考え方",
+    "href": "medicine/FMF/index.html#膠原病の考え方",
+    "title": "機械学習を用いた因果推論",
+    "section": "膠原病の考え方",
+    "text": "膠原病の考え方\n\n\n自己炎症 vs. 自己免疫で大きく分かれる\n\n自己免疫はリンパ球に、自己炎症は好中球によって生じる"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#自己免疫疾患と自己炎症性疾患",
+    "href": "medicine/FMF/index.html#自己免疫疾患と自己炎症性疾患",
+    "title": "機械学習を用いた因果推論",
+    "section": "自己免疫疾患と自己炎症性疾患",
+    "text": "自己免疫疾患と自己炎症性疾患\n\n\n\n自己免疫も自己炎症もスペクトラム\n境界領域の疾患が存在する\n\n簡単にいうとコルヒチンが効く疾患は全部自己炎症寄り\n\n再発性心外膜炎\n成人Still病\nベーチェット病\nSpA\n壊疽性膿皮症"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの疫学",
+    "href": "medicine/FMF/index.html#fmfの疫学",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの疫学",
+    "text": "FMFの疫学\n\nトルコ人に多い（シルクロード）\n2009年の研究だと日本人で約500人で男女差はない (難病情報センター, n.d.)\n潜在的にはもっとたくさんいると思われている"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの症状",
+    "href": "medicine/FMF/index.html#fmfの症状",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの症状",
+    "text": "FMFの症状\n\n中核症状として、高熱が半日〜3日間持続\nある程度決まった間隔（4週間が最多だが個人差あり）での発作\n\nストレスや感染症、月経などに影響される。期間の長さは個人差がある\n\n発熱以外に複数の症状がある\n\n腹痛\n関節炎\n胸膜炎\n筋痛\n皮膚症状 (Padeh and Berkun 2016)"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#よくわからない",
+    "href": "medicine/FMF/index.html#よくわからない",
+    "title": "機械学習を用いた因果推論",
+    "section": "よくわからない！",
+    "text": "よくわからない！\n\n\n高熱が半日〜3日間持続\nある程度決まった間隔（4週間が最多だが個人差あり）での発作\n\nストレスや感染症、月経などに影響される。期間の長さは個人差がある\n\n発作間は症状がないのが特徴\n急性腹症、胸膜炎などの漿膜炎や関節炎などが特徴的"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfを一言で言うなら",
+    "href": "medicine/FMF/index.html#fmfを一言で言うなら",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFを一言で言うなら",
+    "text": "FMFを一言で言うなら\n\nイメージは 定期的な発熱 + 繰り返す虫垂炎"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの鑑別診断",
+    "href": "medicine/FMF/index.html#fmfの鑑別診断",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの鑑別診断",
+    "text": "FMFの鑑別診断\n\nSLEなどの自己免疫性疾患\nIgA血管炎などの血管炎の発作\nIBDのような局所的な自己免疫性疾患\nPorphyriaなどの代謝性疾患\n遺伝性血管神経性浮腫などの急性腹症の希少疾患"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの診断",
+    "href": "medicine/FMF/index.html#fmfの診断",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの診断",
+    "text": "FMFの診断\n\n\nTel-Hashomer基準は特異度が高すぎると言われている\n日本だと厚生労働省が別個に定めている"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの診断日本の事情",
+    "href": "medicine/FMF/index.html#fmfの診断日本の事情",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの診断～日本の事情",
+    "text": "FMFの診断～日本の事情\n\n日本人は海外症例と比べて患者背景が大きく異なる\n\n発症年齢が高い\n腹膜炎症状が少ない\nアミロイドーシス合併が少ない\n\n日本人のFMFのうち非典型例とされるのが4割ほどいるとされる"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの診断は簡単",
+    "href": "medicine/FMF/index.html#fmfの診断は簡単",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの診断は簡単？",
+    "text": "FMFの診断は簡単？\n\n典型例は知識があれば診断は簡単\n一方で、基準を満たさない、“FMF崩れ”みたいな症状が多いと言われている\n大まかなゲシュタルトとして若年者の「繰り返す発熱と腹痛（+高CRP）」を忘れない"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの診断-1",
+    "href": "medicine/FMF/index.html#fmfの診断-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの診断",
+    "text": "FMFの診断\n\n遺伝子検査は必須ではない\n\n遺伝子異常があっても発症しない事も多い（浸透率が高くない）\n逆に遺伝子異常がない人もFMFを発症することもある\n\n常に臨床診断\n特に重要なのはコルヒチンの反応性"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの診断遺伝子検査",
+    "href": "medicine/FMF/index.html#fmfの診断遺伝子検査",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの診断～遺伝子検査",
+    "text": "FMFの診断～遺伝子検査\n\n16番染色体上の16p 13.3領域のMEFV遺伝子が関連遺伝子と知られている\n関連がある遺伝子異常は300以上あると言われている\n日本人のデータだと\n非典型例だとMEFV遺伝子エクソン10の変異は少ない\n\nエクソン1（E84K）\nエクソン2（E148Q，L110P-E148Q）\nエクソン3（P369S-R408Q）\nエクソン5（S503C）\n\n遺伝子検査の判定は難しい"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの診断プラクティカルアプローチ",
+    "href": "medicine/FMF/index.html#fmfの診断プラクティカルアプローチ",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの診断～プラクティカルアプローチ",
+    "text": "FMFの診断～プラクティカルアプローチ\n\n\n\n\n\n\nflowchart TD\n  A[\"FMF疑い例\"] --&gt; B[\"典型例に当てはまらない症例\"]\n  A --&gt; C[\"FMF典型例\"]\n  C --&gt; Z[\"FMF\"]\n  B --&gt; D[\"MEFV遺伝子解析\"]\n  D --&gt; E[\"変異なし\"]\n  D --&gt; F[\"Exon10以外の変異あり&lt;br&gt;E84K, E148Q, L110P-E148Q,&lt;br&gt;P369S-R408Q, R202Q,&lt;br&gt;G304R, S503C&lt;br&gt;※ヘテロの変異を含む\"]\n  D --&gt; G[\"Exon10の変異あり&lt;br&gt;M694I, M680I,&lt;br&gt;M694V, V726A&lt;br&gt;※ヘテロの変異を含む\"]\n  E --&gt; H[\"コルヒチン（診断的投与）\"]\n  F --&gt; H\n  H --&gt; I[\"反応なし\"]\n  H --&gt; J[\"反応あり\"]\n  I --&gt; K[\"他疾患の検索&lt;br&gt;感染症・悪性疾患・&lt;br&gt;自己免疫疾患・&lt;br&gt;他の自己炎症性疾患等\"]\n  J --&gt; L[\"FMF非典型例\"]\n  G --&gt; Z"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#遺伝子検査の方法",
+    "href": "medicine/FMF/index.html#遺伝子検査の方法",
+    "title": "機械学習を用いた因果推論",
+    "section": "遺伝子検査の方法",
+    "text": "遺伝子検査の方法\n\n\n\n東京女子医大学に依頼\n東北大学病院 血液内科・リウマチ膠原病内科\n筑波大学医学医療系小児科\n東京医科歯科大学膠原病・リウマチ先端治療センター\n東京女子医科大学膠原病リウマチ痛風センター\n国立成育医療研究センター免疫科\n\n\n\n信州大学医学部附属病院脳神経内科／リウマチ・膠原病内科\n岐阜大学医学部附属病院小児科\n藤田医科大学病院臨床遺伝科\n兵庫医科大学病院アレルギー・リウマチ内科\n川崎医科大学附属病院リウマチ・膠原病科\n九州大学医学部 小児科\n久留米大学医学部 小児科学教室\n\n\n(遺伝性疾患プラス, n.d.)"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#fmfの治療",
+    "href": "medicine/FMF/index.html#fmfの治療",
+    "title": "機械学習を用いた因果推論",
+    "section": "FMFの治療",
+    "text": "FMFの治療\n\nQOLの改善とAmyloidosis予防が目的\nコルヒチンは90%以上で有用\nコルヒチンが無効な場合はIL-1β阻害薬を使う"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#take-home-message",
+    "href": "medicine/FMF/index.html#take-home-message",
+    "title": "機械学習を用いた因果推論",
+    "section": "Take home message",
+    "text": "Take home message\n\n若年女性の繰り返す発熱と腹痛はFMFを疑う\n診断は臨床第一、コルヒチンの診断的治療をためらわない！\n\n家族歴がなくても良い！\n遺伝子異常がなくても良い！"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#references",
+    "href": "medicine/FMF/index.html#references",
+    "title": "機械学習を用いた因果推論",
+    "section": "References",
+    "text": "References\n\n\nPadeh, Shai, and Yackov Berkun. 2016. “Familial Mediterranean Fever.” Current Opinion in Rheumatology 28 (5): 523–29. https://doi.org/10.1097/BOR.0000000000000315.\n\n\n勝繁. 2024. ホスピタリストのための内科診療フローチャート: 専門的対応が求められる疾患の診療の流れとエビデンス. 第3版 ed. シーニュ.\n\n\n遺伝性疾患プラス. n.d. 家族性地中海熱. https://genetics.qlife.jp/diseases/familial-mediterranean-fever/.\n\n\n難病情報センター. n.d. 家族性地中海熱（指定難病266）. https://www.nanbyou.or.jp/entry/4447."
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidとは",
+    "href": "medicine/amyloidosis/index.html#amyloidとは",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidとは？",
+    "text": "Amyloidとは？\n\n1854年にVirchowが発見したミスフォールド前駆体タンパク質に由来する線維状物質\n\n\n(Amyloid 2020年; DynaMed 2024年)\n\n\n全身の臓器に沈着し、多くの臓器障害を起こす\n有病率はだいたい100万人あたり14人と推定されている\n\nCMLとかと同じくらいの頻度"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidosisの分類",
+    "href": "medicine/amyloidosis/index.html#amyloidosisの分類",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidosisの分類",
+    "text": "Amyloidosisの分類\n\n遺伝性 vs. 後天性 / 全身性 vs. 局所\n\n局所の代表例はCAAとか、Alzheimer型認知症とか→ 今回は全身性のアミロイドーシスに焦点を当てる\n\nAmyloidの種類によっても分類可能\n\nAA, AL, ATTR etcetc\n\nAmyloidの種類での分類が最もわかりやすい"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidの種類の重要性",
+    "href": "medicine/amyloidosis/index.html#amyloidの種類の重要性",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidの種類の重要性",
+    "text": "Amyloidの種類の重要性\n\n全身性/局所性も遺伝性/後天性もAmyloidの種類である程度わかる\n障害される臓器PatternもAmyloidの種類でわかる事が多い\n何よりも、治療法の有無が決定される（後述）"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidの種類と特徴",
+    "href": "medicine/amyloidosis/index.html#amyloidの種類と特徴",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidの種類と特徴",
+    "text": "Amyloidの種類と特徴\n\n最重要スライド！！\n\n\n\n\n\n\n\n\n\n\n\n種類\n前駆物質\n遺伝性/後天性\n障害臓器\n全身性/局所性\n\n\n\n\nAL\n免疫グロブリン軽鎖\n両方\n全臓器、中枢神経は稀\n両方\n\n\nAA\n血清アミロイドA\n後天性\n中枢神経以外全て、通常腎臓\n全身性\n\n\nATTR-wt\nトランスサイレチン\n後天性\n心臓、肺、腱\n全身性\n\n\nATTR-v\nトランスサイレチン\n遺伝性\n末梢/自律神経、心臓、目、髄膜\n全身性\n\n\n\n\n(DynaMed 2024年)\n\n\n全部で30種類以上の前駆物質が判明しているが、上記の4種類でだいたい全部のうち80%くらいは占めている"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidosisの疫学",
+    "href": "medicine/amyloidosis/index.html#amyloidosisの疫学",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidosisの疫学",
+    "text": "Amyloidosisの疫学\n\nUnderdiagnosisされているので正確な疫学は不明\nイギリスのAmyloidosisセンターの1990-2014年までの疫学研究\nAL: 60%, AA: 10.5%, ATTR-wt: 8%, ATTR-v: 10%\nATTRは今後増えるかもしれない\n\n\n(Amyloid 2017年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#全身性amyloidosisの診断は難しい",
+    "href": "medicine/amyloidosis/index.html#全身性amyloidosisの診断は難しい",
+    "title": "Systemic amyloidosisとは",
+    "section": "全身性Amyloidosisの診断は難しい！",
+    "text": "全身性Amyloidosisの診断は難しい！\n\n症状は非特異的な事が多い\nそのため、発症から診断までに時間がかかることが知られている\n\n診断までの中央値は7ヶ月\n4割の患者が1年以上、10%以上の患者が3年以上経過して診断される\n\n\n\n(Acta Haematologica 2020年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#どうやって診断する",
+    "href": "medicine/amyloidosis/index.html#どうやって診断する",
+    "title": "Systemic amyloidosisとは",
+    "section": "どうやって診断する？",
+    "text": "どうやって診断する？\n\n代表的な症状は倦怠感、低栄養であり、そこから攻めるのは辛い\nどちらかというと、特定の臓器障害を見て疑った後にRed flagを探すのが現実的"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidosisの診断",
+    "href": "medicine/amyloidosis/index.html#amyloidosisの診断",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidosisの診断",
+    "text": "Amyloidosisの診断\n\n\n\n\n\nflowchart LR\n  A[\"Amyloidosisを疑う\"] --&gt; B[\"Clueとなる追加情報を集める\"]\n  B --&gt; C[\"AmyloidosisのTyping: 侵襲的検査\"]\n\n\n\n\n\n\n\nStep by stepで考える\n特徴的な臓器障害と違和感を見逃さない"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#特徴的な臓器障害",
+    "href": "medicine/amyloidosis/index.html#特徴的な臓器障害",
+    "title": "Systemic amyloidosisとは",
+    "section": "特徴的な臓器障害",
+    "text": "特徴的な臓器障害\n\nAmyloidが沈着しやすい臓器が決まっており、以下の時にSystemic amyloidosisを疑う\n\n非糖尿病患者のネフローゼ症候群\nHFpEF（特に、強いLVHを伴う）\n肝脾腫\nGloves and stockings patternのPolyneuropathy\nMGUS患者の消耗性の症状\n\n\n\n(JAMA 2020年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#ゲシュタルトを覚えよう",
+    "href": "medicine/amyloidosis/index.html#ゲシュタルトを覚えよう",
+    "title": "Systemic amyloidosisとは",
+    "section": "ゲシュタルトを覚えよう",
+    "text": "ゲシュタルトを覚えよう\n\n出来れば、AA, AL, ATTR-wtの3つはゲシュタルトを覚えておくと良い\n疑った時に問診・身体所見を追加"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#aa-amyloidosisの疾患シナリオ",
+    "href": "medicine/amyloidosis/index.html#aa-amyloidosisの疾患シナリオ",
+    "title": "Systemic amyloidosisとは",
+    "section": "AA amyloidosisの疾患シナリオ",
+    "text": "AA amyloidosisの疾患シナリオ\n\n年齢の中央値は50-60歳\n慢性炎症性疾患の背景がある患者の高度蛋白尿、全身浮腫\n\nTB, RA, IBD, SLE, FMF, Sarcoidosis, HIVなど\n蛋白尿が95%でNephrosis rangeは50%にもなる\n\n肝脾腫は10%程度\n心不全や神経障害は非典型的\n\n\n(Rheumatic Disease Clinics of North America 2018年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#al-amyloidosisの疾患シナリオ①",
+    "href": "medicine/amyloidosis/index.html#al-amyloidosisの疾患シナリオ①",
+    "title": "Systemic amyloidosisとは",
+    "section": "AL amyloidosisの疾患シナリオ①",
+    "text": "AL amyloidosisの疾患シナリオ①\n\n\n\n\n診断時の年齢は50-70歳が殆ど\n以下の症状の時に巨舌（10-17%）や眼窩周囲の紫斑（15%）を探す\n\n心不全入院: 特にLVHを伴うHFpEF（60-75%）\n腎機能低下: 著名な蛋白尿（50-70%）\n神経障害: 両手足のしびれ、両側の手根管症候群、起立性低血圧による失神・めまい（22%）\n\n\n\n\n\n\n(DynaMed 2024年; The New England Journal of Medicine 2024年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#al-amyloidosisの疾患シナリオ②",
+    "href": "medicine/amyloidosis/index.html#al-amyloidosisの疾患シナリオ②",
+    "title": "Systemic amyloidosisとは",
+    "section": "AL amyloidosisの疾患シナリオ②",
+    "text": "AL amyloidosisの疾患シナリオ②\n\n元々MGUSなどの基礎疾患がわかっている患者が、倦怠感や浮腫、体重減少などの非特異的な症状で来院\n検査で心不全や腎機能低下、臓器腫大が判明\n\n\n(JAMA 2020年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#attr-amyloidosisの疾患シナリオ",
+    "href": "medicine/amyloidosis/index.html#attr-amyloidosisの疾患シナリオ",
+    "title": "Systemic amyloidosisとは",
+    "section": "ATTR amyloidosisの疾患シナリオ",
+    "text": "ATTR amyloidosisの疾患シナリオ\n\n年齢の中央値は75歳, 90%は男性\n高齢者のHFpEFでエコーをしたら特徴的な所見\n\n後壁の心室壁厚 &gt; 15mm, Granular sparkiling pattern、ECGで低電位など\n\n神経: 手根管症候群が30-50%、脊柱管狭窄症、DSP\n高齢者の上腕二頭筋腱断裂, 両側手根管症候群のようなやや違和感があるStory\n腎疾患は稀\n\n\n(Rheumatic Disease Clinics of North America 2018年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidosisの疾患シナリオ",
+    "href": "medicine/amyloidosis/index.html#amyloidosisの疾患シナリオ",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidosisの疾患シナリオ",
+    "text": "Amyloidosisの疾患シナリオ\n\n腎臓のNephrosis → AA, AL amyloidosis\n心Amyloidosis → AL, ATTR amyloidosis\nPolyneuropathy → AL, ATTR amyloidosis\n\n\n最も重要なのは心Amyloidosis"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#心amyloidosisの重要性",
+    "href": "medicine/amyloidosis/index.html#心amyloidosisの重要性",
+    "title": "Systemic amyloidosisとは",
+    "section": "心Amyloidosisの重要性",
+    "text": "心Amyloidosisの重要性\n\n心不全は最も重要な合併症かつ、予後規定因子\nHFpEFの中でも隠れ心amyloidosisが多いとされる\n\n\n(ESC Heart Failure 2023年)\n\n\nとはいえ、HFpEF全例で疑うのはやはり現実的ではない\n\n病歴で、Polyneuropathy、手根管症候群、Nephrosisの合併\n\n心電図も疑うきっかけになる"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#ecgの特徴",
+    "href": "medicine/amyloidosis/index.html#ecgの特徴",
+    "title": "Systemic amyloidosisとは",
+    "section": "ECGの特徴",
+    "text": "ECGの特徴\n\n\n\n\n\n\n\n\nAF\n壁肥厚があるにもかかわらず、心電図が低電位\nQS pattern（偽梗塞パターン）"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#心amyloidosisの診断",
+    "href": "medicine/amyloidosis/index.html#心amyloidosisの診断",
+    "title": "Systemic amyloidosisとは",
+    "section": "心Amyloidosisの診断",
+    "text": "心Amyloidosisの診断\n\n侵襲性と値段の問題から、まずはTTEが使われる事が多い\nCMR（当院でややハードルは高いが）もかなり精度が良い\nTTE→CMR→更なる検査という順番が現実的\nCMRはCVICという会社でもやってくれる（飯田橋だがオススメ）"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#tteの特徴",
+    "href": "medicine/amyloidosis/index.html#tteの特徴",
+    "title": "Systemic amyloidosisとは",
+    "section": "TTEの特徴",
+    "text": "TTEの特徴\n\n\n\n\n心筋壁/乳頭筋/弁/中隔の肥厚\n中隔/後壁比が &lt; 1.3\n肥厚心筋の “granular sparkling”\n心室中隔/左室後壁の低収縮\n心電図上の低電位と心室中隔肥厚（&gt; 1.98 cm）の組み合わせで，感度 72%，特異度 91%"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#cmrの特徴",
+    "href": "medicine/amyloidosis/index.html#cmrの特徴",
+    "title": "Systemic amyloidosisとは",
+    "section": "CMRの特徴",
+    "text": "CMRの特徴\n\n\n\n\n\n\n\n\nCMR: 基本は造影MRI\n\nLGEは左心室内膜下優位に分布（感度85%, 特異度92%）\n\n造影剤が使えない時もT1 mappingという手法で診断可能\n\n感度80-92%，特異度56-91%\n当院だとできないらしい・・・・・・"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#心amyloidosisのタイピング",
+    "href": "medicine/amyloidosis/index.html#心amyloidosisのタイピング",
+    "title": "Systemic amyloidosisとは",
+    "section": "心Amyloidosisのタイピング",
+    "text": "心Amyloidosisのタイピング\n\nAL, ATTR amyloidosisの診断をする（95％がこの2種類）\nAL: Monoclonal蛋白検出で非侵襲的に診断可能\n\n血液・尿中免疫電気泳動/固定法、Free Light Chain\nこれらが全て陰性の時の感度は約99%\n\n\n\n(JAMA 2024年)\n\n\nATTR: PyPシンチ（Tc99m）を使う事で、非侵襲的に診断可能\n\nMonoclonal蛋白陰性→PyPシンチ陽性 = ATTR amyloidosis確定診断"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#pypシンチ",
+    "href": "medicine/amyloidosis/index.html#pypシンチ",
+    "title": "Systemic amyloidosisとは",
+    "section": "PyPシンチ",
+    "text": "PyPシンチ\n\n\n\n\n陽性の場合はATTR amyloidosisを示唆する\nATTR-CAの診断能は感度58-99%，特異度79-100%\nAL amyloidosisでも陽性になるので注意！\n\n採血・検尿でALを除外したら一発診断可能"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#cardiac-amyloidosisca診断のアルゴリズム",
+    "href": "medicine/amyloidosis/index.html#cardiac-amyloidosisca診断のアルゴリズム",
+    "title": "Systemic amyloidosisとは",
+    "section": "Cardiac amyloidosis(CA)診断のアルゴリズム",
+    "text": "Cardiac amyloidosis(CA)診断のアルゴリズム\n\n\n\n\n\nflowchart LR\n  A[\"心アミロイドーシス疑い\"] --&gt;|検査| B[\"monoclonal蛋白検査\"]\n  B --&gt;|陽性| C[\"血液内科コンサルト・生検\"]\n  B --&gt;|陰性| D[\"PyPシンチ\"]\n  D --&gt;|陽性| E[\"ATTR-CM\"]\n  D --&gt;|陰性| F[\"心アミロイドーシスらしくない\"]\n\n\n\n\n\n\n\n採血・検尿が陰性→PyPシンチ陽性→ATTR amyloidosis確定\n採血・検尿でM蛋白が陽性→Amyloidの組織生検は必須\n\nMGUSは70歳以上で5%、ATTR-wtのCAのうち10-40%はAL amyloidosisの検査で異常が出る為\n局所麻酔下での脂肪織の生検が非侵襲的でよい\n\n感度 ATTR-v: 65-85%, AL: 60-80%, ATTR-wt:14%\n\n\n\n\n(JAMA 2024年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#cardiac-amyloidosisca診断のまとめ",
+    "href": "medicine/amyloidosis/index.html#cardiac-amyloidosisca診断のまとめ",
+    "title": "Systemic amyloidosisとは",
+    "section": "Cardiac amyloidosis(CA)診断のまとめ",
+    "text": "Cardiac amyloidosis(CA)診断のまとめ\n\n\n(Annals of Internal Medicine 2023年)"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#amyloidosisの診断後",
+    "href": "medicine/amyloidosis/index.html#amyloidosisの診断後",
+    "title": "Systemic amyloidosisとは",
+    "section": "Amyloidosisの診断後",
+    "text": "Amyloidosisの診断後\n\n治療は専門科に任せる\nAL amyloidosisは血液内科\nATTRは慶應の循環器内科に紹介\n\nTafosmideをやっている\n\nATTRがwtかv（遺伝性か孤発性か）は家族歴を確認するが結局は遺伝子検査が必須\n\n熊本と長野に集積"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#take-home-message",
+    "href": "medicine/amyloidosis/index.html#take-home-message",
+    "title": "Systemic amyloidosisとは",
+    "section": "Take home message",
+    "text": "Take home message\n\n特徴的な臓器障害パターンからAmyloidosisを引っ掛けよう\n心アミロイドーシスが最も重要！探しに行く！\nALは採血・検尿、ATTR-wtはPypシンチで非侵襲的に診断を！\n最終的にはTissue is issue！ATTR-wtアミロイドーシス疑いの時は腹壁脂肪を生検する！"
+  },
+  {
+    "objectID": "medicine/amyloidosis/index.html#references",
+    "href": "medicine/amyloidosis/index.html#references",
+    "title": "Systemic amyloidosisとは",
+    "section": "References",
+    "text": "References\n\n\nActa Haematologica. 2020年. Acta Haematol. 2020;143(4):304–311.\n\n\nAmyloid. 2017年. Amyloid. 2017 Sep;24(3):162–166.\n\n\nAmyloid. 2020年. Amyloid. 2020;27(4):217–222.\n\n\nAnnals of Internal Medicine. 2023年. Ann Intern Med. 2023;176(3):ITC33–ITC48.\n\n\nDynaMed. 2024年. Amyloidosis. EBSCO Information Services.\n\n\nESC Heart Failure. 2023年. ESC Heart Fail. 2023;10(3):1896–1906.\n\n\nJAMA. 2020年. JAMA. 2020;324(1):79–89.\n\n\nJAMA. 2024年. JAMA. 2024;331(9):778–791.\n\n\nRheumatic Disease Clinics of North America. 2018年. Rheum Dis Clin North Am. 2018;44(4):585–603.\n\n\nThe New England Journal of Medicine. 2024年. N Engl J Med. 2024;390(24):2295–2307."
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#通常の回帰",
+    "href": "statistics/mlcausal/index.html#通常の回帰",
+    "title": "機械学習を用いた因果推論",
+    "section": "通常の回帰",
+    "text": "通常の回帰\n\n連続値をrestricted cubic splineに入れるなど\nただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」\nその上で、CAの交絡因子が補正しきれるかは不明"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#次の手",
+    "href": "statistics/mlcausal/index.html#次の手",
+    "title": "機械学習を用いた因果推論",
+    "section": "次の手",
+    "text": "次の手\n\nPropensity score weighting\nIPTW、Overlap weightingなど多くの方法がある\nweighted meanを用いる\n重み付けの方法で、Estimandをどこにするかも指定可能"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#さらなる補正",
+    "href": "statistics/mlcausal/index.html#さらなる補正",
+    "title": "機械学習を用いた因果推論",
+    "section": "さらなる補正",
+    "text": "さらなる補正\n\nAIPW, TMLEなど\nOutcome modelとPropensity modelを用いてDoubly robustにする\n自由度は上昇した"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#しかしながら",
+    "href": "statistics/mlcausal/index.html#しかしながら",
+    "title": "機械学習を用いた因果推論",
+    "section": "しかしながら・・・・・・",
+    "text": "しかしながら・・・・・・\n\n上記以外にも、「誰に」「どの程度」の治療効果があるか分からない\n\n治療効果の異質性\n\nRCTですら群レベルでの平均的な治療効果しか分からない\n\nこの治療は眼の前の患者さんに有益ですか？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#通常の回帰だとどうすればいい",
+    "href": "statistics/mlcausal/index.html#通常の回帰だとどうすればいい",
+    "title": "機械学習を用いた因果推論",
+    "section": "通常の回帰だとどうすればいい？",
+    "text": "通常の回帰だとどうすればいい？\n\n簡単にいうとSubgroup解析\n\n恣意的にInteraction項を作らないといけない\n\nあるいは複雑なモデルにした上でG-computation\nいずれにせよ、線形が前提となる\n柔軟なモデルで治療の異質性を捉えたい？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#古典的な因果推論の問題点",
+    "href": "statistics/mlcausal/index.html#古典的な因果推論の問題点",
+    "title": "機械学習を用いた因果推論",
+    "section": "古典的な因果推論の問題点",
+    "text": "古典的な因果推論の問題点\n\nEstimandは常に気にする\nUnobserved confoundingへの対処はできない\nその他、複数のBiasも\nColidarには要注意\n95%信頼区間は出せるのか？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#機械学習側の問題点",
+    "href": "statistics/mlcausal/index.html#機械学習側の問題点",
+    "title": "機械学習を用いた因果推論",
+    "section": "機械学習側の問題点",
+    "text": "機械学習側の問題点\n\n過学習の問題\n\ncross-fitting\nHonest\n\n解釈が難しい"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#s-learner",
+    "href": "statistics/mlcausal/index.html#s-learner",
+    "title": "機械学習を用いた因果推論",
+    "section": "S-learner",
+    "text": "S-learner"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#どれがいいの",
+    "href": "statistics/mlcausal/index.html#どれがいいの",
+    "title": "機械学習を用いた因果推論",
+    "section": "どれがいいの？",
+    "text": "どれがいいの？\n\nS-learnerが最も直感的ではあるが・・・・・・\n過去のReviewだとDR-learnerが良さそう\n\n以下のTableをまとめる\nInoue K, Adomi M, Efthimiou O, et al. Machine learning approaches to evaluate heterogeneous treatment effects in randomized controlled trials: a scoping review. J Clin Epidemiol. 2024;176(111538):111538. doi:10.1016/j.jclinepi.2024.111538"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#random-forestについて",
+    "href": "statistics/mlcausal/index.html#random-forestについて",
+    "title": "機械学習を用いた因果推論",
+    "section": "Random forestについて",
+    "text": "Random forestについて"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forestの原理",
+    "href": "statistics/mlcausal/index.html#causal-forestの原理",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forestの原理",
+    "text": "Causal forestの原理\n\nHTE専用の機械学習\n基本はRandom forest\n治療効果の差が最も出やすいように木をTrainingする"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forestの強み",
+    "href": "statistics/mlcausal/index.html#causal-forestの強み",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forestの強み",
+    "text": "Causal forestの強み"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#どれがいいの-1",
+    "href": "statistics/mlcausal/index.html#どれがいいの-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "どれがいいの？",
+    "text": "どれがいいの？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#機械学習の解釈の問題",
+    "href": "statistics/mlcausal/index.html#機械学習の解釈の問題",
+    "title": "機械学習を用いた因果推論",
+    "section": "機械学習の解釈の問題",
+    "text": "機械学習の解釈の問題\n\nModelを深堀る: SHAP\nModelの妥当性を確認: RATE\nModelを分かりやすく変更: Surrogate tree、Policy tree"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#advanced",
+    "href": "statistics/mlcausal/index.html#advanced",
+    "title": "機械学習を用いた因果推論",
+    "section": "Advanced",
+    "text": "Advanced\n\n95%信頼区間が出せるかどうか？\nMissingnessについて\nSensitivity analysisはどうすればいい？"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#test-dataset①",
+    "href": "statistics/mlcausal/index.html#test-dataset①",
+    "title": "機械学習を用いた因果推論",
+    "section": "Test-dataset①",
+    "text": "Test-dataset①\n\n治療効果は各々別個にいれてある\nDAGは上記の通り\nCAがメインのInterventionで解析をするアウトカムは3種類\n\n連続値のAFEQT-OS\n二値値のbin_outcome(短期の入院の有無など)\n生存分析のeventtime, status(長期の心不全あるいは死亡)\n\nほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)\nSESは観測されない交絡因子"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#test-dataset②",
+    "href": "statistics/mlcausal/index.html#test-dataset②",
+    "title": "機械学習を用いた因果推論",
+    "section": "Test-dataset②",
+    "text": "Test-dataset②\n\n\n# A tibble: 6 × 14\n     id   age sexm1   bmi    hf   bnp  lvef palpitation    ca bin_outcome\n  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;\n1     1    47     1  31.7     0    56    43           1     1           1\n2     2    62     0  19.1     0   180    43           0     0           1\n3     3    57     1  19.3     0    73    62           1     0           0\n4     4    59     0  17.7     1    74    43           0     1           1\n5     5    85     0  37.2     0   169    48           1     1           1\n6     6    53     1  18.7     1   120    46           0     1           1\n# ℹ 4 more variables: afeqt_treatment_effect &lt;dbl&gt;, afeqt_os &lt;dbl&gt;,\n#   eventtime &lt;dbl&gt;, status &lt;int&gt;"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#thank-you-for-your-listening",
+    "href": "statistics/mlcausal/index.html#thank-you-for-your-listening",
+    "title": "機械学習を用いた因果推論",
+    "section": "Thank you for your listening",
+    "text": "Thank you for your listening"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#t-learner-1",
+    "href": "statistics/mlcausal/index.html#t-learner-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "T learner",
+    "text": "T learner\n\nt-learner"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#x-learner-1",
+    "href": "statistics/mlcausal/index.html#x-learner-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "X-learner",
+    "text": "X-learner\n\n\n\nx-learner\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x751c12f61250&gt;"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#dr-learner-1",
+    "href": "statistics/mlcausal/index.html#dr-learner-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "DR-learner",
+    "text": "DR-learner\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x751c12f96270&gt;\n\n\n\n\n# A tibble: 6 × 8\n     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true\n  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 \n2     2  1.16      0 0.339   1.57    0.955  0.303    0.744\n3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 \n4     4  2.74      1 0.268   2.18    1.74   2.53     0.562\n5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 \n6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 \n\n\n# A tibble: 4 × 2\n  estimand                             value\n  &lt;chr&gt;                                &lt;dbl&gt;\n1 true ATE: mean(tau_true)              1.27\n2 DR ATE: mean(phi_dr)                  1.19\n3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21\n4 naive difference in means             1.70\n\n\n# A tibble: 1 × 4\n  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation\n     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n1     1.27                       1.19     0.122            0.996"
   }
 ]

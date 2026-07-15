@@ -162,6 +162,10 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li><a href="#/因果推論-at-glance" id="/toc-因果推論-at-glance">因果推論 at glance</a></li>
 <li><a href="#/機械学習-at-glance" id="/toc-機械学習-at-glance">機械学習 at glance</a></li>
 <li><a href="#/機械学習と因果推論の出会い" id="/toc-機械学習と因果推論の出会い">機械学習と因果推論の出会い</a></li>
+<li><a href="#/注意点" id="/toc-注意点">注意点</a></li>
+<li><a href="#/meta-learner系" id="/toc-meta-learner系">meta-learner系</a></li>
+<li><a href="#/causal-forestについて" id="/toc-causal-forestについて">Causal forestについて</a></li>
+<li><a href="#/実践" id="/toc-実践">実践！</a></li>
 </ul>
 </nav>
 </section>
@@ -200,23 +204,236 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <section id="dagの基本" class="slide level2">
 <h2>DAGの基本</h2>
 
+<!-- Todo: ここにColiderと交絡因子の説明、何を補正すべきかを書く -->
 <img data-src="index_files/figure-revealjs/DAG-1.svg" width="960" class="r-stretch"></section>
 <section id="世界は結構複雑にできている" class="slide level2">
 <h2>世界は結構複雑にできている</h2>
+<ul>
+<li>交絡因子の制御は実際はかなり難しい</li>
+<li>何を、どう補正するか？</li>
+<li>Stratification、Matching、Weighting・・・・・・</li>
+</ul>
+</section>
+<section id="通常の回帰" class="slide level2">
+<h2>通常の回帰</h2>
+<ul>
+<li>連続値をrestricted cubic splineに入れるなど</li>
+<li>ただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」</li>
+<li>その上で、CAの交絡因子が補正しきれるかは不明</li>
+</ul>
+</section>
+<section id="次の手" class="slide level2">
+<h2>次の手</h2>
+<ul>
+<li>Propensity score weighting</li>
+<li>IPTW、Overlap weightingなど多くの方法がある</li>
+<li>weighted meanを用いる</li>
+<li>重み付けの方法で、Estimandをどこにするかも指定可能</li>
+</ul>
+</section>
+<section id="さらなる補正" class="slide level2">
+<h2>さらなる補正</h2>
+<ul>
+<li>AIPW, TMLEなど</li>
+<li>Outcome modelとPropensity modelを用いてDoubly robustにする</li>
+<li>自由度は上昇した</li>
+</ul>
+</section>
+<section id="しかしながら" class="slide level2">
+<h2>しかしながら・・・・・・</h2>
 <ul>
 <li>上記以外にも、「誰に」「どの程度」の治療効果があるか分からない
 <ul>
 <li>治療効果の異質性</li>
 </ul></li>
-<li>「因果推論の根本的問題」
+<li>RCTですら群レベルでの平均的な治療効果しか分からない
 <ul>
-<li>同じ人間で介入をする/しないを観察出来ない</li>
+<li>この治療は眼の前の患者さんに有益ですか？</li>
 </ul></li>
-<li>RCTですら</li>
 </ul>
 </section>
-<section id="test-dataset" class="slide level2">
-<h2>Test-dataset</h2>
+<section id="通常の回帰だとどうすればいい" class="slide level2">
+<h2>通常の回帰だとどうすればいい？</h2>
+<ul>
+<li>簡単にいうとSubgroup解析
+<ul>
+<li>恣意的にInteraction項を作らないといけない</li>
+</ul></li>
+<li>あるいは複雑なモデルにした上でG-computation</li>
+<li>いずれにせよ、線形が前提となる</li>
+<li>柔軟なモデルで治療の異質性を捉えたい？</li>
+</ul>
+</section></section>
+<section>
+<section id="機械学習-at-glance" class="title-slide slide level1 center">
+<h1>機械学習 at glance</h1>
+
+</section>
+<section id="機械学習とは" class="slide level2">
+<h2>機械学習とは</h2>
+</section>
+<section id="代表的な機械学習" class="slide level2">
+<h2>代表的な機械学習</h2>
+<ul>
+<li>Logistic回帰</li>
+<li>tree-based model
+<ul>
+<li>Random forest</li>
+<li>XGBoost</li>
+</ul></li>
+<li>Neural network</li>
+</ul>
+</section>
+<section id="機械学習の強みと弱み" class="slide level2">
+<h2>機械学習の強みと弱み</h2>
+<ul>
+<li>Pros
+<ul>
+<li>データから関係性を柔軟に読み取る</li>
+<li>例えばTree based modelは相互作用を自然に扱うことが出来る</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>複雑なモデルはBlack boxになる</li>
+<li>Overfittingの問題</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="機械学習と因果推論の出会い" class="title-slide slide level1 center">
+<h1>機械学習と因果推論の出会い</h1>
+
+</section>
+<section id="因果推論における機械学習の役割" class="slide level2">
+<h2>因果推論における機械学習の役割</h2>
+<ul>
+<li>アウトカムモデル、PS modelを柔軟に扱う</li>
+<li>Interaction termを自然に扱える
+<ul>
+<li>HTEを自然に扱えないか？</li>
+</ul></li>
+</ul>
+</section>
+<section id="機械学習を用いた因果推論について" class="slide level2">
+<h2>機械学習を用いた因果推論について</h2>
+<ul>
+<li>大別してMeta learner系とCausal forest系に分けられる</li>
+<li>柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest</li>
+<li>とはいえ、Causal forestだけで良い気もする</li>
+</ul>
+</section></section>
+<section>
+<section id="注意点" class="title-slide slide level1 center">
+<h1>注意点</h1>
+
+</section>
+<section id="古典的な因果推論の問題点" class="slide level2">
+<h2>古典的な因果推論の問題点</h2>
+<ul>
+<li>Estimandは常に気にする</li>
+<li>Unobserved confoundingへの対処はできない</li>
+<li>その他、複数のBiasも</li>
+<li>Colidarには要注意</li>
+<li>95%信頼区間は出せるのか？</li>
+</ul>
+</section>
+<section id="機械学習側の問題点" class="slide level2">
+<h2>機械学習側の問題点</h2>
+<ul>
+<li>過学習の問題
+<ul>
+<li>cross-fitting</li>
+<li>Honest</li>
+</ul></li>
+<li>解釈が難しい</li>
+</ul>
+</section></section>
+<section>
+<section id="meta-learner系" class="title-slide slide level1 center">
+<h1>meta-learner系</h1>
+
+</section>
+<section id="s-learner" class="slide level2">
+<h2>S-learner</h2>
+</section>
+<section id="t-learner" class="slide level2">
+<h2>T-learner</h2>
+</section>
+<section id="x-learner" class="slide level2">
+<h2>X-learner</h2>
+</section>
+<section id="dr-learner" class="slide level2">
+<h2>DR-learner</h2>
+</section>
+<section id="どれがいいの" class="slide level2">
+<h2>どれがいいの？</h2>
+<ul>
+<li>S-learnerが最も直感的ではあるが・・・・・・</li>
+<li>過去のReviewだとDR-learnerが良さそう</li>
+</ul>
+<p>以下のTableをまとめる</p>
+<pre><code>Inoue K, Adomi M, Efthimiou O, et al. Machine learning approaches to evaluate heterogeneous treatment effects in randomized controlled trials: a scoping review. J Clin Epidemiol. 2024;176(111538):111538. doi:10.1016/j.jclinepi.2024.111538</code></pre>
+</section></section>
+<section>
+<section id="causal-forestについて" class="title-slide slide level1 center">
+<h1>Causal forestについて</h1>
+
+</section>
+<section id="random-forestについて" class="slide level2">
+<h2>Random forestについて</h2>
+</section>
+<section id="causal-forestの原理" class="slide level2">
+<h2>Causal forestの原理</h2>
+<ul>
+<li>HTE専用の機械学習</li>
+<li>基本はRandom forest</li>
+<li>治療効果の差が最も出やすいように木をTrainingする</li>
+</ul>
+</section>
+<section id="causal-forestの強み" class="slide level2">
+<h2>Causal forestの強み</h2>
+</section>
+<section id="どれがいいの-1" class="slide level2">
+<h2>どれがいいの？</h2>
+</section>
+<section id="機械学習の解釈の問題" class="slide level2">
+<h2>機械学習の解釈の問題</h2>
+<ul>
+<li>Modelを深堀る: SHAP</li>
+<li>Modelの妥当性を確認: RATE</li>
+<li>Modelを分かりやすく変更: Surrogate tree、Policy tree</li>
+</ul>
+</section>
+<section id="advanced" class="slide level2">
+<h2>Advanced</h2>
+<ul>
+<li>95%信頼区間が出せるかどうか？</li>
+<li>Missingnessについて</li>
+<li>Sensitivity analysisはどうすればいい？</li>
+</ul>
+</section></section>
+<section>
+<section id="実践" class="title-slide slide level1 center">
+<h1>実践！</h1>
+
+</section>
+<section id="test-dataset①" class="slide level2">
+<h2>Test-dataset①</h2>
+<ul>
+<li>治療効果は各々別個にいれてある</li>
+<li>DAGは上記の通り</li>
+<li>CAがメインのInterventionで解析をするアウトカムは3種類
+<ul>
+<li>連続値のAFEQT-OS</li>
+<li>二値値のbin_outcome(短期の入院の有無など)</li>
+<li>生存分析のeventtime, status(長期の心不全あるいは死亡)</li>
+</ul></li>
+<li>ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)</li>
+<li>SESは観測されない交絡因子</li>
+</ul>
+</section>
+<section id="test-dataset②" class="slide level2">
+<h2>Test-dataset②</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 14
@@ -263,19 +480,8 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </div>
 </div>
 </section>
-<section id="dataの説明" class="slide level2">
-<h2>Dataの説明</h2>
-<ul>
-<li>DAGは上記の通り</li>
-<li>CAがメインのInterventionで解析をするアウトカムは3種類
-<ul>
-<li>連続値のAFEQT-OS</li>
-<li>二値値のbin_outcome(短期の入院の有無など)</li>
-<li>生存分析のeventtime, status(長期の心不全あるいは死亡)</li>
-</ul></li>
-<li>ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)</li>
-<li>SESは観測されない交絡因子</li>
-</ul>
+<section id="thank-you-for-your-listening" class="slide level2">
+<h2>Thank you for your listening</h2>
 </section>
 <section id="simple-regression" class="slide level2">
 <h2>Simple regression</h2>
@@ -848,67 +1054,9 @@ Number of Fisher Scoring iterations: 2</code></pre>
    8.839814 </code></pre>
 </div>
 </div>
-</section></section>
-<section>
-<section id="機械学習-at-glance" class="title-slide slide level1 center">
-<h1>機械学習 at glance</h1>
-
-</section>
-<section id="機械学習とは" class="slide level2">
-<h2>機械学習とは</h2>
-</section>
-<section id="代表的な機械学習" class="slide level2">
-<h2>代表的な機械学習</h2>
-<ul>
-<li>Logistic回帰</li>
-<li>tree-based model
-<ul>
-<li>Random forest</li>
-<li>XGBoost</li>
-</ul></li>
-<li>Neural network</li>
-</ul>
-</section>
-<section id="機械学習の強みと弱み" class="slide level2">
-<h2>機械学習の強みと弱み</h2>
-<ul>
-<li>Pros
-<ul>
-<li>データから関係性を柔軟に読み取る</li>
-<li>例えばTree based modelは相互作用を自然に扱うことが出来る</li>
-</ul></li>
-<li>Cons
-<ul>
-<li>複雑なモデルはBlack boxになる</li>
-<li>Overfittingの問題</li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="機械学習と因果推論の出会い" class="title-slide slide level1 center">
-<h1>機械学習と因果推論の出会い</h1>
-
-</section>
-<section id="因果推論における機械学習の役割" class="slide level2">
-<h2>因果推論における機械学習の役割</h2>
-<ul>
-<li>アウトカムモデル、PS modelを柔軟に扱う</li>
-<li>Interaction termを自然に扱える
-<ul>
-<li>HTEを自然に扱えないか？</li>
-</ul></li>
-</ul>
-</section>
-<section id="機械学習を用いた因果推論について" class="slide level2">
-<h2>機械学習を用いた因果推論について</h2>
-<ul>
-<li>大別してMeta learner系とCausal forest系に分けられる</li>
-<li>柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest</li>
-<li>とはいえ、Causal forestだけで良い気もする</li>
-</ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x780147e9f200&gt;</code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x751c1a2a4f80&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]</code></pre>
@@ -932,7 +1080,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 
 </div>
 <img data-src="index_files/figure-revealjs/scratch-for-S-learner-1.svg" width="960" class="r-stretch"></section>
-<section id="t-learner" class="slide level2">
+<section id="t-learner-1" class="slide level2">
 <h2>T learner</h2>
 
 <img data-src="images/t-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">t-learner</p></section>
@@ -940,7 +1088,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 <h2>Scratch for T-learner</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.TLearner object at 0x7801476ed1c0&gt;</code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.TLearner object at 0x751c1a2638c0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>T learnerでの局所治療効果</code></pre>
@@ -951,7 +1099,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 </div>
 </div>
 </section>
-<section id="x-learner" class="slide level2">
+<section id="x-learner-1" class="slide level2">
 <h2>X-learner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -961,7 +1109,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.XLearner object at 0x78013ed677a0&gt;</code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.XLearner object at 0x751c12f61250&gt;</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -972,11 +1120,11 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 </div>
 </div>
 </section>
-<section id="dr-learner" class="slide level2">
+<section id="dr-learner-1" class="slide level2">
 <h2>DR-learner</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.dr._drlearner.DRLearner object at 0x78013c90e420&gt;</code></pre>
+<pre><code>&lt;econml.dr._drlearner.DRLearner object at 0x751c12f96270&gt;</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1029,7 +1177,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x7 &gt;
 
-&gt; 8013ed941d0&gt;</code></pre>
+&gt; 51c12e68410&gt;</code></pre>
 </div>
 
 </div>
@@ -1072,7 +1220,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
  collate  ja_JP.UTF-8
  ctype    ja_JP.UTF-8
  tz       Asia/Tokyo
- date     2026-07-05
+ date     2026-07-15
  pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)
  quarto   1.9.38 @ /opt/quarto/bin/quarto
 
@@ -1273,7 +1421,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
  libpython:      /usr/lib/python3.12/config-3.12-x86_64-linux-gnu/libpython3.12.so
  pythonhome:     /home/figarofuga/analysis/personal-slides/.venv:/home/figarofuga/analysis/personal-slides/.venv
  virtualenv:     /home/figarofuga/analysis/personal-slides/.venv/bin/activate_this.py
- version:        3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]
+ version:        3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]
  numpy:          /home/figarofuga/analysis/personal-slides/.venv/lib/python3.12/site-packages/numpy
  numpy_version:  2.4.6
  
