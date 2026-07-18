@@ -1,62 +1,32 @@
 {
-  "name": "quarto-r-slides",
+  "name": "personal-slides-analysis",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "context": "."
   },
-  "features": {
-    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
-      "vscodeRSupport": "full",
-      "installRMarkdown": true,
-      "installBspm": true,
-      "installRadian": true
-    },
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "jq,curl,wget,git,make,build-essential,gfortran,cmake,pkg-config,liblas-dev,liblapack-dev,libnlopt-dev,python3,python3-venv,python3-dev,fontconfig,fonts-noto,fonts-noto-cjk,fonts-noto-color-emoji,libcurl4-openssl-dev,libssl-dev,libxml2-dev,libfontconfig1-dev,libfreetype6-dev,libharfbuzz-dev,libfribidi-dev,libpng-dev,libjpeg-dev,libtiff5-dev",
-      "upgradePackages": false
-    },
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
-      "version": "latest",
-      "installTinyTex": false,
-      "installChromium": true
-    }
+
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb",
+    "storage": "64gb"
   },
-  "overrideFeatureInstallOrder": [
-    "ghcr.io/rocker-org/devcontainer-features/r-apt",
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages",
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli",
-    "ghcr.io/rocker-org/devcontainer-features/rstudio-server"
-  ],
+
   "remoteUser": "vscode",
+
   "customizations": {
     "vscode": {
       "extensions": [
         "quarto.quarto",
         "REditorSupport.r",
         "ms-python.python",
-        "yzhang.markdown-all-in-one"
-      ],
-      "settings": {
-        "editor.formatOnSave": true,
-        "files.associations": {
-          "*.qmd": "quarto"
-        }
-      }
+        "ms-toolsai.jupyter"
+      ]
     }
   },
-  "forwardPorts": [
-    4444,
-    8000,
-    8787
+
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"
   ],
-  "portsAttributes": {
-    "4444": {
-      "label": "Quarto preview",
-      "onAutoForward": "openPreview"
-    },
-    "8000": {
-      "label": "Static docs preview",
-      "onAutoForward": "notify"
-    }
-  },
-  "postCreateCommand": "bash .devcontainer/postCreate.sh"
+
+  "postCreateCommand": "sudo chown -R \"$(id -u):$(id -g)\" \"${containerWorkspaceFolder}/.pixi\" && pixi install --locked"
 }

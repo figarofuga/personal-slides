@@ -1,0 +1,31 @@
+Package: ggcube
+Type: Package
+Title: 3D Plotting with 'ggplot2'
+Version: 0.1.0
+Authors@R: 
+    person("Matthew", "Kling", , "mattkling@berkeley.edu", 
+    role = c("aut", "cre", "cph"))
+Description: A 'ggplot2' extension for creating 3D figures.
+    Provides 3D geoms, stats, and a coord_3d() coordinate
+    system supporting rotation, perspective, and lighting.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/matthewkling/ggcube,
+        https://matthewkling.github.io/ggcube/
+BugReports: https://github.com/matthewkling/ggcube/issues
+Depends: R (>= 3.5), ggplot2
+Imports: dplyr, tidyr, stringr, scales, rlang, grid, lifecycle,
+        labeling, purrr, magrittr, polyclip, isoband, systemfonts
+RoxygenNote: 7.3.2
+Suggests: alphashape3d, av, base64enc, geometry, gifski, knitr, MASS,
+        mgcv, patchwork, progress, ragg, rmarkdown, testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Config/Needs/website: rmarkdown
+NeedsCompilation: no
+Packaged: 2026-05-19 15:35:57 UTC; matthewkling
+Author: Matthew Kling [aut, cre, cph]
+Maintainer: Matthew Kling <mattkling@berkeley.edu>
+Repository: CRAN
+Date/Publication: 2026-05-27 10:00:23 UTC

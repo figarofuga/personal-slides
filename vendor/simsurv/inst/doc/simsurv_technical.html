@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Sam Brilleman" />
+
+<meta name="date" content="2026-01-22" />
+
+<title>Technical background to the simsurv package</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Technical background to the simsurv package</h1>
+<h4 class="author">Sam Brilleman</h4>
+<h4 class="date">2026-01-22</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#preamble">Preamble</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#cumulative-hazard-inversion-method-bender-et-al.-2005">Cumulative hazard inversion method (Bender et al. (2005))</a><ul>
+<li><a href="#exponential-distribution">Exponential distribution</a></li>
+<li><a href="#weibull-distribution">Weibull distribution</a></li>
+<li><a href="#gompertz-distribution">Gompertz distribution</a></li>
+</ul></li>
+<li><a href="#numerical-root-finding">Numerical root finding</a><ul>
+<li><a href="#exponential-mixture-distribution">Exponential mixture distribution</a></li>
+<li><a href="#weibull-mixture-distribution">Weibull mixture distribution</a></li>
+<li><a href="#gompertz-mixture-distribution">Gompertz mixture distribution</a></li>
+</ul></li>
+<li><a href="#extending-to-time-dependent-effects-or-user-defined-hazard-functions">Extending to time-dependent effects or user-defined hazard functions</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<div id="preamble" class="section level2">
+<h2>Preamble</h2>
+<p>This vignette herein describes the methodology used to simulate event times in the <strong>simsurv</strong> package. For a vignette related to usage of the package, including examples and code, please see <a href="simsurv_usage.html">How to use the simsurv package</a>.</p>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The survival function for individual <span class="math inline">\(i\)</span> is the probability that their “true” event time <span class="math inline">\(T_i^*\)</span> is greater than the current time <span class="math inline">\(t\)</span>. That is, the survival function can be defined as</p>
+<p><span class="math display">\[
+  S_i (t) = P(T_i^* &gt; t)
+\]</span></p>
+<p>Moreover, the corresponding probability of having failed at or before time <span class="math inline">\(t\)</span> (i.e. having not survived up to time <span class="math inline">\(t\)</span>) is the complement to the survival function. That is, the probability of failure is defined as</p>
+<p><span class="math display">\[
+  F_i (t) = P(T_i^* \leq t) = 1 - S_i (t)
+\]</span></p>
+<p>If the survival time <span class="math inline">\(T_i^*\)</span> is known to be drawn from some parametric distribution, then it also holds that the definition of the probability of failure, <span class="math inline">\(F_i(t)\)</span>, is equivalent to the definition of the cumulative distribution function (CDF) for the distribution of event times. Moreover, probability distribution theory tells us that the CDF for a continuous random variable must follow a uniform distribution on the range 0 to 1 (Mood et al. (1973)). That is, <span class="math inline">\(F_X (X) \sim U(0,1)\)</span> where <span class="math inline">\(F_X (.)\)</span> denotes the CDF for the continuous random variable <span class="math inline">\(X\)</span>. Similarly, the complement of the CDF for <span class="math inline">\(X\)</span> must also follow a uniform distribution on the range 0 to 1, that is, <span class="math inline">\(1-F_X (X) \sim U(0,1)\)</span>.</p>
+<p>These results therefore allow one to conclude that under a standard parametric distributional assumption for the event times <span class="math inline">\(T_i^*\)</span> <span class="math inline">\((i=1,…,N)\)</span>, the survival probability for individual <span class="math inline">\(i\)</span> at their true event time will be a uniform random variable on the range 0 to 1. That is,</p>
+<p><span class="math display">\[
+  S_i (T_i^*) = U_i \sim U(0,1)
+\]</span></p>
+<p>It is then possible to extend these results to the setting of a proportional hazards model. Under a proportional hazards model the survival probability for individual <span class="math inline">\(i\)</span> at their event time <span class="math inline">\(T_i^*\)</span> can be written as</p>
+<p><span class="math display">\[
+  S_i (T_i^*) = \exp \left( -H_0 (T_i^*) \exp(X_i^T \beta) \right) = U_i \sim U(0,1)
+\]</span></p>
+<p>where <span class="math inline">\(H_0(t)=\int_0^t h_0(s) ds\)</span> is the cumulative baseline hazard evaluated at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(X_i\)</span> is a vector of covariates with associated population-level (i.e. fixed effect) parameters <span class="math inline">\(\beta\)</span>.</p>
+</div>
+<div id="cumulative-hazard-inversion-method-bender-et-al.-2005" class="section level2">
+<h2>Cumulative hazard inversion method (Bender et al. (2005))</h2>
+<p>Rearranging the equation for <span class="math inline">\(S_i(t)\)</span> and solving for <span class="math inline">\(t\)</span> leads to the following general form for the inverted survival function</p>
+<p><span class="math display">\[
+  S_i^{-1}(u) = H_0^{-1} \left( -\log(u) \exp(-X_i^T \beta) \right)
+\]</span></p>
+<p>where <span class="math inline">\(S_i^{-1}(u)\)</span> is the inverted survival function for individual <span class="math inline">\(i\)</span>, <span class="math inline">\(H_0^{-1} (u)\)</span> corresponds to the inverted cumulative baseline hazard function, and <span class="math inline">\(X_i\)</span> is a vector of covariates with associated population-level (i.e. fixed effect) parameters <span class="math inline">\(\beta\)</span>.</p>
+<p>Therefore, if the cumulative hazard function is invertible, we can easily simulate a new event time as</p>
+<p><span class="math display">\[
+  T_i^s = S_i^{-1}(U_i)
+\]</span></p>
+<p>where <span class="math inline">\(T_i^s\)</span> is the simulated event times for individual <span class="math inline">\(i\)</span>, <span class="math inline">\(S_i^{-1}(u)\)</span> is the inverted survival function defined previously, and <span class="math inline">\(U_i\)</span> is a random variable drawn from a <span class="math inline">\(U(0,1)\)</span> distribution. Note that if the cumulative baseline hazard is directly invertible then an analytic form will be available for <span class="math inline">\(S_i^{-1}(u)\)</span>. That is, we can just plug in random draws of <span class="math inline">\(U_i\)</span> and directly calculate the simulated event times. Since independent draws of a <span class="math inline">\(U(0,1)\)</span> random variable are easily obtained using any standard statistical software, this method will be easy and fast for simulating event times.</p>
+<p>This method was first proposed by Bender et al. (2005) and is commonly known as the <em>cumulative hazard inversion method</em>.</p>
+<p>For the standard parametric survival distributions included in the <strong>simsurv</strong> package (i.e. Weibull, exponential, Gompertz) an analytic form for <span class="math inline">\(S_i^{-1}(u)\)</span> does exist. Therefore, event times for these standard parametric distributions (assuming proportional hazards) are generated using the cumulative hazard inversion method. The parameterisations for each of these standard parametric distributions are shown next.</p>
+<div id="exponential-distribution" class="section level3">
+<h3>Exponential distribution</h3>
+<p>For the exponential distribution we have the following:</p>
+<p><span class="math display">\[
+  h_i(t) = \lambda \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  H_i(t) = \lambda t \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  S_i(t) = \exp \left( -\lambda t \exp(X_i^T \beta) \right)
+\]</span></p>
+<p><span class="math display">\[
+  S_i^{-1}(u) =  \left( 
+    \frac{- \log(u)}{\lambda \exp(X_i^T \beta)}
+  \right)
+\]</span></p>
+<p>where <span class="math inline">\(\lambda &gt; 0\)</span> is the scale (sometimes known as rate) parameter.</p>
+</div>
+<div id="weibull-distribution" class="section level3">
+<h3>Weibull distribution</h3>
+<p>For the Weibull distribution we have the following:</p>
+<p><span class="math display">\[
+  h_i(t) = \gamma \lambda (t ^{\gamma - 1}) \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  H_i(t) = \lambda (t^{\gamma}) \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  S_i(t) = \exp \left( -\lambda (t^{\gamma}) \exp(X_i^T \beta) \right)
+\]</span></p>
+<p><span class="math display">\[
+  S_i^{-1}(u) = \left( 
+    \frac{- \log(u)}{\lambda \exp(X_i^T \beta)}
+  \right) 
+  ^ {1 / \gamma}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda &gt; 0\)</span> and <span class="math inline">\(\gamma &gt; 0\)</span> are the scale and shape parameters, respectively.</p>
+</div>
+<div id="gompertz-distribution" class="section level3">
+<h3>Gompertz distribution</h3>
+<p>For the Gompertz distribution we have the following:</p>
+<p><span class="math display">\[
+  h_i(t) = \lambda \exp(\gamma t) \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  H_i(t) = \frac{\lambda (\exp(\gamma t) - 1)}{\gamma} \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  S_i(t) = \exp \left( \frac{-\lambda (\exp(\gamma t) - 1)}{\gamma}  \exp(X_i^T \beta) \right)
+\]</span></p>
+<p><span class="math display">\[
+  S_i^{-1}(u) = \frac{1}{\gamma} \log
+  \left[
+    \left( 
+      \frac{- \gamma \log(u)}{\lambda \exp(X_i^T \beta)}
+    \right) + 1
+  \right]  
+\]</span></p>
+<p>where <span class="math inline">\(\lambda &gt; 0\)</span> and <span class="math inline">\(\gamma &gt; 0\)</span> are the scale and shape parameters, respectively.</p>
+</div>
+</div>
+<div id="numerical-root-finding" class="section level2">
+<h2>Numerical root finding</h2>
+<p>If the cumulative baseline hazard function is not invertible, then numerical root finding can be used to solve to <span class="math inline">\(t\)</span>. This method has been discussed by both Bender et al. (2005) and Crowther and Lambert (2013). In <strong>simsurv</strong> this is required for the two-component mixture distributions (assuming proportional hazards). An analytical form is available for the survival function of each of these distributions, but numerical root finding must be used to invert the survival function. In practice, the <strong>simsurv</strong> package uses the <code>stats::uniroot</code> function based on the method of Brent (1973). This means iteratively finding a solution to the equation <span class="math inline">\(S_i(t) - U_i = 0\)</span>.</p>
+<p>The two-component mixture distributions in <strong>simsurv</strong> are parameterised in the same way as the <strong>survsim</strong> Stata package (Crowther and Lambert (2002)). That is, they are additive on the survival scale, with a parameter defining the mixing proportions, i.e.</p>
+<p><span class="math display">\[
+  S_0(t) = \pi S_{01}(t) + (1-\pi) S_{02}(t)
+\]</span></p>
+<p>where <span class="math inline">\(S_0(t)\)</span> is the baseline survival function, <span class="math inline">\(S_{01}(t)\)</span> and <span class="math inline">\(S_{02}(t)\)</span> are baseline survival functions for the two component distributions, and <span class="math inline">\(0 \leq \pi \leq 1\)</span> is the mixing parameter. The specific parameterisations for the hazard and survival functions of each of the two-component mixture distributions in <strong>simsurv</strong> are shown next.</p>
+<div id="exponential-mixture-distribution" class="section level3">
+<h3>Exponential mixture distribution</h3>
+<p>For the two-component exponential mixture distribution we have the following:</p>
+<p><span class="math display">\[
+  h_i(t) = 
+  \left[
+    \frac
+    {\pi \lambda_1 \exp(-\lambda_1 t) + (1 - \pi) \lambda_2 \exp(-\lambda_2 t) }
+    {\pi \exp(-\lambda_1 t) + (1 - \pi) \exp(-\lambda_2 t) }
+  \right] 
+  \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  H_i(t) = - \log
+  \left[ 
+    \pi \exp(-\lambda_1 t) + (1-\pi) \exp(-\lambda_2 t) 
+  \right] 
+  \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  S_i(t) = 
+  \left[ 
+    \pi \exp(-\lambda_1 t) + (1-\pi) \exp(-\lambda_2 t) 
+  \right] 
+  ^ {\exp(X_i^T \beta)}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span> are the scale (sometimes known as rate) parameters for the component exponential distributions.</p>
+</div>
+<div id="weibull-mixture-distribution" class="section level3">
+<h3>Weibull mixture distribution</h3>
+<p>For the two-component Weibull mixture distribution we have the following:</p>
+<p><span class="math display">\[
+  h_i(t) = 
+  \left[
+    \frac
+    { \pi \gamma_1 \lambda_1 (t^{\gamma_1-1}) \exp(-\lambda_1 (t^{\gamma_1})) + 
+      (1-\pi) \gamma_2 \lambda_2 (t^{\gamma_2-1}) \exp(-\lambda_2 (t^{\gamma_2})) }
+    {\pi \exp(-\lambda_1 (t^{\gamma_1})) + (1-\pi) \exp(-\lambda_2 (t^{\gamma_2}))}
+  \right] 
+  \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  H_i(t) = - \log
+  \left[
+    \pi \exp(-\lambda_1 (t^{\gamma_1})) + (1-\pi) \exp(-\lambda_2 (t^{\gamma_2})) 
+  \right] 
+  \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  S_i(t) = 
+  \left[
+    \pi \exp(-\lambda_1 (t^{\gamma_1})) + (1-\pi) \exp(-\lambda_2 (t^{\gamma_2})) 
+  \right] 
+  ^ {\exp(X_i^T \beta)}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span> are the scale parameters, and <span class="math inline">\(\gamma_1 &gt; 0\)</span> and <span class="math inline">\(\gamma_2 &gt; 0\)</span> are the shape parameters, for the component Weibull distributions.</p>
+</div>
+<div id="gompertz-mixture-distribution" class="section level3">
+<h3>Gompertz mixture distribution</h3>
+<p><span class="math display">\[
+  h_i(t) = 
+  \left[
+    \frac
+    {
+      \pi \lambda_1 \exp(\gamma_1 t) \exp \left( \frac{-\lambda_1 (\exp(\gamma_1 t) - 1)}{\gamma_1} \right)
+      + (1-\pi) \lambda_2 \exp(\gamma_2 t) \exp \left( \frac{-\lambda_2 (\exp(\gamma_2 t) - 1)}{\gamma_2} \right)
+    }
+    {
+      \pi \exp \left( \frac{-\lambda_1 (\exp(\gamma_1 t) - 1)}{\gamma_1} \right)
+      + (1-\pi) \exp \left( \frac{-\lambda_2 (\exp(\gamma_2 t) - 1)}{\gamma_2} \right)
+    }
+  \right]
+  \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  H_i(t) = - \log
+  \left[
+    \pi 
+    \exp \left( \frac{-\lambda_1 (\exp(\gamma_1 t) - 1)}{\gamma_1} \right)
+    + (1-\pi) 
+    \exp \left( \frac{-\lambda_2 (\exp(\gamma_2 t) - 1)}{\gamma_2} \right)
+  \right] 
+  \exp(X_i^T \beta)
+\]</span></p>
+<p><span class="math display">\[
+  S_i(t) = 
+  \left[
+    \pi 
+    \exp \left( \frac{-\lambda_1 (\exp(\gamma_1 t) - 1)}{\gamma_1} \right)
+    + (1-\pi) 
+    \exp \left( \frac{-\lambda_2 (\exp(\gamma_2 t) - 1)}{\gamma_2} \right)
+  \right] 
+  ^ {\exp(X_i^T \beta)}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span> are the scale parameters, and <span class="math inline">\(\gamma_1 &gt; 0\)</span> and <span class="math inline">\(\gamma_2 &gt; 0\)</span> are the shape parameters, for the component Gompertz distributions.</p>
+</div>
+</div>
+<div id="extending-to-time-dependent-effects-or-user-defined-hazard-functions" class="section level2">
+<h2>Extending to time-dependent effects or user-defined hazard functions</h2>
+<p>If one can obtain an algebraic closed-form solution for the inverse cumulative baseline hazard, <span class="math inline">\(H_0^{-1}(u)\)</span>, then a major benefit of the cumulative hazard inversion method is that it is simple and computationally efficient. Moreover, it can be used to generate survival times for a variety of standard parametric baseline hazards, for example, the exponential, Weibull or Gompertz distributions. Even if the cumulative baseline hazard cannot be inverted analytically then one can still use numerical root finding, as described in the previous section, to numerically invert the survival function and solve for <span class="math inline">\(t\)</span>.</p>
+<p>However, using numerical root finding still requires an analytical form for the survival function. For some complex data generating processes it may not be possible to obtain a closed-form solution to the cumulative baseline hazard <span class="math inline">\(H_0 (t)\)</span> and therefore the form of <span class="math inline">\(S_i(t)\)</span> will also be intractable. Crowther and Lambert (2013) therefore proposed an extension to overcome these issues. Their extension incorporates <em>both</em> numerical root finding and numerical quadrature. The numerical quadrature is used to evaluate the cumulative hazard in situations where it cannot be evaluated analytically.</p>
+<p>An example of a situation where their method is required is the introduction of time-dependent effects on the hazard scale (i.e. non-proportional hazards). The introduction of time-dependent effects often leads to an intractable integral when evaluating the cumulative hazard. The method therefore involves iterating between numerical quadrature and numerical root finding until an appropriate solution for <span class="math inline">\(t\)</span> is obtained. This is the method used by the <strong>simsurv</strong> package when the user supplies their own hazard or log hazard function for generating the event times, or when they are simulating with time-dependent effects (i.e. non-proportional hazards). The numerical integration is based on Gauss-Kronrod quadrature with a default of 15 nodes (although the user can choose between 7, 11, or 15 nodes). For further details on the method we refer the reader to the the paper by Crowther and Lambert (2013).</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Bender R, Augustin T, Blettner M. Generating survival times to simulate Cox proportional hazards models. <em>Stat Med</em> 2005;<strong>24</strong>(11):1713-1723. </p>
+<p>Brent R. <em>Algorithms for Minimization without Derivatives</em>. Englewood Cliffs, NJ: Prentice-Hall, 1973.</p>
+<p>Crowther MJ, Lambert PC. Simulating complex survival data. <em>Stata J</em> 2012;<strong>12</strong>(4):674-687.</p>
+<p>Crowther MJ, Lambert PC. Simulating biologically plausible complex survival data. <em>Stat Med</em> 2013;<strong>32</strong>(23):4118-4134. </p>
+<p>Mood AM, Graybill FA, Boes DC. <em>Introduction to the Theory of Statistics</em>. McGraw-Hill: New York, 1974.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

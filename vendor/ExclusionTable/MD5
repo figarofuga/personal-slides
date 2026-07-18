@@ -1,0 +1,16 @@
+c14e5488d7c95299dcfbadf9460a34b7 *DESCRIPTION
+eb3f350754d754763eba476fad31bbc2 *NAMESPACE
+5ab8f2be687797c6a29d9b7bdec98877 *NEWS.md
+14150e6add4373ee9670eaaf8de29940 *R/exclusion_table.R
+1c8352c27c876593184e2232eb1accda *R/print.exl_tbl.R
+04d9dc5c818cd070bee6aadfc420fdc9 *README.md
+9e2e0a18796f17c15cac5259ed996ce0 *build/vignette.rds
+92e14c67c3c75892cb69b86ded7a1360 *inst/doc/ExclusionTable_vignette.R
+b066e473409f1f3e9ab1ec6b1185262e *inst/doc/ExclusionTable_vignette.Rmd
+cb3c5be49c7a55a5cbab7c971fa75ab1 *inst/doc/ExclusionTable_vignette.html
+772b0127d73cea68b273a95bd5d25fee *man/exclusion_table.Rd
+03caa16b66960133f32b5392e2165ce0 *man/print.exl_tbl.Rd
+b861e0b109a3fb80e08133c655693642 *tests/testthat.R
+33f664a3002919d98a03e8582a1a9e20 *tests/testthat/_snaps/exclusion_table.md
+47f95357e7d54a9a57584a88ae69fe9b *tests/testthat/test-exclusion_table.R
+b066e473409f1f3e9ab1ec6b1185262e *vignettes/ExclusionTable_vignette.Rmd

@@ -1,0 +1,315 @@
+---
+title: "RMSTに関してあるいは、Cox回帰の限界"
+author: "新美 望"
+date: "2020/4"
+lang: ja
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    incremental: false
+    smaller: true
+    title-slide: false
+---
+
+```{=html}
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.55em;
+  margin-top: 0.6em;
+  text-align: right;
+}
+.reveal .small {
+  font-size: 0.72em;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+.reveal img {
+  max-height: 64vh;
+  object-fit: contain;
+}
+.reveal table {
+  font-size: 0.48em;
+}
+</style>
+```
+
+## RMSTに関してあるいは、Cox回帰の限界
+
+2020/4 ＠Keio University  
+新美 望
+
+## ある日のこと
+
+<!-- TODO: 元スライドは画像3枚の配置。Quartoでは簡略配置。 -->
+
+:::: columns
+::: {.column width="38%"}
+![](images/slide02_image01.png){fig-alt="ある日のこと 画像1" width="82%"}
+:::
+
+::: {.column width="62%"}
+![](images/slide02_image02.png){fig-alt="ある日のこと 画像2" width="78%"}
+
+![](images/slide02_image03.png){fig-alt="ある日のこと 画像3" width="100%"}
+:::
+::::
+
+## 今日の内容
+
+- 復習：生存解析
+- Cox hazardの限界
+- RMSTとは？
+- RMSTは何がいいの？限界は？
+- RMSTの使い方
+- 観察研究での使い道
+
+## 今日の内容
+
+- 速習：生存解析
+- Cox hazardの限界
+- RMSTとは？
+- RMSTは何がいいの？限界は？
+- RMSTの使い方
+- 観察研究での使い道
+
+## 速習：生存解析
+
+:::: columns
+::: {.column width="52%"}
+- 生存時間およびイベントの発症率の推定にKaplan-Meier法
+- 単純な比較にLog-rank
+- 影響の大きさの定量化や多変量調整にCoxハザードモデル
+- これらを用いることが多い
+:::
+
+::: {.column width="48%"}
+![](images/slide05_image01.png){fig-alt="生存解析の図1" width="82%"}
+
+![](images/slide05_image02.png){fig-alt="生存解析の図2" width="82%"}
+:::
+::::
+
+## Kaplan-Meier Method
+
+:::: columns
+::: {.column width="56%"}
+- eventがあった時にその時の瞬間風速を計算する
+- 瞬間風速の積み重ねでplotを行う
+- 指標では中央値を用いる
+:::
+
+::: {.column width="44%"}
+![](images/slide06_image01.png){fig-alt="Kaplan-Meier method" width="74%"}
+:::
+::::
+
+## Non Parametric：Log-rank、一般化Wilcoxon検定
+
+:::: columns
+::: {.column width="52%"}
+- 大雑把に言うとχ2検定
+- 多群で使えるのがメリット
+- 影響の大きさの定量化は出来ない
+- 一般化Wilcoxon検定の方が早期のeventに対して検出力が高い
+- Log-rankが苦手な形がある
+:::
+
+::: {.column width="48%"}
+![](images/slide07_image01.png){fig-alt="Log-rankの模式図" width="42%"}
+
+![](images/slide07_image02.png){fig-alt="Log-rankが苦手な形" width="100%"}
+:::
+::::
+
+## Cox回帰について
+
+:::: columns
+::: {.column width="58%"}
+- ハザード比
+- 大元の生存曲線の形はどうでも良い
+- 各々の共変量の有無で瞬間の死亡率（hazard比）が変化する
+:::
+
+::: {.column width="42%"}
+![](images/slide08_image01.png){fig-alt="Cox回帰の式" width="100%"}
+:::
+::::
+
+## 今日の内容
+
+- 復習：生存解析
+- Cox hazardの限界
+- RMSTとは？
+- RMSTは何がいいの？限界は？
+- RMSTの使い方
+- 観察研究での使い道
+
+## Cox Modelの限界
+
+- 共変量が時間に関わらずに同じように影響するという仮定が必要
+- 比例ハザード性がないといけない
+  - Log-log plotなどで確認する
+- 結果の解釈が難しい
+- 例：REAL-CAD study
+  - 高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました
+  - 患者さんにどう説明する？
+
+## 本当ならダメな形！！
+
+![](images/slide11_image01.png){fig-alt="比例ハザード性が成り立たない例" width="76%"}
+
+## Log-log Plot
+
+:::: columns
+::: {.column width="48%"}
+- 横軸が時間、縦軸が `log{-log(S(t))}` のグラフ
+- これが平行の時には比例hazard性が保たれていると判断
+- わかりやすいのは元の曲線が交わっているか否か
+:::
+
+::: {.column width="52%"}
+![](images/slide12_image01.png){fig-alt="Log-log plot 1" width="96%"}
+
+![](images/slide12_image02.png){fig-alt="Log-log plot 2" width="96%"}
+:::
+::::
+
+## 今日の内容
+
+- 復習：生存解析
+- Cox hazardの限界
+- RMSTとは？
+- RMSTは何がいいの？限界は？
+- RMSTの使い方
+- 観察研究での使い道
+
+## RMSTとは
+
+:::: columns
+::: {.column width="52%"}
+- Restricted Mean Survival Timeの略
+- ある特定の時間（τ）までの生存曲線の面積を計測したもの
+- 近年、がん領域の研究でよく使われるようになっている
+:::
+
+::: {.column width="48%"}
+![](images/slide14_image01.png){fig-alt="RMSTの概念図1" width="72%"}
+
+![](images/slide14_image02.png){fig-alt="RMSTの概念図2" width="90%"}
+:::
+::::
+
+## RMSTとは
+
+- 比較には各々の治療群のRMSTの差や比をとる事が可能
+- 多変量回帰として種々の因子の調整も可能
+
+<!-- TODO: 元スライドの式・図配置は簡略化。 -->
+
+:::: columns
+::: {.column width="50%"}
+![](images/slide15_image01.png){fig-alt="RMST比較の図" width="92%"}
+:::
+
+::: {.column width="50%"}
+![](images/slide15_image02.png){fig-alt="RMST差の図" width="82%"}
+
+![](images/slide15_image03.png){fig-alt="RMST比の図" width="82%"}
+:::
+::::
+
+## RMSTの直観的理解
+
+:::: columns
+::: {.column width="50%"}
+![](images/slide16_image01.png){fig-alt="RMSTの直観的理解1" width="80%"}
+:::
+
+::: {.column width="50%"}
+![](images/slide16_image02.png){fig-alt="RMSTの直観的理解2" width="80%"}
+:::
+::::
+
+## HRとRMSTの関係
+
+![](images/slide17_image01.png){fig-alt="HRとRMSTの関係" width="62%"}
+
+## 今日の内容
+
+- 復習：生存解析
+- Cox hazardの限界
+- RMSTとは？
+- RMSTは何がいいの？限界は？
+- RMSTの使い方
+- 観察研究での使い道
+
+## RMSTは何がいいの？限界は？
+
+- RMSTでは、複数の異なる研究の比較の時にフォローアップ時間が違っていても比較が可能とされる
+- 臨床的解釈として「ある時間まで追跡した時の平均生存時間」という風に解釈が可能
+- 例：薬を飲むと、10年後には1年間の寿命伸延効果があります
+- 一番の注意点は、特定の時間τを臨床的に意味がある数字にする事
+- τが決められない時は長めの時間をとるのがベター
+
+## ハザードとの比較
+
+![](images/slide20_image01.png){fig-alt="ハザードとの比較" width="82%"}
+
+## 評価指標の比較 {.scrollable}
+
+<!-- TODO: 元スライドは横長表。QuartoではMarkdown表に変換し、スクロール可能にしている。 -->
+
+| 評価指標 | 時間 | 意味 | 利点 | 欠点 | 特に適した状況 |
+|---|---|---|---|---|---|
+| HR | フォロー期間全部 | ある瞬間でのRiskの変化率の比率 | フォロー期間全部の情報を使える | 直観的理解が困難<br>発症率が低いと広いCIになる | 研究：比例ハザードがある状況（非劣勢以外） |
+| ARR | ある特定の期間 | ある瞬間でのEvent freeの絶対差 | KM曲線から計算可能 | KM曲線の形の差を捉えられない | 研究と臨床：治療のインパクトの説明 |
+| NNT | ある特定の期間 | `1 / ARR` | KM曲線から計算可能 | 患者への説明が困難<br>KM曲線の形の差を捉えられない | 研究：介入の効果や有害事象への説明 |
+| 中央生存時間の差 | 各々のグループである一点 | 各グループで生存率が50%になる時間の差 | KM曲線から計算可能<br>Robust | Sample sizeやイベント率が低いと計算不可能 | 研究：大規模研究や長期の研究、高いイベント率の研究 |
+| RMST | ある特定の期間 | ある期間における平均イベントフリーの延長効果 | 直観的<br>非劣勢試験でも狭いCIで計算できる | 決めた期間より先について解釈できない<br>KM曲線の形の差を捉えられない | 研究と臨床：治療のインパクトの説明 |
+
+## 補足図
+
+![](images/slide22_image01.png){fig-alt="RMST補足図" width="70%"}
+
+## ISCHEMIAの場合
+
+:::: columns
+::: {.column width="58%"}
+- ICTUS, FRISC-II, RITA-3などの過去のRCTのメタアナライシスに準じて5年という時間を決めている
+- 5年restricted mean event-free timeの差は、invasive strategy群で9.5日長い
+- 95% CIは -17.8から36.9日
+:::
+
+::: {.column width="42%"}
+![](images/slide23_image01.png){fig-alt="ISCHEMIAのRMST結果" width="100%"}
+:::
+::::
+
+## 今日の内容
+
+- 復習：生存解析
+- Cox hazardの限界
+- RMSTとは？
+- RMSTは何がいいの？限界は？
+- RMSTの使い方
+- 観察研究での使い道
+
+## 観察研究での使い道
+
+- 回帰式を用いて、交絡因子を調整することも出来る
+  - Stroke. 2018;49:607-613.
+- Propensity score match後に単変量でも可能
+  - Open Heart. 2020;7:e001163.
+- 近年、Risk model作成も行われている
+  - Circ Cardiovasc Qual Outcomes. 2020;13:e005918.
+
+## AIMの締めの言葉
+
+- RCTにおいて、ルーチンでRMSTの差を使う事を推奨する
+
+![](images/slide26_image01.png){fig-alt="AIMの締めの言葉" width="70%"}
+
+## ご静聴ありがとうございました

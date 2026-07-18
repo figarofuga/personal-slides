@@ -1,0 +1,556 @@
+#' Atomic pie chart (internal)
+#'
+#' @description
+#' Core implementation for drawing a single pie chart.  This is the
+#' workhorse behind the exported \code{\link{PieChart}} function — it takes a
+#' **single** data frame (no \code{split_by} support) and returns a
+#' \code{ggplot} object.  The chart maps the proportion of each x-axis
+#' category to the angle of a pie slice using
+#' \code{\link[ggplot2]{coord_polar}()}, with optional faceting and
+#' per-slice labels.
+#'
+#' @section Architecture:
+#' \enumerate{
+#'   \item \strong{ggplot dispatch} — selects \code{gglogger::ggplot} or
+#'         \code{ggplot2::ggplot} based on
+#'         \code{getOption("plotthis.gglogger.enabled")}.
+#'   \item \strong{Column resolution} — \code{x} is forced to factor;
+#'         \code{y} is validated (numeric, optional).
+#'   \item \strong{Count aggregation} — when \code{y = NULL}, the count of
+#'         observations per (\code{x}, \code{facet_by}) combination is
+#'         computed as a new \code{.y} column.  Factor levels are preserved
+#'         after aggregation.
+#'   \item \strong{Label resolution} — when \code{label = TRUE}, the label
+#'         column is set to \code{y}.  The \code{label} column is then
+#'         validated.
+#'   \item \strong{Facet column resolution} — \code{facet_by} columns are
+#'         validated as factors, allowing up to two columns.
+#'   \item \strong{NA / empty-level handling} —
+#'         \code{\link{process_keep_na_empty}()} applies \code{keep_na} and
+#'         \code{keep_empty} policies.  Per-column \code{keep_empty} settings
+#'         are extracted for \code{x} and \code{facet_by}.  When more than one
+#'         facet column is provided, their \code{keep_empty} values must be
+#'         identical.
+#'   \item \strong{Clockwise ordering} — when \code{clockwise = TRUE}
+#'         (default), the levels of \code{x} are reversed so that the first
+#'         slice starts from the top and proceeds clockwise.  The data is then
+#'         sorted by the (possibly reversed) \code{x} factor levels.
+#'   \item \strong{Position calculation} — if faceted, grouping by facet
+#'         variables; computes cumulative sums (\code{csum}) and label
+#'         midpoint positions (\code{pos}) for each slice.
+#'   \item \strong{Colour mapping} — \code{\link{palette_this}()} assigns
+#'         colours to all \code{x} levels, including \code{NA} (defaulting to
+#'         \code{"grey80"}).
+#'   \item \strong{Plot assembly} — the \code{ggplot} object is built with
+#'         \code{geom_col(width = 1)} and
+#'         \code{coord_polar(theta = "y")} to create the circular pie
+#'         layout.  The fill scale uses \code{scale_fill_manual()} with
+#'         per-slice colours; the \code{drop} argument is controlled by
+#'         \code{keep_empty_x}.
+#'   \item \strong{Labels} — when \code{label} is not \code{NULL},
+#'         \code{\link[ggrepel]{geom_label_repel}()} adds text labels at
+#'         the computed midpoint positions (\code{pos}).
+#'   \item \strong{Dimension calculation} —
+#'         \code{\link{calculate_plot_dimensions}()} computes plot height and
+#'         width from \code{aspect.ratio} and legend metrics.  The resulting
+#'         \code{height} / \code{width} attributes are stored on the
+#'         \code{ggplot} object.
+#'   \item \strong{Faceting} — \code{\link{facet_plot}()} wraps the plot
+#'         with \code{facet_wrap} / \code{facet_grid} if \code{facet_by} is
+#'         provided, respecting the \code{keep_empty} setting for facet
+#'         variables.
+#' }
+#'
+#' @inheritParams common_args
+#' @param x A character string specifying the column name for the x-axis
+#'  (categories).  Must be character or factor.  Each unique value becomes a
+#'  pie slice.
+#' @param y A character string specifying the numeric column for the y-axis.
+#'  When \code{NULL} (default), the count of observations in each
+#'  (\code{x}, \code{facet_by}) combination is used and stored as
+#'  \code{.y}.
+#' @param label A character string specifying the column to use for slice
+#'  labels.  \code{NULL} (default) hides labels.  When \code{TRUE}, the
+#'  \code{y} values are used as labels.  When \code{y = NULL}, use
+#'  \code{".y"} to label with the computed counts.
+#' @param clockwise A logical value.  When \code{TRUE} (default), the pie
+#'  slices are ordered clockwise starting from the top.  When \code{FALSE},
+#'  slices are ordered counter-clockwise.
+#' @keywords internal
+#' @return A \code{ggplot} object with \code{height} and \code{width}
+#'  attributes (in inches) attached.
+#' @importFrom rlang sym
+#' @importFrom dplyr lead if_else mutate %>% group_by summarise n
+#' @importFrom tidyr complete
+#' @importFrom ggplot2 coord_polar geom_col scale_fill_manual labs element_blank guide_legend
+#' @importFrom ggrepel geom_label_repel
+PieChartAtomic <- function(
+    data,
+    x,
+    y = NULL,
+    label = y,
+    clockwise = TRUE,
+    keep_na = FALSE,
+    keep_empty = FALSE,
+    theme = "theme_this",
+    theme_args = list(),
+    palette = "Paired",
+    palcolor = NULL,
+    palreverse = FALSE,
+    alpha = 1,
+    facet_by = NULL,
+    facet_scales = "free_y",
+    facet_ncol = NULL,
+    facet_nrow = NULL,
+    facet_byrow = TRUE,
+    aspect.ratio = 1,
+    legend.position = "right",
+    legend.direction = "vertical",
+    title = NULL,
+    subtitle = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    ...
+) {
+    ggplot <- if (getOption("plotthis.gglogger.enabled", FALSE)) {
+        gglogger::ggplot
+    } else {
+        ggplot2::ggplot
+    }
+    base_size <- theme_args$base_size %||% 12
+    text_size_scale <- base_size / 12
+
+    x <- check_columns(data, x, force_factor = TRUE)
+    y <- check_columns(data, y)
+    orig_data <- data
+    if (is.null(y)) {
+        data <- data %>%
+            group_by(!!!syms(unique(c(x, facet_by)))) %>%
+            summarise(.y = n(), .groups = "drop")
+
+        for (col in unique(c(x, facet_by))) {
+            data[[col]] <- factor(
+                data[[col]],
+                levels = levels(orig_data[[col]])
+            )
+        }
+        y <- ".y"
+    }
+    if (isTRUE(label)) {
+        label <- y
+    }
+
+    label <- check_columns(data, label)
+    facet_by <- check_columns(
+        data,
+        facet_by,
+        force_factor = TRUE,
+        allow_multi = TRUE
+    )
+
+    data <- process_keep_na_empty(data, keep_na, keep_empty)
+    keep_empty_x <- keep_empty[[x]]
+    keep_empty_facet <- if (!is.null(facet_by)) {
+        keep_empty[[facet_by[1]]]
+    } else {
+        NULL
+    }
+    if (length(facet_by) > 1) {
+        stopifnot(
+            "[PieChart] `keep_empty` for `facet_by` variables must be identical." = identical(
+                keep_empty_facet,
+                keep_empty[[facet_by[2]]]
+            )
+        )
+    }
+
+    # order the data by the levels of x
+    if (isTRUE(clockwise)) {
+        data[[x]] <- factor(data[[x]], levels = rev(levels(data[[x]])))
+    }
+    data <- data[order(data[[x]]), , drop = FALSE]
+
+    if (!is.null(facet_by)) {
+        data <- data %>%
+            group_by(!!!syms(facet_by)) %>%
+            mutate(
+                csum = rev(cumsum(rev(!!sym(y)))),
+                pos = !!sym(y) / 2 + lead(!!sym("csum"), 1),
+                pos = if_else(is.na(!!sym("pos")), !!sym(y) / 2, !!sym("pos"))
+            ) %>%
+            ungroup()
+
+        for (col in facet_by) {
+            data[[col]] <- factor(
+                data[[col]],
+                levels = levels(orig_data[[col]])
+            )
+        }
+    } else {
+        data <- data %>%
+            mutate(
+                csum = rev(cumsum(rev(!!sym(y)))),
+                pos = !!sym(y) / 2 + lead(!!sym("csum"), 1),
+                pos = if_else(is.na(!!sym("pos")), !!sym(y) / 2, !!sym("pos"))
+            )
+    }
+    rm(orig_data)
+
+    x_vals <- levels(data[[x]])
+    if (isTRUE(clockwise)) {
+        x_vals <- rev(x_vals)
+    }
+    if (anyNA(data[[x]])) {
+        x_vals <- c(x_vals, NA)
+    }
+
+    colors <- palette_this(
+        x_vals,
+        palette = palette,
+        palcolor = palcolor,
+        NA_keep = TRUE,
+        reverse = palreverse
+    )
+
+    p <- ggplot(data, aes(x = "", y = !!sym(y), fill = !!sym(x))) +
+        geom_col(
+            width = 1,
+            alpha = alpha,
+            color = "white",
+            show.legend = TRUE
+        ) +
+        # scale_fill_manual(name = x, drop = !keep_empty, values = colors, guide = guide_legend(reverse = clockwise)) +
+        labs(title = title, subtitle = subtitle, x = xlab, y = ylab) +
+        coord_polar(theta = "y") +
+        do_call(theme, theme_args) +
+        ggplot2::theme(
+            aspect.ratio = aspect.ratio,
+            legend.position = legend.position,
+            legend.direction = legend.direction,
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.text = element_blank(),
+            axis.ticks = element_blank(),
+            axis.title = element_blank(),
+            panel.border = element_blank()
+        )
+
+    if (isTRUE(keep_empty_x)) {
+        p <- p +
+            scale_fill_manual(
+                name = x,
+                values = colors,
+                na.value = colors["NA"] %||% "grey80",
+                breaks = rev(x_vals),
+                limits = rev(x_vals),
+                drop = FALSE,
+                guide = guide_legend(reverse = clockwise)
+            )
+    } else {
+        p <- p +
+            scale_fill_manual(
+                name = x,
+                values = colors,
+                na.value = colors["NA"] %||% "grey80",
+                breaks = rev(x_vals),
+                guide = guide_legend(reverse = clockwise)
+            )
+    }
+
+    if (!is.null(label)) {
+        p <- p +
+            geom_label_repel(
+                aes(
+                    y = !!sym("pos"),
+                    label = ifelse(
+                        is.na(!!sym(label)),
+                        "NA",
+                        as.character(!!sym(label))
+                    )
+                ),
+                nudge_x = 0.1,
+                color = "grey20",
+                fill = "#fcfcfc",
+                size = text_size_scale * 3
+            )
+    }
+
+    dims <- calculate_plot_dimensions(
+        base_height = 4.5,
+        aspect.ratio = aspect.ratio,
+        legend.position = legend.position,
+        legend.direction = legend.direction,
+        legend_n = length(x_vals),
+        legend_nchar = max(nchar(as.character(x_vals)), na.rm = TRUE)
+    )
+
+    attr(p, "height") <- dims$height
+    attr(p, "width") <- dims$width
+
+    facet_plot(
+        p,
+        facet_by,
+        facet_scales,
+        facet_nrow,
+        facet_ncol,
+        facet_byrow,
+        legend.position = legend.position,
+        legend.direction = legend.direction,
+        drop = !isTRUE(keep_empty_facet)
+    )
+}
+
+#' Pie chart
+#'
+#' @description
+#' Draws a pie chart illustrating the numerical proportion of each group
+#' relative to the whole.  Each slice corresponds to a level of the x-axis
+#' variable and its angle is proportional to the y-axis value (or the
+#' observation count when \code{y} is omitted).
+#'
+#' The function supports \strong{count aggregation} (omit \code{y} to plot
+#' observation counts per x-category), \strong{slice labels} via
+#' \code{ggrepel::geom_label_repel()}, clockwise or counter-clockwise slice
+#' ordering, faceting, and splitting into separate sub-plots via
+#' \code{split_by}.
+#'
+#' @section split_by workflow:
+#' When \code{split_by} is provided:
+#' \enumerate{
+#'   \item \code{\link{validate_common_args}()} validates the \code{seed}
+#'         and \code{facet_by} settings.
+#'   \item \code{\link{check_keep_na}()} and \code{\link{check_keep_empty}()}
+#'         normalise the \code{keep_na} / \code{keep_empty} arguments for all
+#'         columns (\code{x}, \code{split_by}, \code{facet_by}).
+#'   \item \code{\link{process_theme}()} resolves the theme function.
+#'   \item The \code{x} column is forced to factor; \code{y} is validated.
+#'   \item The \code{split_by} column is validated and its NA / empty levels
+#'         are processed via \code{\link{process_keep_na_empty}()}.  It is
+#'         then removed from the per-column \code{keep_na} / \code{keep_empty}
+#'         lists.
+#'   \item The data frame is split by \code{split_by} (preserving level
+#'         order).  If \code{split_by} is \code{NULL}, the data is wrapped in
+#'         a single-element list with name \code{"..."}.
+#'   \item Per-split \code{palette}, \code{palcolor},
+#'         \code{legend.position}, and \code{legend.direction} are resolved
+#'         via \code{\link{check_palette}()}, \code{\link{check_palcolor}()},
+#'         and \code{\link{check_legend}()}.
+#'   \item \code{\link{PieChartAtomic}()} is called for each split.  If
+#'         \code{title} is a function, it receives the split level name and
+#'         can generate dynamic titles.
+#'   \item Results are combined via \code{\link{combine_plots}()} (when
+#'         \code{combine = TRUE}) or returned as a named list.
+#' }
+#'
+#' @export
+#' @inheritParams PieChartAtomic
+#' @inheritParams common_args
+#' @param split_by The column(s) to split the data by and produce separate
+#'  sub-plots.  Multiple columns are concatenated with \code{split_by_sep}.
+#' @param split_by_sep A character string to separate concatenated
+#'  \code{split_by} columns.  Default \code{"_"}.
+#' @param seed A numeric seed for reproducibility.  Passed to
+#'  \code{\link{validate_common_args}()}.
+#' @param combine Logical; when \code{TRUE} (default), returns a combined
+#'  \code{patchwork} object.  When \code{FALSE}, returns a named list of
+#'  individual \code{ggplot} objects.
+#' @param ncol,nrow Integer number of columns / rows for the combined layout
+#'  (passed to \code{\link[patchwork]{wrap_plots}}).
+#' @param byrow Logical; fill the combined layout by row.  Default \code{TRUE}
+#'  (passed to \code{\link[patchwork]{wrap_plots}}).
+#' @param axes A character string specifying how axes should be treated across
+#'  the combined layout (passed to \code{\link[patchwork]{wrap_plots}}).
+#' @param axis_titles A character string specifying how axis titles should be
+#'  treated across the combined layout.  Defaults to \code{axes}.
+#' @param guides A character string specifying how guides (legends) should be
+#'  collected across panels.  Default \code{"collect"} (passed to
+#'  \code{\link{combine_plots}()}).
+#' @param design A custom layout design for the combined plot (passed to
+#'  \code{\link{combine_plots}()}).
+#' @return A \code{ggplot} object, a \code{patchwork} object, or a named list
+#'  of \code{ggplot} objects (when \code{combine = FALSE}), each with
+#'  \code{height} and \code{width} attributes in inches.
+#' @examples
+#' \donttest{
+#' data <- data.frame(
+#'    x = factor(c("A", "B", "C", NA, "E", "F", "G", "H"), levels = LETTERS[1:8]),
+#'    y = c(10, 8, 16, 4, 6, 12, 14, 2),
+#'    group = factor(c("G1", "G1", NA, NA, "G3", "G3", "G4", "G4"),
+#'        levels = c("G1", "G2", "G3", "G4")),
+#'    facet = factor(c("F1", NA, "F3", "F4", "F1", NA, "F3", "F4"),
+#'        levels = c("F1", "F2", "F3", "F4"))
+#' )
+#'
+#' # Basic pie chart
+#' PieChart(data, x = "x", y = "y")
+#'
+#' # Keep NA and empty levels
+#' PieChart(data, x = "x", y = "y", keep_na = TRUE, keep_empty = TRUE)
+#'
+#' # Counter-clockwise ordering
+#' PieChart(data, x = "x", y = "y", clockwise = FALSE)
+#' PieChart(data, x = "x", y = "y", clockwise = FALSE,
+#'          keep_na = TRUE, keep_empty = TRUE)
+#'
+#' # With slice labels
+#' PieChart(data, x = "x", y = "y", label = "group")
+#'
+#' # Faceting
+#' PieChart(data, x = "x", y = "y", facet_by = "facet")
+#' PieChart(data, x = "x", y = "y", facet_by = c("facet", "group"),
+#'     keep_empty = "level")
+#' PieChart(data, x = "x", y = "y", facet_by = c("facet", "group"),
+#'     keep_empty = TRUE)
+#'
+#' # Split into sub-plots
+#' PieChart(data, x = "x", y = "y", split_by = "group")
+#'
+#' # Per-split palettes
+#' PieChart(data, x = "x", y = "y", split_by = "group",
+#'          palette = list(G1 = "Reds", G2 = "Blues", G3 = "Greens", G4 = "Purp"))
+#'
+#' # Y from count
+#' PieChart(data, x = "group")
+#'
+#' # Y from count with label
+#' PieChart(data, x = "group", label = ".y")
+#' }
+PieChart <- function(
+    data,
+    x,
+    y = NULL,
+    label = y,
+    split_by = NULL,
+    split_by_sep = "_",
+    clockwise = TRUE,
+    facet_by = NULL,
+    facet_scales = "free_y",
+    facet_ncol = NULL,
+    facet_nrow = NULL,
+    facet_byrow = TRUE,
+    theme = "theme_this",
+    theme_args = list(),
+    palette = "Paired",
+    palcolor = NULL,
+    palreverse = FALSE,
+    alpha = 1,
+    aspect.ratio = 1,
+    keep_na = FALSE,
+    keep_empty = FALSE,
+    legend.position = "right",
+    legend.direction = "vertical",
+    title = NULL,
+    subtitle = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    combine = TRUE,
+    nrow = NULL,
+    ncol = NULL,
+    byrow = TRUE,
+    seed = 8525,
+    axes = NULL,
+    axis_titles = axes,
+    guides = NULL,
+    design = NULL,
+    ...
+) {
+    validate_common_args(seed, facet_by = facet_by)
+    keep_na <- check_keep_na(keep_na, c(x, split_by, facet_by))
+    keep_empty <- check_keep_empty(keep_empty, c(x, split_by, facet_by))
+    theme <- process_theme(theme)
+
+    x <- check_columns(data, x, force_factor = TRUE)
+    y <- check_columns(data, y)
+    split_by <- check_columns(
+        data,
+        split_by,
+        force_factor = TRUE,
+        allow_multi = TRUE,
+        concat_multi = TRUE,
+        concat_sep = split_by_sep
+    )
+
+    if (!is.null(split_by)) {
+        data <- process_keep_na_empty(data, keep_na, keep_empty, col = split_by)
+        keep_na[[split_by]] <- NULL
+        keep_empty[[split_by]] <- NULL
+        datas <- split(data, data[[split_by]])
+        # keep the order of levels
+        datas <- datas[levels(data[[split_by]])]
+    } else {
+        datas <- list(data)
+        split_by <- names(datas) <- "..."
+    }
+    palette <- check_palette(palette, names(datas))
+    palcolor <- check_palcolor(palcolor, names(datas))
+    legend.direction <- check_legend(
+        legend.direction,
+        names(datas),
+        "legend.direction"
+    )
+    legend.position <- check_legend(
+        legend.position,
+        names(datas),
+        "legend.position"
+    )
+
+    plots <- lapply(
+        names(datas),
+        function(nm) {
+            default_title <- if (length(datas) == 1 && identical(nm, "...")) {
+                NULL
+            } else {
+                nm
+            }
+            if (is.function(title)) {
+                title <- title(default_title)
+            } else {
+                title <- title %||% default_title
+            }
+            PieChartAtomic(
+                datas[[nm]],
+                x = x,
+                y = y,
+                label = label,
+                split_by = split_by,
+                clockwise = clockwise,
+                facet_by = facet_by,
+                facet_scales = facet_scales,
+                facet_ncol = facet_ncol,
+                facet_nrow = facet_nrow,
+                facet_byrow = facet_byrow,
+                keep_na = keep_na,
+                keep_empty = keep_empty,
+                theme = theme,
+                theme_args = theme_args,
+                palette = palette[[nm]],
+                palcolor = palcolor[[nm]],
+                palreverse = palreverse,
+                alpha = alpha,
+                aspect.ratio = aspect.ratio,
+                legend.position = legend.position[[nm]],
+                legend.direction = legend.direction[[nm]],
+                title = title,
+                subtitle = subtitle,
+                xlab = xlab,
+                ylab = ylab,
+                ...
+            )
+        }
+    )
+
+    names(plots) <- names(datas)
+
+    combine_plots(
+        plots,
+        combine = combine,
+        split_by = split_by,
+        nrow = nrow,
+        ncol = ncol,
+        byrow = byrow,
+        axes = axes,
+        axis_titles = axis_titles,
+        guides = guides,
+        design = design
+    )
+}
