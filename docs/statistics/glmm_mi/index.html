@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Nozomi Niimi">
+  <title>My personal slides – GLMM</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">GLMM</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nozomi Niimi 
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide level2">
+
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.55em;
+  margin-top: 0.6em;
+  text-align: right;
+}
+.reveal .small {
+  font-size: 0.78em;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+.reveal img {
+  max-height: 66vh;
+  object-fit: contain;
+}
+</style>
+</section>
+<section id="glmm" class="slide level2">
+<h2>GLMM</h2>
+<p>Nozomi Niimi</p>
+</section>
+<section id="本日のagenda" class="slide level2">
+<h2>本日のagenda</h2>
+<ul>
+<li>GLMM（Generalized Linear Mixed Model）について</li>
+<li>GLMMの直感的理解</li>
+<li>GLMMとGEE（Generalized Estimating Equation）の違い</li>
+<li>GLMMの注意点</li>
+<li>こんな時！GLMM！</li>
+</ul>
+</section>
+<section id="本日のagenda-1" class="slide level2">
+<h2>本日のagenda</h2>
+<ul>
+<li>GLMM（Generalized Linear Mixed Model）について</li>
+<li>GLMMの直感的理解</li>
+<li>GLMMとGEE（Generalized Estimating Equation）の違い</li>
+<li>GLMMの注意点</li>
+<li>こんな時！GLMM！</li>
+<li>おまけ</li>
+</ul>
+</section>
+<section id="実際の論文" class="slide level2">
+<h2>実際の論文</h2>
+<!-- TODO: 元スライドでは論文スクリーンショット2枚のレイアウト。画像サイズはレンダリング後に調整する。 -->
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/slide04_image01.png" style="width:100.0%" alt="論文スクリーンショット1"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/slide04_image02.png" style="width:100.0%" alt="論文スクリーンショット2"></p>
+</div></div>
+</section>
+<section id="glmmを使った論文は増えている" class="slide level2">
+<h2>GLMMを使った論文は増えている</h2>
+
+<img data-src="images/slide05_image01.png" style="width:78.0%" alt="GLMMを使った論文数の推移" class="r-stretch"><div class="reference">
+<p>PLoS One. 2014;9(11):1-10.</p>
+</div>
+</section>
+<section id="glmmについて" class="slide level2">
+<h2>GLMMについて</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<ul>
+<li>線形モデルを拡張したもの</li>
+<li>連続変数を扱う最小二乗法が基本</li>
+<li>ただし、目的変数が連続変数だけだったり、分散が正規分布でないと不可能だった</li>
+<li>link関数を用いることで更に拡張したのがGLM</li>
+<li>独立変数の効果を固定効果とランダム効果に分けて更に自由度を上げたのがgeneralized linear mixed model（GLMM）</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/slide06_image01.png" style="width:78.0%" alt="GLMMの概念図"></p>
+</div></div>
+</section>
+<section id="復習一般化線形モデルについて" class="slide level2">
+<h2>復習：一般化線形モデルについて</h2>
+<ul>
+<li>線形モデル：差の二乗を最も小さくする</li>
+<li>一般化線形モデル：リンク関数を挟んで、尤度を最大にする</li>
+</ul>
+<!-- TODO: 元スライドの3画像配置は簡略化。 -->
+<div class="columns">
+<div class="column" style="width:34%;">
+<p><img data-src="images/slide07_image01.png" style="width:100.0%" alt="一般化線形モデルの図1"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="images/slide07_image02.png" style="width:100.0%" alt="一般化線形モデルの図2"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="images/slide07_image03.png" style="width:100.0%" alt="一般化線形モデルの図3"></p>
+</div></div>
+</section>
+<section id="glmの仮定" class="slide level2">
+<h2>GLMの仮定</h2>
+<ul>
+<li>仮定1：従属変数の分布を勝手に決めている（指数分布族）</li>
+<li>仮定2：従属変数がそれぞれ独立である</li>
+</ul>
+<!-- TODO: 元スライドの書籍画像3枚は簡易配置。 -->
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img data-src="images/slide08_image01.jpg" style="width:72.0%" alt="GLMの仮定に関する図1"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="images/slide08_image02.jpg" style="width:72.0%" alt="GLMの仮定に関する図2"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="images/slide08_image03.jpg" style="width:72.0%" alt="GLMの仮定に関する図3"></p>
+</div></div>
+<div class="reference">
+<p>『StanとRでベイズ統計モデリング』</p>
+</div>
+</section>
+<section id="glmmとは" class="slide level2">
+<h2>GLMMとは？</h2>
+<ul>
+<li>同じ個体からの繰り返し測定の場合</li>
+<li>ヒエラルキー構造になっている解析（multilevel）、クラスターデザイン</li>
+<li>例：慢性心不全患者に新しい薬を処方して、BNPの推移を2ヶ月おきに計測する</li>
+<li>例：急性心不全の患者へのICU/HCUへの入室の効果</li>
+<li>上記の時には、GLMでは結果が偏るのでGLMMやGEEを用いる</li>
+<li>GLMMでは効果を固定効果とランダム効果に分けて推定する</li>
+</ul>
+</section>
+<section id="固定効果とランダム効果" class="slide level2">
+<h2>固定効果とランダム効果？？</h2>
+
+<img data-src="images/slide10_image01.png" style="width:52.0%" alt="固定効果とランダム効果のイメージ" class="r-stretch"></section>
+<section id="本日のagenda-2" class="slide level2">
+<h2>本日のagenda</h2>
+<ul>
+<li>GLMM（Generalized Linear Mixed Model）について</li>
+<li>GLMMの直感的理解</li>
+<li>GLMMとGEE（Generalized Estimating Equation）の違い</li>
+<li>GLMMの注意点</li>
+<li>こんな時！GLMM！</li>
+<li>おまけ</li>
+</ul>
+</section>
+<section id="glmmについて図での表現" class="slide level2">
+<h2>GLMMについて：図での表現</h2>
+<!-- TODO: 元スライドはPowerPoint図形で階層構造を表現。抽出テキストのみを箇条書き化しているため、必要ならQuarto/mermaid/画像で再作図する。 -->
+<ul>
+<li>全体</li>
+<li>病院A / 病院B / 病院C</li>
+<li>階層1：病院</li>
+<li>階層2：患者</li>
+<li>例
+<ul>
+<li>「腎機能がこんなに悪いんだから、RAASiは禁忌に近い！！」</li>
+<li>「腎機能がこんなに悪いんだから、よりRAASi使わなきゃ！！」</li>
+</ul></li>
+</ul>
+</section>
+<section id="glmmについてグラフ的理解" class="slide level2">
+<h2>GLMMについて：グラフ的理解</h2>
+<!-- TODO: 元スライドの2グラフ配置は簡略化。 -->
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/slide13_image01.png" style="width:100.0%" alt="GLMMのグラフ的理解1"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/slide13_image02.png" style="width:100.0%" alt="GLMMのグラフ的理解2"></p>
+</div></div>
+</section>
+<section id="glmmについて式での表現" class="slide level2">
+<h2>GLMMについて：式での表現</h2>
+<!-- TODO: 元スライドの式と分布図の配置は簡略化。 -->
+<ul>
+<li>式の構造はGLMと同じ</li>
+<li>この、係数の部分が同じではないのがGLMM</li>
+<li>通常のGLM
+<ul>
+<li><code>造影剤量 = a + b * eGFR + c * age</code></li>
+</ul></li>
+<li>GLMMの考え
+<ul>
+<li><code>y = a + b1 * eGFR + c * age</code></li>
+<li><code>y = a + b2 * eGFR + c * age</code></li>
+<li><code>y = a + b3 * eGFR + c * age</code></li>
+</ul></li>
+<li>固定効果：<code>b: 0.25 ± 1.2</code></li>
+<li>ランダム効果
+<ul>
+<li><code>b1: 1.8</code></li>
+<li><code>b2: 0.6</code></li>
+<li><code>b3: 3.5</code></li>
+</ul></li>
+</ul>
+
+<img data-src="images/slide14_image01.png" style="width:46.0%" alt="係数分布のイメージ" class="r-stretch"></section>
+<section id="本日のagenda-3" class="slide level2">
+<h2>本日のagenda</h2>
+<ul>
+<li>GLMM（Generalized Linear Mixed Model）について</li>
+<li>GLMMの直感的理解</li>
+<li>GLMMとGEE（Generalized Estimating Equation）の違い</li>
+<li>GLMMの注意点</li>
+<li>こんな時！GLMM！</li>
+<li>おまけ</li>
+</ul>
+</section>
+<section id="geeとは" class="slide level2">
+<h2>GEEとは</h2>
+<ul>
+<li>Working correlation matrixという特殊な行列を用いたモデリングの手法</li>
+<li>GLMの仮定（再掲）
+<ul>
+<li>仮定1：従属変数の分布を勝手に決めている（指数分布族）</li>
+<li>仮定2：従属変数がそれぞれ独立である</li>
+</ul></li>
+<li>この仮定1を満たさなくても使える！！</li>
+</ul>
+</section>
+<section id="従属変数の分布" class="slide level2">
+<h2>従属変数の分布？</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<ul>
+<li>outcomeの分布の事</li>
+<li>連続値？離散値？</li>
+<li>カテゴリー変数？</li>
+<li>0/1？</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/slide17_image01.png" style="width:70.0%" alt="従属変数の分布のイメージ"></p>
+</div></div>
+</section>
+<section id="問題になるのは離散値" class="slide level2">
+<h2>問題になるのは離散値！</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<ul>
+<li>ほとんどの場合、問題になるのは離散値（0, 1, 2, 3…）</li>
+<li>Poisson分布を用いると、かなりばらつきが多くなる（=過分散）</li>
+<li>outcomeが離散値だとGLMMとGEEで違いが出てくる
+<ul>
+<li>連続値だと差は出ない</li>
+</ul></li>
+<li>例：てんかん患者が1年以内に発作を起こした回数</li>
+<li>例：心不全患者のICU在室日数</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/slide18_image01.jpg" style="width:72.0%" alt="離散値outcomeの例"></p>
+</div></div>
+<div class="reference">
+<p>Ann Intern Med. 2003;139(8).</p>
+</div>
+</section>
+<section id="glmmとgeeの違いについて" class="slide level2">
+<h2>GLMMとGEEの違いについて</h2>
+<ul>
+<li>同じ点
+<ul>
+<li>GLMMもGEEもクラスターや層別の解析が可能</li>
+</ul></li>
+<li>違う点
+<ul>
+<li>GEEの方が従属変数の分布が異なっていても結果がrobust</li>
+<li>GLMMと違いGEEは尤度が出せない</li>
+<li>擬似尤度を使うため、計算方法によって結果が変わりやすい</li>
+</ul></li>
+<li>GEEは1つの層までしか解析出来ない</li>
+<li>GEEは集団全体への効果（marginal）しか推定できない</li>
+<li>GLMMは各々の細かいclusterでの効果量（conditional）の推定が可能</li>
+</ul>
+<div class="reference">
+<p>Comput Stat Data Anal. 2014;77:70-83.<br>
+Stat Sci. 2004;19(2):219-238.</p>
+</div>
+</section>
+<section id="glmmとgeeの使い分け" class="slide level2">
+<h2>GLMMとGEEの使い分け</h2>
+<ul>
+<li>2層以上の解析 → GLMM</li>
+<li>患者個々人の影響も見たい（conditionalな影響が見たい） → GLMM</li>
+<li>離散値のoutcomeを見たい → GEE</li>
+<li>循環器領域ではGLMMの方が使い勝手良さそう</li>
+<li>GEEは使うソフトによって結果が異なる事がある</li>
+</ul>
+<div class="reference">
+<p>Comput Stat Data Anal. 2014;77:70-83.</p>
+</div>
+</section>
+<section id="こんな時glmm" class="slide level2">
+<h2>こんな時！GLMM！</h2>
+<ul>
+<li>病院毎や個人差を考慮した解析をしたい時</li>
+<li>ただし、差はあってもある程度常識的な範囲に入ると推定される時</li>
+<li>Logisticの場合</li>
+<li>Poisson分布の時はGEEやBayes統計が良いかもしれない</li>
+<li>患者一人一人の状態に合わせた効果が欲しい時（Frailty model）</li>
+</ul>
+</section>
+<section id="glmmの注意点" class="slide level2">
+<h2>GLMMの注意点</h2>
+<ul>
+<li>例えば個人差を階層にする時
+<ul>
+<li>年齢、性別、BMIのようなデータは階層別にしない！</li>
+</ul></li>
+<li>例えば施設間の差を階層にする時
+<ul>
+<li>hospital volumeのような測定できる因子は階層にしない！</li>
+</ul></li>
+<li>どのような図式で、何を個体差（施設差）にするか事前に設定する</li>
+</ul>
+</section>
+<section id="絵を描こう" class="slide level2">
+<h2>絵を描こう！</h2>
+<!-- TODO: 元スライドはPowerPoint図形による因果・階層の整理。必要ならMermaidやDAG風の図に再作図する。 -->
+<ul>
+<li>階層
+<ul>
+<li>測定されない施設の影響</li>
+</ul></li>
+<li>共変量・因子
+<ul>
+<li>年齢</li>
+<li>夜間・休日</li>
+<li>D2B time</li>
+<li>high volumeか否か</li>
+<li>PADの有無</li>
+<li>糖尿病</li>
+</ul></li>
+</ul>
+</section>
+<section id="おまけ" class="slide level2">
+<h2>おまけ</h2>
+<ul>
+<li>おそらく最もこのmixed modelが使われるのはmeta analysis</li>
+<li>Fixed effects vs Random effects</li>
+<li>Fixed effects
+<ul>
+<li>真の治療効果は研究毎ではheterogeneityがないという仮定</li>
+<li><code>n</code> が等しく、モデルが正しければ全てのforest plotが一致する</li>
+<li>common treatment effectがわかる</li>
+</ul></li>
+<li>Random effects
+<ul>
+<li>真の治療効果はsampling variabilityによって変化がある</li>
+<li>average treatment effectがわかる</li>
+</ul></li>
+<li>Random effectsでは、分散を偶然誤差と系統誤差に振り分ける必要がある</li>
+<li>Heterogeneityの検定が必要だが、あまり行われない</li>
+<li>Random effectsの方が有意差が出にくい傾向がある</li>
+</ul>
+</section>
+<section id="ご静聴ありがとうございました" class="slide level2">
+<h2>ご静聴ありがとうございました</h2>
+</section>
+<section id="補足画像" class="slide level2">
+<h2>補足画像</h2>
+<!-- TODO: 元スライド26はタイトルなしの画像2枚。用途に応じて削除またはAppendix化する。 -->
+<p><img data-src="images/slide26_image01.png" style="width:80.0%" alt="補足画像1"></p>
+<p><img data-src="images/slide26_image02.png" style="width:80.0%" alt="補足画像2"></p>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "コピーしました");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "コピーしました");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/figarofuga\.github\.io\/personal-slides\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

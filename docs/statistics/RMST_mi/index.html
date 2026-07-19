@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="新美 望">
+  <meta name="dcterms.date" content="2020-04-01">
+  <title>My personal slides – RMSTに関してあるいは、Cox回帰の限界</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">RMSTに関してあるいは、Cox回帰の限界</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+新美 望 
+</div>
+</div>
+</div>
+
+  <p class="date">2020-04-01</p>
+</section>
+<section class="slide level2">
+
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.55em;
+  margin-top: 0.6em;
+  text-align: right;
+}
+.reveal .small {
+  font-size: 0.72em;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+.reveal img {
+  max-height: 64vh;
+  object-fit: contain;
+}
+.reveal table {
+  font-size: 0.48em;
+}
+</style>
+</section>
+<section id="rmstに関してあるいはcox回帰の限界" class="slide level2">
+<h2>RMSTに関してあるいは、Cox回帰の限界</h2>
+<p>2020/4 ＠Keio University<br>
+新美 望</p>
+</section>
+<section id="ある日のこと" class="slide level2">
+<h2>ある日のこと</h2>
+<!-- TODO: 元スライドは画像3枚の配置。Quartoでは簡略配置。 -->
+<div class="columns">
+<div class="column" style="width:38%;">
+<p><img data-src="images/slide02_image01.png" style="width:82.0%" alt="ある日のこと 画像1"></p>
+</div><div class="column" style="width:62%;">
+<p><img data-src="images/slide02_image02.png" style="width:78.0%" alt="ある日のこと 画像2"></p>
+<p><img data-src="images/slide02_image03.png" style="width:100.0%" alt="ある日のこと 画像3"></p>
+</div></div>
+</section>
+<section id="今日の内容" class="slide level2">
+<h2>今日の内容</h2>
+<ul>
+<li>復習：生存解析</li>
+<li>Cox hazardの限界</li>
+<li>RMSTとは？</li>
+<li>RMSTは何がいいの？限界は？</li>
+<li>RMSTの使い方</li>
+<li>観察研究での使い道</li>
+</ul>
+</section>
+<section id="今日の内容-1" class="slide level2">
+<h2>今日の内容</h2>
+<ul>
+<li>速習：生存解析</li>
+<li>Cox hazardの限界</li>
+<li>RMSTとは？</li>
+<li>RMSTは何がいいの？限界は？</li>
+<li>RMSTの使い方</li>
+<li>観察研究での使い道</li>
+</ul>
+</section>
+<section id="速習生存解析" class="slide level2">
+<h2>速習：生存解析</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<ul>
+<li>生存時間およびイベントの発症率の推定にKaplan-Meier法</li>
+<li>単純な比較にLog-rank</li>
+<li>影響の大きさの定量化や多変量調整にCoxハザードモデル</li>
+<li>これらを用いることが多い</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<p><img data-src="images/slide05_image01.png" style="width:82.0%" alt="生存解析の図1"></p>
+<p><img data-src="images/slide05_image02.png" style="width:82.0%" alt="生存解析の図2"></p>
+</div></div>
+</section>
+<section id="kaplan-meier-method" class="slide level2">
+<h2>Kaplan-Meier Method</h2>
+<div class="columns">
+<div class="column" style="width:56%;">
+<ul>
+<li>eventがあった時にその時の瞬間風速を計算する</li>
+<li>瞬間風速の積み重ねでplotを行う</li>
+<li>指標では中央値を用いる</li>
+</ul>
+</div><div class="column" style="width:44%;">
+<p><img data-src="images/slide06_image01.png" style="width:74.0%" alt="Kaplan-Meier method"></p>
+</div></div>
+</section>
+<section id="non-parametriclog-rank一般化wilcoxon検定" class="slide level2">
+<h2>Non Parametric：Log-rank、一般化Wilcoxon検定</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<ul>
+<li>大雑把に言うとχ2検定</li>
+<li>多群で使えるのがメリット</li>
+<li>影響の大きさの定量化は出来ない</li>
+<li>一般化Wilcoxon検定の方が早期のeventに対して検出力が高い</li>
+<li>Log-rankが苦手な形がある</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<p><img data-src="images/slide07_image01.png" style="width:42.0%" alt="Log-rankの模式図"></p>
+<p><img data-src="images/slide07_image02.png" style="width:100.0%" alt="Log-rankが苦手な形"></p>
+</div></div>
+</section>
+<section id="cox回帰について" class="slide level2">
+<h2>Cox回帰について</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<ul>
+<li>ハザード比</li>
+<li>大元の生存曲線の形はどうでも良い</li>
+<li>各々の共変量の有無で瞬間の死亡率（hazard比）が変化する</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/slide08_image01.png" style="width:100.0%" alt="Cox回帰の式"></p>
+</div></div>
+</section>
+<section id="今日の内容-2" class="slide level2">
+<h2>今日の内容</h2>
+<ul>
+<li>復習：生存解析</li>
+<li>Cox hazardの限界</li>
+<li>RMSTとは？</li>
+<li>RMSTは何がいいの？限界は？</li>
+<li>RMSTの使い方</li>
+<li>観察研究での使い道</li>
+</ul>
+</section>
+<section id="cox-modelの限界" class="slide level2">
+<h2>Cox Modelの限界</h2>
+<ul>
+<li>共変量が時間に関わらずに同じように影響するという仮定が必要</li>
+<li>比例ハザード性がないといけない
+<ul>
+<li>Log-log plotなどで確認する</li>
+</ul></li>
+<li>結果の解釈が難しい</li>
+<li>例：REAL-CAD study
+<ul>
+<li>高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました</li>
+<li>患者さんにどう説明する？</li>
+</ul></li>
+</ul>
+</section>
+<section id="本当ならダメな形" class="slide level2">
+<h2>本当ならダメな形！！</h2>
+
+<img data-src="images/slide11_image01.png" style="width:76.0%" alt="比例ハザード性が成り立たない例" class="r-stretch"></section>
+<section id="log-log-plot" class="slide level2">
+<h2>Log-log Plot</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<ul>
+<li>横軸が時間、縦軸が <code>log{-log(S(t))}</code> のグラフ</li>
+<li>これが平行の時には比例hazard性が保たれていると判断</li>
+<li>わかりやすいのは元の曲線が交わっているか否か</li>
+</ul>
+</div><div class="column" style="width:52%;">
+<p><img data-src="images/slide12_image01.png" style="width:96.0%" alt="Log-log plot 1"></p>
+<p><img data-src="images/slide12_image02.png" style="width:96.0%" alt="Log-log plot 2"></p>
+</div></div>
+</section>
+<section id="今日の内容-3" class="slide level2">
+<h2>今日の内容</h2>
+<ul>
+<li>復習：生存解析</li>
+<li>Cox hazardの限界</li>
+<li>RMSTとは？</li>
+<li>RMSTは何がいいの？限界は？</li>
+<li>RMSTの使い方</li>
+<li>観察研究での使い道</li>
+</ul>
+</section>
+<section id="rmstとは" class="slide level2">
+<h2>RMSTとは</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<ul>
+<li>Restricted Mean Survival Timeの略</li>
+<li>ある特定の時間（τ）までの生存曲線の面積を計測したもの</li>
+<li>近年、がん領域の研究でよく使われるようになっている</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<p><img data-src="images/slide14_image01.png" style="width:72.0%" alt="RMSTの概念図1"></p>
+<p><img data-src="images/slide14_image02.png" style="width:90.0%" alt="RMSTの概念図2"></p>
+</div></div>
+</section>
+<section id="rmstとは-1" class="slide level2">
+<h2>RMSTとは</h2>
+<ul>
+<li>比較には各々の治療群のRMSTの差や比をとる事が可能</li>
+<li>多変量回帰として種々の因子の調整も可能</li>
+</ul>
+<!-- TODO: 元スライドの式・図配置は簡略化。 -->
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/slide15_image01.png" style="width:92.0%" alt="RMST比較の図"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/slide15_image02.png" style="width:82.0%" alt="RMST差の図"></p>
+<p><img data-src="images/slide15_image03.png" style="width:82.0%" alt="RMST比の図"></p>
+</div></div>
+</section>
+<section id="rmstの直観的理解" class="slide level2">
+<h2>RMSTの直観的理解</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/slide16_image01.png" style="width:80.0%" alt="RMSTの直観的理解1"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/slide16_image02.png" style="width:80.0%" alt="RMSTの直観的理解2"></p>
+</div></div>
+</section>
+<section id="hrとrmstの関係" class="slide level2">
+<h2>HRとRMSTの関係</h2>
+
+<img data-src="images/slide17_image01.png" style="width:62.0%" alt="HRとRMSTの関係" class="r-stretch"></section>
+<section id="今日の内容-4" class="slide level2">
+<h2>今日の内容</h2>
+<ul>
+<li>復習：生存解析</li>
+<li>Cox hazardの限界</li>
+<li>RMSTとは？</li>
+<li>RMSTは何がいいの？限界は？</li>
+<li>RMSTの使い方</li>
+<li>観察研究での使い道</li>
+</ul>
+</section>
+<section id="rmstは何がいいの限界は" class="slide level2">
+<h2>RMSTは何がいいの？限界は？</h2>
+<ul>
+<li>RMSTでは、複数の異なる研究の比較の時にフォローアップ時間が違っていても比較が可能とされる</li>
+<li>臨床的解釈として「ある時間まで追跡した時の平均生存時間」という風に解釈が可能</li>
+<li>例：薬を飲むと、10年後には1年間の寿命伸延効果があります</li>
+<li>一番の注意点は、特定の時間τを臨床的に意味がある数字にする事</li>
+<li>τが決められない時は長めの時間をとるのがベター</li>
+</ul>
+</section>
+<section id="ハザードとの比較" class="slide level2">
+<h2>ハザードとの比較</h2>
+
+<img data-src="images/slide20_image01.png" style="width:82.0%" alt="ハザードとの比較" class="r-stretch"></section>
+<section id="評価指標の比較" class="slide level2 scrollable">
+<h2>評価指標の比較</h2>
+<!-- TODO: 元スライドは横長表。QuartoではMarkdown表に変換し、スクロール可能にしている。 -->
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>評価指標</th>
+<th>時間</th>
+<th>意味</th>
+<th>利点</th>
+<th>欠点</th>
+<th>特に適した状況</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HR</td>
+<td>フォロー期間全部</td>
+<td>ある瞬間でのRiskの変化率の比率</td>
+<td>フォロー期間全部の情報を使える</td>
+<td>直観的理解が困難<br>発症率が低いと広いCIになる</td>
+<td>研究：比例ハザードがある状況（非劣勢以外）</td>
+</tr>
+<tr class="even">
+<td>ARR</td>
+<td>ある特定の期間</td>
+<td>ある瞬間でのEvent freeの絶対差</td>
+<td>KM曲線から計算可能</td>
+<td>KM曲線の形の差を捉えられない</td>
+<td>研究と臨床：治療のインパクトの説明</td>
+</tr>
+<tr class="odd">
+<td>NNT</td>
+<td>ある特定の期間</td>
+<td><code>1 / ARR</code></td>
+<td>KM曲線から計算可能</td>
+<td>患者への説明が困難<br>KM曲線の形の差を捉えられない</td>
+<td>研究：介入の効果や有害事象への説明</td>
+</tr>
+<tr class="even">
+<td>中央生存時間の差</td>
+<td>各々のグループである一点</td>
+<td>各グループで生存率が50%になる時間の差</td>
+<td>KM曲線から計算可能<br>Robust</td>
+<td>Sample sizeやイベント率が低いと計算不可能</td>
+<td>研究：大規模研究や長期の研究、高いイベント率の研究</td>
+</tr>
+<tr class="odd">
+<td>RMST</td>
+<td>ある特定の期間</td>
+<td>ある期間における平均イベントフリーの延長効果</td>
+<td>直観的<br>非劣勢試験でも狭いCIで計算できる</td>
+<td>決めた期間より先について解釈できない<br>KM曲線の形の差を捉えられない</td>
+<td>研究と臨床：治療のインパクトの説明</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="補足図" class="slide level2">
+<h2>補足図</h2>
+
+<img data-src="images/slide22_image01.png" style="width:70.0%" alt="RMST補足図" class="r-stretch"></section>
+<section id="ischemiaの場合" class="slide level2">
+<h2>ISCHEMIAの場合</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<ul>
+<li>ICTUS, FRISC-II, RITA-3などの過去のRCTのメタアナライシスに準じて5年という時間を決めている</li>
+<li>5年restricted mean event-free timeの差は、invasive strategy群で9.5日長い</li>
+<li>95% CIは -17.8から36.9日</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/slide23_image01.png" style="width:100.0%" alt="ISCHEMIAのRMST結果"></p>
+</div></div>
+</section>
+<section id="今日の内容-5" class="slide level2">
+<h2>今日の内容</h2>
+<ul>
+<li>復習：生存解析</li>
+<li>Cox hazardの限界</li>
+<li>RMSTとは？</li>
+<li>RMSTは何がいいの？限界は？</li>
+<li>RMSTの使い方</li>
+<li>観察研究での使い道</li>
+</ul>
+</section>
+<section id="観察研究での使い道" class="slide level2">
+<h2>観察研究での使い道</h2>
+<ul>
+<li>回帰式を用いて、交絡因子を調整することも出来る
+<ul>
+<li>Stroke. 2018;49:607-613.</li>
+</ul></li>
+<li>Propensity score match後に単変量でも可能
+<ul>
+<li>Open Heart. 2020;7:e001163.</li>
+</ul></li>
+<li>近年、Risk model作成も行われている
+<ul>
+<li>Circ Cardiovasc Qual Outcomes. 2020;13:e005918.</li>
+</ul></li>
+</ul>
+</section>
+<section id="aimの締めの言葉" class="slide level2">
+<h2>AIMの締めの言葉</h2>
+<ul>
+<li>RCTにおいて、ルーチンでRMSTの差を使う事を推奨する</li>
+</ul>
+
+<img data-src="images/slide26_image01.png" style="width:70.0%" alt="AIMの締めの言葉" class="r-stretch"></section>
+<section id="ご静聴ありがとうございました" class="slide level2">
+<h2>ご静聴ありがとうございました</h2>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "コピーしました");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "コピーしました");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/figarofuga\.github\.io\/personal-slides\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

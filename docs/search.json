@@ -2209,7 +2209,7 @@
     "href": "statistics/mlcausal/index.html#どれがいいの",
     "title": "機械学習を用いた因果推論",
     "section": "どれがいいの？",
-    "text": "どれがいいの？\n\nS-learnerが最も直感的ではあるが・・・・・・\n過去のReviewだとDR-learnerが良さそう\n\n以下のTableをまとめる\nInoue K, Adomi M, Efthimiou O, et al. Machine learning approaches to evaluate heterogeneous treatment effects in randomized controlled trials: a scoping review. J Clin Epidemiol. 2024;176(111538):111538. doi:10.1016/j.jclinepi.2024.111538"
+    "text": "どれがいいの？\n\nS-learnerが最も直感的ではあるが・・・・・・\n過去のReviewだとDR-learnerが良さそう\nhttps://www.pywhy.org/EconML/spec/flowchart.html\n上記図をmermaidで作る\n\n以下のTableをまとめる\nInoue K, Adomi M, Efthimiou O, et al. Machine learning approaches to evaluate heterogeneous treatment effects in randomized controlled trials: a scoping review. J Clin Epidemiol. 2024;176(111538):111538. doi:10.1016/j.jclinepi.2024.111538"
   },
   {
     "objectID": "statistics/mlcausal/index.html#random-forestについて",
@@ -2321,7 +2321,7 @@
     "href": "statistics/mlcausal/index.html#それでもなお問題が残る",
     "title": "機械学習を用いた因果推論",
     "section": "それでもなお、問題が残る",
-    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？\n\n\n\nn = 6000 \n\n\nNaive diff (unadjusted): 8.265991 \n\n\nG-computation ATE (Q-model only): 8.839814 \n\n\nTMLE ATE (targeted): 9.068977 \n\n\nTMLE 95% CI: 8.246636 to 9.891317 \n\n\n\n\n\nCall:\nglm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + \n    lvef + palpitation, family = gaussian(), data = dat_ortho)\n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***\nca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***\nage         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***\nsexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***\nbmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***\nhf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***\nbnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***\nlvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***\npalpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.57486)\n\n    Null deviance: 1316132  on 5999  degrees of freedom\nResidual deviance:  482724  on 5991  degrees of freedom\nAIC: 43373\n\nNumber of Fisher Scoring iterations: 2\n\n\n      ca \n8.839814 \n\n\n\nCall:\nglm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), \n    data = dat_ortho)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \na_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.46741)\n\n    Null deviance: 566906  on 6000  degrees of freedom\nResidual deviance: 482724  on 5999  degrees of freedom\nAIC: 43357\n\nNumber of Fisher Scoring iterations: 2\n\n\na_resid_lpm \n   8.839814 \n\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x74bb421c50d0&gt;\n\n\n[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]"
+    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？\n\n\n\nn = 6000 \n\n\nNaive diff (unadjusted): 8.265991 \n\n\nG-computation ATE (Q-model only): 8.839814 \n\n\nTMLE ATE (targeted): 9.068977 \n\n\nTMLE 95% CI: 8.246636 to 9.891317 \n\n\n\n\n\nCall:\nglm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + \n    lvef + palpitation, family = gaussian(), data = dat_ortho)\n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***\nca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***\nage         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***\nsexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***\nbmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***\nhf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***\nbnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***\nlvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***\npalpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.57486)\n\n    Null deviance: 1316132  on 5999  degrees of freedom\nResidual deviance:  482724  on 5991  degrees of freedom\nAIC: 43373\n\nNumber of Fisher Scoring iterations: 2\n\n\n      ca \n8.839814 \n\n\n\nCall:\nglm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), \n    data = dat_ortho)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \na_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.46741)\n\n    Null deviance: 566906  on 6000  degrees of freedom\nResidual deviance: 482724  on 5999  degrees of freedom\nAIC: 43357\n\nNumber of Fisher Scoring iterations: 2\n\n\na_resid_lpm \n   8.839814 \n\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x736828af0ce0&gt;\n\n\n[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]"
   },
   {
     "objectID": "statistics/mlcausal/index.html#scratch-for-s-learner",
@@ -2342,28 +2342,28 @@
     "href": "statistics/mlcausal/index.html#scratch-for-t-learner",
     "title": "機械学習を用いた因果推論",
     "section": "Scratch for T-learner",
-    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x74bb421c6240&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834\n 10.7685034 ]"
+    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x7368289622a0&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834\n 10.7685034 ]"
   },
   {
     "objectID": "statistics/mlcausal/index.html#x-learner-1",
     "href": "statistics/mlcausal/index.html#x-learner-1",
     "title": "機械学習を用いた因果推論",
     "section": "X-learner",
-    "text": "X-learner\n\n\n\nx-learner\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x74bb3ad51b50&gt;"
+    "text": "X-learner\n\n\n\nx-learner\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x736828ae39e0&gt;"
   },
   {
     "objectID": "statistics/mlcausal/index.html#dr-learner-1",
     "href": "statistics/mlcausal/index.html#dr-learner-1",
     "title": "機械学習を用いた因果推論",
     "section": "DR-learner",
-    "text": "DR-learner\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x74bb3ad05ee0&gt;\n\n\n\n\n# A tibble: 6 × 8\n     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true\n  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 \n2     2  1.16      0 0.339   1.57    0.955  0.303    0.744\n3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 \n4     4  2.74      1 0.268   2.18    1.74   2.53     0.562\n5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 \n6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 \n\n\n# A tibble: 4 × 2\n  estimand                             value\n  &lt;chr&gt;                                &lt;dbl&gt;\n1 true ATE: mean(tau_true)              1.27\n2 DR ATE: mean(phi_dr)                  1.19\n3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21\n4 naive difference in means             1.70\n\n\n# A tibble: 1 × 4\n  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation\n     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n1     1.27                       1.19     0.122            0.996"
+    "text": "DR-learner\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x73682005e660&gt;\n\n\n\n\n# A tibble: 6 × 8\n     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true\n  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 \n2     2  1.16      0 0.339   1.57    0.955  0.303    0.744\n3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 \n4     4  2.74      1 0.268   2.18    1.74   2.53     0.562\n5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 \n6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 \n\n\n# A tibble: 4 × 2\n  estimand                             value\n  &lt;chr&gt;                                &lt;dbl&gt;\n1 true ATE: mean(tau_true)              1.27\n2 DR ATE: mean(phi_dr)                  1.19\n3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21\n4 naive difference in means             1.70\n\n\n# A tibble: 1 × 4\n  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation\n     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n1     1.27                       1.19     0.122            0.996"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
     "href": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
     "title": "機械学習を用いた因果推論",
     "section": "機械学習の因果推論における使い方",
-    "text": "機械学習の因果推論における使い方\n\n交絡因子の調整で機械学習を用いる\n\nAIPW, tlmeなど\n\n因果をダイレクトに推論する学習機を作る\n\nMeta-learner\n\nCATEを測定する\n\nCausal forestなど\n\n\n\n\n&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x74bb39d32a20&gt;"
+    "text": "機械学習の因果推論における使い方\n\n交絡因子の調整で機械学習を用いる\n\nAIPW, tlmeなど\n\n因果をダイレクトに推論する学習機を作る\n\nMeta-learner\n\nCATEを測定する\n\nCausal forestなど\n\n\n\n\n&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x73682005ff80&gt;"
   },
   {
     "objectID": "statistics/mlcausal/index.html#因果forest",
@@ -2377,6 +2377,937 @@
     "href": "statistics/mlcausal/index.html#survival-model",
     "title": "機械学習を用いた因果推論",
     "section": "Survival model",
-    "text": "Survival model\n\n\n\n          control      treated\n[1,] -0.096239271  0.096239271\n[2,] -0.023472267  0.023472267\n[3,] -0.350801733  0.350801733\n[4,] -0.004023857  0.004023857\n[5,]  3.260398228 -3.260398228\n[6,] -0.009254241  0.009254241\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.5.3 (2026-03-11)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-07-18\n pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)\n quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n arg               0.1.1      2026-05-27 [1] CRAN (R 4.5.3)\n backports         1.5.1      2026-04-03 [1] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [1] CRAN (R 4.5.2)\n bayestestR      * 0.18.1     2026-05-24 [1] CRAN (R 4.5.3)\n bonsai          * 0.4.1      2026-05-21 [1] CRAN (R 4.5.3)\n boot              1.3-32     2025-08-29 [1] CRAN (R 4.5.1)\n broom           * 1.0.13     2026-05-14 [1] CRAN (R 4.5.3)\n cachem            1.1.0      2024-05-16 [1] CRAN (R 4.5.1)\n checkmate         2.3.3      2025-08-18 [1] CRAN (R 4.5.1)\n chk               0.10.0     2025-01-24 [1] CRAN (R 4.5.1)\n class             7.3-23     2025-01-01 [1] CRAN (R 4.5.1)\n cli               3.6.6      2026-04-09 [1] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [1] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [1] CRAN (R 4.5.1)\n colorspace        2.1-2      2025-09-22 [1] CRAN (R 4.5.1)\n correlation     * 0.8.8      2025-07-08 [1] CRAN (R 4.5.1)\n curl              7.1.0      2026-04-22 [1] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [1] CRAN (R 4.5.1)\n data.table        1.17.8     2025-07-10 [1] CRAN (R 4.5.1)\n datawizard      * 1.3.1      2026-04-26 [1] CRAN (R 4.5.3)\n DiagrammeR        1.0.12     2026-04-27 [1] CRAN (R 4.5.3)\n dials           * 1.4.4      2026-06-22 [1] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [1] CRAN (R 4.5.1)\n digest            0.6.39     2025-11-19 [1] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [1] CRAN (R 4.5.3)\n easystats       * 0.7.6      2026-05-24 [1] CRAN (R 4.5.3)\n effectsize      * 1.0.2      2026-03-11 [1] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [1] CRAN (R 4.5.1)\n farver            2.1.2      2024-05-13 [1] CRAN (R 4.5.1)\n fastmap           1.2.0      2024-05-15 [1] CRAN (R 4.5.1)\n forcats         * 1.0.1      2025-09-25 [1] CRAN (R 4.5.1)\n foreign           0.8-91     2026-01-29 [1] CRAN (R 4.5.2)\n Formula           1.2-5      2023-02-24 [1] CRAN (R 4.5.1)\n furrr             0.4.0      2026-03-31 [1] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [1] CRAN (R 4.5.3)\n future.apply      1.20.2     2026-02-20 [1] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [1] CRAN (R 4.5.1)\n ggcube          * 0.1.0      2026-05-27 [1] CRAN (R 4.5.3)\n ggdag           * 0.2.13     2024-07-22 [1] CRAN (R 4.5.1)\n ggforce           0.5.0      2025-06-18 [1] CRAN (R 4.5.1)\n ggplot2         * 4.0.3      2026-04-22 [1] CRAN (R 4.5.3)\n ggraph            2.2.2      2025-08-24 [1] CRAN (R 4.5.2)\n ggrepel           0.9.8      2026-03-17 [1] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [1] CRAN (R 4.5.3)\n glue              1.8.1      2026-04-17 [1] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [1] CRAN (R 4.5.2)\n graphlayouts      1.2.4      2026-06-19 [1] CRAN (R 4.5.3)\n grf             * 2.6.1      2026-03-04 [1] CRAN (R 4.5.3)\n gridExtra         2.3.1      2026-06-25 [1] CRAN (R 4.5.3)\n gtable            0.3.6      2024-10-25 [1] CRAN (R 4.5.1)\n hardhat           1.4.3      2026-04-04 [1] CRAN (R 4.5.3)\n here            * 1.0.2      2025-09-15 [1] CRAN (R 4.5.1)\n Hmisc           * 5.2-6      2026-06-19 [1] CRAN (R 4.5.3)\n hms               1.1.4      2025-10-17 [1] CRAN (R 4.5.1)\n htmlTable         2.5.0      2026-04-22 [1] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [1] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [1] CRAN (R 4.5.1)\n igraph            2.3.3      2026-06-26 [1] CRAN (R 4.5.3)\n infer           * 1.1.0      2025-12-18 [1] CRAN (R 4.5.2)\n insight         * 1.5.2      2026-06-28 [1] CRAN (R 4.5.3)\n ipred             0.9-15     2024-07-18 [1] CRAN (R 4.5.1)\n isoband           0.3.0      2025-12-07 [1] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [1] CRAN (R 4.5.1)\n knitr             1.51       2025-12-20 [1] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [1] CRAN (R 4.5.1)\n lattice           0.22-9     2026-02-09 [1] CRAN (R 4.5.2)\n lava              1.9.2      2026-06-30 [1] CRAN (R 4.5.3)\n lifecycle         1.0.5      2026-01-08 [1] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [1] CRAN (R 4.5.2)\n listenv           1.0.0      2026-06-22 [1] CRAN (R 4.5.3)\n litedown          0.9        2025-12-18 [1] CRAN (R 4.5.2)\n lmtest            0.9-40     2022-03-21 [1] CRAN (R 4.5.1)\n lubridate       * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [1] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [1] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [1] CRAN (R 4.5.1)\n MatchIt         * 4.7.2      2025-05-30 [1] CRAN (R 4.5.1)\n Matrix            1.7-5      2026-03-21 [1] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [1] CRAN (R 4.5.1)\n memoise           2.0.1      2021-11-26 [1] CRAN (R 4.5.1)\n modelbased      * 0.16.0     2026-06-30 [1] CRAN (R 4.5.3)\n modeldata       * 1.5.1      2025-08-22 [1] CRAN (R 4.5.1)\n modelenv          0.2.0      2024-10-14 [1] CRAN (R 4.5.1)\n modelsummary    * 2.6.0      2026-02-13 [1] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [1] CRAN (R 4.5.2)\n mvtnorm           1.4-1      2026-06-06 [1] CRAN (R 4.5.3)\n nlme              3.1-169    2026-03-27 [1] CRAN (R 4.5.3)\n nnet              7.3-20     2025-01-01 [1] CRAN (R 4.5.1)\n otel              0.2.0      2025-08-29 [1] CRAN (R 4.5.1)\n parallelly        1.48.0     2026-06-29 [1] CRAN (R 4.5.3)\n parameters      * 0.29.2     2026-06-28 [1] CRAN (R 4.5.3)\n parsnip         * 1.6.0      2026-05-14 [1] CRAN (R 4.5.3)\n performance     * 0.17.1     2026-06-30 [1] CRAN (R 4.5.3)\n pillar            1.11.1     2025-09-17 [1] CRAN (R 4.5.1)\n pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.5.1)\n png               0.1-9      2026-03-15 [1] CRAN (R 4.5.3)\n policytree      * 1.2.4      2026-02-18 [1] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [1] CRAN (R 4.5.1)\n polyclip          1.10-7     2024-07-23 [1] CRAN (R 4.5.1)\n prodlim           2026.03.11 2026-03-11 [1] CRAN (R 4.5.3)\n purrr           * 1.2.2      2026-04-10 [1] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [1] CRAN (R 4.5.1)\n R6                2.6.1      2025-02-15 [1] CRAN (R 4.5.1)\n RColorBrewer      1.1-3      2022-04-03 [1] CRAN (R 4.5.1)\n Rcpp              1.1.1-1.1  2026-04-24 [1] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [1] CRAN (R 4.5.2)\n recipes         * 1.3.3      2026-05-30 [1] CRAN (R 4.5.3)\n report          * 0.6.4      2026-05-04 [1] CRAN (R 4.5.3)\n reticulate      * 1.46.0     2026-04-09 [1] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [1] CRAN (R 4.5.3)\n rmarkdown         2.31       2026-03-26 [1] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [1] CRAN (R 4.5.2)\n rootSolve         1.8.2.4    2023-09-21 [1] CRAN (R 4.5.1)\n rpart             4.1.27     2026-03-27 [1] CRAN (R 4.5.3)\n rprojroot         2.1.1      2025-08-26 [1] CRAN (R 4.5.1)\n rsample         * 1.3.2      2026-01-30 [1] CRAN (R 4.5.2)\n rstudioapi        0.19.0     2026-06-11 [1] CRAN (R 4.5.3)\n S7                0.2.2      2026-04-22 [1] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [1] CRAN (R 4.5.1)\n scales          * 1.4.0      2025-04-24 [1] CRAN (R 4.5.1)\n see             * 0.14.1     2026-06-29 [1] CRAN (R 4.5.3)\n sessioninfo     * 1.2.4      2026-06-04 [1] CRAN (R 4.5.3)\n simsurv         * 1.0.1      2026-01-22 [1] CRAN (R 4.5.3)\n SparseM           1.84-2     2024-07-17 [1] CRAN (R 4.5.1)\n sparsevctrs       0.3.6      2026-01-27 [1] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [1] CRAN (R 4.5.2)\n stringr         * 1.6.0      2025-11-04 [1] CRAN (R 4.5.2)\n survival        * 3.8-6      2026-01-16 [1] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [1] CRAN (R 4.5.2)\n tables            0.9.35     2026-06-04 [1] CRAN (R 4.5.3)\n tailor          * 0.1.0      2025-08-25 [1] CRAN (R 4.5.1)\n TH.data           1.1-5      2025-11-17 [1] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [1] CRAN (R 4.5.2)\n tidygraph         1.3.0      2023-12-18 [1] CRAN (R 4.5.1)\n tidymodels      * 1.4.1      2025-09-08 [1] CRAN (R 4.5.1)\n tidyr           * 1.3.2      2025-12-19 [1] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [1] CRAN (R 4.5.1)\n tidyverse       * 2.0.0      2023-02-22 [1] CRAN (R 4.5.1)\n timechange        0.4.0      2026-01-29 [1] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [1] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [1] CRAN (R 4.5.3)\n tinytable         0.16.0     2026-02-11 [1] CRAN (R 4.5.2)\n tune            * 2.1.0      2026-04-17 [1] CRAN (R 4.5.3)\n tweenr            2.0.3      2024-02-26 [1] CRAN (R 4.5.1)\n tzdb              0.5.0      2025-03-15 [1] CRAN (R 4.5.1)\n utf8              1.2.6      2025-06-08 [1] CRAN (R 4.5.1)\n V8                8.2.0      2026-04-21 [1] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [1] CRAN (R 4.5.3)\n viridis           0.6.5      2024-01-29 [1] CRAN (R 4.5.1)\n viridisLite       0.4.3      2026-02-04 [1] CRAN (R 4.5.2)\n visNetwork        2.1.4      2025-09-04 [1] CRAN (R 4.5.1)\n WeightIt        * 1.7.0      2026-04-22 [1] CRAN (R 4.5.3)\n withr             3.0.3      2026-06-19 [1] CRAN (R 4.5.3)\n workflows       * 1.3.0      2025-08-27 [1] CRAN (R 4.5.1)\n workflowsets    * 1.1.1      2025-05-27 [1] CRAN (R 4.5.1)\n xfun              0.59       2026-06-19 [1] CRAN (R 4.5.3)\n yaml              2.3.12     2025-12-10 [1] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [1] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [1] CRAN (R 4.5.2)\n\n [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.4\n cairoFT\n pango          1.56.4\n png            1.6.58\n jpeg           8.0\n tiff           LIBTIFF, Version 4.7.2\n tcl            8.6.13\n curl           8.21.0\n zlib           1.3.2\n bzlib          1.0.8, 13-Jul-2019\n xz             5.8.3\n deflate        1.25\n PCRE           10.47 2025-10-21\n ICU            78.3\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          GNU libiconv 1.18\n readline       8.3\n BLAS           /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n python:         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/python\n libpython:      /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libpython3.12.so\n pythonhome:     /home/figarofuga/analysis/pixi-test/.pixi/envs/default:/home/figarofuga/analysis/pixi-test/.pixi/envs/default\n version:        3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]\n numpy:          /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/python3.12/site-packages/numpy\n numpy_version:  2.4.6\n \n NOTE: Python version was forced by RETICULATE_PYTHON\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "Survival model\n\n\n\n          control      treated\n[1,] -0.096239271  0.096239271\n[2,] -0.023472267  0.023472267\n[3,] -0.350801733  0.350801733\n[4,] -0.004023857  0.004023857\n[5,]  3.260398228 -3.260398228\n[6,] -0.009254241  0.009254241\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.5.3 (2026-03-11)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-07-19\n pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)\n quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n arg               0.1.1      2026-05-27 [1] CRAN (R 4.5.3)\n backports         1.5.1      2026-04-03 [1] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [1] CRAN (R 4.5.2)\n bayestestR      * 0.18.1     2026-05-24 [1] CRAN (R 4.5.3)\n bonsai          * 0.4.1      2026-05-21 [1] CRAN (R 4.5.3)\n boot              1.3-32     2025-08-29 [1] CRAN (R 4.5.1)\n broom           * 1.0.13     2026-05-14 [1] CRAN (R 4.5.3)\n cachem            1.1.0      2024-05-16 [1] CRAN (R 4.5.1)\n checkmate         2.3.3      2025-08-18 [1] CRAN (R 4.5.1)\n chk               0.10.0     2025-01-24 [1] CRAN (R 4.5.1)\n class             7.3-23     2025-01-01 [1] CRAN (R 4.5.1)\n cli               3.6.6      2026-04-09 [1] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [1] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [1] CRAN (R 4.5.1)\n colorspace        2.1-2      2025-09-22 [1] CRAN (R 4.5.1)\n correlation     * 0.8.8      2025-07-08 [1] CRAN (R 4.5.1)\n curl              7.1.0      2026-04-22 [1] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [1] CRAN (R 4.5.1)\n data.table        1.17.8     2025-07-10 [1] CRAN (R 4.5.1)\n datawizard      * 1.3.1      2026-04-26 [1] CRAN (R 4.5.3)\n DiagrammeR        1.0.12     2026-04-27 [1] CRAN (R 4.5.3)\n dials           * 1.4.4      2026-06-22 [1] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [1] CRAN (R 4.5.1)\n digest            0.6.39     2025-11-19 [1] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [1] CRAN (R 4.5.3)\n easystats       * 0.7.6      2026-05-24 [1] CRAN (R 4.5.3)\n effectsize      * 1.0.2      2026-03-11 [1] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [1] CRAN (R 4.5.1)\n farver            2.1.2      2024-05-13 [1] CRAN (R 4.5.1)\n fastmap           1.2.0      2024-05-15 [1] CRAN (R 4.5.1)\n forcats         * 1.0.1      2025-09-25 [1] CRAN (R 4.5.1)\n foreign           0.8-91     2026-01-29 [1] CRAN (R 4.5.2)\n Formula           1.2-5      2023-02-24 [1] CRAN (R 4.5.1)\n furrr             0.4.0      2026-03-31 [1] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [1] CRAN (R 4.5.3)\n future.apply      1.20.2     2026-02-20 [1] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [1] CRAN (R 4.5.1)\n ggcube          * 0.1.0      2026-05-27 [1] CRAN (R 4.5.3)\n ggdag           * 0.2.13     2024-07-22 [1] CRAN (R 4.5.1)\n ggforce           0.5.0      2025-06-18 [1] CRAN (R 4.5.1)\n ggplot2         * 4.0.3      2026-04-22 [1] CRAN (R 4.5.3)\n ggraph            2.2.2      2025-08-24 [1] CRAN (R 4.5.2)\n ggrepel           0.9.8      2026-03-17 [1] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [1] CRAN (R 4.5.3)\n glue              1.8.1      2026-04-17 [1] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [1] CRAN (R 4.5.2)\n graphlayouts      1.2.4      2026-06-19 [1] CRAN (R 4.5.3)\n grf             * 2.6.1      2026-03-04 [1] CRAN (R 4.5.3)\n gridExtra         2.3.1      2026-06-25 [1] CRAN (R 4.5.3)\n gtable            0.3.6      2024-10-25 [1] CRAN (R 4.5.1)\n hardhat           1.4.3      2026-04-04 [1] CRAN (R 4.5.3)\n here            * 1.0.2      2025-09-15 [1] CRAN (R 4.5.1)\n Hmisc           * 5.2-6      2026-06-19 [1] CRAN (R 4.5.3)\n hms               1.1.4      2025-10-17 [1] CRAN (R 4.5.1)\n htmlTable         2.5.0      2026-04-22 [1] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [1] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [1] CRAN (R 4.5.1)\n igraph            2.3.3      2026-06-26 [1] CRAN (R 4.5.3)\n infer           * 1.1.0      2025-12-18 [1] CRAN (R 4.5.2)\n insight         * 1.5.2      2026-06-28 [1] CRAN (R 4.5.3)\n ipred             0.9-15     2024-07-18 [1] CRAN (R 4.5.1)\n isoband           0.3.0      2025-12-07 [1] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [1] CRAN (R 4.5.1)\n knitr             1.51       2025-12-20 [1] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [1] CRAN (R 4.5.1)\n lattice           0.22-9     2026-02-09 [1] CRAN (R 4.5.2)\n lava              1.9.2      2026-06-30 [1] CRAN (R 4.5.3)\n lifecycle         1.0.5      2026-01-08 [1] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [1] CRAN (R 4.5.2)\n listenv           1.0.0      2026-06-22 [1] CRAN (R 4.5.3)\n litedown          0.9        2025-12-18 [1] CRAN (R 4.5.2)\n lmtest            0.9-40     2022-03-21 [1] CRAN (R 4.5.1)\n lubridate       * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [1] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [1] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [1] CRAN (R 4.5.1)\n MatchIt         * 4.7.2      2025-05-30 [1] CRAN (R 4.5.1)\n Matrix            1.7-5      2026-03-21 [1] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [1] CRAN (R 4.5.1)\n memoise           2.0.1      2021-11-26 [1] CRAN (R 4.5.1)\n modelbased      * 0.16.0     2026-06-30 [1] CRAN (R 4.5.3)\n modeldata       * 1.5.1      2025-08-22 [1] CRAN (R 4.5.1)\n modelenv          0.2.0      2024-10-14 [1] CRAN (R 4.5.1)\n modelsummary    * 2.6.0      2026-02-13 [1] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [1] CRAN (R 4.5.2)\n mvtnorm           1.4-1      2026-06-06 [1] CRAN (R 4.5.3)\n nlme              3.1-169    2026-03-27 [1] CRAN (R 4.5.3)\n nnet              7.3-20     2025-01-01 [1] CRAN (R 4.5.1)\n otel              0.2.0      2025-08-29 [1] CRAN (R 4.5.1)\n parallelly        1.48.0     2026-06-29 [1] CRAN (R 4.5.3)\n parameters      * 0.29.2     2026-06-28 [1] CRAN (R 4.5.3)\n parsnip         * 1.6.0      2026-05-14 [1] CRAN (R 4.5.3)\n performance     * 0.17.1     2026-06-30 [1] CRAN (R 4.5.3)\n pillar            1.11.1     2025-09-17 [1] CRAN (R 4.5.1)\n pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.5.1)\n png               0.1-9      2026-03-15 [1] CRAN (R 4.5.3)\n policytree      * 1.2.4      2026-02-18 [1] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [1] CRAN (R 4.5.1)\n polyclip          1.10-7     2024-07-23 [1] CRAN (R 4.5.1)\n prodlim           2026.03.11 2026-03-11 [1] CRAN (R 4.5.3)\n purrr           * 1.2.2      2026-04-10 [1] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [1] CRAN (R 4.5.1)\n R6                2.6.1      2025-02-15 [1] CRAN (R 4.5.1)\n RColorBrewer      1.1-3      2022-04-03 [1] CRAN (R 4.5.1)\n Rcpp              1.1.1-1.1  2026-04-24 [1] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [1] CRAN (R 4.5.2)\n recipes         * 1.3.3      2026-05-30 [1] CRAN (R 4.5.3)\n report          * 0.6.4      2026-05-04 [1] CRAN (R 4.5.3)\n reticulate      * 1.46.0     2026-04-09 [1] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [1] CRAN (R 4.5.3)\n rmarkdown         2.31       2026-03-26 [1] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [1] CRAN (R 4.5.2)\n rootSolve         1.8.2.4    2023-09-21 [1] CRAN (R 4.5.1)\n rpart             4.1.27     2026-03-27 [1] CRAN (R 4.5.3)\n rprojroot         2.1.1      2025-08-26 [1] CRAN (R 4.5.1)\n rsample         * 1.3.2      2026-01-30 [1] CRAN (R 4.5.2)\n rstudioapi        0.19.0     2026-06-11 [1] CRAN (R 4.5.3)\n S7                0.2.2      2026-04-22 [1] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [1] CRAN (R 4.5.1)\n scales          * 1.4.0      2025-04-24 [1] CRAN (R 4.5.1)\n see             * 0.14.1     2026-06-29 [1] CRAN (R 4.5.3)\n sessioninfo     * 1.2.4      2026-06-04 [1] CRAN (R 4.5.3)\n simsurv         * 1.0.1      2026-01-22 [1] CRAN (R 4.5.3)\n SparseM           1.84-2     2024-07-17 [1] CRAN (R 4.5.1)\n sparsevctrs       0.3.6      2026-01-27 [1] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [1] CRAN (R 4.5.2)\n stringr         * 1.6.0      2025-11-04 [1] CRAN (R 4.5.2)\n survival        * 3.8-6      2026-01-16 [1] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [1] CRAN (R 4.5.2)\n tables            0.9.35     2026-06-04 [1] CRAN (R 4.5.3)\n tailor          * 0.1.0      2025-08-25 [1] CRAN (R 4.5.1)\n TH.data           1.1-5      2025-11-17 [1] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [1] CRAN (R 4.5.2)\n tidygraph         1.3.0      2023-12-18 [1] CRAN (R 4.5.1)\n tidymodels      * 1.4.1      2025-09-08 [1] CRAN (R 4.5.1)\n tidyr           * 1.3.2      2025-12-19 [1] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [1] CRAN (R 4.5.1)\n tidyverse       * 2.0.0      2023-02-22 [1] CRAN (R 4.5.1)\n timechange        0.4.0      2026-01-29 [1] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [1] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [1] CRAN (R 4.5.3)\n tinytable         0.16.0     2026-02-11 [1] CRAN (R 4.5.2)\n tune            * 2.1.0      2026-04-17 [1] CRAN (R 4.5.3)\n tweenr            2.0.3      2024-02-26 [1] CRAN (R 4.5.1)\n tzdb              0.5.0      2025-03-15 [1] CRAN (R 4.5.1)\n utf8              1.2.6      2025-06-08 [1] CRAN (R 4.5.1)\n V8                8.2.0      2026-04-21 [1] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [1] CRAN (R 4.5.3)\n viridis           0.6.5      2024-01-29 [1] CRAN (R 4.5.1)\n viridisLite       0.4.3      2026-02-04 [1] CRAN (R 4.5.2)\n visNetwork        2.1.4      2025-09-04 [1] CRAN (R 4.5.1)\n WeightIt        * 1.7.0      2026-04-22 [1] CRAN (R 4.5.3)\n withr             3.0.3      2026-06-19 [1] CRAN (R 4.5.3)\n workflows       * 1.3.0      2025-08-27 [1] CRAN (R 4.5.1)\n workflowsets    * 1.1.1      2025-05-27 [1] CRAN (R 4.5.1)\n xfun              0.59       2026-06-19 [1] CRAN (R 4.5.3)\n yaml              2.3.12     2025-12-10 [1] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [1] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [1] CRAN (R 4.5.2)\n\n [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.4\n cairoFT\n pango          1.56.4\n png            1.6.58\n jpeg           8.0\n tiff           LIBTIFF, Version 4.7.2\n tcl            8.6.13\n curl           8.21.0\n zlib           1.3.2\n bzlib          1.0.8, 13-Jul-2019\n xz             5.8.3\n deflate        1.25\n PCRE           10.47 2025-10-21\n ICU            78.3\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          GNU libiconv 1.18\n readline       8.3\n BLAS           /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n python:         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/python\n libpython:      /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libpython3.12.so\n pythonhome:     /home/figarofuga/analysis/pixi-test/.pixi/envs/default:/home/figarofuga/analysis/pixi-test/.pixi/envs/default\n version:        3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]\n numpy:          /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/python3.12/site-packages/numpy\n numpy_version:  2.4.6\n \n NOTE: Python version was forced by RETICULATE_PYTHON\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#rmstに関してあるいはcox回帰の限界",
+    "href": "statistics/RMST_mi/index.html#rmstに関してあるいはcox回帰の限界",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "RMSTに関してあるいは、Cox回帰の限界",
+    "text": "RMSTに関してあるいは、Cox回帰の限界\n2020/4 ＠Keio University\n新美 望"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#ある日のこと",
+    "href": "statistics/RMST_mi/index.html#ある日のこと",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "ある日のこと",
+    "text": "ある日のこと"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#今日の内容",
+    "href": "statistics/RMST_mi/index.html#今日の内容",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "今日の内容",
+    "text": "今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#今日の内容-1",
+    "href": "statistics/RMST_mi/index.html#今日の内容-1",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "今日の内容",
+    "text": "今日の内容\n\n速習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#速習生存解析",
+    "href": "statistics/RMST_mi/index.html#速習生存解析",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "速習：生存解析",
+    "text": "速習：生存解析\n\n\n\n生存時間およびイベントの発症率の推定にKaplan-Meier法\n単純な比較にLog-rank\n影響の大きさの定量化や多変量調整にCoxハザードモデル\nこれらを用いることが多い"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#kaplan-meier-method",
+    "href": "statistics/RMST_mi/index.html#kaplan-meier-method",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "Kaplan-Meier Method",
+    "text": "Kaplan-Meier Method\n\n\n\neventがあった時にその時の瞬間風速を計算する\n瞬間風速の積み重ねでplotを行う\n指標では中央値を用いる"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#non-parametriclog-rank一般化wilcoxon検定",
+    "href": "statistics/RMST_mi/index.html#non-parametriclog-rank一般化wilcoxon検定",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "Non Parametric：Log-rank、一般化Wilcoxon検定",
+    "text": "Non Parametric：Log-rank、一般化Wilcoxon検定\n\n\n\n大雑把に言うとχ2検定\n多群で使えるのがメリット\n影響の大きさの定量化は出来ない\n一般化Wilcoxon検定の方が早期のeventに対して検出力が高い\nLog-rankが苦手な形がある"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#cox回帰について",
+    "href": "statistics/RMST_mi/index.html#cox回帰について",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "Cox回帰について",
+    "text": "Cox回帰について\n\n\n\nハザード比\n大元の生存曲線の形はどうでも良い\n各々の共変量の有無で瞬間の死亡率（hazard比）が変化する"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#今日の内容-2",
+    "href": "statistics/RMST_mi/index.html#今日の内容-2",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "今日の内容",
+    "text": "今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#cox-modelの限界",
+    "href": "statistics/RMST_mi/index.html#cox-modelの限界",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "Cox Modelの限界",
+    "text": "Cox Modelの限界\n\n共変量が時間に関わらずに同じように影響するという仮定が必要\n比例ハザード性がないといけない\n\nLog-log plotなどで確認する\n\n結果の解釈が難しい\n例：REAL-CAD study\n\n高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました\n患者さんにどう説明する？"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#本当ならダメな形",
+    "href": "statistics/RMST_mi/index.html#本当ならダメな形",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "本当ならダメな形！！",
+    "text": "本当ならダメな形！！"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#log-log-plot",
+    "href": "statistics/RMST_mi/index.html#log-log-plot",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "Log-log Plot",
+    "text": "Log-log Plot\n\n\n\n横軸が時間、縦軸が log{-log(S(t))} のグラフ\nこれが平行の時には比例hazard性が保たれていると判断\nわかりやすいのは元の曲線が交わっているか否か"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#今日の内容-3",
+    "href": "statistics/RMST_mi/index.html#今日の内容-3",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "今日の内容",
+    "text": "今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#rmstとは",
+    "href": "statistics/RMST_mi/index.html#rmstとは",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "RMSTとは",
+    "text": "RMSTとは\n\n\n\nRestricted Mean Survival Timeの略\nある特定の時間（τ）までの生存曲線の面積を計測したもの\n近年、がん領域の研究でよく使われるようになっている"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#rmstとは-1",
+    "href": "statistics/RMST_mi/index.html#rmstとは-1",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "RMSTとは",
+    "text": "RMSTとは\n\n比較には各々の治療群のRMSTの差や比をとる事が可能\n多変量回帰として種々の因子の調整も可能"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#rmstの直観的理解",
+    "href": "statistics/RMST_mi/index.html#rmstの直観的理解",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "RMSTの直観的理解",
+    "text": "RMSTの直観的理解"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#hrとrmstの関係",
+    "href": "statistics/RMST_mi/index.html#hrとrmstの関係",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "HRとRMSTの関係",
+    "text": "HRとRMSTの関係"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#今日の内容-4",
+    "href": "statistics/RMST_mi/index.html#今日の内容-4",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "今日の内容",
+    "text": "今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#rmstは何がいいの限界は",
+    "href": "statistics/RMST_mi/index.html#rmstは何がいいの限界は",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "RMSTは何がいいの？限界は？",
+    "text": "RMSTは何がいいの？限界は？\n\nRMSTでは、複数の異なる研究の比較の時にフォローアップ時間が違っていても比較が可能とされる\n臨床的解釈として「ある時間まで追跡した時の平均生存時間」という風に解釈が可能\n例：薬を飲むと、10年後には1年間の寿命伸延効果があります\n一番の注意点は、特定の時間τを臨床的に意味がある数字にする事\nτが決められない時は長めの時間をとるのがベター"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#ハザードとの比較",
+    "href": "statistics/RMST_mi/index.html#ハザードとの比較",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "ハザードとの比較",
+    "text": "ハザードとの比較"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#評価指標の比較",
+    "href": "statistics/RMST_mi/index.html#評価指標の比較",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "評価指標の比較",
+    "text": "評価指標の比較\n\n\n\n\n\n\n\n\n\n\n\n\n評価指標\n時間\n意味\n利点\n欠点\n特に適した状況\n\n\n\n\nHR\nフォロー期間全部\nある瞬間でのRiskの変化率の比率\nフォロー期間全部の情報を使える\n直観的理解が困難発症率が低いと広いCIになる\n研究：比例ハザードがある状況（非劣勢以外）\n\n\nARR\nある特定の期間\nある瞬間でのEvent freeの絶対差\nKM曲線から計算可能\nKM曲線の形の差を捉えられない\n研究と臨床：治療のインパクトの説明\n\n\nNNT\nある特定の期間\n1 / ARR\nKM曲線から計算可能\n患者への説明が困難KM曲線の形の差を捉えられない\n研究：介入の効果や有害事象への説明\n\n\n中央生存時間の差\n各々のグループである一点\n各グループで生存率が50%になる時間の差\nKM曲線から計算可能Robust\nSample sizeやイベント率が低いと計算不可能\n研究：大規模研究や長期の研究、高いイベント率の研究\n\n\nRMST\nある特定の期間\nある期間における平均イベントフリーの延長効果\n直観的非劣勢試験でも狭いCIで計算できる\n決めた期間より先について解釈できないKM曲線の形の差を捉えられない\n研究と臨床：治療のインパクトの説明"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#補足図",
+    "href": "statistics/RMST_mi/index.html#補足図",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "補足図",
+    "text": "補足図"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#ischemiaの場合",
+    "href": "statistics/RMST_mi/index.html#ischemiaの場合",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "ISCHEMIAの場合",
+    "text": "ISCHEMIAの場合\n\n\n\nICTUS, FRISC-II, RITA-3などの過去のRCTのメタアナライシスに準じて5年という時間を決めている\n5年restricted mean event-free timeの差は、invasive strategy群で9.5日長い\n95% CIは -17.8から36.9日"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#今日の内容-5",
+    "href": "statistics/RMST_mi/index.html#今日の内容-5",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "今日の内容",
+    "text": "今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#観察研究での使い道",
+    "href": "statistics/RMST_mi/index.html#観察研究での使い道",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "観察研究での使い道",
+    "text": "観察研究での使い道\n\n回帰式を用いて、交絡因子を調整することも出来る\n\nStroke. 2018;49:607-613.\n\nPropensity score match後に単変量でも可能\n\nOpen Heart. 2020;7:e001163.\n\n近年、Risk model作成も行われている\n\nCirc Cardiovasc Qual Outcomes. 2020;13:e005918."
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#aimの締めの言葉",
+    "href": "statistics/RMST_mi/index.html#aimの締めの言葉",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "AIMの締めの言葉",
+    "text": "AIMの締めの言葉\n\nRCTにおいて、ルーチンでRMSTの差を使う事を推奨する"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#ご静聴ありがとうございました",
+    "href": "statistics/RMST_mi/index.html#ご静聴ありがとうございました",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "ご静聴ありがとうございました",
+    "text": "ご静聴ありがとうございました"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmm",
+    "href": "statistics/glmm_mi/index.html#glmm",
+    "title": "GLMM",
+    "section": "GLMM",
+    "text": "GLMM\nNozomi Niimi"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#本日のagenda",
+    "href": "statistics/glmm_mi/index.html#本日のagenda",
+    "title": "GLMM",
+    "section": "本日のagenda",
+    "text": "本日のagenda\n\nGLMM（Generalized Linear Mixed Model）について\nGLMMの直感的理解\nGLMMとGEE（Generalized Estimating Equation）の違い\nGLMMの注意点\nこんな時！GLMM！"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#本日のagenda-1",
+    "href": "statistics/glmm_mi/index.html#本日のagenda-1",
+    "title": "GLMM",
+    "section": "本日のagenda",
+    "text": "本日のagenda\n\nGLMM（Generalized Linear Mixed Model）について\nGLMMの直感的理解\nGLMMとGEE（Generalized Estimating Equation）の違い\nGLMMの注意点\nこんな時！GLMM！\nおまけ"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#実際の論文",
+    "href": "statistics/glmm_mi/index.html#実際の論文",
+    "title": "GLMM",
+    "section": "実際の論文",
+    "text": "実際の論文"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmを使った論文は増えている",
+    "href": "statistics/glmm_mi/index.html#glmmを使った論文は増えている",
+    "title": "GLMM",
+    "section": "GLMMを使った論文は増えている",
+    "text": "GLMMを使った論文は増えている\n\n\nPLoS One. 2014;9(11):1-10."
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmについて",
+    "href": "statistics/glmm_mi/index.html#glmmについて",
+    "title": "GLMM",
+    "section": "GLMMについて",
+    "text": "GLMMについて\n\n\n\n線形モデルを拡張したもの\n連続変数を扱う最小二乗法が基本\nただし、目的変数が連続変数だけだったり、分散が正規分布でないと不可能だった\nlink関数を用いることで更に拡張したのがGLM\n独立変数の効果を固定効果とランダム効果に分けて更に自由度を上げたのがgeneralized linear mixed model（GLMM）"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#復習一般化線形モデルについて",
+    "href": "statistics/glmm_mi/index.html#復習一般化線形モデルについて",
+    "title": "GLMM",
+    "section": "復習：一般化線形モデルについて",
+    "text": "復習：一般化線形モデルについて\n\n線形モデル：差の二乗を最も小さくする\n一般化線形モデル：リンク関数を挟んで、尤度を最大にする"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmの仮定",
+    "href": "statistics/glmm_mi/index.html#glmの仮定",
+    "title": "GLMM",
+    "section": "GLMの仮定",
+    "text": "GLMの仮定\n\n仮定1：従属変数の分布を勝手に決めている（指数分布族）\n仮定2：従属変数がそれぞれ独立である\n\n\n\n\n\n\n\n\n\n\n\n『StanとRでベイズ統計モデリング』"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmとは",
+    "href": "statistics/glmm_mi/index.html#glmmとは",
+    "title": "GLMM",
+    "section": "GLMMとは？",
+    "text": "GLMMとは？\n\n同じ個体からの繰り返し測定の場合\nヒエラルキー構造になっている解析（multilevel）、クラスターデザイン\n例：慢性心不全患者に新しい薬を処方して、BNPの推移を2ヶ月おきに計測する\n例：急性心不全の患者へのICU/HCUへの入室の効果\n上記の時には、GLMでは結果が偏るのでGLMMやGEEを用いる\nGLMMでは効果を固定効果とランダム効果に分けて推定する"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#固定効果とランダム効果",
+    "href": "statistics/glmm_mi/index.html#固定効果とランダム効果",
+    "title": "GLMM",
+    "section": "固定効果とランダム効果？？",
+    "text": "固定効果とランダム効果？？"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#本日のagenda-2",
+    "href": "statistics/glmm_mi/index.html#本日のagenda-2",
+    "title": "GLMM",
+    "section": "本日のagenda",
+    "text": "本日のagenda\n\nGLMM（Generalized Linear Mixed Model）について\nGLMMの直感的理解\nGLMMとGEE（Generalized Estimating Equation）の違い\nGLMMの注意点\nこんな時！GLMM！\nおまけ"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmについて図での表現",
+    "href": "statistics/glmm_mi/index.html#glmmについて図での表現",
+    "title": "GLMM",
+    "section": "GLMMについて：図での表現",
+    "text": "GLMMについて：図での表現\n\n\n全体\n病院A / 病院B / 病院C\n階層1：病院\n階層2：患者\n例\n\n「腎機能がこんなに悪いんだから、RAASiは禁忌に近い！！」\n「腎機能がこんなに悪いんだから、よりRAASi使わなきゃ！！」"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmについてグラフ的理解",
+    "href": "statistics/glmm_mi/index.html#glmmについてグラフ的理解",
+    "title": "GLMM",
+    "section": "GLMMについて：グラフ的理解",
+    "text": "GLMMについて：グラフ的理解"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmについて式での表現",
+    "href": "statistics/glmm_mi/index.html#glmmについて式での表現",
+    "title": "GLMM",
+    "section": "GLMMについて：式での表現",
+    "text": "GLMMについて：式での表現\n\n\n式の構造はGLMと同じ\nこの、係数の部分が同じではないのがGLMM\n通常のGLM\n\n造影剤量 = a + b * eGFR + c * age\n\nGLMMの考え\n\ny = a + b1 * eGFR + c * age\ny = a + b2 * eGFR + c * age\ny = a + b3 * eGFR + c * age\n\n固定効果：b: 0.25 ± 1.2\nランダム効果\n\nb1: 1.8\nb2: 0.6\nb3: 3.5"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#本日のagenda-3",
+    "href": "statistics/glmm_mi/index.html#本日のagenda-3",
+    "title": "GLMM",
+    "section": "本日のagenda",
+    "text": "本日のagenda\n\nGLMM（Generalized Linear Mixed Model）について\nGLMMの直感的理解\nGLMMとGEE（Generalized Estimating Equation）の違い\nGLMMの注意点\nこんな時！GLMM！\nおまけ"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#geeとは",
+    "href": "statistics/glmm_mi/index.html#geeとは",
+    "title": "GLMM",
+    "section": "GEEとは",
+    "text": "GEEとは\n\nWorking correlation matrixという特殊な行列を用いたモデリングの手法\nGLMの仮定（再掲）\n\n仮定1：従属変数の分布を勝手に決めている（指数分布族）\n仮定2：従属変数がそれぞれ独立である\n\nこの仮定1を満たさなくても使える！！"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#従属変数の分布",
+    "href": "statistics/glmm_mi/index.html#従属変数の分布",
+    "title": "GLMM",
+    "section": "従属変数の分布？",
+    "text": "従属変数の分布？\n\n\n\noutcomeの分布の事\n連続値？離散値？\nカテゴリー変数？\n0/1？"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#問題になるのは離散値",
+    "href": "statistics/glmm_mi/index.html#問題になるのは離散値",
+    "title": "GLMM",
+    "section": "問題になるのは離散値！",
+    "text": "問題になるのは離散値！\n\n\n\nほとんどの場合、問題になるのは離散値（0, 1, 2, 3…）\nPoisson分布を用いると、かなりばらつきが多くなる（=過分散）\noutcomeが離散値だとGLMMとGEEで違いが出てくる\n\n連続値だと差は出ない\n\n例：てんかん患者が1年以内に発作を起こした回数\n例：心不全患者のICU在室日数\n\n\n\n\n\nAnn Intern Med. 2003;139(8)."
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmとgeeの違いについて",
+    "href": "statistics/glmm_mi/index.html#glmmとgeeの違いについて",
+    "title": "GLMM",
+    "section": "GLMMとGEEの違いについて",
+    "text": "GLMMとGEEの違いについて\n\n同じ点\n\nGLMMもGEEもクラスターや層別の解析が可能\n\n違う点\n\nGEEの方が従属変数の分布が異なっていても結果がrobust\nGLMMと違いGEEは尤度が出せない\n擬似尤度を使うため、計算方法によって結果が変わりやすい\n\nGEEは1つの層までしか解析出来ない\nGEEは集団全体への効果（marginal）しか推定できない\nGLMMは各々の細かいclusterでの効果量（conditional）の推定が可能\n\n\nComput Stat Data Anal. 2014;77:70-83.\nStat Sci. 2004;19(2):219-238."
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmとgeeの使い分け",
+    "href": "statistics/glmm_mi/index.html#glmmとgeeの使い分け",
+    "title": "GLMM",
+    "section": "GLMMとGEEの使い分け",
+    "text": "GLMMとGEEの使い分け\n\n2層以上の解析 → GLMM\n患者個々人の影響も見たい（conditionalな影響が見たい） → GLMM\n離散値のoutcomeを見たい → GEE\n循環器領域ではGLMMの方が使い勝手良さそう\nGEEは使うソフトによって結果が異なる事がある\n\n\nComput Stat Data Anal. 2014;77:70-83."
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#こんな時glmm",
+    "href": "statistics/glmm_mi/index.html#こんな時glmm",
+    "title": "GLMM",
+    "section": "こんな時！GLMM！",
+    "text": "こんな時！GLMM！\n\n病院毎や個人差を考慮した解析をしたい時\nただし、差はあってもある程度常識的な範囲に入ると推定される時\nLogisticの場合\nPoisson分布の時はGEEやBayes統計が良いかもしれない\n患者一人一人の状態に合わせた効果が欲しい時（Frailty model）"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#glmmの注意点",
+    "href": "statistics/glmm_mi/index.html#glmmの注意点",
+    "title": "GLMM",
+    "section": "GLMMの注意点",
+    "text": "GLMMの注意点\n\n例えば個人差を階層にする時\n\n年齢、性別、BMIのようなデータは階層別にしない！\n\n例えば施設間の差を階層にする時\n\nhospital volumeのような測定できる因子は階層にしない！\n\nどのような図式で、何を個体差（施設差）にするか事前に設定する"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#絵を描こう",
+    "href": "statistics/glmm_mi/index.html#絵を描こう",
+    "title": "GLMM",
+    "section": "絵を描こう！",
+    "text": "絵を描こう！\n\n\n階層\n\n測定されない施設の影響\n\n共変量・因子\n\n年齢\n夜間・休日\nD2B time\nhigh volumeか否か\nPADの有無\n糖尿病"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#おまけ",
+    "href": "statistics/glmm_mi/index.html#おまけ",
+    "title": "GLMM",
+    "section": "おまけ",
+    "text": "おまけ\n\nおそらく最もこのmixed modelが使われるのはmeta analysis\nFixed effects vs Random effects\nFixed effects\n\n真の治療効果は研究毎ではheterogeneityがないという仮定\nn が等しく、モデルが正しければ全てのforest plotが一致する\ncommon treatment effectがわかる\n\nRandom effects\n\n真の治療効果はsampling variabilityによって変化がある\naverage treatment effectがわかる\n\nRandom effectsでは、分散を偶然誤差と系統誤差に振り分ける必要がある\nHeterogeneityの検定が必要だが、あまり行われない\nRandom effectsの方が有意差が出にくい傾向がある"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#ご静聴ありがとうございました",
+    "href": "statistics/glmm_mi/index.html#ご静聴ありがとうございました",
+    "title": "GLMM",
+    "section": "ご静聴ありがとうございました",
+    "text": "ご静聴ありがとうございました"
+  },
+  {
+    "objectID": "statistics/glmm_mi/index.html#補足画像",
+    "href": "statistics/glmm_mi/index.html#補足画像",
+    "title": "GLMM",
+    "section": "補足画像",
+    "text": "補足画像"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#分類モデルの評価について",
+    "href": "statistics/model_performance_mi/index.html#分類モデルの評価について",
+    "title": "分類モデルの評価について",
+    "section": "分類モデルの評価について",
+    "text": "分類モデルの評価について\n2021/7/30\nNozomi Niimi"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#ダニエル書第五章",
+    "href": "statistics/model_performance_mi/index.html#ダニエル書第五章",
+    "title": "分類モデルの評価について",
+    "section": "ダニエル書第五章",
+    "text": "ダニエル書第五章\n\n“そのしるされた文字はこうです。メネ、メネ、テケル、ウパルシン。その事の解き明かしはこうです、メネは神があなたの治世を数えて、これをその終りに至らせたことをいうのです。テケルは、あなたがはかりで量られて、その量の足りないことがあらわれたことをいうのです。ウパルシンは、あなたの国が分かたれて、メデアとペルシャの人々に与えられることをいうのです。”"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#take-home-message",
+    "href": "statistics/model_performance_mi/index.html#take-home-message",
+    "title": "分類モデルの評価について",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\n分類モデルの場合は弁別能と較正能を別個に評価しよう！\n\n弁別能：AUROC\n較正能：Calibration plotを用いる\n分類モデルの場合はクラスの偏りに要注意！\n\nモデルの比較にNRI, Decision-curve analysisも使おう！"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#agenda",
+    "href": "statistics/model_performance_mi/index.html#agenda",
+    "title": "分類モデルの評価について",
+    "section": "Agenda",
+    "text": "Agenda\n\n分類モデルとは？\n分類の評価：DiscriminationとCalibrationって何？\n\nDiscriminationの評価方法\nCalibrationの評価方法\n\nAdvanced model performance：モデルの比較\n\nNRI、IDI、Decision curve analysis"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#agenda-1",
+    "href": "statistics/model_performance_mi/index.html#agenda-1",
+    "title": "分類モデルの評価について",
+    "section": "Agenda",
+    "text": "Agenda\n\n分類モデルとは？\n分類の評価：DiscriminationとCalibrationって何？\n\nDiscriminationの評価方法\nCalibrationの評価方法\n\nAdvanced model performance：モデルの比較\n\nNRI、IDI、Decision curve analysis"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#分類モデルとは",
+    "href": "statistics/model_performance_mi/index.html#分類モデルとは",
+    "title": "分類モデルの評価について",
+    "section": "分類モデルとは？",
+    "text": "分類モデルとは？\n\n\n\nいわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる\n\n回帰モデル：連続値（BNP値、e’、PCWPなど）を直接予測する\n分類モデル：0/1（生死、出血の有無など）を予測する\n\n実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する\n任意のカットオフ（通常0.5）で0か1に丸め込んでいる"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#agenda-2",
+    "href": "statistics/model_performance_mi/index.html#agenda-2",
+    "title": "分類モデルの評価について",
+    "section": "Agenda",
+    "text": "Agenda\n\n分類モデルとは？\n分類の評価：DiscriminationとCalibrationって何？\n\nDiscriminationの評価方法\nCalibrationの評価方法\n\nAdvanced model performance：モデルの比較\n\nNRI、IDI、Decision curve analysis"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#分類の評価discriminationとcalibration",
+    "href": "statistics/model_performance_mi/index.html#分類の評価discriminationとcalibration",
+    "title": "分類モデルの評価について",
+    "section": "分類の評価：DiscriminationとCalibration",
+    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination（弁別能）とCalibration（較正能）を別個に評価する\nDiscrimination\n\n0/1の正確性\n実際にこの患者の予測が当たるかどうかの評価\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目\nCalibrationはしばしば忘れ去られている\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#例",
+    "href": "statistics/model_performance_mi/index.html#例",
+    "title": "分類モデルの評価について",
+    "section": "例",
+    "text": "例\n\nDiscrimination\n\n「ERで胸痛を訴えているこの患者がMIかどうか？」\nそもそも、これが当たらないとどうしようもない\n\nCalibration\n\n「この患者にPCIをしたときに透析になってしまう確率は？」\n20%を超えるようならカテなしで様子をみよう\n0/1だけでなく、実際の数字が重要"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#discriminationとcalibration",
+    "href": "statistics/model_performance_mi/index.html#discriminationとcalibration",
+    "title": "分類モデルの評価について",
+    "section": "DiscriminationとCalibration",
+    "text": "DiscriminationとCalibration\n\n\n\n\n平均リスク50%\n平均リスク10%\nDiscriminationとCalibrationはトレードオフ\nさらに、事前確率やその分布にも影響を受ける\n完璧なDiscrimination & poor calibration\n完璧なCalibrationでの理論上の最大のDiscrimination\n\n\n\n\n\n\nCirculation. 2007;115:928-935."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#discriminationの評価について",
+    "href": "statistics/model_performance_mi/index.html#discriminationの評価について",
+    "title": "分類モデルの評価について",
+    "section": "Discriminationの評価について",
+    "text": "Discriminationの評価について\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#混同行列関連",
+    "href": "statistics/model_performance_mi/index.html#混同行列関連",
+    "title": "分類モデルの評価について",
+    "section": "混同行列関連",
+    "text": "混同行列関連\n\n\n\n\n\n\n\nPPV\nカットオフを作るのにも使う"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#discrimination混同行列関連",
+    "href": "statistics/model_performance_mi/index.html#discrimination混同行列関連",
+    "title": "分類モデルの評価について",
+    "section": "Discrimination：混同行列関連",
+    "text": "Discrimination：混同行列関連\n\n\n\n国試でやった感度・特異度・尤度比等\n一番使われるのはAccuracy\nFβ score（F1, F0.5, F2など）で、偽陰性・偽陽性の何を重視するかで選択が変わる\n\nβに大きな数字を入れると感度を重視\nβに小さな数字を入れるとPPVを重視\n\n偽陰性を極力避けたいとき\n\n一般人口への癌やHIVのscreeningなど\nF2などが良い\n\n偽陽性を極力避けたいとき\n\nHFrEFで心筋生検をすべきかどうか、など\nF0.5などが良い"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#リスク毎の評価",
+    "href": "statistics/model_performance_mi/index.html#リスク毎の評価",
+    "title": "分類モデルの評価について",
+    "section": "リスク毎の評価",
+    "text": "リスク毎の評価\n\n\n\n\nsensitivity\n1-specificity\nPPV"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#注意点",
+    "href": "statistics/model_performance_mi/index.html#注意点",
+    "title": "分類モデルの評価について",
+    "section": "注意点",
+    "text": "注意点\n\n極端に偏ったデータでは混同行列関連は役に立たない\n特にAccuracyは一番ダメ\n\n全部0の予測でも90%超えてしまう\n\nPRAUC等が役に立つが、数字だけでの評価は困難\n\nROCは事前確率に関係のない感度・特異度だけでできている\nPR curveは事前確率が影響する\nPR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい\nROCだと差が出にくい\n\nAUROCは数字で大体の印象が分かるのが強み\n\n\n\n\nAUROCの値\n意味\n\n\n\n\n0.5-0.6\npoor\n\n\n0.6-0.75\npossible helpful\n\n\n0.75-\nclearly useful\n\n\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#結局どうすればいいの",
+    "href": "statistics/model_performance_mi/index.html#結局どうすればいいの",
+    "title": "分類モデルの評価について",
+    "section": "結局どうすればいいの？",
+    "text": "結局どうすればいいの？\n\n均衡がとれているデータの場合\n\n根拠がある場合\n\n妥当な感度、特異度の値が分かっている\nカットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載\nAUROCはあった方が良い\n\n根拠がない場合\n\nYouden indexやFβ scoreをカットオフとしてAccuracy等を評価\nAUROCは必須\n\n\n不均衡データの場合\n\nあまり決まっていない\nAUPRCはどこかに記載した方が無難\n個人的には不均衡でもAUROCをメイン解析にしても良いと思う\nYouden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#calibrationの評価について",
+    "href": "statistics/model_performance_mi/index.html#calibrationの評価について",
+    "title": "分類モデルの評価について",
+    "section": "Calibrationの評価について",
+    "text": "Calibrationの評価について\n\n全体像を示すもの\n\nCalibration plot\n\n一つの数字で表すもの\n\nRecalibration parameters\nCalibration plotの傾きと切片を記述\nHosmer-Lemeshow\n予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する\nBrier score\n実際のイベントと予測確率の差を二乗和にして平均を取った値\n\nCalibration plotが、どこの予測能が悪いかもわかるため最も良い評価\n分類数には要注意\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#calibration-plotの作り方",
+    "href": "statistics/model_performance_mi/index.html#calibration-plotの作り方",
+    "title": "分類モデルの評価について",
+    "section": "Calibration Plotの作り方",
+    "text": "Calibration Plotの作り方\n\n\n\n\n\n予測確率を並べる\n\n\n予測確率で群分けする\n\n\n各群の予測確率をまとめる\n\n\n各群の実測イベント率をまとめる"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#calibrationの細かい方法",
+    "href": "statistics/model_performance_mi/index.html#calibrationの細かい方法",
+    "title": "分類モデルの評価について",
+    "section": "Calibrationの細かい方法",
+    "text": "Calibrationの細かい方法\n\n\n\n3と4を棒グラフや線グラフでまとめる\n\nCalibration plot\n\n3’と4’でχ2検定を行う\n\nHosmer-Lemeshow検定"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#brier-score",
+    "href": "statistics/model_performance_mi/index.html#brier-score",
+    "title": "分類モデルの評価について",
+    "section": "Brier Score",
+    "text": "Brier Score"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#agenda-3",
+    "href": "statistics/model_performance_mi/index.html#agenda-3",
+    "title": "分類モデルの評価について",
+    "section": "Agenda",
+    "text": "Agenda\n\n分類モデルとは？\n分類の評価：DiscriminationとCalibrationって何？\n\nDiscriminationの評価方法\nCalibrationの評価方法\n\nAdvanced model performance：モデルの比較\n\nNRI、IDI、Decision curve analysis"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#モデルの比較",
+    "href": "statistics/model_performance_mi/index.html#モデルの比較",
+    "title": "分類モデルの評価について",
+    "section": "モデルの比較",
+    "text": "モデルの比較\n\n\n\nAU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている\nよくあるシチュエーション\n\nベースのモデルに何かの変数を追加したときにモデルが良くなるか？\n\nNRI / IDI\nAUROCは不完全！\n\n\n\n\n\nCirculation. 2007;115:928-935."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#epidemiology-201425114-121",
+    "href": "statistics/model_performance_mi/index.html#epidemiology-201425114-121",
+    "title": "分類モデルの評価について",
+    "section": "Epidemiology 2014;25:114-121",
+    "text": "Epidemiology 2014;25:114-121"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#nrinet-reclassification-index",
+    "href": "statistics/model_performance_mi/index.html#nrinet-reclassification-index",
+    "title": "分類モデルの評価について",
+    "section": "NRI（Net Reclassification Index）",
+    "text": "NRI（Net Reclassification Index）\n\n\n古いモデルから新しいモデルでの分類によってどのように変化したかを示す\n実は複数の種類がある\n大きく分けて以下に分けられる\n\nCategory-based NRI\nContinuous NRI\n\n\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#cnri",
+    "href": "statistics/model_performance_mi/index.html#cnri",
+    "title": "分類モデルの評価について",
+    "section": "cNRI",
+    "text": "cNRI\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい\n\nPr(higher | event) - Pr(lower | event)\n+ Pr(lower | nonevent) - Pr(higher | nonevent)\n\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす\n\n\n\n\n\n(15 - 3) / 18 + (46 - 12) / 58 = 1.25"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#nriの使い方注意点",
+    "href": "statistics/model_performance_mi/index.html#nriの使い方注意点",
+    "title": "分類モデルの評価について",
+    "section": "NRIの使い方、注意点",
+    "text": "NRIの使い方、注意点\n\nEvent NRI、Non-event NRIを各々提示する\n\n可能であれば、臨床的に意味があるカットオフでのCategory-based NRIが望ましい\n\nNRI単独で評価はせず、補助的に用いる\n\nAUROC等と一緒に\nCalibrationがもともと悪いデータだと、意味がなくても有意に改善する可能性がある\n\n最も良い使い方\n\n全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価\n\n\n\nAnn Intern Med. 2014;160:122-131."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#idiintegrated-discrimination-improvement",
+    "href": "statistics/model_performance_mi/index.html#idiintegrated-discrimination-improvement",
+    "title": "分類モデルの評価について",
+    "section": "IDI（Integrated Discrimination Improvement）",
+    "text": "IDI（Integrated Discrimination Improvement）\n\n\n\ncNRIに各々の予測値の重みづけをしたもの\n次の差をとったもの\n\nEventあり群の新/旧モデルの平均予測値の差\nEventなし群の新/旧モデルの平均予測値の差\n\nCalibrationの要素が入っているが、やはり臨床的な差は見つけにくい\n(0.856 - 0.772) - (0.463 - 0.734) = 0.355"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysis",
+    "href": "statistics/model_performance_mi/index.html#decision-curve-analysis",
+    "title": "分類モデルの評価について",
+    "section": "Decision Curve Analysis",
+    "text": "Decision Curve Analysis\n\nNRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている\n\n現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある\n例：ICUの心電図モニター vs. HFrEFの心臓生検\n\n重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという\n\n\n\n\nP(t) = 0.1\nNB = 252 / 500 - 110 / 500 * (0.1 / 0.9) = 0.480\n\n\n\n\n\nP(t) = 0.5\nNB = 227 / 500 - 50 / 500 * (0.5 / 0.5) = 0.354\n\n\n\n\n\nBMJ. 2016;352:i6."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#ベースラインのリスク",
+    "href": "statistics/model_performance_mi/index.html#ベースラインのリスク",
+    "title": "分類モデルの評価について",
+    "section": "ベースラインのリスク",
+    "text": "ベースラインのリスク\n\n\n\nDefault strategy\n患者を陽性（生検適応）と判断する確率：P(t)\nNet benefitの値のところで最も上のstrategyがより良いモデル\nTreat allとTreat noneよりは常に高くないといけない\n左端のベースラインのリスクの高低も必ず評価する"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#dcanbの解釈",
+    "href": "statistics/model_performance_mi/index.html#dcanbの解釈",
+    "title": "分類モデルの評価について",
+    "section": "DCA、NBの解釈",
+    "text": "DCA、NBの解釈\n\n高価な検査、侵襲的な検査、面倒な検査の場合\n\nΔNBの逆数がNNTと同じような役割を果たす（test tradeoff）\n\n例\n\n心Sarcoidosisの診断にPETを加えたモデルがある\nP(t) が10%の時の ΔNB が0.001\n10%以上で陽性とする基準でNNS 1000\n言い換えると、111回やると1回の偽陽性を避けられる"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curveの読み方作り方",
+    "href": "statistics/model_performance_mi/index.html#decision-curveの読み方作り方",
+    "title": "分類モデルの評価について",
+    "section": "Decision Curveの読み方・作り方",
+    "text": "Decision Curveの読み方・作り方\n\n\n重要な事は、P(t) のレンジを現実的な範囲で決める事\n\n\n下限と上限\nモデルから逆に P(t) を決めてはいけない\n\n\n有病率（P(t) = 0 の時のNB）の値も確認\n\n\n興味があるレンジでどのような動態かを確認する\n\n\nCalibrationが悪いとTreat allやTreat noneよりも悪くなりうる\nその場合はそれ以上の比較はしない\n\n\n新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する\n\n\n必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#結局どうすればいいの-1",
+    "href": "statistics/model_performance_mi/index.html#結局どうすればいいの-1",
+    "title": "分類モデルの評価について",
+    "section": "結局どうすればいいの？",
+    "text": "結局どうすればいいの？\n\nモデルを単に評価するだけなら不要\nベースのモデルに対してどの程度変化したかを記述したい\n元のモデルに対して何かのマーカー（BNP等）を追加したときに、その改善を言いたい\n\ncNRI\n\n臨床的な有用性を強く主張したい\n\n適切なカットオフを自分で決める\nCategory-based NRIをevent/non-eventで記述する\nDecision curve analysisを用いる"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#nbの解釈例1",
+    "href": "statistics/model_performance_mi/index.html#nbの解釈例1",
+    "title": "分類モデルの評価について",
+    "section": "NBの解釈例：1",
+    "text": "NBの解釈例：1\n\n\n\n\n意味がある閾値が10-30%と考えている場合\n15%くらいでTreat allより良い\n\n患者のリスクを勘案した上で、有用な可能性あり\n\n良いモデルだが、ベースのリスクが高すぎる\n\nモデルは使いにくい\n\n20%を超えないとTreat allよりも良い結果が出ない\n\nMiscalibration"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#nbの解釈例2",
+    "href": "statistics/model_performance_mi/index.html#nbの解釈例2",
+    "title": "分類モデルの評価について",
+    "section": "NBの解釈例：2",
+    "text": "NBの解釈例：2\n\n\n\n15%でモデル1と2が交差する\n勝者なく明らかな優位性は不明"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#take-home-message-1",
+    "href": "statistics/model_performance_mi/index.html#take-home-message-1",
+    "title": "分類モデルの評価について",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\n分類モデルの場合は弁別能と較正能を別個に評価しよう！\n\n弁別能：AUROC\n較正能：Calibration plotを用いる\n分類モデルの場合はクラスの偏りに要注意！\n\nモデルの比較にNRI, Decision-curve analysisも使おう！"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#参考文献",
+    "href": "statistics/model_performance_mi/index.html#参考文献",
+    "title": "分類モデルの評価について",
+    "section": "参考文献",
+    "text": "参考文献\n\n『イベント予測モデルの評価指標』\n\nhttps://www.jstage.jst.go.jp/article/jjb/41/1/41_1/_pdf\n\nNet Reclassification Improvement: Computation, Interpretation, and Controversies.\n\nAnn Intern Med. 2014;160:122-131.\n\nNet benefit approaches to the evaluation of prediction models, molecular markers, and diagnostic tests.\n\nBMJ. 2016;352:i6.\n\nVan Calster B, Wynants L, Verbeek JFM, Verbakel JY, Christodoulou E, Vickers AJ, et al.\n\nReporting and interpreting decision curve analysis: A guide for investigators.\nEur Urol. 2018;74:796-804.\n\nSteyerberg EW, Vickers AJ, Cook NR, Gerds T, Gonen M, Obuchowski N, et al.\n\nAssessing the performance of prediction models: a framework for traditional and novel measures.\nEpidemiology. 2010;21:128-138."
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#aicbic",
+    "href": "statistics/model_performance_mi/index.html#aicbic",
+    "title": "分類モデルの評価について",
+    "section": "AIC/BIC",
+    "text": "AIC/BIC\n\nLn(L)：モデルの対数尤度（見た目の似方）\nP：モデルの中の変数の数\nAICとBICは基本的には似たものをみており、複数のモデルの比較に用いる\n小さい方が良い値\nモデルの数が非常に多ければBICの方が良い\n基本的にはAICを使えばよさそう\n\nBICの方が罰則が多く、単純すぎるモデルを選ぶ傾向があるため\n\nどちらかというと変数選択で使う事が多い\n\nBackward elimination"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#連続値の評価について",
+    "href": "statistics/model_performance_mi/index.html#連続値の評価について",
+    "title": "分類モデルの評価について",
+    "section": "連続値の評価について",
+    "text": "連続値の評価について\n\n\n\n連続値\n\n決定係数（R2）\n平均二乗誤差関連（MAE、MSE、RMSE）\n\nR2（R squared）\n\nデータの分散のうち、どの程度が説明可能だったかの指標\n線形モデルにおいては相関係数の二乗になる\n非線形モデルでは解釈できない"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#平均二乗誤差関連",
+    "href": "statistics/model_performance_mi/index.html#平均二乗誤差関連",
+    "title": "分類モデルの評価について",
+    "section": "平均二乗誤差関連",
+    "text": "平均二乗誤差関連\n\n\n\n直観的に理解しやすい\n平均絶対誤差（MAE）\n平均二乗誤差（MSE）\n二乗平均平方根誤差（RMSE）"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#rmseは正確性を診ておりr2はバラツキの大きさを診ている",
+    "href": "statistics/model_performance_mi/index.html#rmseは正確性を診ておりr2はバラツキの大きさを診ている",
+    "title": "分類モデルの評価について",
+    "section": "RMSEは正確性を診ており、R2はバラツキの大きさを診ている",
+    "text": "RMSEは正確性を診ており、R2はバラツキの大きさを診ている"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#何を使えばいいの",
+    "href": "statistics/model_performance_mi/index.html#何を使えばいいの",
+    "title": "分類モデルの評価について",
+    "section": "何を使えばいいの？",
+    "text": "何を使えばいいの？\n\n常に、RMSEを使えば無難\nRMSEのメリット・デメリット\n\n分かりやすい\n臨床的に意味のある誤差かの判断は必要\nBNPの誤差30は問題ないが、E/e’の誤差8は大問題\n極端な外れ値があると使えない\n生の散布図やBland-Altman分析を使う\n\nR2のメリット・デメリット\n\nR2は値のスケールやデータセットのnの数に影響されない\n異なる指標を比べるのに良い\n非線形モデルで使えない\n説明変数を多くすればするほど、意味がなくても見た目上よくなってしまう\nあまりにも合っていないモデルを作ると負にもなりうる\n\n使い分け\n\n予測を目的とする機械学習的なものならRMSE\n因果を目的とする、何が原因かを評価するならR2"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#bland-altman分析",
+    "href": "statistics/model_performance_mi/index.html#bland-altman分析",
+    "title": "分類モデルの評価について",
+    "section": "Bland-Altman分析",
+    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941."
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#可視化事始め",
+    "href": "statistics/visualization_mi/index.html#可視化事始め",
+    "title": "可視化事始め",
+    "section": "可視化事始め",
+    "text": "可視化事始め\nそのフィギュア、必要ですか？\n2021/3/5 ＠Keio University\n新美 望"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#take-home-message",
+    "href": "statistics/visualization_mi/index.html#take-home-message",
+    "title": "可視化事始め",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n色覚多様性にも配慮した色を使う"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#what-is-this",
+    "href": "statistics/visualization_mi/index.html#what-is-this",
+    "title": "可視化事始め",
+    "section": "What Is This？",
+    "text": "What Is This？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#画像例",
+    "href": "statistics/visualization_mi/index.html#画像例",
+    "title": "可視化事始め",
+    "section": "画像例",
+    "text": "画像例"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#visualization",
+    "href": "statistics/visualization_mi/index.html#visualization",
+    "title": "可視化事始め",
+    "section": "Visualization",
+    "text": "Visualization\n\nTableと異なり、Figureにすることで情報量は格段に上がる\n一方で、適切なFigureを描かないと見にくいばかりか、misleadingにもなりうる\n内科の問診のように、基礎中の基礎だけど重要極まりない工程\nVisualizationって誰かに習ったっけ？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容",
+    "href": "statistics/visualization_mi/index.html#今日の内容",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容-1",
+    "href": "statistics/visualization_mi/index.html#今日の内容-1",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#よいfigureの条件",
+    "href": "statistics/visualization_mi/index.html#よいfigureの条件",
+    "title": "可視化事始め",
+    "section": "よいFigureの条件",
+    "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nTufte, 1983, p. 51\n\n\n\nEdward Tufte"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#非常に良いfigureの見本",
+    "href": "statistics/visualization_mi/index.html#非常に良いfigureの見本",
+    "title": "可視化事始め",
+    "section": "非常に良いFigureの見本",
+    "text": "非常に良いFigureの見本\n\n\n\n\n\n\n？？？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#よいfigureの条件-1",
+    "href": "statistics/visualization_mi/index.html#よいfigureの条件-1",
+    "title": "可視化事始め",
+    "section": "よいFigureの条件",
+    "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nデータ・インク比を最大化する\n\n\n\nEdward Tufte"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容-2",
+    "href": "statistics/visualization_mi/index.html#今日の内容-2",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#インクデータ比の法則",
+    "href": "statistics/visualization_mi/index.html#インクデータ比の法則",
+    "title": "可視化事始め",
+    "section": "インク・データ比の法則",
+    "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容-3",
+    "href": "statistics/visualization_mi/index.html#今日の内容-3",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて\nTake home message"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#見せたいものって",
+    "href": "statistics/visualization_mi/index.html#見せたいものって",
+    "title": "可視化事始め",
+    "section": "見せたいものって？",
+    "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#人間の得意苦手分野",
+    "href": "statistics/visualization_mi/index.html#人間の得意苦手分野",
+    "title": "可視化事始め",
+    "section": "人間の得意・苦手分野",
+    "text": "人間の得意・苦手分野"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#example",
+    "href": "statistics/visualization_mi/index.html#example",
+    "title": "可視化事始め",
+    "section": "Example",
+    "text": "Example\n\n\n\n青が感染症\n赤が戦場での負傷\n黒がその他\nどちらが分かりやすいですか？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#空白スライド",
+    "href": "statistics/visualization_mi/index.html#空白スライド",
+    "title": "可視化事始め",
+    "section": "空白スライド",
+    "text": "空白スライド"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容-4",
+    "href": "statistics/visualization_mi/index.html#今日の内容-4",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#nへの意識",
+    "href": "statistics/visualization_mi/index.html#nへの意識",
+    "title": "可視化事始め",
+    "section": "Nへの意識",
+    "text": "Nへの意識\n\n\n\n連続値の平均や中央値を比較する時には分布も非常に重要\n分布を見る時にはバイオリンプロットもよい\nサンプルサイズの大きさで、使う図表を分けるべき\n一つの目安として n &lt; 30 ではドットチャートを併用する"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#whats-this",
+    "href": "statistics/visualization_mi/index.html#whats-this",
+    "title": "可視化事始め",
+    "section": "What’s This？",
+    "text": "What’s This？\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#whats-this-1",
+    "href": "statistics/visualization_mi/index.html#whats-this-1",
+    "title": "可視化事始め",
+    "section": "What’s This？",
+    "text": "What’s This？\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???\n???"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#thats-it",
+    "href": "statistics/visualization_mi/index.html#thats-it",
+    "title": "可視化事始め",
+    "section": "That’s It!!",
+    "text": "That’s It!!\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n!!!!"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#nへの意識-1",
+    "href": "statistics/visualization_mi/index.html#nへの意識-1",
+    "title": "可視化事始め",
+    "section": "Nへの意識",
+    "text": "Nへの意識\n\n\n\n何かの比較の時には必ず分布も考慮する\n箱ひげ図やバイオリンプロットは非常に見やすい\n一方で、Nが小さいときにはその意味も変わる\nNが少ないときはそのデータも入れた方が良い"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#nへの意識と見やすさの両立",
+    "href": "statistics/visualization_mi/index.html#nへの意識と見やすさの両立",
+    "title": "可視化事始め",
+    "section": "Nへの意識と見やすさの両立",
+    "text": "Nへの意識と見やすさの両立\n\nドットチャートに要約（平均・中央値）を追加する\nドットを出来るだけ薄くする"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#まとめ",
+    "href": "statistics/visualization_mi/index.html#まとめ",
+    "title": "可視化事始め",
+    "section": "まとめ",
+    "text": "まとめ"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容-5",
+    "href": "statistics/visualization_mi/index.html#今日の内容-5",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#次元プロットって",
+    "href": "statistics/visualization_mi/index.html#次元プロットって",
+    "title": "可視化事始め",
+    "section": "3次元プロットって？",
+    "text": "3次元プロットって？\n\n\n\n基本的にはmisleading\n使わなくて済むなら絶対に使わない\n一番ダメなのが3次元円グラフ\n青と紫どちらが大きいですか？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#どちらが見やすい",
+    "href": "statistics/visualization_mi/index.html#どちらが見やすい",
+    "title": "可視化事始め",
+    "section": "どちらが見やすい？",
+    "text": "どちらが見やすい？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#今日の内容-6",
+    "href": "statistics/visualization_mi/index.html#今日の内容-6",
+    "title": "可視化事始め",
+    "section": "今日の内容",
+    "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：ゲシュタルトと色使いについて"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#ゲシュタルトとは",
+    "href": "statistics/visualization_mi/index.html#ゲシュタルトとは",
+    "title": "可視化事始め",
+    "section": "ゲシュタルトとは",
+    "text": "ゲシュタルトとは\n\n\n\n近接の法則\n類同の法則\n囲みの法則\n閉合の法則\n連続の法則\n接合の法則"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#推奨はしないけど",
+    "href": "statistics/visualization_mi/index.html#推奨はしないけど",
+    "title": "可視化事始め",
+    "section": "推奨はしないけど",
+    "text": "推奨はしないけど"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#色使いについて",
+    "href": "statistics/visualization_mi/index.html#色使いについて",
+    "title": "可視化事始め",
+    "section": "色使いについて",
+    "text": "色使いについて\n\n\n\n色覚異常は思っている以上にコモン\nカラーユニバーサルデザイン"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#カラーユニバーサルデザイン",
+    "href": "statistics/visualization_mi/index.html#カラーユニバーサルデザイン",
+    "title": "可視化事始め",
+    "section": "カラーユニバーサルデザイン",
+    "text": "カラーユニバーサルデザイン\n\n具体的な色彩の選び方は以下を参照\nhttps://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#aha-figure-guidelines",
+    "href": "statistics/visualization_mi/index.html#aha-figure-guidelines",
+    "title": "可視化事始め",
+    "section": "AHA Figure Guidelines",
+    "text": "AHA Figure Guidelines\nhttps://www.ahajournals.org/figure-guidelines"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#take-home-message-1",
+    "href": "statistics/visualization_mi/index.html#take-home-message-1",
+    "title": "可視化事始め",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n色覚多様性にも配慮した色を使う"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#reference",
+    "href": "statistics/visualization_mi/index.html#reference",
+    "title": "可視化事始め",
+    "section": "Reference",
+    "text": "Reference\n\nReveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency.\n\nCirculation. 2019;140(18):1506-1518.\n\nGraphics and statistics for cardiology: Comparing categorical and continuous variables.\n\nHeart. 2016;102(5):349-355.\n\n永田ゆかり（2020）『データ視覚化のデザイン』SBクリエイティブ株式会社\nキーラン・ヒーリー（2021）『実践Data Scienceシリーズ データ分析のためのデータ可視化入門』KS情報科学専門書\nhttps://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html\nhttps://socviz.co/lookatdata.html\nhttps://seaborn.pydata.org/tutorial/function_overview.html"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#ご静聴ありがとうございました",
+    "href": "statistics/visualization_mi/index.html#ご静聴ありがとうございました",
+    "title": "可視化事始め",
+    "section": "ご静聴ありがとうございました",
+    "text": "ご静聴ありがとうございました"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#補足画像",
+    "href": "statistics/visualization_mi/index.html#補足画像",
+    "title": "可視化事始め",
+    "section": "補足画像",
+    "text": "補足画像"
   }
 ]

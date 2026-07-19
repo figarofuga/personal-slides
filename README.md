@@ -34,6 +34,10 @@ Preview or render the site with:
 ```bash
 pixi run preview
 pixi run render
+
+# Base Folder（pixi.tomlがある場所）からの相対パスで1つだけ
+pixi run render statistics/RMST_mi/index.qmd
+pixi run render medicine/FMF/index.qmd
 ```
 
 The rendered site is written to `docs/` for GitHub Pages.
