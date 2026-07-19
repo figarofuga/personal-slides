@@ -1,3 +1,23 @@
 {
-    "positron.r.interpreters.pixiDiscovery": true
+    "positron.r.interpreters.pixiDiscovery": true,
+
+    "files.watcherExclude": {
+        "**/.pixi/**": true,
+        "**/.quarto/**": true,
+        "**/docs/**": true,
+        "**/index_cache/**": true
+    },
+    "search.exclude": {
+        "**/.pixi/**": true,
+        "**/.quarto/**": true,
+        "**/docs/**": true,
+        "**/index_cache/**": true
+    },
+    "python.analysis.exclude": [
+        ".pixi",
+        ".quarto",
+        "docs",
+        "**/index_cache"
+    ],
+    "quarto.cells.diagnostics.enabled": false
 }
