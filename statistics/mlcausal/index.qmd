@@ -133,8 +133,14 @@ tidy_dagitty(dag) |>
 
 ```
 
-<!-- Todo: ここにColiderと交絡因子の説明、何を補正すべきかを書く -->
 
+- 交絡因子は介入とOutcome両方に関連する上流の因子(介入 <- 交絡 -> アウトカム)
+- 中間因子は介入とOutcomeの間にある因子(介入 -> 中間 -> アウトカム)
+- Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -> Colider <- アウトカム)
+- 基本は交絡因子のみ補正が必要
+  - 中間因子を補正すると治療効果が薄まる
+  - Coliderを補正してしまうと逆にバイアスが出てくる
+- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール
 
 ## 世界は結構複雑にできている
 
@@ -148,28 +154,30 @@ tidy_dagitty(dag) |>
 - 連続値をrestricted cubic splineに入れるなど
 - ただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」
 - その上で、CAの交絡因子が補正しきれるかは不明
+- 交互作用項などは人が入れるしかないが、増やしすぎると「次元の呪い」にかかる
 
 ## 次の手
 
-- Propensity score weighting
-- IPTW、Overlap weightingなど多くの方法がある
-- weighted meanを用いる
+- Propensity score weightingによって群の介入因子の分布を似せる
+  - IPTW、Overlap weightingなど多くの方法がある
 - 重み付けの方法で、Estimandをどこにするかも指定可能
 
 ## さらなる補正
 
-- AIPW, TMLEなど
+- AIPW, TMLEなどでDoubly robustな手法
 - Outcome modelとPropensity modelを用いてDoubly robustにする
-- 自由度は上昇した
+
 
 ## しかしながら・・・・・・
 
+- 結局のところ、モデルは人が作らないといけない
+- 非線形な関係も、Interaction termもいずれにせよ人が作る必要がある
 - 上記以外にも、「誰に」「どの程度」の治療効果があるか分からない
   - 治療効果の異質性
-- RCTですら群レベルでの平均的な治療効果しか分からない
+- RCTでは群レベルでの平均的な治療効果しか分からない
   - この治療は眼の前の患者さんに有益ですか？
 
-## 通常の回帰だとどうすればいい？
+## 目の前の患者への利益は通常の回帰だとどうすればいい？
 
 - 簡単にいうとSubgroup解析
   - 恣意的にInteraction項を作らないといけない
@@ -183,14 +191,47 @@ tidy_dagitty(dag) |>
 
 ## 機械学習とは
 
+- 機械学習の定義「学習はデータから学習し、初めてのデータに対して一般化し、明示的な指示なしにタスクを実行できる統計アルゴリズム」
+  - 簡単にいうとパターン認識
+1. 正解がある: 教師つき学習→予測に用いる
+2. 正解がない: 教師なし学習→記述の一種
+
 
 ## 代表的な機械学習
 
-- Logistic回帰
-- tree-based model
-  - Random forest
-  - XGBoost
-- Neural network
+:::: {.columns}
+
+::: {.column width="30%"}
+
+\[
+\log\left(\frac{P}{1-P}\right)
+=
+X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
+\]
+
+Logistic回帰
+
+:::
+
+::: {.column width="30%"}
+
+
+![Tree-based models](images/treebased_model.png)
+
+- これはRandom forest
+- 小さい木のモデルを並列ではなく直列にするとXGBoostなど
+
+:::
+
+::: {.column width="30%"}
+
+![Neural network models](images/neuralnetwork.png)
+
+- 沢山のLogistic regression modelを重ねたようなもの
+
+:::
+
+::::
 
 ## 機械学習の強みと弱み
 
@@ -238,11 +279,24 @@ tidy_dagitty(dag) |>
 
 ## S-learner
 
+![s-learner](images/s-learner.drawio.svg)
+
+
 ## T-learner
+
+![t-learner](images/t-learner.drawio.svg)
 
 ## X-learner
 
+![x-learner](images/x-learner.drawio.svg)
+
+## R-learner
+
+![r-learner](images/r-learner.drawio.svg)
+
 ## DR-learner
+
+![dr-learner](images/dr-learner.drawio.svg)
 
 ## どれがいいの？
 
@@ -1461,10 +1515,7 @@ print(T_te)
 
 ```
 
-## X-learner
 
-
-![x-learner](images/x-learner.drawio.svg)
 
 ```{python}
 #| label: X-learner
@@ -1888,15 +1939,6 @@ ggplot(dr_data, aes(x = tau_true, y = tau_hat)) +
 
 ```
 
-
-## 機械学習の因果推論における使い方
-
-- 交絡因子の調整で機械学習を用いる
-  - AIPW, tlmeなど
-- 因果をダイレクトに推論する学習機を作る
-  - Meta-learner
-- CATEを測定する
-  - Causal forestなど
 
 ```{python}
 
