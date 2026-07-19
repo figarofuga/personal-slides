@@ -43,10 +43,10 @@ library(sessioninfo)
 library(reticulate)
 library(here)
 
-reticulate::use_python(
-  here::here(".pixi", "envs", "default", "bin", "python"),
-  required = TRUE
-)
+# reticulate::use_python(
+#   here::here(".pixi", "envs", "default", "bin", "python"),
+#   required = TRUE
+# )
 
 reticulate::py_config()
 
