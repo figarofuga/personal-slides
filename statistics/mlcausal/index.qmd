@@ -203,11 +203,13 @@ tidy_dagitty(dag) |>
 
 ::: {.column width="30%"}
 
+
 \[
 \log\left(\frac{P}{1-P}\right)
 =
 X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 \]
+
 
 Logistic回帰
 
