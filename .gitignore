@@ -2,11 +2,29 @@
 .RData
 .Rproj.user/
 
-/.quarto/
-
+# Local Python and Pixi environments
 .venv/
+/.pixi/*
+!/.pixi/config.toml
 __pycache__/
 *.pyc
 
-.DS_Store
+# Quarto caches
+/.quarto/
 **/*.quarto_ipynb
+
+# Local migration and smoke-test artifacts
+/pixi-install.log
+/support*.csv
+/test.R
+/test.py
+/scripts copy/
+
+# Compiled outputs produced while building vendored R packages
+/vendor/**/src/*.o
+/vendor/**/src/*.so
+/vendor/**/src/*.a
+/vendor/**/src/*.dll
+/vendor/**/src/*.dylib
+
+.DS_Store

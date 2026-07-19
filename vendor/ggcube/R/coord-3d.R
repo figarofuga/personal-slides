@@ -1,0 +1,1054 @@
+#' 3D coordinate system
+#'
+#' \code{coord_3d} is a 3D coordinate system that creates a 2D view of 3D data.
+#' This is the essential core component of any plot made with `ggcube`.
+#' It supports rotation, perspective projection, and options for controlling plot
+#' aspect ratios, panel selection, axis label placement, and lighting.
+#'
+#' @param roll,pitch,yaw Rotation around x, y, and z axes, respectively, in degrees.
+#'    Positive values rotate the near face of the plot "downward", "rightward", and clockwise, respectively.
+#' @param persp Logical indicating whether to apply perspective projection. When \code{TRUE} (the default),
+#'   objects farther from the viewer appear smaller. When \code{FALSE}, produces an orthographic projection in which
+#'   lines that are parallel in 3D space render as parallel in the plot.
+#' @param dist Distance from viewer to center of the data cube. Only used when \code{persp = TRUE}.
+#'   Larger values create less perspective distortion. Default is 2.
+#'   Values less than 1 are allowed but can be problematic for rendering.
+#' @param zoom Numeric value controlling the framing of the plot. Values greater
+#'   than 1 zoom in (tighter framing, may crop edges), values less than 1
+#'   zoom out (more whitespace around the plot). Default is 1.
+#' @param expand Logical indicating whether to expand axis ranges beyond the data range,
+#'   similar to standard ggplot2 behavior. If \code{TRUE} (the default), expansion behavior
+#'   can be controlled using standard axis scaling functions, e.g.
+#'   \code{... + scale_x_continuous(expand = expansion(.5))}.
+#' @param clip Character string indicating clipping behavior. Use \code{"off"} (the default, recommended
+#'   for some 3D plots) to allow drawing outside the plot panel.
+#' @param panels Character vector specifying which panels to render, including one or more of the following:
+#'   \itemize{
+#'     \item \code{"background"} (the default), \code{"foreground"}: faces laying behind or in front of
+#'       the cube's interior volume, respectively. These panels vary depending on plot rotation.
+#'     \item \code{"xmin"}, \code{"ymax"}, etc.: names of specific cube faces.
+#'     \item \code{"all"}, \code{"none"}: display the full cube or remove all faces.
+#'   }
+#'   See [cube_theming] for details on panel styling, including transparency of foreground panels.
+#' @param xlabels,ylabels,zlabels Character strings or length-2 character vectors specifying
+#'   axis label (text and title) placement. Labels are placed inline with grid lines for
+#'   the selected panel face. For each axis, there are four potential panels where labels
+#'   could be placed, and two potential edges for each panel. Labels can only be placed on
+#'   visible faces (see `panels` argument). Each parameter accepts:
+#'   \itemize{
+#'     \item \code{"auto"} (default): Automatic edge selection based on an algorithm
+#'       that prioritizes edges that are visible on the periphery of the plot and considers
+#'       several attributes of face geometry for better readability.
+#'     \item \code{c("face1", "face2")}: Manual edge specification using two adjacent
+#'       face names (e.g., \code{c("xmin", "ymin")} selects the edge shared by the
+#'       xmin and ymin faces). The \strong{first face} in the vector determines which
+#'       face the axis labels will be aligned with, while the second face
+#'       identifies which edge of this face gets labelled. Available face names are:
+#'       "xmin", "xmax", "ymin", "ymax", "zmin", "zmax".
+#'   }
+#'   See [cube_theming] for details on axis label styling.
+#' @param title_position Character string controlling axis title placement. Currently only
+#'    affects titles for internal axes (not on the plot periphery); titles for axes on the
+#'    plot periphery are always centered along the axis edge.
+#'   \itemize{
+#'     \item \code{"auto"} (default): Internal axis titles are placed at the near
+#'       end of the axis, outside the plot area.
+#'     \item \code{"center"}: Internal axis titles are centered along the axis edge.
+#'   }
+#' @param rotate_labels Logical indicating whether axis labels (text and titles) should automatically
+#'   rotate to align with the projected axis directions. When \code{FALSE}, uses theme
+#'   text and title angle settings.
+#' @param scales Character string specifying aspect ratio behavior:
+#'   \itemize{
+#'     \item \code{"free"} (default): Each axis scales independently to fill cube space,
+#'       then \code{ratio} applies to standardized coordinates. This gives maximum
+#'       visual range for each dimension.
+#'     \item \code{"fixed"}: Maintains proportional relationships in raw data values,
+#'       as scaled by \code{ratio}. Similar to \code{coord_fixed()} but for 3D
+#'       (visual ratios match the labeled axis ranges).
+#'   }
+#' @param ratio Numeric vector of length 3 specifying relative axis lengths as
+#'   \code{c(x, y, z)}. Defaults to \code{c(1, 1, 1)} for equal proportions.
+#'   \itemize{
+#'     \item With \code{scales = "free"}: Ratios apply to scaled cube coordinates
+#'     \item With \code{scales = "fixed"}: Ratios apply to original data coordinates
+#'   }
+#' @inheritParams light_param
+#' @param ... Additional arguments reserved for internal use.
+#'
+#' @examples
+#' # base plot used in examples
+#' p <- ggplot() +
+#'   geom_function_3d(
+#'     aes(fill = after_stat(z), color = after_stat(z)),
+#'     fun = function(x, y) sin(x) * cos(y),
+#'     xlim = c(-pi, pi), ylim = c(-pi, pi),
+#'     n = 50, light = light("direct", contrast = .7)) +
+#'   scale_fill_viridis_c() +
+#'   scale_color_viridis_c() +
+#'   theme(legend.position = "none")
+#'
+#' # 3D plot with default coord settings
+#' p + coord_3d()
+#'
+#' \donttest{
+#'
+#' # Use `pitch`, `roll`, `yaw` to control plot rotation ----------------------
+#'
+#' # zero rotation gives view from x-y face
+#' p + coord_3d(pitch = 0, roll = 0, yaw = 0)
+#'
+#' # pitch rotates plot around y axis
+#' p + coord_3d(pitch = 30, roll = 0, yaw = 0)
+#'
+#' # roll rotates plot around x axis
+#' p + coord_3d(pitch = 0, roll = 30, yaw = 0)
+#'
+#' # yaw rotates plot around z axis
+#' p + coord_3d(pitch = 0, roll = 0, yaw = 30)
+#'
+#' # combine them to achieve arbitrary rotations
+#' p + coord_3d(pitch = 20, roll = 40, yaw = 60)
+#'
+#'
+#' # Use `persp` and `dist` to control perspective effects --------------------
+#'
+#' # strong perspective effect as if seen from very close
+#' p + coord_3d(dist = 1)
+#'
+#' # weaker perspective effects as if seen from far away
+#' p + coord_3d(dist = 3)
+#'
+#' # orthographic projection (`dist = Inf` would be equivalent but it errors)
+#' p + coord_3d(persp = FALSE)
+#'
+#'
+#' # Use `scales` and `ratio` to control aspect ratio -------------------------
+#'
+#' # The default "free" scales shown above give cube with maximum visual range.
+#' # Use "fixed" scales to make figure match data scales, like coord_fixed.
+#' p + coord_3d(scales = "fixed")
+#'
+#' # Custom aspect ratios: make y twice as long visually
+#' p + coord_3d(scales = "free", ratio = c(1, 2, 1))
+#'
+#' # Combine behaviors: fix scales and make y twice as long
+#' p + coord_3d(scales = "fixed", ratio = c(1, 2, 1))
+#'
+#'
+#' # Use `panels` to select which cube faces to render ------------------------
+#'
+#' p + coord_3d(panels = c("xmin", "xmax", "zmax"))
+#'
+#' # foreground panels default to 20% opaque (can be styled using `theme()`)
+#' p + coord_3d(panels = "all")
+#'
+#'
+#' # Use label params to control axis text placement and rotation -------------
+#'
+#' p + coord_3d(xlabels = c("ymax", "zmax"),
+#'              zlabels = c("xmax", "ymin"))
+#'
+#' p + coord_3d(rotate_labels = FALSE)
+#'
+#' }
+#'
+#' @return A `Coord` object that can be added to a ggplot.
+#' @seealso [light()] for lighting specification, [cube_theming] for panel and
+#'   text styling, [polygon_params] for 3D-related parameters for polygon layers.
+#' @export
+coord_3d <- function(pitch = 0, roll = -60, yaw = -30,
+                     persp = TRUE, dist = 2,
+                     expand = TRUE, clip = "off",
+                     panels = "background",
+                     xlabels = "auto", ylabels = "auto", zlabels = "auto",
+                     title_position = c("auto", "center"),
+                     rotate_labels = TRUE,
+                     scales = "free",
+                     ratio = c(1, 1, 1),
+                     zoom = 1,
+                     light = ggcube::light(),
+                     ...) {
+
+      # Capture internal-only params from ...
+      dots <- list(...)
+      fixed_bounds <- dots$fixed_bounds
+
+      # Validate parameters
+      if (!scales %in% c("free", "fixed")) {
+            stop("scales must be 'free' or 'fixed'")
+      }
+
+      if (!is.numeric(ratio) || length(ratio) != 3 || any(ratio <= 0)) {
+            stop("ratio must be a positive numeric vector of length 3")
+      }
+
+      if (!is.numeric(zoom) || length(zoom) != 1 || zoom <= 0) {
+            stop("zoom must be a positive numeric value")
+      }
+
+      if(persp && dist < 1) {
+            warning("Although `dist` values less than 1 are allowed, they often produce nonsensical plots.")
+      }
+
+      title_position <- match.arg(title_position)
+
+      list(
+            ggproto(NULL, Coord3D,
+                    pitch = pitch, roll = roll, yaw = yaw,
+                    persp = persp, dist = dist,
+                    expand = expand, clip = clip,
+                    panels = panels,
+                    rotate_labels = rotate_labels,
+                    scales = scales,
+                    ratio = ratio,
+                    zoom = zoom,
+                    xlabels = xlabels, ylabels = ylabels, zlabels = zlabels,
+                    light = light,
+                    title_position = title_position,
+                    fixed_bounds = fixed_bounds
+            ),
+            theme(plot.margin = margin(20, 20, 20, 20, "pt"))
+      )
+}
+
+#' Detect if a scale transformation flips direction
+#'
+#' @param scale_obj A ggplot2 scale object
+#' @return Logical indicating if the scale transform flips direction
+#' @keywords internal
+#' @noRd
+detect_scale_direction_flip <- function(scale_obj) {
+      if (is.null(scale_obj)) return(FALSE)
+
+      transform <- scale_obj$trans
+      if (is.null(transform)) return(FALSE)
+
+      test_output <- transform$transform(c(1, 2))
+
+      # If we can't compare the outputs, assume no flip
+      if (length(test_output) != 2 || any(is.na(test_output))) {
+            return(FALSE)
+      }
+
+      return(test_output[1] > test_output[2])
+}
+
+#' Translate face names to account for scale direction flips
+#'
+#' @param face_names Character vector of face names
+#' @param scale_flips Scales flipped for each axis
+#' @return Character vector of translated face names
+#' @keywords internal
+#' @noRd
+translate_face_names_from_flips <- function(face_names, scale_flips) {
+      if (length(face_names) == 0) return(face_names)
+
+      # Only translate actual face names, leave other values unchanged
+      valid_faces <- c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax")
+      if (!any(face_names %in% valid_faces)) {
+            return(face_names)  # No face names to translate
+      }
+
+      # Get flip indicators
+      x_flipped <- scale_flips$x
+      y_flipped <- scale_flips$y
+      z_flipped <- scale_flips$z
+
+      # Create translation mapping
+      translated <- face_names
+
+      for (i in seq_along(translated)) {
+            face <- translated[i]
+
+            if (x_flipped && face == "xmin") {
+                  translated[i] <- "xmax"
+            } else if (x_flipped && face == "xmax") {
+                  translated[i] <- "xmin"
+            } else if (y_flipped && face == "ymin") {
+                  translated[i] <- "ymax"
+            } else if (y_flipped && face == "ymax") {
+                  translated[i] <- "ymin"
+            } else if (z_flipped && face == "zmin") {
+                  translated[i] <- "zmax"
+            } else if (z_flipped && face == "zmax") {
+                  translated[i] <- "zmin"
+            }
+      }
+
+      return(translated)
+}
+
+translate_face_names <- function(faces, scale_x, scale_y, scale_z) {
+      if (length(faces) == 0) return(faces)
+
+      # Detect direction flips for each axis
+      flips <- list(
+            x = detect_scale_direction_flip(scale_x),
+            y = detect_scale_direction_flip(scale_y),
+            z = detect_scale_direction_flip(scale_z)
+      )
+
+      # Use the same logic as the flips version
+      return(translate_face_names_from_flips(faces, flips))
+}
+
+Coord3D <- ggproto("Coord3D", CoordCartesian,
+                   # Parameters
+                   pitch = 0,
+                   roll = 120,
+                   yaw = 30,
+                   persp = FALSE,
+                   dist = 2,
+                   expand = TRUE,
+                   clip = "off",
+                   panels = "background",
+                   rotate_labels = TRUE,
+                   scales = "free",
+                   ratio = c(1, 1, 1),
+                   zoom = 1,
+                   light = NULL,
+
+                   plot_bounds = c(0, 1, 0, 1),  # [xmin, xmax, ymin, ymax]
+
+                   fixed_bounds = NULL, # set by animate_3d() to lock bounds
+
+                   setup_panel_params = function(self, scale_x, scale_y, params = list()) {
+
+                         # Check if theme is void-like and override panels if so
+                         theme_obj <- NULL
+                         tryCatch({
+                               for (i in 1:25) {
+                                     env <- parent.frame(i)
+                                     if (exists("theme", envir = env)) {
+                                           potential_theme <- get("theme", envir = env)
+                                           if (is.list(potential_theme)) {
+                                                 theme_obj <- potential_theme
+                                                 break
+                                           }
+                                     }
+                               }
+                         }, error = function(e) {
+                               # Ignore errors - theme_obj will remain NULL
+                         })
+
+                         # Override panels to "none" if theme_void-like
+                         original_panels <- self$panels
+                         if (!is.null(theme_obj) && is_theme_void_like(theme_obj)) {
+                               self$panels <- "none"
+                         }
+
+                         # Get standard panel params from parent
+                         panel_params <- ggproto_parent(CoordCartesian, self)$setup_panel_params(scale_x, scale_y, params)
+
+                         # Train and recover z scale
+                         train_z_scale()
+                         scale_z <- .z_scale_cache$scale
+                         if (is.null(scale_z)) { # Create default z scale if none exists (e.g., when using stat_function_3d)
+                               scale_z <- scale_z_continuous()
+                               # scale_z$train(c(-10, 10))
+                               .z_scale_cache$scale <- scale_z
+                         }
+
+                         # Translate face names to account for scale direction flips
+                         self$panels <- translate_face_names(self$panels, scale_x, scale_y, scale_z)
+                         self$xlabels <- translate_face_names(self$xlabels, scale_x, scale_y, scale_z)
+                         self$ylabels <- translate_face_names(self$ylabels, scale_x, scale_y, scale_z)
+                         self$zlabels <- translate_face_names(self$zlabels, scale_x, scale_y, scale_z)
+
+                         # Store scale flip information for later use in transform()
+                         panel_params$scale_flips <- list(
+                               x = detect_scale_direction_flip(scale_x),
+                               y = detect_scale_direction_flip(scale_y),
+                               z = detect_scale_direction_flip(scale_z)
+                         )
+
+                         # Scale info (including axis names)
+                         panel_params$scales <- self$scales
+                         panel_params$scale_info <- list(
+                               x = get_scale_info(scale_x, expand = self$expand, axis_name = "x"),
+                               y = get_scale_info(scale_y, expand = self$expand, axis_name = "y"),
+                               z = get_scale_info(scale_z, expand = self$expand, axis_name = "z")
+                         )
+
+                         # Blank out native scale names (prevents them from showing in standard ggplot2 rendering)
+                         scale_x$name <- ""
+                         scale_y$name <- ""
+
+                         # Projection info
+                         panel_params$proj <- list(pitch = self$pitch, roll = self$roll, yaw = self$yaw,
+                                                   persp = self$persp, dist = self$dist)
+
+                         # Aspect ratio info
+                         panel_params$ratio <- self$ratio
+                         effective_ratios <- compute_effective_ratios(
+                               list(x = panel_params$scale_info$x$limits,
+                                    y = panel_params$scale_info$y$limits,
+                                    z = panel_params$scale_info$z$limits),
+                               panel_params$scales,
+                               panel_params$ratio
+                         )
+                         panel_params$effective_ratios <- effective_ratios
+
+                         # Visible faces (using translated panel names)
+                         visible_faces_fgbg <- select_visible_faces(self$panels, panel_params$proj, effective_ratios)
+                         visible_faces <- do.call("c", visible_faces_fgbg)
+                         panel_params$visible_faces <- visible_faces
+                         panel_params$visible_faces_fg <- visible_faces_fgbg$fg
+                         panel_params$visible_faces_bg <- visible_faces_fgbg$bg
+
+                         # Calculate plot bounds using SCALE BREAKS and TITLE POSITIONS
+                         if (length(visible_faces) > 0) {
+                               all_faces <- c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax")
+                               full_grid <- make_scale_grid(all_faces, panel_params$scale_info,
+                                                            panel_params$scales, panel_params$ratio)
+
+                               if (!is.null(full_grid)) {
+                                     # Transform the FULL grid to get base bounds
+                                     full_grid_transformed <- transform_3d_standard(full_grid, panel_params$proj)
+
+                                     # Calculate bounds including potential title positions
+                                     all_bounds_x <- full_grid_transformed$x
+                                     all_bounds_y <- full_grid_transformed$y
+
+                                     bounds_info <- calculate_plot_bounds(all_bounds_x, all_bounds_y)
+                                     panel_params$plot_bounds <- bounds_info$bounds
+                                     self$bounds_aspect <- bounds_info$aspect
+                               } else {
+                                     panel_params$plot_bounds <- c(-1, 1, -1, 1)
+                               }
+
+                               # Override bounds if fixed (e.g. during animation)
+                               if (!is.null(self$fixed_bounds)) {
+                                     panel_params$plot_bounds <- self$fixed_bounds
+                                     self$bounds_aspect <- diff(self$fixed_bounds[3:4]) /
+                                           diff(self$fixed_bounds[1:2])
+                               }
+
+                               # Apply zoom: scale bounds around center
+                               # zoom < 1 zooms in (tighter framing), zoom > 1 zooms out (more padding)
+                               if (!is.null(self$zoom) && self$zoom != 1) {
+                                     bounds <- panel_params$plot_bounds
+                                     x_center <- mean(bounds[1:2])
+                                     y_center <- mean(bounds[3:4])
+                                     x_half <- diff(bounds[1:2]) / 2 / self$zoom
+                                     y_half <- diff(bounds[3:4]) / 2 / self$zoom
+                                     panel_params$plot_bounds <- c(
+                                           x_center - x_half, x_center + x_half,
+                                           y_center - y_half, y_center + y_half
+                                     )
+                                     # Aspect ratio doesn't change with uniform zoom
+                               }
+
+                               # Generate grid for selected faces using real scale breaks
+                               if (length(visible_faces) > 0) {
+                                     selected_grid <- make_scale_grid(visible_faces, panel_params$scale_info,
+                                                                      panel_params$scales, panel_params$ratio)
+
+                                     if (!is.null(selected_grid)) {
+                                           selected_grid_transformed <- transform_3d_standard(selected_grid, panel_params$proj)
+                                           panel_params$grid_transformed <- selected_grid_transformed
+                                           panel_params$grid_transformed$face <- selected_grid$face
+                                           panel_params$grid_transformed$group <- selected_grid$group
+                                           panel_params$grid_transformed$z_proj <- selected_grid_transformed$z
+                                           panel_params$grid_transformed$depth_scale <- selected_grid_transformed$depth_scale
+                                           panel_params$grid_transformed$break_value <- selected_grid$break_value
+                                           panel_params$grid_transformed$break_pos <- selected_grid$break_pos
+                                           panel_params$grid_transformed$break_axis <- selected_grid$break_axis
+                                           panel_params$grid_transformed$start_boundaries <- selected_grid$start_boundaries
+                                           panel_params$grid_transformed$end_boundaries <- selected_grid$end_boundaries
+                                     } else {
+                                           panel_params$grid_transformed <- NULL
+                                     }
+                               } else {
+                                     # No visible faces - no grid to render
+                                     panel_params$grid_transformed <- NULL
+                               }
+                         } else {
+                               # No visible faces - use minimal bounds (just cube corners)
+                               aspect_cube <- data.frame(
+                                     x = c(-0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5) * effective_ratios[1],
+                                     y = c(-0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5) * effective_ratios[2],
+                                     z = c(-0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5) * effective_ratios[3]
+                               )
+                               cube_transformed <- transform_3d_standard(aspect_cube, panel_params$proj)
+
+                               bounds_info <- calculate_plot_bounds(cube_transformed$x, cube_transformed$y)
+                               panel_params$plot_bounds <- bounds_info$bounds
+                               self$bounds_aspect <- bounds_info$aspect
+                               panel_params$grid_transformed <- NULL
+                         }
+
+                         # add light specs
+                         panel_params$light <- self$light
+
+                         return(panel_params)
+                   },
+
+                   # Force 1:1 aspect ratio
+                   aspect = function(self, ranges) {
+                         if (!is.null(self$fixed_bounds)) {
+                               return(diff(self$fixed_bounds[3:4]) / diff(self$fixed_bounds[1:2]))
+                         }
+                         if (!is.null(self$bounds_aspect)) {
+                               return(self$bounds_aspect)
+                         }
+                         return(1)
+                   },
+
+                   # Handle back transformation
+                   backtransform_range = function(self, panel_params) {
+                         return(list(x = c(0, 1), y = c(0, 1)))
+                   },
+
+                   render_bg = function(self, panel_params, theme) {
+                         # Store theme element states in panel_params for render_cube to use
+                         panel_params$theme_elements <- list(
+                               show_background_panels = !inherits(calc_element("panel.background", theme), "element_blank"),
+                               show_grid = !inherits(calc_element("panel.grid", theme), "element_blank") &&
+                                     !inherits(calc_element("panel.grid.major", theme), "element_blank"),
+                               show_axis_text = !inherits(calc_element("axis.text", theme), "element_blank"),
+                               show_axis_title = !inherits(calc_element("axis.title", theme), "element_blank")
+                         )
+
+                         render_cube(self, panel_params, theme, layer = "background")
+                   },
+
+                   transform = function(self, data, panel_params) {
+
+                         # Add light specs if applicable
+                         data <- attach_light(data, self$light)
+
+                         # Restore z=0 for baseline vertices, if applicable (stat_bar_3d)
+                         if ("z0" %in% names(data)) {
+                               data$z[data$z0] <- 0
+                         }
+
+                         # Translate project_to_face names if they exist
+                         if ("project_to_face" %in% names(data) && !is.null(panel_params$scale_flips)) {
+                               data$project_to_face <- translate_face_names_from_flips(data$project_to_face, panel_params$scale_flips)
+                         }
+
+                         # Scale data to standard domain with aspect ratio
+                         scale_ranges <- list(x = panel_params$scale_info$x$limits,
+                                              y = panel_params$scale_info$y$limits,
+                                              z = panel_params$scale_info$z$limits)
+                         result <- scale_to_standard(data[c("x", "y", "z")], scale_ranges,
+                                                     panel_params$scales, panel_params$ratio)
+
+                         # lighting computation
+                         if ("lighting_spec" %in% names(data)) {
+                               data <- compute_light_in_coord(data, result, scale_ranges,
+                                                              panel_params$scales, panel_params$ratio,
+                                                              panel_params$proj)
+                         }
+
+                         # Project data onto cube face, if applicable
+                         result <- project_to_face(data, result, panel_params$proj, panel_params$effective_ratios)
+
+                         # Expand ref_circle points to circular polygons, if applicable
+                         data <- points_to_circles(data, result, panel_params$effective_ratios)
+
+                         # Apply 3D transformation (returns x, y, z, depth, depth_scale)
+                         result <- transform_3d_standard(data, panel_params$proj)
+
+                         # Combine transformed coordinates and additional variables
+                         result <- bind_cols(select(result, x, y, z, depth, depth_scale),
+                                             select(data, -x, -y, -z))
+
+                         # Apply final coordinate transformation to fit plot bounds
+                         result <- scale_to_npc_coordinates(result, plot_bounds = panel_params$plot_bounds)
+
+                         # Backface culling and light modification
+                         result <- process_backfaces(result)
+
+                         # Hierarchical depth sorting
+                         result <- sort_by_depth(result)
+
+                         # convert group to integer to prevent downstream rendering errors
+                         result$group <- as.integer(factor(result$group))
+
+                         return(result)
+                   },
+
+                   render_fg = function(self, panel_params, theme) {
+                         # Store theme element states for foreground rendering
+                         panel_params$theme_elements$show_foreground_panels = !inherits(calc_element("panel.foreground", theme), "element_blank")
+
+                         render_cube(self, panel_params, theme, layer = "foreground")
+                   },
+
+                   # Disable standard grids
+                   render_grid = function(self, panel_params, theme) {
+                         grid::nullGrob()
+                   },
+
+                   # Handle z-ordering
+                   map_data = function(self, data, panel_params) {
+                         data <- self$transform(data, panel_params)
+
+                         # Sort by z-depth
+                         if ("z_proj" %in% names(data)) {
+                               if ("group" %in% names(data)) {
+                                     data <- data[order(data$group, -data$z_proj), ]
+                               } else {
+                                     data <- data[order(-data$z_proj), ]
+                               }
+                         }
+
+                         return(data)
+                   },
+
+                   # Suppress irrelevant warnings about axis guides
+                   modify_scales = function(self, scales_x, scales_y) {
+                         # Set guides to none to prevent position guide warnings
+                         for (scale in scales_x) {
+                               if (!is.null(scale)) {
+                                     scale$guide <- "none"
+                               }
+                         }
+                         for (scale in scales_y) {
+                               if (!is.null(scale)) {
+                                     scale$guide <- "none"
+                               }
+                         }
+                         return(list(x = scales_x, y = scales_y))
+                   }
+)
+
+# Helper function to compute plot bounds and aspect ratio
+calculate_plot_bounds <- function(all_bounds_x, all_bounds_y){
+      x_bounds <- range(all_bounds_x, na.rm = TRUE)
+      y_bounds <- range(all_bounds_y, na.rm = TRUE)
+
+      # Add padding
+      x_padding <- diff(x_bounds) * 0.05
+      y_padding <- diff(y_bounds) * 0.05
+      x_bounds <- c(x_bounds[1] - x_padding, x_bounds[2] + x_padding)
+      y_bounds <- c(y_bounds[1] - y_padding, y_bounds[2] + y_padding)
+
+      # Calculate aspect ratio
+      bounds_aspect <- diff(y_bounds) / diff(x_bounds)
+
+      # Return both bounds and aspect ratio
+      list(
+            bounds = c(x_bounds[1], x_bounds[2], y_bounds[1], y_bounds[2]),
+            aspect = bounds_aspect
+      )
+}
+
+
+#' Extract variable names from aesthetic mappings
+#'
+#' @param plot_obj A ggplot object
+#' @return A list with x, y, z character vectors of variable names
+#' @keywords internal
+#' @noRd
+extract_aesthetic_vars <- function(plot_obj) {
+      x_vars <- character(0)
+      y_vars <- character(0)
+      z_vars <- character(0)
+
+      # Helper function to safely extract variables from a mapping
+      extract_vars <- function(mapping) {
+            vars <- list(x = character(0), y = character(0), z = character(0))
+
+            tryCatch({
+                  if (!is.null(mapping$x)) {
+                        vars$x <- all.vars(mapping$x)
+                  }
+                  if (!is.null(mapping$y)) {
+                        vars$y <- all.vars(mapping$y)
+                  }
+                  if (!is.null(mapping$z)) {
+                        vars$z <- all.vars(mapping$z)
+                  }
+            }, error = function(e) {
+                  # If all.vars() fails, ignore this mapping
+            })
+
+            return(vars)
+      }
+
+      # Plot-level mappings
+      if (!is.null(plot_obj$mapping)) {
+            plot_vars <- extract_vars(plot_obj$mapping)
+            x_vars <- c(x_vars, plot_vars$x)
+            y_vars <- c(y_vars, plot_vars$y)
+            z_vars <- c(z_vars, plot_vars$z)
+      }
+
+      # Layer-level mappings
+      if (!is.null(plot_obj$layers)) {
+            for (layer in plot_obj$layers) {
+                  if (!is.null(layer$mapping)) {
+                        layer_vars <- extract_vars(layer$mapping)
+                        x_vars <- c(x_vars, layer_vars$x)
+                        y_vars <- c(y_vars, layer_vars$y)
+                        z_vars <- c(z_vars, layer_vars$z)
+                  }
+            }
+      }
+
+      return(list(
+            x = unique(x_vars),
+            y = unique(y_vars),
+            z = unique(z_vars)
+      ))
+}
+
+
+#' Get axis name for a single scale with proper fallback hierarchy
+#'
+#' @param scale_obj Scale object (can be NULL for z-axis)
+#' @param axis_name Axis name ("x", "y", or "z")
+#' @return Single axis name string
+#' @keywords internal
+#' @noRd
+get_scale_names <- function(scale_obj, axis_name) {
+
+      # CAPTURE SCALE NAME BEFORE BLANKING IT OUT
+      scale_name <- if (!is.null(scale_obj)) scale_obj$name %||% waiver() else waiver()
+
+      # TRY TO FIND PLOT OBJECT AND EXTRACT BOTH LABELS AND AESTHETIC VARS
+      plot_obj <- NULL
+      plot_labels <- NULL
+      aesthetic_vars <- NULL
+
+      tryCatch({
+            for (i in 1:25) {
+                  env <- parent.frame(i)
+                  if (exists("plot", envir = env)) {
+                        potential_plot <- get("plot", envir = env)
+                        if (inherits(potential_plot, "ggplot")) {
+                              plot_obj <- potential_plot
+                              plot_labels <- potential_plot$labels
+                              aesthetic_vars <- extract_aesthetic_vars(potential_plot)
+                              break
+                        }
+                  }
+            }
+      }, error = function(e) {
+            # Ignore errors - will use defaults
+      })
+
+      # RESOLVE FINAL NAME WITH FALLBACK HIERARCHY:
+      # 1. Explicit scale name (from scale constructors like scale_x_continuous(name = "..."))
+      # 2. Plot labels (automatic from aes() expressions OR user-set from labs())
+      # 3. Simple aesthetic variable names (fallback if plot labels missing)
+      # 4. Default name (axis_name)
+
+      final_name <- axis_name  # default
+
+      if (!inherits(scale_name, "waiver") && !is.null(scale_name) && scale_name != "") {
+            # Priority 1: Explicit scale name
+            final_name <- scale_name
+      } else if (!is.null(plot_labels) && !is.null(plot_labels[[axis_name]]) && !inherits(plot_labels[[axis_name]], "waiver")) {
+            # Priority 2: Plot labels (from aes expressions or labs())
+            final_name <- plot_labels[[axis_name]]
+      } else if (!is.null(aesthetic_vars) && length(aesthetic_vars[[axis_name]]) > 0) {
+            # Priority 3: Aesthetic variable names
+            final_name <- aesthetic_vars[[axis_name]][1]
+      }
+
+      return(final_name)
+}
+
+train_z_scale <- function(){
+
+      # Walk parent frames to find layer data
+      data <- NULL
+      tryCatch({
+            for (i in 1:25) {
+                  env <- parent.frame(i)
+                  if (exists("data", envir = env)) {
+                        potential_data <- get("data", envir = env)
+                        if (is.list(potential_data) && length(potential_data) > 0 &&
+                            is.data.frame(potential_data[[1]])) {
+                              data <- potential_data
+                              break
+                        }
+                  }
+            }
+      }, error = function(e) {})
+
+      if (!is.null(data) && !is.null(.z_scale_cache$scale)) {
+            for (layer_data in data) {
+
+                  # Train on z column
+                  if ("z" %in% names(layer_data) && nrow(layer_data) > 0) {
+
+                        if(inherits(.z_scale_cache$scale, "ScaleContinuousPosition")) {
+                              .z_scale_cache$scale$train(layer_data$z)
+                        }
+
+                        if(inherits(.z_scale_cache$scale, "ScaleDiscretePosition")) {
+                              if("z_raw" %in% names(layer_data)) {
+                                    .z_scale_cache$scale$range_c$train(layer_data$z)
+                                    .z_scale_cache$scale$train(layer_data$z_raw)
+                              } else {
+                                    .z_scale_cache$scale$range_c$train(as.integer(factor(layer_data$z)))
+                                    .z_scale_cache$scale$train(layer_data$z)
+                              }
+                        }
+                  }
+
+                  # Train on zend column if present (for segment geoms)
+                  if ("zend" %in% names(layer_data) && nrow(layer_data) > 0) {
+
+                        if(inherits(.z_scale_cache$scale, "ScaleContinuousPosition")) {
+                              .z_scale_cache$scale$train(layer_data$zend)
+                        }
+
+                        if(inherits(.z_scale_cache$scale, "ScaleDiscretePosition")) {
+                              if("zend_raw" %in% names(layer_data)) {
+                                    .z_scale_cache$scale$range_c$train(layer_data$zend)
+                                    .z_scale_cache$scale$train(layer_data$zend_raw)
+                              } else {
+                                    .z_scale_cache$scale$range_c$train(as.integer(factor(layer_data$zend)))
+                                    .z_scale_cache$scale$train(layer_data$zend)
+                              }
+                        }
+                  }
+
+                  # Train on zmin column if present (for col geoms with variable baseline)
+                  if ("zmin" %in% names(layer_data) && nrow(layer_data) > 0) {
+                        if(inherits(.z_scale_cache$scale, "ScaleContinuousPosition")) {
+                              .z_scale_cache$scale$train(layer_data$zmin)
+                        }
+                  }
+
+                  # Train on 0 if z0 column exists (for bar geoms with fixed baseline)
+                  if ("z0" %in% names(layer_data) && nrow(layer_data) > 0) {
+                        if(inherits(.z_scale_cache$scale, "ScaleContinuousPosition")) {
+                              .z_scale_cache$scale$train(0)
+                        }
+                  }
+            }
+      }
+}
+
+#' Check if theme is void-like (has multiple key elements set to element_blank)
+#'
+#' @param theme_obj Theme object or theme list
+#' @return Logical indicating if theme appears to be void-like
+#' @keywords internal
+#' @noRd
+is_theme_void_like <- function(theme_obj) {
+      if (is.null(theme_obj)) return(FALSE)
+
+      # Create a temporary theme to test elements
+      temp_theme <- theme_obj
+
+      # Count how many key theme elements are element_blank
+      blank_count <- 0
+      key_elements <- c("panel.background", "panel.grid", "panel.grid.major",
+                        "axis.text", "axis.title")
+
+      for (element_name in key_elements) {
+            tryCatch({
+                  element_val <- calc_element(element_name, temp_theme)
+                  if (inherits(element_val, "element_blank")) {
+                        blank_count <- blank_count + 1
+                  }
+            }, error = function(e) {
+                  # If we can't evaluate the element, skip it
+            })
+      }
+
+      # If 3 or more key elements are blank, consider it void-like
+      return(blank_count >= 3)
+}
+
+get_scale_info <- function(scale_obj, expand = TRUE, axis_name = NULL) {
+
+      default_expansion <- utils::getFromNamespace("default_expansion", "ggplot2")
+      expand_limits_scale <- utils::getFromNamespace("expand_limits_scale", "ggplot2")
+
+      expansion <- default_expansion(scale_obj, expand = expand)
+      limits <- scale_obj$get_limits()
+      # Pass NULL for coord_limits since coord_3d doesn't support them yet
+      expanded_range <- expand_limits_scale(scale_obj, expansion, limits, coord_limits = NULL)
+
+      # Get all breaks and labels
+      all_breaks <- scale_obj$get_breaks()
+      all_labels <- scale_obj$get_labels()
+
+      # Filter breaks to be within expanded limits
+      if (is.numeric(all_breaks)) {
+            # For continuous scales, filter numerically
+            valid_mask <- !is.na(all_breaks) &
+                  all_breaks >= expanded_range[1] &
+                  all_breaks <= expanded_range[2]
+            valid_breaks <- all_breaks[valid_mask]
+
+            # Filter corresponding labels
+            if (length(all_labels) == length(all_breaks)) {
+                  valid_labels <- all_labels[valid_mask]
+            } else {
+                  valid_labels <- all_labels  # Let ggplot2 handle label mismatch
+            }
+      } else {
+            # For discrete scales, keep all breaks/labels as-is
+            # (discrete scales shouldn't have out-of-bounds issues)
+            valid_breaks <- all_breaks
+            valid_labels <- all_labels
+      }
+
+      # Get the scale name if axis_name is provided
+      scale_name <- if (!is.null(axis_name)) get_scale_names(scale_obj, axis_name) else NULL
+
+      result <- list(limits = expanded_range,
+                     breaks = valid_breaks,
+                     labels = valid_labels)
+
+      # Add name if provided
+      if (!is.null(scale_name)) {
+            result$name <- scale_name
+      }
+
+      return(result)
+}
+
+# Project data onto cube face, if applicable
+project_to_face <- function(data, data_std, proj, effective_ratios = c(1, 1, 1)){
+      if(! "project_to_face" %in% names(data) || all(is.na(data$project_to_face))) return(data_std)
+      face_extent <- setNames(effective_ratios * 0.5, c("x", "y", "z"))
+      data_std %>%
+            mutate(face = data$project_to_face,
+                   depth_3d = transform_3d_standard(data_std, proj)$depth,
+                   axis = substr(face, 1, 1),
+                   value = ifelse(substr(face, 2, 4) == "min", -1, 1) *
+                         face_extent[axis],
+                   x = ifelse(is.na(face) | axis != "x", x, value),
+                   y = ifelse(is.na(face) | axis != "y", y, value),
+                   z = ifelse(is.na(face) | axis != "z", z, value)) %>%
+            select(x, y, z, depth_3d)
+}
+
+
+#' Convert ref_circle points to circular polygons
+#'
+#' @param data Original data frame
+#' @param data_std Standardized data frame
+#' @return Data frame with circular polygons replacing ref_circle points
+#' @keywords internal
+#' @noRd
+points_to_circles <- function(data, data_std, effective_ratios = c(1, 1, 1)) {
+
+      # Keep std coords and all other vars
+      d <- bind_cols(select(data, -x, -y, -z),
+                     select(data_std, x, y, z))
+      if("depth_3d" %in% names(data_std)) d$depth_3d <- data_std$depth_3d
+
+      # Check if we have any ref_circle elements
+      if (!"element_type" %in% names(d) || !any(d$element_type == "ref_circle")) {
+            return(d)
+      }
+
+      result <- filter(d, element_type == "ref_circle") %>%
+            rowwise() %>%
+            reframe(generate_circle_vertices(x, y, z, project_to_face,
+                                             ref_circle_radius, ref_circle_vertices,
+                                             effective_ratios),
+                    vertex_order = 1:ref_circle_vertices,
+                    group = group) %>%
+            full_join(select(filter(d, element_type == "ref_circle"), -x, -y, -z),
+                      by = join_by(group)) %>%
+            arrange(group, vertex_order) %>%
+            bind_rows(filter(d, element_type != "ref_circle"))
+
+      return(result)
+}
+
+#' Generate circle vertices in 3D space for a given face
+#'
+#' @param x_std,y_std,z_std Standardized point coordinates
+#' @param face Face name (e.g., "zmin", "xmax")
+#' @param radius Circle radius in standardized units
+#' @param n_vertices Number of vertices for the circle
+#' @return Data frame with x, y, z coordinates for circle vertices
+#' @keywords internal
+#' @noRd
+generate_circle_vertices <- function(x_std, y_std, z_std, face, radius, n_vertices,
+                                     effective_ratios = c(1, 1, 1)) {
+      # Generate angles for circle vertices
+      angles <- seq(0, 2 * pi, length.out = n_vertices + 1)[-(n_vertices + 1)]
+
+      # Get the face axis and value
+      face_axis <- substr(face, 1, 1)
+      axis_index <- match(face_axis, c("x", "y", "z"))
+      face_value <- ifelse(substr(face, 2, 4) == "min", -0.5, 0.5) * effective_ratios[axis_index]
+
+      # Generate circle vertices based on the face
+      if (face_axis == "z") { # Circle in x-y plane
+            x_coords <- x_std + radius * cos(angles)
+            y_coords <- y_std + radius * sin(angles)
+            z_coords <- rep(face_value, n_vertices)
+      } else if (face_axis == "x") { # Circle in y-z plane
+            x_coords <- rep(face_value, n_vertices)
+            y_coords <- y_std + radius * cos(angles)
+            z_coords <- z_std + radius * sin(angles)
+      } else if (face_axis == "y") { # Circle in x-z plane
+            x_coords <- x_std + radius * cos(angles)
+            y_coords <- rep(face_value, n_vertices)
+            z_coords <- z_std + radius * sin(angles)
+      } else {
+            stop("Invalid face: ", face)
+      }
+
+      return(data.frame(x = x_coords, y = y_coords, z = z_coords))
+}
+
+validate_coord3d <- function(coord){
+      stopifnot("Did you forget to add `coord_3d()` to your plot?" = inherits(coord, "Coord3D"))
+}
+
+# Identify backfaces using signed area test
+is_backface <- function(x, y){
+      sum(x * lead(y, default = first(y)) -
+                lead(x, default = first(x)) * y) < 0
+}
+
+process_backfaces <- function(data) {
+
+      if (".subgroup" %in% names(data)) {
+            # For data with subgroups (e.g. text with holes), compute signed area
+            # per subgroup to avoid cross-contour stitching artifacts from lead()
+            # wrapping across contour boundaries, then sum per group.
+            group_areas <- data %>%
+                  mutate(y = y*1000, x = x*1000) %>%
+                  group_by(group, .subgroup) %>%
+                  summarise(.area = sum(x * lead(y, default = first(y)) -
+                                              lead(x, default = first(x)) * y),
+                            .groups = "drop") %>%
+                  group_by(group) %>%
+                  summarise(.backface = sum(.area) < 0,
+                            .area = sum(.area)) %>%
+                  ungroup()
+            data <- left_join(data, group_areas, by = "group")
+      } else {
+            # Standard case: signed area over whole group
+            data <- data %>%
+                  group_by(group) %>%
+                  mutate(.backface = is_backface(x, y)) %>%
+                  ungroup()
+      }
+
+      # Apply culling if requested
+      if("cull_backfaces" %in% names(data) && data$cull_backfaces[1]) {
+            data <- filter(data, !.backface)
+      }
+
+      # Apply lighting effects if present
+      if("lighting_spec" %in% names(data) && "light" %in% names(data)) {
+            scl <- data$lighting_spec[[1]]$backface_scale %||% 1
+            off <- data$lighting_spec[[1]]$backface_offset %||% 0
+            if((scl != 1 || off != 0) &
+               data$lighting_spec[[1]]$method != "rgb") {
+                  data <- mutate(data, light = ifelse(.backface, light * scl + off, light))
+            }
+      }
+
+      return(select(data, -.backface))
+}

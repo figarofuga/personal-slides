@@ -1,0 +1,1357 @@
+#' Check the columns if columns found in the data
+#' @keywords internal
+#' @param df A data frame
+#' @param columns A character vector of column names
+#' @param force_factor Whether to force the columns to be factors
+#' @param allow_multi Whether to allow multiple columns
+#' @param concat_multi Whether to concatenate multiple columns
+#' @param concat_sep The separator to use for concatenation
+#' @return A character string of the valid column
+#' @importFrom tidyr unite
+#' @importFrom rlang syms
+check_columns <- function(
+    df,
+    columns,
+    force_factor = FALSE,
+    allow_multi = FALSE,
+    concat_multi = FALSE,
+    concat_sep = "_"
+) {
+    if (is.null(df)) {
+        stop("The data is NULL.")
+    }
+    if (is.null(columns)) {
+        return(NULL)
+    }
+    df_name <- deparse(substitute(df))
+    param_name <- deparse(substitute(columns))
+    if (isFALSE(allow_multi)) {
+        if (length(columns) > 1) {
+            stop(paste0("Only one column is allowed in '", param_name, "'"))
+        }
+        if (!columns %in% colnames(df)) {
+            stop(paste0("'", columns, "' is/are not in the data."))
+        }
+    } else {
+        notfound <- setdiff(columns, colnames(df))
+        if (length(notfound) > 0) {
+            stop(paste0(
+                "'",
+                paste0(notfound, collapse = ", "),
+                "' is/are not in the data."
+            ))
+        }
+        if (isTRUE(concat_multi) && length(columns) > 1) {
+            message(
+                "Multiple columns are provided in '",
+                param_name,
+                "'. They will be concatenated into one column."
+            )
+            new_col <- paste(columns, collapse = concat_sep)
+            df <- unite(
+                df,
+                !!sym(new_col),
+                !!!syms(columns),
+                sep = concat_sep,
+                remove = FALSE
+            )
+            # Try keep the order of levels
+            if (isTRUE(force_factor)) {
+                all_levels <- lapply(columns, function(col) {
+                    if (is.factor(df[[col]])) {
+                        levels(df[[col]])
+                    } else {
+                        unique(df[[col]])
+                    }
+                })
+                all_levels <- do_call(expand_grid, all_levels)
+                all_levels <- apply(all_levels, 1, paste, collapse = concat_sep)
+                df[[new_col]] <- droplevels(factor(
+                    df[[new_col]],
+                    levels = unique(all_levels)
+                ))
+            }
+            columns <- new_col
+        }
+    }
+    if (isTRUE(force_factor)) {
+        p <- parent.frame()
+        for (col in columns) {
+            if (!is.factor(df[[col]])) {
+                p[[df_name]][[col]] <- factor(
+                    df[[col]],
+                    levels = unique(df[[col]])
+                )
+            } else if (!col %in% colnames(p[[df_name]])) {
+                p[[df_name]][[col]] <- df[[col]]
+            }
+        }
+    }
+    return(columns)
+}
+
+
+#' Expand the plot area with CSS-like padding
+#' @keywords internal
+#' @param expand A numeric vector of length 1, 2, 3, or 4
+#'   The values to expand the x and y axes. It is like CSS padding.
+#'   When a single value is provided, it is used for both axes on both sides.
+#'   When two values are provided, the first value is used for the top/bottom side and the second value is used for the left/right side.
+#'   When three values are provided, the first value is used for the top side, the second value is used for the left/right side, and the third value is used for the bottom side.
+#'   When four values are provided, the values are used for the top, right, bottom, and left sides, respectively.
+#'   You can also use a named vector to specify the values for each side.
+#'   When the axis is discrete, the values will be applied as 'add' to the 'expansion' function.
+#'   When the axis is continuous, the values will be applied as 'mult' to the 'expansion' function.
+#'   See also \url{https://ggplot2.tidyverse.org/reference/expansion.html}
+#' @param x_type The type of x-axis, either "continuous" or "discrete"
+#' @param y_type The type of y-axis, either "continuous" or "discrete"
+#' @return A list with x and y values for expand
+#' @importFrom ggplot2 expansion
+norm_expansion <- function(
+    expand,
+    x_type,
+    y_type,
+    continuous_default = c(0.05, 0),
+    discrete_default = c(0, 0.6)
+) {
+    .expand_by_type <- function(ex, type, both = FALSE) {
+        if (type == "continuous" && !is.null(ex)) {
+            ret <- c(ex, 0)
+        } else if (type == "continuous" && is.null(ex)) {
+            ret <- continuous_default
+        } else if (type == "discrete" && !is.null(ex)) {
+            ret <- c(0, ex)
+        } else {
+            # type == "discrete" && is.null(ex)
+            ret <- discrete_default
+        }
+        if (both) {
+            return(c(ret, ret))
+        }
+        return(ret)
+    }
+
+    if (is.null(expand)) {
+        return(list(
+            x = .expand_by_type(NULL, x_type, both = TRUE),
+            y = .expand_by_type(NULL, y_type, both = TRUE)
+        ))
+    }
+    if (is.null(names(expand))) {
+        if (length(expand) == 1) {
+            expand <- c(
+                top = expand,
+                right = expand,
+                bottom = expand,
+                left = expand
+            )
+        } else if (length(expand) == 2) {
+            expand <- c(
+                top = expand[1],
+                right = expand[2],
+                bottom = expand[1],
+                left = expand[2]
+            )
+        } else if (length(expand) == 3) {
+            expand <- c(
+                top = expand[1],
+                right = expand[2],
+                bottom = expand[3],
+                left = expand[2]
+            )
+        } else if (length(expand) == 4) {
+            expand <- c(
+                top = expand[1],
+                right = expand[2],
+                bottom = expand[3],
+                left = expand[4]
+            )
+        } else {
+            stop("Invalid length (", length(expand), ") of 'expand'")
+        }
+    }
+
+    expand <- as.list(expand)
+    if (
+        "x" %in%
+            names(expand) &&
+            ("left" %in% names(expand) || "right" %in% names(expand))
+    ) {
+        stop("Cannot have both 'x' and 'left'/'right' in 'expand'")
+    }
+    if (
+        "y" %in%
+            names(expand) &&
+            ("top" %in% names(expand) || "bottom" %in% names(expand))
+    ) {
+        stop("Cannot have both 'y' and 'top'/'bottom' in 'expand'")
+    }
+    if ("x" %in% names(expand)) {
+        expand$left <- expand$right <- expand$x
+        expand$x <- NULL
+    }
+    if ("y" %in% names(expand)) {
+        expand$bottom <- expand$top <- expand$y
+        expand$y <- NULL
+    }
+    return(list(
+        x = c(
+            .expand_by_type(expand$left, x_type),
+            .expand_by_type(expand$right, x_type)
+        ),
+        y = c(
+            .expand_by_type(expand$bottom, y_type),
+            .expand_by_type(expand$top, y_type)
+        )
+    ))
+}
+
+#' Calculate hjust and vjust based on angle
+#' @param angle A numeric value of the angle
+#' @return A list with h and v values
+#' @keywords internal
+calc_just <- function(angle) {
+    angle <- angle %% 360
+    if (angle < 0) {
+        angle <- angle + 360
+    }
+    if (angle < 10) {
+        h <- 0.5
+        v <- 1
+    } else if (angle < 90) {
+        h <- 1
+        v <- 1
+    } else if (angle < 135) {
+        h <- 1
+        v <- 0.5
+    } else if (angle < 180) {
+        h <- 1
+        v <- 0.5
+    } else if (angle < 225) {
+        h <- 0
+        v <- 0
+    } else if (angle < 270) {
+        h <- 0
+        v <- 0
+    } else if (angle < 315) {
+        h <- 0
+        v <- 0.5
+    } else if (angle < 360) {
+        h <- 0
+        v <- 1
+    } else {
+        h <- 0.5
+        v <- 1
+    }
+    list(h = h, v = v)
+}
+
+
+#' Calculate plot dimensions with aspect ratio consideration
+#'
+#' This function calculates plot height and width taking into account:
+#' - Content-based scaling (number of items on axes)
+#' - Aspect ratio constraints
+#' - Legend position and direction
+#' - Minimum and maximum dimension bounds
+#'
+#' @param base_height Base height for the plot (before legend adjustments). Default is 4.5.
+#' @param aspect.ratio Aspect ratio (height/width). If NULL, width is calculated independently.
+#' @param n_x Number of categories on x-axis (for width scaling)
+#' @param n_y Number of categories on y-axis (for height scaling)
+#' @param x_scale_factor Scaling factor per x-axis category. Default is 0.5.
+#' @param y_scale_factor Scaling factor per y-axis category. Default is 0.5.
+#' @param legend.position Position of legend ("none", "right", "left", "top", "bottom")
+#' @param legend.direction Direction of legend ("vertical" or "horizontal")
+#' @param flip Whether the plot is flipped (inverts aspect ratio)
+#' @param min_width Minimum width in inches. Default is 3.
+#' @param min_height Minimum height in inches. Default is 3.
+#' @param max_width Maximum width in inches. Default is 12.
+#' @param max_height Maximum height in inches. Default is 12.
+#' @return A list with height and width components
+#' @keywords internal
+calculate_plot_dimensions <- function(
+    base_height = 4.5,
+    aspect.ratio = 1,
+    n_x = NULL,
+    n_y = NULL,
+    x_scale_factor = 0.5,
+    y_scale_factor = 0.5,
+    legend.position = "right",
+    legend.direction = "vertical",
+    legend_n = 1,
+    legend_nchar = 5,
+    flip = FALSE,
+    min_width = 3,
+    min_height = 3,
+    max_width = 12,
+    max_height = 12
+) {
+    # Handle flip by inverting aspect ratio
+    if (isTRUE(flip) && !is.null(aspect.ratio)) {
+        aspect.ratio <- 1 / aspect.ratio
+    }
+
+    # Calculate content-based dimensions
+    if (!is.null(aspect.ratio)) {
+        # Strategy: Calculate width from content, then derive height from aspect ratio
+        if (!is.null(n_x)) {
+            # Calculate width based on x-axis content
+            content_width <- 0.5 + n_x * x_scale_factor
+            if (content_width > max_width) {
+                # Content already overflows max width: cap width and anchor height to base_height
+                width <- max_width
+                height <- base_height * aspect.ratio
+            } else {
+                # Calculate height from aspect ratio: aspect.ratio = height / width
+                height <- content_width * aspect.ratio
+                width <- content_width
+
+                # Check if this creates extreme dimensions
+                if (height < min_height || height > max_height) {
+                    # Adjust based on height constraints
+                    height <- max(min_height, min(height, max_height))
+                    width <- height / aspect.ratio
+
+                    if (width < min_width || width > max_width) {
+                        # Content requirements conflict with aspect ratio
+                        warning(
+                            "Content-based width (",
+                            round(content_width, 2),
+                            ") conflicts with aspect.ratio (",
+                            round(aspect.ratio, 2),
+                            "). Using content width; plot panel aspect ratio will differ from specified.",
+                            call. = FALSE
+                        )
+                        width <- max(min_width, min(content_width, max_width))
+                        height <- base_height
+                    }
+                }
+            }
+        } else if (!is.null(n_y)) {
+            # Calculate height based on y-axis content
+            content_height <- 0.5 + n_y * y_scale_factor
+            if (content_height > max_height) {
+                # Content already overflows max height: cap height and anchor width to base_height
+                height <- max_height
+                width <- base_height / aspect.ratio
+            } else {
+                # Calculate width from aspect ratio: width = height / aspect.ratio
+                height <- content_height
+                width <- height / aspect.ratio
+
+                # Check if this creates extreme dimensions
+                if (width < min_width || width > max_width) {
+                    # Adjust based on width constraints
+                    width <- max(min_width, min(width, max_width))
+                    height <- width * aspect.ratio
+
+                    if (height < min_height || height > max_height) {
+                        # Content requirements conflict with aspect ratio
+                        warning(
+                            "Content-based height (",
+                            round(content_height, 2),
+                            ") conflicts with aspect.ratio (",
+                            round(aspect.ratio, 2),
+                            "). Using content height; plot panel aspect ratio will differ from specified.",
+                            call. = FALSE
+                        )
+                        height <- max(
+                            min_height,
+                            min(content_height, max_height)
+                        )
+                        width <- base_height / aspect.ratio
+                    }
+                }
+            }
+        } else {
+            # No content scaling, use base height and derive width from aspect ratio
+            height <- base_height
+            width <- height / aspect.ratio
+        }
+    } else {
+        # No aspect ratio constraint - calculate dimensions independently
+        height <- if (!is.null(n_y)) {
+            0.5 + n_y * y_scale_factor
+        } else {
+            base_height
+        }
+        width <- if (!is.null(n_x)) {
+            0.5 + n_x * x_scale_factor
+        } else {
+            base_height
+        }
+    }
+
+    # Ensure minimum dimensions
+    height <- max(height, min_height)
+    width <- max(width, min_width)
+
+    # Add legend space additively (after aspect ratio calculations)
+    # Legend metrics (ggplot2 defaults at 11pt text):
+    #   key:  ~0.25 in (unit(1.2, "lines") at 11pt) + internal padding
+    #   text: ~0.07 in per character  (11pt, ~0.6 aspect ratio, 1/72 in/pt)
+    #   row height (key + spacing): ~0.30 in
+    #   outer margin / title:       ~0.35 in
+    legend_key_w <- 0.30 # key width + internal margins
+    legend_char_w <- 0.07 # inches per character of label text
+    legend_row_h <- 0.30 # height of one stacked legend row
+    legend_pad <- 0.35 # outer margin + optional title
+
+    if (!identical(legend.position, "none")) {
+        if (legend.position %in% c("right", "left")) {
+            # Vertical legend: width = key + text, at least 1 in
+            legend_width <- max(
+                1.0,
+                legend_key_w + legend_nchar * legend_char_w
+            )
+            width <- width + legend_width
+        } else if (legend.direction == "horizontal") {
+            # Horizontal legend (bottom / top): items sit side-by-side, may wrap
+            # Estimate how many items fit per row given current (pre-legend) width
+            item_w <- max(
+                0.5,
+                legend_key_w + legend_nchar * legend_char_w + 0.1
+            )
+            items_per_row <- max(1L, floor(width / item_w))
+            n_rows <- ceiling(max(1L, legend_n) / items_per_row)
+            legend_height <- max(1.0, legend_pad + n_rows * legend_row_h)
+            height <- height + legend_height
+        } else {
+            # Vertical legend at bottom / top or floating: treat like right/left
+            legend_width <- max(
+                1.0,
+                legend_key_w + legend_nchar * legend_char_w
+            )
+            width <- width + legend_width
+        }
+    }
+
+    # Apply maximum bounds
+    height <- min(height, max_height)
+    width <- min(width, max_width)
+
+    list(height = height, width = width)
+}
+
+
+#' Facetting a plot
+#'
+#' @param plot The plot to facet or a list list(plot, height, width) if guess_size is TRUE
+#' @param facet_by The column(s) to split data by and plot separately or facet by
+#'   If NULL, no faceting will be done
+#' @param facet_scales Whether to scale the axes of facets.
+#' @param nrow The number of rows in facet_wrap
+#' @param ncol The number of columns in facet_wrap
+#' @param byrow Whether to fill the plots by row
+#' @param legend.position The position of the legend
+#' @param legend.direction The direction of the legend
+#' @param recalc_size Whether to re-calculate the size of the plot
+#' @param ... Additional arguments to pass to facet_wrap or facet_grid
+#' @return The faceted plot. If guess_size is TRUE, attr(p, "height") and attr(p, "width") will be set
+#' @importFrom rlang sym
+#' @importFrom ggplot2 facet_wrap facet_grid ggplot_build vars
+#' @keywords internal
+facet_plot <- function(
+    plot,
+    facet_by,
+    facet_scales,
+    nrow,
+    ncol,
+    byrow,
+    legend.position = "right",
+    legend.direction = "vertical",
+    recalc_size = TRUE,
+    ...
+) {
+    if (is.null(facet_by)) {
+        return(plot)
+    }
+
+    if (recalc_size) {
+        p <- facet_plot(
+            plot,
+            facet_by,
+            facet_scales,
+            nrow,
+            ncol,
+            byrow,
+            recalc_size = FALSE,
+            ...
+        )
+        d <- wrap_dims(length(unique(ggplot_build(p)$data[[1]]$PANEL)))
+        height <- d[1] * attr(plot, "height")
+        width <- d[2] * attr(plot, "width")
+        if (!identical(legend.position, "none")) {
+            # The legends are merged
+            if (legend.position %in% c("left", "right")) {
+                portion <- ifelse(legend.direction == "vertical", 0.2, 0.3)
+                width <- width - (d[2] - 1) * (width / d[2] * portion)
+            } else {
+                portion <- ifelse(legend.direction == "vertical", 0.3, 0.2)
+                height <- height - (d[1] - 1) * (height / d[1] * portion)
+            }
+        }
+        attr(p, "height") <- height
+        attr(p, "width") <- width
+        return(p)
+    }
+
+    if (length(facet_by) == 1) {
+        plot <- plot +
+            ggplot2::facet_wrap(
+                facets = facet_by,
+                scales = facet_scales,
+                nrow = nrow,
+                ncol = ncol,
+                dir = if (byrow) "h" else "v",
+                ...
+            )
+    } else {
+        args <- rlang::dots_list(...)
+        args$strip.position <- NULL
+        args$rows <- vars(!!sym(facet_by[[1]]))
+        args$cols <- vars(!!sym(facet_by[[2]]))
+        args$scales <- facet_scales
+        plot <- plot + do_call(ggplot2::facet_grid, args)
+    }
+
+    return(plot)
+}
+
+
+#' Combine plots into one
+#'
+#' @keywords internal
+#' @param plots A list of plots
+#' @param combine Whether to combine the plots into one
+#' @param split_by The column name to split the plots by. When provided,
+#' the combined data from all sub-plots is available via \code{p$data}.
+#' @param nrow The number of rows in the combined plot
+#' @param ncol The number of columns in the combined plot
+#' @param byrow Whether to fill the plots by row
+#' @param recalc_size Whether to re-calculate the size of the combined plot
+#' @return The faceted plot. If guess_size is TRUE, attr(p, "height") and attr(p, "width") will be set
+#' @importFrom patchwork wrap_plots
+#' @importFrom rlang %||%
+#' @importFrom ggplot2 wrap_dims
+combine_plots <- function(
+    plots,
+    combine = TRUE,
+    split_by = NULL,
+    nrow = NULL,
+    ncol = NULL,
+    byrow = NULL,
+    axes = NULL,
+    axis_titles = NULL,
+    guides = NULL,
+    design = NULL,
+    recalc_size = TRUE
+) {
+    if (isFALSE(combine)) {
+        return(plots)
+    }
+
+    if (recalc_size) {
+        d <- wrap_dims(length(plots), nrow, ncol)
+        nrow <- d[1]
+        ncol <- d[2]
+        p <- combine_plots(
+            plots,
+            combine = TRUE,
+            split_by = split_by,
+            nrow = nrow,
+            ncol = ncol,
+            byrow = byrow,
+            axes = axes,
+            axis_titles = axis_titles,
+            guides = guides,
+            design = design,
+            recalc_size = FALSE
+        )
+        # Allow to work with external plots
+        try(
+            {
+                attr(p, "height") <- nrow *
+                    max(sapply(plots, function(x) attr(x, "height")))
+                attr(p, "width") <- ncol *
+                    max(sapply(plots, function(x) attr(x, "width")))
+            },
+            silent = TRUE
+        )
+        return(p)
+    }
+    # When it's gTree, also run wrap_plots to convert it to a patchwork object
+    # CorPairsPlot
+    if (length(plots) == 1 && !inherits(plots[[1]], "gTree")) {
+        return(plots[[1]])
+    }
+
+    if (!is.null(split_by)) {
+        # Build the row-bound combined data from all sub-plots.
+        # Some plot types (e.g. Heatmap) may have sub-plots with different
+        # column names, so we align columns before rbinding.
+        split_dfs <- lapply(names(plots), function(nm) {
+            d <- plots[[nm]]$data
+            d[[split_by]] <- nm
+            return(d)
+        })
+        if (all(vapply(split_dfs, is.data.frame, logical(1)))) {
+            all_cols <- unique(unlist(lapply(split_dfs, names)))
+            split_dfs <- lapply(split_dfs, function(d) {
+                missing <- setdiff(all_cols, names(d))
+                for (col in missing) {
+                    d[[col]] <- NA
+                }
+                d[, all_cols, drop = FALSE]
+            })
+            combined_data <- do_call(rbind, split_dfs)
+        } else {
+            combined_data <- do_call(rbind, split_dfs)
+        }
+
+        # For standard ggplot plots, wrap_plots uses the last sub-plot as
+        # the rendering base. We set the combined data on it and give each
+        # layer that inherits the plot data explicit per-split data so
+        # rendering is unaffected. Layers with their own explicit data
+        # (e.g. geom_text with a computed AUC column) are left unchanged.
+        last_idx <- length(plots)
+        last_orig_data <- plots[[last_idx]]$data
+        plots[[last_idx]]$data <- combined_data
+        for (i in seq_along(plots[[last_idx]]$layers)) {
+            layer_data <- plots[[last_idx]]$layers[[i]]$data
+            if (inherits(layer_data, "waiver")) {
+                plots[[last_idx]]$layers[[i]]$data <- last_orig_data
+            }
+        }
+    }
+
+    p <- wrap_plots(
+        plots,
+        nrow = nrow,
+        ncol = ncol,
+        byrow = byrow,
+        axes = axes,
+        axis_titles = axis_titles,
+        guides = guides,
+        design = design
+    )
+
+    # For non-ggplot sub-plots (e.g. wrap_elements / grid grobs),
+    # wrap_plots creates a waiver() $data instead of inheriting from
+    # the last sub-plot. Set it explicitly so p$data always works.
+    if (!is.null(split_by)) {
+        p$data <- combined_data
+    }
+
+    p
+}
+
+
+#' Get a ggplot layer for background
+#' @keywords internal
+#' @param data A data frame
+#' @param x A character string specifying the column name of the data frame to plot for the x-axis
+#' @param keep_empty A character string specifying whether to keep empty levels
+#' @param palette A character string specifying the palette to use
+#' @param palcolor A character string specifying the color to use in the palette
+#' @param alpha A numeric value specifying the transparency of the plot
+#' @param facet_by A character string specifying the column name(s) of the data frame to facet the plot
+#' @param direction A character string specifying the direction for the background
+#' @return A ggplot layer for background
+#' @importFrom ggplot2 geom_rect
+#' @importFrom dplyr distinct
+#' @importFrom tidyr expand_grid
+bg_layer <- function(
+    data,
+    x,
+    keep_empty,
+    palette,
+    palcolor,
+    alpha,
+    facet_by,
+    direction = "vertical"
+) {
+    if (anyNA(data[[x]])) {
+        randint <- sample.int(1e6, 1)
+        levels(data[[x]]) <- c(levels(data[[x]]), paste0("__NA__", randint))
+        data[[x]][is.na(data[[x]])] <- paste0("__NA__", randint)
+    }
+    lvls <- if (keep_empty) levels(data[[x]]) else levels(droplevels(data[[x]]))
+    bg_color <- palette_this(lvls, palette = palette, palcolor = palcolor)
+    bg_data <- data.frame(x = factor(lvls, levels = lvls))
+    bg_data$x <- as.numeric(bg_data$x)
+    bg_data$xmin <- ifelse(bg_data$x == min(bg_data$x), -Inf, bg_data$x - 0.5)
+    bg_data$xmax <- ifelse(bg_data$x == max(bg_data$x), Inf, bg_data$x + 0.5)
+    bg_data$ymin <- -Inf
+    bg_data$ymax <- Inf
+    bg_data$fill <- bg_color[lvls]
+
+    if (!is.null(facet_by)) {
+        unique_facet_values <- distinct(data, !!!syms(facet_by))
+        bg_data <- expand_grid(bg_data, unique_facet_values)
+        for (fb in facet_by) {
+            bg_data[[fb]] <- factor(bg_data[[fb]], levels = levels(data[[fb]]))
+        }
+    }
+
+    if (direction == "vertical") {
+        geom_rect(
+            data = bg_data,
+            aes(
+                xmin = !!sym("xmin"),
+                xmax = !!sym("xmax"),
+                ymin = !!sym("ymin"),
+                ymax = !!sym("ymax")
+            ),
+            fill = bg_data$fill,
+            alpha = alpha,
+            inherit.aes = FALSE
+        )
+    } else {
+        geom_rect(
+            data = bg_data,
+            aes(
+                xmin = !!sym("ymin"),
+                xmax = !!sym("ymax"),
+                ymin = !!sym("xmin"),
+                ymax = !!sym("xmax")
+            ),
+            fill = bg_data$fill,
+            alpha = alpha,
+            inherit.aes = FALSE
+        )
+    }
+}
+
+#' Convert RGBA to RGB
+#' @keywords internal
+rgba_to_rgb <- function(RGBA, BackGround = c(1, 1, 1)) {
+    A <- RGBA[[length(RGBA)]]
+    RGB <- RGBA[[-length(RGBA)]] * A + BackGround * (1 - A)
+    return(RGB)
+}
+
+#' Blend two colors
+#' @keywords internal
+blend_to_color <- function(C1, C2, mode = "blend") {
+    c1 <- C1[[1]]
+    c1a <- C1[[2]]
+    c2 <- C2[[1]]
+    c2a <- C2[[2]]
+    A <- 1 - (1 - c1a) * (1 - c2a)
+    if (A < 1.0e-6) {
+        return(list(c(0, 0, 0), 1))
+    }
+    if (mode == "blend") {
+        out <- (c1 * c1a + c2 * c2a * (1 - c1a)) / A
+        A <- 1
+    }
+    if (mode == "average") {
+        out <- (c1 + c2) / 2
+        out[out > 1] <- 1
+    }
+    if (mode == "screen") {
+        out <- 1 - (1 - c1) * (1 - c2)
+    }
+    if (mode == "multiply") {
+        out <- c1 * c2
+    }
+    return(list(out, A))
+}
+
+#' Blend a list of colors
+#' @keywords internal
+blend_rgblist <- function(Clist, mode = "blend", RGB_BackGround = c(1, 1, 1)) {
+    N <- length(Clist)
+    ClistUse <- Clist
+    while (N != 1) {
+        temp <- ClistUse
+        ClistUse <- list()
+        for (C in temp[1:(length(temp) - 1)]) {
+            c1 <- C[[1]]
+            a1 <- C[[2]]
+            c2 <- temp[[length(temp)]][[1]]
+            a2 <- temp[[length(temp)]][[2]]
+            ClistUse <- append(
+                ClistUse,
+                list(blend_to_color(
+                    C1 = list(c1, a1 * (1 - 1 / N)),
+                    C2 = list(c2, a2 * 1 / N),
+                    mode = mode
+                ))
+            )
+        }
+        N <- length(ClistUse)
+    }
+    Result <- list(ClistUse[[1]][[1]], ClistUse[[1]][[2]])
+    Result <- rgba_to_rgb(Result, BackGround = RGB_BackGround)
+    return(Result)
+}
+
+#' Blend colors
+#'
+#' This function blends a list of colors using the specified blend mode.
+#'
+#' @param colors Color vectors.
+#' @param mode Blend mode. One of "blend", "average", "screen", or "multiply".
+#'
+#' @keywords internal
+#' @return The blended color.
+#' @importFrom grDevices col2rgb
+blend_colors <- function(
+    colors,
+    mode = c("blend", "average", "screen", "multiply")
+) {
+    mode <- match.arg(mode)
+    colors <- colors[!is.na(colors)]
+    if (length(colors) == 0) {
+        return(NA)
+    }
+    if (length(colors) == 1) {
+        return(colors)
+    }
+    rgb <- as.list(as.data.frame(col2rgb(colors) / 255))
+    Clist <- lapply(rgb, function(x) {
+        list(x, 1)
+    })
+    blend_color <- blend_rgblist(Clist, mode = mode)
+    blend_color <- grDevices::rgb(
+        blend_color[1],
+        blend_color[2],
+        blend_color[3]
+    )
+    return(blend_color)
+}
+
+#' @importFrom grid is.grob grobWidth grobHeight
+#' @importFrom gtable is.gtable gtable_add_rows gtable_add_cols gtable_add_grob
+add_grob <- function(
+    gtable,
+    grob,
+    position = c("top", "bottom", "left", "right", "none"),
+    space = NULL,
+    clip = "on"
+) {
+    position <- match.arg(position)
+    if (position == "none" || is.null(grob)) {
+        return(gtable)
+    }
+
+    if (is.null(space)) {
+        if (is.gtable(grob)) {
+            if (position %in% c("top", "bottom")) {
+                space <- sum(grob$heights)
+            } else {
+                space <- sum(grob$widths)
+            }
+        } else if (is.grob(grob)) {
+            if (position %in% c("top", "bottom")) {
+                space <- grobHeight(grob)
+            } else {
+                space <- grobWidth(grob)
+            }
+        }
+    }
+
+    if (position == "top") {
+        gtable <- gtable_add_rows(gtable, space, 0)
+        gtable <- gtable_add_grob(
+            gtable,
+            grob,
+            t = 1,
+            l = mean(gtable$layout[
+                grepl(pattern = "panel", x = gtable$layout$name),
+                "l"
+            ]),
+            clip = clip
+        )
+    }
+    if (position == "bottom") {
+        gtable <- gtable_add_rows(gtable, space, -1)
+        gtable <- gtable_add_grob(
+            gtable,
+            grob,
+            t = dim(gtable)[1],
+            l = mean(gtable$layout[
+                grepl(pattern = "panel", x = gtable$layout$name),
+                "l"
+            ]),
+            clip = clip
+        )
+    }
+    if (position == "left") {
+        gtable <- gtable_add_cols(gtable, space, 0)
+        gtable <- gtable_add_grob(
+            gtable,
+            grob,
+            t = mean(gtable$layout[grep("panel", gtable$layout$name), "t"]),
+            l = 1,
+            clip = clip
+        )
+    }
+    if (position == "right") {
+        gtable <- gtable_add_cols(gtable, space, -1)
+        gtable <- gtable_add_grob(
+            gtable,
+            grob,
+            t = mean(gtable$layout[grep("panel", gtable$layout$name), "t"]),
+            l = dim(gtable)[2],
+            clip = clip
+        )
+    }
+    return(gtable)
+}
+
+#' Convert a color with arbitrary transparency to a fixed color
+#'
+#' This function takes a vector of colors and an alpha level and converts the colors
+#' to fixed colors with the specified alpha level.
+#'
+#' @param colors Color vectors.
+#' @param alpha Alpha level ranging from 0 to 1.
+#' @return The colors with the specified alpha level.
+#' @keywords internal
+#' @importFrom grDevices col2rgb rgb
+adjcolors <- function(colors, alpha) {
+    has_names <- !is.null(names(colors))
+    color_df <- as.data.frame(col2rgb(colors) / 255)
+    colors_out <- sapply(color_df, function(color) {
+        color_rgb <- rgba_to_rgb(list(color, alpha))
+        return(rgb(color_rgb[1], color_rgb[2], color_rgb[3]))
+    })
+    if (has_names) {
+        names(colors_out) <- names(colors)
+    } else {
+        names(colors_out) <- NULL
+    }
+    return(colors_out)
+}
+
+#' Process theme to allow 'ggplot2::theme_minimal' to work
+#'
+#' @param theme The theme to process
+#' @return The processed theme
+#' @keywords internal
+#' @importFrom utils getFromNamespace
+process_theme <- function(theme) {
+    if (is.function(theme)) {
+        return(theme)
+    }
+
+    if (!is.character(theme)) {
+        stop("The theme must be a character string or a theme function.")
+    }
+
+    if (!grepl("::", theme)) {
+        return(theme)
+    }
+
+    parts <- unlist(strsplit(theme, "::"))
+    if (length(parts) != 2) {
+        stop("Invalid theme '", theme, "'")
+    }
+
+    return(getFromNamespace(parts[2], parts[1]))
+}
+
+
+#' check_palette
+#' Check if the palette can be properly used
+#' @param palette palette
+#' @param datas_name names of the split data
+#' @keywords internal
+#' @return named list containing palette names
+check_palette <- function(palette, datas_name) {
+    palette <- as.list(palette)
+    stopifnot("'palette' must be specified" = length(palette) > 0)
+    if (length(palette) == 1 && length(datas_name) > 1) {
+        palette <- rep(palette, length(datas_name))
+    }
+    if (length(palette) < length(datas_name)) {
+        stop(
+            "The length of 'palette' (",
+            length(palette),
+            ") is less than the number ",
+            "(",
+            length(datas_name),
+            ") of unique values in 'split_by'"
+        )
+    }
+    if (is.null(names(palette))) {
+        names(palette)[1:length(datas_name)] <- datas_name
+    } else if (length(setdiff(datas_name, names(palette))) > 0) {
+        stop(
+            "Values in 'split_by' (",
+            paste(setdiff(datas_name, names(palette)), collapse = ", "),
+            ") ",
+            "have no corresponding palette assigned in 'palette'"
+        )
+    }
+    return(palette)
+}
+
+
+#' check_palcolor
+#' Check if the palcolor can be properly used
+#' @param palcolor palcolor
+#' @param datas_name names of the split data
+#' @keywords internal
+#' @return named list containing color names
+check_palcolor <- function(palcolor, datas_name) {
+    if (is.null(palcolor)) {
+        return(NULL)
+    }
+    # as.list() will turn c("red", "blue") into list("red", "blue")
+    # but we need list(c("red", "blue"))
+    if (!is.list(palcolor)) {
+        palcolor <- list(palcolor)
+    }
+    if (identical(datas_name, "...") && !identical(names(palcolor), "...")) {
+        palcolor <- list(palcolor)
+        names(palcolor) <- datas_name
+    }
+    if (!identical(datas_name, "...") && all(sapply(palcolor, is.character))) {
+        palcolor <- list(palcolor)
+    }
+    if (length(palcolor) == 1 && length(datas_name) > 1) {
+        palcolor <- rep(palcolor, length(datas_name))
+    }
+    if (is.null(names(palcolor))) {
+        names(palcolor)[1:length(datas_name)] <- datas_name
+    }
+    # It's okay that some split_by values have no corresponding palcolor
+    # because they can be NULL
+    return(palcolor)
+}
+
+
+#' check_legend
+#' Check if the legend.position and legend.direction are valid
+#' @param legend The value legend.position or legend.direction
+#' @param datas_name names of the split data
+#' @keywords internal
+#' @importFrom ggplot2 waiver
+#' @return named list containing legend names
+check_legend <- function(
+    legend,
+    datas_name,
+    which = c("legend.position", "legend.direction")
+) {
+    which <- match.arg(which)
+    legend <- as.list(legend)
+
+    if (inherits(legend, "waiver")) {
+        legend <- list(legend)
+    }
+
+    if (length(legend) == 1 && length(datas_name) > 1) {
+        legend <- rep(legend, length(datas_name))
+    }
+    if (length(legend) < length(datas_name)) {
+        stop(
+            "The length of ",
+            which,
+            " (",
+            length(legend),
+            ") is less than the number ",
+            "(",
+            length(datas_name),
+            ") of unique values in 'split_by'"
+        )
+    }
+    if (is.null(names(legend))) {
+        names(legend)[1:length(datas_name)] <- datas_name
+    } else if (length(setdiff(datas_name, names(legend))) > 0) {
+        stop(
+            "Values in 'split_by' (",
+            paste(setdiff(datas_name, names(legend)), collapse = ", "),
+            ") ",
+            "have no corresponding ",
+            which,
+            "."
+        )
+    }
+
+    return(legend)
+}
+
+
+#' check_keep_na
+#' Check and normalize keep_na parameter
+#' @param keep_na keep_na
+#' @param cols column names if keep_na is a single value
+#' @keywords internal
+#' @return normalized keep_na
+check_keep_na <- function(keep_na, cols = NA) {
+    if (is.character(keep_na) || is.logical(keep_na)) {
+        if (isTRUE(keep_na) || is.na(keep_na)) {
+            keep_na <- NA
+        }
+        if (is.null(cols) || length(cols) == 0) {
+            # no columns selected
+            return(list())
+        } else if (length(cols) == 1 && is.na(cols)) {
+            return(keep_na)
+        } else {
+            cols <- unique(cols)
+            return(stats::setNames(rep(list(keep_na), length(cols)), cols))
+        }
+    }
+    if (is.null(names(keep_na)) || !is.list(keep_na)) {
+        stop("'keep_na' must be a logical/character or a named list.")
+    }
+    out <- list()
+    if (length(cols) > 1 || (length(cols) == 1 && !is.na(cols))) {
+        cols <- unique(cols)
+        out <- stats::setNames(rep(list(FALSE), length(cols)), cols)
+    }
+    for (name in names(keep_na)) {
+        out[[name]] <- check_keep_na(keep_na[[name]])
+    }
+
+    return(out)
+}
+
+#' check_keep_empty
+#' Check and normalize keep_empty parameter
+#' @param keep_empty keep_empty
+#' @param cols column names if keep_empty is a single value
+#' @keywords internal
+#' @return normalized keep_empty
+check_keep_empty <- function(keep_empty, cols = NA) {
+    if (identical(keep_empty, "levels")) {
+        keep_empty <- "level"
+    }
+    if (is.character(keep_empty) && !identical(keep_empty, "level")) {
+        stop("'keep_empty' must be one of TRUE/FALSE, 'level', or 'levels'.")
+    }
+    if (!is.list(keep_empty)) {
+        if (is.null(cols) || length(cols) == 0) {
+            # no columns selected
+            return(list())
+        } else if (length(cols) == 1 && is.na(cols)) {
+            return(keep_empty)
+        } else {
+            cols <- unique(cols)
+            return(stats::setNames(rep(list(keep_empty), length(cols)), cols))
+        }
+    }
+    if (is.null(names(keep_empty))) {
+        stop("'keep_empty' must have names when provided as a list.")
+    }
+    out <- list()
+    if (length(cols) > 1 || (length(cols) == 1 && !is.na(cols))) {
+        cols <- unique(cols)
+        out <- stats::setNames(rep(list(FALSE), length(cols)), cols)
+    }
+    for (name in names(keep_empty)) {
+        out[[name]] <- check_keep_empty(keep_empty[[name]])
+    }
+    return(out)
+}
+
+#' process_keep_na_empty
+#' Process keep_na and keep_empty to data
+#' @param data data frame
+#' @param keep_na List of keep_na
+#' @param keep_empty List of keep_empty
+#' @keywords internal
+#' @return processed data frame
+process_keep_na_empty <- function(
+    data,
+    keep_na = NULL,
+    keep_empty = NULL,
+    col = NULL
+) {
+    if (!is.null(keep_na)) {
+        if (!is.null(col) && col %in% names(keep_na)) {
+            keep_na <- keep_na[col]
+        }
+        for (cl in names(keep_na)) {
+            if (!cl %in% colnames(data)) {
+                warning(
+                    "Column '",
+                    cl,
+                    "' not found in data. Skipping 'keep_na' processing for this column."
+                )
+                next
+            }
+            if (!anyNA(data[[cl]])) {
+                next
+            }
+            if (isFALSE(keep_na[[cl]])) {
+                data <- data[!is.na(data[[cl]]), , drop = FALSE]
+                next
+            }
+            if (is.factor(data[[cl]]) && !is.na(keep_na[[cl]])) {
+                levels(data[[cl]]) <- c(levels(data[[cl]]), keep_na[[cl]])
+            }
+            data[[cl]][is.na(data[[cl]])] <- keep_na[[cl]]
+        }
+    }
+
+    if (!is.null(keep_empty)) {
+        if (!is.null(col) && col %in% names(keep_empty)) {
+            keep_empty <- keep_empty[col]
+        }
+
+        for (cl in names(keep_empty)) {
+            if (!cl %in% colnames(data)) {
+                warning(
+                    "Column '",
+                    cl,
+                    "' not found in data. Skipping 'keep_empty' processing for this column."
+                )
+                next
+            }
+            if (!is.factor(data[[cl]])) {
+                next
+            }
+            if (isFALSE(keep_empty[[cl]])) {
+                data[[cl]] <- droplevels(data[[cl]])
+            }
+        }
+    }
+    return(data)
+}
+
+#' Call a function with a list of arguments
+#'
+#' A faster alternative to \code{\link[base]{do.call}}, especially when there are
+#' large objects in the argument list. Named arguments are looked up by symbol
+#' in the evaluation environment rather than being copied into the call, which
+#' avoids the copying overhead of \code{base::do.call}. Unnamed arguments are
+#' embedded in the call directly and do not benefit from this optimization.
+#' Borrowed from \code{Gmisc::fastDoCall}.
+#'
+#' @inheritParams base::do.call
+#' @return The result of the function call
+#' @keywords internal
+do_call <- function(what, args, quote = FALSE, envir = parent.frame()) {
+    # source: Gmisc
+    # author: Max Gordon <max@gforge.se>
+
+    if (quote) {
+        args <- lapply(args, enquote) # nocov
+    }
+
+    if (
+        is.null(names(args)) ||
+            is.data.frame(args)
+    ) {
+        argn <- args
+        args <- list()
+    } else {
+        # Add all the named arguments
+        argn <- lapply(names(args)[names(args) != ""], as.name)
+        names(argn) <- names(args)[names(args) != ""]
+        # Add the unnamed arguments
+        argn <- c(argn, args[names(args) == ""])
+        args <- args[names(args) != ""]
+    }
+
+    if (is.character(what)) {
+        fn <- strsplit(what, "[:]{2,3}")[[1]]
+        what <- if (length(fn) == 1) {
+            get(fn[[1]], envir = envir, mode = "function")
+        } else {
+            get(fn[[2]], envir = asNamespace(fn[[1]]), mode = "function")
+        }
+        call <- as.call(c(list(what), argn))
+    } else if (is.function(what)) {
+        f_name <- deparse1(substitute(what))
+        call <- as.call(c(list(as.name(f_name)), argn))
+        args[[f_name]] <- what
+    } else if (is.name(what)) {
+        call <- as.call(c(list(what), argn))
+    } else {
+        stop(
+            "'what' must be a function, a character string, or a name, not ",
+            class(what)[[1]]
+        )
+    }
+
+    eval(call, envir = args, enclos = envir)
+}
+
+#' Prepare continuous color scale limits with quantile/cutoff controls
+#'
+#' Computes the lower and upper cutoffs for a continuous color/fill scale,
+#' applies data winsorization (clamping), and returns the results needed
+#' by \code{\link[ggplot2]{scale_fill_gradientn}} or
+#' \code{\link[ggplot2]{scale_color_gradientn}}.
+#'
+#' @inheritParams common_args
+#' @param data A data frame.
+#' @param column The column name in \code{data} to use for the color scale.
+#' @param bg_cutoff Optional numeric cutoff — values \code{<= bg_cutoff} are
+#'   set to \code{NA} before computing cutoffs. Default is \code{NULL}.
+#' @return A list with components:
+#'   \item{data}{The modified data frame (with winsorized \code{column}).}
+#'   \item{feat_colors_value}{Numeric vector of 100 evenly-spaced values from
+#'     \code{lower_cutoff} to \code{upper_cutoff}.}
+#'   \item{limits}{Numeric vector of length 2 giving the range
+#'     \code{c(lower_cutoff, upper_cutoff)}.}
+#' @keywords internal
+#' @importFrom stats quantile
+prepare_continuous_color_scale <- function(
+    data,
+    column,
+    lower_quantile = 0,
+    upper_quantile = 0.99,
+    lower_cutoff = NULL,
+    upper_cutoff = NULL,
+    bg_cutoff = NULL
+) {
+    if (!is.null(bg_cutoff)) {
+        data[[column]][data[[column]] <= bg_cutoff] <- NA
+    }
+
+    if (all(is.na(data[[column]]))) {
+        feat_colors_value <- rep(0, 100)
+        feat_colors_value[1] <- 0
+        feat_colors_value[100] <- 1e-3
+    } else {
+        lower_cutoff <- lower_cutoff %||%
+            quantile(
+                data[[column]][is.finite(data[[column]])],
+                lower_quantile,
+                na.rm = TRUE
+            )
+        upper_cutoff <- upper_cutoff %||%
+            quantile(
+                data[[column]][is.finite(data[[column]])],
+                upper_quantile,
+                na.rm = TRUE
+            )
+        if (upper_cutoff == lower_cutoff) {
+            if (upper_cutoff == 0) {
+                upper_cutoff <- 1e-3
+            } else {
+                upper_cutoff <- upper_cutoff + upper_cutoff * 1e-3
+            }
+        }
+        if (upper_cutoff - lower_cutoff < 1e-6) {
+            upper_cutoff <- lower_cutoff + 1e-3
+        }
+        feat_colors_value <- seq(
+            lower_cutoff,
+            upper_cutoff,
+            length.out = 100
+        )
+    }
+
+    data[[column]][
+        data[[column]] > max(feat_colors_value, na.rm = TRUE)
+    ] <- max(feat_colors_value, na.rm = TRUE)
+    data[[column]][
+        data[[column]] < min(feat_colors_value, na.rm = TRUE)
+    ] <- min(feat_colors_value, na.rm = TRUE)
+
+    list(
+        data = data,
+        feat_colors_value = feat_colors_value,
+        limits = range(feat_colors_value)
+    )
+}

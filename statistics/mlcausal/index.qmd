@@ -44,7 +44,7 @@ library(reticulate)
 library(here)
 
 reticulate::use_python(
-  here::here(".venv", "bin", "python3.12"),
+  here::here(".pixi", "envs", "default", "bin", "python"),
   required = TRUE
 )
 
@@ -248,6 +248,8 @@ tidy_dagitty(dag) |>
 
 - S-learnerが最も直感的ではあるが・・・・・・
 - 過去のReviewだとDR-learnerが良さそう
+- https://www.pywhy.org/EconML/spec/flowchart.html
+- 上記図をmermaidで作る
 
 以下のTableをまとめる
 
