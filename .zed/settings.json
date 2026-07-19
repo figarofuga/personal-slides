@@ -1,8 +1,0 @@
-{
-    "languages": {
-        "R": {
-            "language_servers": ["air", "r_language_server"],
-            "use_on_type_format": false
-        }
-    }
-}
