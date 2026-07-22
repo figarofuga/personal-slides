@@ -27,7 +27,7 @@ execute:
   error: false
   warning: false
   echo: false
-  cache: true
+  cache: false
 knitr: 
   opts_chunk: 
     dev: svglite

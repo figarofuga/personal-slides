@@ -11,6 +11,7 @@ __pycache__/
 
 # Quarto caches
 /.quarto/
+**/index_cache/
 **/*.quarto_ipynb
 
 # Local migration and smoke-test artifacts

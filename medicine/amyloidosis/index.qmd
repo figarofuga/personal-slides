@@ -59,12 +59,7 @@ knitr:
 
 ## Amyloidとは？
 
-- 1854年にVirchowが発見したミスフォールド前駆体<br>タンパク質に由来する線維状物質
-
-::: {.reference}
-[@amyloid2020_217; @dynamed2024_amyloidosis]
-:::
-
+- 1854年にVirchowが発見したミスフォールド前駆体<br>タンパク質に由来する線維状物質[@amyloid2020_217; @dynamed2024_amyloidosis]
 - 全身の臓器に沈着し、多くの臓器障害を起こす
 - 有病率はだいたい100万人あたり14人と推定されている
   - CMLとかと同じくらいの頻度
@@ -95,10 +90,7 @@ knitr:
 | AA | 血清アミロイドA | 後天性 | 中枢神経以外全て、通常腎臓 | 全身性 |
 | ATTR-wt | トランスサイレチン | 後天性 | 心臓、肺、腱 | 全身性 |
 | ATTR-v | トランスサイレチン | 遺伝性 | 末梢/自律神経、心臓、目、髄膜 | 全身性 |
-
-::: {.reference}
 [@dynamed2024_amyloidosis]
-:::
 
 - 全部で30種類以上の前駆物質が判明しているが、上記の4種類でだいたい全部のうち80%くらいは占めている
 
@@ -108,10 +100,7 @@ knitr:
 - イギリスのAmyloidosisセンターの1990-2014年までの疫学研究
 - AL: 60%, AA: 10.5%, ATTR-wt: 8%, ATTR-v: 10%
 - ATTRは今後増えるかもしれない
-
-::: {.reference}
 [@amyloid2017_epidemiology]
-:::
 
 ## 全身性Amyloidosisの診断は難しい！
 
@@ -119,10 +108,7 @@ knitr:
 - そのため、発症から診断までに時間がかかることが知られている
   - 診断までの中央値は7ヶ月
   - 4割の患者が1年以上、10%以上の患者が3年以上経過して診断される
-
-::: {.reference}
 [@actaHaematol2020_delay]
-:::
 
 ## どうやって診断する？
 
@@ -148,10 +134,8 @@ flowchart LR
   - 肝脾腫
   - Gloves and stockings patternのPolyneuropathy
   - MGUS患者の消耗性の症状
-
-::: {.reference}
 [@jama2020_systemic]
-:::
+
 
 ## ゲシュタルトを覚えよう
 
@@ -167,53 +151,47 @@ flowchart LR
 - 肝脾腫は10%程度
 - 心不全や神経障害は非典型的
 
-::: {.reference}
 [@rheumDisClin2018_aa]
-:::
 
 ## AL amyloidosisの疾患シナリオ①
 
 <!-- TODO: 元スライドの side-by-side 比率と画像高さは簡略化。必要なら column 幅を調整する。 -->
 
 :::: columns
-::: {.column width="58%"}
+::: {.column width="60%"}
 - 診断時の年齢は50-70歳が殆ど
 - 以下の症状の時に巨舌（10-17%）や眼窩周囲の紫斑（15%）を探す
   - 心不全入院: 特にLVHを伴うHFpEF（60-75%）
   - 腎機能低下: 著名な蛋白尿（50-70%）
   - 神経障害: 両手足のしびれ、<br>両側の手根管症候群、<br>起立性低血圧による失神・めまい（22%）
+  [@dynamed2024_amyloidosis]
 :::
 
-::: {.column width="42%"}
+::: {.column width="40%"}
 ![](images/al_amyloidosis_gestalt.png){fig-alt="AL amyloidosis gestalt" width="72%"}
+[@nejm2024_al]
 :::
 ::::
-
-::: {.reference}
-[@dynamed2024_amyloidosis; @nejm2024_al]
-:::
 
 ## AL amyloidosisの疾患シナリオ②
 
 - 元々MGUSなどの基礎疾患がわかっている患者が、倦怠感や<br>浮腫、体重減少などの非特異的な症状で来院
 - 検査で心不全や腎機能低下、臓器腫大が判明
 
-::: {.reference}
 [@jama2020_systemic]
-:::
+
 
 ## ATTR amyloidosisの疾患シナリオ
 
 - 年齢の中央値は75歳, 90%は男性
 - 高齢者のHFpEFでエコーをしたら特徴的な所見
-  - 後壁の心室壁厚 &gt; 15mm, Granular sparkiling pattern、ECGで低電位など
+  - 後壁の心室壁厚 &gt; 15mm, Granular sparkiling pattern, ECGで低電位など
 - 神経: 手根管症候群が30-50%、脊柱管狭窄症、DSP
 - 高齢者の上腕二頭筋腱断裂, 両側手根管症候群のような<br>やや違和感があるStory
 - 腎疾患は稀
 
-::: {.reference}
 [@rheumDisClin2018_aa]
-:::
+
 
 ## Amyloidosisの疾患シナリオ
 
@@ -228,19 +206,13 @@ flowchart LR
 ## 心Amyloidosisの重要性
 
 - 心不全は[**最も重要な合併症かつ、予後規定因子**]{style="color: red; font-size: 1.15em;"}
-- HFpEFの中でも隠れ心amyloidosisが多いとされる
-
-::: {.reference}
-[@escHeartFail2023_hfpef]
-:::
+- HFpEFの中でも隠れ心amyloidosisが多いとされる[@escHeartFail2023_hfpef]
 
 - とはいえ、HFpEF全例で疑うのはやはり現実的ではない
   - 病歴で、Polyneuropathy、手根管症候群、Nephrosisの合併
 - 心電図も疑うきっかけになる
 
 ## ECGの特徴
-
-<!-- TODO: 元スライドの左右画像配置は Quarto columns に置換。画像サイズはレンダリング後に調整する。 -->
 
 :::: columns
 ::: {.column width="50%"}
@@ -260,12 +232,11 @@ flowchart LR
 
 - 侵襲性と値段の問題から、まずはTTEが使われる事が多い
 - CMR（当院でややハードルは高いが）もかなり精度が良い
-- TTE→CMR→更なる検査という順番が現実的
+- TTE → CMR → 更なる検査という順番が現実的
 - CMRはCVICという会社でもやってくれる（飯田橋だがオススメ）
 
 ## TTEの特徴
 
-<!-- TODO: 元スライドの side-by-side 比率（1.2fr:1fr）は簡略化。 -->
 
 :::: columns
 ::: {.column width="55%"}
@@ -282,8 +253,6 @@ flowchart LR
 ::::
 
 ## CMRの特徴
-
-<!-- TODO: 元スライドの2画像配置は Quarto columns に置換。 -->
 
 :::: columns
 ::: {.column width="50%"}
@@ -306,28 +275,21 @@ flowchart LR
 - AL, ATTR amyloidosisの診断をする（95％がこの2種類）
 - AL: Monoclonal蛋白検出で非侵襲的に診断可能
   - 血液・尿中免疫電気泳動/固定法、Free Light Chain
-  - これらが全て陰性の時の感度は約99%
-
-::: {.reference}
-[@jama2024_cardiac]
-:::
-
+  - これらが全て陰性の時の感度は約99%[@jama2024_cardiac]
 - ATTR: **PyPシンチ（Tc99m）**を使う事で、非侵襲的に診断可能
   - Monoclonal蛋白陰性→PyPシンチ陽性 = ATTR amyloidosis確定診断
 
 ## PyPシンチ
 
-<!-- TODO: 元スライドの side-by-side 比率（1.4fr:1fr）は簡略化。 -->
-
 :::: columns
-::: {.column width="58%"}
+::: {.column width="60%"}
 - 陽性の場合はATTR amyloidosisを示唆する
 - ATTR-CAの診断能は<br>感度58-99%，特異度79-100%
 - AL amyloidosisでも陽性になるので注意！
-  - 採血・検尿でALを除外したら<br>一発診断可能
+  - 採血・検尿でALを除外したら一発診断可能
 :::
 
-::: {.column width="42%"}
+::: {.column width="40%"}
 ![](images/pyp_scinti.jpeg){fig-alt="PyP scintigraphy" width="80%"}
 :::
 ::::
@@ -345,21 +307,16 @@ flowchart LR
 
 - 採血・検尿が陰性→PyPシンチ陽性→ATTR amyloidosis確定
 - 採血・検尿でM蛋白が陽性→Amyloidの組織生検は必須
-  - MGUSは70歳以上で5%、ATTR-wtのCAのうち10-40%は<br>AL amyloidosisの検査で異常が出る為
+  - MGUSは70歳以上で5%、ATTR-wtのCAのうち10-40%はAL amyloidosisの検査で異常が出る為
   - 局所麻酔下での脂肪織の生検が非侵襲的でよい
     - 感度 ATTR-v: 65-85%, AL: 60-80%, ATTR-wt:14%
-
-::: {.reference}
 [@jama2024_cardiac]
-:::
 
 ## Cardiac amyloidosis(CA)診断のまとめ
 
 ![](images/ca_pathway.png){fig-alt="Cardiac amyloidosis diagnostic pathway" width="70%"}
 
-::: {.reference}
 [@annInternMed2023_ca]
-:::
 
 ## Amyloidosisの診断後
 

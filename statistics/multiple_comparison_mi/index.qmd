@@ -1,0 +1,468 @@
+---
+title: "可視化事始め"
+subtitle: "そのフィギュア、必要ですか？"
+author: "新美 望"
+date: "2021/3/5"
+lang: ja
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    incremental: false
+    smaller: true
+    title-slide: false
+---
+
+```{=html}
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.55em;
+  margin-top: 0.6em;
+  text-align: right;
+}
+.reveal .small {
+  font-size: 0.76em;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+.reveal img {
+  max-height: 64vh;
+  object-fit: contain;
+}
+blockquote {
+  font-size: 0.82em;
+}
+</style>
+```
+
+## 可視化事始め
+
+そのフィギュア、必要ですか？  
+2021/3/5 ＠Keio University  
+新美 望
+
+## Take Home Message
+
+- まず、最初に何を見せたいのかを3つから考える
+  - 分布
+  - 関係
+  - 差・比率
+- 差・比率を見せる時は極力長さで表す
+  - 面積は使わない
+- 最もシンプルな図を実現する
+  - データ・インク比率が良いもの
+- Nや分布にも配慮する
+  - 連続値に棒グラフは避ける
+- 色覚多様性にも配慮した色を使う
+
+## What Is This？
+
+![](images/slide03_image01.png){fig-alt="What is this" width="48%"}
+
+## 画像例
+
+<!-- TODO: 元スライドは画像のみ。配置は簡略化。 -->
+
+:::: columns
+::: {.column width="58%"}
+![](images/slide04_image01.png){fig-alt="画像例1" width="78%"}
+:::
+
+::: {.column width="42%"}
+![](images/slide04_image02.png){fig-alt="画像例2" width="90%"}
+:::
+::::
+
+## Visualization
+
+- Tableと異なり、Figureにすることで情報量は格段に上がる
+- 一方で、適切なFigureを描かないと見にくいばかりか、misleadingにもなりうる
+- 内科の問診のように、基礎中の基礎だけど重要極まりない工程
+- Visualizationって誰かに習ったっけ？
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：Gestaltと色使いについて
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：Gestaltと色使いについて
+
+## よいFigureの条件
+
+:::: columns
+::: {.column width="58%"}
+> 優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。
+
+::: {.reference}
+Tufte, 1983, p. 51
+:::
+:::
+
+::: {.column width="42%"}
+![](images/slide08_image01.jpg){fig-alt="Edward Tufte" width="60%"}
+
+Edward Tufte
+:::
+::::
+
+## 非常に良いFigureの見本
+
+<!-- TODO: 元スライドの見本図と小画像の配置を簡略化。 -->
+
+:::: columns
+::: {.column width="72%"}
+![](images/slide09_image01.jpg){fig-alt="非常に良いFigureの見本" width="100%"}
+:::
+
+::: {.column width="28%"}
+- ？？？
+
+![](images/slide09_image02.png){fig-alt="補助画像" width="90%"}
+:::
+::::
+
+## よいFigureの条件
+
+:::: columns
+::: {.column width="58%"}
+> 優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。
+
+- データ・インク比を最大化する
+:::
+
+::: {.column width="42%"}
+![](images/slide10_image01.jpg){fig-alt="Edward Tufte" width="60%"}
+
+Edward Tufte
+:::
+::::
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：Gestaltと色使いについて
+
+## インク・データ比の法則
+
+:::: columns
+::: {.column width="52%"}
+- そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件
+- 簡単にいうと「シンプル イズ ベスト」
+:::
+
+::: {.column width="48%"}
+![](images/slide12_image01.png){fig-alt="インク・データ比の例1" width="66%"}
+
+![](images/slide12_image02.png){fig-alt="インク・データ比の例2" width="92%"}
+:::
+::::
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：Gestaltと色使いについて
+- Take home message
+
+## 見せたいものって？
+
+:::: columns
+::: {.column width="44%"}
+- 見せたいものは大体この3種類に大別
+  - 関係性
+  - 分布
+  - 比率・差
+- この6種類が基本
+  - 散布図
+  - ヒストグラム
+  - 折れ線グラフ
+  - 箱ひげ図
+  - ドットチャート
+  - 棒グラフ
+:::
+
+::: {.column width="56%"}
+![](images/slide14_image01.jpg){fig-alt="見せたいものと図の種類" width="100%"}
+:::
+::::
+
+## 人間の得意・苦手分野
+
+![](images/slide15_image01.jpg){fig-alt="人間の得意・苦手分野" width="72%"}
+
+## Example
+
+:::: columns
+::: {.column width="42%"}
+- 青が感染症
+- 赤が戦場での負傷
+- 黒がその他
+- どちらが分かりやすいですか？
+:::
+
+::: {.column width="58%"}
+![](images/slide16_image01.jpg){fig-alt="Example 元図" width="80%"}
+
+![](images/slide16_image02.png){fig-alt="Example 図1" width="48%"}
+![](images/slide16_image03.png){fig-alt="Example 図2" width="48%"}
+:::
+::::
+
+## 空白スライド
+
+<!-- TODO: 元スライド17は空白。必要なら削除する。 -->
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：Gestaltと色使いについて
+
+## Nへの意識
+
+:::: columns
+::: {.column width="48%"}
+- 連続値の平均や中央値を比較する時には分布も非常に重要
+- 分布を見る時にはバイオリンプロットもよい
+- サンプルサイズの大きさで、使う図表を分けるべき
+- 一つの目安として `n < 30` ではドットチャートを併用する
+:::
+
+::: {.column width="52%"}
+![](images/slide19_image01.png){fig-alt="バイオリンプロット" width="88%"}
+
+![](images/slide19_image02.png){fig-alt="ドットチャート" width="88%"}
+:::
+::::
+
+## What’s This？
+
+:::: columns
+::: {.column width="44%"}
+- STEMI患者のPCI後のCKの値の平均
+- STEMI患者のPCI後のCKの値の中央値
+- ???
+:::
+
+::: {.column width="56%"}
+![](images/slide20_image01.png){fig-alt="CK平均の図" width="48%"}
+![](images/slide20_image02.png){fig-alt="CK中央値の図" width="48%"}
+:::
+::::
+
+## What’s This？
+
+:::: columns
+::: {.column width="44%"}
+- STEMI患者のPCI後のCKの値の平均
+- STEMI患者のPCI後のCKの値の中央値
+- ???
+- ???
+:::
+
+::: {.column width="56%"}
+![](images/slide21_image01.png){fig-alt="CK平均の図2" width="48%"}
+![](images/slide21_image02.png){fig-alt="CK中央値の図2" width="48%"}
+:::
+::::
+
+## That’s It!!
+
+:::: columns
+::: {.column width="44%"}
+- STEMI患者のPCI後のCKの値の平均
+- STEMI患者のPCI後のCKの値の中央値
+- !!!!
+:::
+
+::: {.column width="56%"}
+![](images/slide22_image01.png){fig-alt="CK平均の図3" width="48%"}
+![](images/slide22_image02.png){fig-alt="CK中央値の図3" width="48%"}
+:::
+::::
+
+## Nへの意識
+
+:::: columns
+::: {.column width="48%"}
+- 何かの比較の時には必ず分布も考慮する
+- 箱ひげ図やバイオリンプロットは非常に見やすい
+- 一方で、Nが小さいときにはその意味も変わる
+- Nが少ないときはそのデータも入れた方が良い
+:::
+
+::: {.column width="52%"}
+![](images/slide23_image01.png){fig-alt="Nへの意識" width="78%"}
+:::
+::::
+
+## Nへの意識と見やすさの両立
+
+- ドットチャートに要約（平均・中央値）を追加する
+- ドットを出来るだけ薄くする
+
+:::: columns
+::: {.column width="50%"}
+![](images/slide24_image01.png){fig-alt="ドットチャートと要約1" width="86%"}
+:::
+
+::: {.column width="50%"}
+![](images/slide24_image02.png){fig-alt="ドットチャートと要約2" width="86%"}
+:::
+::::
+
+## まとめ
+
+![](images/slide25_image01.png){fig-alt="まとめ図" width="78%"}
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：Gestaltと色使いについて
+
+## 3次元プロットって？
+
+:::: columns
+::: {.column width="42%"}
+- 基本的にはmisleading
+- 使わなくて済むなら絶対に使わない
+- 一番ダメなのが3次元円グラフ
+- 青と紫どちらが大きいですか？
+:::
+
+::: {.column width="58%"}
+![](images/slide27_image01.jpg){fig-alt="3次元円グラフ1" width="48%"}
+![](images/slide27_image02.jpg){fig-alt="3次元円グラフ2" width="48%"}
+:::
+::::
+
+## どちらが見やすい？
+
+:::: columns
+::: {.column width="44%"}
+![](images/slide28_image01.png){fig-alt="3次元プロット例" width="86%"}
+:::
+
+::: {.column width="56%"}
+![](images/slide28_image02.png){fig-alt="2次元プロット例" width="100%"}
+:::
+::::
+
+## 今日の内容
+
+- Visualization：良いFigureの条件
+- データ・インク比
+- 見せたいものと人間の得意分野
+- Nへの意識
+- 3次元プロットって？
+- Tips：ゲシュタルトと色使いについて
+
+## ゲシュタルトとは
+
+:::: columns
+::: {.column width="34%"}
+- 近接の法則
+- 類同の法則
+- 囲みの法則
+- 閉合の法則
+- 連続の法則
+- 接合の法則
+:::
+
+::: {.column width="66%"}
+![](images/slide30_image01.jpg){fig-alt="ゲシュタルトの法則" width="100%"}
+:::
+::::
+
+## 推奨はしないけど
+
+![](images/slide31_image01.png){fig-alt="推奨はしないけど" width="82%"}
+
+## 色使いについて
+
+:::: columns
+::: {.column width="42%"}
+- 色覚異常は思っている以上にコモン
+- カラーユニバーサルデザイン
+:::
+
+::: {.column width="58%"}
+![](images/slide32_image01.png){fig-alt="色使いについて1" width="48%"}
+
+![](images/slide32_image02.png){fig-alt="色使いについて2" width="90%"}
+:::
+::::
+
+## カラーユニバーサルデザイン
+
+- 具体的な色彩の選び方は以下を参照
+- <https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf>
+
+![](images/slide33_image01.png){fig-alt="カラーユニバーサルデザイン" width="72%"}
+
+## AHA Figure Guidelines
+
+<https://www.ahajournals.org/figure-guidelines>
+
+![](images/slide34_image01.png){fig-alt="AHA figure guidelines" width="76%"}
+
+## Take Home Message
+
+- まず、最初に何を見せたいのかを3つから考える
+  - 分布
+  - 関係
+  - 差・比率
+- 差・比率を見せる時は極力長さで表す
+  - 面積は使わない
+- 最もシンプルな図を実現する
+  - データ・インク比率が良いもの
+- Nや分布にも配慮する
+  - 連続値に棒グラフは避ける
+- 色覚多様性にも配慮した色を使う
+
+## Reference
+
+- Reveal, Don't Conceal: Transforming Data Visualization to Improve Transparency.
+  - Circulation. 2019;140(18):1506-1518.
+- Graphics and statistics for cardiology: Comparing categorical and continuous variables.
+  - Heart. 2016;102(5):349-355.
+- 永田ゆかり（2020）『データ視覚化のデザイン』SBクリエイティブ株式会社
+- キーラン・ヒーリー（2021）『実践Data Scienceシリーズ データ分析のためのデータ可視化入門』KS情報科学専門書
+- <https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html>
+- <https://socviz.co/lookatdata.html>
+- <https://seaborn.pydata.org/tutorial/function_overview.html>
+
+## ご静聴ありがとうございました
+
+## 補足画像
+
+<!-- TODO: 元スライド38は画像のみ。必要ならReferenceまたはAppendixへ移動する。 -->
+
+![](images/slide38_image01.png){fig-alt="補足画像" width="76%"}

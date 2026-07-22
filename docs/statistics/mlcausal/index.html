@@ -204,8 +204,18 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <section id="dagの基本" class="slide level2">
 <h2>DAGの基本</h2>
 
-<!-- Todo: ここにColiderと交絡因子の説明、何を補正すべきかを書く -->
-<img data-src="index_files/figure-revealjs/DAG-1.svg" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/DAG-1.svg" width="960" class="r-stretch"><ul>
+<li>交絡因子は介入とOutcome両方に関連する上流の因子(介入 &lt;- 交絡 -&gt; アウトカム)</li>
+<li>中間因子は介入とOutcomeの間にある因子(介入 -&gt; 中間 -&gt; アウトカム)</li>
+<li>Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -&gt; Colider &lt;- アウトカム)</li>
+<li>基本は交絡因子のみ補正が必要
+<ul>
+<li>中間因子を補正すると治療効果が薄まる</li>
+<li>Coliderを補正してしまうと逆にバイアスが出てくる</li>
+</ul></li>
+<li>分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール</li>
+</ul>
+</section>
 <section id="世界は結構複雑にできている" class="slide level2">
 <h2>世界は結構複雑にできている</h2>
 <ul>
@@ -220,40 +230,43 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>連続値をrestricted cubic splineに入れるなど</li>
 <li>ただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」</li>
 <li>その上で、CAの交絡因子が補正しきれるかは不明</li>
+<li>交互作用項などは人が入れるしかないが、増やしすぎると「次元の呪い」にかかる</li>
 </ul>
 </section>
 <section id="次の手" class="slide level2">
 <h2>次の手</h2>
 <ul>
-<li>Propensity score weighting</li>
+<li>Propensity score weightingによって群の介入因子の分布を似せる
+<ul>
 <li>IPTW、Overlap weightingなど多くの方法がある</li>
-<li>weighted meanを用いる</li>
+</ul></li>
 <li>重み付けの方法で、Estimandをどこにするかも指定可能</li>
 </ul>
 </section>
 <section id="さらなる補正" class="slide level2">
 <h2>さらなる補正</h2>
 <ul>
-<li>AIPW, TMLEなど</li>
+<li>AIPW, TMLEなどでDoubly robustな手法</li>
 <li>Outcome modelとPropensity modelを用いてDoubly robustにする</li>
-<li>自由度は上昇した</li>
 </ul>
 </section>
 <section id="しかしながら" class="slide level2">
 <h2>しかしながら・・・・・・</h2>
 <ul>
+<li>結局のところ、モデルは人が作らないといけない</li>
+<li>非線形な関係も、Interaction termもいずれにせよ人が作る必要がある</li>
 <li>上記以外にも、「誰に」「どの程度」の治療効果があるか分からない
 <ul>
 <li>治療効果の異質性</li>
 </ul></li>
-<li>RCTですら群レベルでの平均的な治療効果しか分からない
+<li>RCTでは群レベルでの平均的な治療効果しか分からない
 <ul>
 <li>この治療は眼の前の患者さんに有益ですか？</li>
 </ul></li>
 </ul>
 </section>
-<section id="通常の回帰だとどうすればいい" class="slide level2">
-<h2>通常の回帰だとどうすればいい？</h2>
+<section id="目の前の患者への利益は通常の回帰だとどうすればいい" class="slide level2">
+<h2>目の前の患者への利益は通常の回帰だとどうすればいい？</h2>
 <ul>
 <li>簡単にいうとSubgroup解析
 <ul>
@@ -269,20 +282,51 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <h1>機械学習 at glance</h1>
 
 </section>
-<section id="機械学習とは" class="slide level2">
+<section id="機械学習とは" class="slide level2 scrollable">
 <h2>機械学習とは</h2>
+<ul>
+<li>機械学習の定義「学習はデータから学習し、初めてのデータに対して一般化し、明示的な指示なしにタスクを実行できる統計アルゴリズム」
+<ul>
+<li>簡単にいうとパターン認識</li>
+</ul></li>
+</ul>
+<ol type="1">
+<li>正解がある: 教師つき学習→予測に用いる</li>
+<li>正解がない: 教師なし学習→記述の一種</li>
+</ol>
 </section>
 <section id="代表的な機械学習" class="slide level2">
 <h2>代表的な機械学習</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span class="math display">\[
+\log\left(\frac{P}{1-P}\right)
+=
+X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
+\]</span></p>
+<p>Logistic回帰</p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/treebased_model.png"></p>
+<figcaption>Tree-based models</figcaption>
+</figure>
+</div>
 <ul>
-<li>Logistic回帰</li>
-<li>tree-based model
-<ul>
-<li>Random forest</li>
-<li>XGBoost</li>
-</ul></li>
-<li>Neural network</li>
+<li>これはRandom forest</li>
+<li>小さい木のモデルを並列ではなく直列にするとXGBoostなど</li>
 </ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/neuralnetwork.png"></p>
+<figcaption>Neural network models</figcaption>
+</figure>
+</div>
+<ul>
+<li>沢山のLogistic regression modelを重ねたようなもの</li>
+</ul>
+</div></div>
 </section>
 <section id="機械学習の強みと弱み" class="slide level2">
 <h2>機械学習の強みと弱み</h2>
@@ -355,16 +399,24 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </section>
 <section id="s-learner" class="slide level2">
 <h2>S-learner</h2>
-</section>
+
+<img data-src="images/s-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">s-learner</p></section>
 <section id="t-learner" class="slide level2">
 <h2>T-learner</h2>
-</section>
+
+<img data-src="images/t-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">t-learner</p></section>
 <section id="x-learner" class="slide level2">
 <h2>X-learner</h2>
-</section>
+
+<img data-src="images/x-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">x-learner</p></section>
+<section id="r-learner" class="slide level2">
+<h2>R-learner</h2>
+
+<img data-src="images/r-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">r-learner</p></section>
 <section id="dr-learner" class="slide level2">
 <h2>DR-learner</h2>
-</section>
+
+<img data-src="images/dr-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">dr-learner</p></section>
 <section id="どれがいいの" class="slide level2">
 <h2>どれがいいの？</h2>
 <ul>
@@ -1058,7 +1110,7 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x736828af0ce0&gt;</code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x724d00f54bf0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]</code></pre>
@@ -1090,7 +1142,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 <h2>Scratch for T-learner</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.TLearner object at 0x7368289622a0&gt;</code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.TLearner object at 0x724d00c97860&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>T learnerでの局所治療効果</code></pre>
@@ -1100,33 +1152,18 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
  10.7685034 ]</code></pre>
 </div>
 </div>
-</section>
-<section id="x-learner-1" class="slide level2">
-<h2>X-learner</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/x-learner.drawio.svg"></p>
-<figcaption>x-learner</figcaption>
-</figure>
-</div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.XLearner object at 0x736828ae39e0&gt;</code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.XLearner object at 0x724cf9b00c80&gt;</code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/X-learner-1.svg"></p>
-</figure>
+
 </div>
-</div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/X-learner-1.svg" class="r-stretch"></section>
 <section id="dr-learner-1" class="slide level2">
 <h2>DR-learner</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.dr._drlearner.DRLearner object at 0x73682005e660&gt;</code></pre>
+<pre><code>&lt;econml.dr._drlearner.DRLearner object at 0x724cf86b20c0&gt;</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1156,32 +1193,27 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
      &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;
 1     1.27                       1.19     0.122            0.996</code></pre>
 </div>
-
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/scratch-DR-learner-3.svg" width="960"></p>
+</figure>
 </div>
-<img data-src="index_files/figure-revealjs/scratch-DR-learner-3.svg" width="960" class="r-stretch"></section>
-<section id="機械学習の因果推論における使い方" class="slide level2">
-<h2>機械学習の因果推論における使い方</h2>
-<ul>
-<li>交絡因子の調整で機械学習を用いる
-<ul>
-<li>AIPW, tlmeなど</li>
-</ul></li>
-<li>因果をダイレクトに推論する学習機を作る
-<ul>
-<li>Meta-learner</li>
-</ul></li>
-<li>CATEを測定する
-<ul>
-<li>Causal forestなど</li>
-</ul></li>
-</ul>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x73682005ff80&gt;</code></pre>
+<pre><code>&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x724cf8665010&gt;</code></pre>
 </div>
-
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg"></p>
+</figure>
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="因果forest" class="slide level2">
 <h2>因果forest</h2>
 <ul>
@@ -1195,16 +1227,16 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-3.svg" width="960" class="r-stretch"><div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>          control      treated
-[1,] -0.096239271  0.096239271
-[2,] -0.023472267  0.023472267
-[3,] -0.350801733  0.350801733
-[4,] -0.004023857  0.004023857
-[5,]  3.260398228 -3.260398228
-[6,] -0.009254241  0.009254241</code></pre>
+[1,] -0.047508782  0.047508782
+[2,] -0.025912136  0.025912136
+[3,] -0.309310212  0.309310212
+[4,]  0.004778065 -0.004778065
+[5,]  3.158081355 -3.158081355
+[6,] -0.062332572  0.062332572</code></pre>
 </div>
 <div class="cell-output-display">
 <div class="grViz html-widget html-fill-item" id="htmlwidget-be29272657d1b5e81d9a" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-be29272657d1b5e81d9a">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bmi <= 20.58 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" bmi <= 20.46 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n2 [label=\" bnp <= 19 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-be29272657d1b5e81d9a">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bmi <= 20.58 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" bmi <= 20.46 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n2 [label=\" bnp <= 20 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <!-- ![Treeplot](images/treeplot.svg) -->
@@ -1220,7 +1252,7 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
  collate  ja_JP.UTF-8
  ctype    ja_JP.UTF-8
  tz       Asia/Tokyo
- date     2026-07-19
+ date     2026-07-22
  pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)
  quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto
 
