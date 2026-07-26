@@ -61,12 +61,15 @@ library(grid)
 ## 因果関係
 
 - 医学研究の第一の目標と言っても過言ではない
-- Aの薬を使うと患者の予後は良くなるか？
+- "Aの薬を使うと患者の予後は良くなるか？"
 - 実際は口で言うほど簡単ではない
 
 ## どうして難しいか？
 
-- 数多くのBiasが存在する
+- 因果関係の根本的問題
+  - ある個人に「介入をしなかった時」と「介入をした時」の結果を同時に観測できない
+- これを解決するために種々の方法が存在する
+- 最も有名なのはRCTであるが、RCTは万能ではない
 - ConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある
 - 観察研究はConfounderがコントロール出来ない
 
@@ -78,8 +81,6 @@ library(grid)
 - 詳細は省くが、今回はPearl流のDAGを中心に考える
 
 ## DAGの基本
-
-
 
 ```{r}
 #| label: DAG
@@ -140,33 +141,247 @@ tidy_dagitty(dag) |>
 - 基本は交絡因子のみ補正が必要
   - 中間因子を補正すると治療効果が薄まる
   - Coliderを補正してしまうと逆にバイアスが出てくる
-- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール
+- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール[@IwanamiDataScience2016Vol3]
 
 ## 世界は結構複雑にできている
 
 - 交絡因子の制御は実際はかなり難しい
 - 何を、どう補正するか？
 - Stratification、Matching、Weighting・・・・・・
+- 最もシンプルなのは回帰モデル
+
+## 交絡因子の制御の方法
+
+::: {.panel-tabset}
+
+## Stratification
+
+```{r}
 
 
-## 通常の回帰
+```
 
-- 連続値をrestricted cubic splineに入れるなど
+## Matching
+
+```{r}
+
+```
+
+## Weighting
+
+```{r}
+
+```
+
+:::
+
+## 通常の回帰モデル
+
 - ただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」
-- その上で、CAの交絡因子が補正しきれるかは不明
-- 交互作用項などは人が入れるしかないが、増やしすぎると「次元の呪い」にかかる
+- その上で、交絡因子が補正しきれるかは不明
 
 ## 次の手
 
-- Propensity score weightingによって群の介入因子の分布を似せる
-  - IPTW、Overlap weightingなど多くの方法がある
-- 重み付けの方法で、Estimandをどこにするかも指定可能
+- 自由度を上げるために、連続値をrestricted cubic splineに入れる
+- 交互作用項を入れる　などなど
+- いずれにせよ、**"人の手で"**モデルを作る必要がある
 
 ## さらなる補正
 
-- AIPW, TMLEなどでDoubly robustな手法
+- AIPW, TMLE, orthogonalization(Todo: spell check)などでDoubly robustな手法
 - Outcome modelとPropensity modelを用いてDoubly robustにする
 
+## 特殊な手法
+
+::: {.panel-tabset}
+
+## Augumented Inverse Probablity Weighting (AIPW)
+
+```{r}
+#| label: scratch-for-AIPW
+
+library(WeightIt)
+
+ps_fit <- glm(ca ~ age + sexm1 + bmi + hf + bnp + lvef, data = toy_data, family = binomial)
+
+ps_trimmed <- predict(ps_fit, type = "response") |>
+  (\(x)dplyr::case_when(
+    x < 0.01 ~ 0.01,
+    x > 0.99 ~ 0.99,
+    .default = x
+  ))()
+
+outcome_model <- glm(afeqt_os ~ ca * (age + sexm1 + bmi + hf + bnp + lvef), data = toy_data, family = gaussian)
+
+# 全員治療された場合
+toy_data1 <- dplyr::mutate(
+  toy_data, ca = 1
+)
+
+# 全員非治療だった場合
+toy_data0 <- dplyr::mutate(
+  toy_data, ca = 0
+)
+
+toy_data_aipw <- toy_data |>
+  dplyr::mutate(
+    ps = ps_trimmed,
+    mu1 = predict(outcome_model, newdata = toy_data1),
+    mu0 = predict(outcome_model, newdata = toy_data0)
+  ) |>
+  dplyr::mutate(
+# 3. AIPW pseudo-outcome
+    phi1 = mu1 + ca/ps * (afeqt_os - mu1),
+    phi0 = mu0 + (1 - ca) / (1 - ps) * (afeqt_os - mu0)
+  )
+
+# 4. ATE
+psi <- toy_data_aipw$phi1 - toy_data_aipw$phi0
+ate_aipw <- mean(psi)
+se <- sd(psi) / sqrt(length(psi))
+
+ci <- c(
+  ate_aipw - 1.96 * se,
+  ate_aipw + 1.96 * se
+)
+
+
+
+```
+
+<!-- Todo: 解説を書く -->
+
+## TMLE 
+
+```{r}
+#| label: scratch-for-TMLE
+
+# --- 0) 準備 ---------------------------------------------------------------
+library(MatchIt)
+
+# 処置・アウトカム・共変量
+A <- toy_data$ca
+Y <- toy_data$afeqt_os
+
+W <- toy_data[, c("age","sexm1","bmi","hf","bnp","lvef","palpitation")]
+
+n <- nrow(toy_data)
+
+# --- 1) まずは素朴な推定（比較用） ----------------------------------------
+naive_diff <- mean(Y[A==1]) - mean(Y[A==0])
+
+# --- 2) gモデル（傾向スコア）: P(A=1|W) -----------------------------------
+g_fit <- glm(A ~ age + sexm1 + bmi + hf + bnp + lvef + palpitation, data = toy_data, family = binomial())
+g_hat <- predict(g_fit, type = "response")
+
+# 実務では positivity の極端さ対策で truncation をよく入れる
+g_hat <- pmin(pmax(g_hat, 0.01), 0.99)
+
+# --- 3) Qモデル（アウトカム回帰）: E(Y|A,W) ---------------------------------
+Q_fit <- glm(Y ~ A + age + sexm1 + bmi + hf + bnp + lvef + palpitation, data = toy_data, family = gaussian())
+
+# 観測された A の下での予測 Q(A,W)
+Q_aw <- predict(Q_fit, type = "response")
+
+# 介入した世界（A=1, A=0）の下での予測 Q(1,W), Q(0,W)
+Q1_w <- predict(Q_fit, newdata = data.frame(A=1, W), type = "response")
+Q0_w <- predict(Q_fit, newdata = data.frame(A=0, W), type = "response")
+
+# ここまでが「G-computation（回帰による反実仮想平均）」の素材
+gcomp_ate <- mean(Q1_w - Q0_w)
+
+# --- 4) clever covariate（IPWっぽい重み） -----------------------------------
+# 連続アウトカムの基本形では、H1, H0 を使って Q を "必要な方向に" だけ更新する
+H1 <- as.numeric(A==1) / g_hat
+H0 <- as.numeric(A==0) / (1 - g_hat)
+
+# --- 5) targeting step：epsilon を推定して Q を更新 --------------------------
+# 連続(Y)の簡単な形： (Y - Q_aw) を H1, H0 で回帰（切片なし）して epsilon を得る
+eps_fit <- lm(I(Y - Q_aw) ~ -1 + H1 + H0)
+eps <- coef(eps_fit)
+eps1 <- unname(eps["H1"])
+eps0 <- unname(eps["H0"])
+
+# 更新後の Q*（observed と intervention の両方）
+Qstar_aw <- Q_aw + eps1 * H1 + eps0 * H0
+Qstar_1w <- Q1_w + eps1 * (1 / g_hat)
+Qstar_0w <- Q0_w + eps0 * (1 / (1 - g_hat))
+
+tmle_ate <- mean(Qstar_1w - Qstar_0w)
+
+# --- 6) 標準誤差（influence function の分散で） ----------------------------
+# IC = H1*(Y - Q*) - H0*(Y - Q*) + (Q*(1,W)-Q*(0,W)) - psi
+IC <- (H1 - H0) * (Y - Qstar_aw) + (Qstar_1w - Qstar_0w) - tmle_ate
+se <- sd(IC) / sqrt(n)
+ci <- tmle_ate + c(-1, 1) * 1.96 * se
+
+# --- 7) 結果表示 -----------------------------------------------------------
+cat("n =", n, "\n")
+cat("Naive diff (unadjusted):", naive_diff, "\n")
+cat("G-computation ATE (Q-model only):", gcomp_ate, "\n")
+cat("TMLE ATE (targeted):", tmle_ate, "\n")
+cat("TMLE 95% CI:", ci[1], "to", ci[2], "\n")
+
+```
+
+<!-- Todo: 解説を書く -->
+
+## Orthogonalization
+
+
+```{r}
+#| label: scratch-for-orthogonalization
+
+dat_ortho <- toy_data
+
+fit_full <- glm(afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + lvef + palpitation, data = dat_ortho, family = gaussian())
+
+summary(fit_full)
+
+coef(fit_full)["ca"]
+
+# predict Y for covs
+
+fit_y <- glm(
+  afeqt_os ~ age + sexm1 + bmi + hf + bnp + lvef + palpitation, 
+  data = dat_ortho, 
+  family = gaussian()
+)
+
+dat_ortho <- dat_ortho |> 
+  dplyr::mutate(
+    `.fitted` = predict(fit_y, type = "response"),
+    y_resid = afeqt_os - .fitted
+  )
+
+fit_a_lpm <- glm(
+  ca ~ age + sexm1 + bmi + hf + bnp + lvef + palpitation,
+  family = gaussian(),
+  data = dat_ortho
+)
+
+dat_ortho <- dat_ortho |> 
+  dplyr::mutate(
+    a_hat_lpm = predict(fit_a_lpm, type = "response"), 
+    a_resid_lpm = ca - a_hat_lpm
+  ) 
+
+fit_orth_lpm <- glm(
+  y_resid ~ 0 + a_resid_lpm,
+  family = gaussian(),
+  data = dat_ortho
+)
+
+summary(fit_orth_lpm)
+
+coef(fit_orth_lpm)["a_resid_lpm"]
+
+
+```
+
+<!-- Todo: 解説を書く -->
+
+:::
 
 ## しかしながら・・・・・・
 
@@ -185,7 +400,6 @@ tidy_dagitty(dag) |>
 - いずれにせよ、線形が前提となる
 - 柔軟なモデルで治療の異質性を捉えたい？
 
-
 # 機械学習 at glance
 
 
@@ -201,21 +415,8 @@ tidy_dagitty(dag) |>
 
 :::: {.columns}
 
-::: {.column width="30%"}
 
-
-$$
-\log\left(\frac{P}{1-P}\right)
-=
-X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
-$$
-
-
-Logistic回帰
-
-:::
-
-::: {.column width="30%"}
+::: {.column width="50%"}
 
 
 ![Tree-based models](images/treebased_model.png)
@@ -225,7 +426,7 @@ Logistic回帰
 
 :::
 
-::: {.column width="30%"}
+::: {.column width="50%"}
 
 ![Neural network models](images/neuralnetwork.png)
 
@@ -258,20 +459,10 @@ Logistic回帰
 - 柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest
 - とはいえ、Causal forestだけで良い気もする
 
+## 注意点
 
-
-# 注意点
-
-## 古典的な因果推論の問題点
-
-- Estimandは常に気にする
-- Unobserved confoundingへの対処はできない
-- その他、複数のBiasも
-- Colidarには要注意
-- 95%信頼区間は出せるのか？
-
-## 機械学習側の問題点
-
+- 基本的にUnobserved confoundingには対応できない
+- Collider biasには対応できない
 - 過学習の問題
   - cross-fitting
   - Honest
@@ -283,22 +474,33 @@ Logistic回帰
 
 ![s-learner](images/s-learner.drawio.svg)
 
+<!-- Todo: 解説を書く -->
 
 ## T-learner
 
 ![t-learner](images/t-learner.drawio.svg)
 
+<!-- Todo: 解説を書く -->
+
+
 ## X-learner
 
 ![x-learner](images/x-learner.drawio.svg)
+
+<!-- Todo: 解説を書く -->
 
 ## R-learner
 
 ![r-learner](images/r-learner.drawio.svg)
 
+<!-- Todo: 解説を書く -->
+
 ## DR-learner
 
 ![dr-learner](images/dr-learner.drawio.svg)
+
+<!-- Todo: 解説を書く -->
+
 
 ## どれがいいの？
 
@@ -344,503 +546,6 @@ Logistic回帰
 
 
 ## Test-dataset①
-
-- 治療効果は各々別個にいれてある
-- DAGは上記の通り
-- CAがメインのInterventionで解析をするアウトカムは3種類
-    - 連続値のAFEQT-OS
-    - 二値値のbin_outcome(短期の入院の有無など)
-    - 生存分析のeventtime, status(長期の心不全あるいは死亡)
-- ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)
-- SESは観測されない交絡因子
-
-## Test-dataset②
-
-```{r} 
-#| label: Make-Toydata
-
-# ============================================================
-# Toy data generation according to DAG
-# with BNP, nonlinear BMI effect, and heterogeneous treatment effect
-# ============================================================
-
-# Required packages for DAG plot:
-# install.packages(c("dagitty", "ggdag", "ggplot2"))
-library(tinyplot)
-library(dplyr)
-library(simsurv)
-
-set.seed(123)
-
-n <- 6000
-
-# ------------------------------------------------------------
-# Helper functions
-# ------------------------------------------------------------
-
-inv_logit <- function(x) {
-  1 / (1 + exp(-x))
-}
-
-rtruncnorm_simple <- function(n, mean, sd, lower, upper) {
-  out <- numeric(0)
-
-  while (length(out) < n) {
-    x <- rnorm(n, mean = mean, sd = sd)
-    x <- x[x >= lower & x <= upper]
-    out <- c(out, x)
-  }
-
-  out[seq_len(n)]
-}
-
-rtruncnorm_vec <- function(mean, sd, lower, upper) {
-  out <- rnorm(length(mean), mean = mean, sd = sd)
-  bad <- out < lower | out > upper
-
-  while (any(bad)) {
-    out[bad] <- rnorm(sum(bad), mean = mean[bad], sd = sd)
-    bad <- out < lower | out > upper
-  }
-
-  out
-}
-
-rtrunclnorm_simple <- function(n, meanlog, sdlog, lower, upper) {
-  out <- numeric(0)
-
-  while (length(out) < n) {
-    x <- rlnorm(n, meanlog = meanlog, sdlog = sdlog)
-    x <- x[x >= lower & x <= upper]
-    out <- c(out, x)
-  }
-
-  out[seq_len(n)]
-}
-
-# ------------------------------------------------------------
-# 1. Baseline variables
-# ------------------------------------------------------------
-
-# sexm1: 0/1, P(sexm1 = 0) = 0.40, P(sexm1 = 1) = 0.60
-sexm1 <- rbinom(n, size = 1, prob = 0.60)
-
-# Age: Normal(mean 60 for male, mean 65 for female, sd 8), truncated at 20 and 95
-
-
-age <- ifelse(
-  sexm1 == 0,
-  rtruncnorm_simple(
-    n = sum(sexm1 == 0),
-    mean = 65,
-    sd = 8,
-    lower = 20,
-    upper = 99
-  ),
-  rtruncnorm_simple(
-    n = sum(sexm1 == 1),
-    mean = 60,
-    sd = 8,
-    lower = 20,
-    upper = 95
-  )
-) |> as.integer()
-
-
-# BMI: lognormal with expected value approximately 25 before truncation
-# truncated at 10 and 35
-sdlog_bmi <- 0.20
-meanlog_bmi <- log(22) - sdlog_bmi^2 / 2
-
-bmi <- rtrunclnorm_simple(
-  n = n,
-  meanlog = meanlog_bmi,
-  sdlog = sdlog_bmi,
-  lower = 12,
-  upper = 40
-)
-
-# LVEF: normal with expected value for 55%
-
-lvef <- rtruncnorm_simple(
-  n = n,
-  mean = 52,
-  sd = 8,
-  lower = 15,
-  upper = 75
-) |> as.integer()
-
-
-
-
-# Standardized variables for model coefficients
-age_z <- as.numeric(scale(age))
-bmi_z <- as.numeric(scale(bmi))
-lvef_z <- as.numeric(scale(lvef))
-
-p_SES <- 0.625
-
-SES <- rbinom(n, size = 4, prob = p_SES)
-
-SES_z <- as.numeric(scale(SES))
-
-# ------------------------------------------------------------
-# 2. Comorbidities
-#    Age, sexm1, SES -> HF, HTN, Stroke, SES
-# ------------------------------------------------------------
-
-p_hf <- inv_logit(
-  -1.5 +
-    0.95 * age_z +
-    0.15 * sexm1 -
-    0.45 * bmi_z -
-    0.3 * lvef_z +
-    0.2 * SES_z
-)
-
-hf <- rbinom(n, size = 1, prob = p_hf)
-
-
-# ------------------------------------------------------------
-# 3. BNP
-#    Lognormal, lower bound 0, upper bound 2000,
-#    expected value approximately 150 before truncation.
-#
-#    BNP is affected by:
-#    Age, sexm1, BMI, SES, HF, HTN, Stroke, SES
-# ------------------------------------------------------------
-
-sdlog_bnp <- 0.90
-meanlog_bnp <- log(150) - sdlog_bnp^2 / 2
-
-bnp_base <- rtrunclnorm_simple(
-  n = n,
-  meanlog = meanlog_bnp,
-  sdlog = sdlog_bnp,
-  lower = 0,
-  upper = 2000
-)
-
-# Disease-related multiplicative structure for BNP
-bnp <- bnp_base *
-  exp(
-    0.3 * age_z +
-      0.10 * sexm1 -
-      0.15 * bmi_z -
-      0.4 * lvef_z
-  )
-
-# Truncate again at 0 and 2000
-bnp <- pmin(pmax(bnp, 0), 2000) |>
-  as.integer()
-
-bnp_z <- as.numeric(scale(log1p(bnp)))
-
-# ------------------------------------------------------------
-# 4. Palpitation
-#    Age, sexm1, HF, SES, SES -> Palpitation
-# ------------------------------------------------------------
-
-p_palpitation <- inv_logit(
-  -1.0 +
-    0.10 * age_z +
-    0.35 * sexm1 -
-    0.40 * SES_z
-)
-
-palpitation <- rbinom(n, size = 1, prob = p_palpitation)
-
-# ------------------------------------------------------------
-# 5. Treatment / intervention
-#    CA is more likely in lower-risk patients:
-#    younger age, male sexm1, higher BMI, higher SES, and lower BNP.
-#    Palpitation, lower LVEF, and HF also increase CA use.
-# ------------------------------------------------------------
-
-p_ca <- inv_logit(
-    -1.00 +
-    -1.05 * age_z +
-    0.60 * sexm1 +
-    0.35 * bmi_z +
-    0.75 * SES_z +
-    -0.85 * bnp_z +
-    1.70 * palpitation -
-    0.70 * lvef_z +
-    1.25 * hf
-)
-
-ca <- rbinom(n, size = 1, prob = p_ca)
-
-# ------------------------------------------------------------
-# 6. Nonlinear BMI prognostic effect
-#
-#    BMI 25-30: lowest risk
-#    BMI < 25: lower BMI increases risk strongly
-#    BMI > 30: higher BMI increases risk mildly
-#
-#    This creates an asymmetric convex / U-shaped risk function.
-# ------------------------------------------------------------
-
-bmi_risk <-
-  pmax(25 - bmi, 0)^2 +
-  0.3 * pmax(bmi - 30, 0)^2
-
-lvef_risk <-
-  pmax(40 - lvef, 0)^2 +
-  0.3 * pmax(60 - lvef, 0)^2
-
-bmi_risk_z <- as.numeric(scale(bmi_risk))
-lvef_risk_z <- as.numeric(scale(lvef_risk))
-
-age_risk <- pmax(age - 65, 0) / 10
-
-bnp_risk <- log1p(bnp) / log1p(2000)
-
-# ------------------------------------------------------------
-# 7. Heterogeneous treatment effect
-#
-#    Higher risk patients have a larger treatment benefit:
-#    older age, higher BNP, higher BMI risk, and higher LVEF risk.
-#
-#    Female patients have a smaller age-related increase in treatment
-#    benefit and a larger BMI-risk-related increase.
-#
-#    The effect is coded on the log-odds scale.
-#    More negative = stronger risk reduction by CA.
-# ------------------------------------------------------------
-
-
-treatment_effect <- ifelse(
-  sexm1 == 1,
-  -0.20 - 0.45 * age_risk - 0.55 * bnp_risk - 0.20 * bmi_risk_z - 0.25 * lvef_risk_z,
-  -0.20 - 0.25 * age_risk - 0.55 * bnp_risk - 0.45 * bmi_risk_z - 0.25 * lvef_risk_z
-  ) * (-1)
-
-# ------------------------------------------------------------
-# 8. Outcome
-#    HF + death composite outcome
-#
-#    Affected by everything except palpitation:
-#    Age, sexm1, BMI, SES, HF, HTN, Stroke, SES, BNP, CA -> Outcome
-#
-#    Palpitation does not directly affect Outcome.
-# ------------------------------------------------------------
-
-linear_predictor_outcome_a0 <-
-  -2.0 +
-  0.70 * age_risk +
-  0.90 * hf +
-  -0.85 * SES_z +
-  0.55 * bnp_risk +
-  0.04 * bmi_risk +
-  0.1 * lvef_risk
-
-linear_predictor_outcome_a1 <-
-  linear_predictor_outcome_a0 - treatment_effect
-
-linear_predictor_outcome <- ifelse(ca == 1, linear_predictor_outcome_a1, linear_predictor_outcome_a0)
-
-# binary outcome の counterfactual risk
-p_bin_outcome_a0 <- inv_logit(linear_predictor_outcome_a0)
-p_bin_outcome_a1 <- inv_logit(linear_predictor_outcome_a1)
-
-# binary outcome の individual treatment effect on risk difference scale
-ite_bin_rd <- p_bin_outcome_a1 - p_bin_outcome_a0
-
-p_bin_outcome <- inv_logit(linear_predictor_outcome)
-
-bin_outcome <- rbinom(n, size = 1, prob = p_bin_outcome)
-
-younger_age_benefit <- pmax(65 - age, 0) / 10
-
-afeqt_treatment_effect <-
-  4.0 +
-  2.5 * (1 - sexm1) +
-  1.5 * SES_z +
-  1.2 * younger_age_benefit
-
-afeqt_treatment_effect <- pmax(1.0, afeqt_treatment_effect)
-
-afeqt_mean_a0 <- (
-  75 -
-  4 * age_z -
-  7.0 * sexm1 -
-  2.0 * bmi_z -
-  8.0 * hf +
-  3.0 * SES_z -
-  5.0 * bnp_z +
-  3.0 * lvef_z -
-  10.0 * palpitation
-)
-
-afeqt_mean_a1 <- afeqt_mean_a0 + afeqt_treatment_effect
-
-afeqt_mean <- ifelse(ca == 1, afeqt_mean_a1, afeqt_mean_a0)
-
-afeqt_os <- rtruncnorm_vec(
-  mean = afeqt_mean,
-  sd = 8,
-  lower = 0,
-  upper = 100
-)
-
-
-surv_lambda <- 0.08
-surv_gamma <- 1.5
-time_5y <- 5
-
-# CAあり vs なしの individual hazard ratio
-# ite_surv_hr <- exp(linear_predictor_outcome_a1 - linear_predictor_outcome_a0)
-# これは exp(-treatment_effect) と同じ
-ite_surv_hr <- exp(-treatment_effect)
-
-# 5年時点の counterfactual survival / risk
-surv_5y_a0 <- exp(-surv_lambda * time_5y^surv_gamma * exp(linear_predictor_outcome_a0))
-surv_5y_a1 <- exp(-surv_lambda * time_5y^surv_gamma * exp(linear_predictor_outcome_a1))
-
-risk_5y_a0 <- 1 - surv_5y_a0
-risk_5y_a1 <- 1 - surv_5y_a1
-
-# survival outcome の individual treatment effect on 5-year risk difference scale
-ite_surv_rd_5y <- risk_5y_a1 - risk_5y_a0
-
-
-# ------------------------------------------------------------
-# 9. Final dataset
-# ------------------------------------------------------------
-
-pre_toy_data <- tibble::tibble(
-  age = age,
-  sexm1 = sexm1,
-  bmi = bmi,
-  hf = hf,
-  SES = SES,
-  bnp = bnp,
-  lvef = lvef,
-  palpitation = palpitation,
-  p_ca = p_ca,
-  ca = ca,
-  age_risk = age_risk,
-  bnp_risk = bnp_risk,
-  bmi_risk = bmi_risk,
-  lvef_risk = lvef_risk,
-  treatment_effect = treatment_effect,
-  linear_predictor_outcome_a0 = linear_predictor_outcome_a0, 
-  linear_predictor_outcome_a1 = linear_predictor_outcome_a1, 
-  linear_predictor_outcome = linear_predictor_outcome, 
-  p_bin_outcome_a0 = p_bin_outcome_a0, 
-  p_bin_outcome_a1 = p_bin_outcome_a1, 
-  p_bin_outcome = p_bin_outcome,
-  bin_outcome = bin_outcome,
-  afeqt_treatment_effect = afeqt_treatment_effect,
-  afeqt_mean_a0 = afeqt_mean_a0,
-  afeqt_mean_a1 = afeqt_mean_a1,
-  afeqt_os = afeqt_os, 
-  ite_surv_hr = ite_surv_hr,
-  ite_surv_rd_5y = ite_surv_rd_5y
-)  |>
-dplyr::mutate(
-  id = dplyr::row_number(),
-  .before = age
-  )
-
-library(simsurv)
-
-surv_dat <- simsurv::simsurv(
-  dist = "weibull",
-  lambdas = surv_lambda,
-  gammas = surv_gamma,
-  x = pre_toy_data,
-  betas = c(linear_predictor_outcome = 1),
-  maxt = time_5y
-  )
-
-full_toy_data <-
-  dplyr::left_join(
-  pre_toy_data,
-  surv_dat,
-  by = "id"
-  )
-
-toy_data <- dplyr::select(
-  full_toy_data,
-  id, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca, bin_outcome,
-  afeqt_treatment_effect, afeqt_os, eventtime, status
-)
-
-```
-
-```{r}
-#| label: Visualize-ToyData
-
-library(tidyverse)
-library(ggcube)
-
-print(head(toy_data))
-
-tidyr::pivot_longer(toy_data, cols = everything()) |>
-  tinyplot::plt(
-  ~ value, facet = ~ name, facet.args = list(free = TRUE),
-  data = _,
-  type = type_histogram(free = TRUE))
-
-
-
-dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, lvef_risk) |>
-  dplyr::rename(
-    age_rawdata = age,
-    bnp_rawdata = bnp,
-    bmi_rawdata = bmi,
-    lvef_rawdata = lvef
-  ) |>
-  tidyr::pivot_longer(
-    cols = everything(),
-    names_to = c("variable", ".value"),
-    names_pattern = "^(age|bnp|bmi|lvef)_(rawdata|risk)$"
-  ) |>
-  tinyplot::plt(
-    risk ~ rawdata, facet = ~ variable,
-    facet.args = list(free = TRUE),
-    data = _,
-    type = type_loess()
-  )
-
-
-# full_toy_data |> 
-#   tidyr::crossing(target = 0:100) |> 
-#   dplyr::mutate(diff = abs(lvef - target)) |> 
-#   dplyr::slice_min(diff, n = 1, with_ties = FALSE, by = target) |>
-#   ggplot(aes(age, lvef, treatment_effect)) + 
-#   geom_smooth_3d(aes(fill = factor(sexm1)), alpha = 0.5) + 
-#   coord_3d() + 
-#   theme_bw()
-  
-
-full_toy_data |> 
-  dplyr::select(sexm1, age, lvef, treatment_effect) |> 
-  dplyr::mutate(
-    age_cat = base::cut(age, breaks = seq(30, 100, 10)), 
-    lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10))
-    ) |> 
-  dplyr::summarise(
-    mean_trt_eff = mean(treatment_effect), 
-    .by = c(age_cat, lvef_cat, sexm1)
-  ) |> 
-  ggplot(aes(x = age_cat, y = lvef_cat, fill = mean_trt_eff)) +
-  geom_tile(color = "white") +
-  geom_text(aes(label = round(mean_trt_eff, 2)), size = 3) +
-  scale_fill_gradient2(midpoint = 0) +
-  labs(
-    x = "Age category",
-    y = "LVEF category",
-    fill = "Mean treatment effect"
-  ) +
-  facet_grid(~sexm1) + 
-  theme_bw()
-
-
-```
-
 
 ```{r}
 #| label: DAG-for-ToyData
@@ -1076,6 +781,533 @@ ggplot() +
 
 ```
 
+- 治療効果は各々別個にいれてある
+- DAGは上記の通り
+- CAがメインのInterventionで解析をするアウトカムは3種類
+    - 連続値のAFEQT-OS
+    - 二値値のbin_outcome(短期の入院の有無など)
+    - 生存分析のeventtime, status(長期の心不全あるいは死亡)
+- ほとんどの因子は交絡因子だが、palpiationはinstrumental variable (CAには影響するが、outcomeには影響しない)
+- SESは観測されない交絡因子
+
+## Test-dataset②
+
+```{r} 
+#| label: Make-Toydata
+
+# ============================================================
+# Toy data generation according to DAG
+# with BNP, nonlinear BMI effect, and heterogeneous treatment effect
+# ============================================================
+
+# Required packages for DAG plot:
+# install.packages(c("dagitty", "ggdag", "ggplot2"))
+library(tinyplot)
+library(dplyr)
+library(simsurv)
+
+set.seed(123)
+
+n <- 3000
+
+# ------------------------------------------------------------
+# Helper functions
+# ------------------------------------------------------------
+
+inv_logit <- function(x) {
+  1 / (1 + exp(-x))
+}
+
+rtruncnorm_simple <- function(n, mean, sd, lower, upper) {
+  out <- numeric(0)
+
+  while (length(out) < n) {
+    x <- rnorm(n, mean = mean, sd = sd)
+    x <- x[x >= lower & x <= upper]
+    out <- c(out, x)
+  }
+
+  out[seq_len(n)]
+}
+
+rtruncnorm_vec <- function(mean, sd, lower, upper) {
+  out <- rnorm(length(mean), mean = mean, sd = sd)
+  bad <- out < lower | out > upper
+
+  while (any(bad)) {
+    out[bad] <- rnorm(sum(bad), mean = mean[bad], sd = sd)
+    bad <- out < lower | out > upper
+  }
+
+  out
+}
+
+rtrunclnorm_simple <- function(n, meanlog, sdlog, lower, upper) {
+  out <- numeric(0)
+
+  while (length(out) < n) {
+    x <- rlnorm(n, meanlog = meanlog, sdlog = sdlog)
+    x <- x[x >= lower & x <= upper]
+    out <- c(out, x)
+  }
+
+  out[seq_len(n)]
+}
+
+# ------------------------------------------------------------
+# 1. Baseline variables
+# ------------------------------------------------------------
+
+# sexm1: 0/1, P(sexm1 = 0) = 0.40, P(sexm1 = 1) = 0.60
+sexm1 <- rbinom(n, size = 1, prob = 0.60)
+
+# Age: Normal(mean 60 for male, mean 65 for female, sd 8), truncated at 20 and 95
+
+
+age <- ifelse(
+  sexm1 == 0,
+  rtruncnorm_simple(
+    n = sum(sexm1 == 0),
+    mean = 65,
+    sd = 8,
+    lower = 20,
+    upper = 99
+  ),
+  rtruncnorm_simple(
+    n = sum(sexm1 == 1),
+    mean = 60,
+    sd = 8,
+    lower = 20,
+    upper = 95
+  )
+) |> as.integer()
+
+
+# BMI: lognormal with expected value approximately 25 before truncation
+# truncated at 10 and 35
+sdlog_bmi <- 0.20
+meanlog_bmi <- log(22) - sdlog_bmi^2 / 2
+
+bmi <- rtrunclnorm_simple(
+  n = n,
+  meanlog = meanlog_bmi,
+  sdlog = sdlog_bmi,
+  lower = 12,
+  upper = 40
+)
+
+# LVEF: normal with expected value for 55%
+
+lvef <- rtruncnorm_simple(
+  n = n,
+  mean = 52,
+  sd = 8,
+  lower = 15,
+  upper = 75
+) |> as.integer()
+
+
+
+
+# Standardized variables for model coefficients
+age_z <- as.numeric(scale(age))
+bmi_z <- as.numeric(scale(bmi))
+lvef_z <- as.numeric(scale(lvef))
+
+p_SES <- 0.625
+
+SES <- rbinom(n, size = 4, prob = p_SES)
+
+SES_z <- as.numeric(scale(SES))
+
+# ------------------------------------------------------------
+# 2. Comorbidities
+#    Age, sexm1, SES -> HF, HTN, Stroke, SES
+# ------------------------------------------------------------
+
+p_hf <- inv_logit(
+  -1.5 +
+    0.95 * age_z +
+    0.15 * sexm1 -
+    0.45 * bmi_z -
+    0.3 * lvef_z +
+    0.2 * SES_z
+)
+
+hf <- rbinom(n, size = 1, prob = p_hf)
+
+
+# ------------------------------------------------------------
+# 3. BNP
+#    Lognormal, lower bound 0, upper bound 2000,
+#    expected value approximately 150 before truncation.
+#
+#    BNP is affected by:
+#    Age, sexm1, BMI, SES, HF, HTN, Stroke, SES
+# ------------------------------------------------------------
+
+sdlog_bnp <- 0.90
+meanlog_bnp <- log(150) - sdlog_bnp^2 / 2
+
+bnp_base <- rtrunclnorm_simple(
+  n = n,
+  meanlog = meanlog_bnp,
+  sdlog = sdlog_bnp,
+  lower = 0,
+  upper = 2000
+)
+
+# Disease-related multiplicative structure for BNP
+bnp <- bnp_base *
+  exp(
+    0.3 * age_z +
+      0.10 * sexm1 -
+      0.15 * bmi_z -
+      0.4 * lvef_z
+  )
+
+# Truncate again at 0 and 2000
+bnp <- pmin(pmax(bnp, 0), 2000) |>
+  as.integer()
+
+bnp_z <- as.numeric(scale(log1p(bnp)))
+
+# ------------------------------------------------------------
+# 4. Palpitation
+#    Age, sexm1, HF, SES, SES -> Palpitation
+# ------------------------------------------------------------
+
+p_palpitation <- inv_logit(
+  -1.0 +
+    0.10 * age_z +
+    0.35 * sexm1 -
+    0.40 * SES_z
+)
+
+palpitation <- rbinom(n, size = 1, prob = p_palpitation)
+
+# ------------------------------------------------------------
+# 5. Treatment / intervention
+#    CA is more likely in lower-risk patients:
+#    younger age, male sexm1, higher BMI, higher SES, and lower BNP.
+#    Palpitation, lower LVEF, and HF also increase CA use.
+# ------------------------------------------------------------
+
+p_ca <- inv_logit(
+    -1.00 +
+    -1.05 * age_z +
+    0.60 * sexm1 +
+    0.35 * bmi_z +
+    0.75 * SES_z +
+    -0.85 * bnp_z +
+    1.70 * palpitation -
+    0.70 * lvef_z +
+    1.25 * hf
+)
+
+ca <- rbinom(n, size = 1, prob = p_ca)
+
+# ------------------------------------------------------------
+# 6. Nonlinear BMI prognostic effect
+#
+#    BMI 25-30: lowest risk
+#    BMI < 25: lower BMI increases risk strongly
+#    BMI > 30: higher BMI increases risk mildly
+#
+#    This creates an asymmetric convex / U-shaped risk function.
+# ------------------------------------------------------------
+
+bmi_risk <-
+  pmax(25 - bmi, 0)^2 +
+  0.3 * pmax(bmi - 30, 0)^2
+
+lvef_risk <-
+  pmax(40 - lvef, 0)^2 +
+  0.3 * pmax(60 - lvef, 0)^2
+
+bmi_risk_z <- as.numeric(scale(bmi_risk))
+lvef_risk_z <- as.numeric(scale(lvef_risk))
+
+age_risk <- pmax(age - 65, 0) / 10
+
+bnp_risk_raw <- case_when(
+  # 0–350：非常に低いリスク
+  bnp <= 350 ~
+    0.05 * (bnp / 350)^2,
+
+  # 350–1500：BNP上昇に伴って二次関数的に増加
+  bnp <= 1500 ~
+    0.05 +
+    0.75 * ((bnp - 350) / (1500 - 350))^2,
+
+  # 1500–2000：緩やかに増加
+  TRUE ~
+    0.80 +
+    0.20 * ((bnp - 1500) / (2000 - 1500))
+)
+
+# 平均0、標準偏差1に標準化
+bnp_risk <- as.numeric(scale(bnp_risk_raw))
+
+# ------------------------------------------------------------
+# 7. Heterogeneous treatment effect
+#
+#    Higher risk patients have a larger treatment benefit:
+#    older age, higher BNP, higher BMI risk, and higher LVEF risk.
+#
+#    Female patients have a smaller age-related increase in treatment
+#    benefit and a larger BMI-risk-related increase.
+#
+#    The effect is coded on the log-odds scale.
+#    More negative = stronger risk reduction by CA.
+# ------------------------------------------------------------
+
+
+treatment_effect <- ifelse(
+  sexm1 == 1,
+  -0.20 - 0.45 * age_risk - 0.55 * bnp_risk - 0.20 * bmi_risk_z - 0.25 * lvef_risk_z,
+  -0.20 - 0.25 * age_risk - 0.55 * bnp_risk - 0.45 * bmi_risk_z - 0.25 * lvef_risk_z
+  ) * (-1)
+
+# ------------------------------------------------------------
+# 8. Outcome
+#    HF + death composite outcome
+#
+#    Affected by everything except palpitation:
+#    Age, sexm1, BMI, SES, HF, HTN, Stroke, SES, BNP, CA -> Outcome
+#
+#    Palpitation does not directly affect Outcome.
+# ------------------------------------------------------------
+
+linear_predictor_outcome_a0 <-
+  -2.0 +
+  0.70 * age_risk +
+  0.90 * hf +
+  -0.85 * SES_z +
+  0.55 * bnp_risk +
+  0.04 * bmi_risk +
+  0.1 * lvef_risk
+
+linear_predictor_outcome_a1 <-
+  linear_predictor_outcome_a0 - treatment_effect
+
+linear_predictor_outcome <- ifelse(ca == 1, linear_predictor_outcome_a1, linear_predictor_outcome_a0)
+
+# binary outcome の counterfactual risk
+p_bin_outcome_a0 <- inv_logit(linear_predictor_outcome_a0)
+p_bin_outcome_a1 <- inv_logit(linear_predictor_outcome_a1)
+
+# binary outcome の individual treatment effect on risk difference scale
+ite_bin_rd <- p_bin_outcome_a1 - p_bin_outcome_a0
+
+p_bin_outcome <- inv_logit(linear_predictor_outcome)
+
+bin_outcome <- rbinom(n, size = 1, prob = p_bin_outcome)
+
+younger_age_benefit <- pmax(65 - age, 0) / 10
+
+afeqt_treatment_effect <-
+  4.0 +
+  2.5 * (1 - sexm1) +
+  1.5 * SES_z +
+  1.2 * younger_age_benefit
+
+afeqt_treatment_effect <- pmax(1.0, afeqt_treatment_effect)
+
+afeqt_mean_a0 <- (
+  75 -
+  4 * age_z -
+  7.0 * sexm1 -
+  2.0 * bmi_z -
+  8.0 * hf +
+  3.0 * SES_z -
+  5.0 * bnp_z +
+  3.0 * lvef_z -
+  10.0 * palpitation
+)
+
+afeqt_mean_a1 <- afeqt_mean_a0 + afeqt_treatment_effect
+
+afeqt_mean <- ifelse(ca == 1, afeqt_mean_a1, afeqt_mean_a0)
+
+afeqt_os <- rtruncnorm_vec(
+  mean = afeqt_mean,
+  sd = 8,
+  lower = 0,
+  upper = 100
+)
+
+
+surv_lambda <- 0.08
+surv_gamma <- 1.5
+time_5y <- 5
+
+# CAあり vs なしの individual hazard ratio
+# ite_surv_hr <- exp(linear_predictor_outcome_a1 - linear_predictor_outcome_a0)
+# これは exp(-treatment_effect) と同じ
+ite_surv_hr <- exp(-treatment_effect)
+
+# 5年時点の counterfactual survival / risk
+surv_5y_a0 <- exp(-surv_lambda * time_5y^surv_gamma * exp(linear_predictor_outcome_a0))
+surv_5y_a1 <- exp(-surv_lambda * time_5y^surv_gamma * exp(linear_predictor_outcome_a1))
+
+risk_5y_a0 <- 1 - surv_5y_a0
+risk_5y_a1 <- 1 - surv_5y_a1
+
+# survival outcome の individual treatment effect on 5-year risk difference scale
+ite_surv_rd_5y <- risk_5y_a1 - risk_5y_a0
+
+
+# ------------------------------------------------------------
+# 9. Final dataset
+# ------------------------------------------------------------
+
+pre_toy_data <- tibble::tibble(
+  age = age,
+  sexm1 = sexm1,
+  bmi = bmi,
+  hf = hf,
+  SES = SES,
+  bnp = bnp,
+  lvef = lvef,
+  palpitation = palpitation,
+  p_ca = p_ca,
+  ca = ca,
+  age_risk = age_risk,
+  bnp_risk = bnp_risk,
+  bmi_risk = bmi_risk,
+  lvef_risk = lvef_risk,
+  treatment_effect = treatment_effect,
+  linear_predictor_outcome_a0 = linear_predictor_outcome_a0, 
+  linear_predictor_outcome_a1 = linear_predictor_outcome_a1, 
+  linear_predictor_outcome = linear_predictor_outcome, 
+  p_bin_outcome_a0 = p_bin_outcome_a0, 
+  p_bin_outcome_a1 = p_bin_outcome_a1, 
+  p_bin_outcome = p_bin_outcome,
+  bin_outcome = bin_outcome,
+  afeqt_treatment_effect = afeqt_treatment_effect,
+  afeqt_mean_a0 = afeqt_mean_a0,
+  afeqt_mean_a1 = afeqt_mean_a1,
+  afeqt_os = afeqt_os, 
+  ite_surv_hr = ite_surv_hr,
+  ite_surv_rd_5y = ite_surv_rd_5y
+)  |>
+dplyr::mutate(
+  id = dplyr::row_number(),
+  .before = age
+  )
+
+library(simsurv)
+
+surv_dat <- simsurv::simsurv(
+  dist = "weibull",
+  lambdas = surv_lambda,
+  gammas = surv_gamma,
+  x = pre_toy_data,
+  betas = c(linear_predictor_outcome = 1),
+  maxt = time_5y
+  )
+
+full_toy_data <-
+  dplyr::left_join(
+  pre_toy_data,
+  surv_dat,
+  by = "id"
+  )
+
+toy_data <- dplyr::select(
+  full_toy_data,
+  id, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca, bin_outcome,
+  afeqt_treatment_effect, afeqt_os, eventtime, status
+)
+
+print(head(toy_data))
+
+```
+
+## Toy dataの可視化
+
+```{r}
+#| label: Visualize-ToyData2
+
+library(tidyverse)
+library(tinyplot)
+
+
+tidyr::pivot_longer(toy_data, cols = everything()) |>
+  tinyplot::plt(
+  ~ value, facet = ~ name, facet.args = list(free = TRUE),
+  data = _,
+  type = type_histogram(free = TRUE))
+
+```
+
+
+## Modification因子と治療効果
+
+::: {.panel-tabset}
+
+## 共変量とRiskの1:1の関係性
+
+```{r}
+#| label: Visualize-ToyData2
+
+library(tidyverse)
+
+dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, lvef_risk) |>
+  dplyr::rename(
+    age_rawdata = age,
+    bnp_rawdata = bnp,
+    bmi_rawdata = bmi,
+    lvef_rawdata = lvef
+  ) |>
+  tidyr::pivot_longer(
+    cols = everything(),
+    names_to = c("variable", ".value"),
+    names_pattern = "^(age|bnp|bmi|lvef)_(rawdata|risk)$"
+  ) |>
+  tinyplot::plt(
+    risk ~ rawdata, facet = ~ variable,
+    facet.args = list(free = TRUE),
+    data = _
+  )
+
+```
+
+## InteractionとRiskの関係性
+
+```{r}
+#| label: Visualize-ToyData3
+
+library(tidyverse)
+
+full_toy_data |> 
+  dplyr::select(sexm1, age, lvef, treatment_effect) |> 
+  dplyr::mutate(
+    age_cat = base::cut(age, breaks = seq(30, 100, 10)), 
+    lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10))
+    ) |> 
+  dplyr::summarise(
+    mean_trt_eff = mean(treatment_effect), 
+    .by = c(age_cat, lvef_cat, sexm1)
+  ) |> 
+  ggplot(aes(x = age_cat, y = lvef_cat, fill = mean_trt_eff)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(mean_trt_eff, 2)), size = 3) +
+  scale_fill_gradient2(midpoint = 0) +
+  labs(
+    x = "Age category",
+    y = "LVEF category",
+    fill = "Mean treatment effect"
+  ) +
+  facet_grid(~sexm1) + 
+  theme_bw()
+
+
+```
+
+:::
+
 ## Thank you for your listening
 
 
@@ -1187,59 +1419,6 @@ modelsummary::modelsummary(
 
 ```
 
-## Augumented Inverse Probablity Weighting (AIPW)
-
-```{r}
-#| label: scratch-for-AIPW
-
-library(WeightIt)
-
-ps_fit <- glm(ca ~ age + sexm1 + bmi + hf + bnp + lvef, data = toy_data, family = binomial)
-
-ps_trimmed <- predict(ps_fit, type = "response") |>
-  (\(x)dplyr::case_when(
-    x < 0.01 ~ 0.01,
-    x > 0.99 ~ 0.99,
-    .default = x
-  ))()
-
-outcome_model <- glm(afeqt_os ~ ca * (age + sexm1 + bmi + hf + bnp + lvef), data = toy_data, family = gaussian)
-
-# 全員治療された場合
-toy_data1 <- dplyr::mutate(
-  toy_data, ca = 1
-)
-
-# 全員非治療だった場合
-toy_data0 <- dplyr::mutate(
-  toy_data, ca = 0
-)
-
-toy_data_aipw <- toy_data |>
-  dplyr::mutate(
-    ps = ps_trimmed,
-    mu1 = predict(outcome_model, newdata = toy_data1),
-    mu0 = predict(outcome_model, newdata = toy_data0)
-  ) |>
-  dplyr::mutate(
-# 3. AIPW pseudo-outcome
-    phi1 = mu1 + ca/ps * (afeqt_os - mu1),
-    phi0 = mu0 + (1 - ca) / (1 - ps) * (afeqt_os - mu0)
-  )
-
-# 4. ATE
-psi <- toy_data_aipw$phi1 - toy_data_aipw$phi0
-ate_aipw <- mean(psi)
-se <- sd(psi) / sqrt(length(psi))
-
-ci <- c(
-  ate_aipw - 1.96 * se,
-  ate_aipw + 1.96 * se
-)
-
-
-
-```
 
 ## それでもなお、問題が残る
 
@@ -1250,126 +1429,7 @@ ci <- c(
   - 自覚的にInteraction termを入れないとちゃんと推定出来ない
 - ここに機械学習を持ち込めないか？
 
-```{r}
-#| label: scratch-for-TMLE
 
-# --- 0) 準備 ---------------------------------------------------------------
-library(MatchIt)
-
-# 処置・アウトカム・共変量
-A <- toy_data$ca
-Y <- toy_data$afeqt_os
-
-W <- toy_data[, c("age","sexm1","bmi","hf","bnp","lvef","palpitation")]
-
-n <- nrow(toy_data)
-
-# --- 1) まずは素朴な推定（比較用） ----------------------------------------
-naive_diff <- mean(Y[A==1]) - mean(Y[A==0])
-
-# --- 2) gモデル（傾向スコア）: P(A=1|W) -----------------------------------
-g_fit <- glm(A ~ age + sexm1 + bmi + hf + bnp + lvef + palpitation, data = toy_data, family = binomial())
-g_hat <- predict(g_fit, type = "response")
-
-# 実務では positivity の極端さ対策で truncation をよく入れる
-g_hat <- pmin(pmax(g_hat, 0.01), 0.99)
-
-# --- 3) Qモデル（アウトカム回帰）: E(Y|A,W) ---------------------------------
-Q_fit <- glm(Y ~ A + age + sexm1 + bmi + hf + bnp + lvef + palpitation, data = toy_data, family = gaussian())
-
-# 観測された A の下での予測 Q(A,W)
-Q_aw <- predict(Q_fit, type = "response")
-
-# 介入した世界（A=1, A=0）の下での予測 Q(1,W), Q(0,W)
-Q1_w <- predict(Q_fit, newdata = data.frame(A=1, W), type = "response")
-Q0_w <- predict(Q_fit, newdata = data.frame(A=0, W), type = "response")
-
-# ここまでが「G-computation（回帰による反実仮想平均）」の素材
-gcomp_ate <- mean(Q1_w - Q0_w)
-
-# --- 4) clever covariate（IPWっぽい重み） -----------------------------------
-# 連続アウトカムの基本形では、H1, H0 を使って Q を "必要な方向に" だけ更新する
-H1 <- as.numeric(A==1) / g_hat
-H0 <- as.numeric(A==0) / (1 - g_hat)
-
-# --- 5) targeting step：epsilon を推定して Q を更新 --------------------------
-# 連続(Y)の簡単な形： (Y - Q_aw) を H1, H0 で回帰（切片なし）して epsilon を得る
-eps_fit <- lm(I(Y - Q_aw) ~ -1 + H1 + H0)
-eps <- coef(eps_fit)
-eps1 <- unname(eps["H1"])
-eps0 <- unname(eps["H0"])
-
-# 更新後の Q*（observed と intervention の両方）
-Qstar_aw <- Q_aw + eps1 * H1 + eps0 * H0
-Qstar_1w <- Q1_w + eps1 * (1 / g_hat)
-Qstar_0w <- Q0_w + eps0 * (1 / (1 - g_hat))
-
-tmle_ate <- mean(Qstar_1w - Qstar_0w)
-
-# --- 6) 標準誤差（influence function の分散で） ----------------------------
-# IC = H1*(Y - Q*) - H0*(Y - Q*) + (Q*(1,W)-Q*(0,W)) - psi
-IC <- (H1 - H0) * (Y - Qstar_aw) + (Qstar_1w - Qstar_0w) - tmle_ate
-se <- sd(IC) / sqrt(n)
-ci <- tmle_ate + c(-1, 1) * 1.96 * se
-
-# --- 7) 結果表示 -----------------------------------------------------------
-cat("n =", n, "\n")
-cat("Naive diff (unadjusted):", naive_diff, "\n")
-cat("G-computation ATE (Q-model only):", gcomp_ate, "\n")
-cat("TMLE ATE (targeted):", tmle_ate, "\n")
-cat("TMLE 95% CI:", ci[1], "to", ci[2], "\n")
-
-```
-
-```{r}
-#| label: scratch-for-orthogonalization
-
-dat_ortho <- toy_data
-
-fit_full <- glm(afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + lvef + palpitation, data = dat_ortho, family = gaussian())
-
-summary(fit_full)
-
-coef(fit_full)["ca"]
-
-# predict Y for covs
-
-fit_y <- glm(
-  afeqt_os ~ age + sexm1 + bmi + hf + bnp + lvef + palpitation, 
-  data = dat_ortho, 
-  family = gaussian()
-)
-
-dat_ortho <- dat_ortho |> 
-  dplyr::mutate(
-    `.fitted` = predict(fit_y, type = "response"),
-    y_resid = afeqt_os - .fitted
-  )
-
-fit_a_lpm <- glm(
-  ca ~ age + sexm1 + bmi + hf + bnp + lvef + palpitation,
-  family = gaussian(),
-  data = dat_ortho
-)
-
-dat_ortho <- dat_ortho |> 
-  dplyr::mutate(
-    a_hat_lpm = predict(fit_a_lpm, type = "response"), 
-    a_resid_lpm = ca - a_hat_lpm
-  ) 
-
-fit_orth_lpm <- glm(
-  y_resid ~ 0 + a_resid_lpm,
-  family = gaussian(),
-  data = dat_ortho
-)
-
-summary(fit_orth_lpm)
-
-coef(fit_orth_lpm)["a_resid_lpm"]
-
-
-```
 
 
 ```{python}

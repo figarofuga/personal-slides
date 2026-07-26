@@ -24,5 +24,6 @@
 
     "r.rpath.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
     "r.rterm.linux": "${workspaceFolder}/.pixi/envs/default/bin/radian",
-    "r.lsp.diagnostics": false
+    "r.lsp.diagnostics": false,
+    "r.bracketedPaste": true
 }
