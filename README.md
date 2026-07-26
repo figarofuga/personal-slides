@@ -41,16 +41,16 @@ pixi run render medicine/FMF/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add amyloidosis slides"
+git commit -m "Add FMF slides"
 git push
 
 ```
 
 The rendered site is written to `docs/` for GitHub Pages.
 
-TODO: complete mlcausal, FMF, and systemic amyloidosis.
+TODO: complete mlcausal, sepsis hydration.
 
 ## Plans
 
-- Medicine: Rickettsia, Eosinophilia, hypokalemia, treatment of acute severe hyponatremia, sepsis hydration, Whipple disease, thrombophlic test for VTE, and antithrombosis drugs.
+- Medicine: Rickettsia, Eosinophilia, hypokalemia, treatment of acute severe hyponatremia, Whipple disease, thrombophlic test for VTE, and antithrombosis drugs.
 - Stats: Clustering, DAG, Model performance, visualizations, Advanced survival analysis including time-varying cox, splines, propensity score analysis, and multiple imputations

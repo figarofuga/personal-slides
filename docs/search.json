@@ -135,142 +135,142 @@
   {
     "objectID": "medicine/FMF/index.html#症例",
     "href": "medicine/FMF/index.html#症例",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "症例",
     "text": "症例\n\n26歳女性\n当院で発熱・汎発性腹膜炎で入院\nその後1ヶ月半周期で2回同様の入院歴あり\nこれはFMFでは？"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfとは",
     "href": "medicine/FMF/index.html#fmfとは",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFとは",
     "text": "FMFとは\n\n自然免疫による自己炎症性疾患の1つ\n成人発症でも良い数少ない疾患（それ以外だとPPFAくらい）\n家族性地中海熱は常染色体劣性（潜性）遺伝形式で遺伝\n自己炎症性疾患 vs. 自己免疫疾患"
   },
   {
     "objectID": "medicine/FMF/index.html#自己免疫疾患",
     "href": "medicine/FMF/index.html#自己免疫疾患",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "自己免疫疾患",
-    "text": "自己免疫疾患\n\n\n好中球による炎症反応\n\n抗原暴露によるリンパ球による獲得免疫ではない\n\nPAMs, DAMPsの刺激から始まる\n成人発症でも良い数少ない疾患（他にはAOSD, TRAPS, PPFA, VEXAS症候群） (勝繁 2024)"
+    "text": "自己免疫疾患\n (清志 et al. 2019) - 好中球による炎症反応 - 抗原暴露によるリンパ球による獲得免疫ではない - PAMs, DAMPsの刺激から始まる - 成人発症でも良い数少ない疾患（他にはAOSD, TRAPS, PPFA, VEXAS症候群） (勝繁 2024) - 膠原病全体の捉え方での自己免疫と自己炎症の鑑別は重要"
   },
   {
     "objectID": "medicine/FMF/index.html#膠原病の考え方",
     "href": "medicine/FMF/index.html#膠原病の考え方",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "膠原病の考え方",
-    "text": "膠原病の考え方\n\n\n自己炎症 vs. 自己免疫で大きく分かれる\n\n自己免疫はリンパ球に、自己炎症は好中球によって生じる"
+    "text": "膠原病の考え方\n\n\n自己炎症 vs. 自己免疫で大きく分かれる(圭佑 2022)\n\n自己免疫はリンパ球に、自己炎症は好中球によって生じる"
   },
   {
     "objectID": "medicine/FMF/index.html#自己免疫疾患と自己炎症性疾患",
     "href": "medicine/FMF/index.html#自己免疫疾患と自己炎症性疾患",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "自己免疫疾患と自己炎症性疾患",
-    "text": "自己免疫疾患と自己炎症性疾患\n\n\n\n自己免疫も自己炎症もスペクトラム\n境界領域の疾患が存在する\n\n簡単にいうとコルヒチンが効く疾患は全部自己炎症寄り\n\n再発性心外膜炎\n成人Still病\nベーチェット病\nSpA\n壊疽性膿皮症"
+    "text": "自己免疫疾患と自己炎症性疾患\n\n\n\n自己免疫も自己炎症もスペクトラム\n境界領域の疾患が存在する\n\n簡単にいうとコルヒチンが効く疾患は全部自己炎症寄り\n\n再発性心外膜炎\n成人Still病\nベーチェット病\nSpA\n壊疽性膿皮症\n\n\n\n\n (圭佑 2022)"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの疫学",
     "href": "medicine/FMF/index.html#fmfの疫学",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの疫学",
     "text": "FMFの疫学\n\nトルコ人に多い（シルクロード）\n2009年の研究だと日本人で約500人で男女差はない (難病情報センター, n.d.)\n潜在的にはもっとたくさんいると思われている"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの症状",
     "href": "medicine/FMF/index.html#fmfの症状",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの症状",
-    "text": "FMFの症状\n\n中核症状として、高熱が半日〜3日間持続\nある程度決まった間隔（4週間が最多だが個人差あり）での発作\n\nストレスや感染症、月経などに影響される。期間の長さは個人差がある\n\n発熱以外に複数の症状がある\n\n腹痛\n関節炎\n胸膜炎\n筋痛\n皮膚症状 (Padeh and Berkun 2016)"
+    "text": "FMFの症状\n\n\n高熱が半日〜3日間持続\nある程度決まった間隔（4週間が最多だが個人差あり）での発作\n\nストレスや感染症、月経などに影響される。期間の長さは個人差がある\n\n発作間は基本的に症状がないのが特徴\n重要な症状としては急性腹症、胸膜炎などの漿膜炎や関節炎などが特徴的(@ Padeh and Berkun 2016; 勝繁 2024)"
   },
   {
     "objectID": "medicine/FMF/index.html#よくわからない",
     "href": "medicine/FMF/index.html#よくわからない",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "よくわからない！",
-    "text": "よくわからない！\n\n\n高熱が半日〜3日間持続\nある程度決まった間隔（4週間が最多だが個人差あり）での発作\n\nストレスや感染症、月経などに影響される。期間の長さは個人差がある\n\n発作間は症状がないのが特徴\n急性腹症、胸膜炎などの漿膜炎や関節炎などが特徴的"
+    "text": "よくわからない！\n\n\n高熱が半日〜3日間持続\nある程度決まった間隔（4週間が最多だが個人差あり）での発作\n\nストレスや感染症、月経などに影響される。期間の長さは個人差がある\n\n発作間は基本的に症状がないのが特徴\n症状の表現型としては急性腹症、胸膜炎などの漿膜炎や関節炎などが特徴的(勝繁 2024)"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfを一言で言うなら",
     "href": "medicine/FMF/index.html#fmfを一言で言うなら",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFを一言で言うなら",
-    "text": "FMFを一言で言うなら\n\nイメージは 定期的な発熱 + 繰り返す虫垂炎"
+    "text": "FMFを一言で言うなら\n\n定期的な発熱 + 繰り返す虫垂炎"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの鑑別診断",
     "href": "medicine/FMF/index.html#fmfの鑑別診断",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの鑑別診断",
     "text": "FMFの鑑別診断\n\nSLEなどの自己免疫性疾患\nIgA血管炎などの血管炎の発作\nIBDのような局所的な自己免疫性疾患\nPorphyriaなどの代謝性疾患\n遺伝性血管神経性浮腫などの急性腹症の希少疾患"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの診断",
     "href": "medicine/FMF/index.html#fmfの診断",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの診断",
-    "text": "FMFの診断\n\n\nTel-Hashomer基準は特異度が高すぎると言われている\n日本だと厚生労働省が別個に定めている"
+    "text": "FMFの診断\n\n\nTel-Hashomer基準は特異度が高すぎると言われている\n日本だと厚生労働省が別個に定めている (勝繁 2024)"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの診断日本の事情",
     "href": "medicine/FMF/index.html#fmfの診断日本の事情",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの診断～日本の事情",
-    "text": "FMFの診断～日本の事情\n\n日本人は海外症例と比べて患者背景が大きく異なる\n\n発症年齢が高い\n腹膜炎症状が少ない\nアミロイドーシス合併が少ない\n\n日本人のFMFのうち非典型例とされるのが4割ほどいるとされる"
+    "text": "FMFの診断～日本の事情\n\n日本人は海外症例と比べて患者背景が大きく異なる\n\n発症年齢が高い\n腹膜炎症状が少ない\nアミロイドーシス合併が少ない\n\n日本人のFMFのうち非典型例とされるのが4割ほどいるとされる\n諸外国のガイドラインだけ見ていると見逃してしまう"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの診断は簡単",
     "href": "medicine/FMF/index.html#fmfの診断は簡単",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの診断は簡単？",
-    "text": "FMFの診断は簡単？\n\n典型例は知識があれば診断は簡単\n一方で、基準を満たさない、“FMF崩れ”みたいな症状が多いと言われている\n大まかなゲシュタルトとして若年者の「繰り返す発熱と腹痛（+高CRP）」を忘れない"
+    "text": "FMFの診断は簡単？\n\n典型例は知識があれば診断は簡単\n一方で、基準を満たさない、“FMF崩れ”みたいな症状が多いと言われている\n大まかなゲシュタルトとして 若年者の「繰り返す発熱と腹痛（+高CRP）」 を忘れない"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの診断-1",
     "href": "medicine/FMF/index.html#fmfの診断-1",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの診断",
     "text": "FMFの診断\n\n遺伝子検査は必須ではない\n\n遺伝子異常があっても発症しない事も多い（浸透率が高くない）\n逆に遺伝子異常がない人もFMFを発症することもある\n\n常に臨床診断\n特に重要なのはコルヒチンの反応性"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの診断遺伝子検査",
     "href": "medicine/FMF/index.html#fmfの診断遺伝子検査",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの診断～遺伝子検査",
-    "text": "FMFの診断～遺伝子検査\n\n16番染色体上の16p 13.3領域のMEFV遺伝子が関連遺伝子と知られている\n関連がある遺伝子異常は300以上あると言われている\n日本人のデータだと\n非典型例だとMEFV遺伝子エクソン10の変異は少ない\n\nエクソン1（E84K）\nエクソン2（E148Q，L110P-E148Q）\nエクソン3（P369S-R408Q）\nエクソン5（S503C）\n\n遺伝子検査の判定は難しい"
+    "text": "FMFの診断～遺伝子検査\n\n16番染色体上の16p 13.3領域のMEFV遺伝子が関連遺伝子と知られている\n関連がある遺伝子異常は300以上あると言われている\n日本人のデータだと\n非典型例だとMEFV遺伝子エクソン10の変異は少ない\n\nエクソン1（E84K）\nエクソン2（E148Q，L110P-E148Q）\nエクソン3（P369S-R408Q）\nエクソン5（S503C）\n\nその為、遺伝子検査の判定は難しい"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの診断プラクティカルアプローチ",
     "href": "medicine/FMF/index.html#fmfの診断プラクティカルアプローチ",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの診断～プラクティカルアプローチ",
-    "text": "FMFの診断～プラクティカルアプローチ\n\n\n\n\n\n\nflowchart TD\n  A[\"FMF疑い例\"] --&gt; B[\"典型例に当てはまらない症例\"]\n  A --&gt; C[\"FMF典型例\"]\n  C --&gt; Z[\"FMF\"]\n  B --&gt; D[\"MEFV遺伝子解析\"]\n  D --&gt; E[\"変異なし\"]\n  D --&gt; F[\"Exon10以外の変異あり&lt;br&gt;E84K, E148Q, L110P-E148Q,&lt;br&gt;P369S-R408Q, R202Q,&lt;br&gt;G304R, S503C&lt;br&gt;※ヘテロの変異を含む\"]\n  D --&gt; G[\"Exon10の変異あり&lt;br&gt;M694I, M680I,&lt;br&gt;M694V, V726A&lt;br&gt;※ヘテロの変異を含む\"]\n  E --&gt; H[\"コルヒチン（診断的投与）\"]\n  F --&gt; H\n  H --&gt; I[\"反応なし\"]\n  H --&gt; J[\"反応あり\"]\n  I --&gt; K[\"他疾患の検索&lt;br&gt;感染症・悪性疾患・&lt;br&gt;自己免疫疾患・&lt;br&gt;他の自己炎症性疾患等\"]\n  J --&gt; L[\"FMF非典型例\"]\n  G --&gt; Z"
+    "text": "FMFの診断～プラクティカルアプローチ\n\n\n\n\n\nflowchart TD\n  A[\"FMF疑い例\"] --&gt; B[\"典型例に当てはまらない症例\"]\n  A --&gt; C[\"FMF典型例\"]\n  C --&gt; Z[\"FMF\"]\n  B --&gt; D[\"MEFV遺伝子解析\"]\n  D --&gt; E[\"変異なし\"]\n  D --&gt; F[\"Exon10以外の変異あり&lt;br&gt;E84K, E148Q, L110P-E148Q,&lt;br&gt;P369S-R408Q, R202Q,&lt;br&gt;G304R, S503C&lt;br&gt;※ヘテロの変異を含む\"]\n  D --&gt; G[\"Exon10の変異あり&lt;br&gt;M694I, M680I,&lt;br&gt;M694V, V726A&lt;br&gt;※ヘテロの変異を含む\"]\n  E --&gt; H[\"コルヒチン（診断的投与）\"]\n  F --&gt; H\n  H --&gt; I[\"反応なし\"]\n  H --&gt; J[\"反応あり\"]\n  I --&gt; K[\"他疾患の検索&lt;br&gt;感染症・悪性疾患・&lt;br&gt;自己免疫疾患・&lt;br&gt;他の自己炎症性疾患等\"]\n  J --&gt; L[\"FMF非典型例\"]\n  G --&gt; Z\n\n\n\n\n\n\n(清志 et al. 2019)\n\nほとんどの場合、直接の診断あるいはコルヒチンの反応性の確認に落とし込まれる"
   },
   {
     "objectID": "medicine/FMF/index.html#遺伝子検査の方法",
     "href": "medicine/FMF/index.html#遺伝子検査の方法",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "遺伝子検査の方法",
     "text": "遺伝子検査の方法\n\n\n\n東京女子医大学に依頼\n東北大学病院 血液内科・リウマチ膠原病内科\n筑波大学医学医療系小児科\n東京医科歯科大学膠原病・リウマチ先端治療センター\n東京女子医科大学膠原病リウマチ痛風センター\n国立成育医療研究センター免疫科\n\n\n\n信州大学医学部附属病院脳神経内科／リウマチ・膠原病内科\n岐阜大学医学部附属病院小児科\n藤田医科大学病院臨床遺伝科\n兵庫医科大学病院アレルギー・リウマチ内科\n川崎医科大学附属病院リウマチ・膠原病科\n九州大学医学部 小児科\n久留米大学医学部 小児科学教室\n\n\n(遺伝性疾患プラス, n.d.)"
   },
   {
     "objectID": "medicine/FMF/index.html#fmfの治療",
     "href": "medicine/FMF/index.html#fmfの治療",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "FMFの治療",
-    "text": "FMFの治療\n\nQOLの改善とAmyloidosis予防が目的\nコルヒチンは90%以上で有用\nコルヒチンが無効な場合はIL-1β阻害薬を使う"
+    "text": "FMFの治療\n\nQOLの改善とAmyloidosis予防が目的\nコルヒチンは90%以上で有用\nコルヒチンが無効な場合はIL-1β阻害薬を使う\n実際は、「診断が違う」のと「FMFだけどコルヒチン無効」の鑑別がつかない\n\nここは、診断前確率に合わせて動きを変えるしかない"
   },
   {
     "objectID": "medicine/FMF/index.html#take-home-message",
     "href": "medicine/FMF/index.html#take-home-message",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "Take home message",
     "text": "Take home message\n\n若年女性の繰り返す発熱と腹痛はFMFを疑う\n診断は臨床第一、コルヒチンの診断的治療をためらわない！\n\n家族歴がなくても良い！\n遺伝子異常がなくても良い！"
   },
   {
     "objectID": "medicine/FMF/index.html#references",
     "href": "medicine/FMF/index.html#references",
-    "title": "機械学習を用いた因果推論",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
     "section": "References",
-    "text": "References\n\n\nPadeh, Shai, and Yackov Berkun. 2016. “Familial Mediterranean Fever.” Current Opinion in Rheumatology 28 (5): 523–29. https://doi.org/10.1097/BOR.0000000000000315.\n\n\n勝繁. 2024. ホスピタリストのための内科診療フローチャート: 専門的対応が求められる疾患の診療の流れとエビデンス. 第3版 ed. シーニュ.\n\n\n遺伝性疾患プラス. n.d. 家族性地中海熱. https://genetics.qlife.jp/diseases/familial-mediterranean-fever/.\n\n\n難病情報センター. n.d. 家族性地中海熱（指定難病266）. https://www.nanbyou.or.jp/entry/4447."
+    "text": "References\n\n\nPadeh, Shai, and Yackov Berkun. 2016. “Familial Mediterranean Fever.” Current Opinion in Rheumatology 28 (5): 523–29. https://doi.org/10.1097/BOR.0000000000000315.\n\n\n勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ. https://doi.org/10.57424/9784910440064.\n\n\n圭佑. 2022. Dr.前島の膠原病論. 中外医学社. https://doi.org/10.18886/9784498027169.\n\n\n清志, 智裕, and 純. 2019. “家族性地中海熱の診断と治療.” 日本内科学会雑誌 108 (9): 1918–25. https://doi.org/10.2169/naika.108.1918.\n\n\n遺伝性疾患プラス. n.d. 家族性地中海熱. https://genetics.qlife.jp/diseases/familial-mediterranean-fever/.\n\n\n難病情報センター. n.d. 家族性地中海熱（指定難病266）. https://www.nanbyou.or.jp/entry/4447."
   },
   {
     "objectID": "medicine/PEG/index.html#代替栄養とは-1",
@@ -1012,14 +1012,14 @@
     "href": "medicine/index.html",
     "title": "医学",
     "section": "",
-    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです"
+    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです"
   },
   {
     "objectID": "medicine/index.html#スライド一覧",
     "href": "medicine/index.html#スライド一覧",
     "title": "医学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです"
+    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです"
   },
   {
     "objectID": "medicine/pituitary_incidentaloma/index.html#症例",
@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n18.30963\n\n\n2\n22.07938\n\n\n3\n22.00671\n\n\n4\n17.91532\n\n\n5\n20.72365\n\n\n6\n21.99231\n\n\n7\n18.07293\n\n\n8\n19.55988\n\n\n9\n21.44437\n\n\n10\n23.28540\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n18.68046\n\n\n2\n26.13725\n\n\n3\n15.96919\n\n\n4\n19.30159\n\n\n5\n20.39067\n\n\n6\n19.43454\n\n\n7\n23.99833\n\n\n8\n24.79802\n\n\n9\n25.56296\n\n\n10\n19.75219\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n72.76351\n175.5589\n\n\n\n2\n70.10982\n191.9110\n\n\n\n3\n80.04373\n184.9031\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n76.95058\n197.2652\n\n\n\n2\n72.55722\n176.3063\n\n\n\n3\n70.86737\n206.1171\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -2321,7 +2321,7 @@
     "href": "statistics/mlcausal/index.html#それでもなお問題が残る",
     "title": "機械学習を用いた因果推論",
     "section": "それでもなお、問題が残る",
-    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？\n\n\n\nn = 6000 \n\n\nNaive diff (unadjusted): 8.265991 \n\n\nG-computation ATE (Q-model only): 8.839814 \n\n\nTMLE ATE (targeted): 9.068977 \n\n\nTMLE 95% CI: 8.246636 to 9.891317 \n\n\n\n\n\nCall:\nglm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + \n    lvef + palpitation, family = gaussian(), data = dat_ortho)\n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***\nca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***\nage         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***\nsexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***\nbmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***\nhf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***\nbnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***\nlvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***\npalpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.57486)\n\n    Null deviance: 1316132  on 5999  degrees of freedom\nResidual deviance:  482724  on 5991  degrees of freedom\nAIC: 43373\n\nNumber of Fisher Scoring iterations: 2\n\n\n      ca \n8.839814 \n\n\n\nCall:\nglm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), \n    data = dat_ortho)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \na_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.46741)\n\n    Null deviance: 566906  on 6000  degrees of freedom\nResidual deviance: 482724  on 5999  degrees of freedom\nAIC: 43357\n\nNumber of Fisher Scoring iterations: 2\n\n\na_resid_lpm \n   8.839814 \n\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x724d00f54bf0&gt;\n\n\n[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]"
+    "text": "それでもなお、問題が残る\n\nアウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る \nEstimandの問題 = 治療効果の異質性\n\nSubgroup解析と一緒\n自覚的にInteraction termを入れないとちゃんと推定出来ない\n\nここに機械学習を持ち込めないか？\n\n\n\nn = 6000 \n\n\nNaive diff (unadjusted): 8.265991 \n\n\nG-computation ATE (Q-model only): 8.839814 \n\n\nTMLE ATE (targeted): 9.068977 \n\n\nTMLE 95% CI: 8.246636 to 9.891317 \n\n\n\n\n\nCall:\nglm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + \n    lvef + palpitation, family = gaussian(), data = dat_ortho)\n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***\nca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***\nage         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***\nsexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***\nbmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***\nhf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***\nbnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***\nlvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***\npalpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.57486)\n\n    Null deviance: 1316132  on 5999  degrees of freedom\nResidual deviance:  482724  on 5991  degrees of freedom\nAIC: 43373\n\nNumber of Fisher Scoring iterations: 2\n\n\n      ca \n8.839814 \n\n\n\nCall:\nglm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), \n    data = dat_ortho)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \na_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 80.46741)\n\n    Null deviance: 566906  on 6000  degrees of freedom\nResidual deviance: 482724  on 5999  degrees of freedom\nAIC: 43357\n\nNumber of Fisher Scoring iterations: 2\n\n\na_resid_lpm \n   8.839814 \n\n\n\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x775d53783cb0&gt;\n\n\n[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]"
   },
   {
     "objectID": "statistics/mlcausal/index.html#scratch-for-s-learner",
@@ -2342,7 +2342,7 @@
     "href": "statistics/mlcausal/index.html#scratch-for-t-learner",
     "title": "機械学習を用いた因果推論",
     "section": "Scratch for T-learner",
-    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x724d00c97860&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834\n 10.7685034 ]\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x724cf9b00c80&gt;"
+    "text": "Scratch for T-learner\n\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x775d53795850&gt;\n\n\nT learnerでの局所治療効果\n\n\n[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834\n 10.7685034 ]\n\n\n\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x775d53758f50&gt;"
   },
   {
     "objectID": "statistics/mlcausal/index.html#x-learner-1",
@@ -2356,7 +2356,7 @@
     "href": "statistics/mlcausal/index.html#dr-learner-1",
     "title": "機械学習を用いた因果推論",
     "section": "DR-learner",
-    "text": "DR-learner\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x724cf86b20c0&gt;\n\n\n\n\n# A tibble: 6 × 8\n     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true\n  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 \n2     2  1.16      0 0.339   1.57    0.955  0.303    0.744\n3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 \n4     4  2.74      1 0.268   2.18    1.74   2.53     0.562\n5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 \n6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 \n\n\n# A tibble: 4 × 2\n  estimand                             value\n  &lt;chr&gt;                                &lt;dbl&gt;\n1 true ATE: mean(tau_true)              1.27\n2 DR ATE: mean(phi_dr)                  1.19\n3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21\n4 naive difference in means             1.70\n\n\n# A tibble: 1 × 4\n  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation\n     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n1     1.27                       1.19     0.122            0.996\n\n\n\n\n\n\n\n\n\n\n\n&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x724cf8665010&gt;"
+    "text": "DR-learner\n\n\n&lt;econml.dr._drlearner.DRLearner object at 0x775d4c26bef0&gt;\n\n\n\n\n# A tibble: 6 × 8\n     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true\n  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 \n2     2  1.16      0 0.339   1.57    0.955  0.303    0.744\n3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 \n4     4  2.74      1 0.268   2.18    1.74   2.53     0.562\n5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 \n6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 \n\n\n# A tibble: 4 × 2\n  estimand                             value\n  &lt;chr&gt;                                &lt;dbl&gt;\n1 true ATE: mean(tau_true)              1.27\n2 DR ATE: mean(phi_dr)                  1.19\n3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21\n4 naive difference in means             1.70\n\n\n# A tibble: 1 × 4\n  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation\n     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n1     1.27                       1.19     0.122            0.996\n\n\n\n\n\n\n\n\n\n\n\n&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x775d1716b8f0&gt;"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習の因果推論における使い方",
@@ -2377,7 +2377,7 @@
     "href": "statistics/mlcausal/index.html#survival-model",
     "title": "機械学習を用いた因果推論",
     "section": "Survival model",
-    "text": "Survival model\n\n\n\n          control      treated\n[1,] -0.047508782  0.047508782\n[2,] -0.025912136  0.025912136\n[3,] -0.309310212  0.309310212\n[4,]  0.004778065 -0.004778065\n[5,]  3.158081355 -3.158081355\n[6,] -0.062332572  0.062332572\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.5.3 (2026-03-11)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-07-22\n pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)\n quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n arg               0.1.1      2026-05-27 [1] CRAN (R 4.5.3)\n backports         1.5.1      2026-04-03 [1] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [1] CRAN (R 4.5.2)\n bayestestR      * 0.18.1     2026-05-24 [1] CRAN (R 4.5.3)\n bonsai          * 0.4.1      2026-05-21 [1] CRAN (R 4.5.3)\n boot              1.3-32     2025-08-29 [1] CRAN (R 4.5.1)\n broom           * 1.0.13     2026-05-14 [1] CRAN (R 4.5.3)\n cachem            1.1.0      2024-05-16 [1] CRAN (R 4.5.1)\n checkmate         2.3.3      2025-08-18 [1] CRAN (R 4.5.1)\n chk               0.10.0     2025-01-24 [1] CRAN (R 4.5.1)\n class             7.3-23     2025-01-01 [1] CRAN (R 4.5.1)\n cli               3.6.6      2026-04-09 [1] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [1] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [1] CRAN (R 4.5.1)\n colorspace        2.1-2      2025-09-22 [1] CRAN (R 4.5.1)\n correlation     * 0.8.8      2025-07-08 [1] CRAN (R 4.5.1)\n curl              7.1.0      2026-04-22 [1] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [1] CRAN (R 4.5.1)\n data.table        1.17.8     2025-07-10 [1] CRAN (R 4.5.1)\n datawizard      * 1.3.1      2026-04-26 [1] CRAN (R 4.5.3)\n DiagrammeR        1.0.12     2026-04-27 [1] CRAN (R 4.5.3)\n dials           * 1.4.4      2026-06-22 [1] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [1] CRAN (R 4.5.1)\n digest            0.6.39     2025-11-19 [1] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [1] CRAN (R 4.5.3)\n easystats       * 0.7.6      2026-05-24 [1] CRAN (R 4.5.3)\n effectsize      * 1.0.2      2026-03-11 [1] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [1] CRAN (R 4.5.1)\n farver            2.1.2      2024-05-13 [1] CRAN (R 4.5.1)\n fastmap           1.2.0      2024-05-15 [1] CRAN (R 4.5.1)\n forcats         * 1.0.1      2025-09-25 [1] CRAN (R 4.5.1)\n foreign           0.8-91     2026-01-29 [1] CRAN (R 4.5.2)\n Formula           1.2-5      2023-02-24 [1] CRAN (R 4.5.1)\n furrr             0.4.0      2026-03-31 [1] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [1] CRAN (R 4.5.3)\n future.apply      1.20.2     2026-02-20 [1] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [1] CRAN (R 4.5.1)\n ggcube          * 0.1.0      2026-05-27 [1] CRAN (R 4.5.3)\n ggdag           * 0.2.13     2024-07-22 [1] CRAN (R 4.5.1)\n ggforce           0.5.0      2025-06-18 [1] CRAN (R 4.5.1)\n ggplot2         * 4.0.3      2026-04-22 [1] CRAN (R 4.5.3)\n ggraph            2.2.2      2025-08-24 [1] CRAN (R 4.5.2)\n ggrepel           0.9.8      2026-03-17 [1] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [1] CRAN (R 4.5.3)\n glue              1.8.1      2026-04-17 [1] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [1] CRAN (R 4.5.2)\n graphlayouts      1.2.4      2026-06-19 [1] CRAN (R 4.5.3)\n grf             * 2.6.1      2026-03-04 [1] CRAN (R 4.5.3)\n gridExtra         2.3.1      2026-06-25 [1] CRAN (R 4.5.3)\n gtable            0.3.6      2024-10-25 [1] CRAN (R 4.5.1)\n hardhat           1.4.3      2026-04-04 [1] CRAN (R 4.5.3)\n here            * 1.0.2      2025-09-15 [1] CRAN (R 4.5.1)\n Hmisc           * 5.2-6      2026-06-19 [1] CRAN (R 4.5.3)\n hms               1.1.4      2025-10-17 [1] CRAN (R 4.5.1)\n htmlTable         2.5.0      2026-04-22 [1] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [1] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [1] CRAN (R 4.5.1)\n igraph            2.3.3      2026-06-26 [1] CRAN (R 4.5.3)\n infer           * 1.1.0      2025-12-18 [1] CRAN (R 4.5.2)\n insight         * 1.5.2      2026-06-28 [1] CRAN (R 4.5.3)\n ipred             0.9-15     2024-07-18 [1] CRAN (R 4.5.1)\n isoband           0.3.0      2025-12-07 [1] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [1] CRAN (R 4.5.1)\n knitr             1.51       2025-12-20 [1] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [1] CRAN (R 4.5.1)\n lattice           0.22-9     2026-02-09 [1] CRAN (R 4.5.2)\n lava              1.9.2      2026-06-30 [1] CRAN (R 4.5.3)\n lifecycle         1.0.5      2026-01-08 [1] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [1] CRAN (R 4.5.2)\n listenv           1.0.0      2026-06-22 [1] CRAN (R 4.5.3)\n litedown          0.9        2025-12-18 [1] CRAN (R 4.5.2)\n lmtest            0.9-40     2022-03-21 [1] CRAN (R 4.5.1)\n lubridate       * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [1] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [1] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [1] CRAN (R 4.5.1)\n MatchIt         * 4.7.2      2025-05-30 [1] CRAN (R 4.5.1)\n Matrix            1.7-5      2026-03-21 [1] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [1] CRAN (R 4.5.1)\n memoise           2.0.1      2021-11-26 [1] CRAN (R 4.5.1)\n modelbased      * 0.16.0     2026-06-30 [1] CRAN (R 4.5.3)\n modeldata       * 1.5.1      2025-08-22 [1] CRAN (R 4.5.1)\n modelenv          0.2.0      2024-10-14 [1] CRAN (R 4.5.1)\n modelsummary    * 2.6.0      2026-02-13 [1] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [1] CRAN (R 4.5.2)\n mvtnorm           1.4-1      2026-06-06 [1] CRAN (R 4.5.3)\n nlme              3.1-169    2026-03-27 [1] CRAN (R 4.5.3)\n nnet              7.3-20     2025-01-01 [1] CRAN (R 4.5.1)\n otel              0.2.0      2025-08-29 [1] CRAN (R 4.5.1)\n parallelly        1.48.0     2026-06-29 [1] CRAN (R 4.5.3)\n parameters      * 0.29.2     2026-06-28 [1] CRAN (R 4.5.3)\n parsnip         * 1.6.0      2026-05-14 [1] CRAN (R 4.5.3)\n performance     * 0.17.1     2026-06-30 [1] CRAN (R 4.5.3)\n pillar            1.11.1     2025-09-17 [1] CRAN (R 4.5.1)\n pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.5.1)\n png               0.1-9      2026-03-15 [1] CRAN (R 4.5.3)\n policytree      * 1.2.4      2026-02-18 [1] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [1] CRAN (R 4.5.1)\n polyclip          1.10-7     2024-07-23 [1] CRAN (R 4.5.1)\n prodlim           2026.03.11 2026-03-11 [1] CRAN (R 4.5.3)\n purrr           * 1.2.2      2026-04-10 [1] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [1] CRAN (R 4.5.1)\n R6                2.6.1      2025-02-15 [1] CRAN (R 4.5.1)\n RColorBrewer      1.1-3      2022-04-03 [1] CRAN (R 4.5.1)\n Rcpp              1.1.1-1.1  2026-04-24 [1] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [1] CRAN (R 4.5.2)\n recipes         * 1.3.3      2026-05-30 [1] CRAN (R 4.5.3)\n report          * 0.6.4      2026-05-04 [1] CRAN (R 4.5.3)\n reticulate      * 1.46.0     2026-04-09 [1] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [1] CRAN (R 4.5.3)\n rmarkdown         2.31       2026-03-26 [1] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [1] CRAN (R 4.5.2)\n rootSolve         1.8.2.4    2023-09-21 [1] CRAN (R 4.5.1)\n rpart             4.1.27     2026-03-27 [1] CRAN (R 4.5.3)\n rprojroot         2.1.1      2025-08-26 [1] CRAN (R 4.5.1)\n rsample         * 1.3.2      2026-01-30 [1] CRAN (R 4.5.2)\n rstudioapi        0.19.0     2026-06-11 [1] CRAN (R 4.5.3)\n S7                0.2.2      2026-04-22 [1] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [1] CRAN (R 4.5.1)\n scales          * 1.4.0      2025-04-24 [1] CRAN (R 4.5.1)\n see             * 0.14.1     2026-06-29 [1] CRAN (R 4.5.3)\n sessioninfo     * 1.2.4      2026-06-04 [1] CRAN (R 4.5.3)\n simsurv         * 1.0.1      2026-01-22 [1] CRAN (R 4.5.3)\n SparseM           1.84-2     2024-07-17 [1] CRAN (R 4.5.1)\n sparsevctrs       0.3.6      2026-01-27 [1] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [1] CRAN (R 4.5.2)\n stringr         * 1.6.0      2025-11-04 [1] CRAN (R 4.5.2)\n survival        * 3.8-6      2026-01-16 [1] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [1] CRAN (R 4.5.2)\n tables            0.9.35     2026-06-04 [1] CRAN (R 4.5.3)\n tailor          * 0.1.0      2025-08-25 [1] CRAN (R 4.5.1)\n TH.data           1.1-5      2025-11-17 [1] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [1] CRAN (R 4.5.2)\n tidygraph         1.3.0      2023-12-18 [1] CRAN (R 4.5.1)\n tidymodels      * 1.4.1      2025-09-08 [1] CRAN (R 4.5.1)\n tidyr           * 1.3.2      2025-12-19 [1] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [1] CRAN (R 4.5.1)\n tidyverse       * 2.0.0      2023-02-22 [1] CRAN (R 4.5.1)\n timechange        0.4.0      2026-01-29 [1] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [1] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [1] CRAN (R 4.5.3)\n tinytable         0.16.0     2026-02-11 [1] CRAN (R 4.5.2)\n tune            * 2.1.0      2026-04-17 [1] CRAN (R 4.5.3)\n tweenr            2.0.3      2024-02-26 [1] CRAN (R 4.5.1)\n tzdb              0.5.0      2025-03-15 [1] CRAN (R 4.5.1)\n utf8              1.2.6      2025-06-08 [1] CRAN (R 4.5.1)\n V8                8.2.0      2026-04-21 [1] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [1] CRAN (R 4.5.3)\n viridis           0.6.5      2024-01-29 [1] CRAN (R 4.5.1)\n viridisLite       0.4.3      2026-02-04 [1] CRAN (R 4.5.2)\n visNetwork        2.1.4      2025-09-04 [1] CRAN (R 4.5.1)\n WeightIt        * 1.7.0      2026-04-22 [1] CRAN (R 4.5.3)\n withr             3.0.3      2026-06-19 [1] CRAN (R 4.5.3)\n workflows       * 1.3.0      2025-08-27 [1] CRAN (R 4.5.1)\n workflowsets    * 1.1.1      2025-05-27 [1] CRAN (R 4.5.1)\n xfun              0.59       2026-06-19 [1] CRAN (R 4.5.3)\n yaml              2.3.12     2025-12-10 [1] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [1] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [1] CRAN (R 4.5.2)\n\n [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.4\n cairoFT\n pango          1.56.4\n png            1.6.58\n jpeg           8.0\n tiff           LIBTIFF, Version 4.7.2\n tcl            8.6.13\n curl           8.21.0\n zlib           1.3.2\n bzlib          1.0.8, 13-Jul-2019\n xz             5.8.3\n deflate        1.25\n PCRE           10.47 2025-10-21\n ICU            78.3\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          GNU libiconv 1.18\n readline       8.3\n BLAS           /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n python:         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/python\n libpython:      /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libpython3.12.so\n pythonhome:     /home/figarofuga/analysis/pixi-test/.pixi/envs/default:/home/figarofuga/analysis/pixi-test/.pixi/envs/default\n version:        3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]\n numpy:          /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/python3.12/site-packages/numpy\n numpy_version:  2.4.6\n \n NOTE: Python version was forced by RETICULATE_PYTHON\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "Survival model\n\n\n\n          control      treated\n[1,] -0.047508782  0.047508782\n[2,] -0.025912136  0.025912136\n[3,] -0.309310212  0.309310212\n[4,]  0.004778065 -0.004778065\n[5,]  3.158081355 -3.158081355\n[6,] -0.062332572  0.062332572\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.5.3 (2026-03-11)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-07-26\n pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)\n quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version    date (UTC) lib source\n arg               0.1.1      2026-05-27 [1] CRAN (R 4.5.3)\n backports         1.5.1      2026-04-03 [1] CRAN (R 4.5.3)\n base64enc         0.1-6      2026-02-02 [1] CRAN (R 4.5.2)\n bayestestR      * 0.18.1     2026-05-24 [1] CRAN (R 4.5.3)\n bonsai          * 0.4.1      2026-05-21 [1] CRAN (R 4.5.3)\n boot              1.3-32     2025-08-29 [1] CRAN (R 4.5.1)\n broom           * 1.0.13     2026-05-14 [1] CRAN (R 4.5.3)\n cachem            1.1.0      2024-05-16 [1] CRAN (R 4.5.1)\n checkmate         2.3.3      2025-08-18 [1] CRAN (R 4.5.1)\n chk               0.10.0     2025-01-24 [1] CRAN (R 4.5.1)\n class             7.3-23     2025-01-01 [1] CRAN (R 4.5.1)\n cli               3.6.6      2026-04-09 [1] CRAN (R 4.5.3)\n cluster           2.1.8.2    2026-02-05 [1] CRAN (R 4.5.2)\n codetools         0.2-20     2024-03-31 [1] CRAN (R 4.5.1)\n colorspace        2.1-2      2025-09-22 [1] CRAN (R 4.5.1)\n correlation     * 0.8.8      2025-07-08 [1] CRAN (R 4.5.1)\n curl              7.1.0      2026-04-22 [1] CRAN (R 4.5.3)\n dagitty         * 0.3-4      2023-12-07 [1] CRAN (R 4.5.1)\n data.table        1.17.8     2025-07-10 [1] CRAN (R 4.5.1)\n datawizard      * 1.3.1      2026-04-26 [1] CRAN (R 4.5.3)\n DiagrammeR        1.0.12     2026-04-27 [1] CRAN (R 4.5.3)\n dials           * 1.4.4      2026-06-22 [1] CRAN (R 4.5.3)\n DiceDesign        1.10       2023-12-07 [1] CRAN (R 4.5.1)\n digest            0.6.39     2025-11-19 [1] CRAN (R 4.5.2)\n dplyr           * 1.2.1      2026-04-03 [1] CRAN (R 4.5.3)\n easystats       * 0.7.6      2026-05-24 [1] CRAN (R 4.5.3)\n effectsize      * 1.0.2      2026-03-11 [1] CRAN (R 4.5.2)\n evaluate          1.0.5      2025-08-27 [1] CRAN (R 4.5.1)\n farver            2.1.2      2024-05-13 [1] CRAN (R 4.5.1)\n fastmap           1.2.0      2024-05-15 [1] CRAN (R 4.5.1)\n forcats         * 1.0.1      2025-09-25 [1] CRAN (R 4.5.1)\n foreign           0.8-91     2026-01-29 [1] CRAN (R 4.5.2)\n Formula           1.2-5      2023-02-24 [1] CRAN (R 4.5.1)\n furrr             0.4.0      2026-03-31 [1] CRAN (R 4.5.3)\n future            1.70.0     2026-03-14 [1] CRAN (R 4.5.3)\n future.apply      1.20.2     2026-02-20 [1] CRAN (R 4.5.2)\n generics          0.1.4      2025-05-09 [1] CRAN (R 4.5.1)\n ggcube          * 0.1.0      2026-05-27 [1] CRAN (R 4.5.3)\n ggdag           * 0.2.13     2024-07-22 [1] CRAN (R 4.5.1)\n ggforce           0.5.0      2025-06-18 [1] CRAN (R 4.5.1)\n ggplot2         * 4.0.3      2026-04-22 [1] CRAN (R 4.5.3)\n ggraph            2.2.2      2025-08-24 [1] CRAN (R 4.5.2)\n ggrepel           0.9.8      2026-03-17 [1] CRAN (R 4.5.3)\n globals           0.19.1     2026-03-13 [1] CRAN (R 4.5.3)\n glue              1.8.1      2026-04-17 [1] CRAN (R 4.5.3)\n gower             1.0.2      2024-12-17 [1] CRAN (R 4.5.2)\n graphlayouts      1.2.4      2026-06-19 [1] CRAN (R 4.5.3)\n grf             * 2.6.1      2026-03-04 [1] CRAN (R 4.5.3)\n gridExtra         2.3.1      2026-06-25 [1] CRAN (R 4.5.3)\n gtable            0.3.6      2024-10-25 [1] CRAN (R 4.5.1)\n hardhat           1.4.3      2026-04-04 [1] CRAN (R 4.5.3)\n here            * 1.0.2      2025-09-15 [1] CRAN (R 4.5.1)\n Hmisc           * 5.2-6      2026-06-19 [1] CRAN (R 4.5.3)\n hms               1.1.4      2025-10-17 [1] CRAN (R 4.5.1)\n htmlTable         2.5.0      2026-04-22 [1] CRAN (R 4.5.3)\n htmltools         0.5.9      2025-12-04 [1] CRAN (R 4.5.2)\n htmlwidgets       1.6.4      2023-12-06 [1] CRAN (R 4.5.1)\n igraph            2.3.3      2026-06-26 [1] CRAN (R 4.5.3)\n infer           * 1.1.0      2025-12-18 [1] CRAN (R 4.5.2)\n insight         * 1.5.2      2026-06-28 [1] CRAN (R 4.5.3)\n ipred             0.9-15     2024-07-18 [1] CRAN (R 4.5.1)\n isoband           0.3.0      2025-12-07 [1] CRAN (R 4.5.2)\n jsonlite          2.0.0      2025-03-27 [1] CRAN (R 4.5.1)\n knitr             1.51       2025-12-20 [1] CRAN (R 4.5.2)\n labeling          0.4.3      2023-08-29 [1] CRAN (R 4.5.1)\n lattice           0.22-9     2026-02-09 [1] CRAN (R 4.5.2)\n lava              1.9.2      2026-06-30 [1] CRAN (R 4.5.3)\n lifecycle         1.0.5      2026-01-08 [1] CRAN (R 4.5.2)\n lightgbm          4.6.0      2025-02-13 [1] CRAN (R 4.5.2)\n listenv           1.0.0      2026-06-22 [1] CRAN (R 4.5.3)\n litedown          0.9        2025-12-18 [1] CRAN (R 4.5.2)\n lmtest            0.9-40     2022-03-21 [1] CRAN (R 4.5.1)\n lubridate       * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)\n magrittr          2.0.5      2026-04-04 [1] CRAN (R 4.5.3)\n marginaleffects * 0.32.0     2026-02-14 [1] CRAN (R 4.5.2)\n MASS              7.3-65     2025-02-28 [1] CRAN (R 4.5.1)\n MatchIt         * 4.7.2      2025-05-30 [1] CRAN (R 4.5.1)\n Matrix            1.7-5      2026-03-21 [1] CRAN (R 4.5.3)\n MatrixModels      0.5-4      2025-03-26 [1] CRAN (R 4.5.1)\n memoise           2.0.1      2021-11-26 [1] CRAN (R 4.5.1)\n modelbased      * 0.16.0     2026-06-30 [1] CRAN (R 4.5.3)\n modeldata       * 1.5.1      2025-08-22 [1] CRAN (R 4.5.1)\n modelenv          0.2.0      2024-10-14 [1] CRAN (R 4.5.1)\n modelsummary    * 2.6.0      2026-02-13 [1] CRAN (R 4.5.2)\n multcomp          1.4-30     2026-03-09 [1] CRAN (R 4.5.2)\n mvtnorm           1.4-1      2026-06-06 [1] CRAN (R 4.5.3)\n nlme              3.1-169    2026-03-27 [1] CRAN (R 4.5.3)\n nnet              7.3-20     2025-01-01 [1] CRAN (R 4.5.1)\n otel              0.2.0      2025-08-29 [1] CRAN (R 4.5.1)\n parallelly        1.48.0     2026-06-29 [1] CRAN (R 4.5.3)\n parameters      * 0.29.2     2026-06-28 [1] CRAN (R 4.5.3)\n parsnip         * 1.6.0      2026-05-14 [1] CRAN (R 4.5.3)\n performance     * 0.17.1     2026-06-30 [1] CRAN (R 4.5.3)\n pillar            1.11.1     2025-09-17 [1] CRAN (R 4.5.1)\n pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.5.1)\n png               0.1-9      2026-03-15 [1] CRAN (R 4.5.3)\n policytree      * 1.2.4      2026-02-18 [1] CRAN (R 4.5.2)\n polspline         1.1.25     2024-05-10 [1] CRAN (R 4.5.1)\n polyclip          1.10-7     2024-07-23 [1] CRAN (R 4.5.1)\n prodlim           2026.03.11 2026-03-11 [1] CRAN (R 4.5.3)\n purrr           * 1.2.2      2026-04-10 [1] CRAN (R 4.5.3)\n quantreg          6.1        2025-03-10 [1] CRAN (R 4.5.1)\n R6                2.6.1      2025-02-15 [1] CRAN (R 4.5.1)\n RColorBrewer      1.1-3      2022-04-03 [1] CRAN (R 4.5.1)\n Rcpp              1.1.1-1.1  2026-04-24 [1] CRAN (R 4.5.3)\n readr           * 2.2.0      2026-02-19 [1] CRAN (R 4.5.2)\n recipes         * 1.3.3      2026-05-30 [1] CRAN (R 4.5.3)\n report          * 0.6.4      2026-05-04 [1] CRAN (R 4.5.3)\n reticulate      * 1.46.0     2026-04-09 [1] CRAN (R 4.5.3)\n rlang             1.2.0      2026-04-06 [1] CRAN (R 4.5.3)\n rmarkdown         2.31       2026-03-26 [1] CRAN (R 4.5.3)\n rms             * 8.1-1      2026-02-18 [1] CRAN (R 4.5.2)\n rootSolve         1.8.2.4    2023-09-21 [1] CRAN (R 4.5.1)\n rpart             4.1.27     2026-03-27 [1] CRAN (R 4.5.3)\n rprojroot         2.1.1      2025-08-26 [1] CRAN (R 4.5.1)\n rsample         * 1.3.2      2026-01-30 [1] CRAN (R 4.5.2)\n rstudioapi        0.19.0     2026-06-11 [1] CRAN (R 4.5.3)\n S7                0.2.2      2026-04-22 [1] CRAN (R 4.5.3)\n sandwich          3.1-1      2024-09-15 [1] CRAN (R 4.5.1)\n scales          * 1.4.0      2025-04-24 [1] CRAN (R 4.5.1)\n see             * 0.14.1     2026-06-29 [1] CRAN (R 4.5.3)\n sessioninfo     * 1.2.4      2026-06-04 [1] CRAN (R 4.5.3)\n simsurv         * 1.0.1      2026-01-22 [1] CRAN (R 4.5.3)\n SparseM           1.84-2     2024-07-17 [1] CRAN (R 4.5.1)\n sparsevctrs       0.3.6      2026-01-27 [1] CRAN (R 4.5.2)\n stringi           1.8.7      2025-03-27 [1] CRAN (R 4.5.2)\n stringr         * 1.6.0      2025-11-04 [1] CRAN (R 4.5.2)\n survival        * 3.8-6      2026-01-16 [1] CRAN (R 4.5.2)\n systemfonts       1.3.2      2026-03-05 [1] CRAN (R 4.5.2)\n tables            0.9.35     2026-06-04 [1] CRAN (R 4.5.3)\n tailor          * 0.1.0      2025-08-25 [1] CRAN (R 4.5.1)\n TH.data           1.1-5      2025-11-17 [1] CRAN (R 4.5.2)\n tibble          * 3.3.1      2026-01-11 [1] CRAN (R 4.5.2)\n tidygraph         1.3.0      2023-12-18 [1] CRAN (R 4.5.1)\n tidymodels      * 1.4.1      2025-09-08 [1] CRAN (R 4.5.1)\n tidyr           * 1.3.2      2025-12-19 [1] CRAN (R 4.5.2)\n tidyselect        1.2.1      2024-03-11 [1] CRAN (R 4.5.1)\n tidyverse       * 2.0.0      2023-02-22 [1] CRAN (R 4.5.1)\n timechange        0.4.0      2026-01-29 [1] CRAN (R 4.5.2)\n timeDate          4052.112   2026-01-28 [1] CRAN (R 4.5.2)\n tinyplot        * 0.6.1      2026-03-28 [1] CRAN (R 4.5.3)\n tinytable         0.16.0     2026-02-11 [1] CRAN (R 4.5.2)\n tune            * 2.1.0      2026-04-17 [1] CRAN (R 4.5.3)\n tweenr            2.0.3      2024-02-26 [1] CRAN (R 4.5.1)\n tzdb              0.5.0      2025-03-15 [1] CRAN (R 4.5.1)\n utf8              1.2.6      2025-06-08 [1] CRAN (R 4.5.1)\n V8                8.2.0      2026-04-21 [1] CRAN (R 4.5.3)\n vctrs             0.7.3      2026-04-11 [1] CRAN (R 4.5.3)\n viridis           0.6.5      2024-01-29 [1] CRAN (R 4.5.1)\n viridisLite       0.4.3      2026-02-04 [1] CRAN (R 4.5.2)\n visNetwork        2.1.4      2025-09-04 [1] CRAN (R 4.5.1)\n WeightIt        * 1.7.0      2026-04-22 [1] CRAN (R 4.5.3)\n withr             3.0.3      2026-06-19 [1] CRAN (R 4.5.3)\n workflows       * 1.3.0      2025-08-27 [1] CRAN (R 4.5.1)\n workflowsets    * 1.1.1      2025-05-27 [1] CRAN (R 4.5.1)\n xfun              0.59       2026-06-19 [1] CRAN (R 4.5.3)\n yaml              2.3.12     2025-12-10 [1] CRAN (R 4.5.2)\n yardstick       * 1.4.0      2026-04-07 [1] CRAN (R 4.5.3)\n zoo               1.8-15     2025-12-15 [1] CRAN (R 4.5.2)\n\n [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library\n * ── Packages attached to the search path.\n\n─ External software ──────────────────────────────────────────────────────────\n setting        value\n cairo          1.18.4\n cairoFT\n pango          1.56.4\n png            1.6.58\n jpeg           8.0\n tiff           LIBTIFF, Version 4.7.2\n tcl            8.6.13\n curl           8.21.0\n zlib           1.3.2\n bzlib          1.0.8, 13-Jul-2019\n xz             5.8.3\n deflate        1.25\n PCRE           10.47 2025-10-21\n ICU            78.3\n TRE            TRE 0.8.0 R_fixes (BSD)\n iconv          GNU libiconv 1.18\n readline       8.3\n BLAS           /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so\n lapack_version 3.12.0\n\n─ Python configuration ───────────────────────────────────────────────────────\n python:         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/python\n libpython:      /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libpython3.12.so\n pythonhome:     /home/figarofuga/analysis/pixi-test/.pixi/envs/default:/home/figarofuga/analysis/pixi-test/.pixi/envs/default\n version:        3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]\n numpy:          /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/python3.12/site-packages/numpy\n numpy_version:  2.4.6\n \n NOTE: Python version was forced by RETICULATE_PYTHON\n\n──────────────────────────────────────────────────────────────────────────────"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#rmstに関してあるいはcox回帰の限界",
@@ -4079,5 +4079,12 @@
     "title": "可視化事始め",
     "section": "補足画像",
     "text": "補足画像"
+  },
+  {
+    "objectID": "medicine/FMF/index.html#自己炎症性疾患とは",
+    "href": "medicine/FMF/index.html#自己炎症性疾患とは",
+    "title": "家族性地中海熱（Familial Mediterranean Fever: FMF）とは",
+    "section": "自己炎症性疾患とは",
+    "text": "自己炎症性疾患とは\n (清志 et al. 2019)\n\n好中球による炎症反応\n\n抗原暴露によるリンパ球による獲得免疫ではない\n\nPAMs, DAMPsの刺激から始まる\n成人発症でも良い数少ない疾患（他にはAOSD, TRAPS, PPFA, VEXAS症候群） (勝繁 2024)\n膠原病全体の捉え方での自己免疫と自己炎症の鑑別は重要"
   }
 ]
