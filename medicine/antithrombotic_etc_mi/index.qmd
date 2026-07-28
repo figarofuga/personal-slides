@@ -210,9 +210,9 @@ Todo: 確認
 - 明らかに原因があるAFで原因が除去された後には不要とされることが多い
 - 一方で、AFはなりやすさの素因(Substrate)があるので、"AFになりやすい患者"という考え方もできる
   - この後に永続的AFになるかも
-- 実は決まっていない
-
-Todo: ガイドラインのRef
+- この時のAFに対して抗凝固を導入するかは決まっていない
+  - ESC guidelineではIIaだがsepsisの時は利益は分からないと明言を避けている[@Van-Gelder2024-ud]
+  - AHA guidelineではIIb[@Writing-Committee-Members2024-bn]
 
 ## 今わかっていること
 
@@ -222,7 +222,7 @@ Todo: ガイドラインのRef
   - CHADS2-VAで1-4点だと1%程度、5-点で2%程度
 - 特にSepsisの場合は・・・・・・・
 
-Todo：読んでまとめる
+Todo：JAMA 2013読んでまとめる
 
 ## どうするか？
 
