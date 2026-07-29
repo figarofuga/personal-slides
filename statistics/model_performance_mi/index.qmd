@@ -43,15 +43,15 @@ Nozomi Niimi
 
 ## ダニエル書第五章
 
-> “そのしるされた文字はこうです。メネ、メネ、テケル、ウパルシン。その事の解き明かしはこうです、メネは神があなたの治世を数えて、これをその終りに至らせたことをいうのです。テケルは、あなたがはかりで量られて、その量の足りないことがあらわれたことをいうのです。ウパルシンは、あなたの国が分かたれて、メデアとペルシャの人々に与えられることをいうのです。”
+> そのしるされた文字はこうです。メネ、メネ、テケル、ウパルシン。その事の解き明かしはこうです、メネは神があなたの治世を数えて、これをその終りに至らせたことをいうのです。[**テケルは、あなたがはかりで量られて、その量の足りないことがあらわれたことをいうのです。**]{style="color: red;"}ウパルシンは、あなたの国が分かたれて、メデアとペルシャの人々に与えられることをいうのです。
 
 ## Take Home Message
 
-- 分類モデルの場合は弁別能と較正能を別個に評価しよう！
+- 分類モデルの場合は[**弁別能**]{style="color: red;"}と[**較正能**]{style="color: red;"}を別個に評価しよう！
   - 弁別能：AUROC
   - 較正能：Calibration plotを用いる
   - 分類モデルの場合はクラスの偏りに要注意！
-- モデルの比較にNRI, Decision-curve analysisも使おう！
+- モデルの比較にNRI, [**Decision-curve analysis**]{style="color: red;"}も使おう！
 
 ## Agenda
 
@@ -62,14 +62,7 @@ Nozomi Niimi
 - Advanced model performance：モデルの比較
   - NRI、IDI、Decision curve analysis
 
-## Agenda
-
-- 分類モデルとは？
-- 分類の評価：DiscriminationとCalibrationって何？
-  - Discriminationの評価方法
-  - Calibrationの評価方法
-- Advanced model performance：モデルの比較
-  - NRI、IDI、Decision curve analysis
+# 分類モデルとは？
 
 ## 分類モデルとは？
 

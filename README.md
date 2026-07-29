@@ -49,6 +49,7 @@ git push
 The rendered site is written to `docs/` for GitHub Pages.
 
 TODO: complete mlcausal, sepsis hydration.
+TODO: PROのordinalの図のFactorを直す
 
 ## Plans
 
