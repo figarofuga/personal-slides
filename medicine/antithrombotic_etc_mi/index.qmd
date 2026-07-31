@@ -45,7 +45,7 @@ bibliography: references.bib
 ## 症例 1
 
 - 64歳男性、DM, HTN, Dlp背景
-- 3日前発症のアテローム性脳梗塞を発症
+- 4日前発症のアテローム性脳梗塞を発症
 - NIHSSは10点
 - 初期治療は？
 
@@ -67,12 +67,18 @@ bibliography: references.bib
 
 [@Prabhakaran2026-dz]
 
-## DAPTの出血Risk
+## DAPTの出血RiskとBenefit
+
+![DAPTの出血Risk](images/dapt_bleedingrisk.png)
+
+[@Johnston2019-ca]
 
 - 今回の場合は発症しばらく経過しているが出血Riskは高くなくDAPT導入は十分検討できる
-- 裏を返すと、血小板減少とかDIC、原因不明の貧血があったらDAPTは導入しないかも
-
-Todo: DAPTの出血Riskを確認、発症時期により変わるかどうか
+  - 特に最初の1wkより前だと利益は大きそうに見える
+  - 3wks後だと出血のRiskがBenefitを上回る
+- 出血に関しては大体最初の週に0.3%, その後は0.05%程度の出血Risk
+- 裏を返すと、出血Riskが高い場合は行わないかも
+  - 高齢者、CKD、貧血、NSAIDs使用など[@Urban2019-an]
 
 ## 症例 2
 
