@@ -50,12 +50,6 @@ library(here)
 
 reticulate::py_config()
 
-library(dagitty)
-library(ggdag)
-library(dplyr)
-library(ggplot2)
-library(grid)
-
 ```
 
 ## 因果関係
@@ -157,20 +151,87 @@ tidy_dagitty(dag) |>
 ## Stratification
 
 ```{r}
+library(MatchIt)
+library(marginaleffects)
 
+
+data("lalonde")
+
+# PS subclassification for the ATT with 5 subclasses
+s.out <- matchit(treat ~ age + educ + nodegree +
+                    married + re74 + re75,
+                  data = lalonde,
+                  method = "subclass",
+                  subclass = 5, 
+                  estimand = "ATT")
+
+summary(s.out, subclass = TRUE)
+
+
+#Extract matched data
+md <- match_data(s.out)
+
+fitS <- lm(re78 ~ treat * (age + educ + nodegree +
+                    married + re74 + re75),
+           data = md)
+
+avg_comparisons(fitS,
+                variables = "treat",
+                vcov = "HC3",
+                newdata = subset(treat == 1))
 
 ```
 
 ## Matching
 
 ```{r}
+library(MatchIt)
+
+m.out1 <- matchit(treat ~ age + educ + race + nodegree +
+                    married + re74 + re75,
+                  data = lalonde,
+                  method = "nearest", 
+                  estimand = "ATT")
+summary(m.out1)
+
+#Extract matched data
+md <- match_data(s.out)
+
+fitM <- lm(re78 ~ treat * (age + educ + nodegree +
+                    married + re74 + re75),
+           data = md, 
+           weights = weights
+           )
+
+avg_comparisons(fitM,
+                variables = "treat",
+                vcov = ~subclass,
+                newdata = subset(treat == 1)                
+                )
+
+
 
 ```
 
 ## Weighting
 
 ```{r}
+library(WeightIt)
+library(marginaleffects)
 
+W.out <- WeightIt::weightit(treat ~ age + educ + race + nodegree +
+                    married + re74 + re75,
+                  data = lalonde,
+                  method = "glm")
+
+# Fit outcome model
+fitW <- lm_weightit(re78 ~ treat * (age + educ + race + married +
+                                     nodegree + re74 + re75),
+                   data = lalonde, weightit = W.out)
+# G-computation for the treatment effect
+
+marginaleffects::avg_comparisons(fitW, variables = "treat",
+                newdata = subset(treat == 1))
 ```
 
 :::
