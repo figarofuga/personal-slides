@@ -1250,7 +1250,7 @@ tidyr::pivot_longer(toy_data, cols = everything()) |>
 ## 共変量とRiskの1:1の関係性
 
 ```{r}
-#| label: Visualize-ToyData2
+#| label: Visualize-ToyData1
 
 library(tidyverse)
 

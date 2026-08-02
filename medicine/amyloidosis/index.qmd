@@ -1,7 +1,6 @@
 ---
 title: "Systemic amyloidosisとは"
 date: "2024/12/4"
-lang: ja
 bibliography: reference.bib
 link-citations: true
 format:

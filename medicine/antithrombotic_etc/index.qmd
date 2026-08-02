@@ -42,6 +42,8 @@ bibliography: references.bib
 - 基本的にEvidenceがしっかりとある、"明らかな正解"は書きません
 - 明らかな答えがないことに関して、「なぜ？その選択をする？」という事について考えることを目的とします
 
+# 非心原性脳梗塞はいつ発症でもDAPT？
+
 ## 症例 1
 
 - 64歳男性、DM, HTN, Dlp背景
@@ -49,7 +51,7 @@ bibliography: references.bib
 - NIHSSは10点
 - 初期治療は？
 
-## いつDAPTをするの？
+## いつ、だれにDAPTをするの？
 
 - 基本は「発症早期」の「非心原性」のHigh risk TIAまたは軽症脳梗塞
   - TIAとしてはABCD2 4点以上で脳梗塞としてはNIHSS 5点以下
@@ -59,26 +61,27 @@ bibliography: references.bib
 
 | Trial名 | Inclusion | 発症からの時間 | 介入 | NNT |
 |---------------|---------------|---------------|---------------|---------------|
-| CHANCE | ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞 | 24hr | ASA+CLOを21日 | 28 |
-| POINT | ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞 | 12hr | ASA+CLOを90日 | 67 |
-| THALES | ABCD2≧6のTIAあるいはNIHSS≦5の脳梗塞 | 24hr | ASA+CLOを30日 | 91 |
-| CHANCE2 | ABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞かつCYP2C19のloss-of-function allele | 24hr | ASA+Ticagrelorを21日 | 63 |
+| CHANCE | ABCD2≧4のTIAあるい<br>はNIHSS≦3の脳梗塞 | 24hr | ASA+CLOを21日 | 28 |
+| POINT | ABCD2≧4のTIAあるいは<br>NIHSS≦3の脳梗塞 | 12hr | ASA+CLOを90日 | 67 |
+| THALES | ABCD2≧6のTIAあるいは<br>NIHSS≦5の脳梗塞 | 24hr | ASA+CLOを30日 | 91 |
+| CHANCE2 | ABCD2≧4のTIAあるいは<br>NIHSS≦3の脳梗塞かつ<br>CYP2C19のloss-of-function allele | 24hr | ASA+Ticagrelorを21日 | 63 |
 | INSPIRES | ABCD2≧4のTIAあるいはNIHSS≦5の脳梗塞かつアテローム性を疑う | 72hr | ASA+CLOを21日 | 53 |
 
 [@Prabhakaran2026-dz]
 
 ## DAPTの出血RiskとBenefit
 
-![DAPTの出血Risk](images/dapt_bleedingrisk.png)
+![](images/dapt_bleedingrisk.png)
 
 [@Johnston2019-ca]
 
-- 今回の場合は発症しばらく経過しているが出血Riskは高くなくDAPT導入は十分検討できる
-  - 特に最初の1wkより前だと利益は大きそうに見える
-  - 3wks後だと出血のRiskがBenefitを上回る
-- 出血に関しては大体最初の週に0.3%, その後は0.05%程度の出血Risk
+- DAPTのRCTのmeta analysisだと、出血に関しては大体最初の週に0.3%, その後は週に0.05%程度の出血Risk
+  - 特に最初の1wkより前だと脳梗塞の予防効果のBenefitは大きそうに見えるが3wks後だと出血のRiskがBenefitを上回る
+- 今回の場合は発症しばらく経過しているがDAPT導入は十分検討できる
 - 裏を返すと、出血Riskが高い場合は行わないかも
   - 高齢者、CKD、貧血、NSAIDs使用など[@Urban2019-an]
+
+# 心原性脳梗塞の適切なDOAC開始のタイミングは？
 
 ## 症例 2
 
@@ -115,6 +118,9 @@ bibliography: references.bib
 - しかし、最近のRCTでは、早期導入でも出血Riskは変わらないことが示されている
 - 即座のDOACか、24時間程度待って頭部CTを確認した後のDOAC導入が妥当かもしれない
 
+# 心原性脳梗塞患者がhemorrhagic transformationしてしまったらどうする？
+
+
 ## 症例3
 
 - 症例2の患者を24時間後の頭部CTで左MCAに出血性梗塞を認めた
@@ -123,7 +129,7 @@ bibliography: references.bib
 
 ## 脳梗塞の出血転化について
 
-- 実はOPTIMAS trialだと軽度の脳出血合併例も入っている[@Werring2024-jg]
+- DOACの早期導入で有名なRCTのOPTIMAS trialだと軽度の出血性脳梗塞例も入っている[@Werring2024-jg]
   - 出血部位が脳梗塞部位全体の30%未満かつ、圧排がない(Heidelberg criteriaの2未満)
 - 全体としてはEarly vs. Late (4日以内 vs. 7日以降)で安全性に差はなし
   - ただし、まだ出血性脳梗塞患者のPrespecifiedのサブ解析は現時点(2026/7/26)では存在しない
@@ -131,12 +137,14 @@ bibliography: references.bib
 - 個人的には出血が広がらないことを同日～翌日まで確認して早期導入がよい(できれば4日以内)
 - 当然、神経学的に悪化がなく、脳ヘルニアなどがないことが大前提
 
+# AF患者のBreakthrough ischemic strokeへの対応
+
 ## 症例4
 
 - 78歳男性、元々CHADS2 3点で心房細動でEdoxaban 30mgを内服中
 - 1日前発症の脳塞栓症あり、NIHSSは3点程度で軽症
 - 頸動脈エコーでプラークはなし
-- さて、抗凝固はどうする？
+- さて、どうする？
 
 ## DOAC内服中の脳梗塞
 
@@ -158,7 +166,7 @@ bibliography: references.bib
     - 特に、Dabigatran 150mg 2T2Xを考慮(RE-LYで唯一WFに予防効果で勝っている)[@Seiffge2024-yu]
   - ASAを併用　　　　など
 
-## その上で・・・・・・
+## 今までわかっている事
 
 - AFでDOAC内服中の脳梗塞再発患者へのRCTは存在しない
 - 観察研究では、同じ種類のDOACを継続することがその後のRiskが最も低く出血合併症が低かった[@Ip2023-vw]
@@ -166,30 +174,31 @@ bibliography: references.bib
 - ただし、いずれにせよ観察研究なので絶対に正しいわけではない
 - 個人的には元気な患者の場合は循環器内科に左心耳閉鎖術を相談することも検討する
 
+# AF患者がアテローム性脳梗塞になった時の抗血栓薬の選択
 
-## 症例6
+## 症例5
 
 - 82歳男性、元々HTN, DM, Dlpで10年前にアテローム性脳梗塞既往
 - 動悸で初診外来を受診、新規の心房細動が判明
 - どうする？
 
-## 外堀を埋める事実～非心原性脳梗塞の抗血小板薬の治療効果
+## 非心原性脳梗塞の抗血小板薬の治療効果
 
 - WARSS trialではWFは非心原性脳梗塞患者に対してASAと同等の予防効果を認めた[@Mohr2001-ga; @Schachter2008-mp]
   - 死亡または脳梗塞はWFでやや多いが17.8% vs. 16%で有意差なし
   - 出血はMinorな出血で20.8% vs. 12.9%でWFで有意に多い
 
-## 外堀を埋める事実～心原性脳梗塞の抗凝固の治療効果
+## 心原性脳梗塞の抗凝固の治療効果
 
 - EAFT trialではAF+脳塞栓症の患者に対してPlaceboに比べて再発を1/3まで減らす(OR 0.34, 95% CI 0.20–0.56)[@Klijn2019-ex]
 
-## 外堀を埋める事実～心原性脳梗塞への抗血小板薬の予防効果
+## 心原性脳梗塞への抗血小板薬の予防効果
 
 - 複数のRCTのSystematic reviewだと約15%低下はしていたが統計学的に有意ではなかった[@Klijn2019-ex]
 
-## 外堀を埋める事実～抗血小板と抗凝固の併用の出血Risk
+## 抗血小板と抗凝固の併用の出血Risk
 
-![DAPTの出血Risk](images/asa_anticoag_bleeding.png)
+![](images/asa_anticoag_bleeding.png)
 
 [@Morimoto2021-bu]
 
@@ -197,7 +206,7 @@ bibliography: references.bib
   - 1年で3.1% vs. 1.9%
   - 4年で9.6% vs. 7.0%
 
-## アテローム性脳梗塞+AFのRCT
+## アテローム性脳梗塞+AFの唯一のRCT
 
 ![](images/asa_anticoag_rct.png)
 
@@ -205,19 +214,33 @@ bibliography: references.bib
   - P: AF + ASCVD risk因子があり最近(発症 8-360日)TIA/Strokeを発症した患者(n = 316)
   - I: 抗凝固+抗血小板薬
   - C: 抗凝固単剤
-  - O: 
-    - Primary: 2年以内の虚血イベント(心血管死亡+脳梗塞+MI+全身性塞栓症+血行再建)+有意な出血
-      - 17.8% (11.0%-24.0%) vs. 19.6% (12.7%- 26.0%)(HR 0.91, 0.53- 1.55; p = .64)
-    - 虚血イベント
-      - 11.1% vs. 14.2% (HR 0.76, 0.39-1.48; p = .41)
-    - 有意な出血
-      - 9.4% vs. 5.6% (HR 1.63, 0.68-3.94; p = .27)
+  - O: Primary: 2年以内の虚血イベント(心血管死亡+脳梗塞+MI+全身性塞栓症+血行再建)+有意な出血
+
+## 結果
+
+| Outcome | 抗血小板薬 + 抗凝固 (発症率) | 抗凝固 単剤 (発症率) | HR (95% CI), p値 |
+|:---|:---:|:---:|:---|
+| 2年以内の虚血イベント[^1] + 有意な出血 | 17.8% (11.0–24.0%) | 19.6% (12.7–26.0%) | 0.91 (0.53–1.55), *p* = 0.64 |
+| 虚血イベント | 11.1% | 14.2% | 0.76 (0.39–1.48), *p* = 0.41 |
+| 有意な出血 | 9.4% | 5.6% | 1.63 (0.68–3.94), *p* = 0.27 |
+| **全出血イベント** | **19.5%** | **8.6%** | **2.42 (1.23–4.76), *p* = 0.008** |
+
+[^1]: 虚血イベント: 心血管死亡+脳梗塞+MI+全身性塞栓症+血行再建
+
+
+## ただし・・・・・・
+
+- Inclusionは8日目以降なので、もっと急性期はなんとも言えない
+- 7日以内くらいの抗凝固と抗血小板薬の併用についてはこのRCTは教えてくれない
+
+# Secondary AFに対する抗凝固の適応は？
 
 ## 症例6
 
 - 76歳女性、腎盂腎炎で入院
 - 入院日にHR 120の心房細動発症
 - 高血圧、糖尿病既往あり
+- 抗凝固薬の適応は？
 
 ## Secondary (symptomatic) AFの治療は？
 
@@ -230,10 +253,12 @@ bibliography: references.bib
 
 ## 今わかっていること
 
-- 二次性AFの患者は1年間追うと1/3が再発し、5年追うと約1/2が再発する
+- SepsisによるAFはcommonであり重症度が高いと発症しやすい
+  - sepsisだけだと8-10%だが、Septic shockだと23-44%が発症[@Chyou2023-ur]
+- 二次性AFの患者は1年間追うと1/3が再発し、5年追うと約1/2が再発する[@Writing-Committee-Members2024-bn]
 - 二次性AF患者は、その後を追うと死亡率が高く、脳梗塞の発症率も高い
 - ただし、二次性のAFは、一次性のAFに比べて脳梗塞Riskは低い
-  - CHADS2-VAで1-4点だと1%程度、5-点で2%程度
+  - CHADS2-VAで1-4点だと1%程度、5-点で2%程度[@Abdel-Qadir2025-yv]
 - 特にSepsisの場合はCHADS2-VAScは塞栓症のRiskとして使えず、観察研究ではあるが抗凝固と脳梗塞との関連は示されなかった
 [@Walkey2016-mg; @Quon2018-gc]
 

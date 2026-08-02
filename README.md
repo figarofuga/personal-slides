@@ -37,11 +37,11 @@ pixi run render
 
 # Base Folder（pixi.tomlがある場所）からの相対パスで1つだけ
 pixi run render statistics/RMST_mi/index.qmd
-pixi run render medicine/FMF/index.qmd
+pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add FMF slides"
+git commit -m "Add antithrombotic-etc slides"
 git push
 
 ```
