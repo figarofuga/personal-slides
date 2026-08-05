@@ -1,6 +1,11 @@
 version: 7
 platforms:
 - name: linux-64
+  virtual-packages:
+  - __unix=0=0
+  - __linux=4.18
+  - __glibc=2.28
+  - __archspec=0=x86_64
 environments:
   default:
     channels:
@@ -387,7 +392,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/linux-64/r-reshape2-1.4.5-r45h3697838_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/r-reticulate-1.46.0-r45h3697838_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/r-riskregression-2026.03.11-r45hf1899b2_0.conda
-      - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.2.0-r45h3697838_0.conda
+      - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.3.0-r45h3697838_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/r-rms-8.1_1-r45heaba542_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/r-rocr-1.0_12-r45hc72bb7e_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/r-rootsolve-1.8.2.4-r45heaba542_2.conda
@@ -962,14 +967,14 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/xgboost-3.3.0-cpu_pyhb39878e_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/zarr-3.2.1-pyhc364b38_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/zipp-4.1.0-pyhcf101f3_0.conda
-      - conda_source: r-clarify[93c6c628] @ vendor/clarify
-      - conda_source: r-doubleml[728342d3] @ vendor/DoubleML
-      - conda_source: r-exclusiontable[cd1215f7] @ vendor/ExclusionTable
-      - conda_source: r-forestploter[880a4e71] @ vendor/forestploter
-      - conda_source: r-ggcube[a759d2b4] @ vendor/ggcube
-      - conda_source: r-plotthis[f4c07e34] @ vendor/plotthis
-      - conda_source: r-rmsb[480ee362] @ vendor/rmsb
-      - conda_source: r-simsurv[9e81a7f2] @ vendor/simsurv
+      - conda_source: r-clarify[88184ea8] @ vendor/clarify
+      - conda_source: r-doubleml[fa106591] @ vendor/DoubleML
+      - conda_source: r-exclusiontable[dc43a83f] @ vendor/ExclusionTable
+      - conda_source: r-forestploter[0d965102] @ vendor/forestploter
+      - conda_source: r-ggcube[84a83010] @ vendor/ggcube
+      - conda_source: r-plotthis[0877c1c8] @ vendor/plotthis
+      - conda_source: r-rmsb[99bb0123] @ vendor/rmsb
+      - conda_source: r-simsurv[19649a59] @ vendor/simsurv
 packages:
 - conda: https://prefix.dev/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda
   build_number: 20
@@ -7508,19 +7513,6 @@ packages:
   run_exports: {}
   size: 1793241
   timestamp: 1773654293125
-- conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.2.0-r45h3697838_0.conda
-  sha256: d311a9320326f46ec7372aa4944fcbfaa62f9d976dec6be32f3e44f9bc1c720c
-  md5: f4fb1a80e2e11b92cfc654e9871dc2b7
-  depends:
-  - __glibc >=2.17,<3.0.a0
-  - libgcc >=14
-  - libstdcxx >=14
-  - r-base >=4.5,<4.6.0a0
-  license: GPL-3.0-only
-  license_family: GPL3
-  run_exports: {}
-  size: 1590688
-  timestamp: 1775483709345
 - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.3.0-r45h3697838_0.conda
   sha256: 13aed8664cbf46946eed067d1708ee1a8dcbd7cf32d361c7a03a9bf3f83ac425
   md5: afa49304f86d922c157d08e9e9d9ceb8
@@ -15800,7 +15792,7 @@ packages:
   run_exports: {}
   size: 24190
   timestamp: 1779159948016
-- conda_source: r-clarify[93c6c628] @ vendor/clarify
+- conda_source: r-clarify[88184ea8] @ vendor/clarify
   variants:
     target_platform: linux-64
   depends:
@@ -15939,7 +15931,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/r-withr-3.0.3-r45hc72bb7e_0.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-doubleml[728342d3] @ vendor/DoubleML
+- conda_source: r-doubleml[fa106591] @ vendor/DoubleML
   variants:
     target_platform: linux-64
   depends:
@@ -16085,7 +16077,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/r-r6-2.6.1-r45hc72bb7e_1.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-exclusiontable[cd1215f7] @ vendor/ExclusionTable
+- conda_source: r-exclusiontable[dc43a83f] @ vendor/ExclusionTable
   variants:
     target_platform: linux-64
   depends:
@@ -16189,7 +16181,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/libstdcxx-devel_linux-64-15.2.0-hd446a21_119.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-forestploter[880a4e71] @ vendor/forestploter
+- conda_source: r-forestploter[0d965102] @ vendor/forestploter
   variants:
     target_platform: linux-64
   depends:
@@ -16267,7 +16259,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/linux-64/r-base-4.5.3-h502d0c9_3.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-cli-3.6.6-r45h3697838_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-glue-1.8.1-r45h54b55ab_0.conda
-  - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.2.0-r45h3697838_0.conda
+  - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.3.0-r45h3697838_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/readline-8.3-h853b02a_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/sed-4.10-h19d0853_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/tk-8.6.13-noxft_h366c992_103.conda
@@ -16297,7 +16289,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/r-lifecycle-1.0.5-r45hc72bb7e_0.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-ggcube[a759d2b4] @ vendor/ggcube
+- conda_source: r-ggcube[84a83010] @ vendor/ggcube
   variants:
     target_platform: linux-64
   depends:
@@ -16448,7 +16440,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/r-withr-3.0.3-r45hc72bb7e_0.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-plotthis[f4c07e34] @ vendor/plotthis
+- conda_source: r-plotthis[0877c1c8] @ vendor/plotthis
   variants:
     target_platform: linux-64
   depends:
@@ -16623,8 +16615,10 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/r-withr-3.0.3-r45hc72bb7e_0.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-rmsb[480ee362] @ vendor/rmsb
+- conda_source: r-rmsb[99bb0123] @ vendor/rmsb
   variants:
+    c_stdlib: sysroot
+    c_stdlib_version: '2.28'
     target_platform: linux-64
   depends:
   - r-base
@@ -16643,6 +16637,7 @@ packages:
   - libstdcxx >=15
   - libgfortran5 >=15.2.0
   - libgfortran *
+  - __glibc >=2.28,<3.0.a0
   - tbb-devel >=2022.3.0,<2022.4.0a0
   license: GPL-3.0-or-later
   build_packages:
@@ -16797,7 +16792,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/linux-64/r-rcppeigen-0.3.4.0.2-r45h3704496_1.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-rcppparallel-5.1.11_2-r45h0d96847_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-reshape2-1.4.5-r45h3697838_0.conda
-  - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.2.0-r45h3697838_0.conda
+  - conda: https://prefix.dev/conda-forge/linux-64/r-rlang-1.3.0-r45h3697838_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-rms-8.1_1-r45heaba542_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-rpart-4.1.27-r45h54b55ab_0.conda
   - conda: https://prefix.dev/conda-forge/linux-64/r-rstan-2.32.7-r45h0d96847_1.conda
@@ -16910,7 +16905,7 @@ packages:
   - conda: https://prefix.dev/conda-forge/noarch/r-withr-3.0.3-r45hc72bb7e_0.conda
   - conda: https://prefix.dev/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
   - conda: https://prefix.dev/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-- conda_source: r-simsurv[9e81a7f2] @ vendor/simsurv
+- conda_source: r-simsurv[19649a59] @ vendor/simsurv
   variants:
     target_platform: linux-64
   depends:

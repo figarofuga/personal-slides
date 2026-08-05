@@ -23,7 +23,9 @@
     "quarto.cells.diagnostics.enabled": false,
 
     "r.rpath.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
-    "r.rterm.linux": "${workspaceFolder}/.pixi/envs/default/bin/radian",
+    "r.rterm.linux": "${workspaceFolder}/scripts/radian-pixi.sh",
+    "r.sessionWatcher": true,
+    "r.plot.useHttpgd": true,
     "r.lsp.diagnostics": false,
     "r.bracketedPaste": true
 }
