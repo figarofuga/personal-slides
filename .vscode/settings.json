@@ -20,6 +20,7 @@
         "**/index_cache"
     ],
     "python.analysis.indexing": false,
+    "python.pyrefly.disableTypeErrors": true,
     "quarto.cells.diagnostics.enabled": false,
 
     "r.rpath.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
@@ -27,5 +28,7 @@
     "r.sessionWatcher": true,
     "r.plot.useHttpgd": true,
     "r.lsp.diagnostics": false,
-    "r.bracketedPaste": true
+    "r.bracketedPaste": true,
+
+    "positron.r.diagnostics.enable": false
 }

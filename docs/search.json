@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.60087\n\n\n2\n19.00119\n\n\n3\n21.32549\n\n\n4\n23.32308\n\n\n5\n19.49268\n\n\n6\n20.78118\n\n\n7\n22.12761\n\n\n8\n21.28802\n\n\n9\n20.82277\n\n\n10\n20.73918\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.33031\n\n\n2\n20.68505\n\n\n3\n24.04838\n\n\n4\n20.94166\n\n\n5\n20.53896\n\n\n6\n19.44898\n\n\n7\n20.66811\n\n\n8\n23.78428\n\n\n9\n21.08882\n\n\n10\n22.66558\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n73.12805\n205.1990\n\n\n\n2\n77.13932\n185.9467\n\n\n\n3\n77.54197\n174.2210\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n73.64453\n199.7022\n\n\n\n2\n82.29411\n203.7581\n\n\n\n3\n73.77887\n203.0852\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -2804,7 +2804,7 @@
     "href": "statistics/model_performance_mi/index.html#分類の評価discriminationとcalibration",
     "title": "分類モデルの評価について",
     "section": "分類の評価：DiscriminationとCalibration",
-    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination（弁別能）とCalibration（較正能）を別個に評価する\nDiscrimination\n\n0/1の正確性\n実際にこの患者の予測が当たるかどうかの評価\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目\nCalibrationはしばしば忘れ去られている\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination(弁別能)とCalibration(較正能)を別個に評価する\nDiscrimination\n\n0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目 -&gt; Calibrationはしばしば忘れ去られている [@Alba2017-gh]"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#例",
@@ -4351,6 +4351,6 @@
     "href": "statistics/model_performance_mi/index.html#分類モデルとは-1",
     "title": "分類モデルの評価について",
     "section": "分類モデルとは？",
-    "text": "分類モデルとは？\n\n\n\nいわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる\n\n回帰モデル：連続値（BNP値、e’、PCWPなど）を直接予測する\n分類モデル：0/1（生死、出血の有無など）を予測する\n\n実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する\n任意のカットオフ（通常0.5）で0か1に丸め込んでいる"
+    "text": "分類モデルとは？\n\n\n       Class1 predicted  truth\n1 0.003589243    Class2 Class2\n2 0.678621054    Class1 Class1\n3 0.110893522    Class2 Class2\n4 0.735161703    Class1 Class1\n5 0.016239960    Class2 Class2\n6 0.999275071    Class1 Class1\n\n\n\nいわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる\n\n回帰モデル：連続値（BNP値、e’、PCWPなど）を直接予測する\n分類モデル：0/1（生死、出血の有無など）を予測する\n\n実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する\n任意のカットオフ（通常0.5）で0か1に丸め込んでいる"
   }
 ]

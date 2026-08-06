@@ -190,21 +190,6 @@ Nozomi Niimi</p>
 <li>モデルの比較にNRI, <span style="color: red;"><strong>Decision-curve analysis</strong></span>も使おう！</li>
 </ul>
 </section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
-<ul>
-<li>分類モデルとは？</li>
-<li>分類の評価：DiscriminationとCalibrationって何？
-<ul>
-<li>Discriminationの評価方法</li>
-<li>Calibrationの評価方法</li>
-</ul></li>
-<li>Advanced model performance：モデルの比較
-<ul>
-<li>NRI、IDI、Decision curve analysis</li>
-</ul></li>
-</ul>
-</section>
 <section>
 <section id="分類モデルとは" class="title-slide slide level1 center">
 <h1>分類モデルとは？</h1>
@@ -212,56 +197,47 @@ Nozomi Niimi</p>
 </section>
 <section id="分類モデルとは-1" class="slide level2">
 <h2>分類モデルとは？</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       Class1 predicted  truth
+1 0.003589243    Class2 Class2
+2 0.678621054    Class1 Class1
+3 0.110893522    Class2 Class2
+4 0.735161703    Class1 Class1
+5 0.016239960    Class2 Class2
+6 0.999275071    Class1 Class1</code></pre>
+</div>
+</div>
 <ul>
 <li>いわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる
 <ul>
 <li>回帰モデル：連続値（BNP値、e’、PCWPなど）を直接予測する</li>
 <li>分類モデル：0/1（生死、出血の有無など）を予測する</li>
 </ul></li>
-<li>実際の分類モデルは <code>0.4</code>, <code>0.357</code> などイベントが起きる確率を計算する</li>
+<li>実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する</li>
 <li>任意のカットオフ（通常0.5）で0か1に丸め込んでいる</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="images/slide06_image01.png" style="width:70.0%" alt="分類モデルのイメージ"></p>
-<p><img data-src="images/slide06_image02.png" style="width:55.0%" alt="連続値モデルのイメージ"></p>
-</div></div>
-</section>
-<section id="agenda-1" class="slide level2">
-<h2>Agenda</h2>
-<ul>
-<li>分類モデルとは？</li>
-<li>分類の評価：DiscriminationとCalibrationって何？
-<ul>
-<li>Discriminationの評価方法</li>
-<li>Calibrationの評価方法</li>
-</ul></li>
-<li>Advanced model performance：モデルの比較
-<ul>
-<li>NRI、IDI、Decision curve analysis</li>
-</ul></li>
-</ul>
+</section></section>
+<section>
+<section id="分類の評価discriminationとcalibrationって何" class="title-slide slide level1 center">
+<h1>分類の評価：DiscriminationとCalibrationって何？</h1>
+
 </section>
 <section id="分類の評価discriminationとcalibration" class="slide level2">
 <h2>分類の評価：DiscriminationとCalibration</h2>
 <ul>
-<li>分類モデルの評価では、Discrimination（弁別能）とCalibration（較正能）を別個に評価する</li>
+<li>分類モデルの評価では、<span style="color: red;"><strong>Discrimination(弁別能)</strong></span>と<span style="color: red;"><strong>Calibration(較正能)</strong></span>を別個に評価する</li>
 <li>Discrimination
 <ul>
-<li>0/1の正確性</li>
-<li>実際にこの患者の予測が当たるかどうかの評価</li>
+<li>0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価</li>
 </ul></li>
 <li>Calibration
 <ul>
 <li>その患者のリスクの絶対値の評価</li>
 </ul></li>
-<li>まずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目</li>
-<li>Calibrationはしばしば忘れ去られている</li>
+<li>まずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -&gt; Calibrationはしばしば忘れ去られている <span class="citation" data-cites="Alba2017-gh">[@Alba2017-gh]</span></li>
 </ul>
-<div class="reference">
-<p>JAMA. 2017 Oct 10;318(14):1377-84.</p>
-</div>
+<!-- Todo: ここから -->
 </section>
 <section id="例" class="slide level2">
 <h2>例</h2>
@@ -523,7 +499,7 @@ Nozomi Niimi</p>
 <p><img data-src="images/slide20_image02.png" style="width:82.0%" alt="Brier scoreの図"></p>
 </div></div>
 </section>
-<section id="agenda-2" class="slide level2">
+<section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <ul>
 <li>分類モデルとは？</li>
@@ -1152,6 +1128,44 @@ Nozomi Niimi</p>
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

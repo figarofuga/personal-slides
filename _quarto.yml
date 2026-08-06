@@ -2,9 +2,9 @@ project:
   type: website
   output-dir: docs
   render:
-    - index.qmd
-    - statistics/**/*.qmd
-    - medicine/**/*.qmd
+    - /index.qmd
+    - /statistics/**/*.qmd
+    - /medicine/**/*.qmd
 
 website:
   title: "My personal slides"

@@ -53,58 +53,49 @@ Nozomi Niimi
   - 分類モデルの場合はクラスの偏りに要注意！
 - モデルの比較にNRI, [**Decision-curve analysis**]{style="color: red;"}も使おう！
 
-## Agenda
-
-- 分類モデルとは？
-- 分類の評価：DiscriminationとCalibrationって何？
-  - Discriminationの評価方法
-  - Calibrationの評価方法
-- Advanced model performance：モデルの比較
-  - NRI、IDI、Decision curve analysis
-
 # 分類モデルとは？
 
 ## 分類モデルとは？
+```{r}
+#| label: set-up
 
-:::: columns
-::: {.column width="60%"}
+library(modeldata)
+library(yardstick)
+library(dplyr)
+library(ggplot2)
+
+```
+
+
+```{r}
+
+modeldata::two_class_example |> 
+  dplyr::select(Class1, predicted, truth) |> 
+  head()
+
+```
+
+
 - いわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる
   - 回帰モデル：連続値（BNP値、e'、PCWPなど）を直接予測する
   - 分類モデル：0/1（生死、出血の有無など）を予測する
-- 実際の分類モデルは `0.4`, `0.357` などイベントが起きる確率を計算する
+- 実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する
 - 任意のカットオフ（通常0.5）で0か1に丸め込んでいる
-:::
 
-::: {.column width="40%"}
-![](images/slide06_image01.png){fig-alt="分類モデルのイメージ" width="70%"}
-
-![](images/slide06_image02.png){fig-alt="連続値モデルのイメージ" width="55%"}
-:::
-::::
-
-## Agenda
-
-- 分類モデルとは？
-- 分類の評価：DiscriminationとCalibrationって何？
-  - Discriminationの評価方法
-  - Calibrationの評価方法
-- Advanced model performance：モデルの比較
-  - NRI、IDI、Decision curve analysis
+# 分類の評価：DiscriminationとCalibrationって何？
 
 ## 分類の評価：DiscriminationとCalibration
 
-- 分類モデルの評価では、Discrimination（弁別能）とCalibration（較正能）を別個に評価する
+- 分類モデルの評価では、[**Discrimination(弁別能)**]{style="color: red;"}と[**Calibration(較正能)**]{style="color: red;"}を別個に評価する
 - Discrimination
-  - 0/1の正確性
-  - 実際にこの患者の予測が当たるかどうかの評価
+  - 0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価
 - Calibration
   - その患者のリスクの絶対値の評価
-- まずはDiscrimination > Calibrationだが、特に実臨床ではCalibrationも重要な評価項目
-- Calibrationはしばしば忘れ去られている
+- まずはDiscrimination > Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -> Calibrationはしばしば忘れ去られている
+[@Alba2017-gh]
 
-::: {.reference}
-JAMA. 2017 Oct 10;318(14):1377-84.
-:::
+<!-- Todo: ここから -->
+
 
 ## 例
 
@@ -118,28 +109,415 @@ JAMA. 2017 Oct 10;318(14):1377-84.
 
 ## DiscriminationとCalibration
 
+```{r}
+# ============================================================
+# Cook 2007 Figure 2 reproduction
+# Perfect calibration under different true-risk distributions
+# ============================================================
+
+library(tidyverse)
+library(pROC)
+library(ggrepel)
+library(patchwork)
+
+set.seed(42)
+
+# ------------------------------------------------------------
+# 1. Simulation settings
+# ------------------------------------------------------------
+
+n <- 1000
+
+beta_params <- tribble(
+  ~panel,      ~distribution,     ~shape1, ~shape2, ~label_x, ~label_nudge_x, ~label_nudge_y,
+  "Mean 10%",  "Beta(5, 45)",       5,       45,       0.085,       0.020,          1.0,
+  "Mean 10%",  "Beta(1, 9)",        1,        9,        0.150,       0.025,          0.5,
+  "Mean 10%",  "Beta(0.1, 0.9)",    0.1,      0.9,      0.025,       0.035,          0.5,
+
+  "Mean 50%",  "Beta(10, 10)",     10,       10,        0.500,      -0.060,          0.6,
+  "Mean 50%",  "Beta(3, 3)",        3,        3,         0.650,       0.025,          0.3,
+  "Mean 50%",  "Beta(1, 1)",        1,        1,         0.780,      -0.020,          0.5,
+  "Mean 50%",  "Beta(0.1, 0.1)",    0.1,      0.1,       0.080,       0.040,          0.5
+)
+
+# ------------------------------------------------------------
+# 2. Generate individual true risks and outcomes
+#
+# risk_i ~ Beta(a, b)
+# outcome_i ~ Bernoulli(risk_i)
+#
+# The model prediction is the continuous true risk itself.
+# ------------------------------------------------------------
+
+sim_dat <- beta_params |>
+  mutate(
+    simulated_data = pmap(
+      list(shape1, shape2),
+      function(shape1, shape2) {
+
+        risk <- rbeta(
+          n = n,
+          shape1 = shape1,
+          shape2 = shape2
+        )
+
+        tibble(
+          id = seq_len(n),
+          risk = risk,
+          outcome = rbinom(
+            n = n,
+            size = 1,
+            prob = risk
+          ),
+          predicted_class_05 = as.integer(risk >= 0.5)
+        )
+      }
+    )
+  ) |>
+  select(
+    panel,
+    distribution,
+    shape1,
+    shape2,
+    simulated_data
+  ) |>
+  unnest(simulated_data)
+
+# ------------------------------------------------------------
+# 3. Calculate C-statistic for each distribution
+#
+# C-statistic is calculated using:
+#   outcome: observed binary outcome
+#   risk: continuous predicted probability
+# ------------------------------------------------------------
+
+auc_results <- sim_dat |>
+  group_by(
+    panel,
+    distribution,
+    shape1,
+    shape2
+  ) |>
+  summarise(
+    n = n(),
+    event_n = sum(outcome),
+    event_rate = mean(outcome),
+    mean_predicted_risk = mean(risk),
+    sd_predicted_risk = sd(risk),
+
+    c_statistic = {
+      if (n_distinct(outcome) < 2) {
+        NA_real_
+      } else {
+        as.numeric(
+          pROC::roc(
+            response = outcome,
+            predictor = risk,
+            levels = c(0, 1),
+            direction = "<",
+            quiet = TRUE
+          )$auc
+        )
+      }
+    },
+
+    .groups = "drop"
+  )
+
+print(auc_results)
+
+# ------------------------------------------------------------
+# 4. Optional: classification performance using cutoff 0.5
+#
+# This is not the C-statistic calculation.
+# It is shown only as an additional classification summary.
+# ------------------------------------------------------------
+
+classification_results <- sim_dat |>
+  group_by(
+    panel,
+    distribution
+  ) |>
+  summarise(
+    prevalence = mean(outcome),
+    predicted_positive_rate = mean(predicted_class_05),
+    accuracy = mean(predicted_class_05 == outcome),
+
+    sensitivity = if_else(
+      sum(outcome == 1) > 0,
+      mean(predicted_class_05[outcome == 1] == 1),
+      NA_real_
+    ),
+
+    specificity = if_else(
+      sum(outcome == 0) > 0,
+      mean(predicted_class_05[outcome == 0] == 0),
+      NA_real_
+    ),
+
+    .groups = "drop"
+  )
+
+print(classification_results)
+
+# ------------------------------------------------------------
+# 5. Create theoretical beta-density curves
+#
+# The exact endpoints 0 and 1 are avoided because beta
+# densities can diverge there when shape parameters are < 1.
+# ------------------------------------------------------------
+
+density_grid <- seq(
+  from = 0.001,
+  to = 0.999,
+  length.out = 3000
+)
+
+density_dat <- beta_params |>
+  mutate(
+    density_data = pmap(
+      list(shape1, shape2),
+      function(shape1, shape2) {
+        tibble(
+          risk = density_grid,
+          density = dbeta(
+            density_grid,
+            shape1 = shape1,
+            shape2 = shape2
+          )
+        )
+      }
+    )
+  ) |>
+  select(
+    panel,
+    distribution,
+    shape1,
+    shape2,
+    density_data
+  ) |>
+  unnest(density_data) |>
+  left_join(
+    auc_results |>
+      select(
+        panel,
+        distribution,
+        c_statistic
+      ),
+    by = c(
+      "panel",
+      "distribution"
+    )
+  )
+
+# ------------------------------------------------------------
+# 6. Create label positions
+#
+# label_x is manually specified above.
+# label_y is calculated from the theoretical beta density.
+# ------------------------------------------------------------
+
+label_dat <- beta_params |>
+  left_join(
+    auc_results |>
+      select(
+        panel,
+        distribution,
+        c_statistic
+      ),
+    by = c(
+      "panel",
+      "distribution"
+    )
+  ) |>
+  mutate(
+    label_y = dbeta(
+      label_x,
+      shape1 = shape1,
+      shape2 = shape2
+    ),
+
+    label_x_plot = label_x + label_nudge_x,
+    label_y_plot = label_y + label_nudge_y,
+
+    label = sprintf(
+      "C = %.2f",
+      c_statistic
+    )
+  )
+
+print(label_dat)
+
+
+# ------------------------------------------------------------
+# 8. Left panel: average true risk 10%
+#
+# x-axis: 0 to 50%
+# y-axis: 0 to 55
+# ------------------------------------------------------------
+
+plot_left <- density_dat |>
+  filter(panel == "Mean 10%") |>
+  ggplot(
+    aes(
+      x = risk,
+      y = density,
+      linetype = distribution,
+      group = distribution
+    )
+  ) +
+  geom_line(
+    linewidth = 0.9
+  ) +
+  geom_text_repel(
+    data = label_dat |>
+      filter(panel == "Mean 10%"),
+    aes(
+      x = label_x_plot,
+      y = label_y_plot,
+      label = label
+    ),
+    inherit.aes = FALSE,
+    size = 3.8,
+    box.padding = 0.25,
+    point.padding = 0.15,
+    min.segment.length = 0,
+    segment.size = 0.3,
+    seed = 123,
+    max.overlaps = Inf
+  ) +
+  coord_cartesian(
+    xlim = c(0, 0.50),
+    ylim = c(0, 20),
+    clip = "on"
+  ) +
+  scale_x_continuous(
+    breaks = seq(0, 0.50, by = 0.10),
+    labels = scales::label_percent(
+      accuracy = 1
+    ),
+    expand = expansion(
+      mult = c(0, 0.02)
+    )
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 50, by = 10),
+    expand = expansion(
+      mult = c(0, 0.02)
+    )
+  ) +
+  labs(
+    x = "True 10-year risk",
+    y = "Probability density",
+    title = NULL
+  ) +
+  theme_bw()
+
+# ------------------------------------------------------------
+# 9. Right panel: average true risk 50%
+#
+# x-axis: 0 to 100%
+# y-axis: 0 to 10
+#
+# Beta(0.1, 0.1) exceeds this y range near 0 and 1,
+# so the endpoint peaks are visually truncated.
+# ------------------------------------------------------------
+
+plot_right <- density_dat |>
+  filter(panel == "Mean 50%") |>
+  ggplot(
+    aes(
+      x = risk,
+      y = density,
+      linetype = distribution,
+      group = distribution
+    )
+  ) +
+  geom_line(
+    linewidth = 0.9
+  ) +
+  geom_text_repel(
+    data = label_dat |>
+      filter(panel == "Mean 50%"),
+    aes(
+      x = label_x_plot,
+      y = label_y_plot,
+      label = label
+    ),
+    inherit.aes = FALSE,
+    size = 3.8,
+    box.padding = 0.25,
+    point.padding = 0.15,
+    min.segment.length = 0,
+    segment.size = 0.3,
+    seed = 456,
+    max.overlaps = Inf
+  ) +
+  coord_cartesian(
+    xlim = c(0, 1),
+    ylim = c(0, 6),
+    clip = "on"
+  ) +
+  scale_x_continuous(
+    breaks = seq(0, 1, by = 0.25),
+    labels = scales::label_percent(
+      accuracy = 1
+    ),
+    expand = expansion(
+      mult = c(0, 0)
+    )
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 10, by = 2),
+    expand = expansion(
+      mult = c(0, 0.02)
+    )
+  ) +
+  labs(
+    x = "True 10-year risk",
+    y = NULL,
+    title = NULL
+  ) +
+  theme_bw()
+
+# ------------------------------------------------------------
+# 10. Combine panels
+# ------------------------------------------------------------
+
+final_plot <-
+  plot_left +
+  plot_right +
+  plot_layout(
+    widths = c(1, 1),
+    guides = "collect"
+  ) +
+  plot_annotation(
+    title = "Risk distribution and discrimination",
+    subtitle = paste0(
+      "Outcome ~ Bernoulli(true risk), n = ",
+      scales::comma(n)
+    )
+  ) &
+  theme(
+    legend.position = "bottom"
+  )
+
+final_plot
+
+```
+
 <!-- TODO: 元スライドの図注・2図配置は簡略化。 -->
 
-:::: columns
-::: {.column width="52%"}
+
 - 平均リスク50%
 - 平均リスク10%
 - DiscriminationとCalibrationはトレードオフ
 - さらに、事前確率やその分布にも影響を受ける
 - 完璧なDiscrimination & poor calibration
 - 完璧なCalibrationでの理論上の最大のDiscrimination
-:::
 
-::: {.column width="48%"}
-![](images/slide10_image01.png){fig-alt="DiscriminationとCalibrationの模式図1" width="86%"}
+[@Cook2007-fs]
 
-![](images/slide10_image02.png){fig-alt="DiscriminationとCalibrationの模式図2" width="100%"}
-:::
-::::
-
-::: {.reference}
-Circulation. 2007;115:928-935.
-:::
 
 ## Discriminationの評価について
 
