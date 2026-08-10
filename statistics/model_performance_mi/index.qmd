@@ -94,8 +94,6 @@ modeldata::two_class_example |>
 - まずはDiscrimination > Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -> Calibrationはしばしば忘れ去られている
 [@Alba2017-gh]
 
-<!-- Todo: ここから -->
-
 
 ## 例
 
@@ -224,8 +222,6 @@ auc_results <- sim_dat |>
     .groups = "drop"
   )
 
-print(auc_results)
-
 # ------------------------------------------------------------
 # 4. Optional: classification performance using cutoff 0.5
 #
@@ -257,8 +253,6 @@ classification_results <- sim_dat |>
 
     .groups = "drop"
   )
-
-print(classification_results)
 
 # ------------------------------------------------------------
 # 5. Create theoretical beta-density curves
@@ -345,8 +339,6 @@ label_dat <- beta_params |>
       c_statistic
     )
   )
-
-print(label_dat)
 
 
 # ------------------------------------------------------------
@@ -506,29 +498,46 @@ final_plot
 
 ```
 
-<!-- TODO: 元スライドの図注・2図配置は簡略化。 -->
 
-
-- 平均リスク50%
-- 平均リスク10%
 - DiscriminationとCalibrationはトレードオフ
-- さらに、事前確率やその分布にも影響を受ける
-- 完璧なDiscrimination & poor calibration
-- 完璧なCalibrationでの理論上の最大のDiscrimination
+- さらに、アウトカムの発症率やリスクの分布にも影響を受ける
+  - 完璧なDiscrimination & poor calibration
+- 完ぺきなCalibrationで完ぺきなDiscriminationをするためにはかなり無理がある分布でないと達成できない
 
 [@Cook2007-fs]
 
 
 ## Discriminationの評価について
 
+:::: columns
+::: {.column width="50%"}
+```{r}
+library(modeldata)
+head(modeldata::two_class_example)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+library(modeldata)
+library(yardstick)
+
+yardstick::conf_mat(
+  modeldata::two_class_example, 
+  truth = truth, 
+  estimate = predicted
+)
+
+```
+:::
+
+::::
+
 - 0/1の評価（混同行列からの計算）
   - Accuracy、感度、特異度、Fβ scoreなど
 - リスク毎の感度・特異度などを評価したもの
   - ROC、PR curve
 
-![](images/slide11_image01.png){fig-alt="混同行列の例" width="38%"}
-
-![](images/slide11_image02.png){fig-alt="ROC/PR curveの例" width="32%"}
 
 ## 混同行列関連
 
@@ -536,17 +545,25 @@ final_plot
 
 :::: columns
 ::: {.column width="50%"}
-![](images/slide12_image01.png){fig-alt="混同行列関連図1" width="45%"}
+$$
+\begin{aligned}
+\text{Accuracy} &= \frac{TP + TN}{TP + TN + FP + FN} \\[6pt]
+\text{Recall / Sensitivity} &= \frac{TP}{TP + FN} \\[6pt]
+\text{Specificity} &= \frac{TN}{TN + FP} \\[6pt]
+\text{Precision} &= \frac{TP}{TP + FP} \\[6pt]
+F_1\text{-Score} &= 2 \times
+\frac{\text{Precision} \times \text{Recall}}
+{\text{Precision} + \text{Recall}} \\[6pt]
+F_{\beta} &= 
+\frac{(1 + \beta^2)\cdot TP}
+{(1 + \beta^2)\cdot TP + \beta^2\cdot FN + FP}
+\end{aligned}
+$$
 
-![](images/slide12_image02.png){fig-alt="混同行列関連図2" width="90%"}
+
+![](images/conf_mat.png){fig-alt="混同行列関連図2" width="90%"}
 :::
 
-::: {.column width="50%"}
-- PPV
-- カットオフを作るのにも使う
-
-![](images/slide12_image03.png){fig-alt="混同行列関連図3" width="90%"}
-:::
 ::::
 
 ## Discrimination：混同行列関連
@@ -566,13 +583,6 @@ final_plot
   - F0.5などが良い
 :::
 
-::: {.column width="48%"}
-![](images/slide13_image01.png){fig-alt="混同行列関連図1" width="82%"}
-
-![](images/slide13_image02.png){fig-alt="混同行列関連図2" width="42%"}
-
-![](images/slide13_image03.png){fig-alt="混同行列関連図3" width="82%"}
-:::
 ::::
 
 ## リスク毎の評価
@@ -585,11 +595,51 @@ final_plot
 - 1-specificity
 - PPV
 
-![](images/slide14_image01.png){fig-alt="リスク毎評価の図1" width="82%"}
-:::
+```{r}
+library(modeldata)
+library(yardstick)
+library(ggplot2)
+
+yardstick::roc_curve(
+  modeldata::two_class_example, 
+  truth, 
+  Class1
+) |> 
+  ggplot2::autoplot()
+
+yardstick::roc_auc(
+  modeldata::two_class_example, 
+  truth, 
+  Class1
+) 
+
+```
+
+
 
 ::: {.column width="50%"}
-![](images/slide14_image02.png){fig-alt="リスク毎評価の図2" width="70%"}
+
+- PR-AUC
+
+```{r}
+library(modeldata)
+library(yardstick)
+library(ggplot2)
+
+yardstick::pr_curve(
+  modeldata::two_class_example, 
+  truth, 
+  Class1
+) |> 
+  ggplot2::autoplot()
+
+yardstick::pr_auc(
+  modeldata::two_class_example, 
+  truth, 
+  Class1
+) 
+
+```
 
 ![](images/slide14_image03.png){fig-alt="リスク毎評価の補助図1" width="45%"}
 ![](images/slide14_image04.png){fig-alt="リスク毎評価の補助図2" width="45%"}

@@ -14,6 +14,7 @@ environments:
       linux-64:
       - conda: https://prefix.dev/conda-forge/linux-64/_openmp_mutex-4.5-7_kmp_llvm.conda
       - conda: https://prefix.dev/conda-forge/linux-64/alsa-lib-1.2.16.1-hb03c661_0.conda
+      - conda: https://prefix.dev/conda-forge/linux-64/arf-0.4.5-ha23c83e_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/argon2-cffi-bindings-25.1.0-py312h4c3975b_2.conda
       - conda: https://prefix.dev/conda-forge/linux-64/arro3-core-0.8.1-py312h0ccc70a_1.conda
       - conda: https://prefix.dev/conda-forge/linux-64/at-spi2-atk-2.38.0-h0630a04_3.tar.bz2
@@ -1018,6 +1019,19 @@ packages:
     - alsa-lib >=1.2.16.1,<1.3.0a0
   size: 592377
   timestamp: 1781521980743
+- conda: https://prefix.dev/conda-forge/linux-64/arf-0.4.5-ha23c83e_0.conda
+  sha256: 294dfc507cd36b5366dda3d01726afa90a5b1066b2f9efff6fc5e06cd1abc3fd
+  md5: 034217f234a86b02abe628f4e2eeb60a
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - libgcc >=14
+  constrains:
+  - __glibc >=2.17
+  license: MIT
+  license_family: MIT
+  run_exports: {}
+  size: 3967508
+  timestamp: 1785585213297
 - conda: https://prefix.dev/conda-forge/linux-64/argon2-cffi-bindings-25.1.0-py312h4c3975b_2.conda
   sha256: 7988c207b2b766dad5ebabf25a92b8d75cb8faed92f256fd7a4e0875c9ec6d58
   md5: 1567f06d717246abab170736af8bad1b

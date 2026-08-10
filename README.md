@@ -27,6 +27,8 @@ installed automatically from `pixi.lock`. To install it manually, run:
 
 ```bash
 pixi install --locked
+pixi add パッケージ名
+pixi clean --build
 ```
 
 Preview or render the site with:

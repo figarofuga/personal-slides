@@ -22,3 +22,6 @@ format:
   html:
     theme: cosmo
     toc: false
+
+execute: 
+  freeze: auto
