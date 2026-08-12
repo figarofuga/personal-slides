@@ -587,13 +587,18 @@ $$
 
 ## リスク毎の評価
 
-<!-- TODO: 元スライドのROC/PR図の位置関係は簡略化。 -->
+```{r}
+library(modeldata)
+
+head(modeldata::two_class_example) |> 
+  dplyr::select(Class1, predicted, truth) |> 
+  dplyr::rename(`probability of Class1` = Class1)
+
+```
+
 
 :::: columns
 ::: {.column width="50%"}
-- sensitivity
-- 1-specificity
-- PPV
 
 ```{r}
 library(modeldata)
@@ -615,11 +620,9 @@ yardstick::roc_auc(
 
 ```
 
-
+:::
 
 ::: {.column width="50%"}
-
-- PR-AUC
 
 ```{r}
 library(modeldata)
@@ -641,24 +644,10 @@ yardstick::pr_auc(
 
 ```
 
-![](images/slide14_image03.png){fig-alt="リスク毎評価の補助図1" width="45%"}
-![](images/slide14_image04.png){fig-alt="リスク毎評価の補助図2" width="45%"}
-
-![](images/slide14_image05.png){fig-alt="リスク毎評価の図5" width="86%"}
 :::
 ::::
 
-## 注意点
-
-- 極端に偏ったデータでは混同行列関連は役に立たない
-- 特にAccuracyは一番ダメ
-  - 全部0の予測でも90%超えてしまう
-- PRAUC等が役に立つが、数字だけでの評価は困難
-  - ROCは事前確率に関係のない感度・特異度だけでできている
-  - PR curveは事前確率が影響する
-  - PR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい
-  - ROCだと差が出にくい
-- AUROCは数字で大体の印象が分かるのが強み
+## Confusion matrix baseの評価の注意点
 
 | AUROCの値 | 意味 |
 |---|---|
@@ -666,9 +655,15 @@ yardstick::pr_auc(
 | 0.6-0.75 | possible helpful |
 | 0.75- | clearly useful |
 
-::: {.reference}
-JAMA. 2017 Oct 10;318(14):1377-84.
-:::
+[@Alba2017-gh]
+
+- 極端に偏ったデータでは混同行列関連は役に立たない
+- 特にAccuracyは一番ダメ
+  - 全部0の予測でも90%超えてしまう
+- PRAUC等が役に立つが、数字だけでの評価は困難
+  - PR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)
+- **AUROCは数字で大体の印象が分かるのが強み**
+
 
 ## 結局どうすればいいの？
 
@@ -682,8 +677,7 @@ JAMA. 2017 Oct 10;318(14):1377-84.
     - AUROCは必須
 - 不均衡データの場合
   - あまり決まっていない
-  - AUPRCはどこかに記載した方が無難
-  - 個人的には不均衡でもAUROCをメイン解析にしても良いと思う
+  - AUPRCはどこかに記載した方が無難、個人的には不均衡でもAUROCをメイン解析にしても良いと思う
   - Youden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する
 
 ## Calibrationの評価について

@@ -26,7 +26,5 @@
 
   "mounts": [
     "source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"
-  ],
-
-  "postCreateCommand": "sudo chown -R \"$(id -u):$(id -g)\" \"${containerWorkspaceFolder}/.pixi\" && pixi install --locked"
+  ]
 }
