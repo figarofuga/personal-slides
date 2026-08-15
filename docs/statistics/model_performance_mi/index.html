@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja"><head>
+<html lang="en"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -32,8 +32,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -49,6 +68,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -127,6 +147,7 @@
   </style>
 </head>
 <body class="quarto-light">
+<script src="mathjax-config.js"></script>
   <div class="reveal">
     <div class="slides">
 
@@ -136,12 +157,27 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Nozomi Niimi 
+Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
+<div class="quarto-title-author-email">
+<a href="mailto:figarofuga@gmail.com">figarofuga@gmail.com</a>
 </div>
+        <p class="quarto-title-affiliation">
+            東京医療センター総合内科
+          </p>
+    </div>
 </div>
 
   <p class="date">2021-07-30</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/分類モデルとは" id="/toc-分類モデルとは">分類モデルとは？</a></li>
+<li><a href="#/分類の評価discriminationとcalibrationって何" id="/toc-分類の評価discriminationとcalibrationって何">分類の評価：DiscriminationとCalibrationって何？</a></li>
+<li><a href="#/advanced-model-performanceモデルの比較" id="/toc-advanced-model-performanceモデルの比較">Advanced model performance：モデルの比較</a></li>
+</ul>
+</nav>
 </section>
 <section class="slide level2">
 
@@ -165,12 +201,78 @@ Nozomi Niimi
 blockquote {
   font-size: 0.82em;
 }
+
+.reveal .tibble-flow {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reveal .tibble-flow h3 {
+  font-size: 0.72em;
+  text-align: center;
+  margin-bottom: 0.3em;
+}
+
+.reveal .tibble-flow table {
+  font-size: 0.58em;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.reveal .tibble-flow table th {
+  background: #0b284e;
+  color: white;
+  font-weight: 700;
+}
+
+.reveal .tibble-flow table th,
+.reveal .tibble-flow table td {
+  padding: 0.22em 0.45em;
+}
+
+.reveal .flow-operation {
+  text-align: center;
+}
+
+.reveal .flow-operation pre {
+  font-size: 0.42em;
+  box-shadow: none;
+}
+
+.reveal .flow-operation code {
+  display: inline-block;
+  padding: 0.35em 0.55em;
+  color: #0b284e;
+  background: #eef4fb;
+  border: 1px solid #b8cbe0;
+  border-radius: 0.25em;
+  font-size: 0.72em;
+  white-space: nowrap;
+}
+
+.reveal .flow-arrow {
+  color: #3973b9;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.reveal .flow-caption {
+  margin-top: 0.35em;
+  color: #555;
+  font-size: 0.52em;
+  line-height: 1.35;
+}
+
+.reveal .auc-result {
+  width: fit-content;
+  margin: 0.7em auto 0;
+  padding-top: 0.35em;
+  border-top: 3px solid #3973b9;
+  font-size: 0.78em;
+  text-align: center;
+}
 </style>
-</section>
-<section id="分類モデルの評価について" class="slide level2">
-<h2>分類モデルの評価について</h2>
-<p>2021/7/30<br>
-Nozomi Niimi</p>
 </section>
 <section id="ダニエル書第五章" class="slide level2">
 <h2>ダニエル書第五章</h2>
@@ -235,9 +337,8 @@ Nozomi Niimi</p>
 <ul>
 <li>その患者のリスクの絶対値の評価</li>
 </ul></li>
-<li>まずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -&gt; Calibrationはしばしば忘れ去られている <span class="citation" data-cites="Alba2017-gh">[@Alba2017-gh]</span></li>
+<li>まずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -&gt; Calibrationはしばしば忘れ去られている <span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
 </ul>
-<!-- Todo: ここから -->
 </section>
 <section id="例" class="slide level2">
 <h2>例</h2>
@@ -257,27 +358,52 @@ Nozomi Niimi</p>
 </section>
 <section id="discriminationとcalibration" class="slide level2">
 <h2>DiscriminationとCalibration</h2>
-<!-- TODO: 元スライドの図注・2図配置は簡略化。 -->
-<div class="columns">
-<div class="column" style="width:52%;">
-<ul>
-<li>平均リスク50%</li>
-<li>平均リスク10%</li>
-<li>DiscriminationとCalibrationはトレードオフ</li>
-<li>さらに、事前確率やその分布にも影響を受ける</li>
-<li>完璧なDiscrimination &amp; poor calibration</li>
-<li>完璧なCalibrationでの理論上の最大のDiscrimination</li>
-</ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide10_image01.png" style="width:86.0%" alt="DiscriminationとCalibrationの模式図1"></p>
-<p><img data-src="images/slide10_image02.png" style="width:100.0%" alt="DiscriminationとCalibrationの模式図2"></p>
-</div></div>
-<div class="reference">
-<p>Circulation. 2007;115:928-935.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" width="960"></p>
+</figure>
 </div>
+</div>
+</div>
+<ul>
+<li>DiscriminationとCalibrationはトレードオフ</li>
+<li>さらに、アウトカムの発症率やリスクの分布にも影響を受ける
+<ul>
+<li>完璧なDiscrimination &amp; poor calibration</li>
+</ul></li>
+<li>完ぺきなCalibrationで完ぺきなDiscriminationをするためにはかなり無理がある分布でないと達成できない</li>
+</ul>
+<p><span class="citation" data-cites="Cook2007-fs">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
 </section>
 <section id="discriminationの評価について" class="slide level2">
 <h2>Discriminationの評価について</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   truth      Class1       Class2 predicted
+1 Class2 0.003589243 0.9964107574    Class2
+2 Class1 0.678621054 0.3213789460    Class1
+3 Class2 0.110893522 0.8891064779    Class2
+4 Class1 0.735161703 0.2648382969    Class1
+5 Class2 0.016239960 0.9837600397    Class2
+6 Class1 0.999275071 0.0007249286    Class1</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<p><br> =&gt;</p>
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          Truth
+Prediction Class1 Class2
+    Class1    227     50
+    Class2     31    192</code></pre>
+</div>
+</div>
+</div></div>
 <ul>
 <li>0/1の評価（混同行列からの計算）
 <ul>
@@ -288,22 +414,26 @@ Nozomi Niimi</p>
 <li>ROC、PR curve</li>
 </ul></li>
 </ul>
-<p><img data-src="images/slide11_image01.png" style="width:38.0%" alt="混同行列の例"></p>
-<p><img data-src="images/slide11_image02.png" style="width:32.0%" alt="ROC/PR curveの例"></p>
 </section>
 <section id="混同行列関連" class="slide level2">
 <h2>混同行列関連</h2>
-<!-- TODO: 元スライドの数式・矢印レイアウトは画像を並べる形に簡略化。 -->
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="images/slide12_image01.png" style="width:45.0%" alt="混同行列関連図1"></p>
-<p><img data-src="images/slide12_image02.png" style="width:90.0%" alt="混同行列関連図2"></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>PPV</li>
-<li>カットオフを作るのにも使う</li>
-</ul>
-<p><img data-src="images/slide12_image03.png" style="width:90.0%" alt="混同行列関連図3"></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Accuracy} &amp;= \frac{TP + TN}{TP + TN + FP + FN} \\[6pt]
+\text{Recall / Sensitivity} &amp;= \frac{TP}{TP + FN} \\[6pt]
+\text{Specificity} &amp;= \frac{TN}{TN + FP} \\[6pt]
+\text{Precision} &amp;= \frac{TP}{TP + FP} \\[6pt]
+F_1\text{-Score} &amp;= 2 \times
+\frac{\text{Precision} \times \text{Recall}}
+{\text{Precision} + \text{Recall}} \\[6pt]
+F_{\beta} &amp;=
+\frac{(1 + \beta^2)\cdot TP}
+{(1 + \beta^2)\cdot TP + \beta^2\cdot FN + FP}
+\end{aligned}
+\]</span></p>
+<p><img data-src="images/conf_mat.png" style="width:90.0%" alt="混同行列関連図2"></p>
 </div></div>
 </section>
 <section id="discrimination混同行列関連" class="slide level2">
@@ -329,46 +459,168 @@ Nozomi Niimi</p>
 <li>F0.5などが良い</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide13_image01.png" style="width:82.0%" alt="混同行列関連図1"></p>
-<p><img data-src="images/slide13_image02.png" style="width:42.0%" alt="混同行列関連図2"></p>
-<p><img data-src="images/slide13_image03.png" style="width:82.0%" alt="混同行列関連図3"></p>
 </div></div>
+</section>
+<section id="roc指標ができるまで" class="slide level2">
+<h2>ROC指標ができるまで</h2>
+<div class="columns tibble-flow">
+<div class="column" style="width:36%;">
+<h3 id="予測結果">1. 予測結果</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">実測値</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.679</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.111</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.735</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.016</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.999</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="1" style="width:20%;">
+<div class="flow-operation">
+<code>roc_curve()</code>
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+閾値を動かしながら<br>感度・特異度を計算
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="2" style="width:44%;">
+<h3 id="閾値ごとの性能">2. 閾値ごとの性能</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">特異度</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">感度</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.008</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.017</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.021</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.025</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div>
+<div class="auc-result fragment" data-fragment-index="3">
+<p>各点を結んだROC曲線の面積：<strong>AUROC = 0.939</strong></p>
+</div>
 </section>
 <section id="リスク毎の評価" class="slide level2">
 <h2>リスク毎の評価</h2>
-<!-- TODO: 元スライドのROC/PR図の位置関係は簡略化。 -->
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  probability of Class1 predicted  truth
+1           0.003589243    Class2 Class2
+2           0.678621054    Class1 Class1
+3           0.110893522    Class2 Class2
+4           0.735161703    Class1 Class1
+5           0.016239960    Class2 Class2
+6           0.999275071    Class1 Class1</code></pre>
+</div>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<ul>
-<li>sensitivity</li>
-<li>1-specificity</li>
-<li>PPV</li>
-</ul>
-<p><img data-src="images/slide14_image01.png" style="width:82.0%" alt="リスク毎評価の図1"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 roc_auc binary         0.939</code></pre>
+</div>
+</div>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/slide14_image02.png" style="width:70.0%" alt="リスク毎評価の図2"></p>
-<p><img data-src="images/slide14_image03.png" style="width:45.0%" alt="リスク毎評価の補助図1"> <img data-src="images/slide14_image04.png" style="width:45.0%" alt="リスク毎評価の補助図2"></p>
-<p><img data-src="images/slide14_image05.png" style="width:86.0%" alt="リスク毎評価の図5"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 pr_auc  binary         0.946</code></pre>
+</div>
+</div>
 </div></div>
 </section>
-<section id="注意点" class="slide level2">
-<h2>注意点</h2>
-<ul>
-<li>極端に偏ったデータでは混同行列関連は役に立たない</li>
-<li>特にAccuracyは一番ダメ
-<ul>
-<li>全部0の予測でも90%超えてしまう</li>
-</ul></li>
-<li>PRAUC等が役に立つが、数字だけでの評価は困難
-<ul>
-<li>ROCは事前確率に関係のない感度・特異度だけでできている</li>
-<li>PR curveは事前確率が影響する</li>
-<li>PR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい</li>
-<li>ROCだと差が出にくい</li>
-</ul></li>
-<li>AUROCは数字で大体の印象が分かるのが強み</li>
-</ul>
+<section id="confusion-matrix-baseの評価の注意点" class="slide level2">
+<h2>Confusion matrix baseの評価の注意点</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -391,9 +643,19 @@ Nozomi Niimi</p>
 </tr>
 </tbody>
 </table>
-<div class="reference">
-<p>JAMA. 2017 Oct 10;318(14):1377-84.</p>
-</div>
+<p><span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></p>
+<ul>
+<li>極端に偏ったデータでは混同行列関連は役に立たない</li>
+<li>特にAccuracyは一番ダメ
+<ul>
+<li>全部0の予測でも90%超えてしまう</li>
+</ul></li>
+<li>PRAUC等が役に立つが、数字だけでの評価は困難
+<ul>
+<li>PR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)</li>
+</ul></li>
+<li><strong>AUROCは数字で大体の印象が分かるのが強み</strong></li>
+</ul>
 </section>
 <section id="結局どうすればいいの" class="slide level2">
 <h2>結局どうすればいいの？</h2>
@@ -415,8 +677,7 @@ Nozomi Niimi</p>
 <li>不均衡データの場合
 <ul>
 <li>あまり決まっていない</li>
-<li>AUPRCはどこかに記載した方が無難</li>
-<li>個人的には不均衡でもAUROCをメイン解析にしても良いと思う</li>
+<li>AUPRCはどこかに記載した方が無難、個人的には不均衡でもAUROCをメイン解析にしても良いと思う</li>
 <li>Youden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する</li>
 </ul></li>
 </ul>
@@ -430,23 +691,16 @@ Nozomi Niimi</p>
 </ul></li>
 <li>一つの数字で表すもの
 <ul>
-<li>Recalibration parameters</li>
-<li>Calibration plotの傾きと切片を記述</li>
-<li>Hosmer-Lemeshow</li>
-<li>予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する</li>
-<li>Brier score</li>
-<li>実際のイベントと予測確率の差を二乗和にして平均を取った値</li>
+<li>Recalibration parameters: Calibration plotの傾きと切片を記述</li>
+<li>Hosmer-Lemeshow: 予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する</li>
+<li>Brier score: 実際のイベントと予測確率の差を二乗和にして平均を取った値</li>
 </ul></li>
-<li>Calibration plotが、どこの予測能が悪いかもわかるため最も良い評価</li>
+<li><span style="color: red; font-size: 1.1em;"><strong>Calibration plot</strong></span>が、どこの予測能が悪いかもわかるため最も良い評価<span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
 <li>分類数には要注意</li>
 </ul>
-<div class="reference">
-<p>JAMA. 2017 Oct 10;318(14):1377-84.</p>
-</div>
 </section>
-<section id="calibration-plotの作り方" class="slide level2">
+<section id="calibration-plotの作り方" class="slide level2 scrollable">
 <h2>Calibration Plotの作り方</h2>
-<!-- TODO: 元スライドは番号付きの処理フロー。画像を残し、手順は箇条書きで整理。 -->
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -464,9 +718,15 @@ Nozomi Niimi</p>
 </ol></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/slide18_image01.png" style="width:100.0%" alt="Calibration plot作成手順1"></p>
-<p><img data-src="images/slide18_image02.png" style="width:100.0%" alt="Calibration plot作成手順2"></p>
-<p><img data-src="images/slide18_image03.png" style="width:48.0%" alt="Calibration plot作成手順3"> <img data-src="images/slide18_image04.png" style="width:48.0%" alt="Calibration plot作成手順4"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="calibrationの細かい方法" class="slide level2">
@@ -490,7 +750,6 @@ Nozomi Niimi</p>
 </section>
 <section id="brier-score" class="slide level2">
 <h2>Brier Score</h2>
-<!-- TODO: 元スライドは数式中心。画像を残し、必要なら数式をMarkdown化する。 -->
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="images/slide20_image01.png" style="width:100.0%" alt="Brier scoreの式"></p>
@@ -498,21 +757,11 @@ Nozomi Niimi</p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="images/slide20_image02.png" style="width:82.0%" alt="Brier scoreの図"></p>
 </div></div>
-</section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
-<ul>
-<li>分類モデルとは？</li>
-<li>分類の評価：DiscriminationとCalibrationって何？
-<ul>
-<li>Discriminationの評価方法</li>
-<li>Calibrationの評価方法</li>
-</ul></li>
-<li>Advanced model performance：モデルの比較
-<ul>
-<li>NRI、IDI、Decision curve analysis</li>
-</ul></li>
-</ul>
+</section></section>
+<section>
+<section id="advanced-model-performanceモデルの比較" class="title-slide slide level1 center">
+<h1>Advanced model performance：モデルの比較</h1>
+
 </section>
 <section id="モデルの比較" class="slide level2">
 <h2>モデルの比較</h2>
@@ -520,24 +769,20 @@ Nozomi Niimi</p>
 <div class="column" style="width:58%;">
 <ul>
 <li>AU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている</li>
-<li>よくあるシチュエーション
+<li>よくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？
 <ul>
-<li>ベースのモデルに何かの変数を追加したときにモデルが良くなるか？</li>
-</ul></li>
 <li>NRI / IDI</li>
-<li>AUROCは不完全！</li>
+</ul></li>
 </ul>
 </div><div class="column" style="width:42%;">
 <p><img data-src="images/slide22_image01.png" style="width:100.0%" alt="AUROCの限界"></p>
+<p><span class="citation" data-cites="Cook2007-fs">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
 </div></div>
-<div class="reference">
-<p>Circulation. 2007;115:928-935.</p>
-</div>
 </section>
 <section id="epidemiology-201425114-121" class="slide level2">
 <h2>Epidemiology 2014;25:114-121</h2>
-
-<img data-src="images/slide23_image01.png" style="width:74.0%" alt="Epidemiology 2014の図" class="r-stretch"></section>
+<p><img data-src="images/slide23_image01.png" style="width:74.0%" alt="Epidemiology 2014の図"></p>
+</section>
 <section id="nrinet-reclassification-index" class="slide level2">
 <h2>NRI（Net Reclassification Index）</h2>
 <!-- TODO: 元スライドの番号付き図解は画像中心に簡略化。 -->
@@ -550,8 +795,8 @@ Nozomi Niimi</p>
 <li>Continuous NRI</li>
 </ul></li>
 </ul>
-
-<img data-src="images/slide24_image01.png" style="width:88.0%" alt="NRIの図解" class="r-stretch"><div class="reference">
+<p><img data-src="images/slide24_image01.png" style="width:88.0%" alt="NRIの図解"></p>
+<div class="reference">
 <p>JAMA. 2017 Oct 10;318(14):1377-84.</p>
 </div>
 </section>
@@ -687,7 +932,7 @@ Nozomi Niimi</p>
 </ul></li>
 </ul>
 </section>
-<section id="decision-curveの読み方作り方" class="slide level2">
+<section id="decision-curveの読み方作り方" class="slide level2 scrollable">
 <h2>Decision Curveの読み方・作り方</h2>
 <ul>
 <li><ol type="1">
@@ -825,8 +1070,8 @@ Nozomi Niimi</p>
 <li>Backward elimination</li>
 </ul></li>
 </ul>
-
-<img data-src="images/slide37_image01.png" style="width:36.0%" alt="AIC/BICの式" class="r-stretch"></section>
+<p><img data-src="images/slide37_image01.png" style="width:36.0%" alt="AIC/BICの式"></p>
+</section>
 <section id="連続値の評価について" class="slide level2">
 <h2>連続値の評価について</h2>
 <div class="columns">
@@ -868,8 +1113,8 @@ Nozomi Niimi</p>
 </section>
 <section id="rmseは正確性を診ておりr2はバラツキの大きさを診ている" class="slide level2">
 <h2>RMSEは正確性を診ており、R2はバラツキの大きさを診ている</h2>
-
-<img data-src="images/slide40_image01.png" style="width:76.0%" alt="RMSEとR2の違い" class="r-stretch"></section>
+<p><img data-src="images/slide40_image01.png" style="width:76.0%" alt="RMSEとR2の違い"></p>
+</section>
 <section id="何を使えばいいの" class="slide level2">
 <h2>何を使えばいいの？</h2>
 <ul>
@@ -897,7 +1142,7 @@ Nozomi Niimi</p>
 </ul></li>
 </ul>
 </section>
-<section id="bland-altman分析" class="slide level2">
+<section id="bland-altman分析" class="slide level2 smaller scrollable">
 <h2>Bland-Altman分析</h2>
 <div class="columns">
 <div class="column" style="width:46%;">
@@ -912,11 +1157,19 @@ Nozomi Niimi</p>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Alba2017-gh" class="csl-entry" role="listitem">
+Alba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. <span>“Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.”</span> <em>The Journal of the American Medical Association</em> 318 (14): 1377–84. <a href="https://doi.org/10.1001/jama.2017.12126">https://doi.org/10.1001/jama.2017.12126</a>.
+</div>
+<div id="ref-Cook2007-fs" class="csl-entry" role="listitem">
+Cook, Nancy R. 2007. <span>“Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.”</span> <em>Circulation</em> 115 (7): 928–35. <a href="https://doi.org/10.1161/CIRCULATIONAHA.106.672402">https://doi.org/10.1161/CIRCULATIONAHA.106.672402</a>.
+</div>
+</div>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a></p>
 </div>
 </div></div>
 
@@ -948,6 +1201,7 @@ Nozomi Niimi</p>
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': true,
  
@@ -1074,7 +1328,7 @@ Nozomi Niimi</p>
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -1102,7 +1356,7 @@ Nozomi Niimi</p>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1188,12 +1442,12 @@ Nozomi Niimi</p>
           // flash "checked"
           button.classList.add('code-copy-button-checked');
           var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "コピーしました");
+          button.setAttribute("title", "Copied!");
           let tooltip;
           if (window.bootstrap) {
             button.setAttribute("data-bs-toggle", "tooltip");
             button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "コピーしました");
+            button.setAttribute("data-bs-title", "Copied!");
             tooltip = new bootstrap.Tooltip(button, 
               { trigger: "manual", 
                 customClass: "code-copy-button-tooltip",

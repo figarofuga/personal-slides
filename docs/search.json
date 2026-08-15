@@ -2804,7 +2804,7 @@
     "href": "statistics/model_performance_mi/index.html#分類の評価discriminationとcalibration",
     "title": "分類モデルの評価について",
     "section": "分類の評価：DiscriminationとCalibration",
-    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination(弁別能)とCalibration(較正能)を別個に評価する\nDiscrimination\n\n0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目 -&gt; Calibrationはしばしば忘れ去られている [@Alba2017-gh]"
+    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination(弁別能)とCalibration(較正能)を別個に評価する\nDiscrimination\n\n0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目 -&gt; Calibrationはしばしば忘れ去られている (Alba et al. 2017)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#例",
@@ -2818,21 +2818,21 @@
     "href": "statistics/model_performance_mi/index.html#discriminationとcalibration",
     "title": "分類モデルの評価について",
     "section": "DiscriminationとCalibration",
-    "text": "DiscriminationとCalibration\n\n\n\n\n平均リスク50%\n平均リスク10%\nDiscriminationとCalibrationはトレードオフ\nさらに、事前確率やその分布にも影響を受ける\n完璧なDiscrimination & poor calibration\n完璧なCalibrationでの理論上の最大のDiscrimination\n\n\n\n\n\n\nCirculation. 2007;115:928-935."
+    "text": "DiscriminationとCalibration\n\n\n\n\n\n\n\n\n\n\nDiscriminationとCalibrationはトレードオフ\nさらに、アウトカムの発症率やリスクの分布にも影響を受ける\n\n完璧なDiscrimination & poor calibration\n\n完ぺきなCalibrationで完ぺきなDiscriminationをするためにはかなり無理がある分布でないと達成できない\n\n(Cook 2007)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#discriminationの評価について",
     "href": "statistics/model_performance_mi/index.html#discriminationの評価について",
     "title": "分類モデルの評価について",
     "section": "Discriminationの評価について",
-    "text": "Discriminationの評価について\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
+    "text": "Discriminationの評価について\n\n\n\n\n   truth      Class1       Class2 predicted\n1 Class2 0.003589243 0.9964107574    Class2\n2 Class1 0.678621054 0.3213789460    Class1\n3 Class2 0.110893522 0.8891064779    Class2\n4 Class1 0.735161703 0.2648382969    Class1\n5 Class2 0.016239960 0.9837600397    Class2\n6 Class1 0.999275071 0.0007249286    Class1\n\n\n\n =&gt;\n\n\n\n          Truth\nPrediction Class1 Class2\n    Class1    227     50\n    Class2     31    192\n\n\n\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#混同行列関連",
     "href": "statistics/model_performance_mi/index.html#混同行列関連",
     "title": "分類モデルの評価について",
     "section": "混同行列関連",
-    "text": "混同行列関連\n\n\n\n\n\n\n\nPPV\nカットオフを作るのにも使う"
+    "text": "混同行列関連\n\n\n\\[\n\\begin{aligned}\n\\text{Accuracy} &= \\frac{TP + TN}{TP + TN + FP + FN} \\\\[6pt]\n\\text{Recall / Sensitivity} &= \\frac{TP}{TP + FN} \\\\[6pt]\n\\text{Specificity} &= \\frac{TN}{TN + FP} \\\\[6pt]\n\\text{Precision} &= \\frac{TP}{TP + FP} \\\\[6pt]\nF_1\\text{-Score} &= 2 \\times\n\\frac{\\text{Precision} \\times \\text{Recall}}\n{\\text{Precision} + \\text{Recall}} \\\\[6pt]\nF_{\\beta} &=\n\\frac{(1 + \\beta^2)\\cdot TP}\n{(1 + \\beta^2)\\cdot TP + \\beta^2\\cdot FN + FP}\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#discrimination混同行列関連",
@@ -2846,7 +2846,7 @@
     "href": "statistics/model_performance_mi/index.html#リスク毎の評価",
     "title": "分類モデルの評価について",
     "section": "リスク毎の評価",
-    "text": "リスク毎の評価\n\n\n\n\nsensitivity\n1-specificity\nPPV"
+    "text": "リスク毎の評価\n\n\n  probability of Class1 predicted  truth\n1           0.003589243    Class2 Class2\n2           0.678621054    Class1 Class1\n3           0.110893522    Class2 Class2\n4           0.735161703    Class1 Class1\n5           0.016239960    Class2 Class2\n6           0.999275071    Class1 Class1\n\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc binary         0.939\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 pr_auc  binary         0.946"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#注意点",
@@ -2860,21 +2860,21 @@
     "href": "statistics/model_performance_mi/index.html#結局どうすればいいの",
     "title": "分類モデルの評価について",
     "section": "結局どうすればいいの？",
-    "text": "結局どうすればいいの？\n\n均衡がとれているデータの場合\n\n根拠がある場合\n\n妥当な感度、特異度の値が分かっている\nカットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載\nAUROCはあった方が良い\n\n根拠がない場合\n\nYouden indexやFβ scoreをカットオフとしてAccuracy等を評価\nAUROCは必須\n\n\n不均衡データの場合\n\nあまり決まっていない\nAUPRCはどこかに記載した方が無難\n個人的には不均衡でもAUROCをメイン解析にしても良いと思う\nYouden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する"
+    "text": "結局どうすればいいの？\n\n均衡がとれているデータの場合\n\n根拠がある場合\n\n妥当な感度、特異度の値が分かっている\nカットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載\nAUROCはあった方が良い\n\n根拠がない場合\n\nYouden indexやFβ scoreをカットオフとしてAccuracy等を評価\nAUROCは必須\n\n\n不均衡データの場合\n\nあまり決まっていない\nAUPRCはどこかに記載した方が無難、個人的には不均衡でもAUROCをメイン解析にしても良いと思う\nYouden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#calibrationの評価について",
     "href": "statistics/model_performance_mi/index.html#calibrationの評価について",
     "title": "分類モデルの評価について",
     "section": "Calibrationの評価について",
-    "text": "Calibrationの評価について\n\n全体像を示すもの\n\nCalibration plot\n\n一つの数字で表すもの\n\nRecalibration parameters\nCalibration plotの傾きと切片を記述\nHosmer-Lemeshow\n予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する\nBrier score\n実際のイベントと予測確率の差を二乗和にして平均を取った値\n\nCalibration plotが、どこの予測能が悪いかもわかるため最も良い評価\n分類数には要注意\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+    "text": "Calibrationの評価について\n\n全体像を示すもの\n\nCalibration plot\n\n一つの数字で表すもの\n\nRecalibration parameters: Calibration plotの傾きと切片を記述\nHosmer-Lemeshow: 予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する\nBrier score: 実際のイベントと予測確率の差を二乗和にして平均を取った値\n\nCalibration plotが、どこの予測能が悪いかもわかるため最も良い評価(Alba et al. 2017)\n分類数には要注意"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#calibration-plotの作り方",
     "href": "statistics/model_performance_mi/index.html#calibration-plotの作り方",
     "title": "分類モデルの評価について",
     "section": "Calibration Plotの作り方",
-    "text": "Calibration Plotの作り方\n\n\n\n\n\n予測確率を並べる\n\n\n予測確率で群分けする\n\n\n各群の予測確率をまとめる\n\n\n各群の実測イベント率をまとめる"
+    "text": "Calibration Plotの作り方\n\n\n\n\n予測確率を並べる\n\n\n予測確率で群分けする\n\n\n各群の予測確率をまとめる\n\n\n各群の実測イベント率をまとめる"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#calibrationの細かい方法",
@@ -2902,7 +2902,7 @@
     "href": "statistics/model_performance_mi/index.html#モデルの比較",
     "title": "分類モデルの評価について",
     "section": "モデルの比較",
-    "text": "モデルの比較\n\n\n\nAU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている\nよくあるシチュエーション\n\nベースのモデルに何かの変数を追加したときにモデルが良くなるか？\n\nNRI / IDI\nAUROCは不完全！\n\n\n\n\n\nCirculation. 2007;115:928-935."
+    "text": "モデルの比較\n\n\n\nAU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている\nよくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？\n\nNRI / IDI\n\n\n\n\n(Cook 2007)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#epidemiology-201425114-121",
@@ -3042,7 +3042,7 @@
     "href": "statistics/model_performance_mi/index.html#bland-altman分析",
     "title": "分類モデルの評価について",
     "section": "Bland-Altman分析",
-    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941."
+    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941.\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402."
   },
   {
     "objectID": "statistics/visualization_mi/index.html#可視化事始め",
@@ -4352,5 +4352,19 @@
     "title": "分類モデルの評価について",
     "section": "分類モデルとは？",
     "text": "分類モデルとは？\n\n\n       Class1 predicted  truth\n1 0.003589243    Class2 Class2\n2 0.678621054    Class1 Class1\n3 0.110893522    Class2 Class2\n4 0.735161703    Class1 Class1\n5 0.016239960    Class2 Class2\n6 0.999275071    Class1 Class1\n\n\n\nいわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる\n\n回帰モデル：連続値（BNP値、e’、PCWPなど）を直接予測する\n分類モデル：0/1（生死、出血の有無など）を予測する\n\n実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する\n任意のカットオフ（通常0.5）で0か1に丸め込んでいる"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#roc指標ができるまで",
+    "href": "statistics/model_performance_mi/index.html#roc指標ができるまで",
+    "title": "分類モデルの評価について",
+    "section": "ROC指標ができるまで",
+    "text": "ROC指標ができるまで\n\n\n1. 予測結果\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n0.004\nClass2\n\n\n0.679\nClass1\n\n\n0.111\nClass2\n\n\n0.735\nClass1\n\n\n0.016\nClass2\n\n\n0.999\nClass1\n\n\n\n\n\n\n\nroc_curve()\n\n→\n\n\n閾値を動かしながら感度・特異度を計算\n\n\n\n2. 閾値ごとの性能\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n0\n0.000\n1\n\n\n0\n0.004\n1\n\n\n0\n0.008\n1\n\n\n0\n0.012\n1\n\n\n0\n0.017\n1\n\n\n0\n0.021\n1\n\n\n0\n0.025\n1\n\n\n\n\n\n\n\n各点を結んだROC曲線の面積：AUROC = 0.939"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#confusion-matrix-baseの評価の注意点",
+    "href": "statistics/model_performance_mi/index.html#confusion-matrix-baseの評価の注意点",
+    "title": "分類モデルの評価について",
+    "section": "Confusion matrix baseの評価の注意点",
+    "text": "Confusion matrix baseの評価の注意点\n\n\n\nAUROCの値\n意味\n\n\n\n\n0.5-0.6\npoor\n\n\n0.6-0.75\npossible helpful\n\n\n0.75-\nclearly useful\n\n\n\n(Alba et al. 2017)\n\n極端に偏ったデータでは混同行列関連は役に立たない\n特にAccuracyは一番ダメ\n\n全部0の予測でも90%超えてしまう\n\nPRAUC等が役に立つが、数字だけでの評価は困難\n\nPR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)\n\nAUROCは数字で大体の印象が分かるのが強み"
   }
 ]

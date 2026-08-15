@@ -77,7 +77,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add antithrombotic-etc slides"
+git commit -m "Add progress model performance"
 git push
 
 ```

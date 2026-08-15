@@ -1,16 +1,41 @@
 ---
 title: "分類モデルの評価について"
-author: "Nozomi Niimi"
 date: "2021/7/30"
-lang: ja
 format:
-  revealjs:
-    theme: simple
-    slide-number: true
-    incremental: false
+  clean-revealjs:
+    toc: true
+    toc-depth: 1
+    slide-level: 2
+    theme: default
+    scrollable: true
     smaller: true
-    title-slide: false
+    transition: slide
+    incremental: false
+    pdf-separate-fragments: false
+    pdf-max-pages-per-slide: 3
+    slide-number: true
+    auto-stretch: false
+    footer: '<a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a>'
+author:
+  - name: Nozomi Niimi
+    orcid: 0000-0002-6909-0740
+    email: figarofuga@gmail.com
+    affiliations: 東京医療センター総合内科
+date-format: "YYYY-MM-DD"
+engine: knitr
+execute: 
+  error: false
+  warning: false
+  echo: false
+  cache: false
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
+bibliography: references.bib
 ---
+
+
 
 ```{=html}
 <style>
@@ -33,13 +58,80 @@ format:
 blockquote {
   font-size: 0.82em;
 }
+
+.reveal .tibble-flow {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reveal .tibble-flow h3 {
+  font-size: 0.72em;
+  text-align: center;
+  margin-bottom: 0.3em;
+}
+
+.reveal .tibble-flow table {
+  font-size: 0.58em;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.reveal .tibble-flow table th {
+  background: #0b284e;
+  color: white;
+  font-weight: 700;
+}
+
+.reveal .tibble-flow table th,
+.reveal .tibble-flow table td {
+  padding: 0.22em 0.45em;
+}
+
+.reveal .flow-operation {
+  text-align: center;
+}
+
+.reveal .flow-operation pre {
+  font-size: 0.42em;
+  box-shadow: none;
+}
+
+.reveal .flow-operation code {
+  display: inline-block;
+  padding: 0.35em 0.55em;
+  color: #0b284e;
+  background: #eef4fb;
+  border: 1px solid #b8cbe0;
+  border-radius: 0.25em;
+  font-size: 0.72em;
+  white-space: nowrap;
+}
+
+.reveal .flow-arrow {
+  color: #3973b9;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.reveal .flow-caption {
+  margin-top: 0.35em;
+  color: #555;
+  font-size: 0.52em;
+  line-height: 1.35;
+}
+
+.reveal .auc-result {
+  width: fit-content;
+  margin: 0.7em auto 0;
+  padding-top: 0.35em;
+  border-top: 3px solid #3973b9;
+  font-size: 0.78em;
+  text-align: center;
+}
 </style>
 ```
 
-## 分類モデルの評価について
-
-2021/7/30  
-Nozomi Niimi
 
 ## ダニエル書第五章
 
@@ -510,14 +602,22 @@ final_plot
 ## Discriminationの評価について
 
 :::: columns
-::: {.column width="50%"}
+::: {.column width="45%"}
 ```{r}
 library(modeldata)
 head(modeldata::two_class_example)
 ```
 :::
 
-::: {.column width="50%"}
+::: {.column width="10%"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">予測と現実の0/1の組み合わせを<br>2×2にまとめる</div>
+</div>
+:::
+
+::: {.column width="45%"}
 ```{r}
 library(modeldata)
 library(yardstick)
@@ -541,8 +641,6 @@ yardstick::conf_mat(
 
 ## 混同行列関連
 
-<!-- TODO: 元スライドの数式・矢印レイアウトは画像を並べる形に簡略化。 -->
-
 :::: columns
 ::: {.column width="50%"}
 $$
@@ -561,7 +659,82 @@ F_{\beta} &=
 $$
 
 
-![](images/conf_mat.png){fig-alt="混同行列関連図2" width="90%"}
+```{r}
+#| fig-width: 6
+#| fig-height: 5.4
+#| out-width: 65%
+#| fig-align: center
+
+library(ggplot2)
+
+confusion_cells <- tibble::tribble(
+  ~actual, ~predicted, ~cell_label,
+  "P",     "P",        "真陽性\n(TP)",
+  "P",     "N",        "偽陰性\n(FN)",
+  "N",     "P",        "偽陽性\n(FP)",
+  "N",     "N",        "真陰性\n(TN)"
+) |>
+  dplyr::mutate(
+    # x軸は左から P, N
+    predicted = factor(predicted, levels = c("P", "N")),
+
+    # y軸は下から描画されるので N, P の順
+    actual = factor(actual, levels = c("N", "P"))
+  )
+
+ggplot(
+  confusion_cells,
+  aes(x = predicted, y = actual)
+) +
+  geom_tile(
+    width = 0.92,
+    height = 0.92,
+    fill = "white",
+    colour = "grey55",
+    linewidth = 0.8
+  ) +
+  geom_text(
+    aes(label = cell_label),
+    size = 6,
+    fontface = "bold",
+    lineheight = 1.25
+  ) +
+  scale_x_discrete(
+    position = "top",
+    expand = expansion(add = 0.08)
+  ) +
+  scale_y_discrete(
+    expand = expansion(add = 0.08)
+  ) +
+  coord_fixed(clip = "off") +
+  labs(
+    x = "予測されたクラス",
+    y = "実際の\nクラス"
+  ) +
+  theme_void(base_family = "sans") +
+  theme(
+    axis.text = element_text(
+      size = 17,
+      face = "italic",
+      family = "serif",
+      colour = "black"
+    ),
+    axis.title.x.top = element_text(
+      size = 17,
+      face = "bold",
+      margin = margin(b = 7)
+    ),
+    axis.title.y = element_text(
+      size = 17,
+      face = "bold",
+      angle = 0,
+      lineheight = 1.15,
+      margin = margin(r = 12)
+    ),
+    plot.margin = margin(18, 18, 18, 28)
+  )
+```
+
 :::
 
 ::::
@@ -584,6 +757,88 @@ $$
 :::
 
 ::::
+
+## ROC指標ができるまで
+
+```{r}
+#| include: false
+
+library(dplyr)
+library(yardstick)
+library(modeldata)
+
+input_tbl <- modeldata::two_class_example |>
+  transmute(
+    prob_Class1 = Class1,
+    truth
+  ) 
+
+roc_tbl <- input_tbl |>
+  yardstick::roc_curve(
+    truth = truth,
+    prob_Class1
+  )
+
+auc_value <- input_tbl |>
+  yardstick::roc_auc(
+    truth = truth,
+    prob_Class1
+  ) |>
+  dplyr::pull(.estimate)
+
+```
+
+:::: {.columns .tibble-flow}
+::: {.column width="36%"}
+
+### 1. 予測結果
+
+```{r}
+#| echo: false
+
+input_tbl |>
+  dplyr::slice_head(n = 6) |>
+  knitr::kable(
+    format = "html",
+    align = "cc",
+    col.names = c("予測確率", "実測値")
+  )
+```
+
+:::
+
+::: {.column .fragment width="20%" fragment-index="1"}
+
+<div class="flow-operation">
+  <code>roc_curve()</code>
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">閾値を動かしながら<br>感度・特異度を計算</div>
+</div>
+
+:::
+
+::: {.column .fragment width="44%" fragment-index="2"}
+
+### 2. 閾値ごとの性能
+
+```{r}
+#| echo: false
+
+roc_tbl |>
+  dplyr::slice_head(n = 7) |>
+  knitr::kable(
+    format = "html",
+    align = "ccc",
+    col.names = c("閾値", "特異度", "感度")
+  )
+```
+
+:::
+::::
+
+- 感度と1-特異度で点を結ぶとROC曲線
+- PrecisionとRecallで点を結ぶとPR曲線
+
 
 ## リスク毎の評価
 
@@ -685,22 +940,15 @@ yardstick::pr_auc(
 - 全体像を示すもの
   - Calibration plot
 - 一つの数字で表すもの
-  - Recalibration parameters
-  - Calibration plotの傾きと切片を記述
-  - Hosmer-Lemeshow
-  - 予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する
-  - Brier score
-  - 実際のイベントと予測確率の差を二乗和にして平均を取った値
-- Calibration plotが、どこの予測能が悪いかもわかるため最も良い評価
+  - Recalibration parameters: Calibration plotの傾きと切片を記述
+  - Hosmer-Lemeshow: 予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する
+  - Brier score: 実際のイベントと予測確率の差を二乗和にして平均を取った値
+- [**Calibration plot**]{style="color: red; font-size: 1.1em;"}が、どこの予測能が悪いかもわかるため最も良い評価[@Alba2017-gh]
 - 分類数には要注意
 
-::: {.reference}
-JAMA. 2017 Oct 10;318(14):1377-84.
-:::
 
 ## Calibration Plotの作り方
 
-<!-- TODO: 元スライドは番号付きの処理フロー。画像を残し、手順は箇条書きで整理。 -->
 
 :::: columns
 ::: {.column width="50%"}
@@ -711,13 +959,29 @@ JAMA. 2017 Oct 10;318(14):1377-84.
 :::
 
 ::: {.column width="50%"}
-![](images/slide18_image01.png){fig-alt="Calibration plot作成手順1" width="100%"}
 
-![](images/slide18_image02.png){fig-alt="Calibration plot作成手順2" width="100%"}
+```{r}
+library(modeldata)
+library(dplyr)
+library(ggplot2)
 
-![](images/slide18_image03.png){fig-alt="Calibration plot作成手順3" width="48%"}
-![](images/slide18_image04.png){fig-alt="Calibration plot作成手順4" width="48%"}
+modeldata::two_class_example |> 
+  dplyr::arrange(Class1) |> 
+  dplyr::mutate(
+    category = ggplot2::cut_number(Class1, 10, labels = FALSE)
+  ) |> 
+  dplyr::summarise(
+    pct = mean(truth == "Class1"), .by = category
+  ) |> 
+  ggplot2::ggplot(aes(x = category, y = pct)) + 
+  geom_col(fill = "steelblue") + 
+  theme_bw()
+
+
+```
+
 :::
+
 ::::
 
 ## Calibrationの細かい方法
@@ -739,7 +1003,7 @@ JAMA. 2017 Oct 10;318(14):1377-84.
 
 ## Brier Score
 
-<!-- TODO: 元スライドは数式中心。画像を残し、必要なら数式をMarkdown化する。 -->
+
 
 :::: columns
 ::: {.column width="50%"}
@@ -753,34 +1017,25 @@ JAMA. 2017 Oct 10;318(14):1377-84.
 :::
 ::::
 
-## Agenda
-
-- 分類モデルとは？
-- 分類の評価：DiscriminationとCalibrationって何？
-  - Discriminationの評価方法
-  - Calibrationの評価方法
-- Advanced model performance：モデルの比較
-  - NRI、IDI、Decision curve analysis
+# Advanced model performance：モデルの比較
 
 ## モデルの比較
 
 :::: columns
 ::: {.column width="58%"}
 - AU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている
-- よくあるシチュエーション
-  - ベースのモデルに何かの変数を追加したときにモデルが良くなるか？
-- NRI / IDI
-- AUROCは不完全！
+- よくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？
+  - NRI / IDI
+
 :::
 
 ::: {.column width="42%"}
 ![](images/slide22_image01.png){fig-alt="AUROCの限界" width="100%"}
+
+[@Cook2007-fs]
+
 :::
 ::::
-
-::: {.reference}
-Circulation. 2007;115:928-935.
-:::
 
 ## Epidemiology 2014;25:114-121
 

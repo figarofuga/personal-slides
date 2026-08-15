@@ -310,7 +310,38 @@ ci <- c(
 
 ```
 
-<!-- Todo: 解説を書く -->
+$$
+\begin{aligned}
+\hat{\mu}_1^{\mathrm{AIPW}}
+&=
+\frac{1}{n}\sum_{i=1}^{n}
+\left[
+\underbrace{\hat{\mu}_1(X_i)}_{\text{Outcome prediction}}
++
+\underbrace{
+\frac{A_i}{\hat{e}(X_i)}
+\{Y_i-\hat{\mu}_1(X_i)\}
+}_{\text{IPW correction}}
+\right]
+\\[10pt]
+\hat{\mu}_0^{\mathrm{AIPW}}
+&=
+\frac{1}{n}\sum_{i=1}^{n}
+\left[
+\underbrace{\hat{\mu}_0(X_i)}_{\text{Outcome prediction}}
++
+\underbrace{
+\frac{1-A_i}{1-\hat{e}(X_i)}
+\{Y_i-\hat{\mu}_0(X_i)\}
+}_{\text{IPW correction}}
+\right]
+\end{aligned}
+$$
+
+- 以下に2種類の補正を入れる
+  - 全て治療を受けたときにOutcome regression
+  - 治療を受ける/受けないのPropensity scoreの補正
+
 
 ## TMLE 
 
