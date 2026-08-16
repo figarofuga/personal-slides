@@ -393,7 +393,14 @@ blockquote {
 </div>
 </div>
 </div><div class="column" style="width:10%;">
-<p><br> =&gt;</p>
+<div class="flow-operation">
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+予測と現実の0/1の組み合わせを<br>2×2にまとめる
+</div>
+</div>
 </div><div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -433,7 +440,15 @@ F_{\beta} &amp;=
 {(1 + \beta^2)\cdot TP + \beta^2\cdot FN + FP}
 \end{aligned}
 \]</span></p>
-<p><img data-src="images/conf_mat.png" style="width:90.0%" alt="混同行列関連図2"></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="discrimination混同行列関連" class="slide level2">
@@ -464,7 +479,7 @@ F_{\beta} &amp;=
 <section id="roc指標ができるまで" class="slide level2">
 <h2>ROC指標ができるまで</h2>
 <div class="columns tibble-flow">
-<div class="column" style="width:36%;">
+<div class="column" style="width:20%;">
 <h3 id="予測結果">1. 予測結果</h3>
 <div class="cell">
 <div class="cell-output-display">
@@ -477,27 +492,27 @@ F_{\beta} &amp;=
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.0035892</td>
 <td style="text-align: center;">Class2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.679</td>
+<td style="text-align: center;">0.6786211</td>
 <td style="text-align: center;">Class1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.111</td>
+<td style="text-align: center;">0.1108935</td>
 <td style="text-align: center;">Class2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.735</td>
+<td style="text-align: center;">0.7351617</td>
 <td style="text-align: center;">Class1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.016</td>
+<td style="text-align: center;">0.0162400</td>
 <td style="text-align: center;">Class2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.999</td>
+<td style="text-align: center;">0.9992751</td>
 <td style="text-align: center;">Class1</td>
 </tr>
 </tbody>
@@ -506,16 +521,37 @@ F_{\beta} &amp;=
 </div>
 </div><div class="column fragment" data-fragment-index="1" style="width:20%;">
 <div class="flow-operation">
-<code>roc_curve()</code>
 <div class="flow-arrow">
 →
 </div>
 <div class="flow-caption">
-閾値を動かしながら<br>感度・特異度を計算
+閾値を動かしながら<br>予測値を作る
 </div>
 </div>
-</div><div class="column fragment" data-fragment-index="2" style="width:44%;">
-<h3 id="閾値ごとの性能">2. 閾値ごとの性能</h3>
+</div><div class="column fragment" data-fragment-index="2" style="width:20%;">
+<h3 id="閾値ごとでの予測">2. 閾値ごとでの予測</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   prob_Class1  truth predict_min predict_min_2
+1 1.794262e-07 Class2      Class2        Class2
+2 4.503065e-06 Class2      Class1        Class2
+3 5.813991e-06 Class2      Class1        Class1
+4 5.922113e-06 Class2      Class1        Class1
+5 1.216854e-05 Class2      Class1        Class1
+6 1.401020e-05 Class2      Class1        Class1</code></pre>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="3" style="width:20%;">
+<div class="flow-operation">
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+各々の閾値での予測のClassから<br>感度・特異度を計算
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="3" style="width:20%;">
+<h3 id="閾値ごとの性能">3. 閾値ごとの性能</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -528,38 +564,38 @@ F_{\beta} &amp;=
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">-Inf</td>
+<td style="text-align: center;">0.0000000</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">2.00e-07</td>
+<td style="text-align: center;">0.0000000</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.008</td>
+<td style="text-align: center;">4.50e-06</td>
+<td style="text-align: center;">0.0041322</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">5.80e-06</td>
+<td style="text-align: center;">0.0082645</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.017</td>
+<td style="text-align: center;">5.90e-06</td>
+<td style="text-align: center;">0.0123967</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.021</td>
+<td style="text-align: center;">1.22e-05</td>
+<td style="text-align: center;">0.0165289</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.025</td>
+<td style="text-align: center;">1.40e-05</td>
+<td style="text-align: center;">0.0206612</td>
 <td style="text-align: center;">1</td>
 </tr>
 </tbody>
@@ -567,9 +603,10 @@ F_{\beta} &amp;=
 </div>
 </div>
 </div></div>
-<div class="auc-result fragment" data-fragment-index="3">
-<p>各点を結んだROC曲線の面積：<strong>AUROC = 0.939</strong></p>
-</div>
+<ul>
+<li>感度と1-特異度で点を結ぶとROC曲線</li>
+<li>PrecisionとRecallで点を結ぶとPR曲線</li>
+</ul>
 </section>
 <section id="リスク毎の評価" class="slide level2">
 <h2>リスク毎の評価</h2>
@@ -590,7 +627,7 @@ F_{\beta} &amp;=
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -606,7 +643,7 @@ F_{\beta} &amp;=
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -722,7 +759,7 @@ F_{\beta} &amp;=
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -750,6 +787,13 @@ F_{\beta} &amp;=
 </section>
 <section id="brier-score" class="slide level2">
 <h2>Brier Score</h2>
+<p><span class="math display">\[
+\text{Brier Score}
+=
+\frac{1}{N}
+\sum_{i=1}^{N}
+\left(\hat{p}_i - y_i\right)^2
+\]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="images/slide20_image01.png" style="width:100.0%" alt="Brier scoreの式"></p>

@@ -2825,7 +2825,7 @@
     "href": "statistics/model_performance_mi/index.html#discriminationの評価について",
     "title": "分類モデルの評価について",
     "section": "Discriminationの評価について",
-    "text": "Discriminationの評価について\n\n\n\n\n   truth      Class1       Class2 predicted\n1 Class2 0.003589243 0.9964107574    Class2\n2 Class1 0.678621054 0.3213789460    Class1\n3 Class2 0.110893522 0.8891064779    Class2\n4 Class1 0.735161703 0.2648382969    Class1\n5 Class2 0.016239960 0.9837600397    Class2\n6 Class1 0.999275071 0.0007249286    Class1\n\n\n\n =&gt;\n\n\n\n          Truth\nPrediction Class1 Class2\n    Class1    227     50\n    Class2     31    192\n\n\n\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
+    "text": "Discriminationの評価について\n\n\n\n\n   truth      Class1       Class2 predicted\n1 Class2 0.003589243 0.9964107574    Class2\n2 Class1 0.678621054 0.3213789460    Class1\n3 Class2 0.110893522 0.8891064779    Class2\n4 Class1 0.735161703 0.2648382969    Class1\n5 Class2 0.016239960 0.9837600397    Class2\n6 Class1 0.999275071 0.0007249286    Class1\n\n\n\n\n\n→\n\n\n予測と現実の0/1の組み合わせを2×2にまとめる\n\n\n\n\n\n          Truth\nPrediction Class1 Class2\n    Class1    227     50\n    Class2     31    192\n\n\n\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#混同行列関連",
@@ -2888,7 +2888,7 @@
     "href": "statistics/model_performance_mi/index.html#brier-score",
     "title": "分類モデルの評価について",
     "section": "Brier Score",
-    "text": "Brier Score"
+    "text": "Brier Score\n\\[\n\\text{Brier Score}\n=\n\\frac{1}{N}\n\\sum_{i=1}^{N}\n\\left(\\hat{p}_i - y_i\\right)^2\n\\]"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#agenda-3",
@@ -4358,7 +4358,7 @@
     "href": "statistics/model_performance_mi/index.html#roc指標ができるまで",
     "title": "分類モデルの評価について",
     "section": "ROC指標ができるまで",
-    "text": "ROC指標ができるまで\n\n\n1. 予測結果\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n0.004\nClass2\n\n\n0.679\nClass1\n\n\n0.111\nClass2\n\n\n0.735\nClass1\n\n\n0.016\nClass2\n\n\n0.999\nClass1\n\n\n\n\n\n\n\nroc_curve()\n\n→\n\n\n閾値を動かしながら感度・特異度を計算\n\n\n\n2. 閾値ごとの性能\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n0\n0.000\n1\n\n\n0\n0.004\n1\n\n\n0\n0.008\n1\n\n\n0\n0.012\n1\n\n\n0\n0.017\n1\n\n\n0\n0.021\n1\n\n\n0\n0.025\n1\n\n\n\n\n\n\n\n各点を結んだROC曲線の面積：AUROC = 0.939"
+    "text": "ROC指標ができるまで\n\n\n1. 予測結果\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n0.0035892\nClass2\n\n\n0.6786211\nClass1\n\n\n0.1108935\nClass2\n\n\n0.7351617\nClass1\n\n\n0.0162400\nClass2\n\n\n0.9992751\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n2. 閾値ごとでの予測\n\n\n   prob_Class1  truth predict_min predict_min_2\n1 1.794262e-07 Class2      Class2        Class2\n2 4.503065e-06 Class2      Class1        Class2\n3 5.813991e-06 Class2      Class1        Class1\n4 5.922113e-06 Class2      Class1        Class1\n5 1.216854e-05 Class2      Class1        Class1\n6 1.401020e-05 Class2      Class1        Class1\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n3. 閾値ごとの性能\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n-Inf\n0.0000000\n1\n\n\n2.00e-07\n0.0000000\n1\n\n\n4.50e-06\n0.0041322\n1\n\n\n5.80e-06\n0.0082645\n1\n\n\n5.90e-06\n0.0123967\n1\n\n\n1.22e-05\n0.0165289\n1\n\n\n1.40e-05\n0.0206612\n1\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\nPrecisionとRecallで点を結ぶとPR曲線"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#confusion-matrix-baseの評価の注意点",

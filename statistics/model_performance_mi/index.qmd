@@ -643,21 +643,6 @@ yardstick::conf_mat(
 
 :::: columns
 ::: {.column width="50%"}
-$$
-\begin{aligned}
-\text{Accuracy} &= \frac{TP + TN}{TP + TN + FP + FN} \\[6pt]
-\text{Recall / Sensitivity} &= \frac{TP}{TP + FN} \\[6pt]
-\text{Specificity} &= \frac{TN}{TN + FP} \\[6pt]
-\text{Precision} &= \frac{TP}{TP + FP} \\[6pt]
-F_1\text{-Score} &= 2 \times
-\frac{\text{Precision} \times \text{Recall}}
-{\text{Precision} + \text{Recall}} \\[6pt]
-F_{\beta} &= 
-\frac{(1 + \beta^2)\cdot TP}
-{(1 + \beta^2)\cdot TP + \beta^2\cdot FN + FP}
-\end{aligned}
-$$
-
 
 ```{r}
 #| fig-width: 6
@@ -737,9 +722,28 @@ ggplot(
 
 :::
 
+::: {.column width="50%"}
+
+$$
+\begin{aligned}
+\text{Accuracy} &= \frac{TP + TN}{TP + TN + FP + FN} \\[6pt]
+\text{Recall / Sensitivity} &= \frac{TP}{TP + FN} \\[6pt]
+\text{Specificity} &= \frac{TN}{TN + FP} \\[6pt]
+\text{Precision} &= \frac{TP}{TP + FP} \\[6pt]
+F_1\text{-Score} &= 2 \times
+\frac{\text{Precision} \times \text{Recall}}
+{\text{Precision} + \text{Recall}} \\[6pt]
+F_{\beta} &= 
+\frac{(1 + \beta^2)\cdot TP}
+{(1 + \beta^2)\cdot TP + \beta^2\cdot FN + FP}
+\end{aligned}
+$$
+
+:::
+
 ::::
 
-## Discrimination：混同行列関連
+## 混同行列関連の指標について
 
 :::: columns
 ::: {.column width="52%"}
@@ -789,14 +793,14 @@ auc_value <- input_tbl |>
 ```
 
 :::: {.columns .tibble-flow}
-::: {.column width="36%"}
+::: {.column width="20%"}
 
 ### 1. 予測結果
 
 ```{r}
 #| echo: false
 
-input_tbl |>
+input_tbl |> 
   dplyr::slice_head(n = 6) |>
   knitr::kable(
     format = "html",
@@ -810,16 +814,42 @@ input_tbl |>
 ::: {.column .fragment width="20%" fragment-index="1"}
 
 <div class="flow-operation">
-  <code>roc_curve()</code>
   <div class="flow-arrow">&rarr;</div>
-  <div class="flow-caption">閾値を動かしながら<br>感度・特異度を計算</div>
+  <div class="flow-caption">閾値を動かしながら<br>予測値を作る</div>
 </div>
 
 :::
 
-::: {.column .fragment width="44%" fragment-index="2"}
+::: {.column .fragment width="20%" fragment-index="2"}
 
-### 2. 閾値ごとの性能
+### 2. 閾値ごとでの予測
+
+```{r}
+library(dplyr)
+
+input_tbl |>
+  dplyr::arrange(prob_Class1) |> 
+  dplyr::mutate(
+    predict_min = if_else(prob_Class1 > 1.794262e-07, "Class1", "Class2"), 
+    predict_min_2  = if_else(prob_Class1 > 4.503066e-06 , "Class1", "Class2"), 
+  ) |> head()
+
+```
+
+:::
+
+::: {.column .fragment width="20%" fragment-index="3"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">各々の閾値での予測のClassから<br>感度・特異度を計算</div>
+</div>
+
+:::
+
+::: {.column .fragment width="20%" fragment-index="3"}
+
+### 3. 閾値ごとの性能
 
 ```{r}
 #| echo: false
@@ -971,10 +1001,13 @@ modeldata::two_class_example |>
     category = ggplot2::cut_number(Class1, 10, labels = FALSE)
   ) |> 
   dplyr::summarise(
-    pct = mean(truth == "Class1"), .by = category
+    mean_incidence = mean(truth == "Class1"), 
+    mean_prob = mean(Class1),
+    .by = category
   ) |> 
-  ggplot2::ggplot(aes(x = category, y = pct)) + 
-  geom_col(fill = "steelblue") + 
+  tidyr::pivot_longer(cols = c(mean_incidence, mean_prob)) |> 
+  ggplot2::ggplot(aes(x = category, y = value)) + 
+  geom_col(aes(fill = name), position = position_dodge2()) + 
   theme_bw()
 
 
@@ -995,15 +1028,37 @@ modeldata::two_class_example |>
 :::
 
 ::: {.column width="42%"}
-![](images/slide19_image01.png){fig-alt="Calibrationの表1" width="90%"}
 
-![](images/slide19_image02.png){fig-alt="Calibrationの表2" width="90%"}
+```{r}
+library(modeldata)
+library(dplyr)
+library(ggplot2)
+
+modeldata::two_class_example |> 
+  dplyr::arrange(Class1) |> 
+  dplyr::mutate(
+    category = ggplot2::cut_number(Class1, 10, labels = FALSE)
+  ) |> 
+  dplyr::summarise(
+    mean_incidence = mean(truth == "Class1"), 
+    mean_prob = mean(Class1),
+    .by = category
+  ) 
+
+```
+
 :::
 ::::
 
 ## Brier Score
 
-
+$$
+\text{Brier Score}
+=
+\frac{1}{N}
+\sum_{i=1}^{N}
+\left(\hat{p}_i - y_i\right)^2
+$$
 
 :::: columns
 ::: {.column width="50%"}

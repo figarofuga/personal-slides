@@ -549,7 +549,19 @@ orthogonalization_result
 
 ```
 
-<!-- Todo: 解説を書く -->
+$$
+\begin{aligned}
+Y_i &= \theta_0 D_i + g_0(X_i) + \varepsilon_i,
+\qquad
+\mathbb{E}[\varepsilon_i \mid X_i, D_i] = 0, \\[6pt]
+D_i &= m_0(X_i) + V_i,
+\qquad
+\mathbb{E}[V_i \mid X_i] = 0.
+\end{aligned}
+$$
+
+- 「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する
+- シンプルなGLMの場合は通常のGLMの結果と同じになる
 
 :::
 
