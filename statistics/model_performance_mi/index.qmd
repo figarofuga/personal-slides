@@ -87,6 +87,45 @@ blockquote {
   padding: 0.22em 0.45em;
 }
 
+/* ROC flow: reserve more room for the table with predictions at each cutoff. */
+.reveal .roc-flow {
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(2.5rem, 0.35fr)
+    minmax(0, 1.7fr)
+    minmax(2.5rem, 0.35fr)
+    minmax(0, 1.5fr);
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.reveal .roc-flow > .column {
+  width: auto !important;
+  min-width: 0;
+}
+
+.reveal .roc-flow h3 {
+  font-size: 0.52em;
+  white-space: nowrap;
+}
+
+.reveal .roc-flow table {
+  width: 100%;
+  font-size: 0.50em;
+}
+
+.reveal .roc-flow table th,
+.reveal .roc-flow table td {
+  padding: 0.18em 0.28em;
+  white-space: nowrap;
+}
+
+.reveal .roc-flow .flow-arrow {
+  font-size: 2.8rem;
+}
+
 .reveal .flow-operation {
   text-align: center;
 }
@@ -792,8 +831,8 @@ auc_value <- input_tbl |>
 
 ```
 
-:::: {.columns .tibble-flow}
-::: {.column width="20%"}
+:::: {.columns .tibble-flow .roc-flow}
+::: {.column}
 
 ### 1. 予測結果
 
@@ -811,7 +850,7 @@ input_tbl |>
 
 :::
 
-::: {.column .fragment width="20%" fragment-index="1"}
+::: {.column .fragment fragment-index="1"}
 
 <div class="flow-operation">
   <div class="flow-arrow">&rarr;</div>
@@ -820,25 +859,42 @@ input_tbl |>
 
 :::
 
-::: {.column .fragment width="20%" fragment-index="2"}
+::: {.column .fragment fragment-index="2"}
 
 ### 2. 閾値ごとでの予測
 
 ```{r}
-library(dplyr)
+#| echo: false
 
 input_tbl |>
   dplyr::arrange(prob_Class1) |> 
   dplyr::mutate(
-    predict_min = if_else(prob_Class1 > 1.794262e-07, "Class1", "Class2"), 
-    predict_min_2  = if_else(prob_Class1 > 4.503066e-06 , "Class1", "Class2"), 
-  ) |> head()
+    predict_1 = dplyr::if_else(
+      prob_Class1 > 1.794262e-07,
+      "Class1",
+      "Class2"
+    ),
+    predict_2 = dplyr::if_else(
+      prob_Class1 > 4.503066e-06,
+      "Class1",
+      "Class2"
+    )
+  ) |>
+  dplyr::slice_head(n = 6) |>
+  dplyr::mutate(
+    prob_Class1 = formatC(prob_Class1, format = "e", digits = 2)
+  ) |>
+  knitr::kable(
+    format = "html",
+    align = "cccc",
+    col.names = c("予測確率", "実際のアウトカム", "閾値:1.8e-07", "閾値2:4.5e-06")
+  )
 
 ```
 
 :::
 
-::: {.column .fragment width="20%" fragment-index="3"}
+::: {.column .fragment fragment-index="3"}
 
 <div class="flow-operation">
   <div class="flow-arrow">&rarr;</div>
@@ -847,9 +903,9 @@ input_tbl |>
 
 :::
 
-::: {.column .fragment width="20%" fragment-index="3"}
+::: {.column .fragment fragment-index="4"}
 
-### 3. 閾値ごとの性能
+### 3. 感度・特異度
 
 ```{r}
 #| echo: false
@@ -980,6 +1036,138 @@ yardstick::pr_auc(
 ## Calibration Plotの作り方
 
 
+```{r}
+#| include: false
+
+library(dplyr)
+library(yardstick)
+library(modeldata)
+
+input_tbl <- modeldata::two_class_example |>
+  transmute(
+    prob_Class1 = Class1,
+    truth
+  ) |> 
+  dplyr::arrange(prob_Class1) |> 
+  dplyr::mutate(
+    class = ggplot2::cut_number(prob_Class1, n  = 10, labels = FALSE)
+    )　
+
+summarised_tbl <- input_tbl |>
+  dplyr::summarise(
+    event_proportion = mean(truth == "Class1"),
+    mean_probability = mean(prob_Class1), 
+    .by = class
+  )
+
+
+```
+
+:::: {.columns .tibble-flow .roc-flow}
+::: {.column}
+
+### 1. 予測結果を予測確率に従って並べ直す
+
+```{r}
+#| echo: false
+
+input_tbl |>  
+  dplyr::slice_head(n = 6) |>
+  knitr::kable(
+    format = "html",
+    align = "cc",
+    col.names = c("予測確率", "実測値", "予測確率カテゴリ")
+  )
+
+input_tbl |> 
+  dplyr::slice_tail(n = 6) |>
+  knitr::kable(
+    format = "html",
+    align = "cc",
+    col.names = c("予測確率", "実測値", "予測確率カテゴリ")
+  )
+```
+
+:::
+
+::: {.column .fragment fragment-index="1"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">同じClassでの平均発症予測確率と<br>実際の発症率を比べる</div>
+</div>
+
+:::
+
+::: {.column .fragment fragment-index="2"}
+
+### 2. Class毎の予測確率と実際のイベント発症確率
+
+```{r}
+#| echo: false
+
+summarised_tbl |>
+  knitr::kable(
+    format = "html",
+    align = "cc",
+    col.names = c("カテゴリ", "予測発症率の平均", "実際の発症率")
+  )
+
+
+```
+
+:::
+
+::: {.column .fragment fragment-index="3"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">可視化</div>
+</div>
+
+:::
+
+::: {.column .fragment fragment-index="4"}
+
+### 3. Visualization
+
+```{r}
+#| echo: false
+
+library(tidyr)
+library(ggplot2)
+library(patchwork)
+
+calib_dat <- tidyr::pivot_longer(
+  summarised_tbl,
+  cols = c("event_proportion", "mean_probability")
+) 
+  
+lineplot <- ggplot2::ggplot(
+  data = calib_dat, 
+  mapping = aes(x = class, y = value, colour = name)) + 
+  geom_line() + 
+  theme_bw() + 
+  theme(legend.position = "none")
+
+barplot <- ggplot2::ggplot(
+  data = calib_dat, 
+  mapping = aes(x = class, y = value, colour = name, fill = name)) + 
+  geom_col(position = position_dodge2()) + 
+  theme_bw()
+
+lineplot + barplot + plot_layout(guides = "collect")
+
+```
+
+:::
+::::
+
+- 感度と1-特異度で点を結ぶとROC曲線
+- PrecisionとRecallで点を結ぶとPR曲線
+
+<!-- Todo: 変更 -->
+
 :::: columns
 ::: {.column width="50%"}
 - 1. 予測確率を並べる
@@ -1062,9 +1250,36 @@ $$
 
 :::: columns
 ::: {.column width="50%"}
+
+```{r}
+library(modeldata)
+library(dplyr)
+library(ggplot2)
+
+modeldata::two_class_example |> 
+  dplyr::select(
+    Class1, predicted, truth
+      ) |> 
+  dplyr::mutate(
+    truth_num = dplyr::if_else(
+      truth == "Class1", 1, 0
+    ), 
+    diff_squared = (truth_num - Class1)^2
+  ) |> 
+  dplyr::rename(
+    `Probability of Class1` = Class1
+  ) |> 
+  head() |> 
+  knitr::kable(
+    format = "html",
+    align = "ccccc"
+  )
+
+```
+
 ![](images/slide20_image01.png){fig-alt="Brier scoreの式" width="100%"}
 
-![](images/slide20_image03.png){fig-alt="Brier scoreの例" width="70%"}
+
 :::
 
 ::: {.column width="50%"}
