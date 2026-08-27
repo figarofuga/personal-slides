@@ -1,0 +1,22 @@
+[workspace]
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["linux-64"]
+preview = ["pixi-build"]
+
+[package]
+name = "r-glinternet"
+version = "1.0.13"
+
+[package.build.backend]
+name = "pixi-build-r"
+version = "*"
+channels = [
+  "https://prefix.dev/pixi-build-backends",
+  "https://prefix.dev/conda-forge",
+]
+
+[package.build.config]
+compilers = ["c"]
+
+[package.host-dependencies]
+r-base = ">=4.5,<4.6"

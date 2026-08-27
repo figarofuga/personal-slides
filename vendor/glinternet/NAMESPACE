@@ -1,0 +1,14 @@
+useDynLib("glinternet", .registration=TRUE)
+export(glinternet, glinternet.cv)
+importFrom(utils,head,tail,packageDescription)
+
+importFrom("graphics", "abline", "axis", "plot", "segments","lines")
+importFrom("stats", "lm", "predict", "sd")
+
+S3method("print", "glinternet")
+S3method("print", "glinternet.cv")
+S3method("plot", "glinternet.cv")
+S3method("predict", "glinternet")
+S3method("predict", "glinternet.cv")
+S3method("coef", "glinternet")
+S3method("coef", "glinternet.cv")
