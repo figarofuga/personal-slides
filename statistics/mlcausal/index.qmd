@@ -148,14 +148,13 @@ tidy_dagitty(dag) |>
 
 ```
 
-
-- 交絡因子は介入とOutcome両方に関連する上流の因子(介入 <- 交絡 -> アウトカム)
-- 中間因子は介入とOutcomeの間にある因子(介入 -> 中間 -> アウトカム)
-- Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -> Colider <- アウトカム)
+- 交絡因子は介入とOutcome両方に関連する上流の因子(介入 \<- 交絡 -\> アウトカム)
+- 中間因子は介入とOutcomeの間にある因子(介入 -\> 中間 -\> アウトカム)
+- Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -\> Colider \<- アウトカム)
 - 基本は交絡因子のみ補正が必要
   - 中間因子を補正すると治療効果が薄まる
   - Coliderを補正してしまうと逆にバイアスが出てくる
-- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール[@IwanamiDataScience2016Vol3]
+- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール[@Iwanami-2016-sy]
 
 ## 世界は結構複雑にできている
 
@@ -166,8 +165,7 @@ tidy_dagitty(dag) |>
 
 ## 交絡因子の制御の方法
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## Stratification
 
 ```{r}
@@ -253,7 +251,6 @@ fitW <- lm_weightit(re78 ~ treat * (age + educ + race + married +
 marginaleffects::avg_comparisons(fitW, variables = "treat",
                 newdata = subset(treat == 1))
 ```
-
 :::
 
 ## 通常の回帰モデル
@@ -274,8 +271,7 @@ marginaleffects::avg_comparisons(fitW, variables = "treat",
 
 ## 特殊な手法
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## Augmented Inverse Probability Weighting (AIPW)
 
 ```{r}
@@ -330,8 +326,7 @@ aipw_result
 
 ```
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \hat{\mu}_1^{\mathrm{AIPW}}
 &=
 \frac{1}{n}\sum_{i=1}^{n}
@@ -355,14 +350,13 @@ $$
 \{Y_i-\hat{\mu}_0(X_i)\}
 }_{\text{IPW correction}}
 \right]
-\end{aligned}
-$$
+\end{aligned}$$
 
 - イメージだと、G-computationによるアウトカムモデルでの仮想データに以下の補正を加えている
   - 治療を受ける/受けないのPropensity scoreの補正
 - Doubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない
 
-## TMLE 
+## TMLE
 
 ```{r}
 #| label: scratch-for-TMLE
@@ -442,8 +436,7 @@ tmle_result
 
 ```
 
-$$
-\widehat Q^{\,0}(a,W_i)
+$$\widehat Q^{\,0}(a,W_i)
 =
 \widehat{\mathrm E}
 \left(
@@ -482,13 +475,11 @@ A_i=1\mid W_i
 +
 \frac{1}{1-\widehat g(W_i)}
 \right\}
-\right]
-$$
+\right]$$
 
 - アウトカムモデルによる予測と実測値の残差を、傾向スコアの逆数から作ったclever covariateで回帰して修正量を求め、その修正量で治療あり・なしの予測値を更新した後、平均差としてATEを計算する。
 
 ## Orthogonalization
-
 
 ```{r}
 #| label: scratch-for-orthogonalization
@@ -549,20 +540,17 @@ orthogonalization_result
 
 ```
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 Y_i &= \theta_0 D_i + g_0(X_i) + \varepsilon_i,
 \qquad
 \mathbb{E}[\varepsilon_i \mid X_i, D_i] = 0, \\[6pt]
 D_i &= m_0(X_i) + V_i,
 \qquad
 \mathbb{E}[V_i \mid X_i] = 0.
-\end{aligned}
-$$
+\end{aligned}$$
 
 - 「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する
 - シンプルなGLMの場合は通常のGLMの結果と同じになる
-
 :::
 
 ## しかしながら・・・・・・
@@ -584,39 +572,30 @@ $$
 
 # 機械学習 at glance
 
-
 ## 機械学習とは
 
 - 機械学習の定義「学習はデータから学習し、初めてのデータに対して一般化し、明示的な指示なしにタスクを実行できる統計アルゴリズム」
   - 簡単にいうとパターン認識
-1. 正解がある: 教師つき学習→予測に用いる
-2. 正解がない: 教師なし学習→記述の一種
 
+1.  正解がある: 教師つき学習→予測に用いる
+2.  正解がない: 教師なし学習→記述の一種
 
 ## 代表的な機械学習
 
-:::: {.columns}
-
-
+::::: columns
 ::: {.column width="50%"}
-
-
 ![Tree-based models](images/treebased_model.png)
 
 - これはRandom forest
 - 小さい木のモデルを並列ではなく直列にするとXGBoostなど
-
 :::
 
 ::: {.column width="50%"}
-
 ![Neural network models](images/neuralnetwork.png)
 
 - 沢山のLogistic regression modelを重ねたようなもの
-
 :::
-
-::::
+:::::
 
 ## 機械学習の強みと弱み
 
@@ -625,7 +604,9 @@ $$
   - 例えばTree based modelは相互作用を自然に扱うことが出来る
 - Cons
   - 複雑なモデルはBlack boxになる
+    - [**現実世界への有用性と妥当性**]{style="color: red;font-size: 1.2em;"}の評価が必要
   - Overfittingの問題
+    - [**モデルの評価**]{style="color: red;font-size: 1.2em;"}が必須
 
 # 機械学習と因果推論の出会い
 
@@ -656,76 +637,141 @@ $$
 
 ![s-learner](images/s-learner.drawio.svg)
 
-<!-- Todo: 解説を書く -->
+- 最も基本的なmeta-learner
+- ML modelを用いたG-computationと考えればいい
+- Simpleなゆえに了解しやすい
+- ただし、介入よりも影響が大きい因子(年齢や腎機能など)の影響が大きいと介入効果が消えることもある(特にLASSOなど)
 
 ## T-learner
 
 ![t-learner](images/t-learner.drawio.svg)
 
-<!-- Todo: 解説を書く -->
-
+- 介入の因子を重要視したmeta-learner
+- 介入ありの群でのML modelと介入なし群でML modelを別個に作りG-computation
+- 介入の効果が消えることはない
+- ただし、Doubly robustさはない
 
 ## X-learner
 
 ![x-learner](images/x-learner.drawio.svg)
 
-<!-- Todo: 解説を書く -->
+- Propensity score weightingを導入したmeta-learner
+- T-learnerで推定した治療効果を推測する機械学習モデルにIPWを組み合わせている
+- 結構複雑、メインでないモデルのパラメーターを「局外パラメーター」という
 
 ## R-learner
 
 ![r-learner](images/r-learner.drawio.svg)
 
-<!-- Todo: 解説を書く -->
+- OrthogonalizationをML modelで行っているという理解
+- 交絡因子の影響を除外するというところで強みがある
+- HTEをやる場合は最後の回帰が少し特殊
 
 ## DR-learner
 
 ![dr-learner](images/dr-learner.drawio.svg)
 
-<!-- Todo: 解説を書く -->
-
+- ML modelを用いたAIPWの治療効果を予測するモデルを介入以外の共変量で行う
+- Doubly robustである事が強み
 
 ## どれがいいの？
 
 - S-learnerが最も直感的ではあるが・・・・・・
+  - 一番の問題は95%信頼区間などは出せない
 - 過去のReviewだとDR-learnerが良さそう
 - https://www.pywhy.org/EconML/spec/flowchart.html
 - 上記図をmermaidで作る
 
-以下のTableをまとめる
 
-    Inoue K, Adomi M, Efthimiou O, et al. Machine learning approaches to evaluate heterogeneous treatment effects in randomized controlled trials: a scoping review. J Clin Epidemiol. 2024;176(111538):111538. doi:10.1016/j.jclinepi.2024.111538
-  
+| Algorithm | 強み（Strengths） | 限界（Limitations） |
+|:---|:---|:---|
+| S-learner | - シンプル<br>- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある<br>- 治療群と対照群の人数が不均衡な場合、不安定になる |
+| T-learner | - シンプル<br>- 治療群と対照群を分けて明示的にモデル化する<br>- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 治療群と対照群の人数が不均衡な場合、不安定になる |
+| X-learner / DR-learner | - 異質な治療効果を直接推定する<br>- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
+| R-learner | - 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する<br>- 治療効果に対する直接的な損失関数を構成できる | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
+
+: メタラーナーの特徴と限界 {#tbl-metalearner-comparison}[@Inoue2024-sb]
 
 
 # Causal forestについて
 
 ## Random forestについて
 
+- Tree-based modelの大御所
+- Bootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る
+  - 当然ながら、この時は「Outcome」を予測するようにTreeを分割させる
+- 自然に交互作用や非線形の関係を推測可能
+- そのTreeの多数決で予測を行う
+
 ## Causal forestの原理
 
 - HTE専用の機械学習
-- 基本はRandom forest
-- 治療効果の差が最も出やすいように木をTrainingする
+- 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木をTrainingする
+- Overfittingを防ぐために"Honest"を用いる
+  - 選択されていない残りのSampleでHyperparameterを決める
 
 ## Causal forestの強み
 
+- HTE専用のモデル
+- 95％信頼区間も計算可能
+- Policy treeやBest linear projectionなどで解釈も可能
+
 ## どれがいいの？
 
+- ATEの場合はmeta-learnerでも良い
+- HTEの場合はCausal forestが現実的に最も良い
 
-## 機械学習の解釈の問題
+## Overfittingを避けるために
 
-- Modelを深堀る: SHAP
-- Modelの妥当性を確認: RATE
-- Modelを分かりやすく変更: Surrogate tree、Policy tree
+- 簡単に言うとCross validationを組み合わせる
+- Causal forestの場合は、分岐を決めるデータセットと、そこで得られる治療効果を分ける"honesty"という概念が独特
 
-## Advanced 
+## モデルの評価の仕方
+
+- 通常のモデルと一緒で独立したtest datasetを用意しておく
+- 診る項目は2種類
+  - Discrimination
+    - Ranking方式, AUTOC
+    - Qini係数
+  - Calibration
+    - best linear predictionの係数
+
+## Discrimination
+
+## 機械学習
+
+# Advanced
 
 - 95%信頼区間が出せるかどうか？
 - Missingnessについて
 - Sensitivity analysisはどうすればいい？
+  - Refutation method[@Feuerriegel2024-ya]
+- 生存分析について
+
+## 95%信頼区間が出せるか？
+
+- Causal forestは出せるが通常のMLは信頼区間は出せない
+  - 機械学習モデルの代表的な弱点
+- いわゆる、AIPWやTMLEの局外パラメーターだけMLにして最終モデルを通常のGlmやSuperlearnerにする方法もある
+
+## Missingnessについて
+
+- 通常の機械学習では多重代入は使えない
+- 一方でtree-based approachはnaturalに欠損値を扱える
+  - 欠損値だったら……という条件を決定木に読ませる
+
+## Sensitivity analysisはどうすればいい？
+
+- Refutation method[@Feuerriegel2024-ya]
+
+## 生存分析について
+
+- econmlではまだ実装されていない
+- meta learnerで無理やりやるなら、pseudopopulation(Jackknife法を使って、打ち切りデータを最後まで観察できたものとする)で予測させるなど
+- causal forestではnaturalに実装されている
+- 論文にはBalanced Individual  Treatment Effect in  Survival Data (BITES)なども紹介されている[@Moller2026-xi]
 
 # 実践！
-
 
 ## Test-dataset①
 
@@ -966,9 +1012,9 @@ ggplot() +
 - 治療効果は各々別個にいれてある
 - DAGは上記の通り
 - CAがメインのInterventionで解析をするアウトカムは3種類
-    - 連続値のAFEQT-OS
-    - 二値値のbin_outcome(短期の入院の有無など)
-    - 生存分析のeventtime, status(長期の心不全あるいは死亡)
+  - 連続値のAFEQT-OS
+  - 二値値のbin_outcome(短期の入院の有無など)
+  - 生存分析のeventtime, status(長期の心不全あるいは死亡)
 - ほとんどの因子は交絡因子だが、palpiationはinstrumental variable (CAには影響するが、outcomeには影響しない)
 - SESは観測されない交絡因子
 
@@ -982,6 +1028,9 @@ print(head(toy_data))
 ```
 
 ## Toy dataの可視化
+
+::: panel-tabset
+## 連続値の単変量
 
 ```{r}
 #| label: Visualize-ToyData2
@@ -998,12 +1047,53 @@ tidyr::pivot_longer(toy_data, cols = everything()) |>
 
 ```
 
+## Pair plot
+
+```{r}
+#| label: Visualize-ToyData-pairs
+
+library(tidyverse)
+library(GGally)
+
+dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |> 
+  dplyr::slice_sample(n = 500) |>
+  dplyr::mutate(
+    across(c(sexm1, hf, palpitation, ca), \(x)factor(x))) |> 
+  GGally::ggpairs() + theme_bw()
+
+
+```
+:::
 
 ## Modification因子と治療効果
 
-::: {.panel-tabset}
+::: panel-tabset
+## ATE
 
-## 共変量とRiskの1:1の関係性
+```{r}
+
+ate_rd_summary <- full_toy_data |>
+  dplyr::summarise(
+    n = sum(!is.na(ite_rd_bin)),
+    ate_rd = mean(ite_rd_bin, na.rm = TRUE),
+    ite_rd_sd = sd(ite_rd_bin, na.rm = TRUE)
+  ) |>
+  dplyr::mutate(
+    ate_rd_se = ite_rd_sd / sqrt(n),
+    critical_value = qt(0.975, df = n - 1),
+    ci_lower = ate_rd - critical_value * ate_rd_se,
+    ci_upper = ate_rd + critical_value * ate_rd_se
+  ) |>
+  dplyr::select(
+    n, ate_rd, ite_rd_sd, ate_rd_se,
+    ci_lower, ci_upper
+  )
+
+ate_rd_summary
+
+```
+
+## 共変量とOutcomeのRiskの1:1の関係性
 
 ```{r}
 #| label: Visualize-ToyData1
@@ -1030,7 +1120,30 @@ dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, 
 
 ```
 
-## InteractionとRiskの関係性
+## 主要な連続値の因子とTreatment effects
+
+```{r}
+#| label: Toydata-HTE-vis
+
+library(tidyverse)
+library(tinyplot)
+
+dplyr::select(full_toy_data, age, bnp, bmi, lvef, ite_rd_bin) |> 
+  tidyr::pivot_longer(
+    cols = -ite_rd_bin,
+    names_to = "name",
+    values_to = "value"
+  ) |>
+  tinyplot::plt(
+    ite_rd_bin ~ value, facet = ~ name, 
+    type = type_loess(),
+    facet.args = list(free = TRUE),
+    data = _
+  )
+
+```
+
+## Treatment effectのHeterogeneity
 
 ```{r}
 #| label: Visualize-ToyData3
@@ -1038,13 +1151,14 @@ dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, 
 library(tidyverse)
 
 full_toy_data |> 
-  dplyr::select(sexm1, age, lvef, treatment_effect) |> 
+  dplyr::select(sexm1, age, lvef, ite_rd_bin) |> 
   dplyr::mutate(
+    sexm1 = if_else(sexm1 == 1, "Male", "Female"),
     age_cat = base::cut(age, breaks = seq(30, 100, 10)), 
     lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10))
     ) |> 
   dplyr::summarise(
-    mean_trt_eff = mean(treatment_effect), 
+    mean_trt_eff = mean(ite_rd_bin), 
     .by = c(age_cat, lvef_cat, sexm1)
   ) |> 
   ggplot(aes(x = age_cat, y = lvef_cat, fill = mean_trt_eff)) +
@@ -1061,132 +1175,302 @@ full_toy_data |>
 
 
 ```
-
 :::
 
-## Thank you for your listening
+## Meta-learners
+
+::: panel-tabset
+## S-learner
+
+```{python}
+#| label: s-learner-binary
+#| echo: true
+
+import numpy as np
+import pandas as pd
+from econml.metalearners import SLearner
+from sklearn.base import BaseEstimator, RegressorMixin, clone
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.model_selection import train_test_split
+
+# EconML の SLearner は overall_model.predict() を呼ぶ。
+# 分類器の 1 クラス確率を predict() から返す adapter を用意する。
+class ClassifierAsProbabilityRegressor(RegressorMixin, BaseEstimator):
+    def __init__(self, classifier):
+        self.classifier = classifier
+
+    def fit(self, X, y):
+        self.classifier_ = clone(self.classifier)
+        self.classifier_.fit(X, y)
+        return self
+
+    def predict(self, X):
+        return self.classifier_.predict_proba(X)[:, 1]
 
 
+toy_data = r.toy_data.copy()
+feature_names = ["age", "sexm1", "bmi", "hf", "bnp", "lvef"]
 
+X = toy_data.loc[:, feature_names].astype(float)
+Y = toy_data["bin_outcome"].astype(int)
+T = toy_data["ca"].astype(int)
 
+# treatment と outcome の4群がおおむね保たれるように分割する
+strata = T.astype(str) + "_" + Y.astype(str)
+X_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(
+    X, Y, T,
+    test_size=0.2,
+    random_state=123,
+    stratify=strata,
+)
 
-## Simple regression
+outcome_model = ClassifierAsProbabilityRegressor(
+    HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    )
+)
 
-```{r}
-#| label: simple-regression
+s_learner = SLearner(overall_model=outcome_model)
+s_learner.fit(Y_train, T_train, X=X_train)
 
+# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)
+s_cate_rd = np.asarray(
+    s_learner.effect(X_test, T0=0, T1=1)
+).reshape(-1)
 
-library(rms)
-library(easystats)
-library(modelsummary)
+s_effect_df = pd.DataFrame({
+    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
+    "cate_rd": s_cate_rd,
+})
 
-dd <- rms::datadist(toy_data)
-options(datadist = "dd")
-
-simple_fit <- lm(afeqt_os ~ age + sexm1 + bmi + hf + bnp + lvef + ca, data = toy_data)
-
-rcs_fit <- lm(afeqt_os ~ rcs(age, 4) + sexm1 + rcs(bmi, 4) + hf + rcs(bnp, 4) + rcs(lvef, 4) + ca, data = toy_data)
-
-modelsummary::modelsummary(list(
-  simple = simple_fit,
-  rcs = rcs_fit
-))
+print(s_effect_df.head())
+print(f"ATE in test set (risk difference): {s_cate_rd.mean():.3f}")
 
 ```
 
+- `s_cate_rd` は確率スケールの治療効果（risk difference）であり、負の値は `ca = 1` によるイベントリスク低下を表す
+- S-learnerは1つのモデルで $E(Y \mid X, T)$ を学習し、各対象者について `T = 1` と `T = 0` の予測確率の差を取る
+- 因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要
 
-## シンプルな回帰モデルの解釈と問題点
+## T-learner
 
-- 複数のパラメータを固定した上での目標としたパラメータを1単位変化した時の効果
-- 線形である事が条件
-- 複雑な関係性を捉えることが出来ない
-    - Model misspecificationの問題
-    - 治療の異質性を捉えられない
+```{python}
+#| label: t-learner-binary
+#| echo: true
 
-## 例えば
+from econml.metalearners import TLearner
 
-```{r}
+t_outcome_model = ClassifierAsProbabilityRegressor(
+    HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    )
+)
 
-marginaleffects::plot_predictions(
-  simple_fit, 
-  condition = "bmi")
+# T=0 と T=1 で別々の outcome model を学習する
+t_learner = TLearner(models=t_outcome_model)
+t_learner.fit(Y_train, T_train, X=X_train)
 
-marginaleffects::plot_predictions(
-  rcs_fit,
-  condition = "bmi")
+t_cate_rd = np.asarray(
+    t_learner.effect(X_test, T0=0, T1=1)
+).reshape(-1)
 
+t_effect_df = pd.DataFrame({
+    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
+    "cate_rd": t_cate_rd,
+})
+
+print(t_effect_df.head())
+print(f"ATE in test set (risk difference): {t_cate_rd.mean():.3f}")
 ```
 
-## どうすればRobustになる？
+- T-learnerは `T = 0` と `T = 1` で2つの予測確率モデルを作り、その差をCATEとする
+- 各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい
 
-- Propensity score (PS) analysis
-  - PS match, PS weight
-    - ATT, ATC, ATE, ATOなど
-- アウトカムモデル + PS model
-  - Doubly robust model
-    - 最も有名なものはAIPW
-- PS modelを進化させる
-  - PSをUpdateさせるTMLE
+## X-learner
 
-## Matchingだと
+```{python}
+#| label: x-learner-binary
+#| echo: true
 
-- 一番有名なのはPropensity score matching
+from econml.metalearners import XLearner
+from sklearn.ensemble import HistGradientBoostingRegressor
 
-```{r}
-#| label: propensity-score-analysis
-
-library(MatchIt)
-library(WeightIt)
-library(marginaleffects)
-library(modelsummary)
-
-mout <- MatchIt::matchit(ca ~ age + sexm1 + bmi + hf + bnp + lvef, data = toy_data)
-
-m_dat <- MatchIt::match.data(mout)
-
-fit_match <- glm(afeqt_os ~ ca * (age + sexm1 + bmi + hf + bnp + lvef), data = m_dat)
-
-match_res <- marginaleffects::avg_comparisons(
-  fit_match,
-  variable = "ca",
-  vcoc = ~subclass,
-  newdata = subset(ca == 1)
+x_outcome_model = ClassifierAsProbabilityRegressor(
+    HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    )
 )
 
-wout <- WeightIt::weightit(ca ~ age + sexm1 + bmi + hf + bnp + lvef, data = toy_data, method = "ipt")
-
-weight_res <- WeightIt::lm_weightit(
-  afeqt_os ~ ca,
-  data = toy_data,
-  weightit = wout,
-  vcov = "HC0"
+# imputed treatment effect（連続値）を学習するための回帰モデル
+x_cate_model = HistGradientBoostingRegressor(
+    learning_rate=0.05,
+    max_iter=200,
+    max_leaf_nodes=15,
+    min_samples_leaf=30,
+    l2_regularization=1.0,
+    random_state=123,
 )
 
-options("modelsummary_factory_default" = "tinytable")
+# P(T=1 | X) を学習するモデル
+x_propensity_model = HistGradientBoostingClassifier(
+    learning_rate=0.05,
+    max_iter=150,
+    max_leaf_nodes=15,
+    min_samples_leaf=30,
+    l2_regularization=1.0,
+    random_state=123,
+)
 
-modelsummary::modelsummary(
-  models = list(
-    `PS match` = match_res,
-    `PS weight` = weight_res
+x_learner = XLearner(
+    models=x_outcome_model,
+    cate_models=x_cate_model,
+    propensity_model=x_propensity_model,
+)
+x_learner.fit(Y_train, T_train, X=X_train)
+
+x_cate_rd = np.asarray(
+    x_learner.effect(X_test, T0=0, T1=1)
+).reshape(-1)
+
+x_effect_df = pd.DataFrame({
+    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
+    "cate_rd": x_cate_rd,
+})
+
+print(x_effect_df.head())
+print(f"ATE in test set (risk difference): {x_cate_rd.mean():.3f}")
+```
+
+- X-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する
+- 最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する
+
+## DR-learner
+
+```{python}
+#| label: dr-learner-binary
+#| echo: true
+
+from econml.dr import DRLearner
+
+dr_learner = DRLearner(
+    model_propensity=HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=150,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
     ),
-  estimate = "{estimate} [{conf.low}, {conf.high}]"
-
+    model_regression=HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    model_final=HistGradientBoostingRegressor(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    discrete_outcome=True,
+    min_propensity=0.01,
+    cv=5,
+    random_state=123,
 )
+
+# nuisance modelはcv=5でcross-fittingされる
+dr_learner.fit(Y_train, T_train, X=X_train)
+
+dr_cate_rd = np.asarray(
+    dr_learner.effect(X_test, T0=0, T1=1)
+).reshape(-1)
+
+dr_effect_df = pd.DataFrame({
+    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
+    "cate_rd": dr_cate_rd,
+})
+
+print(dr_effect_df.head())
+print(f"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}")
+
+# 4つのlearnerを同じtest setで比較する
+learner_summary = pd.DataFrame({
+    "learner": ["S", "T", "X", "DR"],
+    "ate_rd": [
+        s_cate_rd.mean(),
+        t_cate_rd.mean(),
+        x_cate_rd.mean(),
+        dr_cate_rd.mean(),
+    ],
+    "cate_sd": [
+        s_cate_rd.std(ddof=1),
+        t_cate_rd.std(ddof=1),
+        x_cate_rd.std(ddof=1),
+        dr_cate_rd.std(ddof=1),
+    ],
+})
+
+print(learner_summary.round(3))
+```
+
+- `discrete_outcome=True` により、EconMLがoutcome classifierの陽性確率を使用する
+- propensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する
+- `min_propensity=0.01` は、推定propensity scoreが0または1に近い場合の極端な補正を制限する
+:::
+
+## Causal forest
+
+```{r}
+#| label: causal-forest
+
+library(grf)
+library(policytree)
+
+causal_forest_bin <- grf::causal_forest(
+  X = subset(toy_data, select=c("age", "sexm1", "bmi", "hf", "bnp", "lvef")),
+  Y = toy_data$bin_outcome, 
+  W = toy_data$ca
+)
+
+dplyr::bind_cols(
+  toy_data, 
+  predict(causal_forest_bin, estimate.variance = TRUE)
+) |> tibble::as_tibble()
+
+dr.scores <- double_robust_scores(causal_forest_bin)
+
+head(dr.scores)
+
+# Fit a depth-2 tree on the doubly robust scores.
+tree <- policy_tree(subset(toy_data, select=c("age", "sexm1", "bmi", "hf", "bnp", "lvef")), dr.scores, depth = 2)
+
+# Print and plot the tree - action 1 corresponds to control, and 2 treated.
+print(tree)
+plot(tree, leaf.label = c("Control", "CA"))
 
 ```
 
-
-## それでもなお、問題が残る
-
-- アウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る
-<!-- Todo: Citationを入れる -->
-- Estimandの問題 = 治療効果の異質性
-  - Subgroup解析と一緒
-  - 自覚的にInteraction termを入れないとちゃんと推定出来ない
-- ここに機械学習を持ち込めないか？
-
-
-
+## 男女差、LVEF、Cr等との治療効果
 
 ```{python}
 #| label: S-learner
@@ -1229,534 +1513,7 @@ print(S_te)
 
 ```
 
-## Scratch for S-learner
-
-```{r}
-#| label: scratch-for-S-learner
-
-library(tidymodels)
-library(bonsai)
-
-set.seed(42)
-
-# toy_data_split <- rsample::initial_split(toy_data)
-# train_data <- rsample::training(toy_data_split)
-# test_data <- rsample::testing(toy_data_split)
-
-# 3. モデルの初期化 (scikit-learn API)
-# 引数を指定しない場合、デフォルトのハイパーパラメータが適用されます
-# numeric outcome用
-# re78やpseudo outcome Dを回帰する
-lightgbm_spec <- boost_tree() |>
-  set_engine("lightgbm") |> 
-  set_mode("regression")
-
-# mu1_hat(x): treated群でfit
-lightgbm_fit <- workflow() |>
-  add_formula(afeqt_os ~ age + sexm1 + bmi + hf + bnp + lvef + ca) |>
-  add_model(lightgbm_spec) |>
-  fit(data = toy_data)
-
-fitted_data <- broom::augment(lightgbm_fit, new_data = toy_data)
-
-yardstick::rmse(fitted_data, afeqt_os, .pred)
-
-data_ca0 <- dplyr::mutate(toy_data, ca = 0)
-
-fitted_data_ca0 <- predict(lightgbm_fit, new_data = data_ca0) |> 
-  dplyr::rename(ca0_pred = .pred)
-
-data_ca1 <- dplyr::mutate(toy_data, ca = 1)
-
-fitted_data_ca1 <- predict(lightgbm_fit, new_data = data_ca1) |> 
-  dplyr::rename(ca1_pred = .pred)
-
-whole_data <- dplyr::bind_cols(
-  fitted_data, 
-  fitted_data_ca0, 
-  fitted_data_ca1
-) |> 
-  dplyr::mutate(
-    ca_diff = ca1_pred - ca0_pred
-  )
-
-datawizard::describe_distribution(whole_data, ca_diff)
-
-tinyplot::plt(~ca_diff, data = whole_data, type = type_histogram())
-
-```
-
-## T learner
-
-
-![t-learner](images/t-learner.drawio.svg)
-
-
-## Scratch for T-learner
-
-
-```{python}
-#| label: T-learner
-
-from econml.metalearners import TLearner
-import numpy as np
-import pandas as pd
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.model_selection import train_test_split
-
-X = toy_data.loc[:,["age", "sexm1", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data['afeqt_os']
-T = toy_data['ca']
-n = toy_data.shape[0]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42,
-    stratify=T
-    )
-
-T_train = T.loc[y_train.index]
-T_test = T.loc[y_test.index]
-
-# Instantiate T learner
-models = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
-T_learner = TLearner(models=models)
-# Train T_learner
-T_learner.fit(y_train, T_train, X=X_train)
-# Estimate treatment effects on test data
-T_te = T_learner.effect(X_test)
-
-print("T learnerでの局所治療効果")
-print(T_te)
-
-```
-
-
-
-```{python}
-#| label: X-learner
-
-# Main imports
-# Helper imports
-import numpy as np
-import pandas as pd
-import seaborn as sns
-from econml.metalearners import XLearner
-from numpy.random import binomial, multivariate_normal, normal, uniform
-from sklearn.ensemble import GradientBoostingRegressor, RandomForestClassifier
-from sklearn.model_selection import train_test_split
-
-
-X = toy_data.loc[:, ["age", "sexm1", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data["afeqt_os"]
-T = toy_data["ca"]
-n = toy_data.shape[0]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=T
-)
-
-T_train = T.loc[y_train.index]
-T_test = T.loc[y_test.index]
-
-# モデルの構築
-models = GradientBoostingRegressor(max_depth=3, random_state=0)
-propensity_model = RandomForestClassifier()
-X_learner = XLearner(models=models, propensity_model=propensity_model)
-X_learner.fit(y_train, T_train, X=X_train)
-
-# Estimate treatment effects on test data
-X_te = X_learner.effect(X_test)
-
-sns.scatterplot(x=X_test['age'], y=X_te)
-
-```
-
-## DR-learner
-```{python}
-#| label: DR-learner
-
-
-# Main imports
-from econml.dr import DRLearner
-
-# Helper imports
-import numpy as np
-import pandas as pd
-from numpy.random import binomial, multivariate_normal, normal, uniform
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingRegressor
-from sklearn.model_selection import train_test_split
-
-X = toy_data.loc[:,["age", "sexm1", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data['afeqt_os']
-T = toy_data['ca']
-n = toy_data.shape[0]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42,
-    stratify=T
-    )
-
-T_train = T.loc[y_train.index]
-T_test = T.loc[y_test.index]
-
-# Instantiate Doubly Robust Learner
-
-outcome_model = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
-pseudo_treatment_model = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(n/100))
-propensity_model = RandomForestClassifier(n_estimators=100, max_depth=6,
-                                                  min_samples_leaf=int(n/100))
-
-DR_learner = DRLearner(model_regression=outcome_model, model_propensity=propensity_model,
-                       model_final=pseudo_treatment_model, cv=5)
-# Train DR_learner
-DR_learner.fit(y, T, X=X)
-# Estimate treatment effects on test data
-DR_te = DR_learner.effect(X_test)
-
-```
-
-
-
-```{r}
-#| label: scratch-DR-learner
-
-library(tidymodels)
-library(dplyr)
-
-set.seed(123)
-
-# ============================================================
-# 0. 勉強用のシミュレーションデータを作る
-# ============================================================
-# 想定:
-#   X: 共変量
-#   A: 処置 0/1
-#   Y: アウトカム
-#   tau_true: 本当のCATE = E[Y(1) - Y(0) | X]
-#
-# 実データでは tau_true は観測できません。
-# ここでは答え合わせ用に持たせています。
-
-n <- 2000
-
-x1 <- rnorm(n)
-x2 <- rnorm(n)
-x3 <- rbinom(n, size = 1, prob = 0.5)
-x4 <- runif(n, min = -1, max = 1)
-
-# 真の傾向スコア P(A = 1 | X)
-e_true <- plogis( -0.2 + 0.5 * x1 - 0.4 * x2 + 0.4 * x3 + 0.2 * x4)
-
-# 処置割付
-A <- rbinom(n, size = 1, prob = e_true)
-
-# Y(0) の条件付き平均
-mu0_true <- 1 +
-  1.0 * x1 +
-  0.5 * x2 -
-  0.7 * x3 +
-  0.3 * x4
-
-# 真のCATE
-tau_true <- 1 +
-  0.7 * x1 -
-  0.4 * x2 +
-  0.5 * x3
-
-# 観測アウトカム
-Y <- mu0_true + A * tau_true + rnorm(n, sd = 1)
-
-dat <- tibble(
-  id = 1:n,
-  Y = Y,
-  A = A,
-  # parsnipのlogistic_reg用に処置をfactorにもしておく
-  A_fac = factor(if_else(A == 1, "treated", "control"), levels = c("control", "treated")),
-  x1 = x1,
-  x2 = x2,
-  x3 = x3,
-  x4 = x4,
-  e_true = e_true,
-  mu0_true = mu0_true,
-  tau_true = tau_true
-)
-
-# ============================================================
-# 1. 2-fold cross-fitting 用のfoldを作る
-# ============================================================
-# DR-learnerでは、同じデータで nuisance model を学習して
-# 同じデータに予測を返すと過学習の影響が入りやすいので、
-# ここでは一番簡単な2-fold cross-fittingを手で書きます。
-#
-# fold 1 の予測には fold 2 で学習したモデルを使う。
-# fold 2 の予測には fold 1 で学習したモデルを使う。
-
-dat <- dat %>%
-  mutate(fold = sample(rep(1:2, length.out = n)))
-
-# ============================================================
-# 2. tidymodelsで使うglmモデルを定義
-# ============================================================
-# glmだけ使うため、engine = "glm" を明示します。
-
-propensity_spec <- logistic_reg() %>%
-  set_engine("glm") %>%
-  set_mode("classification")
-
-outcome_spec <- linear_reg() %>%
-  set_engine("glm") %>%
-  set_mode("regression")
-
-cate_spec <- linear_reg() %>%
-  set_engine("glm") %>%
-  set_mode("regression")
-
-# ============================================================
-# 3. fold 1 に対する nuisance 予測を作る
-# ============================================================
-# fold 1 の各観測について、
-#   e_hat(X)   = P(A = 1 | X)
-#   mu1_hat(X) = E[Y | A = 1, X]
-#   mu0_hat(X) = E[Y | A = 0, X]
-# を作ります。
-#
-# ただし、モデルの学習には fold 1 を使わず、fold 2 だけを使います。
-
-train_for_fold1 <- dat %>%
-  filter(fold != 1)
-
-test_fold1 <- dat %>%
-  filter(fold == 1)
-
-# 傾向スコアモデル: A ~ X
-e_model_fold1 <- propensity_spec %>%
-  fit(
-    A_fac ~ x1 + x2 + x3 + x4,
-    data = train_for_fold1
-  )
-
-# アウトカムモデル: Y ~ A, X, A:X
-# Aとの交互作用を入れて、処置効果の異質性を表現できるようにしています。
-m_model_fold1 <- outcome_spec %>%
-  fit(
-    Y ~ A * (x1 + x2 + x3 + x4),
-    data = train_for_fold1
-  )
-
-# 同じXに対して、仮にA=1だったら、仮にA=0だったら、を予測する
-test_fold1_A1 <- test_fold1 %>%
-  mutate(A = 1)
-
-test_fold1_A0 <- test_fold1 %>%
-  mutate(A = 0)
-
-fold1_dr_parts <- test_fold1 %>%
-  mutate(
-    e_hat = predict(
-      e_model_fold1,
-      new_data = test_fold1,
-      type = "prob"
-    )$.pred_treated,
-
-    mu1_hat = predict(
-      m_model_fold1,
-      new_data = test_fold1_A1
-    )$.pred,
-
-    mu0_hat = predict(
-      m_model_fold1,
-      new_data = test_fold1_A0
-    )$.pred
-  )
-
-# ============================================================
-# 4. fold 2 に対する nuisance 予測を作る
-# ============================================================
-# 今度は逆に、fold 2 の予測のために fold 1 だけで学習します。
-
-train_for_fold2 <- dat %>%
-  filter(fold != 2)
-
-test_fold2 <- dat %>%
-  filter(fold == 2)
-
-e_model_fold2 <- propensity_spec %>%
-  fit(
-    A_fac ~ x1 + x2 + x3 + x4,
-    data = train_for_fold2
-  )
-
-m_model_fold2 <- outcome_spec %>%
-  fit(
-    Y ~ A * (x1 + x2 + x3 + x4),
-    data = train_for_fold2
-  )
-
-test_fold2_A1 <- test_fold2 %>%
-  mutate(A = 1)
-
-test_fold2_A0 <- test_fold2 %>%
-  mutate(A = 0)
-
-fold2_dr_parts <- test_fold2 %>%
-  mutate(
-    e_hat = predict(
-      e_model_fold2,
-      new_data = test_fold2,
-      type = "prob"
-    )$.pred_treated,
-
-    mu1_hat = predict(
-      m_model_fold2,
-      new_data = test_fold2_A1
-    )$.pred,
-
-    mu0_hat = predict(
-      m_model_fold2,
-      new_data = test_fold2_A0
-    )$.pred
-  )
-
-# ============================================================
-# 5. fold 1 と fold 2 の予測を結合する
-# ============================================================
-
-dr_data <- bind_rows(fold1_dr_parts, fold2_dr_parts) %>%
-  arrange(id)
-
-# 傾向スコアが0や1に近すぎると割り算が暴れるので、
-# 勉強用に軽くクリップしておきます。
-dr_data <- dr_data %>%
-  mutate(
-    e_hat_raw = e_hat,
-    e_hat = pmin(pmax(e_hat, 0.01), 0.99)
-  )
-
-# ============================================================
-# 6. DR疑似アウトカムを作る
-# ============================================================
-# Aが0/1のとき、DR-learnerの疑似アウトカムは
-#
-# phi =
-#   mu1_hat(X) - mu0_hat(X)
-#   + A       * {Y - mu1_hat(X)} / e_hat(X)
-#   - (1 - A) * {Y - mu0_hat(X)} / {1 - e_hat(X)}
-#
-# です。
-#
-# 直感:
-#   mu1_hat - mu0_hat
-#     -> アウトカムモデルによる処置効果の予測
-#
-#   A * (Y - mu1_hat) / e_hat
-#     -> 処置群で、実際のYとmu1_hatのズレを補正
-#
-#   -(1 - A) * (Y - mu0_hat) / (1 - e_hat)
-#     -> 対照群で、実際のYとmu0_hatのズレを補正
-#
-# この「アウトカムモデル + IPW的な残差補正」が doubly robust な部分です。
-
-dr_data <- dr_data %>%
-  mutate(
-    phi_dr =
-      (mu1_hat - mu0_hat) +
-      A * (Y - mu1_hat) / e_hat -
-      (1 - A) * (Y - mu0_hat) / (1 - e_hat)
-  )
-
-# 疑似アウトカムを少し見る
-dr_data %>%
-  select(id, Y, A, e_hat, mu1_hat, mu0_hat, phi_dr, tau_true) %>%
-  head()
-
-# ============================================================
-# 7. 疑似アウトカムをXに回帰してCATEモデルを作る
-# ============================================================
-# ここがDR-learnerの最終段階です。
-#
-#   E[phi_dr | X = x]
-#
-# を推定します。
-#
-# 今回はglmだけ使うので、ここも linear_reg(engine = "glm") です。
-
-cate_model <- cate_spec %>%
-  fit(
-    phi_dr ~ x1 + x2 + x3 + x4,
-    data = dr_data
-  )
-
-# 各個体の CATE 推定値 tau_hat(X) を得る
-dr_data <- dr_data %>%
-  mutate(
-    tau_hat = predict(
-      cate_model,
-      new_data = dr_data
-    )$.pred
-  )
-
-# ============================================================
-# 8. ATEも確認する
-# ============================================================
-# DR疑似アウトカムの平均はATE推定量としても見られます。
-# シミュレーションなので真のATEとも比較できます。
-
-ate_check <- tibble(
-  estimand = c(
-    "true ATE: mean(tau_true)",
-    "DR ATE: mean(phi_dr)",
-    "plug-in ATE: mean(mu1_hat - mu0_hat)",
-    "naive difference in means"
-  ),
-  value = c(
-    mean(dr_data$tau_true),
-    mean(dr_data$phi_dr),
-    mean(dr_data$mu1_hat - dr_data$mu0_hat),
-    mean(dr_data$Y[dr_data$A == 1]) -
-      mean(dr_data$Y[dr_data$A == 0])
-  )
-)
-
-ate_check
-
-# ============================================================
-# 9. CATEの答え合わせ
-# ============================================================
-# 実データでは tau_true は分かりません。
-# ここではシミュレーションなので、推定CATEと真のCATEを比べます。
-
-cate_check <- dr_data %>%
-  summarise(
-    true_ate = mean(tau_true),
-    estimated_ate_from_tau_hat = mean(tau_hat),
-    cate_rmse = sqrt(mean((tau_hat - tau_true)^2)),
-    cate_correlation = cor(tau_hat, tau_true)
-  )
-
-cate_check
-
-# ============================================================
-# 10. 可視化
-# ============================================================
-# tau_hat が tau_true に近ければ、点が45度線の近くに並びます。
-
-ggplot(dr_data, aes(x = tau_true, y = tau_hat)) +
-  geom_point(alpha = 0.25) +
-  geom_abline(slope = 1, intercept = 0, linetype = 2) +
-  labs(
-    x = "True CATE",
-    y = "Estimated CATE by DR-learner",
-    title = "DR-learner with tidymodels glm only"
-  )
-
-```
-
+## HTEとPolicy tree
 
 ```{python}
 
@@ -1766,17 +1523,11 @@ intrp = SingleTreeCateInterpreter(
     include_model_uncertainty=False, max_depth=2, min_samples_leaf=10
 )
 # We interpret the CATE model's behavior based on the features used for heterogeneity
-intrp.interpret(DR_learner, X)
+intrp.interpret(dr_learner, X)
 # Plot the tree
 intrp.plot(feature_names=["age", "sexm1", "bmi", "hf", "bnp", "lvef"], fontsize=12)
 
 ```
-
-## 因果forest
-
-- HTEを計測するのに有名
-- Ashey et al 2019
-
 
 ## Survival model
 
@@ -1832,9 +1583,17 @@ plot(surv_tree, leaf.labels = c("Observation", "Catheter ablation"))
 # cat(DiagrammeRsvg::export_svg(surv_tree_plot), file = here::here("images", 'treeplot.svg'))
 
 ```
+
 <!-- ![Treeplot](images/treeplot.svg) -->
 
 ```{r}
 library(sessioninfo)
 sessioninfo::session_info(info = "all")
 ```
+
+## Thank you for your listening !!
+
+## おまけ
+
+- もしも治療効果が一定だったとしてCausal forestにかける
+- 実際は・・・・・・

@@ -1,0 +1,19 @@
+{
+  "hash": "3ba0f9f0865a02f620402dbd038c1076",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"高齢者の心不全管理\"\nsubtitle: \"現代のGeneralistの必須Skill\"\nformat:\n  clean-revealjs:\n    toc: true\n    toc-depth: 1\n    slide-level: 2\n    theme: default\n    scrollable: true\n    smaller: true\n    transition: slide\n    incremental: false\n    pdf-separate-fragments: false\n    pdf-max-pages-per-slide: 3\n    slide-number: true\n    footer: '<a href=\"../../medicine/index.html\">Medicine</a> · <a href=\"../../statistics/index.html\">Statistics</a> · <a href=\"../../index.html\">Home</a>'\nauthor:\n  - name: Nozomi Niimi\n    orcid: 0000-0002-6909-0740\n    email: figarofuga@gmail.com\n    affiliations: 東京医療センター総合内科\ndate-format: \"YYYY-MM-DD\"\nengine: knitr\nexecute: \n  error: false\n  warning: false\n  echo: false\n  cache: false\nknitr: \n  opts_chunk: \n    dev: svglite\n    fig-format: svg\ndate: \"2026-09-14\"\nbibliography: references.bib\n---\n\n```{=html}\n<style>\n.reveal .big-message {\n  font-size: 1.35em;\n  text-align: center;\n}\n.reveal .columns {\n  gap: 1rem;\n}\n.reveal img {\n  max-height: 68vh;\n}\n</style>\n```\n\n# 高齢者と心不全の関係\n\n## 心不全パンデミック\n\n\n## 高齢と心不全の関係\n\n\n# 現代の心不全管理 at glance\n\n## Phaseを意識した心不全管理\n\n## HFrEF-1 ~GBMT\n\n## HFrEF-2 ~Beyond GBMT\n\n## HFpEF-1 ~ GBMT\n\n## Mechanical intervention\n\n\n# 高齢者における心不全の各フェーズの動き方\n\n## 超急性期～NPPV+ニトロ, NSTEACS, DC\nNPPVの代わりにHFNCは？\n\n## 急性期心不全\n\nNohria stevenson\n利尿薬はしっかり使うべき？\nBaはどうする？\n\n## 高齢者HFrEFの管理\n\nGBMTの効果\nUnderutilization\n\n## 高齢者HFpEFの管理\n\nFinerenoneの効果？\nGLP1-RA？\n\n## 食事について\n\nmalnutritionの問題\n\n## ACPの確立\n\n\n\n## References {.scrollable}\n\n::: {#refs}\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

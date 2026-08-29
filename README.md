@@ -51,6 +51,20 @@ pixi add パッケージ名
 direnv reload
 ```
 
+If R packages were not registered in conda-forge, then run this script
+
+```bash
+pixi run Rscript scripts/vendor_pixi_r_packages.R <<package-name>>
+```
+
+Afterward, run these script to save vendor/ to github
+
+```bash
+git add pixi.toml pixi.lock vendor/
+git commit -m "Vendor new packages for Pixi"
+
+```
+
 If `pixi.toml` was edited directly, including when adding a local `pixi-build-r`
 package, update the lock file and environment without `--locked`:
 
@@ -72,12 +86,12 @@ pixi run preview
 pixi run render
 
 # Base Folder（pixi.tomlがある場所）からの相対パスで1つだけ
-pixi run render statistics/RMST_mi/index.qmd
+pixi run render statistics/model_performance_mi/index.qmd
 pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add progress model performance"
+git commit -m "Add progress MLcausal"
 git push
 
 ```

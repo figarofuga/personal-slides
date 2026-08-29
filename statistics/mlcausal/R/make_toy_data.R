@@ -76,10 +76,10 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
 
   lvef <- rtruncnorm_simple(
     n = n,
-    mean = 52,
+    mean = 50,
     sd = 8,
     lower = 15,
-    upper = 75
+    upper = 70
   ) |>
     as.integer()
 
@@ -139,16 +139,33 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   palpitation <- rbinom(n, size = 1, prob = p_palpitation)
 
   # Treatment / intervention
+  # Age has the strongest negative association with CA, especially after 70.
+  # Low LVEF increases CA use, while high LVEF has only a mild penalty.
+  ca_score <-
+    -0.085 * (age - 60) -
+    0.010 * pmax(age - 70, 0)^2 +
+    0.065 * pmax(50 - lvef, 0) -
+    0.012 * pmax(lvef - 50, 0) +
+    1.70 * hf -
+    2.20 * (bmi < 18) -
+    0.25 * pmax(18 - bmi, 0) +
+    2.10 * palpitation +
+    0.35 * sexm1 +
+    0.55 * SES_z -
+    0.20 * bnp_z +
+    0.10 * bmi_z
+
+  # Keep the overall CA prevalence stable across seeds and sample sizes.
+  target_ca_prevalence <- 0.52
+  ca_intercept <- uniroot(
+    function(intercept) {
+      mean(inv_logit(intercept + ca_score)) - target_ca_prevalence
+    },
+    interval = c(-10, 10)
+  )$root
+
   p_ca <- inv_logit(
-    -1.00 -
-      1.05 * age_z +
-      0.60 * sexm1 +
-      0.35 * bmi_z +
-      0.75 * SES_z -
-      0.85 * bnp_z +
-      1.70 * palpitation -
-      0.70 * lvef_z +
-      1.25 * hf
+    ca_intercept + ca_score
   )
 
   ca <- rbinom(n, size = 1, prob = p_ca)
@@ -178,23 +195,8 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
 
   bnp_risk <- as.numeric(scale(bnp_risk_raw))
 
-  # Heterogeneous treatment effect
-  treatment_effect <- ifelse(
-    sexm1 == 1,
-    -0.20 -
-      0.45 * age_risk -
-      0.55 * bnp_risk -
-      0.20 * bmi_risk_z -
-      0.25 * lvef_risk_z,
-    -0.20 -
-      0.25 * age_risk -
-      0.55 * bnp_risk -
-      0.45 * bmi_risk_z -
-      0.25 * lvef_risk_z
-  ) * (-1)
-
-  # Outcomes
-  linear_predictor_outcome_a0 <-
+  # Outcome risk under no treatment
+  linear_predictor_outcome_a0_raw <-
     -2.0 +
     0.70 * age_risk +
     0.90 * hf -
@@ -203,8 +205,67 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     0.04 * bmi_risk +
     0.1 * lvef_risk
 
-  linear_predictor_outcome_a1 <-
-    linear_predictor_outcome_a0 - treatment_effect
+  # Avoid probabilities numerically equal to 0 or 1. This also leaves room
+  # for both benefit and harm on the risk-difference scale.
+  outcome_logit_bounds <- qlogis(c(0.005, 0.995))
+  linear_predictor_outcome_a0 <- pmin(
+    pmax(linear_predictor_outcome_a0_raw, outcome_logit_bounds[1]),
+    outcome_logit_bounds[2]
+  )
+
+  p_bin_outcome_a0 <- inv_logit(linear_predictor_outcome_a0)
+
+  # Heterogeneous treatment effect on the risk-difference scale.
+  # A larger benefit score produces a more negative ite_rd_bin:
+  # younger age, lower LVEF, higher BNP, and higher BMI imply more benefit.
+  age_benefit_modifier <-
+    -age_z +
+    0.5 * pmax(55 - age, 0) / 10
+
+  lvef_benefit_modifier <-
+    -lvef_z +
+    0.5 * pmax(45 - lvef, 0) / 10
+
+  bmi_benefit_modifier <-
+    bmi_z -
+    0.5 * (bmi < 18)
+
+  benefit_score <-
+    1.00 * age_benefit_modifier +
+    1.00 * lvef_benefit_modifier +
+    0.80 * bnp_z +
+    1.30 * bmi_benefit_modifier
+
+  benefit_score_z <- as.numeric(scale(benefit_score))
+  ite_rd_bin_raw <- -0.12 * benefit_score_z
+
+  rd_lower_bound <- 0.005 - p_bin_outcome_a0
+  rd_upper_bound <- 0.995 - p_bin_outcome_a0
+
+  # Center the true sample ATE at zero after respecting probability bounds.
+  ate_calibration_shift <- uniroot(
+    function(shift) {
+      mean(
+        pmin(
+          pmax(ite_rd_bin_raw + shift, rd_lower_bound),
+          rd_upper_bound
+        )
+      )
+    },
+    interval = c(-1, 1)
+  )$root
+
+  ite_rd_bin <- pmin(
+    pmax(ite_rd_bin_raw + ate_calibration_shift, rd_lower_bound),
+    rd_upper_bound
+  )
+
+  p_bin_outcome_a1 <- p_bin_outcome_a0 + ite_rd_bin
+  linear_predictor_outcome_a1 <- qlogis(p_bin_outcome_a1)
+
+  # Positive values denote a reduction in the log odds of the outcome.
+  treatment_effect <-
+    linear_predictor_outcome_a0 - linear_predictor_outcome_a1
 
   linear_predictor_outcome <- ifelse(
     ca == 1,
@@ -212,9 +273,11 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     linear_predictor_outcome_a0
   )
 
-  p_bin_outcome_a0 <- inv_logit(linear_predictor_outcome_a0)
-  p_bin_outcome_a1 <- inv_logit(linear_predictor_outcome_a1)
-  p_bin_outcome <- inv_logit(linear_predictor_outcome)
+  p_bin_outcome <- ifelse(
+    ca == 1,
+    p_bin_outcome_a1,
+    p_bin_outcome_a0
+  )
   bin_outcome <- rbinom(n, size = 1, prob = p_bin_outcome)
 
   younger_age_benefit <- pmax(65 - age, 0) / 10
@@ -314,10 +377,71 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     maxt = time_5y
   )
 
-  full_toy_data <- dplyr::left_join(
+  # Binomial outcome with no covariate-dependent treatment effect
+  treatment_effect_no_hte <- rnorm(
+    n = n,
+    mean = 4,
+    sd = 0.2
+  )
+
+  linear_predictor_outcome_no_hte_a0 <- linear_predictor_outcome_a0
+
+  linear_predictor_outcome_no_hte_a1 <-
+    linear_predictor_outcome_no_hte_a0 - treatment_effect_no_hte
+
+  linear_predictor_outcome_no_hte <- ifelse(
+    ca == 1,
+    linear_predictor_outcome_no_hte_a1,
+    linear_predictor_outcome_no_hte_a0
+  )
+
+  p_bin_outcome_no_hte_a0 <- inv_logit(
+    linear_predictor_outcome_no_hte_a0
+  )
+
+  p_bin_outcome_no_hte_a1 <- inv_logit(
+    linear_predictor_outcome_no_hte_a1
+  )
+
+  p_bin_outcome_no_hte <- inv_logit(
+    linear_predictor_outcome_no_hte
+  )
+
+  bin_outcome_no_hte <- rbinom(
+    n = n,
+    size = 1,
+    prob = p_bin_outcome_no_hte
+  )
+
+  full_toy_data <- tibble::tibble(
     pre_toy_data,
-    surv_dat,
-    by = "id"
+    treatment_effect_no_hte = treatment_effect_no_hte,
+    linear_predictor_outcome_no_hte_a0 =
+      linear_predictor_outcome_no_hte_a0,
+    linear_predictor_outcome_no_hte_a1 =
+      linear_predictor_outcome_no_hte_a1,
+    linear_predictor_outcome_no_hte = linear_predictor_outcome_no_hte,
+    p_bin_outcome_no_hte_a0 = p_bin_outcome_no_hte_a0,
+    p_bin_outcome_no_hte_a1 = p_bin_outcome_no_hte_a1,
+    p_bin_outcome_no_hte = p_bin_outcome_no_hte,
+    bin_outcome_no_hte = bin_outcome_no_hte
+  ) |>
+    dplyr::left_join(
+      surv_dat,
+      by = "id"
+    ) |>
+  dplyr::mutate(
+    # Individual risk difference
+    ite_rd_bin =
+      p_bin_outcome_a1 - p_bin_outcome_a0,
+
+    # Individual log odds ratio
+    ite_log_or_bin =
+      linear_predictor_outcome_a1 -
+      linear_predictor_outcome_a0,
+
+    # Individual odds ratio
+    ite_or_bin = exp(-treatment_effect)
   )
 
   toy_data <- dplyr::select(
@@ -332,6 +456,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     palpitation,
     ca,
     bin_outcome,
+    bin_outcome_no_hte,
     afeqt_treatment_effect,
     afeqt_os,
     eventtime,

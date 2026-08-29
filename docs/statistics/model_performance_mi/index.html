@@ -230,6 +230,45 @@ blockquote {
   padding: 0.22em 0.45em;
 }
 
+/* ROC flow: reserve more room for the table with predictions at each cutoff. */
+.reveal .roc-flow {
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(2.5rem, 0.35fr)
+    minmax(0, 1.7fr)
+    minmax(2.5rem, 0.35fr)
+    minmax(0, 1.5fr);
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.reveal .roc-flow > .column {
+  width: auto !important;
+  min-width: 0;
+}
+
+.reveal .roc-flow h3 {
+  font-size: 0.52em;
+  white-space: nowrap;
+}
+
+.reveal .roc-flow table {
+  width: 100%;
+  font-size: 0.50em;
+}
+
+.reveal .roc-flow table th,
+.reveal .roc-flow table td {
+  padding: 0.18em 0.28em;
+  white-space: nowrap;
+}
+
+.reveal .roc-flow .flow-arrow {
+  font-size: 2.8rem;
+}
+
 .reveal .flow-operation {
   text-align: center;
 }
@@ -426,6 +465,16 @@ Prediction Class1 Class2
 <h2>混同行列関連</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <p><span class="math display">\[
 \begin{aligned}
 \text{Accuracy} &amp;= \frac{TP + TN}{TP + TN + FP + FN} \\[6pt]
@@ -440,19 +489,10 @@ F_{\beta} &amp;=
 {(1 + \beta^2)\cdot TP + \beta^2\cdot FN + FP}
 \end{aligned}
 \]</span></p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
-</figure>
-</div>
-</div>
-</div>
 </div></div>
 </section>
-<section id="discrimination混同行列関連" class="slide level2">
-<h2>Discrimination：混同行列関連</h2>
+<section id="混同行列関連の指標について" class="slide level2">
+<h2>混同行列関連の指標について</h2>
 <div class="columns">
 <div class="column" style="width:52%;">
 <ul>
@@ -478,8 +518,8 @@ F_{\beta} &amp;=
 </section>
 <section id="roc指標ができるまで" class="slide level2">
 <h2>ROC指標ができるまで</h2>
-<div class="columns tibble-flow">
-<div class="column" style="width:20%;">
+<div class="columns tibble-flow roc-flow">
+<div class="column">
 <h3 id="予測結果">1. 予測結果</h3>
 <div class="cell">
 <div class="cell-output-display">
@@ -519,7 +559,7 @@ F_{\beta} &amp;=
 </table>
 </div>
 </div>
-</div><div class="column fragment" data-fragment-index="1" style="width:20%;">
+</div><div class="column fragment" data-fragment-index="1">
 <div class="flow-operation">
 <div class="flow-arrow">
 →
@@ -528,20 +568,61 @@ F_{\beta} &amp;=
 閾値を動かしながら<br>予測値を作る
 </div>
 </div>
-</div><div class="column fragment" data-fragment-index="2" style="width:20%;">
+</div><div class="column fragment" data-fragment-index="2">
 <h3 id="閾値ごとでの予測">2. 閾値ごとでの予測</h3>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   prob_Class1  truth predict_min predict_min_2
-1 1.794262e-07 Class2      Class2        Class2
-2 4.503065e-06 Class2      Class1        Class2
-3 5.813991e-06 Class2      Class1        Class1
-4 5.922113e-06 Class2      Class1        Class1
-5 1.216854e-05 Class2      Class1        Class1
-6 1.401020e-05 Class2      Class1        Class1</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">実際のアウトカム</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値:1.8e-07</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値2:4.5e-06</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.79e-07</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.50e-06</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.81e-06</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5.92e-06</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1.22e-05</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1.40e-05</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</div><div class="column fragment" data-fragment-index="3" style="width:20%;">
+</div><div class="column fragment" data-fragment-index="3">
 <div class="flow-operation">
 <div class="flow-arrow">
 →
@@ -550,8 +631,8 @@ F_{\beta} &amp;=
 各々の閾値での予測のClassから<br>感度・特異度を計算
 </div>
 </div>
-</div><div class="column fragment" data-fragment-index="3" style="width:20%;">
-<h3 id="閾値ごとの性能">3. 閾値ごとの性能</h3>
+</div><div class="column fragment" data-fragment-index="4">
+<h3 id="感度特異度">3. 感度・特異度</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -738,6 +819,199 @@ F_{\beta} &amp;=
 </section>
 <section id="calibration-plotの作り方" class="slide level2 scrollable">
 <h2>Calibration Plotの作り方</h2>
+<div class="columns tibble-flow roc-flow">
+<div class="column">
+<h3 id="予測結果を予測確率に従って並べ直す">1. 予測結果を予測確率に従って並べ直す</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">実測値</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率カテゴリ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">2.00e-07</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.50e-06</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.80e-06</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5.90e-06</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1.22e-05</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1.40e-05</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">実測値</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率カテゴリ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.9999054</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.9999103</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.9999104</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.9999209</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.9999720</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.9999965</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="1">
+<div class="flow-operation">
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+同じClassでの平均発症予測確率と<br>実際の発症率を比べる
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="2">
+<h3 id="class毎の予測確率と実際のイベント発症確率">2. Class毎の予測確率と実際のイベント発症確率</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">カテゴリ</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">予測発症率の平均</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">実際の発症率</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">0.0006264</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.02</td>
+<td style="text-align: center;">0.0122140</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.14</td>
+<td style="text-align: center;">0.0776816</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0.26</td>
+<td style="text-align: center;">0.2125326</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.38</td>
+<td style="text-align: center;">0.4978346</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0.56</td>
+<td style="text-align: center;">0.7620909</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">0.86</td>
+<td style="text-align: center;">0.9134009</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">0.98</td>
+<td style="text-align: center;">0.9778961</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">0.96</td>
+<td style="text-align: center;">0.9938732</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">0.9992472</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="3">
+<div class="flow-operation">
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+可視化
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="4">
+<h3 id="visualization">3. Visualization</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li>感度と1-特異度で点を結ぶとROC曲線</li>
+<li>PrecisionとRecallで点を結ぶとPR曲線</li>
+</ul>
+<!-- Todo: 変更 -->
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -759,7 +1033,7 @@ F_{\beta} &amp;=
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -781,8 +1055,21 @@ F_{\beta} &amp;=
 </ul></li>
 </ul>
 </div><div class="column" style="width:42%;">
-<p><img data-src="images/slide19_image01.png" style="width:90.0%" alt="Calibrationの表1"></p>
-<p><img data-src="images/slide19_image02.png" style="width:90.0%" alt="Calibrationの表2"></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   category mean_incidence    mean_prob
+1         1           0.00 0.0006263551
+2         2           0.02 0.0122139744
+3         3           0.14 0.0776815639
+4         4           0.26 0.2125326425
+5         5           0.38 0.4978345764
+6         6           0.56 0.7620908836
+7         7           0.86 0.9134009246
+8         8           0.98 0.9778960779
+9         9           0.96 0.9938732087
+10       10           1.00 0.9992471669</code></pre>
+</div>
+</div>
 </div></div>
 </section>
 <section id="brier-score" class="slide level2">
@@ -796,8 +1083,66 @@ F_{\beta} &amp;=
 \]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Probability of Class1</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">predicted</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">truth</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">truth_num</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">diff_squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.0035892</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.0000129</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.6786211</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.1032844</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.1108935</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.0122974</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.7351617</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.0701393</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.0162400</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.0002637</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.9992751</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.0000005</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p><img data-src="images/slide20_image01.png" style="width:100.0%" alt="Brier scoreの式"></p>
-<p><img data-src="images/slide20_image03.png" style="width:70.0%" alt="Brier scoreの例"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="images/slide20_image02.png" style="width:82.0%" alt="Brier scoreの図"></p>
 </div></div>

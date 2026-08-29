@@ -1,8 +1,8 @@
 ---
-title: "可視化事始め"
-subtitle: "そのフィギュア、必要ですか？"
+title: "モデルに入れる因子の選択"
+subtitle: "DAGの基礎"
 author: "新美 望"
-date: "2021/3/5"
+date: "2026/8/23"
 lang: ja
 format:
   revealjs:

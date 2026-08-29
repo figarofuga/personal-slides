@@ -32,6 +32,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -162,9 +228,9 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li><a href="#/因果推論-at-glance" id="/toc-因果推論-at-glance">因果推論 at glance</a></li>
 <li><a href="#/機械学習-at-glance" id="/toc-機械学習-at-glance">機械学習 at glance</a></li>
 <li><a href="#/機械学習と因果推論の出会い" id="/toc-機械学習と因果推論の出会い">機械学習と因果推論の出会い</a></li>
-<li><a href="#/注意点" id="/toc-注意点">注意点</a></li>
 <li><a href="#/meta-learner系" id="/toc-meta-learner系">meta-learner系</a></li>
 <li><a href="#/causal-forestについて" id="/toc-causal-forestについて">Causal forestについて</a></li>
+<li><a href="#/advanced" id="/toc-advanced">Advanced</a></li>
 <li><a href="#/実践" id="/toc-実践">実践！</a></li>
 </ul>
 </nav>
@@ -178,14 +244,19 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <h2>因果関係</h2>
 <ul>
 <li>医学研究の第一の目標と言っても過言ではない</li>
-<li>Aの薬を使うと患者の予後は良くなるか？</li>
+<li>“Aの薬を使うと患者の予後は良くなるか？”</li>
 <li>実際は口で言うほど簡単ではない</li>
 </ul>
 </section>
 <section id="どうして難しいか" class="slide level2">
 <h2>どうして難しいか？</h2>
 <ul>
-<li>数多くのBiasが存在する</li>
+<li>因果関係の根本的問題
+<ul>
+<li>ある個人に「介入をしなかった時」と「介入をした時」の結果を同時に観測できない</li>
+</ul></li>
+<li>これを解決するために種々の方法が存在する</li>
+<li>最も有名なのはRCTであるが、RCTは万能ではない</li>
 <li>ConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある</li>
 <li>観察研究はConfounderがコントロール出来ない</li>
 </ul>
@@ -213,7 +284,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>中間因子を補正すると治療効果が薄まる</li>
 <li>Coliderを補正してしまうと逆にバイアスが出てくる</li>
 </ul></li>
-<li>分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール</li>
+<li>分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール<span class="citation" data-cites="IwanamiDataScience2016Vol3">[@IwanamiDataScience2016Vol3]</span></li>
 </ul>
 </section>
 <section id="世界は結構複雑にできている" class="slide level2">
@@ -222,33 +293,395 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>交絡因子の制御は実際はかなり難しい</li>
 <li>何を、どう補正するか？</li>
 <li>Stratification、Matching、Weighting・・・・・・</li>
+<li>最もシンプルなのは回帰モデル</li>
 </ul>
 </section>
-<section id="通常の回帰" class="slide level2">
-<h2>通常の回帰</h2>
+<section id="交絡因子の制御の方法" class="slide level2">
+<h2>交絡因子の制御の方法</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Stratification</a></li><li><a href="#tabset-1-2">Matching</a></li><li><a href="#tabset-1-3">Weighting</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+matchit(formula = treat ~ age + educ + nodegree + married + re74 + 
+    re75, data = lalonde, method = "subclass", estimand = "ATT", 
+    subclass = 5)
+
+Summary of Balance for All Data:
+         Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance        0.3951        0.2609          0.9490     0.7550    0.2314
+age            25.8162       28.0303         -0.3094     0.4400    0.0813
+educ           10.3459       10.2354          0.0550     0.4959    0.0347
+nodegree        0.7081        0.5967          0.2450          .    0.1114
+married         0.1892        0.5128         -0.8263          .    0.3236
+re74         2095.5737     5619.2365         -0.7211     0.5181    0.2248
+re75         1532.0553     2466.4844         -0.2903     0.9563    0.1342
+         eCDF Max
+distance   0.3700
+age        0.1577
+educ       0.1114
+nodegree   0.1114
+married    0.3236
+re74       0.4470
+re75       0.2876
+
+Summary of Balance by Subclass:
+
+- Subclass 1
+         Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance        0.1775        0.1256          0.8398     1.0450    0.2312
+age            27.5676       31.6522         -0.5914     0.4788    0.1094
+educ           10.4865       10.0696          0.1713     0.6289    0.0340
+nodegree        0.5405        0.5348          0.0116          .    0.0058
+married         0.7027        0.9000         -0.4317          .    0.1973
+re74         6986.6475     9326.5528         -0.2821     1.3141    0.1283
+re75         3205.2601     3564.4389         -0.0830     1.3018    0.0668
+         eCDF Max
+distance   0.3959
+age        0.2418
+educ       0.1263
+nodegree   0.0058
+married    0.1973
+re74       0.2595
+re75       0.1555
+
+- Subclass 2
+         Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance        0.3205        0.3208         -0.0087     1.2837    0.0451
+age            25.0000       25.5846         -0.1108     0.3175    0.1174
+educ           10.6216       10.7538         -0.0590     0.5819    0.0443
+nodegree        0.4595        0.3846          0.1502          .    0.0748
+married         0.2432        0.2000          0.1008          .    0.0432
+re74         2140.1023     2274.7087         -0.0336     2.2096    0.1403
+re75         1678.1752     1599.4741          0.0177     3.1393    0.0892
+         eCDF Max
+distance   0.1243
+age        0.3152
+educ       0.1538
+nodegree   0.0748
+married    0.0432
+re74       0.4258
+re75       0.2682
+
+- Subclass 3
+         Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance        0.4224        0.4190          0.1375     1.1054    0.0537
+age            23.6216       21.5294          0.2680     0.7306    0.1076
+educ            9.7027        9.7647         -0.0286     0.6834    0.0427
+nodegree        0.7027        0.7353         -0.0713          .    0.0326
+married         0.0000        0.0000          0.0000          .    0.0000
+re74          835.6498      906.8236         -0.0425     1.0100    0.0690
+re75          759.5276      733.9533          0.0185     1.2914    0.0548
+         eCDF Max
+distance   0.1331
+age        0.2647
+educ       0.1176
+nodegree   0.0326
+married    0.0000
+re74       0.2297
+re75       0.2027
+
+- Subclass 4
+         Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance        0.4881        0.4885         -0.0204     1.2134    0.0397
+age            23.9730       22.3878          0.2082     0.5387    0.1274
+educ           10.2703       10.3673         -0.0512     1.9286    0.0649
+nodegree        0.8649        0.9184         -0.1565          .    0.0535
+married         0.0000        0.0000          0.0000          .    0.0000
+re74          341.7234      884.9488         -0.5627     0.3840    0.1439
+re75          574.8227     1004.6633         -0.3187     0.5757    0.1655
+         eCDF Max
+distance   0.1070
+age        0.3828
+educ       0.2289
+nodegree   0.0535
+married    0.0000
+re74       0.3751
+re75       0.4032
+
+- Subclass 5
+         Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance        0.5669        0.5725         -0.1378     0.5343    0.0801
+age            28.9189       30.6471         -0.2576     0.2704    0.1641
+educ           10.6486       12.0000         -1.5206     0.0929    0.1095
+nodegree        0.9730        0.7647          1.2843          .    0.2083
+married         0.0000        0.0000          0.0000          .    0.0000
+re74          173.7455      744.8671         -1.0759     0.0681    0.0758
+re75         1442.4909     2070.4553         -0.2490     1.8298    0.1496
+         eCDF Max
+distance   0.2130
+age        0.3307
+educ       0.2353
+nodegree   0.2083
+married    0.0000
+re74       0.1860
+re75       0.4404
+
+Sample Sizes by Subclass:
+          1   2   3  4  5 All
+Control 230  65  68 49 17 429
+Treated  37  37  37 37 37 185
+Total   267 102 105 86 54 614</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+      942        693 1.36    0.174 2.5  -417   2300
+
+Term: treat
+Type: response
+Comparison: 1 - 0</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+matchit(formula = treat ~ age + educ + race + nodegree + married + 
+    re74 + re75, data = lalonde, method = "nearest", estimand = "ATT")
+
+Summary of Balance for All Data:
+           Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance          0.5774        0.1822          1.7941     0.9211    0.3774
+age              25.8162       28.0303         -0.3094     0.4400    0.0813
+educ             10.3459       10.2354          0.0550     0.4959    0.0347
+raceblack         0.8432        0.2028          1.7615          .    0.6404
+racehispan        0.0595        0.1422         -0.3498          .    0.0827
+racewhite         0.0973        0.6550         -1.8819          .    0.5577
+nodegree          0.7081        0.5967          0.2450          .    0.1114
+married           0.1892        0.5128         -0.8263          .    0.3236
+re74           2095.5737     5619.2365         -0.7211     0.5181    0.2248
+re75           1532.0553     2466.4844         -0.2903     0.9563    0.1342
+           eCDF Max
+distance     0.6444
+age          0.1577
+educ         0.1114
+raceblack    0.6404
+racehispan   0.0827
+racewhite    0.5577
+nodegree     0.1114
+married      0.3236
+re74         0.4470
+re75         0.2876
+
+Summary of Balance for Matched Data:
+           Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance          0.5774        0.3629          0.9739     0.7566    0.1321
+age              25.8162       25.3027          0.0718     0.4568    0.0847
+educ             10.3459       10.6054         -0.1290     0.5721    0.0239
+raceblack         0.8432        0.4703          1.0259          .    0.3730
+racehispan        0.0595        0.2162         -0.6629          .    0.1568
+racewhite         0.0973        0.3135         -0.7296          .    0.2162
+nodegree          0.7081        0.6378          0.1546          .    0.0703
+married           0.1892        0.2108         -0.0552          .    0.0216
+re74           2095.5737     2342.1076         -0.0505     1.3289    0.0469
+re75           1532.0553     1614.7451         -0.0257     1.4956    0.0452
+           eCDF Max Std. Pair Dist.
+distance     0.4216          0.9740
+age          0.2541          1.3938
+educ         0.0757          1.2474
+raceblack    0.3730          1.0259
+racehispan   0.1568          1.0743
+racewhite    0.2162          0.8390
+nodegree     0.0703          1.0106
+married      0.0216          0.8281
+re74         0.2757          0.7965
+re75         0.2054          0.7381
+
+Sample Sizes:
+          Control Treated
+All           429     185
+Matched       185     185
+Unmatched     244       0
+Discarded       0       0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Estimate Std. Error     z Pr(&gt;|z|)   S 2.5 % 97.5 %
+      568       1181 0.481     0.63 0.7 -1746   2882
+
+Term: treat
+Type: response
+Comparison: 1 - 0</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+     1637        797 2.05     0.04 4.6  75.1   3199
+
+Term: treat
+Type: probs
+Comparison: 1 - 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="通常の回帰モデル" class="slide level2">
+<h2>通常の回帰モデル</h2>
 <ul>
-<li>連続値をrestricted cubic splineに入れるなど</li>
-<li>ただし、これらは基本は「値を基準で固定した上で、caを0 → 1にした時の平均的な変化」</li>
-<li>その上で、CAの交絡因子が補正しきれるかは不明</li>
-<li>交互作用項などは人が入れるしかないが、増やしすぎると「次元の呪い」にかかる</li>
+<li>ただし、これらは基本は「値を基準で固定した上で、treatを0 → 1にした時の平均的な変化」</li>
+<li>その上で、交絡因子が補正しきれるかは不明</li>
 </ul>
 </section>
 <section id="次の手" class="slide level2">
 <h2>次の手</h2>
 <ul>
-<li>Propensity score weightingによって群の介入因子の分布を似せる
-<ul>
-<li>IPTW、Overlap weightingなど多くの方法がある</li>
-</ul></li>
-<li>重み付けの方法で、Estimandをどこにするかも指定可能</li>
+<li>自由度を上げるために、連続値をrestricted cubic splineに入れる</li>
+<li>交互作用項を入れる　などなど</li>
+<li>いずれにせよ、<strong>“人の手で”</strong>モデルを作る必要がある</li>
 </ul>
 </section>
 <section id="さらなる補正" class="slide level2">
 <h2>さらなる補正</h2>
 <ul>
-<li>AIPW, TMLEなどでDoubly robustな手法</li>
+<li>AIPW, TMLE, orthogonalizationなどでDoubly robustな手法</li>
 <li>Outcome modelとPropensity modelを用いてDoubly robustにする</li>
 </ul>
+</section>
+<section id="特殊な手法" class="slide level2">
+<h2>特殊な手法</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Augmented Inverse Probability Weighting (AIPW)</a></li><li><a href="#tabset-2-2">TMLE</a></li><li><a href="#tabset-2-3">Orthogonalization</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  estimand estimate conf_low conf_high
+  &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 ATE          470.   -1346.     2285.</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}_1^{\mathrm{AIPW}}
+&amp;=
+\frac{1}{n}\sum_{i=1}^{n}
+\left[
+\underbrace{\hat{\mu}_1(X_i)}_{\text{Outcome prediction}}
++
+\underbrace{
+\frac{A_i}{\hat{e}(X_i)}
+\{Y_i-\hat{\mu}_1(X_i)\}
+}_{\text{IPW correction}}
+\right]
+\\[10pt]
+\hat{\mu}_0^{\mathrm{AIPW}}
+&amp;=
+\frac{1}{n}\sum_{i=1}^{n}
+\left[
+\underbrace{\hat{\mu}_0(X_i)}_{\text{Outcome prediction}}
++
+\underbrace{
+\frac{1-A_i}{1-\hat{e}(X_i)}
+\{Y_i-\hat{\mu}_0(X_i)\}
+}_{\text{IPW correction}}
+\right]
+\end{aligned}
+\]</span></p>
+<ul>
+<li>イメージだと、G-computationによるアウトカムモデルでの仮想データに以下の補正を加えている
+<ul>
+<li>治療を受ける/受けないのPropensity scoreの補正</li>
+</ul></li>
+<li>Doubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない</li>
+</ul>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  method        estimate conf_low conf_high
+  &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 Naive            -635.      NA        NA 
+2 G-computation    1075.    -946.     3096.
+3 TMLE              135.   -1509.     1779.</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\widehat Q^{\,0}(a,W_i)
+=
+\widehat{\mathrm E}
+\left(
+Y_i\mid A_i=a,W_i
+\right)
+\\[6pt]
+\widehat g(W_i)
+=
+\widehat{\Pr}
+\left(
+A_i=1\mid W_i
+\right)
+\\[6pt]
+\begin{aligned}
+\widehat Q^{\,0}_1(W_i)
+&amp;=
+\widehat Q^{\,0}(1,W_i)
+\\[6pt]
+\widehat Q^{\,0}_0(W_i)
+&amp;=
+\widehat Q^{\,0}(0,W_i)
+\end{aligned}
+\\[6pt]
+\widehat{\mathrm{ATE}}_{\mathrm{TMLE}}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left[
+\widehat Q^{\,0}_1(W_i)
+-
+\widehat Q^{\,0}_0(W_i)
++
+\widehat\varepsilon
+\left\{
+\frac{1}{\widehat g(W_i)}
++
+\frac{1}{1-\widehat g(W_i)}
+\right\}
+\right]
+\]</span></p>
+<ul>
+<li>アウトカムモデルによる予測と実測値の残差を、傾向スコアの逆数から作ったclever covariateで回帰して修正量を求め、その修正量で治療あり・なしの予測値を更新した後、平均差としてATEを計算する。</li>
+</ul>
+</div>
+<div id="tabset-2-3">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  method             estimate conf_low conf_high
+  &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 Outcome regression    1548.     13.9     3083.
+2 Orthogonalization     1233.   -295.      2761.</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i &amp;= \theta_0 D_i + g_0(X_i) + \varepsilon_i,
+\qquad
+\mathbb{E}[\varepsilon_i \mid X_i, D_i] = 0, \\[6pt]
+D_i &amp;= m_0(X_i) + V_i,
+\qquad
+\mathbb{E}[V_i \mid X_i] = 0.
+\end{aligned}
+\]</span></p>
+<ul>
+<li>「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する</li>
+<li>シンプルなGLMの場合は通常のGLMの結果と同じになる</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="しかしながら" class="slide level2">
 <h2>しかしながら・・・・・・</h2>
@@ -298,14 +731,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <section id="代表的な機械学習" class="slide level2">
 <h2>代表的な機械学習</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
-<p><span class="math display">\[
-\log\left(\frac{P}{1-P}\right)
-=
-X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
-\]</span></p>
-<p>Logistic回帰</p>
-</div><div class="column" style="width:30%;">
+<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/treebased_model.png"></p>
@@ -316,7 +742,7 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 <li>これはRandom forest</li>
 <li>小さい木のモデルを並列ではなく直列にするとXGBoostなど</li>
 </ul>
-</div><div class="column" style="width:30%;">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/neuralnetwork.png"></p>
@@ -365,25 +791,12 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 <li>柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest</li>
 <li>とはいえ、Causal forestだけで良い気もする</li>
 </ul>
-</section></section>
-<section>
-<section id="注意点" class="title-slide slide level1 center">
-<h1>注意点</h1>
-
 </section>
-<section id="古典的な因果推論の問題点" class="slide level2">
-<h2>古典的な因果推論の問題点</h2>
+<section id="注意点" class="slide level2">
+<h2>注意点</h2>
 <ul>
-<li>Estimandは常に気にする</li>
-<li>Unobserved confoundingへの対処はできない</li>
-<li>その他、複数のBiasも</li>
-<li>Colidarには要注意</li>
-<li>95%信頼区間は出せるのか？</li>
-</ul>
-</section>
-<section id="機械学習側の問題点" class="slide level2">
-<h2>機械学習側の問題点</h2>
-<ul>
+<li>基本的にUnobserved confoundingには対応できない</li>
+<li>Collider biasには対応できない</li>
 <li>過学習の問題
 <ul>
 <li>cross-fitting</li>
@@ -400,23 +813,49 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 <section id="s-learner" class="slide level2">
 <h2>S-learner</h2>
 
-<img data-src="images/s-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">s-learner</p></section>
+<img data-src="images/s-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">s-learner</p><ul>
+<li>最も基本的なmeta-learner</li>
+<li>ML modelを用いたG-computationと考えればいい</li>
+<li>Simpleなゆえに了解しやすい</li>
+<li>ただし、介入よりも影響が大きい因子(年齢や腎機能など)の影響が大きいと介入効果が消えることもある(特にLASSOなど)</li>
+</ul>
+</section>
 <section id="t-learner" class="slide level2">
 <h2>T-learner</h2>
 
-<img data-src="images/t-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">t-learner</p></section>
+<img data-src="images/t-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">t-learner</p><ul>
+<li>介入の因子を重要視したmeta-learner</li>
+<li>介入ありの群でのML modelと介入なし群でML modelを別個に作りG-computation</li>
+<li>介入の効果が消えることはない</li>
+<li>ただし、Doubly robustさはない</li>
+</ul>
+</section>
 <section id="x-learner" class="slide level2">
 <h2>X-learner</h2>
 
-<img data-src="images/x-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">x-learner</p></section>
+<img data-src="images/x-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">x-learner</p><ul>
+<li>Propensity score weightingを導入したmeta-learner</li>
+<li>T-learnerで推定した治療効果を推測する機械学習モデルにIPWを組み合わせている</li>
+<li>結構複雑、メインでないモデルのパラメーターを「局外パラメーター」という</li>
+</ul>
+</section>
 <section id="r-learner" class="slide level2">
 <h2>R-learner</h2>
 
-<img data-src="images/r-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">r-learner</p></section>
+<img data-src="images/r-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">r-learner</p><ul>
+<li>OrthogonalizationをML modelで行っているという理解</li>
+<li>交絡因子の影響を除外するというところで強みがある</li>
+<li>HTEをやる場合は最後の回帰が少し特殊</li>
+</ul>
+</section>
 <section id="dr-learner" class="slide level2">
 <h2>DR-learner</h2>
 
-<img data-src="images/dr-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">dr-learner</p></section>
+<img data-src="images/dr-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">dr-learner</p><ul>
+<li>ML modelを用いたAIPWの治療効果を予測するモデルを介入以外の共変量で行う</li>
+<li>Doubly robustである事が強み</li>
+</ul>
+</section>
 <section id="どれがいいの" class="slide level2">
 <h2>どれがいいの？</h2>
 <ul>
@@ -435,17 +874,34 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 </section>
 <section id="random-forestについて" class="slide level2">
 <h2>Random forestについて</h2>
+<ul>
+<li>Tree-based modelの大御所</li>
+<li>Bootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る
+<ul>
+<li>当然ながら、この時は「Outcome」を予測するようにTreeを分割させる</li>
+</ul></li>
+<li>自然に交互作用や非線形の関係を推測可能</li>
+<li>そのTreeの多数決で予測を行う</li>
+</ul>
 </section>
 <section id="causal-forestの原理" class="slide level2">
 <h2>Causal forestの原理</h2>
 <ul>
 <li>HTE専用の機械学習</li>
-<li>基本はRandom forest</li>
-<li>治療効果の差が最も出やすいように木をTrainingする</li>
+<li>基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木をTrainingする</li>
+<li>Overfittingを防ぐために”Honest”を用いる
+<ul>
+<li>選択されていない残りのSampleでHyperparameterを決める</li>
+</ul></li>
 </ul>
 </section>
 <section id="causal-forestの強み" class="slide level2">
 <h2>Causal forestの強み</h2>
+<ul>
+<li>HTE専用のモデル</li>
+<li>95％信頼区間も計算可能</li>
+<li>Policy treeやBest linear projectionなどで解釈も可能</li>
+</ul>
 </section>
 <section id="どれがいいの-1" class="slide level2">
 <h2>どれがいいの？</h2>
@@ -453,19 +909,20 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 <section id="機械学習の解釈の問題" class="slide level2">
 <h2>機械学習の解釈の問題</h2>
 <ul>
-<li>Modelを深堀る: SHAP</li>
 <li>Modelの妥当性を確認: RATE</li>
 <li>Modelを分かりやすく変更: Surrogate tree、Policy tree</li>
 </ul>
-</section>
-<section id="advanced" class="slide level2">
-<h2>Advanced</h2>
+</section></section>
+<section id="advanced" class="title-slide slide level1 center">
+<h1>Advanced</h1>
 <ul>
 <li>95%信頼区間が出せるかどうか？</li>
 <li>Missingnessについて</li>
 <li>Sensitivity analysisはどうすればいい？</li>
+<li>生存分析について</li>
 </ul>
-</section></section>
+</section>
+
 <section>
 <section id="実践" class="title-slide slide level1 center">
 <h1>実践！</h1>
@@ -473,7 +930,8 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 </section>
 <section id="test-dataset①" class="slide level2">
 <h2>Test-dataset①</h2>
-<ul>
+
+<img data-src="index_files/figure-revealjs/DAG-for-ToyData-1.svg" width="960" class="r-stretch"><ul>
 <li>治療効果は各々別個にいれてある</li>
 <li>DAGは上記の通り</li>
 <li>CAがメインのInterventionで解析をするアウトカムは3種類
@@ -482,7 +940,7 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 <li>二値値のbin_outcome(短期の入院の有無など)</li>
 <li>生存分析のeventtime, status(長期の心不全あるいは死亡)</li>
 </ul></li>
-<li>ほとんどの因子は交絡因子だが、palpiationはinstrumental variable(CAには影響するが、outcomeには影響しない)</li>
+<li>ほとんどの因子は交絡因子だが、palpiationはinstrumental variable (CAには影響するが、outcomeには影響しない)</li>
 <li>SESは観測されない交絡因子</li>
 </ul>
 </section>
@@ -490,55 +948,413 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 <h2>Test-dataset②</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 14
+<pre><code># A tibble: 6 × 15
      id   age sexm1   bmi    hf   bnp  lvef palpitation    ca bin_outcome
   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;
-1     1    47     1  31.7     0    56    43           1     1           1
-2     2    62     0  19.1     0   180    43           0     0           1
-3     3    57     1  19.3     0    73    62           1     0           0
-4     4    59     0  17.7     1    74    43           0     1           1
-5     5    85     0  37.2     0   169    48           1     1           1
-6     6    53     1  18.7     1   120    46           0     1           1
-# ℹ 4 more variables: afeqt_treatment_effect &lt;dbl&gt;, afeqt_os &lt;dbl&gt;,
-#   eventtime &lt;dbl&gt;, status &lt;int&gt;</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/Visualize-ToyData-1.svg" width="960"></p>
-</figure>
+1     1    39     1  25.5     0     8    59           0     1           0
+2     2    62     0  18.8     0   719    46           0     1           1
+3     3    56     1  28.0     0   264    56           1     1           0
+4     4    70     0  17.7     0    79    50           0     0           1
+5     5    73     0  25.0     0   188    50           0     0           1
+6     6    58     1  27.7     0    29    56           1     1           1
+# ℹ 5 more variables: bin_outcome_no_hte &lt;int&gt;, afeqt_treatment_effect &lt;dbl&gt;,
+#   afeqt_os &lt;dbl&gt;, eventtime &lt;dbl&gt;, status &lt;int&gt;</code></pre>
 </div>
 </div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/Visualize-ToyData-2.svg" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/Visualize-ToyData-3.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+</section>
+<section id="toy-dataの可視化" class="slide level2">
+<h2>Toy dataの可視化</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">連続値の単変量</a></li><li><a href="#tabset-3-2">Pair plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/DAG-for-ToyData-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/Visualize-ToyData2-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/Visualize-ToyData-pairs-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="thank-you-for-your-listening" class="slide level2">
-<h2>Thank you for your listening</h2>
+<section id="modification因子と治療効果" class="slide level2">
+<h2>Modification因子と治療効果</h2>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">ATE</a></li><li><a href="#tabset-4-2">共変量とOutcomeのRiskの1:1の関係性</a></li><li><a href="#tabset-4-3">主要な連続値の因子とTreatment effects</a></li><li><a href="#tabset-4-4">Treatment effectのHeterogeneity</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+      n    ate_rd ite_rd_sd ate_rd_se ci_lower ci_upper
+  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1  3000 0.0000200     0.106   0.00193 -0.00377  0.00381</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/Visualize-ToyData1-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/Toydata-HTE-vis-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/Visualize-ToyData3-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="simple-regression" class="slide level2">
-<h2>Simple regression</h2>
+<section id="meta-learners" class="slide level2">
+<h2>Meta-learners</h2>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">S-learner</a></li><li><a href="#tabset-5-2">T-learner</a></li><li><a href="#tabset-5-3">X-learner</a></li><li><a href="#tabset-5-4">DR-learner</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-3"><a></a><span class="im">from</span> econml.metalearners <span class="im">import</span> SLearner</span>
+<span id="cb12-4"><a></a><span class="im">from</span> sklearn.base <span class="im">import</span> BaseEstimator, RegressorMixin, clone</span>
+<span id="cb12-5"><a></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingClassifier</span>
+<span id="cb12-6"><a></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb12-7"><a></a></span>
+<span id="cb12-8"><a></a><span class="co"># EconML の SLearner は overall_model.predict() を呼ぶ。</span></span>
+<span id="cb12-9"><a></a><span class="co"># 分類器の 1 クラス確率を predict() から返す adapter を用意する。</span></span>
+<span id="cb12-10"><a></a><span class="kw">class</span> ClassifierAsProbabilityRegressor(RegressorMixin, BaseEstimator):</span>
+<span id="cb12-11"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, classifier):</span>
+<span id="cb12-12"><a></a>        <span class="va">self</span>.classifier <span class="op">=</span> classifier</span>
+<span id="cb12-13"><a></a></span>
+<span id="cb12-14"><a></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb12-15"><a></a>        <span class="va">self</span>.classifier_ <span class="op">=</span> clone(<span class="va">self</span>.classifier)</span>
+<span id="cb12-16"><a></a>        <span class="va">self</span>.classifier_.fit(X, y)</span>
+<span id="cb12-17"><a></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb12-18"><a></a></span>
+<span id="cb12-19"><a></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb12-20"><a></a>        <span class="cf">return</span> <span class="va">self</span>.classifier_.predict_proba(X)[:, <span class="dv">1</span>]</span>
+<span id="cb12-21"><a></a></span>
+<span id="cb12-22"><a></a></span>
+<span id="cb12-23"><a></a>toy_data <span class="op">=</span> r.toy_data.copy()</span>
+<span id="cb12-24"><a></a>feature_names <span class="op">=</span> [<span class="st">"age"</span>, <span class="st">"sexm1"</span>, <span class="st">"bmi"</span>, <span class="st">"hf"</span>, <span class="st">"bnp"</span>, <span class="st">"lvef"</span>]</span>
+<span id="cb12-25"><a></a></span>
+<span id="cb12-26"><a></a>X <span class="op">=</span> toy_data.loc[:, feature_names].astype(<span class="bu">float</span>)</span>
+<span id="cb12-27"><a></a>Y <span class="op">=</span> toy_data[<span class="st">"bin_outcome"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb12-28"><a></a>T <span class="op">=</span> toy_data[<span class="st">"ca"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb12-29"><a></a></span>
+<span id="cb12-30"><a></a><span class="co"># treatment と outcome の4群がおおむね保たれるように分割する</span></span>
+<span id="cb12-31"><a></a>strata <span class="op">=</span> T.astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> Y.astype(<span class="bu">str</span>)</span>
+<span id="cb12-32"><a></a>X_train, X_test, Y_train, Y_test, T_train, T_test <span class="op">=</span> train_test_split(</span>
+<span id="cb12-33"><a></a>    X, Y, T,</span>
+<span id="cb12-34"><a></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb12-35"><a></a>    random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb12-36"><a></a>    stratify<span class="op">=</span>strata,</span>
+<span id="cb12-37"><a></a>)</span>
+<span id="cb12-38"><a></a></span>
+<span id="cb12-39"><a></a>outcome_model <span class="op">=</span> ClassifierAsProbabilityRegressor(</span>
+<span id="cb12-40"><a></a>    HistGradientBoostingClassifier(</span>
+<span id="cb12-41"><a></a>        learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb12-42"><a></a>        max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb12-43"><a></a>        max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb12-44"><a></a>        min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb12-45"><a></a>        l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb12-46"><a></a>        random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb12-47"><a></a>    )</span>
+<span id="cb12-48"><a></a>)</span>
+<span id="cb12-49"><a></a></span>
+<span id="cb12-50"><a></a>s_learner <span class="op">=</span> SLearner(overall_model<span class="op">=</span>outcome_model)</span>
+<span id="cb12-51"><a></a>s_learner.fit(Y_train, T_train, X<span class="op">=</span>X_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x7766403ce720&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)</span></span>
+<span id="cb14-2"><a></a>s_cate_rd <span class="op">=</span> np.asarray(</span>
+<span id="cb14-3"><a></a>    s_learner.effect(X_test, T0<span class="op">=</span><span class="dv">0</span>, T1<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb14-4"><a></a>).reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb14-5"><a></a></span>
+<span id="cb14-6"><a></a>s_effect_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb14-7"><a></a>    <span class="st">"id"</span>: toy_data.loc[X_test.index, <span class="st">"id"</span>].to_numpy(),</span>
+<span id="cb14-8"><a></a>    <span class="st">"cate_rd"</span>: s_cate_rd,</span>
+<span id="cb14-9"><a></a>})</span>
+<span id="cb14-10"><a></a></span>
+<span id="cb14-11"><a></a><span class="bu">print</span>(s_effect_df.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id   cate_rd
+0  1586 -0.009156
+1   168 -0.125002
+2    23 -0.021216
+3   823 -0.009676
+4  2898 -0.102527</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="bu">print</span>(<span class="ss">f"ATE in test set (risk difference): </span><span class="sc">{</span>s_cate_rd<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ATE in test set (risk difference): -0.036</code></pre>
+</div>
+</div>
+<ul>
+<li><code>s_cate_rd</code> は確率スケールの治療効果（risk difference）であり、負の値は <code>ca = 1</code> によるイベントリスク低下を表す</li>
+<li>S-learnerは1つのモデルで <span class="math inline">\(E(Y \mid X, T)\)</span> を学習し、各対象者について <code>T = 1</code> と <code>T = 0</code> の予測確率の差を取る</li>
+<li>因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要</li>
+</ul>
+</div>
+<div id="tabset-5-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">from</span> econml.metalearners <span class="im">import</span> TLearner</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>t_outcome_model <span class="op">=</span> ClassifierAsProbabilityRegressor(</span>
+<span id="cb18-4"><a></a>    HistGradientBoostingClassifier(</span>
+<span id="cb18-5"><a></a>        learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb18-6"><a></a>        max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb18-7"><a></a>        max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb18-8"><a></a>        min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb18-9"><a></a>        l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb18-10"><a></a>        random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb18-11"><a></a>    )</span>
+<span id="cb18-12"><a></a>)</span>
+<span id="cb18-13"><a></a></span>
+<span id="cb18-14"><a></a><span class="co"># T=0 と T=1 で別々の outcome model を学習する</span></span>
+<span id="cb18-15"><a></a>t_learner <span class="op">=</span> TLearner(models<span class="op">=</span>t_outcome_model)</span>
+<span id="cb18-16"><a></a>t_learner.fit(Y_train, T_train, X<span class="op">=</span>X_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;econml.metalearners._metalearners.TLearner object at 0x776724447a40&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>t_cate_rd <span class="op">=</span> np.asarray(</span>
+<span id="cb20-2"><a></a>    t_learner.effect(X_test, T0<span class="op">=</span><span class="dv">0</span>, T1<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-3"><a></a>).reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb20-4"><a></a></span>
+<span id="cb20-5"><a></a>t_effect_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb20-6"><a></a>    <span class="st">"id"</span>: toy_data.loc[X_test.index, <span class="st">"id"</span>].to_numpy(),</span>
+<span id="cb20-7"><a></a>    <span class="st">"cate_rd"</span>: t_cate_rd,</span>
+<span id="cb20-8"><a></a>})</span>
+<span id="cb20-9"><a></a></span>
+<span id="cb20-10"><a></a><span class="bu">print</span>(t_effect_df.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id   cate_rd
+0  1586 -0.003447
+1   168 -0.114993
+2    23 -0.011142
+3   823 -0.010398
+4  2898 -0.100142</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="bu">print</span>(<span class="ss">f"ATE in test set (risk difference): </span><span class="sc">{</span>t_cate_rd<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ATE in test set (risk difference): -0.040</code></pre>
+</div>
+</div>
+<ul>
+<li>T-learnerは <code>T = 0</code> と <code>T = 1</code> で2つの予測確率モデルを作り、その差をCATEとする</li>
+<li>各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい</li>
+</ul>
+</div>
+<div id="tabset-5-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a><span class="im">from</span> econml.metalearners <span class="im">import</span> XLearner</span>
+<span id="cb24-2"><a></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingRegressor</span>
+<span id="cb24-3"><a></a></span>
+<span id="cb24-4"><a></a>x_outcome_model <span class="op">=</span> ClassifierAsProbabilityRegressor(</span>
+<span id="cb24-5"><a></a>    HistGradientBoostingClassifier(</span>
+<span id="cb24-6"><a></a>        learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb24-7"><a></a>        max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb24-8"><a></a>        max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb24-9"><a></a>        min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb24-10"><a></a>        l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb24-11"><a></a>        random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb24-12"><a></a>    )</span>
+<span id="cb24-13"><a></a>)</span>
+<span id="cb24-14"><a></a></span>
+<span id="cb24-15"><a></a><span class="co"># imputed treatment effect（連続値）を学習するための回帰モデル</span></span>
+<span id="cb24-16"><a></a>x_cate_model <span class="op">=</span> HistGradientBoostingRegressor(</span>
+<span id="cb24-17"><a></a>    learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb24-18"><a></a>    max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb24-19"><a></a>    max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb24-20"><a></a>    min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb24-21"><a></a>    l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb24-22"><a></a>    random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb24-23"><a></a>)</span>
+<span id="cb24-24"><a></a></span>
+<span id="cb24-25"><a></a><span class="co"># P(T=1 | X) を学習するモデル</span></span>
+<span id="cb24-26"><a></a>x_propensity_model <span class="op">=</span> HistGradientBoostingClassifier(</span>
+<span id="cb24-27"><a></a>    learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb24-28"><a></a>    max_iter<span class="op">=</span><span class="dv">150</span>,</span>
+<span id="cb24-29"><a></a>    max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb24-30"><a></a>    min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb24-31"><a></a>    l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb24-32"><a></a>    random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb24-33"><a></a>)</span>
+<span id="cb24-34"><a></a></span>
+<span id="cb24-35"><a></a>x_learner <span class="op">=</span> XLearner(</span>
+<span id="cb24-36"><a></a>    models<span class="op">=</span>x_outcome_model,</span>
+<span id="cb24-37"><a></a>    cate_models<span class="op">=</span>x_cate_model,</span>
+<span id="cb24-38"><a></a>    propensity_model<span class="op">=</span>x_propensity_model,</span>
+<span id="cb24-39"><a></a>)</span>
+<span id="cb24-40"><a></a>x_learner.fit(Y_train, T_train, X<span class="op">=</span>X_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;econml.metalearners._metalearners.XLearner object at 0x776600162ed0&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>x_cate_rd <span class="op">=</span> np.asarray(</span>
+<span id="cb26-2"><a></a>    x_learner.effect(X_test, T0<span class="op">=</span><span class="dv">0</span>, T1<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-3"><a></a>).reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb26-4"><a></a></span>
+<span id="cb26-5"><a></a>x_effect_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb26-6"><a></a>    <span class="st">"id"</span>: toy_data.loc[X_test.index, <span class="st">"id"</span>].to_numpy(),</span>
+<span id="cb26-7"><a></a>    <span class="st">"cate_rd"</span>: x_cate_rd,</span>
+<span id="cb26-8"><a></a>})</span>
+<span id="cb26-9"><a></a></span>
+<span id="cb26-10"><a></a><span class="bu">print</span>(x_effect_df.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id   cate_rd
+0  1586 -0.054275
+1   168 -0.189311
+2    23  0.046049
+3   823  0.016441
+4  2898 -0.106375</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="bu">print</span>(<span class="ss">f"ATE in test set (risk difference): </span><span class="sc">{</span>x_cate_rd<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ATE in test set (risk difference): -0.021</code></pre>
+</div>
+</div>
+<ul>
+<li>X-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する</li>
+<li>最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する</li>
+</ul>
+</div>
+<div id="tabset-5-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="im">from</span> econml.dr <span class="im">import</span> DRLearner</span>
+<span id="cb30-2"><a></a></span>
+<span id="cb30-3"><a></a>dr_learner <span class="op">=</span> DRLearner(</span>
+<span id="cb30-4"><a></a>    model_propensity<span class="op">=</span>HistGradientBoostingClassifier(</span>
+<span id="cb30-5"><a></a>        learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb30-6"><a></a>        max_iter<span class="op">=</span><span class="dv">150</span>,</span>
+<span id="cb30-7"><a></a>        max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb30-8"><a></a>        min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb30-9"><a></a>        l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb30-10"><a></a>        random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb30-11"><a></a>    ),</span>
+<span id="cb30-12"><a></a>    model_regression<span class="op">=</span>HistGradientBoostingClassifier(</span>
+<span id="cb30-13"><a></a>        learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb30-14"><a></a>        max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb30-15"><a></a>        max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb30-16"><a></a>        min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb30-17"><a></a>        l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb30-18"><a></a>        random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb30-19"><a></a>    ),</span>
+<span id="cb30-20"><a></a>    model_final<span class="op">=</span>HistGradientBoostingRegressor(</span>
+<span id="cb30-21"><a></a>        learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb30-22"><a></a>        max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb30-23"><a></a>        max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb30-24"><a></a>        min_samples_leaf<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb30-25"><a></a>        l2_regularization<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb30-26"><a></a>        random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb30-27"><a></a>    ),</span>
+<span id="cb30-28"><a></a>    discrete_outcome<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb30-29"><a></a>    min_propensity<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="cb30-30"><a></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb30-31"><a></a>    random_state<span class="op">=</span><span class="dv">123</span>,</span>
+<span id="cb30-32"><a></a>)</span>
+<span id="cb30-33"><a></a></span>
+<span id="cb30-34"><a></a><span class="co"># nuisance modelはcv=5でcross-fittingされる</span></span>
+<span id="cb30-35"><a></a>dr_learner.fit(Y_train, T_train, X<span class="op">=</span>X_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;econml.dr._drlearner.DRLearner object at 0x7765fde144d0&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a>dr_cate_rd <span class="op">=</span> np.asarray(</span>
+<span id="cb32-2"><a></a>    dr_learner.effect(X_test, T0<span class="op">=</span><span class="dv">0</span>, T1<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb32-3"><a></a>).reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb32-4"><a></a></span>
+<span id="cb32-5"><a></a>dr_effect_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb32-6"><a></a>    <span class="st">"id"</span>: toy_data.loc[X_test.index, <span class="st">"id"</span>].to_numpy(),</span>
+<span id="cb32-7"><a></a>    <span class="st">"cate_rd"</span>: dr_cate_rd,</span>
+<span id="cb32-8"><a></a>})</span>
+<span id="cb32-9"><a></a></span>
+<span id="cb32-10"><a></a><span class="bu">print</span>(dr_effect_df.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id   cate_rd
+0  1586 -0.037503
+1   168 -0.147269
+2    23 -0.050656
+3   823  0.017259
+4  2898  0.051444</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a><span class="bu">print</span>(<span class="ss">f"ATE in test set (risk difference): </span><span class="sc">{</span>dr_cate_rd<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ATE in test set (risk difference): -0.033</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a><span class="co"># 4つのlearnerを同じtest setで比較する</span></span>
+<span id="cb36-2"><a></a>learner_summary <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb36-3"><a></a>    <span class="st">"learner"</span>: [<span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"X"</span>, <span class="st">"DR"</span>],</span>
+<span id="cb36-4"><a></a>    <span class="st">"ate_rd"</span>: [</span>
+<span id="cb36-5"><a></a>        s_cate_rd.mean(),</span>
+<span id="cb36-6"><a></a>        t_cate_rd.mean(),</span>
+<span id="cb36-7"><a></a>        x_cate_rd.mean(),</span>
+<span id="cb36-8"><a></a>        dr_cate_rd.mean(),</span>
+<span id="cb36-9"><a></a>    ],</span>
+<span id="cb36-10"><a></a>    <span class="st">"cate_sd"</span>: [</span>
+<span id="cb36-11"><a></a>        s_cate_rd.std(ddof<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb36-12"><a></a>        t_cate_rd.std(ddof<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb36-13"><a></a>        x_cate_rd.std(ddof<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb36-14"><a></a>        dr_cate_rd.std(ddof<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb36-15"><a></a>    ],</span>
+<span id="cb36-16"><a></a>})</span>
+<span id="cb36-17"><a></a></span>
+<span id="cb36-18"><a></a><span class="bu">print</span>(learner_summary.<span class="bu">round</span>(<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  learner  ate_rd  cate_sd
+0       S  -0.036    0.085
+1       T  -0.040    0.201
+2       X  -0.021    0.158
+3      DR  -0.033    0.262</code></pre>
+</div>
+</div>
+<ul>
+<li><code>discrete_outcome=True</code> により、EconMLがoutcome classifierの陽性確率を使用する</li>
+<li>propensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する</li>
+<li><code>min_propensity=0.01</code> は、推定propensity scoreが0または1に近い場合の極端な補正を制限する</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="causal-forest" class="slide level2">
+<h2>Causal forest</h2>
 <div class="cell">
 <div class="cell-output-display">
 <!-- preamble start -->
@@ -547,25 +1363,25 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_7zqptai3vfczmy1d40oy = TinyTable.createTableFunctions("tinytable_7zqptai3vfczmy1d40oy");
+      const tableFns_7r7lxwu2yeox08we41zl = TinyTable.createTableFunctions("tinytable_7r7lxwu2yeox08we41zl");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '48', j: 2 }, { i: '48', j: 3 } ], css_id: 'tinytable_css_q2zo0o5j5pd9urpzlrqu',}, 
-          { positions: [ { i: '40', j: 2 }, { i: '40', j: 3 } ], css_id: 'tinytable_css_dvqz85pdwwmff4vmu31d',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '16', j: 2 }, { i: '17', j: 2 }, { i: '18', j: 2 }, { i: '19', j: 2 }, { i: '20', j: 2 }, { i: '21', j: 2 }, { i: '22', j: 2 }, { i: '23', j: 2 }, { i: '24', j: 2 }, { i: '25', j: 2 }, { i: '26', j: 2 }, { i: '27', j: 2 }, { i: '28', j: 2 }, { i: '29', j: 2 }, { i: '30', j: 2 }, { i: '31', j: 2 }, { i: '32', j: 2 }, { i: '33', j: 2 }, { i: '34', j: 2 }, { i: '35', j: 2 }, { i: '36', j: 2 }, { i: '37', j: 2 }, { i: '38', j: 2 }, { i: '39', j: 2 }, { i: '41', j: 2 }, { i: '42', j: 2 }, { i: '43', j: 2 }, { i: '44', j: 2 }, { i: '45', j: 2 }, { i: '46', j: 2 }, { i: '47', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '16', j: 3 }, { i: '17', j: 3 }, { i: '18', j: 3 }, { i: '19', j: 3 }, { i: '20', j: 3 }, { i: '21', j: 3 }, { i: '22', j: 3 }, { i: '23', j: 3 }, { i: '24', j: 3 }, { i: '25', j: 3 }, { i: '26', j: 3 }, { i: '27', j: 3 }, { i: '28', j: 3 }, { i: '29', j: 3 }, { i: '30', j: 3 }, { i: '31', j: 3 }, { i: '32', j: 3 }, { i: '33', j: 3 }, { i: '34', j: 3 }, { i: '35', j: 3 }, { i: '36', j: 3 }, { i: '37', j: 3 }, { i: '38', j: 3 }, { i: '39', j: 3 }, { i: '41', j: 3 }, { i: '42', j: 3 }, { i: '43', j: 3 }, { i: '44', j: 3 }, { i: '45', j: 3 }, { i: '46', j: 3 }, { i: '47', j: 3 } ], css_id: 'tinytable_css_d49v4h09tq899ckytmwu',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_j50qrp4i8kwronezp450',}, 
-          { positions: [ { i: '48', j: 1 } ], css_id: 'tinytable_css_rw14vyw38gdg7t8jdyg6',}, 
-          { positions: [ { i: '40', j: 1 } ], css_id: 'tinytable_css_sqb3qj0fykgwf4oq1qwt',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 }, { i: '16', j: 1 }, { i: '17', j: 1 }, { i: '18', j: 1 }, { i: '19', j: 1 }, { i: '20', j: 1 }, { i: '21', j: 1 }, { i: '22', j: 1 }, { i: '23', j: 1 }, { i: '24', j: 1 }, { i: '25', j: 1 }, { i: '26', j: 1 }, { i: '27', j: 1 }, { i: '28', j: 1 }, { i: '29', j: 1 }, { i: '30', j: 1 }, { i: '31', j: 1 }, { i: '32', j: 1 }, { i: '33', j: 1 }, { i: '34', j: 1 }, { i: '35', j: 1 }, { i: '36', j: 1 }, { i: '37', j: 1 }, { i: '38', j: 1 }, { i: '39', j: 1 }, { i: '41', j: 1 }, { i: '42', j: 1 }, { i: '43', j: 1 }, { i: '44', j: 1 }, { i: '45', j: 1 }, { i: '46', j: 1 }, { i: '47', j: 1 } ], css_id: 'tinytable_css_9dfqsnq7ljoxyvirkw9l',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_dhdb39uj25e1ut50ykvn',}, 
+          { positions: [ { i: '11', j: 2 }, { i: '11', j: 3 } ], css_id: 'tinytable_css_6ch3snw1vdoeg6wpimfl',}, 
+          { positions: [ { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_d8uflwm83ykhxano9k0o',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 } ], css_id: 'tinytable_css_72zb0j5bnz9smli64kjx',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_uhg992iet4o8l171ipuc',}, 
+          { positions: [ { i: '11', j: 1 } ], css_id: 'tinytable_css_ic0296t1ac3ts4ovec5l',}, 
+          { positions: [ { i: '4', j: 1 } ], css_id: 'tinytable_css_xzdusezdew2l2yz1ucqb',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 } ], css_id: 'tinytable_css_0pi40vx05uze3dqhz30c',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_sq0ens0ezkr4oxcqotwd',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_7zqptai3vfczmy1d40oy.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_7r7lxwu2yeox08we41zl.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -574,379 +1390,17 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_q2zo0o5j5pd9urpzlrqu, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_q2zo0o5j5pd9urpzlrqu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_dvqz85pdwwmff4vmu31d, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_dvqz85pdwwmff4vmu31d {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_d49v4h09tq899ckytmwu, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_d49v4h09tq899ckytmwu { text-align: center }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_j50qrp4i8kwronezp450, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_j50qrp4i8kwronezp450 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_rw14vyw38gdg7t8jdyg6, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_rw14vyw38gdg7t8jdyg6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_sqb3qj0fykgwf4oq1qwt, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_sqb3qj0fykgwf4oq1qwt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_9dfqsnq7ljoxyvirkw9l, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_9dfqsnq7ljoxyvirkw9l { text-align: left }
-    #tinytable_7zqptai3vfczmy1d40oy td.tinytable_css_dhdb39uj25e1ut50ykvn, #tinytable_7zqptai3vfczmy1d40oy th.tinytable_css_dhdb39uj25e1ut50ykvn {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_6ch3snw1vdoeg6wpimfl, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_6ch3snw1vdoeg6wpimfl {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_d8uflwm83ykhxano9k0o, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_d8uflwm83ykhxano9k0o {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_72zb0j5bnz9smli64kjx, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_72zb0j5bnz9smli64kjx { text-align: center }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_uhg992iet4o8l171ipuc, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_uhg992iet4o8l171ipuc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_ic0296t1ac3ts4ovec5l, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_ic0296t1ac3ts4ovec5l {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_xzdusezdew2l2yz1ucqb, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_xzdusezdew2l2yz1ucqb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_0pi40vx05uze3dqhz30c, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_0pi40vx05uze3dqhz30c { text-align: left }
+    #tinytable_7r7lxwu2yeox08we41zl td.tinytable_css_sq0ens0ezkr4oxcqotwd, #tinytable_7r7lxwu2yeox08we41zl th.tinytable_css_sq0ens0ezkr4oxcqotwd {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_7zqptai3vfczmy1d40oy" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-        
-        <thead>
-              <tr>
-                <th scope="col" data-row="0" data-col="1"> </th>
-                <th scope="col" data-row="0" data-col="2">simple</th>
-                <th scope="col" data-row="0" data-col="3">rcs</th>
-              </tr>
-        </thead>
-        
-        <tbody>
-                <tr>
-                  <td data-row="1" data-col="1">(Intercept)</td>
-                  <td data-row="1" data-col="2">96.360</td>
-                  <td data-row="1" data-col="3">101.504</td>
-                </tr>
-                <tr>
-                  <td data-row="2" data-col="1"></td>
-                  <td data-row="2" data-col="2">(1.683)</td>
-                  <td data-row="2" data-col="3">(4.566)</td>
-                </tr>
-                <tr>
-                  <td data-row="3" data-col="1">age</td>
-                  <td data-row="3" data-col="2">-0.608</td>
-                  <td data-row="3" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="4" data-col="1"></td>
-                  <td data-row="4" data-col="2">(0.019)</td>
-                  <td data-row="4" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="5" data-col="1">sexm1</td>
-                  <td data-row="5" data-col="2">-8.240</td>
-                  <td data-row="5" data-col="3">-7.908</td>
-                </tr>
-                <tr>
-                  <td data-row="6" data-col="1"></td>
-                  <td data-row="6" data-col="2">(0.289)</td>
-                  <td data-row="6" data-col="3">(0.282)</td>
-                </tr>
-                <tr>
-                  <td data-row="7" data-col="1">bmi</td>
-                  <td data-row="7" data-col="2">-0.361</td>
-                  <td data-row="7" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="8" data-col="1"></td>
-                  <td data-row="8" data-col="2">(0.032)</td>
-                  <td data-row="8" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="9" data-col="1">hf</td>
-                  <td data-row="9" data-col="2">-6.755</td>
-                  <td data-row="9" data-col="3">-6.603</td>
-                </tr>
-                <tr>
-                  <td data-row="10" data-col="1"></td>
-                  <td data-row="10" data-col="2">(0.351)</td>
-                  <td data-row="10" data-col="3">(0.342)</td>
-                </tr>
-                <tr>
-                  <td data-row="11" data-col="1">bnp</td>
-                  <td data-row="11" data-col="2">-0.015</td>
-                  <td data-row="11" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="12" data-col="1"></td>
-                  <td data-row="12" data-col="2">(0.001)</td>
-                  <td data-row="12" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="13" data-col="1">lvef</td>
-                  <td data-row="13" data-col="2">0.460</td>
-                  <td data-row="13" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="14" data-col="1"></td>
-                  <td data-row="14" data-col="2">(0.019)</td>
-                  <td data-row="14" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="15" data-col="1">ca</td>
-                  <td data-row="15" data-col="2">6.006</td>
-                  <td data-row="15" data-col="3">4.964</td>
-                </tr>
-                <tr>
-                  <td data-row="16" data-col="1"></td>
-                  <td data-row="16" data-col="2">(0.312)</td>
-                  <td data-row="16" data-col="3">(0.308)</td>
-                </tr>
-                <tr>
-                  <td data-row="17" data-col="1">rcs(age, 4)age</td>
-                  <td data-row="17" data-col="2"></td>
-                  <td data-row="17" data-col="3">-0.564</td>
-                </tr>
-                <tr>
-                  <td data-row="18" data-col="1"></td>
-                  <td data-row="18" data-col="2"></td>
-                  <td data-row="18" data-col="3">(0.056)</td>
-                </tr>
-                <tr>
-                  <td data-row="19" data-col="1">rcs(age, 4)age'</td>
-                  <td data-row="19" data-col="2"></td>
-                  <td data-row="19" data-col="3">-0.054</td>
-                </tr>
-                <tr>
-                  <td data-row="20" data-col="1"></td>
-                  <td data-row="20" data-col="2"></td>
-                  <td data-row="20" data-col="3">(0.164)</td>
-                </tr>
-                <tr>
-                  <td data-row="21" data-col="1">rcs(age, 4)age''</td>
-                  <td data-row="21" data-col="2"></td>
-                  <td data-row="21" data-col="3">0.263</td>
-                </tr>
-                <tr>
-                  <td data-row="22" data-col="1"></td>
-                  <td data-row="22" data-col="2"></td>
-                  <td data-row="22" data-col="3">(0.607)</td>
-                </tr>
-                <tr>
-                  <td data-row="23" data-col="1">rcs(bmi, 4)bmi</td>
-                  <td data-row="23" data-col="2"></td>
-                  <td data-row="23" data-col="3">-0.147</td>
-                </tr>
-                <tr>
-                  <td data-row="24" data-col="1"></td>
-                  <td data-row="24" data-col="2"></td>
-                  <td data-row="24" data-col="3">(0.135)</td>
-                </tr>
-                <tr>
-                  <td data-row="25" data-col="1">rcs(bmi, 4)bmi'</td>
-                  <td data-row="25" data-col="2"></td>
-                  <td data-row="25" data-col="3">-1.216</td>
-                </tr>
-                <tr>
-                  <td data-row="26" data-col="1"></td>
-                  <td data-row="26" data-col="2"></td>
-                  <td data-row="26" data-col="3">(0.500)</td>
-                </tr>
-                <tr>
-                  <td data-row="27" data-col="1">rcs(bmi, 4)bmi''</td>
-                  <td data-row="27" data-col="2"></td>
-                  <td data-row="27" data-col="3">3.745</td>
-                </tr>
-                <tr>
-                  <td data-row="28" data-col="1"></td>
-                  <td data-row="28" data-col="2"></td>
-                  <td data-row="28" data-col="3">(1.507)</td>
-                </tr>
-                <tr>
-                  <td data-row="29" data-col="1">rcs(bnp, 4)bnp</td>
-                  <td data-row="29" data-col="2"></td>
-                  <td data-row="29" data-col="3">-0.103</td>
-                </tr>
-                <tr>
-                  <td data-row="30" data-col="1"></td>
-                  <td data-row="30" data-col="2"></td>
-                  <td data-row="30" data-col="3">(0.008)</td>
-                </tr>
-                <tr>
-                  <td data-row="31" data-col="1">rcs(bnp, 4)bnp'</td>
-                  <td data-row="31" data-col="2"></td>
-                  <td data-row="31" data-col="3">1.079</td>
-                </tr>
-                <tr>
-                  <td data-row="32" data-col="1"></td>
-                  <td data-row="32" data-col="2"></td>
-                  <td data-row="32" data-col="3">(0.166)</td>
-                </tr>
-                <tr>
-                  <td data-row="33" data-col="1">rcs(bnp, 4)bnp''</td>
-                  <td data-row="33" data-col="2"></td>
-                  <td data-row="33" data-col="3">-1.666</td>
-                </tr>
-                <tr>
-                  <td data-row="34" data-col="1"></td>
-                  <td data-row="34" data-col="2"></td>
-                  <td data-row="34" data-col="3">(0.274)</td>
-                </tr>
-                <tr>
-                  <td data-row="35" data-col="1">rcs(lvef, 4)lvef</td>
-                  <td data-row="35" data-col="2"></td>
-                  <td data-row="35" data-col="3">0.380</td>
-                </tr>
-                <tr>
-                  <td data-row="36" data-col="1"></td>
-                  <td data-row="36" data-col="2"></td>
-                  <td data-row="36" data-col="3">(0.061)</td>
-                </tr>
-                <tr>
-                  <td data-row="37" data-col="1">rcs(lvef, 4)lvef'</td>
-                  <td data-row="37" data-col="2"></td>
-                  <td data-row="37" data-col="3">-0.009</td>
-                </tr>
-                <tr>
-                  <td data-row="38" data-col="1"></td>
-                  <td data-row="38" data-col="2"></td>
-                  <td data-row="38" data-col="3">(0.165)</td>
-                </tr>
-                <tr>
-                  <td data-row="39" data-col="1">rcs(lvef, 4)lvef''</td>
-                  <td data-row="39" data-col="2"></td>
-                  <td data-row="39" data-col="3">-0.081</td>
-                </tr>
-                <tr>
-                  <td data-row="40" data-col="1"></td>
-                  <td data-row="40" data-col="2"></td>
-                  <td data-row="40" data-col="3">(0.626)</td>
-                </tr>
-                <tr>
-                  <td data-row="41" data-col="1">Num.Obs.</td>
-                  <td data-row="41" data-col="2">6000</td>
-                  <td data-row="41" data-col="3">6000</td>
-                </tr>
-                <tr>
-                  <td data-row="42" data-col="1">R2</td>
-                  <td data-row="42" data-col="2">0.497</td>
-                  <td data-row="42" data-col="3">0.526</td>
-                </tr>
-                <tr>
-                  <td data-row="43" data-col="1">R2 Adj.</td>
-                  <td data-row="43" data-col="2">0.496</td>
-                  <td data-row="43" data-col="3">0.525</td>
-                </tr>
-                <tr>
-                  <td data-row="44" data-col="1">AIC</td>
-                  <td data-row="44" data-col="2">45268.7</td>
-                  <td data-row="44" data-col="3">44921.2</td>
-                </tr>
-                <tr>
-                  <td data-row="45" data-col="1">BIC</td>
-                  <td data-row="45" data-col="2">45329.0</td>
-                  <td data-row="45" data-col="3">45035.1</td>
-                </tr>
-                <tr>
-                  <td data-row="46" data-col="1">Log.Lik.</td>
-                  <td data-row="46" data-col="2">-22625.332</td>
-                  <td data-row="46" data-col="3">-22443.603</td>
-                </tr>
-                <tr>
-                  <td data-row="47" data-col="1">F</td>
-                  <td data-row="47" data-col="2">845.156</td>
-                  <td data-row="47" data-col="3">443.390</td>
-                </tr>
-                <tr>
-                  <td data-row="48" data-col="1">RMSE</td>
-                  <td data-row="48" data-col="2">10.51</td>
-                  <td data-row="48" data-col="3">10.19</td>
-                </tr>
-        </tbody>
-      </table>
-    </div>
-<!-- hack to avoid NA insertion in last line -->
-</div>
-</div>
-</section>
-<section id="シンプルな回帰モデルの解釈と問題点" class="slide level2">
-<h2>シンプルな回帰モデルの解釈と問題点</h2>
-<ul>
-<li>複数のパラメータを固定した上での目標としたパラメータを1単位変化した時の効果</li>
-<li>線形である事が条件</li>
-<li>複雑な関係性を捉えることが出来ない
-<ul>
-<li>Model misspecificationの問題</li>
-<li>治療の異質性を捉えられない</li>
-</ul></li>
-</ul>
-</section>
-<section id="例えば" class="slide level2">
-<h2>例えば</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-2.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="どうすればrobustになる" class="slide level2">
-<h2>どうすればRobustになる？</h2>
-<ul>
-<li>Propensity score (PS) analysis
-<ul>
-<li>PS match, PS weight
-<ul>
-<li>ATT, ATC, ATE, ATOなど</li>
-</ul></li>
-</ul></li>
-<li>アウトカムモデル + PS model
-<ul>
-<li>Doubly robust model
-<ul>
-<li>最も有名なものはAIPW</li>
-</ul></li>
-</ul></li>
-<li>PS modelを進化させる
-<ul>
-<li>PSをUpdateさせるTMLE</li>
-</ul></li>
-</ul>
-</section>
-<section id="matchingだと" class="slide level2">
-<h2>Matchingだと</h2>
-<ul>
-<li>一番有名なのはPropensity score matching</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<!-- preamble start -->
-
-    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
-
-    <script>
-      // Create table-specific functions using external factory
-      const tableFns_lsk9ccr5t8uz4uefjvjn = TinyTable.createTableFunctions("tinytable_lsk9ccr5t8uz4uefjvjn");
-      // tinytable span after
-      window.addEventListener('load', function () {
-          var cellsToStyle = [
-            // tinytable style arrays after
-          { positions: [ { i: '11', j: 2 }, { i: '11', j: 3 } ], css_id: 'tinytable_css_fizaerlnztx07mskjr0a',}, 
-          { positions: [ { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_yr9gtuxo6oq5tp2ewwvv',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 } ], css_id: 'tinytable_css_xpa6ndlo5t5t5rqvhvov',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_bccxy2rf5n16yq5qkpoe',}, 
-          { positions: [ { i: '11', j: 1 } ], css_id: 'tinytable_css_v32ti810k0i2cj7jyzsa',}, 
-          { positions: [ { i: '4', j: 1 } ], css_id: 'tinytable_css_1wpep1um1fvszt3j2vzh',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 } ], css_id: 'tinytable_css_ls43vhmcypa49tu2mu50',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_hrftx9gydwi548a2xxmc',}, 
-          ];
-
-          // Loop over the arrays to style the cells
-          cellsToStyle.forEach(function (group) {
-              group.positions.forEach(function (cell) {
-                  tableFns_lsk9ccr5t8uz4uefjvjn.styleCell(cell.i, cell.j, group.css_id);
-              });
-          });
-      });
-    </script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
-    <style>
-    /* tinytable css entries after */
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_fizaerlnztx07mskjr0a, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_fizaerlnztx07mskjr0a {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_yr9gtuxo6oq5tp2ewwvv, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_yr9gtuxo6oq5tp2ewwvv {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_xpa6ndlo5t5t5rqvhvov, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_xpa6ndlo5t5t5rqvhvov { text-align: center }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_bccxy2rf5n16yq5qkpoe, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_bccxy2rf5n16yq5qkpoe {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_v32ti810k0i2cj7jyzsa, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_v32ti810k0i2cj7jyzsa {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_1wpep1um1fvszt3j2vzh, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_1wpep1um1fvszt3j2vzh {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_ls43vhmcypa49tu2mu50, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_ls43vhmcypa49tu2mu50 { text-align: left }
-    #tinytable_lsk9ccr5t8uz4uefjvjn td.tinytable_css_hrftx9gydwi548a2xxmc, #tinytable_lsk9ccr5t8uz4uefjvjn th.tinytable_css_hrftx9gydwi548a2xxmc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    </style>
-    <div class="container">
-      <table class="tinytable" id="tinytable_lsk9ccr5t8uz4uefjvjn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_7r7lxwu2yeox08we41zl" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -959,58 +1413,58 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">ca</td>
-                  <td data-row="1" data-col="2">6.549 [5.808, 7.290]</td>
-                  <td data-row="1" data-col="3">6.026 [5.095, 6.956]</td>
+                  <td data-row="1" data-col="2">3.497 [2.615, 4.379]</td>
+                  <td data-row="1" data-col="3">3.750 [2.612, 4.888]</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1"></td>
-                  <td data-row="2" data-col="2">(0.378)</td>
-                  <td data-row="2" data-col="3">(0.475)</td>
+                  <td data-row="2" data-col="2">(0.450)</td>
+                  <td data-row="2" data-col="3">(0.580)</td>
                 </tr>
                 <tr>
                   <td data-row="3" data-col="1">(Intercept)</td>
                   <td data-row="3" data-col="2"></td>
-                  <td data-row="3" data-col="3">65.301 [64.664, 65.938]</td>
+                  <td data-row="3" data-col="3">66.528 [65.756, 67.299]</td>
                 </tr>
                 <tr>
                   <td data-row="4" data-col="1"></td>
                   <td data-row="4" data-col="2"></td>
-                  <td data-row="4" data-col="3">(0.325)</td>
+                  <td data-row="4" data-col="3">(0.394)</td>
                 </tr>
                 <tr>
                   <td data-row="5" data-col="1">Num.Obs.</td>
-                  <td data-row="5" data-col="2">5636</td>
-                  <td data-row="5" data-col="3">6000</td>
+                  <td data-row="5" data-col="2">2978</td>
+                  <td data-row="5" data-col="3">3000</td>
                 </tr>
                 <tr>
                   <td data-row="6" data-col="1">R2</td>
-                  <td data-row="6" data-col="2">0.506</td>
+                  <td data-row="6" data-col="2">0.471</td>
                   <td data-row="6" data-col="3"></td>
                 </tr>
                 <tr>
                   <td data-row="7" data-col="1">AIC</td>
-                  <td data-row="7" data-col="2">42407.6</td>
-                  <td data-row="7" data-col="3">63998.4</td>
+                  <td data-row="7" data-col="2">22479.8</td>
+                  <td data-row="7" data-col="3">29141.2</td>
                 </tr>
                 <tr>
                   <td data-row="8" data-col="1">BIC</td>
-                  <td data-row="8" data-col="2">42507.2</td>
-                  <td data-row="8" data-col="3">64018.5</td>
+                  <td data-row="8" data-col="2">22569.7</td>
+                  <td data-row="8" data-col="3">29159.2</td>
                 </tr>
                 <tr>
                   <td data-row="9" data-col="1">Log.Lik.</td>
-                  <td data-row="9" data-col="2">-21188.810</td>
-                  <td data-row="9" data-col="3">-31996.196</td>
+                  <td data-row="9" data-col="2">-11224.882</td>
+                  <td data-row="9" data-col="3">-14567.604</td>
                 </tr>
                 <tr>
                   <td data-row="10" data-col="1">F</td>
-                  <td data-row="10" data-col="2">443.673</td>
-                  <td data-row="10" data-col="3">161.114</td>
+                  <td data-row="10" data-col="2">203.327</td>
+                  <td data-row="10" data-col="3">41.736</td>
                 </tr>
                 <tr>
                   <td data-row="11" data-col="1">RMSE</td>
-                  <td data-row="11" data-col="2">10.39</td>
-                  <td data-row="11" data-col="3">14.27</td>
+                  <td data-row="11" data-col="2">10.49</td>
+                  <td data-row="11" data-col="3">14.37</td>
                 </tr>
         </tbody>
       </table>
@@ -1019,224 +1473,141 @@ X_0 + a_0 X_0 + a_1 X_1 + a_2 X_2 + a_3 X_3 + a_4 X_4 + \cdots
 </div>
 </div>
 </section>
-<section id="augumented-inverse-probablity-weighting-aipw" class="slide level2">
-<h2>Augumented Inverse Probablity Weighting (AIPW)</h2>
-</section>
-<section id="それでもなお問題が残る" class="slide level2">
-<h2>それでもなお、問題が残る</h2>
-<ul>
-<li>アウトカムモデル、PS modelの両者がMisspecificationがあるとバイアスが残る <!-- Todo: Citationを入れる --></li>
-<li>Estimandの問題 = 治療効果の異質性
-<ul>
-<li>Subgroup解析と一緒</li>
-<li>自覚的にInteraction termを入れないとちゃんと推定出来ない</li>
-</ul></li>
-<li>ここに機械学習を持ち込めないか？</li>
-</ul>
+<section id="男女差lvefcr等との治療効果" class="slide level2">
+<h2>男女差、LVEF、Cr等との治療効果</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>n = 6000 </code></pre>
+<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x7765fde16a50&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Naive diff (unadjusted): 8.265991 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>G-computation ATE (Q-model only): 8.839814 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TMLE ATE (targeted): 9.068977 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TMLE 95% CI: 8.246636 to 9.891317 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = afeqt_os ~ ca + age + sexm1 + bmi + hf + bnp + 
-    lvef + palpitation, family = gaussian(), data = dat_ortho)
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  9.204e+01  1.440e+00   63.94   &lt;2e-16 ***
-ca           8.840e+00  2.735e-01   32.32   &lt;2e-16 ***
-age         -5.229e-01  1.669e-02  -31.33   &lt;2e-16 ***
-sexm1       -7.885e+00  2.473e-01  -31.89   &lt;2e-16 ***
-bmi         -4.010e-01  2.726e-02  -14.71   &lt;2e-16 ***
-hf          -7.447e+00  3.001e-01  -24.82   &lt;2e-16 ***
-bnp         -1.423e-02  5.624e-04  -25.30   &lt;2e-16 ***
-lvef         5.009e-01  1.584e-02   31.61   &lt;2e-16 ***
-palpitation -1.203e+01  2.550e-01  -47.20   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 80.57486)
-
-    Null deviance: 1316132  on 5999  degrees of freedom
-Residual deviance:  482724  on 5991  degrees of freedom
-AIC: 43373
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      ca 
-8.839814 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = y_resid ~ 0 + a_resid_lpm, family = gaussian(), 
-    data = dat_ortho)
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-a_resid_lpm   8.8398     0.2733   32.34   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 80.46741)
-
-    Null deviance: 566906  on 6000  degrees of freedom
-Residual deviance: 482724  on 5999  degrees of freedom
-AIC: 43357
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>a_resid_lpm 
-   8.839814 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.SLearner object at 0x775d53783cb0&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[5.96923035 2.74580755 4.08232513 ... 7.14635074 9.6300243  5.90174077]</code></pre>
-</div>
-</div>
-</section>
-<section id="scratch-for-s-learner" class="slide level2">
-<h2>Scratch for S-learner</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric .estimator .estimate
-  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 rmse    standard        8.65</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Variable | Mean |   SD |  IQR |          Range | Skewness | Kurtosis |    n | n_Missing
----------------------------------------------------------------------------------------
-ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |         0</code></pre>
-</div>
-
-</div>
-<img data-src="index_files/figure-revealjs/scratch-for-S-learner-1.svg" width="960" class="r-stretch"></section>
-<section id="t-learner-1" class="slide level2">
-<h2>T learner</h2>
-
-<img data-src="images/t-learner.drawio.svg" class="r-stretch quarto-figure-center"><p class="caption">t-learner</p></section>
-<section id="scratch-for-t-learner" class="slide level2">
-<h2>Scratch for T-learner</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.TLearner object at 0x775d53795850&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>T learnerでの局所治療効果</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[ 5.8737296   3.57512484  2.42924101 ...  6.10902536 11.44156834
- 10.7685034 ]</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.metalearners._metalearners.XLearner object at 0x775d53758f50&gt;</code></pre>
-</div>
-
-</div>
-<img data-src="index_files/figure-revealjs/X-learner-1.svg" class="r-stretch"></section>
-<section id="dr-learner-1" class="slide level2">
-<h2>DR-learner</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.dr._drlearner.DRLearner object at 0x775d4c26bef0&gt;</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-     id      Y     A e_hat mu1_hat mu0_hat phi_dr tau_true
-  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-1     1 -0.936     1 0.489   0.649  -0.490 -2.10     1.31 
-2     2  1.16      0 0.339   1.57    0.955  0.303    0.744
-3     3  3.71      0 0.842   4.53    1.82  -9.31     2.81 
-4     4  2.74      1 0.268   2.18    1.74   2.53     0.562
-5     5  3.54      1 0.446   1.76    0.494  5.28     1.52 
-6     6  4.42      1 0.781   4.63    1.52   2.84     2.95 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  estimand                             value
-  &lt;chr&gt;                                &lt;dbl&gt;
-1 true ATE: mean(tau_true)              1.27
-2 DR ATE: mean(phi_dr)                  1.19
-3 plug-in ATE: mean(mu1_hat - mu0_hat)  1.21
-4 naive difference in means             1.70</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-  true_ate estimated_ate_from_tau_hat cate_rmse cate_correlation
-     &lt;dbl&gt;                      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;
-1     1.27                       1.19     0.122            0.996</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/scratch-DR-learner-3.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x775d1716b8f0&gt;</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg"></p>
-</figure>
-</div>
+<pre><code>[ 1.24278864  2.71803951  0.35703627  3.47107322  1.67008745 -0.23680529
+  6.30212745  0.57934246  0.27337618  2.35066257  2.20999339 10.13630722
+  6.41654783  0.49889455  1.75524363  2.88010762  1.75921144  1.10754768
+  1.5822343   1.95098904  2.3081965   0.68240056  1.83233614  0.91668026
+ -1.86345792  5.06806823  2.72407758 -0.23352469  8.35797189 11.21343906
+  2.40754419  7.59506402 -0.64175269  5.20913809  4.0980791   2.81845048
+  5.07947539  0.47456616 -0.75300575  5.31475689  4.76152521  5.92697784
+ -0.50453694  2.3919588  -2.381109    2.40353941  0.89078484  3.00040703
+ -3.05689797  4.19246543 -1.87232525  2.01755985  0.15548881  2.48972828
+ -1.84314743  3.80150197  0.17328202  5.27629397  3.27573075  1.37734124
+  0.64752986  0.67296897 -1.01790158  4.14098072  8.51623963 -2.69480467
+  7.01419757  5.01741559  7.63200377  0.75581998  0.72127777  8.55081512
+  7.09426201  0.99351503 -1.25660084  4.03677364  3.97672882  2.83747991
+  9.02874503  5.51207705  9.66358663  1.63518379  6.65981628  6.99195028
+ 10.0713652   2.1138951  -1.65813234  3.63173419  0.91133575  0.02876775
+  4.46964203  0.8594088   4.07763921  7.42982768 -0.77211342  3.692784
+  0.99267483  2.04323625  1.39697603  4.60825503  4.99527454  0.89190292
+  5.22014967  4.12956094 -0.62433351  7.23195049  6.35719427  0.56152379
+  1.66553382  4.63929723  4.18141066  3.77641012  3.99775146 -0.30355702
+  4.42852125 -0.14020396  3.34281168  1.27739917  4.10363956  0.55858527
+  0.10024232  1.7580816   5.38729356  2.09338011  0.17084785  3.95422927
+  1.15996794  2.54379208  3.55883162  1.07707033  3.01847046  8.14965969
+ -0.26798983  4.87624474  0.38442234 -0.29397167  1.1841084   7.77732043
+ -0.1415026   0.82465734  7.42619091  5.14180648  5.31794467  0.36472326
+  1.02082269 -2.35576347  4.25027522  2.75132512  0.64853533  5.85221285
+  5.88690196  1.15902668  0.23020797  1.72914471  1.93560877 -0.66414121
+ -0.43615219 -0.44671616  0.92223364  8.54645891  8.93524704  8.76392263
+  4.17402093  2.39368941  2.9320017   2.47853159  1.63384742 -0.31623328
+  0.14808541  0.65186052  0.95953327 -2.34369902  6.70144001  4.30077627
+  2.05131739  1.01964659  3.21557741  5.99063745  4.65084502  3.32864264
+  0.58815228  4.14158511  0.44011902  7.97601248  0.94931078  2.18184188
+  8.73376719 -0.60831219  5.27456576  1.81329397  4.2261326   5.00203429
+  1.81207773  0.41376754  1.04749574  1.89277462  0.55760272  2.34500496
+  7.2863671   1.34769967  0.50296624 -0.41213821  0.65889749  0.56152379
+  6.06082888  4.87697757  1.46214392 -0.36161338 -2.17280005  1.10980915
+  3.91135084  5.65488825  4.45992565  0.6082702   0.97223284  1.83879328
+  4.69554828  4.47911833  0.9394601   0.56280711  6.50653873  4.68962359
+ -0.07519424  3.58208469  1.11643661 -7.22542093  0.35579693 -0.47019313
+  7.64712896  0.43202741  5.40802112  1.67040134  1.00746458  0.04665177
+  1.94133855  3.82790311  0.41926929 -1.41041922  1.2878939   3.80375946
+ -1.79041568 -0.26264451  1.20017365  1.14973666 -7.73952245  8.97985479
+  2.27601753  5.7897996   2.1898521   2.25115157  2.872842    2.26504933
+  9.08274548  6.13457132 -1.09529528  2.14718779  3.07281591  4.87005201
+ -0.82927753  1.99951877 -0.6099733   5.20822106  3.47545871  1.08923469
+  5.71651236  0.2591172   1.38505938  1.4584453   3.57807733  0.67611066
+ -0.25941819  1.83897468  0.27416608  0.34835382  0.62285369  5.88647205
+ -0.19566225  9.53137939  0.46749717  2.22666894  0.79597748  1.83806566
+  0.99782544  1.44990719  1.19281095  0.28193691 -1.34395199  1.96955302
+  3.61383408  0.73636742  3.07751236  5.44874901  0.56280711  3.53345121
+  9.70122623 -0.14821282  2.06499326  0.62543416  1.73802141  1.49804824
+  3.38343803  0.17240271  4.32241558  2.16450765 11.10828519  0.43579342
+  1.24969427  2.97755372  0.97606628  6.53383055  4.91527731  0.2740568
+  0.42116244  0.52994204  1.01107836  0.37908922  0.56540259  3.13616743
+  2.04065984  2.12594567  1.08536876  4.39619044  5.1012888   7.35168053
+  3.02405733  0.85181372  2.81011732  4.10741904  9.09480294  1.04921001
+  9.54639965  1.28859732  2.72542089  1.13791333  2.36103448  1.66553382
+  0.82875988  4.87066124  4.61505306  2.67388593 -0.54890135  0.67022523
+  5.42768685 -3.98597202  0.99894936  2.93273573  2.21394458  3.82651455
+  0.48712957  2.46951054  3.13675779  4.7106826   1.61006355  0.30436474
+  2.40607965  2.55106001  5.43716204  6.32276195  4.26537274  0.41795525
+  6.47824346  0.44377469  8.22023434  2.32443169  0.69749076  0.44611586
+  1.29292302  0.43080587  0.19016433  1.29420008  5.11607194  1.70665368
+  3.63010291  1.44733444  3.71258205  8.01482186  0.79649629 -0.76583061
+  1.19323126  1.14641188  1.30409096  1.54524765  6.2735766   4.81813913
+  2.93911263  2.03651564  0.28986355  0.6893307   4.4949362   0.43280715
+  0.45430169  1.39607093  0.95133917  1.31979098  5.03048333  0.35179022
+  0.84698464  7.26425144  5.14526877  2.71629927  1.57058271 -2.87995681
+  4.12956094  6.314843    0.0115738   0.8200942   2.33087211 -0.04727918
+ -0.86954589  4.19389124  0.67682967  2.59988361  5.94824063  6.1787471
+  1.51974939  4.65511243  0.69572348  2.0035754   2.36205766  3.62570298
+  3.31289095  1.86991413  3.27380994  4.30924495 -4.90864449  5.13773073
+  2.16117075  6.73770306  0.35313925  0.5295593   1.97082962  4.18933274
+  0.2522317   3.57857988  5.6191136   0.25733003  1.27739917 -1.74135873
+  3.3605814   0.97518461  1.44194633  5.31794467  6.42666976  2.69314185
+  1.53200705 -5.06310175  0.91752356  4.98466824  1.94536287  0.60111883
+ -1.85786067  2.2561622   5.14253872 -3.47282171 -0.94078909 -0.85381085
+  1.82189624  0.78596348  0.67225255  3.22156959  6.16509463  0.4575933
+  7.7655633   7.6635783   0.36047372  0.47425665  3.93729213  4.2752976
+  3.97046011  2.93098992  2.8676787  -2.14945561  4.09993981 -4.05196269
+  2.54687457  3.44250936  6.54805518  5.29894151  2.90835723 -1.37551065
+  4.48673703  7.85286427  4.03699492  5.75352838  4.06878085 -0.93290913
+  1.80305502  1.57251961  0.45128156  5.734638    0.84562741 -0.85456434
+  6.38162478  3.73236797  0.82889994  9.47949431  3.18999744  1.96695031
+  6.7276672   0.82512076 -5.11680168  0.11895567  1.3066664  -0.52965586
+ -4.47695852 -7.59624182  0.2740568   2.17516846 -0.53195069 -0.1286705
+  2.6242395   2.37716236  1.76846749  3.86734567  3.88278567 -1.04928658
+  1.51709093  1.19167901  5.13959693  2.57127116  4.62117429  0.52498415
+ -2.73881922  0.69918464 -0.24691281  0.70354794  1.475189    4.68628802
+  0.33270328  1.27143114  1.9468769   9.00356158  0.98226     1.05884892
+ -0.21131646 -0.09696487  6.51944882  2.42650049  2.11883159  2.29390761
+  0.55800085 -2.35953404  2.6589057   1.46037432  3.72511664  2.37607079
+  8.32529159  1.19569692  4.41088503 11.51818895  2.65198745  1.61029569
+  3.32928628  0.71965647  0.96789817  0.24097168 -1.27613322  0.19487923
+  1.39781439  0.33689155 -0.27966776 -1.72998165  0.65186052  0.98789321
+  4.22397722  0.75493887 10.69888343  4.56258331 -0.38320866  1.10238366
+  6.08451114  0.84067546  2.38884543 -0.91951726  0.28986355  0.88528472
+  0.79649629  2.15182934  3.63402279  3.22281879  0.97100379  2.9652959
+  5.62357099  3.74417968  6.14642995  1.6885491   1.54628658  1.98041592
+  4.44070497 -0.28117793  2.04677911  4.53083234  6.52605786  8.25625199
+  1.342304    3.39397734  3.07887885  0.07268714  4.4903097   1.1172161 ]</code></pre>
 </div>
 </div>
 </section>
-<section id="因果forest" class="slide level2">
-<h2>因果forest</h2>
-<ul>
-<li>HTEを計測するのに有名</li>
-<li>Ashey et al 2019</li>
-</ul>
-</section>
+<section id="hteとpolicy-tree" class="slide level2">
+<h2>HTEとPolicy tree</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;econml.cate_interpreter._interpreters.SingleTreeCateInterpreter object at 0x7765fd2de3c0&gt;</code></pre>
+</div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" class="r-stretch"></section>
 <section id="survival-model" class="slide level2">
 <h2>Survival model</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-3.svg" width="960" class="r-stretch"><div class="cell">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-3.svg" width="960" class="r-stretch"><div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>          control      treated
-[1,] -0.047508782  0.047508782
-[2,] -0.025912136  0.025912136
-[3,] -0.309310212  0.309310212
-[4,]  0.004778065 -0.004778065
-[5,]  3.158081355 -3.158081355
-[6,] -0.062332572  0.062332572</code></pre>
+<pre><code>         control     treated
+[1,] -0.06490186  0.06490186
+[2,] -1.44211952  1.44211952
+[3,] -0.02103585  0.02103585
+[4,] -0.20621028  0.20621028
+[5,]  2.14085606 -2.14085606
+[6,] -0.06298911  0.06298911</code></pre>
 </div>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-be29272657d1b5e81d9a" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-be29272657d1b5e81d9a">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bmi <= 20.58 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" bmi <= 20.46 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n2 [label=\" bnp <= 20 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-6fd757f50f6d973b6445" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-6fd757f50f6d973b6445">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bnp <= 62 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" bmi <= 23.71 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n2 [label=\" lvef <= 59 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Catheter ablation \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Observation \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <!-- ![Treeplot](images/treeplot.svg) -->
@@ -1249,174 +1620,143 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
  system   x86_64, linux-gnu
  ui       X11
  language (EN)
- collate  ja_JP.UTF-8
- ctype    ja_JP.UTF-8
+ collate  C.UTF-8
+ ctype    C.UTF-8
  tz       Asia/Tokyo
- date     2026-07-26
+ date     2026-08-26
  pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)
  quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package         * version    date (UTC) lib source
- arg               0.1.1      2026-05-27 [1] CRAN (R 4.5.3)
- backports         1.5.1      2026-04-03 [1] CRAN (R 4.5.3)
- base64enc         0.1-6      2026-02-02 [1] CRAN (R 4.5.2)
- bayestestR      * 0.18.1     2026-05-24 [1] CRAN (R 4.5.3)
- bonsai          * 0.4.1      2026-05-21 [1] CRAN (R 4.5.3)
- boot              1.3-32     2025-08-29 [1] CRAN (R 4.5.1)
- broom           * 1.0.13     2026-05-14 [1] CRAN (R 4.5.3)
- cachem            1.1.0      2024-05-16 [1] CRAN (R 4.5.1)
- checkmate         2.3.3      2025-08-18 [1] CRAN (R 4.5.1)
- chk               0.10.0     2025-01-24 [1] CRAN (R 4.5.1)
- class             7.3-23     2025-01-01 [1] CRAN (R 4.5.1)
- cli               3.6.6      2026-04-09 [1] CRAN (R 4.5.3)
- cluster           2.1.8.2    2026-02-05 [1] CRAN (R 4.5.2)
- codetools         0.2-20     2024-03-31 [1] CRAN (R 4.5.1)
- colorspace        2.1-2      2025-09-22 [1] CRAN (R 4.5.1)
- correlation     * 0.8.8      2025-07-08 [1] CRAN (R 4.5.1)
- curl              7.1.0      2026-04-22 [1] CRAN (R 4.5.3)
- dagitty         * 0.3-4      2023-12-07 [1] CRAN (R 4.5.1)
- data.table        1.17.8     2025-07-10 [1] CRAN (R 4.5.1)
- datawizard      * 1.3.1      2026-04-26 [1] CRAN (R 4.5.3)
- DiagrammeR        1.0.12     2026-04-27 [1] CRAN (R 4.5.3)
- dials           * 1.4.4      2026-06-22 [1] CRAN (R 4.5.3)
- DiceDesign        1.10       2023-12-07 [1] CRAN (R 4.5.1)
- digest            0.6.39     2025-11-19 [1] CRAN (R 4.5.2)
- dplyr           * 1.2.1      2026-04-03 [1] CRAN (R 4.5.3)
- easystats       * 0.7.6      2026-05-24 [1] CRAN (R 4.5.3)
- effectsize      * 1.0.2      2026-03-11 [1] CRAN (R 4.5.2)
- evaluate          1.0.5      2025-08-27 [1] CRAN (R 4.5.1)
- farver            2.1.2      2024-05-13 [1] CRAN (R 4.5.1)
- fastmap           1.2.0      2024-05-15 [1] CRAN (R 4.5.1)
- forcats         * 1.0.1      2025-09-25 [1] CRAN (R 4.5.1)
- foreign           0.8-91     2026-01-29 [1] CRAN (R 4.5.2)
- Formula           1.2-5      2023-02-24 [1] CRAN (R 4.5.1)
- furrr             0.4.0      2026-03-31 [1] CRAN (R 4.5.3)
- future            1.70.0     2026-03-14 [1] CRAN (R 4.5.3)
- future.apply      1.20.2     2026-02-20 [1] CRAN (R 4.5.2)
- generics          0.1.4      2025-05-09 [1] CRAN (R 4.5.1)
- ggcube          * 0.1.0      2026-05-27 [1] CRAN (R 4.5.3)
- ggdag           * 0.2.13     2024-07-22 [1] CRAN (R 4.5.1)
- ggforce           0.5.0      2025-06-18 [1] CRAN (R 4.5.1)
- ggplot2         * 4.0.3      2026-04-22 [1] CRAN (R 4.5.3)
- ggraph            2.2.2      2025-08-24 [1] CRAN (R 4.5.2)
- ggrepel           0.9.8      2026-03-17 [1] CRAN (R 4.5.3)
- globals           0.19.1     2026-03-13 [1] CRAN (R 4.5.3)
- glue              1.8.1      2026-04-17 [1] CRAN (R 4.5.3)
- gower             1.0.2      2024-12-17 [1] CRAN (R 4.5.2)
- graphlayouts      1.2.4      2026-06-19 [1] CRAN (R 4.5.3)
- grf             * 2.6.1      2026-03-04 [1] CRAN (R 4.5.3)
- gridExtra         2.3.1      2026-06-25 [1] CRAN (R 4.5.3)
- gtable            0.3.6      2024-10-25 [1] CRAN (R 4.5.1)
- hardhat           1.4.3      2026-04-04 [1] CRAN (R 4.5.3)
- here            * 1.0.2      2025-09-15 [1] CRAN (R 4.5.1)
- Hmisc           * 5.2-6      2026-06-19 [1] CRAN (R 4.5.3)
- hms               1.1.4      2025-10-17 [1] CRAN (R 4.5.1)
- htmlTable         2.5.0      2026-04-22 [1] CRAN (R 4.5.3)
- htmltools         0.5.9      2025-12-04 [1] CRAN (R 4.5.2)
- htmlwidgets       1.6.4      2023-12-06 [1] CRAN (R 4.5.1)
- igraph            2.3.3      2026-06-26 [1] CRAN (R 4.5.3)
- infer           * 1.1.0      2025-12-18 [1] CRAN (R 4.5.2)
- insight         * 1.5.2      2026-06-28 [1] CRAN (R 4.5.3)
- ipred             0.9-15     2024-07-18 [1] CRAN (R 4.5.1)
- isoband           0.3.0      2025-12-07 [1] CRAN (R 4.5.2)
- jsonlite          2.0.0      2025-03-27 [1] CRAN (R 4.5.1)
- knitr             1.51       2025-12-20 [1] CRAN (R 4.5.2)
- labeling          0.4.3      2023-08-29 [1] CRAN (R 4.5.1)
- lattice           0.22-9     2026-02-09 [1] CRAN (R 4.5.2)
- lava              1.9.2      2026-06-30 [1] CRAN (R 4.5.3)
- lifecycle         1.0.5      2026-01-08 [1] CRAN (R 4.5.2)
- lightgbm          4.6.0      2025-02-13 [1] CRAN (R 4.5.2)
- listenv           1.0.0      2026-06-22 [1] CRAN (R 4.5.3)
- litedown          0.9        2025-12-18 [1] CRAN (R 4.5.2)
- lmtest            0.9-40     2022-03-21 [1] CRAN (R 4.5.1)
- lubridate       * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)
- magrittr          2.0.5      2026-04-04 [1] CRAN (R 4.5.3)
- marginaleffects * 0.32.0     2026-02-14 [1] CRAN (R 4.5.2)
- MASS              7.3-65     2025-02-28 [1] CRAN (R 4.5.1)
- MatchIt         * 4.7.2      2025-05-30 [1] CRAN (R 4.5.1)
- Matrix            1.7-5      2026-03-21 [1] CRAN (R 4.5.3)
- MatrixModels      0.5-4      2025-03-26 [1] CRAN (R 4.5.1)
- memoise           2.0.1      2021-11-26 [1] CRAN (R 4.5.1)
- modelbased      * 0.16.0     2026-06-30 [1] CRAN (R 4.5.3)
- modeldata       * 1.5.1      2025-08-22 [1] CRAN (R 4.5.1)
- modelenv          0.2.0      2024-10-14 [1] CRAN (R 4.5.1)
- modelsummary    * 2.6.0      2026-02-13 [1] CRAN (R 4.5.2)
- multcomp          1.4-30     2026-03-09 [1] CRAN (R 4.5.2)
- mvtnorm           1.4-1      2026-06-06 [1] CRAN (R 4.5.3)
- nlme              3.1-169    2026-03-27 [1] CRAN (R 4.5.3)
- nnet              7.3-20     2025-01-01 [1] CRAN (R 4.5.1)
- otel              0.2.0      2025-08-29 [1] CRAN (R 4.5.1)
- parallelly        1.48.0     2026-06-29 [1] CRAN (R 4.5.3)
- parameters      * 0.29.2     2026-06-28 [1] CRAN (R 4.5.3)
- parsnip         * 1.6.0      2026-05-14 [1] CRAN (R 4.5.3)
- performance     * 0.17.1     2026-06-30 [1] CRAN (R 4.5.3)
- pillar            1.11.1     2025-09-17 [1] CRAN (R 4.5.1)
- pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.5.1)
- png               0.1-9      2026-03-15 [1] CRAN (R 4.5.3)
- policytree      * 1.2.4      2026-02-18 [1] CRAN (R 4.5.2)
- polspline         1.1.25     2024-05-10 [1] CRAN (R 4.5.1)
- polyclip          1.10-7     2024-07-23 [1] CRAN (R 4.5.1)
- prodlim           2026.03.11 2026-03-11 [1] CRAN (R 4.5.3)
- purrr           * 1.2.2      2026-04-10 [1] CRAN (R 4.5.3)
- quantreg          6.1        2025-03-10 [1] CRAN (R 4.5.1)
- R6                2.6.1      2025-02-15 [1] CRAN (R 4.5.1)
- RColorBrewer      1.1-3      2022-04-03 [1] CRAN (R 4.5.1)
- Rcpp              1.1.1-1.1  2026-04-24 [1] CRAN (R 4.5.3)
- readr           * 2.2.0      2026-02-19 [1] CRAN (R 4.5.2)
- recipes         * 1.3.3      2026-05-30 [1] CRAN (R 4.5.3)
- report          * 0.6.4      2026-05-04 [1] CRAN (R 4.5.3)
- reticulate      * 1.46.0     2026-04-09 [1] CRAN (R 4.5.3)
- rlang             1.2.0      2026-04-06 [1] CRAN (R 4.5.3)
- rmarkdown         2.31       2026-03-26 [1] CRAN (R 4.5.3)
- rms             * 8.1-1      2026-02-18 [1] CRAN (R 4.5.2)
- rootSolve         1.8.2.4    2023-09-21 [1] CRAN (R 4.5.1)
- rpart             4.1.27     2026-03-27 [1] CRAN (R 4.5.3)
- rprojroot         2.1.1      2025-08-26 [1] CRAN (R 4.5.1)
- rsample         * 1.3.2      2026-01-30 [1] CRAN (R 4.5.2)
- rstudioapi        0.19.0     2026-06-11 [1] CRAN (R 4.5.3)
- S7                0.2.2      2026-04-22 [1] CRAN (R 4.5.3)
- sandwich          3.1-1      2024-09-15 [1] CRAN (R 4.5.1)
- scales          * 1.4.0      2025-04-24 [1] CRAN (R 4.5.1)
- see             * 0.14.1     2026-06-29 [1] CRAN (R 4.5.3)
- sessioninfo     * 1.2.4      2026-06-04 [1] CRAN (R 4.5.3)
- simsurv         * 1.0.1      2026-01-22 [1] CRAN (R 4.5.3)
- SparseM           1.84-2     2024-07-17 [1] CRAN (R 4.5.1)
- sparsevctrs       0.3.6      2026-01-27 [1] CRAN (R 4.5.2)
- stringi           1.8.7      2025-03-27 [1] CRAN (R 4.5.2)
- stringr         * 1.6.0      2025-11-04 [1] CRAN (R 4.5.2)
- survival        * 3.8-6      2026-01-16 [1] CRAN (R 4.5.2)
- systemfonts       1.3.2      2026-03-05 [1] CRAN (R 4.5.2)
- tables            0.9.35     2026-06-04 [1] CRAN (R 4.5.3)
- tailor          * 0.1.0      2025-08-25 [1] CRAN (R 4.5.1)
- TH.data           1.1-5      2025-11-17 [1] CRAN (R 4.5.2)
- tibble          * 3.3.1      2026-01-11 [1] CRAN (R 4.5.2)
- tidygraph         1.3.0      2023-12-18 [1] CRAN (R 4.5.1)
- tidymodels      * 1.4.1      2025-09-08 [1] CRAN (R 4.5.1)
- tidyr           * 1.3.2      2025-12-19 [1] CRAN (R 4.5.2)
- tidyselect        1.2.1      2024-03-11 [1] CRAN (R 4.5.1)
- tidyverse       * 2.0.0      2023-02-22 [1] CRAN (R 4.5.1)
- timechange        0.4.0      2026-01-29 [1] CRAN (R 4.5.2)
- timeDate          4052.112   2026-01-28 [1] CRAN (R 4.5.2)
- tinyplot        * 0.6.1      2026-03-28 [1] CRAN (R 4.5.3)
- tinytable         0.16.0     2026-02-11 [1] CRAN (R 4.5.2)
- tune            * 2.1.0      2026-04-17 [1] CRAN (R 4.5.3)
- tweenr            2.0.3      2024-02-26 [1] CRAN (R 4.5.1)
- tzdb              0.5.0      2025-03-15 [1] CRAN (R 4.5.1)
- utf8              1.2.6      2025-06-08 [1] CRAN (R 4.5.1)
- V8                8.2.0      2026-04-21 [1] CRAN (R 4.5.3)
- vctrs             0.7.3      2026-04-11 [1] CRAN (R 4.5.3)
- viridis           0.6.5      2024-01-29 [1] CRAN (R 4.5.1)
- viridisLite       0.4.3      2026-02-04 [1] CRAN (R 4.5.2)
- visNetwork        2.1.4      2025-09-04 [1] CRAN (R 4.5.1)
- WeightIt        * 1.7.0      2026-04-22 [1] CRAN (R 4.5.3)
- withr             3.0.3      2026-06-19 [1] CRAN (R 4.5.3)
- workflows       * 1.3.0      2025-08-27 [1] CRAN (R 4.5.1)
- workflowsets    * 1.1.1      2025-05-27 [1] CRAN (R 4.5.1)
- xfun              0.59       2026-06-19 [1] CRAN (R 4.5.3)
- yaml              2.3.12     2025-12-10 [1] CRAN (R 4.5.2)
- yardstick       * 1.4.0      2026-04-07 [1] CRAN (R 4.5.3)
- zoo               1.8-15     2025-12-15 [1] CRAN (R 4.5.2)
+ package         * version   date (UTC) lib source
+ arg               0.1.1     2026-05-27 [1] CRAN (R 4.5.3)
+ backports         1.5.1     2026-04-03 [1] CRAN (R 4.5.3)
+ base64enc         0.1-6     2026-02-02 [1] CRAN (R 4.5.2)
+ bayestestR        0.18.1    2026-05-24 [1] CRAN (R 4.5.3)
+ boot              1.3-32    2025-08-29 [1] CRAN (R 4.5.1)
+ broom             1.0.13    2026-05-14 [1] CRAN (R 4.5.3)
+ cachem            1.1.0     2024-05-16 [1] CRAN (R 4.5.1)
+ checkmate         2.3.3     2025-08-18 [1] CRAN (R 4.5.1)
+ chk               0.10.0    2025-01-24 [1] CRAN (R 4.5.1)
+ cli               3.6.6     2026-04-09 [1] CRAN (R 4.5.3)
+ cluster           2.1.8.2   2026-02-05 [1] CRAN (R 4.5.2)
+ codetools         0.2-20    2024-03-31 [1] CRAN (R 4.5.1)
+ colorspace        2.1-2     2025-09-22 [1] CRAN (R 4.5.1)
+ curl              7.1.0     2026-04-22 [1] CRAN (R 4.5.3)
+ dagitty         * 0.3-4     2023-12-07 [1] CRAN (R 4.5.1)
+ data.table        1.17.8    2025-07-10 [1] CRAN (R 4.5.1)
+ datawizard        1.3.1     2026-04-26 [1] CRAN (R 4.5.3)
+ DiagrammeR        1.0.12    2026-04-27 [1] CRAN (R 4.5.3)
+ digest            0.6.39    2025-11-19 [1] CRAN (R 4.5.2)
+ dplyr           * 1.2.1     2026-04-03 [1] CRAN (R 4.5.3)
+ effectsize        1.0.2     2026-03-11 [1] CRAN (R 4.5.2)
+ evaluate          1.0.5     2025-08-27 [1] CRAN (R 4.5.1)
+ farver            2.1.2     2024-05-13 [1] CRAN (R 4.5.1)
+ fastmap           1.2.0     2024-05-15 [1] CRAN (R 4.5.1)
+ forcats         * 1.0.1     2025-09-25 [1] CRAN (R 4.5.1)
+ foreign           0.8-91    2026-01-29 [1] CRAN (R 4.5.2)
+ Formula           1.2-5     2023-02-24 [1] CRAN (R 4.5.1)
+ future            1.70.0    2026-03-14 [1] CRAN (R 4.5.3)
+ future.apply      1.20.2    2026-02-20 [1] CRAN (R 4.5.2)
+ generics          0.1.4     2025-05-09 [1] CRAN (R 4.5.1)
+ GGally          * 2.4.0     2025-08-23 [1] CRAN (R 4.5.1)
+ ggdag           * 0.2.13    2024-07-22 [1] CRAN (R 4.5.1)
+ ggforce           0.5.0     2025-06-18 [1] CRAN (R 4.5.1)
+ ggplot2         * 4.0.3     2026-04-22 [1] CRAN (R 4.5.3)
+ ggraph            2.2.2     2025-08-24 [1] CRAN (R 4.5.2)
+ ggrepel           0.9.8     2026-03-17 [1] CRAN (R 4.5.3)
+ ggstats           0.13.0    2026-03-06 [1] CRAN (R 4.5.2)
+ globals           0.19.1    2026-03-13 [1] CRAN (R 4.5.3)
+ glue              1.8.1     2026-04-17 [1] CRAN (R 4.5.3)
+ graphlayouts      1.2.4     2026-06-19 [1] CRAN (R 4.5.3)
+ grf             * 2.6.1     2026-03-04 [1] CRAN (R 4.5.3)
+ gridExtra         2.3.1     2026-06-25 [1] CRAN (R 4.5.3)
+ gtable            0.3.6     2024-10-25 [1] CRAN (R 4.5.1)
+ here            * 1.0.2     2025-09-15 [1] CRAN (R 4.5.1)
+ Hmisc           * 5.2-6     2026-06-19 [1] CRAN (R 4.5.3)
+ hms               1.1.4     2025-10-17 [1] CRAN (R 4.5.1)
+ htmlTable         2.5.0     2026-04-22 [1] CRAN (R 4.5.3)
+ htmltools         0.5.9     2025-12-04 [1] CRAN (R 4.5.2)
+ htmlwidgets       1.6.4     2023-12-06 [1] CRAN (R 4.5.1)
+ igraph            2.3.3     2026-06-26 [1] CRAN (R 4.5.3)
+ insight           1.5.2     2026-06-28 [1] CRAN (R 4.5.3)
+ jsonlite          2.0.0     2025-03-27 [1] CRAN (R 4.5.1)
+ knitr             1.51      2025-12-20 [1] CRAN (R 4.5.2)
+ labeling          0.4.3     2023-08-29 [1] CRAN (R 4.5.1)
+ lattice           0.22-9    2026-02-09 [1] CRAN (R 4.5.2)
+ lifecycle         1.0.5     2026-01-08 [1] CRAN (R 4.5.2)
+ listenv           1.0.0     2026-06-22 [1] CRAN (R 4.5.3)
+ litedown          0.9       2025-12-18 [1] CRAN (R 4.5.2)
+ lmtest            0.9-40    2022-03-21 [1] CRAN (R 4.5.1)
+ lubridate       * 1.9.5     2026-02-04 [1] CRAN (R 4.5.2)
+ magrittr          2.0.5     2026-04-04 [1] CRAN (R 4.5.3)
+ marginaleffects * 0.32.0    2026-02-14 [1] CRAN (R 4.5.2)
+ MASS              7.3-65    2025-02-28 [1] CRAN (R 4.5.1)
+ MatchIt         * 4.7.2     2025-05-30 [1] CRAN (R 4.5.1)
+ Matrix            1.7-5     2026-03-21 [1] CRAN (R 4.5.3)
+ MatrixModels      0.5-4     2025-03-26 [1] CRAN (R 4.5.1)
+ memoise           2.0.1     2021-11-26 [1] CRAN (R 4.5.1)
+ modelsummary    * 2.6.0     2026-02-13 [1] CRAN (R 4.5.2)
+ multcomp          1.4-30    2026-03-09 [1] CRAN (R 4.5.2)
+ mvtnorm           1.4-1     2026-06-06 [1] CRAN (R 4.5.3)
+ nlme              3.1-169   2026-03-27 [1] CRAN (R 4.5.3)
+ nnet              7.3-20    2025-01-01 [1] CRAN (R 4.5.1)
+ otel              0.2.0     2025-08-29 [1] CRAN (R 4.5.1)
+ parallelly        1.48.0    2026-06-29 [1] CRAN (R 4.5.3)
+ parameters        0.29.2    2026-06-28 [1] CRAN (R 4.5.3)
+ performance       0.17.1    2026-06-30 [1] CRAN (R 4.5.3)
+ pillar            1.11.1    2025-09-17 [1] CRAN (R 4.5.1)
+ pkgconfig         2.0.3     2019-09-22 [1] CRAN (R 4.5.1)
+ png               0.1-9     2026-03-15 [1] CRAN (R 4.5.3)
+ policytree      * 1.2.4     2026-02-18 [1] CRAN (R 4.5.2)
+ polspline         1.1.25    2024-05-10 [1] CRAN (R 4.5.1)
+ polyclip          1.10-7    2024-07-23 [1] CRAN (R 4.5.1)
+ purrr           * 1.2.2     2026-04-10 [1] CRAN (R 4.5.3)
+ quantreg          6.1       2025-03-10 [1] CRAN (R 4.5.1)
+ R6                2.6.1     2025-02-15 [1] CRAN (R 4.5.1)
+ RColorBrewer      1.1-3     2022-04-03 [1] CRAN (R 4.5.1)
+ Rcpp              1.1.1-1.1 2026-04-24 [1] CRAN (R 4.5.3)
+ readr           * 2.2.0     2026-02-19 [1] CRAN (R 4.5.2)
+ reticulate      * 1.46.0    2026-04-09 [1] CRAN (R 4.5.3)
+ rlang             1.3.0     2026-07-05 [1] CRAN (R 4.5.3)
+ rmarkdown         2.31      2026-03-26 [1] CRAN (R 4.5.3)
+ rms             * 8.1-1     2026-02-18 [1] CRAN (R 4.5.2)
+ rootSolve         1.8.2.4   2023-09-21 [1] CRAN (R 4.5.1)
+ rpart             4.1.27    2026-03-27 [1] CRAN (R 4.5.3)
+ rprojroot         2.1.1     2025-08-26 [1] CRAN (R 4.5.1)
+ rstudioapi        0.19.0    2026-06-11 [1] CRAN (R 4.5.3)
+ S7                0.2.2     2026-04-22 [1] CRAN (R 4.5.3)
+ sandwich          3.1-1     2024-09-15 [1] CRAN (R 4.5.1)
+ scales            1.4.0     2025-04-24 [1] CRAN (R 4.5.1)
+ sessioninfo     * 1.2.4     2026-06-04 [1] CRAN (R 4.5.3)
+ simsurv           1.0.1     2026-01-22 [1] CRAN (R 4.5.3)
+ SparseM           1.84-2    2024-07-17 [1] CRAN (R 4.5.1)
+ stringi           1.8.7     2025-03-27 [1] CRAN (R 4.5.2)
+ stringr         * 1.6.0     2025-11-04 [1] CRAN (R 4.5.2)
+ survival        * 3.8-6     2026-01-16 [1] CRAN (R 4.5.2)
+ tables            0.9.35    2026-06-04 [1] CRAN (R 4.5.3)
+ TH.data           1.1-5     2025-11-17 [1] CRAN (R 4.5.2)
+ tibble          * 3.3.1     2026-01-11 [1] CRAN (R 4.5.2)
+ tidygraph         1.3.0     2023-12-18 [1] CRAN (R 4.5.1)
+ tidyr           * 1.3.2     2025-12-19 [1] CRAN (R 4.5.2)
+ tidyselect        1.2.1     2024-03-11 [1] CRAN (R 4.5.1)
+ tidyverse       * 2.0.0     2023-02-22 [1] CRAN (R 4.5.1)
+ timechange        0.4.0     2026-01-29 [1] CRAN (R 4.5.2)
+ tinyplot        * 0.6.1     2026-03-28 [1] CRAN (R 4.5.3)
+ tinytable         0.16.0    2026-02-11 [1] CRAN (R 4.5.2)
+ tweenr            2.0.3     2024-02-26 [1] CRAN (R 4.5.1)
+ tzdb              0.5.0     2025-03-15 [1] CRAN (R 4.5.1)
+ utf8              1.2.6     2025-06-08 [1] CRAN (R 4.5.1)
+ V8                8.2.0     2026-04-21 [1] CRAN (R 4.5.3)
+ vctrs             0.7.3     2026-04-11 [1] CRAN (R 4.5.3)
+ viridis           0.6.5     2024-01-29 [1] CRAN (R 4.5.1)
+ viridisLite       0.4.3     2026-02-04 [1] CRAN (R 4.5.2)
+ visNetwork        2.1.4     2025-09-04 [1] CRAN (R 4.5.1)
+ WeightIt        * 1.7.0     2026-04-22 [1] CRAN (R 4.5.3)
+ withr             3.0.3     2026-06-19 [1] CRAN (R 4.5.3)
+ xfun              0.59      2026-06-19 [1] CRAN (R 4.5.3)
+ yaml              2.3.12    2025-12-10 [1] CRAN (R 4.5.2)
+ zoo               1.8-15    2025-12-15 [1] CRAN (R 4.5.2)
 
  [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library
  * ── Packages attached to the search path.
@@ -1440,9 +1780,9 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
  TRE            TRE 0.8.0 R_fixes (BSD)
  iconv          GNU libiconv 1.18
  readline       8.3
- BLAS           /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so
- lapack         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libopenblasp-r0.3.33.so
- lapack_version 3.12.0
+ BLAS           /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libmkl_rt.so.2
+ lapack         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/libmkl_rt.so.2
+ lapack_version 3.12.1
 
 ─ Python configuration ───────────────────────────────────────────────────────
  python:         /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/python
@@ -1457,6 +1797,16 @@ ca_diff  | 4.48 | 2.18 | 2.92 | [-2.89, 13.03] |     0.15 |     0.13 | 6000 |   
 ──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>
 </div>
+</section>
+<section id="thank-you-for-your-listening" class="slide level2">
+<h2>Thank you for your listening !!</h2>
+</section>
+<section id="おまけ" class="slide level2">
+<h2>おまけ</h2>
+<ul>
+<li>もしも治療効果が一定だったとしてCausal forestにかける</li>
+<li>実際は・・・・・・</li>
+</ul>
 
 
 </section></section>
