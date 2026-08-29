@@ -1,0 +1,23 @@
+[workspace]
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["linux-64"]
+preview = ["pixi-build"]
+
+[package]
+name = "r-aipw"
+version = "0.6.9.3"
+
+[package.build.backend]
+name = "pixi-build-r"
+version = "*"
+channels = [
+  "https://prefix.dev/pixi-build-backends",
+  "https://prefix.dev/conda-forge",
+]
+
+[package.build.config]
+compilers = []
+
+[package.host-dependencies]
+r-base = ">=4.5,<4.6"
+

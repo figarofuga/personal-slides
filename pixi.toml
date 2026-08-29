@@ -127,6 +127,7 @@ r-rlang = ">=1.3.0,<2"
 arf = ">=0.4.5,<0.5"
 r-aipw = { path = "vendor/AIPW" }
 r-dbarts = ">=0.9_33,<0.10"
+r-predieval = { path = "vendor/predieval" }
 [activation.env]
 RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_USE_MANAGED_VENV = "no"
