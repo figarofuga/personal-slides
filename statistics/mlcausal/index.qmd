@@ -716,9 +716,11 @@ D_i &= m_0(X_i) + V_i,
 - 95％信頼区間も計算可能
 - Policy treeやBest linear projectionなどで解釈も可能
 
-## どれがいいの？
+# Model作成の実務
 
-- ATEの場合はmeta-learnerでも良い
+## 結局どれがいいの？
+
+- ATEの場合はmeta-learnerでも良いがCausal forestでも別に良い
 - HTEの場合はCausal forestが現実的に最も良い
 
 ## Overfittingを避けるために
@@ -726,17 +728,74 @@ D_i &= m_0(X_i) + V_i,
 - 簡単に言うとCross validationを組み合わせる
 - Causal forestの場合は、分岐を決めるデータセットと、そこで得られる治療効果を分ける"honesty"という概念が独特
 
+## モデルの評価の仕方の概論
+
+
+- ModelをBlackboxから出す: ICE, PDP, SHAPなど
+  - Tree Interpreter
+- Modelの性能の評価
+  - Discrimination, Calibrationなど
+- モデルの有用性
+  - Policy tree
+
+## ModelをBlackboxから出す
+<!-- Todo: 作る -->
+
 ## モデルの評価の仕方
 
 - 通常のモデルと一緒で独立したtest datasetを用意しておく
 - 診る項目は2種類
   - Discrimination
-    - Ranking方式, AUTOC
-    - Qini係数
+    - GATE, RATE(AUTOC), Qini
   - Calibration
     - best linear predictionの係数
 
-## Discrimination
+## Meta-learnerの場合
+
+- Outcome modelを用いる場合は通常の機械学習モデルと同じ
+  - Discrimination(AUROC)
+  - Calibration(Calibration plot)　など
+
+## CATEを図るモデル評価の難しさ
+
+- 通常のモデルの評価方法は"正解"に対して、どの程度予測値が迫っているかを比べる
+- 一方で、因果推論モデルの場合は個人レベルの"正解(Individual treatment effects)"は決して分からない
+- その為、【ある程度の一貫性】を診たり、【ある群でのATE】を"正解ラベル"として比較している
+
+## Discrimination ~ GATES
+
+- 各人で予想した治療効果を順番に並べる
+- 5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)
+- 各々の群を一つのデータセットとして別個にATEを出す(真値)
+- 実際にランキング通りかどうかを比べる
+
+## Discrimination ~ RATES
+
+- Rankingを連続的に見ていく閾値
+- 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
+
+## AUTOC(Targeting operator curve)とQini係数
+
+- Rankingを連続的に見ていく閾値
+- 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
+- 横軸にn%、縦軸にこのBenefitの値を並べて面積をとる
+- どちらかというと妥当性を診ているイメージ
+
+## Best linear prediction
+
+- 予測されるITE ~ 予測値 + Propensity score + 誤差項として回帰させたもの
+- 予測値への係数が1であれば良い
+
+## Calibration
+
+- GATESのようにランキングにしてGroup毎でのATEとのCalibration plot
+
+
+## 実務において
+
+- Pythonだと`econml`のDRTester
+- Rだと`grf`で可能
+
 
 ## 機械学習
 
@@ -1067,7 +1126,8 @@ dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |>
 
 ## Modification因子と治療効果
 
-::: panel-tabset
+::: {.panel-tabset}
+
 ## ATE
 
 ```{r}
@@ -1133,11 +1193,14 @@ dplyr::select(full_toy_data, age, bnp, bmi, lvef, ite_rd_bin) |>
     cols = -ite_rd_bin,
     names_to = "name",
     values_to = "value"
-  ) |>
+  ) |> 
+  dplyr::mutate(ite_rd_bin = -ite_rd_bin) |> 
   tinyplot::plt(
     ite_rd_bin ~ value, facet = ~ name, 
     type = type_loess(),
+    draw = abline(h = 0, lty = 2, col = "black"),
     facet.args = list(free = TRUE),
+    ylim = c(-0.2, 0.3),
     data = _
   )
 
@@ -1154,11 +1217,11 @@ full_toy_data |>
   dplyr::select(sexm1, age, lvef, ite_rd_bin) |> 
   dplyr::mutate(
     sexm1 = if_else(sexm1 == 1, "Male", "Female"),
-    age_cat = base::cut(age, breaks = seq(30, 100, 10)), 
-    lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10))
+    age_cat = base::cut(age, breaks = seq(30, 100, 10), labels = c("30s", "40s", "50s", "60s", "70s", "80s", "90s")), 
+    lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10), labels = c("20s%", "30s%", "40s%", "50s%", "60s%", "70s%"))
     ) |> 
   dplyr::summarise(
-    mean_trt_eff = mean(ite_rd_bin), 
+    mean_trt_eff = mean(-ite_rd_bin), 
     .by = c(age_cat, lvef_cat, sexm1)
   ) |> 
   ggplot(aes(x = age_cat, y = lvef_cat, fill = mean_trt_eff)) +
@@ -1179,7 +1242,8 @@ full_toy_data |>
 
 ## Meta-learners
 
-::: panel-tabset
+::: {.panel-tabset}
+
 ## S-learner
 
 ```{python}
@@ -1189,23 +1253,9 @@ full_toy_data |>
 import numpy as np
 import pandas as pd
 from econml.metalearners import SLearner
-from sklearn.base import BaseEstimator, RegressorMixin, clone
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.model_selection import train_test_split
-
-# EconML の SLearner は overall_model.predict() を呼ぶ。
-# 分類器の 1 クラス確率を predict() から返す adapter を用意する。
-class ClassifierAsProbabilityRegressor(RegressorMixin, BaseEstimator):
-    def __init__(self, classifier):
-        self.classifier = classifier
-
-    def fit(self, X, y):
-        self.classifier_ = clone(self.classifier)
-        self.classifier_.fit(X, y)
-        return self
-
-    def predict(self, X):
-        return self.classifier_.predict_proba(X)[:, 1]
+from xgboost import XGBRegressor
 
 
 toy_data = r.toy_data.copy()
@@ -1224,15 +1274,23 @@ X_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(
     stratify=strata,
 )
 
-outcome_model = ClassifierAsProbabilityRegressor(
-    HistGradientBoostingClassifier(
-        learning_rate=0.05,
-        max_iter=200,
-        max_leaf_nodes=15,
-        min_samples_leaf=30,
-        l2_regularization=1.0,
-        random_state=123,
-    )
+xgb_binary_params = {
+    "objective": "binary:logistic",
+    "eval_metric": "logloss",
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "min_child_weight": 10,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1.0,
+    "random_state": 123,
+    "n_jobs": -1,
+}
+
+# objective="binary:logistic" では predict() が P(Y=1 | X, T) を返す
+outcome_model = XGBRegressor(
+    **xgb_binary_params,
 )
 
 s_learner = SLearner(overall_model=outcome_model)
@@ -1265,15 +1323,8 @@ print(f"ATE in test set (risk difference): {s_cate_rd.mean():.3f}")
 
 from econml.metalearners import TLearner
 
-t_outcome_model = ClassifierAsProbabilityRegressor(
-    HistGradientBoostingClassifier(
-        learning_rate=0.05,
-        max_iter=200,
-        max_leaf_nodes=15,
-        min_samples_leaf=30,
-        l2_regularization=1.0,
-        random_state=123,
-    )
+t_outcome_model = XGBRegressor(
+    **xgb_binary_params,
 )
 
 # T=0 と T=1 で別々の outcome model を学習する
@@ -1305,15 +1356,8 @@ print(f"ATE in test set (risk difference): {t_cate_rd.mean():.3f}")
 from econml.metalearners import XLearner
 from sklearn.ensemble import HistGradientBoostingRegressor
 
-x_outcome_model = ClassifierAsProbabilityRegressor(
-    HistGradientBoostingClassifier(
-        learning_rate=0.05,
-        max_iter=200,
-        max_leaf_nodes=15,
-        min_samples_leaf=30,
-        l2_regularization=1.0,
-        random_state=123,
-    )
+x_outcome_model = XGBRegressor(
+    **xgb_binary_params,
 )
 
 # imputed treatment effect（連続値）を学習するための回帰モデル
@@ -1354,10 +1398,69 @@ x_effect_df = pd.DataFrame({
 
 print(x_effect_df.head())
 print(f"ATE in test set (risk difference): {x_cate_rd.mean():.3f}")
+
 ```
 
 - X-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する
 - 最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する
+
+## R-learner
+
+```{python}
+#| label: r-learner-binary
+#| echo: true
+
+from econml.dml import NonParamDML
+
+r_learner = NonParamDML(
+    model_y=HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    model_t=HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=150,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    model_final=HistGradientBoostingRegressor(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    discrete_outcome=True,
+    discrete_treatment=True,
+    cv=5,
+    random_state=123,
+)
+
+# NonParamDML implements the R-learner residual-on-residual objective.
+r_learner.fit(Y_train, T_train, X=X_train)
+
+r_cate_rd = np.asarray(
+    r_learner.effect(X_test, T0=0, T1=1)
+).reshape(-1)
+
+r_effect_df = pd.DataFrame({
+    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
+    "cate_rd": r_cate_rd,
+})
+
+print(r_effect_df.head())
+print(f"ATE in test set (risk difference): {r_cate_rd.mean():.3f}")
+```
+
+- R-learnerはoutcomeとtreatmentをcross-fittingで残差化し、残差同士の関係からCATEを学習する
+- `NonParamDML` の非線形final modelにより、HTEを柔軟に表現する
 
 ## DR-learner
 
@@ -1413,19 +1516,27 @@ dr_effect_df = pd.DataFrame({
 print(dr_effect_df.head())
 print(f"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}")
 
-# 4つのlearnerを同じtest setで比較する
+# 5つのlearnerを同じtest setで比較する
 learner_summary = pd.DataFrame({
-    "learner": ["S", "T", "X", "DR"],
+    "learner": [
+        "S-learner",
+        "T-learner",
+        "X-learner",
+        "R-learner",
+        "DR-learner",
+    ],
     "ate_rd": [
         s_cate_rd.mean(),
         t_cate_rd.mean(),
         x_cate_rd.mean(),
+        r_cate_rd.mean(),
         dr_cate_rd.mean(),
     ],
     "cate_sd": [
         s_cate_rd.std(ddof=1),
         t_cate_rd.std(ddof=1),
         x_cate_rd.std(ddof=1),
+        r_cate_rd.std(ddof=1),
         dr_cate_rd.std(ddof=1),
     ],
 })
@@ -1444,151 +1555,508 @@ print(learner_summary.round(3))
 #| label: causal-forest
 
 library(grf)
+library(partykit)
 library(policytree)
 
-causal_forest_bin <- grf::causal_forest(
-  X = subset(toy_data, select=c("age", "sexm1", "bmi", "hf", "bnp", "lvef")),
-  Y = toy_data$bin_outcome, 
-  W = toy_data$ca
+policy_X <- subset(
+  toy_data,
+  select = c("age", "sexm1", "bmi", "hf", "bnp", "lvef")
 )
 
-dplyr::bind_cols(
-  toy_data, 
-  predict(causal_forest_bin, estimate.variance = TRUE)
-) |> tibble::as_tibble()
+causal_forest_bin <- grf::causal_forest(
+  X = policy_X,
+  Y = toy_data$bin_outcome, 
+  W = toy_data$ca, 
+  honesty = TRUE, 
+  seed = 42
+)
 
 dr.scores <- double_robust_scores(causal_forest_bin)
 
 head(dr.scores)
 
-# Fit a depth-2 tree on the doubly robust scores.
-tree <- policy_tree(subset(toy_data, select=c("age", "sexm1", "bmi", "hf", "bnp", "lvef")), dr.scores, depth = 2)
+interpret_dat <- dplyr::mutate(
+  toy_data, 
+  tau_hat = predict(causal_forest_bin)$prediction
+) |> tibble::as_tibble()
 
-# Print and plot the tree - action 1 corresponds to control, and 2 treated.
-print(tree)
-plot(tree, leaf.label = c("Control", "CA"))
-
-```
-
-## 男女差、LVEF、Cr等との治療効果
-
-```{python}
-#| label: S-learner
-
-from econml.metalearners import SLearner
-import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestRegressor
-import pandas as pd
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.model_selection import train_test_split
-
-toy_data = r.toy_data
-
-X = toy_data.loc[:,["age", "sexm1", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data['afeqt_os']
-T = toy_data['ca']
-n = toy_data.shape[0]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42,
-    stratify=T
-    )
-
-T_train = T.loc[y_train.index]
-T_test = T.loc[y_test.index]
-
-# Instantiate S learner
-overall_model = GradientBoostingRegressor(n_estimators=100, max_depth=6, min_samples_leaf=int(491/100))
-S_learner = SLearner(overall_model=overall_model)
-# Train S_learner
-S_learner.fit(y_train, T_train, X=X_train)
-# Estimate treatment effects on test data
-S_te = S_learner.effect(X_test)
-
-print(S_te)
-
-```
-
-## HTEとPolicy tree
-
-```{python}
-
-from econml.cate_interpreter import SingleTreeCateInterpreter
-
-intrp = SingleTreeCateInterpreter(
-    include_model_uncertainty=False, max_depth=2, min_samples_leaf=10
+surrogate_tree <- partykit::ctree(
+  tau_hat ~ age + sexm1 + bmi + hf + bnp + lvef, 
+  data = interpret_dat, 
+  control = ctree_control(maxdepth = 3)
 )
-# We interpret the CATE model's behavior based on the features used for heterogeneity
-intrp.interpret(dr_learner, X)
-# Plot the tree
-intrp.plot(feature_names=["age", "sexm1", "bmi", "hf", "bnp", "lvef"], fontsize=12)
 
-```
+plot(surrogate_tree)
 
-## Survival model
-
-```{r}
-library(rms)
-library(Hmisc)
-
-dd <- datadist(toy_data)
-
-options(datadist = "dd")
-
-simple_surv_fit <- npsurv(Surv(eventtime, status) ~ ca, data = toy_data)
-
-survplot(simple_surv_fit)
-
-```
-
-```{r}
-#| label: survival-model
-
-library(tidyverse)
-library(survival)
-library(grf)
-library(policytree)
-
-
-survfit_grf <- grf::causal_survival_forest(
-  X = toy_data[, c("age", "sexm1", "bmi", "hf", "bnp", "lvef")],
-  Y = toy_data$eventtime,
+# Policy learning uses a favorable outcome: 1 means event-free.
+# This makes a larger reward correspond to a more desirable outcome.
+causal_forest_policy <- grf::causal_forest(
+  X = policy_X,
+  Y = toy_data$bin_event_free,
   W = toy_data$ca,
-  D = toy_data$status,
-  target = "RMST",
-  horizon = 365*5,
-  num.trees = 500
-  )
+  honesty = TRUE,
+  seed = 42
+)
 
-Gamma.matrix <- double_robust_scores(survfit_grf)
+policy_scores <- policytree::double_robust_scores(causal_forest_policy)
 
-head(Gamma.matrix)
-
-surv_tree <- policytree::policy_tree(
-  toy_data[, c("age", "sexm1", "bmi", "hf", "bnp", "lvef")],
-  Gamma.matrix,
+# Fit a depth-2 tree on the event-free rewards.
+tree <- policytree::policy_tree(
+  policy_X,
+  policy_scores,
   depth = 2
 )
 
-# plot(surv_tree, leaf.labels = c("Observation", "Chemotherapy"))
-
-# base plot は knitr が各出力形式向けに自動処理する
-
-
-plot(surv_tree, leaf.labels = c("Observation", "Catheter ablation"))
-# cat(DiagrammeRsvg::export_svg(surv_tree_plot), file = here::here("images", 'treeplot.svg'))
+# Print and plot the tree - action 1 corresponds to control, and 2 treated.
+print(tree)
+plot(tree, leaf.labels = c("Control", "CA"))
 
 ```
 
-<!-- ![Treeplot](images/treeplot.svg) -->
+
+```{r}
+library(grf)
+
+rate_AUTOC <- grf::rank_average_treatment_effect(causal_forest_bin, 
+predict(causal_forest_bin)$predictions, 
+target = "AUTOC"
+)
+
+rate_QINI <- grf::rank_average_treatment_effect(causal_forest_bin, 
+predict(causal_forest_bin)$predictions, 
+target = "QINI"
+)
+
+plot(rate_AUTOC)
+plot(rate_QINI)
+
+```
+
+## CATEモデルを説明する
+
+```{r}
+#| label: prepare-cate-explanations
+#| include: false
+
+library(dplyr)
+library(ggplot2)
+library(kernelshap)
+library(patchwork)
+library(reticulate)
+library(shapviz)
+
+# All models are explained on the same scale:
+# positive values mean that CA reduces the event risk.
+explain_X <- as.data.frame(policy_X)
+
+predict_meta_benefit <- function(object, newdata) {
+  py_newdata <- reticulate::r_to_py(as.data.frame(newdata))
+  -as.numeric(object$effect(X = py_newdata, T0 = 0L, T1 = 1L))
+}
+
+predict_grf_benefit <- function(object, newdata) {
+  as.numeric(
+    predict(object, newdata = as.data.frame(newdata))$predictions
+  )
+}
+
+model_specs <- list(
+  list(
+    name = "EconML S-learner",
+    object = reticulate::py$s_learner,
+    pred_fun = predict_meta_benefit
+  ),
+  list(
+    name = "EconML X-learner",
+    object = reticulate::py$x_learner,
+    pred_fun = predict_meta_benefit
+  ),
+  list(
+    name = "EconML R-learner",
+    object = reticulate::py$r_learner,
+    pred_fun = predict_meta_benefit
+  ),
+  list(
+    name = "EconML DR-learner",
+    object = reticulate::py$dr_learner,
+    pred_fun = predict_meta_benefit
+  ),
+  list(
+    name = "GRF causal forest",
+    object = causal_forest_policy,
+    pred_fun = predict_grf_benefit
+  )
+)
+
+explain_features <- c("age", "lvef", "bnp")
+feature_labels <- c(
+  age = "Age",
+  lvef = "LVEF (%)",
+  bnp = "BNP"
+)
+
+set.seed(20260903)
+reference_X <- explain_X |>
+  dplyr::slice_sample(n = min(500L, nrow(explain_X)))
+ice_X <- reference_X |>
+  dplyr::slice_sample(n = min(20L, nrow(reference_X)))
+
+make_effect_curves <- function(spec) {
+  pdp_list <- vector("list", length(explain_features))
+  ice_list <- vector("list", length(explain_features))
+
+  for (j in seq_along(explain_features)) {
+    feature <- explain_features[[j]]
+    feature_grid <- seq(
+      quantile(reference_X[[feature]], 0.05, na.rm = TRUE),
+      quantile(reference_X[[feature]], 0.95, na.rm = TRUE),
+      length.out = 25L
+    )
+
+    pdp_newdata <- reference_X[
+      rep(seq_len(nrow(reference_X)), times = length(feature_grid)),
+      ,
+      drop = FALSE
+    ]
+    pdp_newdata[[feature]] <- rep(
+      feature_grid,
+      each = nrow(reference_X)
+    )
+    pdp_prediction <- spec$pred_fun(spec$object, pdp_newdata)
+
+    pdp_list[[j]] <- tibble::tibble(
+      model = spec$name,
+      feature = feature_labels[[feature]],
+      value = feature_grid,
+      hte = vapply(
+        split(
+          pdp_prediction,
+          rep(seq_along(feature_grid), each = nrow(reference_X))
+        ),
+        mean,
+        numeric(1L)
+      )
+    )
+
+    ice_newdata <- ice_X[
+      rep(seq_len(nrow(ice_X)), times = length(feature_grid)),
+      ,
+      drop = FALSE
+    ]
+    ice_newdata[[feature]] <- rep(
+      feature_grid,
+      each = nrow(ice_X)
+    )
+
+    ice_list[[j]] <- tibble::tibble(
+      model = spec$name,
+      feature = feature_labels[[feature]],
+      id = rep(seq_len(nrow(ice_X)), times = length(feature_grid)),
+      value = rep(feature_grid, each = nrow(ice_X)),
+      hte = spec$pred_fun(spec$object, ice_newdata)
+    )
+  }
+
+  list(
+    pdp = dplyr::bind_rows(pdp_list),
+    ice = dplyr::bind_rows(ice_list)
+  )
+}
+
+effect_curves <- lapply(model_specs, make_effect_curves)
+feature_order <- unname(feature_labels[explain_features])
+pdp_data <- dplyr::bind_rows(lapply(effect_curves, `[[`, "pdp")) |>
+  dplyr::mutate(feature = factor(feature, levels = feature_order))
+ice_data <- dplyr::bind_rows(lapply(effect_curves, `[[`, "ice")) |>
+  dplyr::mutate(feature = factor(feature, levels = feature_order))
+
+model_colors <- c(
+  "EconML S-learner" = "#59A14F",
+  "EconML X-learner" = "#F28E2B",
+  "EconML R-learner" = "#B07AA1",
+  "EconML DR-learner" = "#E15759",
+  "GRF causal forest" = "#4E79A7"
+)
+
+pdp_plot <- ggplot(
+  pdp_data,
+  aes(x = value, y = hte, color = model)
+) +
+  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  geom_line(linewidth = 1.1) +
+  facet_wrap(~feature, scales = "free_x", nrow = 1) +
+  scale_color_manual(values = model_colors) +
+  labs(
+    x = NULL,
+    y = "Estimated HTE: risk reduction",
+    color = NULL
+  ) +
+  theme_bw(base_size = 11) +
+  theme(legend.position = "bottom")
+
+ice_plot <- ggplot(
+  ice_data,
+  aes(x = value, y = hte, group = interaction(model, id), color = model)
+) +
+  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  geom_line(alpha = 0.10, linewidth = 0.3) +
+  geom_line(
+    data = pdp_data,
+    aes(x = value, y = hte, color = model, group = model),
+    linewidth = 1.2,
+    alpha = 1
+  ) +
+  facet_wrap(~feature, scales = "free_x", nrow = 1) +
+  scale_color_manual(values = model_colors) +
+  labs(
+    x = NULL,
+    y = "Estimated HTE: risk reduction"
+  ) +
+  theme_bw(base_size = 10) +
+  theme(legend.position = "bottom")
+
+# Model-agnostic, exact Kernel SHAP. The same rows and background sample
+# are used for every model to make their global explanations comparable.
+shap_X <- explain_X |>
+  dplyr::slice_sample(n = min(40L, nrow(explain_X)))
+background_X <- explain_X |>
+  dplyr::slice_sample(n = min(30L, nrow(explain_X)))
+
+shap_objects <- lapply(model_specs, function(spec) {
+  kernelshap::kernelshap(
+    spec$object,
+    X = shap_X,
+    bg_X = background_X,
+    pred_fun = spec$pred_fun,
+    exact = TRUE,
+    verbose = FALSE
+  ) |>
+    shapviz::shapviz()
+})
+names(shap_objects) <- vapply(model_specs, `[[`, character(1L), "name")
+
+shap_feature_labels <- c(
+  age = "Age",
+  sexm1 = "Sex (male)",
+  bmi = "BMI",
+  hf = "Heart failure",
+  bnp = "BNP",
+  lvef = "LVEF"
+)
+
+relabel_shap <- function(x) {
+  colnames(x$S) <- unname(shap_feature_labels[colnames(x$S)])
+  names(x$X) <- unname(shap_feature_labels[names(x$X)])
+  x
+}
+
+shap_objects <- lapply(shap_objects, relabel_shap)
+
+shap_plots <- Map(function(x, model_name) {
+  shapviz::sv_importance(
+    x,
+    kind = "beeswarm",
+    max_display = 6,
+    alpha = 0.65,
+    size = 1
+  ) +
+    labs(
+      title = model_name,
+      x = "SHAP value for risk reduction"
+    ) +
+    theme_bw(base_size = 8) +
+    theme(plot.title = element_text(size = 9))
+}, shap_objects, names(shap_objects))
+
+shap_plot <- patchwork::wrap_plots(
+  shap_plots,
+  ncol = 3,
+  guides = "collect"
+) &
+  theme(legend.position = "bottom")
+```
+
+::: {.panel-tabset}
+
+### PDP
+
+```{r}
+#| label: plot-cate-pdp
+#| fig-width: 10
+#| fig-height: 4.8
+#| out-width: 100%
+
+pdp_plot
+```
+
+### ICE
+
+```{r}
+#| label: plot-cate-ice
+#| fig-width: 10
+#| fig-height: 5.2
+#| out-width: 100%
+
+ice_plot
+```
+
+### Global SHAP
+
+```{r}
+#| label: plot-cate-shap
+#| fig-width: 10
+#| fig-height: 5.2
+#| out-width: 100%
+
+shap_plot
+```
+
+:::
+
+## EconMLモデルをSingle Treeで説明
+
+```{python}
+#| label: prepare-single-tree-interpreters
+#| include: false
+
+import matplotlib.pyplot as plt
+from econml.cate_interpreter import SingleTreeCateInterpreter
+
+
+class BenefitCateWrapper:
+    """Expose CATE as risk reduction so that larger values mean more benefit."""
+
+    def __init__(self, estimator):
+        self.estimator = estimator
+
+    def const_marginal_effect(self, X):
+        return -np.asarray(self.estimator.const_marginal_effect(X))
+
+
+econml_models = {
+    "S-learner": s_learner,
+    "T-learner": t_learner,
+    "X-learner": x_learner,
+    "R-learner": r_learner,
+    "DR-learner": dr_learner,
+}
+
+# Use the same held-out subjects for every surrogate tree.
+tree_X = X_test.loc[:, feature_names].copy()
+tree_min_leaf = max(10, int(np.ceil(0.05 * len(tree_X))))
+single_tree_interpreters = {}
+single_tree_fidelity = {}
+
+for model_name, cate_model in econml_models.items():
+    benefit_model = BenefitCateWrapper(cate_model)
+    interpreter = SingleTreeCateInterpreter(
+        include_model_uncertainty=False,
+        max_depth=3,
+        min_samples_leaf=tree_min_leaf,
+        random_state=123,
+    )
+    interpreter.interpret(benefit_model, tree_X)
+
+    benefit_cate = benefit_model.const_marginal_effect(tree_X)
+    benefit_cate = benefit_cate.reshape((len(tree_X), -1))
+    fidelity = interpreter.tree_model_.score(tree_X, benefit_cate)
+
+    single_tree_interpreters[model_name] = interpreter
+    single_tree_fidelity[model_name] = fidelity
+
+
+def plot_single_tree(model_name):
+    fig, ax = plt.subplots(figsize=(12, 5.8))
+    single_tree_interpreters[model_name].plot(
+        ax=ax,
+        title=(
+            f"{model_name}: depth-3 CATE surrogate "
+            f"(R² = {single_tree_fidelity[model_name]:.2f})"
+        ),
+        feature_names=feature_names,
+        treatment_names=["CA risk reduction"],
+        max_depth=3,
+        filled=True,
+        rounded=True,
+        precision=3,
+        fontsize=7,
+    )
+    fig.tight_layout()
+    plt.show()
+```
+
+::: {.small}
+各ノードの `value` は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じtest setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。
+:::
+
+::: {.panel-tabset}
+
+### S-learner
+
+```{python}
+#| label: plot-single-tree-s
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5.8
+#| out-width: 100%
+
+plot_single_tree("S-learner")
+```
+
+### T-learner
+
+```{python}
+#| label: plot-single-tree-t
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5.8
+#| out-width: 100%
+
+plot_single_tree("T-learner")
+```
+
+### X-learner
+
+```{python}
+#| label: plot-single-tree-x
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5.8
+#| out-width: 100%
+
+plot_single_tree("X-learner")
+```
+
+### R-learner
+
+```{python}
+#| label: plot-single-tree-r
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5.8
+#| out-width: 100%
+
+plot_single_tree("R-learner")
+```
+
+### DR-learner
+
+```{python}
+#| label: plot-single-tree-dr
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5.8
+#| out-width: 100%
+
+plot_single_tree("DR-learner")
+```
+
+:::
+
 
 ```{r}
 library(sessioninfo)
-sessioninfo::session_info(info = "all")
+sessioninfo::session_info()
 ```
 
 ## Thank you for your listening !!

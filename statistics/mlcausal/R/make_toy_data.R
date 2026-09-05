@@ -280,6 +280,11 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   )
   bin_outcome <- rbinom(n, size = 1, prob = p_bin_outcome)
 
+  # Utility outcome for policy learning: 1 means that the adverse event
+  # represented by bin_outcome did not occur. Keeping this as a separate
+  # column preserves the usual event-risk interpretation of bin_outcome.
+  bin_event_free <- 1L - bin_outcome
+
   younger_age_benefit <- pmax(65 - age, 0) / 10
 
   afeqt_treatment_effect <-
@@ -356,6 +361,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     p_bin_outcome_a1 = p_bin_outcome_a1,
     p_bin_outcome = p_bin_outcome,
     bin_outcome = bin_outcome,
+    bin_event_free = bin_event_free,
     afeqt_treatment_effect = afeqt_treatment_effect,
     afeqt_mean_a0 = afeqt_mean_a0,
     afeqt_mean_a1 = afeqt_mean_a1,
@@ -456,6 +462,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     palpitation,
     ca,
     bin_outcome,
+    bin_event_free,
     bin_outcome_no_hte,
     afeqt_treatment_effect,
     afeqt_os,

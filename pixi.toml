@@ -127,7 +127,13 @@ r-rlang = ">=1.3.0,<2"
 arf = ">=0.4.5,<0.5"
 r-aipw = { path = "vendor/AIPW" }
 r-dbarts = ">=0.9_33,<0.10"
+r-stochtree = { path = "vendor/stochtree" }
 r-predieval = { path = "vendor/predieval" }
+r-dalex = ">=2.5.4,<3"
+r-shapviz = ">=0.10.4,<0.11"
+dalex = ">=1.7.0,<2"
+r-kernelshap = ">=0.9.1,<0.10"
+r-partykit = ">=1.2_29,<2"
 [activation.env]
 RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_USE_MANAGED_VENV = "no"

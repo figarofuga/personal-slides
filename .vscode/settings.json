@@ -30,5 +30,6 @@
     "r.lsp.diagnostics": false,
     "r.bracketedPaste": true,
 
-    "positron.r.diagnostics.enable": false
+    "positron.r.diagnostics.enable": false, 
+    "quarto.symbols.showCodeCellsInOutline": false
 }
