@@ -101,7 +101,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add progress MLcausal"
+git commit -m "Add evalITR package"
 git push
 
 ```

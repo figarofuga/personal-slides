@@ -1,0 +1,29 @@
+export(bartc)
+export(refit)
+export(plot_sigma, plot_est, plot_indiv, plot_support)
+
+S3method(summary, bartcFit)
+S3method(print, bartcFit)
+S3method(print, bartcFit.summary)
+S3method(fitted, bartcFit)
+S3method(predict, bartcFit)
+S3method(extract, bartcFit)
+S3method(refit, bartcFit)
+
+importFrom(dbarts, bart2, guessNumCores, xbart, extract)
+export(extract)
+
+importFrom(methods, "slot<-")
+importFrom(stats, glm, binomial, fitted, predict, sd)
+importFrom(stats, plogis, pnorm, qlogis, qnorm, qchisq)
+importFrom(stats, runif, rbinom, rnorm)
+importFrom(stats, quantile, setNames, coef)
+
+importFrom(graphics, abline, hist, lines, plot)
+importFrom(graphics, legend, mtext, par, points, polygon)
+
+importFrom(parallel, makeCluster, clusterExport, clusterEvalQ, clusterApply, stopCluster)
+
+importFrom(utils, tail)
+importFrom(grDevices, rgb)
+

@@ -138,6 +138,8 @@ dalex = ">=1.7.0,<2"
 r-kernelshap = ">=0.9.1,<0.10"
 r-partykit = ">=1.2_29,<2"
 deno = ">=2.4.5,<2.5"
+r-evalitr = { path = "vendor/evalITR" }
+r-bartcause = { path = "vendor/bartCause" }
 [activation.env]
 RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_USE_MANAGED_VENV = "no"
