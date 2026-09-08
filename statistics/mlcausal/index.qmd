@@ -30,6 +30,7 @@ knitr:
   opts_chunk: 
     dev: svglite
     fig-format: svg
+bibliography: references.bib
 date: "2026-08-01"
 ---
 
@@ -40,35 +41,98 @@ date: "2026-08-01"
 #| include: false
 
 library(sessioninfo)
-library(reticulate)
 library(here)
+library(targets)
 
-# reticulate::use_python(
-#   here::here(".pixi", "envs", "default", "bin", "python"),
-#   required = TRUE
-# )
+mlcausal_store <- here::here(
+  "statistics",
+  "mlcausal",
+  "_targets"
+)
 
-reticulate::py_config()
-
-source(
-  here::here(
-    "statistics",
-    "mlcausal",
-    "R",
-    "make_toy_data.R"
+targets::tar_load(
+  c(
+    toy_data,
+    full_toy_data,
+    ate_rd_summary,
+    subclassification_result,
+    matching_result,
+    weighting_result,
+    aipw_result,
+    tmle_result,
+    orthogonalization_result,
+    meta_learner_effects_file,
+    meta_learner_evaluation_files,
+    meta_explanation_figures,
+    causal_forest_shap,
+    causal_forest_dr_scores,
+    causal_forest_surrogate_tree,
+    policy_tree,
+    rate_results,
+    grf_gate_data,
+    grf_validation_summary,
+    grf_pdp_data,
+    grf_ice_data,
+    grf_cate_shap,
+    s_learner_tree_figure,
+    t_learner_tree_figure,
+    x_learner_tree_figure,
+    r_learner_tree_figure,
+    dr_learner_tree_figure
   ),
-  local = knitr::knit_global()
+  store = mlcausal_store,
+  envir = knitr::knit_global()
 )
 
-toy_objects <- make_toy_data(
-  n = 3000L,
-  seed = 123L
+target_artifact <- function(paths, filename) {
+  matched <- paths[basename(paths) == filename]
+  stopifnot(length(matched) == 1L)
+  unname(matched)
+}
+
+# Python owns the numerical work. R reads the cached CSV/SVG artifacts only
+# for presentation in the slides; no Python object crosses the session boundary.
+meta_learner_effects <- utils::read.csv(meta_learner_effects_file)
+learner_summary <- utils::read.csv(
+  target_artifact(meta_learner_evaluation_files, "meta-validation.csv")
+)
+s_learner_effect <- subset(
+  meta_learner_effects,
+  learner == "S-learner",
+  select = c(id, cate_rd)
+)
+t_learner_effect <- subset(
+  meta_learner_effects,
+  learner == "T-learner",
+  select = c(id, cate_rd)
+)
+x_learner_effect <- subset(
+  meta_learner_effects,
+  learner == "X-learner",
+  select = c(id, cate_rd)
+)
+r_learner_effect <- subset(
+  meta_learner_effects,
+  learner == "R-learner",
+  select = c(id, cate_rd)
+)
+dr_learner_effect <- subset(
+  meta_learner_effects,
+  learner == "DR-learner",
+  select = c(id, cate_rd)
 )
 
-toy_data <- toy_objects$toy_data
-full_toy_data <- toy_objects$full_toy_data
-
-rm(toy_objects)
+meta_gate_figure <- target_artifact(
+  meta_learner_evaluation_files,
+  "meta-gates.svg"
+)
+meta_validation_figure <- target_artifact(
+  meta_learner_evaluation_files,
+  "meta-validation.svg"
+)
+meta_pdp_figure <- target_artifact(meta_explanation_figures, "meta-pdp.svg")
+meta_ice_figure <- target_artifact(meta_explanation_figures, "meta-ice.svg")
+meta_shap_figure <- target_artifact(meta_explanation_figures, "meta-shap.svg")
 
 ```
 
@@ -169,105 +233,48 @@ tidy_dagitty(dag) |>
 ## Stratification
 
 ```{r}
-library(MatchIt)
-library(marginaleffects)
-
-
-data("lalonde")
-
-# PS subclassification for the ATT with 5 subclasses
-s.out <- matchit(treat ~ age + educ + nodegree +
-                    married + re74 + re75,
-                  data = lalonde,
-                  method = "subclass",
-                  subclass = 5, 
-                  estimand = "ATT")
-
-summary(s.out, subclass = TRUE)
-
-
-#Extract matched data
-md <- match_data(s.out)
-
-fitS <- lm(re78 ~ treat * (age + educ + nodegree +
-                    married + re74 + re75),
-           data = md)
-
-avg_comparisons(fitS,
-                variables = "treat",
-                vcov = "HC3",
-                newdata = subset(treat == 1))
+subclassification_result
 
 ```
+
+- Propensity scoreの値を5分位に分けて、各々の層同士で比較して最後に統合する
 
 ## Matching
 
 ```{r}
-library(MatchIt)
-
-m.out1 <- matchit(treat ~ age + educ + race + nodegree +
-                    married + re74 + re75,
-                  data = lalonde,
-                  method = "nearest", 
-                  estimand = "ATT")
-summary(m.out1)
-
-#Extract matched data
-md <- match_data(s.out)
-
-fitM <- lm(re78 ~ treat * (age + educ + nodegree +
-                    married + re74 + re75),
-           data = md, 
-           weights = weights
-           )
-
-avg_comparisons(fitM,
-                variables = "treat",
-                vcov = ~subclass,
-                newdata = subset(treat == 1)                
-                )
-
-
+matching_result
 
 ```
+
+- Propensity scoreが似たものを1:1でMatchingさせる
+- 治療側、コントロール側のどちらに合わせるかでATT, ATUが分かる
+
 
 ## Weighting
 
 ```{r}
-library(WeightIt)
-library(marginaleffects)
-
-W.out <- WeightIt::weightit(treat ~ age + educ + race + nodegree +
-                    married + re74 + re75,
-                  data = lalonde,
-                  method = "glm")
-
-# Fit outcome model
-fitW <- lm_weightit(re78 ~ treat * (age + educ + race + married +
-                                     nodegree + re74 + re75),
-                   data = lalonde, weightit = W.out)
-# G-computation for the treatment effect
-
-marginaleffects::avg_comparisons(fitW, variables = "treat",
-                newdata = subset(treat == 1))
+weighting_result
 ```
+
+- Propensity scoreをベースに色々な重みづけをしてバランスをとる
+- 疑似RCTとするAverate Treatment Overlappingなども可能[@Thomas2020-qe]
+
 :::
 
 ## 通常の回帰モデル
 
-- ただし、これらは基本は「値を基準で固定した上で、treatを0 → 1にした時の平均的な変化」
+- 因果推論の時の王道中の王道
+- ただし、これらは基本は「他の交絡因子の値を固定した上で、treatを0 → 1にした時の平均的な変化」という解釈
+  - 細かいEstimandは指定できない
 - その上で、交絡因子が補正しきれるかは不明
 
 ## 次の手
 
 - 自由度を上げるために、連続値をrestricted cubic splineに入れる
 - 交互作用項を入れる　などなど
-- いずれにせよ、**"人の手で"**モデルを作る必要がある
-
-## さらなる補正
-
 - AIPW, TMLE, orthogonalizationなどでDoubly robustな手法
-- Outcome modelとPropensity modelを用いてDoubly robustにする
+  - Outcome modelとPropensity modelを用いてDoubly robustにする
+- これらのモデルで機械学習を入れることも可能
 
 ## 特殊な手法
 
@@ -276,51 +283,28 @@ marginaleffects::avg_comparisons(fitW, variables = "treat",
 
 ```{r}
 #| label: scratch-for-AIPW
+#| echo: true
+#| eval: false
 
-dat_aipw <- MatchIt::lalonde
+library(AIPW)
+library(SuperLearner) # AIPWからSL.glmを使うために必要
 
-ps_fit <- glm(
-  treat ~ age + educ + race + married + nodegree + re74 + re75,
-  data = dat_aipw,
-  family = binomial()
+lalonde <- MatchIt::lalonde
+W <- lalonde[c("age", "educ", "race", "married", "nodegree", "re74", "re75")]
+
+set.seed(123)
+fit <- AIPW$new(
+  Y = lalonde$re78, A = lalonde$treat, W = W,
+  Q.SL.library = "SL.glm", g.SL.library = "SL.glm",
+  k_split = 5, verbose = FALSE
 )
+fit$fit()
+fit$summary()
+fit$result["Mean Difference", ]
+```
 
-ps_trimmed <- predict(ps_fit, type = "response") |>
-  (\(x) pmin(pmax(x, 0.01), 0.99))()
-
-outcome_model <- lm(
-  re78 ~ treat * (
-    age + educ + race + married + nodegree + re74 + re75
-  ),
-  data = dat_aipw
-)
-
-# 全員治療された場合
-dat_aipw1 <- transform(dat_aipw, treat = 1L)
-
-# 全員非治療だった場合
-dat_aipw0 <- transform(dat_aipw, treat = 0L)
-
-dat_aipw <- dat_aipw |>
-  dplyr::mutate(
-    ps = ps_trimmed,
-    mu1 = predict(outcome_model, newdata = dat_aipw1),
-    mu0 = predict(outcome_model, newdata = dat_aipw0),
-    phi1 = mu1 + treat / ps * (re78 - mu1),
-    phi0 = mu0 + (1 - treat) / (1 - ps) * (re78 - mu0)
-  )
-
-# ATEとinfluence functionに基づく標準誤差
-psi <- dat_aipw$phi1 - dat_aipw$phi0
-ate_aipw <- mean(psi)
-aipw_se <- sd(psi) / sqrt(nrow(dat_aipw))
-
-aipw_result <- tibble::tibble(
-  estimand = "ATE",
-  estimate = ate_aipw,
-  conf_low = ate_aipw - 1.96 * aipw_se,
-  conf_high = ate_aipw + 1.96 * aipw_se
-)
+```{r}
+#| label: show-AIPW-result
 
 aipw_result
 
@@ -360,77 +344,23 @@ $$\begin{aligned}
 
 ```{r}
 #| label: scratch-for-TMLE
+#| echo: true
+#| eval: false
 
-# --- 0) 準備 ---------------------------------------------------------------
-dat_tmle <- MatchIt::lalonde
-A <- dat_tmle$treat
-Y <- dat_tmle$re78
-n <- nrow(dat_tmle)
+lalonde <- MatchIt::lalonde
+W <- lalonde[c("age", "educ", "race", "married", "nodegree", "re74", "re75")]
 
-# --- 1) まずは素朴な推定（比較用） ----------------------------------------
-naive_diff <- mean(Y[A==1]) - mean(Y[A==0])
-
-# --- 2) gモデル（傾向スコア）: P(A=1|W) -----------------------------------
-g_fit <- glm(
-  treat ~ age + educ + race + married + nodegree + re74 + re75,
-  data = dat_tmle,
-  family = binomial()
+set.seed(123)
+fit <- tmle::tmle(
+  Y = lalonde$re78, A = lalonde$treat, W = W,
+  Q.SL.library = "SL.glm", g.SL.library = "SL.glm",
+  family = "gaussian"
 )
-g_hat <- predict(g_fit, type = "response")
+fit$estimates$ATE[c("psi", "CI")]
+```
 
-# 実務では positivity の極端さ対策で truncation をよく入れる
-g_hat <- pmin(pmax(g_hat, 0.01), 0.99)
-
-# --- 3) Qモデル（アウトカム回帰）: E(Y|A,W) ---------------------------------
-Q_fit <- lm(
-  re78 ~ treat * (
-    age + educ + race + married + nodegree + re74 + re75
-  ),
-  data = dat_tmle
-)
-
-# 観測された A の下での予測 Q(A,W)
-Q_aw <- predict(Q_fit, type = "response")
-
-# 介入した世界（A=1, A=0）の下での予測 Q(1,W), Q(0,W)
-Q1_w <- predict(Q_fit, newdata = transform(dat_tmle, treat = 1L))
-Q0_w <- predict(Q_fit, newdata = transform(dat_tmle, treat = 0L))
-
-# ここまでが「G-computation（回帰による反実仮想平均）」の素材
-gcomp_ate <- marginaleffects::avg_comparisons(Q_fit, variables = "treat")
-
-# --- 4) clever covariate（IPWっぽい重み） -----------------------------------
-# 連続アウトカムの基本形では、H1, H0 を使って Q を "必要な方向に" だけ更新する
-H1 <- as.numeric(A==1) / g_hat
-H0 <- as.numeric(A==0) / (1 - g_hat)
-
-# --- 5) targeting step：epsilon を推定して Q を更新 --------------------------
-# 連続(Y)の簡単な形： (Y - Q_aw) を H1, H0 で回帰（切片なし）して epsilon を得る
-eps_fit <- lm(I(Y - Q_aw) ~ -1 + H1 + H0)
-eps <- coef(eps_fit)
-eps1 <- unname(eps["H1"])
-eps0 <- unname(eps["H0"])
-
-# 更新後の Q*（observed と intervention の両方）
-Qstar_aw <- Q_aw + eps1 * H1 + eps0 * H0
-Qstar_1w <- Q1_w + eps1 * (1 / g_hat)
-Qstar_0w <- Q0_w + eps0 * (1 / (1 - g_hat))
-
-tmle_ate <- mean(Qstar_1w - Qstar_0w)
-
-# --- 6) 標準誤差（influence function の分散で） ----------------------------
-# IC = H1*(Y - Q*) - H0*(Y - Q*) + (Q*(1,W)-Q*(0,W)) - psi
-IC <- (H1 - H0) * (Y - Qstar_aw) + (Qstar_1w - Qstar_0w) - tmle_ate
-se <- sd(IC) / sqrt(n)
-ci <- tmle_ate + c(-1, 1) * 1.96 * se
-
-# --- 7) 結果表示 -----------------------------------------------------------
-tmle_result <- tibble::tibble(
-  method = c("Naive", "G-computation", "TMLE"),
-  estimate = c(naive_diff, gcomp_ate$estimate, tmle_ate),
-  conf_low = c(NA_real_, gcomp_ate$conf.low, ci[1]),
-  conf_high = c(NA_real_, gcomp_ate$conf.high, ci[2])
-)
+```{r}
+#| label: show-TMLE-result
 
 tmle_result
 
@@ -477,64 +407,36 @@ A_i=1\mid W_i
 \right\}
 \right]$$
 
-- アウトカムモデルによる予測と実測値の残差を、傾向スコアの逆数から作ったclever covariateで回帰して修正量を求め、その修正量で治療あり・なしの予測値を更新した後、平均差としてATEを計算する。
+1. アウトカムモデルによる予測と実測値の残差を出す
+2. 傾向スコアの逆数から作ったclever covariateで回帰して修正量を求める
+3. アウトカムモデルと修正量でAIPWをしているイメージ
+
+- 簡単に言うと強くなったAIPW
 
 ## Orthogonalization
 
 ```{r}
 #| label: scratch-for-orthogonalization
+#| echo: true
+#| eval: false
 
-dat_ortho <- MatchIt::lalonde
+lalonde <- MatchIt::lalonde
+xvars <- "age + educ + race + married + nodegree + re74 + re75"
 
-fit_full <- lm(
-  re78 ~ treat + age + educ + race + married + nodegree + re74 + re75,
-  data = dat_ortho
+m_y <- glm(as.formula(paste("re78 ~", xvars)), gaussian(), data = lalonde)
+m_a <- glm(as.formula(paste("treat ~", xvars)), binomial(), data = lalonde)
+
+dat <- transform(
+  lalonde,
+  y_resid = residuals(m_y, type = "response"),
+  a_resid = treat - fitted(m_a)
 )
+fit <- glm(y_resid ~ 0 + a_resid, gaussian(), data = dat)
+coef(summary(fit))["a_resid", ]
+```
 
-# 共変量からアウトカムを予測して残差化
-fit_y <- lm(
-  re78 ~ age + educ + race + married + nodegree + re74 + re75,
-  data = dat_ortho
-)
-
-dat_ortho <- dat_ortho |> 
-  dplyr::mutate(
-    y_hat = predict(fit_y),
-    y_resid = re78 - y_hat
-  )
-
-# 共変量から処置確率を予測して残差化
-fit_a <- glm(
-  treat ~ age + educ + race + married + nodegree + re74 + re75,
-  family = binomial(),
-  data = dat_ortho
-)
-
-dat_ortho <- dat_ortho |> 
-  dplyr::mutate(
-    a_hat = predict(fit_a, type = "response"),
-    a_resid = treat - a_hat
-  ) 
-
-fit_orth <- lm(
-  y_resid ~ 0 + a_resid,
-  data = dat_ortho
-)
-
-orth_ci <- confint(fit_orth, "a_resid")
-
-orthogonalization_result <- tibble::tibble(
-  method = c("Outcome regression", "Orthogonalization"),
-  estimate = c(coef(fit_full)["treat"], coef(fit_orth)["a_resid"]),
-  conf_low = c(
-    confint(fit_full, "treat")[1],
-    orth_ci[1]
-  ),
-  conf_high = c(
-    confint(fit_full, "treat")[2],
-    orth_ci[2]
-  )
-)
+```{r}
+#| label: show-orthogonalization-result
 
 orthogonalization_result
 
@@ -550,25 +452,32 @@ D_i &= m_0(X_i) + V_i,
 \end{aligned}$$
 
 - 「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する
-- シンプルなGLMの場合は通常のGLMの結果と同じになる
+- outcome側はGaussian GLM、treatment側はbinomial GLMで残差化している
+- treatment側も線形確率モデルで残差化した場合は、Frisch--Waugh--Lovell定理により通常の線形回帰と一致する
+
 :::
 
 ## しかしながら・・・・・・
 
 - 結局のところ、モデルは人が作らないといけない
 - 非線形な関係も、Interaction termもいずれにせよ人が作る必要がある
-- 上記以外にも、「誰に」「どの程度」の治療効果があるか分からない
-  - 治療効果の異質性
-- RCTでは群レベルでの平均的な治療効果しか分からない
+- 治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる
   - この治療は眼の前の患者さんに有益ですか？
 
-## 目の前の患者への利益は通常の回帰だとどうすればいい？
+## Estimandの重要性
 
-- 簡単にいうとSubgroup解析
-  - 恣意的にInteraction項を作らないといけない
-- あるいは複雑なモデルにした上でG-computation
-- いずれにせよ、線形が前提となる
-- 柔軟なモデルで治療の異質性を捉えたい？
+- 医学論文において、[**患者の背景**]{style="color: red;font-size: 1.2em;"}というのはRCTの解釈で非常に重要
+  - Mitra valveのTEERにおけるCOAPT vs. MITRA-FR trial
+  - Cryptogenic strokeに対するPFO closureのRCTの結果の変遷
+  - AFのrhythm controlの優位性を示せたEAST-AFNET4 trial
+- 患者の性質によって異なる介入の治療効果(Estimand)がある[@Little2021-hz]
+
+## 目の前の患者への有効性
+
+- 因果推論の根源的問題により、ある個人への治療効果(Individual treatment effect)は原理的に推測不可能
+- 一方で、患者背景の組み合わせ(46歳、HTN、DMあり、脳梗塞既往なしなど)における治療効果は推定可能
+- これをIndividualized treatment effect(ITE)といったりConditional average treatment effect(CATE)と言ったりする[@Segal2023-gi]
+
 
 # 機械学習 at glance
 
@@ -614,11 +523,11 @@ D_i &= m_0(X_i) + V_i,
 
 - アウトカムモデル、PS modelを柔軟に扱う
 - Interaction termを自然に扱える
-  - HTEを自然に扱えないか？
+- 柔軟なモデルであれば、HTEを自然に扱えないか？
 
 ## 機械学習を用いた因果推論について
 
-- 大別してMeta learner系とCausal forest系に分けられる
+- 大別してMeta learner系とmodified machine-learning系(代表としてCausal forest)に分けられる[@Segal2023-gi]
 - 柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest
 - とはいえ、Causal forestだけで良い気もする
 
@@ -626,10 +535,8 @@ D_i &= m_0(X_i) + V_i,
 
 - 基本的にUnobserved confoundingには対応できない
 - Collider biasには対応できない
-- 過学習の問題
-  - cross-fitting
-  - Honest
-- 解釈が難しい
+[**魔法の杖ではなく、Designは常に重要**]{style="color: red;font-size: 1.2em;"}
+- RCTなどでATEが0だったものについてHTEを探すのは基本的に無意味な事が多い[@Segal2023-gi]
 
 # meta-learner系
 
@@ -651,13 +558,14 @@ D_i &= m_0(X_i) + V_i,
 - 介入の効果が消えることはない
 - ただし、Doubly robustさはない
 
-## X-learner
+## X-learner, DR-learner
 
 ![x-learner](images/x-learner.drawio.svg)
 
 - Propensity score weightingを導入したmeta-learner
 - T-learnerで推定した治療効果を推測する機械学習モデルにIPWを組み合わせている
 - 結構複雑、メインでないモデルのパラメーターを「局外パラメーター」という
+- DR-learnerは最後のPropensity scoreの使い方がAIPWになっている
 
 ## R-learner
 
@@ -667,21 +575,8 @@ D_i &= m_0(X_i) + V_i,
 - 交絡因子の影響を除外するというところで強みがある
 - HTEをやる場合は最後の回帰が少し特殊
 
-## DR-learner
-
-![dr-learner](images/dr-learner.drawio.svg)
-
-- ML modelを用いたAIPWの治療効果を予測するモデルを介入以外の共変量で行う
-- Doubly robustである事が強み
 
 ## どれがいいの？
-
-- S-learnerが最も直感的ではあるが・・・・・・
-  - 一番の問題は95%信頼区間などは出せない
-- 過去のReviewだとDR-learnerが良さそう
-- https://www.pywhy.org/EconML/spec/flowchart.html
-- 上記図をmermaidで作る
-
 
 | Algorithm | 強み（Strengths） | 限界（Limitations） |
 |:---|:---|:---|
@@ -690,13 +585,19 @@ D_i &= m_0(X_i) + V_i,
 | X-learner / DR-learner | - 異質な治療効果を直接推定する<br>- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
 | R-learner | - 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する<br>- 治療効果に対する直接的な損失関数を構成できる | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
 
-: メタラーナーの特徴と限界 {#tbl-metalearner-comparison}[@Inoue2024-sb]
+: メタラーナーの特徴と限界 {#tbl-metalearner-comparison}
+[@Inoue2024-sb]
+
+- S-learnerが最も直感的ではあるが・・・・・・
+  - 一番の問題は95%信頼区間などは出せない
+- 過去のReviewだとDR-learnerが良さそう
 
 
 # Causal forestについて
 
 ## Random forestについて
 
+<!-- Todo: 絵を入れる -->
 - Tree-based modelの大御所
 - Bootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る
   - 当然ながら、この時は「Outcome」を予測するようにTreeを分割させる
@@ -706,15 +607,9 @@ D_i &= m_0(X_i) + V_i,
 ## Causal forestの原理
 
 - HTE専用の機械学習
-- 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木をTrainingする
+- 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割する
 - Overfittingを防ぐために"Honest"を用いる
-  - 選択されていない残りのSampleでHyperparameterを決める
-
-## Causal forestの強み
-
-- HTE専用のモデル
-- 95％信頼区間も計算可能
-- Policy treeやBest linear projectionなどで解釈も可能
+  - 分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める
 
 # Model作成の実務
 
@@ -727,34 +622,34 @@ D_i &= m_0(X_i) + V_i,
 
 - 簡単に言うとCross validationを組み合わせる
 - Causal forestの場合は、分岐を決めるデータセットと、そこで得られる治療効果を分ける"honesty"という概念が独特
+- Data leakageを防ぐのは難しいのでPackageにお任せが良さそう
 
 ## モデルの評価の仕方の概論
-
 
 - ModelをBlackboxから出す: ICE, PDP, SHAPなど
   - Tree Interpreter
 - Modelの性能の評価
   - Discrimination, Calibrationなど
-- モデルの有用性
+- モデルの実施方法
   - Policy tree
 
 ## ModelをBlackboxから出す
-<!-- Todo: 作る -->
+
+- 通常の予測モデルと大きな変化はない
+  - モデルが何をみているか？: SHAP
+  - ある連続値の共変量との関係性: PDP, ICE
+- 人に解釈できる方法として、HTEを浅い決定木で回帰させる"Surrogate tree"というのもある
 
 ## モデルの評価の仕方
 
+- 実際の研究では、HTEのモデルもTRIPOD-AIに従う事が推奨されている[@Segal2023-gi; @Collins2024-mg]
 - 通常のモデルと一緒で独立したtest datasetを用意しておく
 - 診る項目は2種類
   - Discrimination
     - GATE, RATE(AUTOC), Qini
   - Calibration
     - best linear predictionの係数
-
-## Meta-learnerの場合
-
-- Outcome modelを用いる場合は通常の機械学習モデルと同じ
-  - Discrimination(AUROC)
-  - Calibration(Calibration plot)　など
+- Meta-learnerの場合は通常の予測モデルの評価も行う
 
 ## CATEを図るモデル評価の難しさ
 
@@ -764,6 +659,8 @@ D_i &= m_0(X_i) + V_i,
 
 ## Discrimination ~ GATES
 
+<!-- Todo: 図を書く -->
+
 - 各人で予想した治療効果を順番に並べる
 - 5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)
 - 各々の群を一つのデータセットとして別個にATEを出す(真値)
@@ -771,10 +668,14 @@ D_i &= m_0(X_i) + V_i,
 
 ## Discrimination ~ RATES
 
+<!-- Todo: 図を書く -->
+
 - Rankingを連続的に見ていく閾値
 - 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
 
 ## AUTOC(Targeting operator curve)とQini係数
+
+<!-- Todo: 図を書く -->
 
 - Rankingを連続的に見ていく閾値
 - 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
@@ -783,28 +684,34 @@ D_i &= m_0(X_i) + V_i,
 
 ## Best linear prediction
 
-- 予測されるITE ~ 予測値 + Propensity score + 誤差項として回帰させたもの
+<!-- Todo: 図を書く -->
+
+- 予測されるITE ~ 予測値 + Propensity score + 誤差項　　として回帰させたもの
 - 予測値への係数が1であれば良い
 
 ## Calibration
 
+<!-- Todo: 図を書く -->
+
 - GATESのようにランキングにしてGroup毎でのATEとのCalibration plot
 
+## モデルの実施方法
+
+- 誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという
+- Surrogate treeと異なり、ITEが
 
 ## 実務において
 
 - Pythonだと`econml`のDRTester
 - Rだと`grf`で可能
 
-
-## 機械学習
-
 # Advanced
+
+## Topic
 
 - 95%信頼区間が出せるかどうか？
 - Missingnessについて
 - Sensitivity analysisはどうすればいい？
-  - Refutation method[@Feuerriegel2024-ya]
 - 生存分析について
 
 ## 95%信頼区間が出せるか？
@@ -821,14 +728,15 @@ D_i &= m_0(X_i) + V_i,
 
 ## Sensitivity analysisはどうすればいい？
 
-- Refutation method[@Feuerriegel2024-ya]
+- `EconML`ではRefutation methodで可能[@Feuerriegel2024-ya]
+  - 治療やアウトカムをランダムに数値に置き換える, ランダムな数値の交絡因子を入れても問題ないか, 未測定交絡因子を入れても大丈夫かどうか など
 
 ## 生存分析について
 
 - econmlではまだ実装されていない
 - meta learnerで無理やりやるなら、pseudopopulation(Jackknife法を使って、打ち切りデータを最後まで観察できたものとする)で予測させるなど
 - causal forestではnaturalに実装されている
-- 論文にはBalanced Individual  Treatment Effect in  Survival Data (BITES)なども紹介されている[@Moller2026-xi]
+- 論文にはBalanced Individual Treatment Effect in Survival Data (BITES)なども紹介されている[@Moller2026-xi]
 
 # 実践！
 
@@ -1070,11 +978,7 @@ ggplot() +
 
 - 治療効果は各々別個にいれてある
 - DAGは上記の通り
-- CAがメインのInterventionで解析をするアウトカムは3種類
-  - 連続値のAFEQT-OS
-  - 二値値のbin_outcome(短期の入院の有無など)
-  - 生存分析のeventtime, status(長期の心不全あるいは死亡)
-- ほとんどの因子は交絡因子だが、palpiationはinstrumental variable (CAには影響するが、outcomeには影響しない)
+- CAがメインのInterventionで解析をするアウトカムは二値値のbin_outcome(死亡または心不全入院の有無など)
 - SESは観測されない交絡因子
 
 ## Test-dataset②
@@ -1132,26 +1036,11 @@ dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |>
 
 ```{r}
 
-ate_rd_summary <- full_toy_data |>
-  dplyr::summarise(
-    n = sum(!is.na(ite_rd_bin)),
-    ate_rd = mean(ite_rd_bin, na.rm = TRUE),
-    ite_rd_sd = sd(ite_rd_bin, na.rm = TRUE)
-  ) |>
-  dplyr::mutate(
-    ate_rd_se = ite_rd_sd / sqrt(n),
-    critical_value = qt(0.975, df = n - 1),
-    ci_lower = ate_rd - critical_value * ate_rd_se,
-    ci_upper = ate_rd + critical_value * ate_rd_se
-  ) |>
-  dplyr::select(
-    n, ate_rd, ite_rd_sd, ate_rd_se,
-    ci_lower, ci_upper
-  )
-
 ate_rd_summary
 
 ```
+
+- ATEはほぼ0
 
 ## 共変量とOutcomeのRiskの1:1の関係性
 
@@ -1249,6 +1138,7 @@ full_toy_data |>
 ```{python}
 #| label: s-learner-binary
 #| echo: true
+#| eval: false
 
 import numpy as np
 import pandas as pd
@@ -1311,6 +1201,16 @@ print(f"ATE in test set (risk difference): {s_cate_rd.mean():.3f}")
 
 ```
 
+```{r}
+#| label: show-s-learner-result
+
+print(utils::head(s_learner_effect))
+cat(sprintf(
+  "ATE in test set (risk difference): %.3f\n",
+  mean(s_learner_effect$cate_rd)
+))
+```
+
 - `s_cate_rd` は確率スケールの治療効果（risk difference）であり、負の値は `ca = 1` によるイベントリスク低下を表す
 - S-learnerは1つのモデルで $E(Y \mid X, T)$ を学習し、各対象者について `T = 1` と `T = 0` の予測確率の差を取る
 - 因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要
@@ -1320,6 +1220,7 @@ print(f"ATE in test set (risk difference): {s_cate_rd.mean():.3f}")
 ```{python}
 #| label: t-learner-binary
 #| echo: true
+#| eval: false
 
 from econml.metalearners import TLearner
 
@@ -1344,6 +1245,16 @@ print(t_effect_df.head())
 print(f"ATE in test set (risk difference): {t_cate_rd.mean():.3f}")
 ```
 
+```{r}
+#| label: show-t-learner-result
+
+print(utils::head(t_learner_effect))
+cat(sprintf(
+  "ATE in test set (risk difference): %.3f\n",
+  mean(t_learner_effect$cate_rd)
+))
+```
+
 - T-learnerは `T = 0` と `T = 1` で2つの予測確率モデルを作り、その差をCATEとする
 - 各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい
 
@@ -1352,6 +1263,7 @@ print(f"ATE in test set (risk difference): {t_cate_rd.mean():.3f}")
 ```{python}
 #| label: x-learner-binary
 #| echo: true
+#| eval: false
 
 from econml.metalearners import XLearner
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -1401,6 +1313,16 @@ print(f"ATE in test set (risk difference): {x_cate_rd.mean():.3f}")
 
 ```
 
+```{r}
+#| label: show-x-learner-result
+
+print(utils::head(x_learner_effect))
+cat(sprintf(
+  "ATE in test set (risk difference): %.3f\n",
+  mean(x_learner_effect$cate_rd)
+))
+```
+
 - X-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する
 - 最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する
 
@@ -1409,6 +1331,7 @@ print(f"ATE in test set (risk difference): {x_cate_rd.mean():.3f}")
 ```{python}
 #| label: r-learner-binary
 #| echo: true
+#| eval: false
 
 from econml.dml import NonParamDML
 
@@ -1459,6 +1382,16 @@ print(r_effect_df.head())
 print(f"ATE in test set (risk difference): {r_cate_rd.mean():.3f}")
 ```
 
+```{r}
+#| label: show-r-learner-result
+
+print(utils::head(r_learner_effect))
+cat(sprintf(
+  "ATE in test set (risk difference): %.3f\n",
+  mean(r_learner_effect$cate_rd)
+))
+```
+
 - R-learnerはoutcomeとtreatmentをcross-fittingで残差化し、残差同士の関係からCATEを学習する
 - `NonParamDML` の非線形final modelにより、HTEを柔軟に表現する
 
@@ -1467,6 +1400,7 @@ print(f"ATE in test set (risk difference): {r_cate_rd.mean():.3f}")
 ```{python}
 #| label: dr-learner-binary
 #| echo: true
+#| eval: false
 
 from econml.dr import DRLearner
 
@@ -1544,9 +1478,57 @@ learner_summary = pd.DataFrame({
 print(learner_summary.round(3))
 ```
 
+```{r}
+#| label: show-dr-learner-result
+
+print(utils::head(dr_learner_effect))
+cat(sprintf(
+  "ATE in test set (risk difference): %.3f\n",
+  mean(dr_learner_effect$cate_rd)
+))
+learner_summary |>
+  dplyr::select(learner, ate_rd, cate_sd) |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+```
+
 - `discrete_outcome=True` により、EconMLがoutcome classifierの陽性確率を使用する
 - propensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する
 - `min_propensity=0.01` は、推定propensity scoreが0または1に近い場合の極端な補正を制限する
+:::
+
+## Meta-learnerのCalibration / Discrimination
+
+```{r}
+#| label: show-meta-validation
+#| echo: false
+#| out-width: 100%
+
+knitr::include_graphics(meta_validation_figure)
+```
+
+::: {.small}
+
+- 5モデルを同一のtrain/test splitと、EconML `DRTester`が作る共通のdoubly robust outcomeで横並びに評価
+- Calibration $R^2$ は1に近いほど良いが、通常のoutcome predictionの $R^2$ ではなく、CATEのgroup calibration指標
+- DiscriminationはAUTOC / QINI（0より大きいほど、治療効果の順位付け能力が高い）で評価
+
+:::
+
+## Meta-learnerのGATE
+
+```{r}
+#| label: show-meta-gates
+#| echo: false
+#| out-width: 100%
+
+knitr::include_graphics(meta_gate_figure)
+```
+
+::: {.small}
+train setの予測CATE五分位でtest setを分け、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。
 :::
 
 ## Causal forest
@@ -1554,326 +1536,152 @@ print(learner_summary.round(3))
 ```{r}
 #| label: causal-forest
 
-library(grf)
 library(partykit)
 library(policytree)
+library(shapviz)
 
-policy_X <- subset(
-  toy_data,
-  select = c("age", "sexm1", "bmi", "hf", "bnp", "lvef")
-)
-
-causal_forest_bin <- grf::causal_forest(
-  X = policy_X,
-  Y = toy_data$bin_outcome, 
-  W = toy_data$ca, 
-  honesty = TRUE, 
-  seed = 42
-)
-
-dr.scores <- double_robust_scores(causal_forest_bin)
-
-head(dr.scores)
-
-interpret_dat <- dplyr::mutate(
-  toy_data, 
-  tau_hat = predict(causal_forest_bin)$prediction
-) |> tibble::as_tibble()
-
-surrogate_tree <- partykit::ctree(
-  tau_hat ~ age + sexm1 + bmi + hf + bnp + lvef, 
-  data = interpret_dat, 
-  control = ctree_control(maxdepth = 3)
-)
-
-plot(surrogate_tree)
-
-# Policy learning uses a favorable outcome: 1 means event-free.
-# This makes a larger reward correspond to a more desirable outcome.
-causal_forest_policy <- grf::causal_forest(
-  X = policy_X,
-  Y = toy_data$bin_event_free,
-  W = toy_data$ca,
-  honesty = TRUE,
-  seed = 42
-)
-
-policy_scores <- policytree::double_robust_scores(causal_forest_policy)
-
-# Fit a depth-2 tree on the event-free rewards.
-tree <- policytree::policy_tree(
-  policy_X,
-  policy_scores,
-  depth = 2
-)
-
-# Print and plot the tree - action 1 corresponds to control, and 2 treated.
-print(tree)
-plot(tree, leaf.labels = c("Control", "CA"))
+shapviz::sv_importance(causal_forest_shap, kind = "bee")
+utils::head(causal_forest_dr_scores)
+plot(causal_forest_surrogate_tree)
+print(policy_tree)
+plot(policy_tree, leaf.labels = c("Control", "CA"))
 
 ```
 
+## GRFの単体評価
 
 ```{r}
+#| label: show-grf-validation
+#| fig-width: 9
+#| fig-height: 4.5
+#| out-width: 100%
+
+library(ggplot2)
+
+grf_validation_summary |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+
+ggplot(
+  grf_gate_data,
+  aes(x = predicted_gate, y = gate)
+) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
+  geom_errorbar(
+    aes(ymin = gate - 1.96 * gate_se, ymax = gate + 1.96 * gate_se),
+    width = 0
+  ) +
+  geom_line(color = "#4E79A7") +
+  geom_point(color = "#4E79A7", size = 2.5) +
+  geom_text(aes(label = paste0("G", group)), nudge_x = 0.002, nudge_y = 0.002) +
+  coord_equal() +
+  labs(
+    x = "Mean OOB predicted CATE",
+    y = "Doubly robust GATE",
+    title = "GRF grouped calibration"
+  ) +
+  theme_bw(base_size = 11)
+```
+
+::: {.small}
+GRF内だけで、OOB CATE、`grf::get_scores()`、`grf::test_calibration()`を用いて評価する。Grouped calibration $R^2$ はEconMLと同じ式をRで計算した補助指標で、`grf`組み込みの指標ではない。
+:::
+
+## GRFのDiscrimination (RATE)
+
+```{r}
+#| label: show-grf-rate
+#| fig-width: 9
+#| fig-height: 4.5
+#| out-width: 100%
+
 library(grf)
 
-rate_AUTOC <- grf::rank_average_treatment_effect(causal_forest_bin, 
-predict(causal_forest_bin)$predictions, 
-target = "AUTOC"
-)
-
-rate_QINI <- grf::rank_average_treatment_effect(causal_forest_bin, 
-predict(causal_forest_bin)$predictions, 
-target = "QINI"
-)
-
-plot(rate_AUTOC)
-plot(rate_QINI)
+plot(rate_results$autoc)
+plot(rate_results$qini)
 
 ```
 
-## CATEモデルを説明する
+## EconMLモデルを説明する（Python）
+
+::: {.panel-tabset}
+
+### PDP
 
 ```{r}
-#| label: prepare-cate-explanations
+#| label: plot-meta-pdp
+#| echo: false
+#| out-width: 100%
+
+knitr::include_graphics(meta_pdp_figure)
+```
+
+### ICE
+
+```{r}
+#| label: plot-meta-ice
+#| echo: false
+#| out-width: 100%
+
+knitr::include_graphics(meta_ice_figure)
+```
+
+### Global SHAP
+
+```{r}
+#| label: plot-meta-shap
+#| echo: false
+#| out-width: 100%
+
+knitr::include_graphics(meta_shap_figure)
+```
+
+:::
+
+::: {.small}
+PDP、ICE、Kernel SHAPの計算と描画はPython内で完結し、Quartoはtargetsが追跡するSVGを表示するだけである。ここでもGRFは比較対象に含めない。
+:::
+
+## GRFモデルを説明する（R）
+
+```{r}
+#| label: prepare-grf-explanations
 #| include: false
 
 library(dplyr)
 library(ggplot2)
-library(kernelshap)
-library(patchwork)
-library(reticulate)
 library(shapviz)
 
-# All models are explained on the same scale:
-# positive values mean that CA reduces the event risk.
-explain_X <- as.data.frame(policy_X)
-
-predict_meta_benefit <- function(object, newdata) {
-  py_newdata <- reticulate::r_to_py(as.data.frame(newdata))
-  -as.numeric(object$effect(X = py_newdata, T0 = 0L, T1 = 1L))
-}
-
-predict_grf_benefit <- function(object, newdata) {
-  as.numeric(
-    predict(object, newdata = as.data.frame(newdata))$predictions
-  )
-}
-
-model_specs <- list(
-  list(
-    name = "EconML S-learner",
-    object = reticulate::py$s_learner,
-    pred_fun = predict_meta_benefit
-  ),
-  list(
-    name = "EconML X-learner",
-    object = reticulate::py$x_learner,
-    pred_fun = predict_meta_benefit
-  ),
-  list(
-    name = "EconML R-learner",
-    object = reticulate::py$r_learner,
-    pred_fun = predict_meta_benefit
-  ),
-  list(
-    name = "EconML DR-learner",
-    object = reticulate::py$dr_learner,
-    pred_fun = predict_meta_benefit
-  ),
-  list(
-    name = "GRF causal forest",
-    object = causal_forest_policy,
-    pred_fun = predict_grf_benefit
-  )
-)
-
-explain_features <- c("age", "lvef", "bnp")
-feature_labels <- c(
-  age = "Age",
-  lvef = "LVEF (%)",
-  bnp = "BNP"
-)
-
-set.seed(20260903)
-reference_X <- explain_X |>
-  dplyr::slice_sample(n = min(500L, nrow(explain_X)))
-ice_X <- reference_X |>
-  dplyr::slice_sample(n = min(20L, nrow(reference_X)))
-
-make_effect_curves <- function(spec) {
-  pdp_list <- vector("list", length(explain_features))
-  ice_list <- vector("list", length(explain_features))
-
-  for (j in seq_along(explain_features)) {
-    feature <- explain_features[[j]]
-    feature_grid <- seq(
-      quantile(reference_X[[feature]], 0.05, na.rm = TRUE),
-      quantile(reference_X[[feature]], 0.95, na.rm = TRUE),
-      length.out = 25L
-    )
-
-    pdp_newdata <- reference_X[
-      rep(seq_len(nrow(reference_X)), times = length(feature_grid)),
-      ,
-      drop = FALSE
-    ]
-    pdp_newdata[[feature]] <- rep(
-      feature_grid,
-      each = nrow(reference_X)
-    )
-    pdp_prediction <- spec$pred_fun(spec$object, pdp_newdata)
-
-    pdp_list[[j]] <- tibble::tibble(
-      model = spec$name,
-      feature = feature_labels[[feature]],
-      value = feature_grid,
-      hte = vapply(
-        split(
-          pdp_prediction,
-          rep(seq_along(feature_grid), each = nrow(reference_X))
-        ),
-        mean,
-        numeric(1L)
-      )
-    )
-
-    ice_newdata <- ice_X[
-      rep(seq_len(nrow(ice_X)), times = length(feature_grid)),
-      ,
-      drop = FALSE
-    ]
-    ice_newdata[[feature]] <- rep(
-      feature_grid,
-      each = nrow(ice_X)
-    )
-
-    ice_list[[j]] <- tibble::tibble(
-      model = spec$name,
-      feature = feature_labels[[feature]],
-      id = rep(seq_len(nrow(ice_X)), times = length(feature_grid)),
-      value = rep(feature_grid, each = nrow(ice_X)),
-      hte = spec$pred_fun(spec$object, ice_newdata)
-    )
-  }
-
-  list(
-    pdp = dplyr::bind_rows(pdp_list),
-    ice = dplyr::bind_rows(ice_list)
-  )
-}
-
-effect_curves <- lapply(model_specs, make_effect_curves)
-feature_order <- unname(feature_labels[explain_features])
-pdp_data <- dplyr::bind_rows(lapply(effect_curves, `[[`, "pdp")) |>
+feature_order <- c("Age", "LVEF (%)", "BNP")
+grf_pdp_data <- grf_pdp_data |>
   dplyr::mutate(feature = factor(feature, levels = feature_order))
-ice_data <- dplyr::bind_rows(lapply(effect_curves, `[[`, "ice")) |>
+grf_ice_data <- grf_ice_data |>
   dplyr::mutate(feature = factor(feature, levels = feature_order))
 
-model_colors <- c(
-  "EconML S-learner" = "#59A14F",
-  "EconML X-learner" = "#F28E2B",
-  "EconML R-learner" = "#B07AA1",
-  "EconML DR-learner" = "#E15759",
-  "GRF causal forest" = "#4E79A7"
-)
-
-pdp_plot <- ggplot(
-  pdp_data,
-  aes(x = value, y = hte, color = model)
-) +
+grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
   geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
-  geom_line(linewidth = 1.1) +
+  geom_line(color = "#4E79A7", linewidth = 1.1) +
   facet_wrap(~feature, scales = "free_x", nrow = 1) +
-  scale_color_manual(values = model_colors) +
-  labs(
-    x = NULL,
-    y = "Estimated HTE: risk reduction",
-    color = NULL
-  ) +
-  theme_bw(base_size = 11) +
-  theme(legend.position = "bottom")
+  labs(x = NULL, y = "Estimated HTE: risk reduction") +
+  theme_bw(base_size = 11)
 
-ice_plot <- ggplot(
-  ice_data,
-  aes(x = value, y = hte, group = interaction(model, id), color = model)
+grf_ice_plot <- ggplot(
+  grf_ice_data,
+  aes(x = value, y = hte, group = id)
 ) +
   geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
-  geom_line(alpha = 0.10, linewidth = 0.3) +
+  geom_line(color = "#4E79A7", alpha = 0.15, linewidth = 0.35) +
   geom_line(
-    data = pdp_data,
-    aes(x = value, y = hte, color = model, group = model),
-    linewidth = 1.2,
-    alpha = 1
+    data = grf_pdp_data,
+    aes(x = value, y = hte, group = 1),
+    color = "#4E79A7",
+    linewidth = 1.2
   ) +
   facet_wrap(~feature, scales = "free_x", nrow = 1) +
-  scale_color_manual(values = model_colors) +
-  labs(
-    x = NULL,
-    y = "Estimated HTE: risk reduction"
-  ) +
-  theme_bw(base_size = 10) +
-  theme(legend.position = "bottom")
-
-# Model-agnostic, exact Kernel SHAP. The same rows and background sample
-# are used for every model to make their global explanations comparable.
-shap_X <- explain_X |>
-  dplyr::slice_sample(n = min(40L, nrow(explain_X)))
-background_X <- explain_X |>
-  dplyr::slice_sample(n = min(30L, nrow(explain_X)))
-
-shap_objects <- lapply(model_specs, function(spec) {
-  kernelshap::kernelshap(
-    spec$object,
-    X = shap_X,
-    bg_X = background_X,
-    pred_fun = spec$pred_fun,
-    exact = TRUE,
-    verbose = FALSE
-  ) |>
-    shapviz::shapviz()
-})
-names(shap_objects) <- vapply(model_specs, `[[`, character(1L), "name")
-
-shap_feature_labels <- c(
-  age = "Age",
-  sexm1 = "Sex (male)",
-  bmi = "BMI",
-  hf = "Heart failure",
-  bnp = "BNP",
-  lvef = "LVEF"
-)
-
-relabel_shap <- function(x) {
-  colnames(x$S) <- unname(shap_feature_labels[colnames(x$S)])
-  names(x$X) <- unname(shap_feature_labels[names(x$X)])
-  x
-}
-
-shap_objects <- lapply(shap_objects, relabel_shap)
-
-shap_plots <- Map(function(x, model_name) {
-  shapviz::sv_importance(
-    x,
-    kind = "beeswarm",
-    max_display = 6,
-    alpha = 0.65,
-    size = 1
-  ) +
-    labs(
-      title = model_name,
-      x = "SHAP value for risk reduction"
-    ) +
-    theme_bw(base_size = 8) +
-    theme(plot.title = element_text(size = 9))
-}, shap_objects, names(shap_objects))
-
-shap_plot <- patchwork::wrap_plots(
-  shap_plots,
-  ncol = 3,
-  guides = "collect"
-) &
-  theme(legend.position = "bottom")
+  labs(x = NULL, y = "Estimated HTE: risk reduction") +
+  theme_bw(base_size = 10)
 ```
 
 ::: {.panel-tabset}
@@ -1881,108 +1689,62 @@ shap_plot <- patchwork::wrap_plots(
 ### PDP
 
 ```{r}
-#| label: plot-cate-pdp
+#| label: plot-grf-pdp
 #| fig-width: 10
 #| fig-height: 4.8
 #| out-width: 100%
 
-pdp_plot
+grf_pdp_plot
 ```
 
 ### ICE
 
 ```{r}
-#| label: plot-cate-ice
+#| label: plot-grf-ice
 #| fig-width: 10
 #| fig-height: 5.2
 #| out-width: 100%
 
-ice_plot
+grf_ice_plot
 ```
 
 ### Global SHAP
 
 ```{r}
-#| label: plot-cate-shap
+#| label: plot-grf-shap
 #| fig-width: 10
 #| fig-height: 5.2
 #| out-width: 100%
 
-shap_plot
+shapviz::sv_importance(
+  grf_cate_shap,
+  kind = "beeswarm",
+  max_display = 6,
+  alpha = 0.65,
+  size = 1
+) +
+  labs(
+    title = "GRF causal forest",
+    x = "SHAP value for risk reduction"
+  ) +
+  theme_bw(base_size = 10)
 ```
 
 :::
 
 ## EconMLモデルをSingle Treeで説明
 
-```{python}
+```{r}
 #| label: prepare-single-tree-interpreters
 #| include: false
 
-import matplotlib.pyplot as plt
-from econml.cate_interpreter import SingleTreeCateInterpreter
-
-
-class BenefitCateWrapper:
-    """Expose CATE as risk reduction so that larger values mean more benefit."""
-
-    def __init__(self, estimator):
-        self.estimator = estimator
-
-    def const_marginal_effect(self, X):
-        return -np.asarray(self.estimator.const_marginal_effect(X))
-
-
-econml_models = {
-    "S-learner": s_learner,
-    "T-learner": t_learner,
-    "X-learner": x_learner,
-    "R-learner": r_learner,
-    "DR-learner": dr_learner,
-}
-
-# Use the same held-out subjects for every surrogate tree.
-tree_X = X_test.loc[:, feature_names].copy()
-tree_min_leaf = max(10, int(np.ceil(0.05 * len(tree_X))))
-single_tree_interpreters = {}
-single_tree_fidelity = {}
-
-for model_name, cate_model in econml_models.items():
-    benefit_model = BenefitCateWrapper(cate_model)
-    interpreter = SingleTreeCateInterpreter(
-        include_model_uncertainty=False,
-        max_depth=3,
-        min_samples_leaf=tree_min_leaf,
-        random_state=123,
-    )
-    interpreter.interpret(benefit_model, tree_X)
-
-    benefit_cate = benefit_model.const_marginal_effect(tree_X)
-    benefit_cate = benefit_cate.reshape((len(tree_X), -1))
-    fidelity = interpreter.tree_model_.score(tree_X, benefit_cate)
-
-    single_tree_interpreters[model_name] = interpreter
-    single_tree_fidelity[model_name] = fidelity
-
-
-def plot_single_tree(model_name):
-    fig, ax = plt.subplots(figsize=(12, 5.8))
-    single_tree_interpreters[model_name].plot(
-        ax=ax,
-        title=(
-            f"{model_name}: depth-3 CATE surrogate "
-            f"(R² = {single_tree_fidelity[model_name]:.2f})"
-        ),
-        feature_names=feature_names,
-        treatment_names=["CA risk reduction"],
-        max_depth=3,
-        filled=True,
-        rounded=True,
-        precision=3,
-        fontsize=7,
-    )
-    fig.tight_layout()
-    plt.show()
+single_tree_figures <- list(
+  "S-learner" = s_learner_tree_figure,
+  "T-learner" = t_learner_tree_figure,
+  "X-learner" = x_learner_tree_figure,
+  "R-learner" = r_learner_tree_figure,
+  "DR-learner" = dr_learner_tree_figure
+)
 ```
 
 ::: {.small}
@@ -1993,62 +1755,52 @@ def plot_single_tree(model_name):
 
 ### S-learner
 
-```{python}
+```{r}
 #| label: plot-single-tree-s
 #| echo: false
-#| fig-width: 12
-#| fig-height: 5.8
 #| out-width: 100%
 
-plot_single_tree("S-learner")
+knitr::include_graphics(single_tree_figures[["S-learner"]])
 ```
 
 ### T-learner
 
-```{python}
+```{r}
 #| label: plot-single-tree-t
 #| echo: false
-#| fig-width: 12
-#| fig-height: 5.8
 #| out-width: 100%
 
-plot_single_tree("T-learner")
+knitr::include_graphics(single_tree_figures[["T-learner"]])
 ```
 
 ### X-learner
 
-```{python}
+```{r}
 #| label: plot-single-tree-x
 #| echo: false
-#| fig-width: 12
-#| fig-height: 5.8
 #| out-width: 100%
 
-plot_single_tree("X-learner")
+knitr::include_graphics(single_tree_figures[["X-learner"]])
 ```
 
 ### R-learner
 
-```{python}
+```{r}
 #| label: plot-single-tree-r
 #| echo: false
-#| fig-width: 12
-#| fig-height: 5.8
 #| out-width: 100%
 
-plot_single_tree("R-learner")
+knitr::include_graphics(single_tree_figures[["R-learner"]])
 ```
 
 ### DR-learner
 
-```{python}
+```{r}
 #| label: plot-single-tree-dr
 #| echo: false
-#| fig-width: 12
-#| fig-height: 5.8
 #| out-width: 100%
 
-plot_single_tree("DR-learner")
+knitr::include_graphics(single_tree_figures[["DR-learner"]])
 ```
 
 :::
@@ -2061,7 +1813,7 @@ sessioninfo::session_info()
 
 ## Thank you for your listening !!
 
-## おまけ
+## References
 
-- もしも治療効果が一定だったとしてCausal forestにかける
-- 実際は・・・・・・
+::: {#refs}
+:::

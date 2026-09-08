@@ -57,6 +57,16 @@ If R packages were not registered in conda-forge, then run this script
 pixi run Rscript scripts/vendor_pixi_r_packages.R <<package-name>>
 ```
 
+To upgrade an existing vendored package to a newer repository version, run:
+
+```bash
+pixi run Rscript scripts/vendor_pixi_r_packages.R --upgrade <<package-name>>
+```
+
+The upgrade command leaves the package unchanged when the vendored version is
+already current or newer than the configured repository version. After adding or
+upgrading a package, run `pixi install` to update `pixi.lock` and the environment.
+
 Afterward, run these script to save vendor/ to github
 
 ```bash

@@ -30,11 +30,13 @@ uname -v = #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026
 PATH: /home/figarofuga/analysis/pixi-test/.pixi/bld/r-stochtree/04QvR8owL-o/bld/bin/
 PATH: /home/figarofuga/analysis/pixi-test/.pixi/bld/r-stochtree/04QvR8owL-o/host_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_/bin/
 PATH: /home/figarofuga/.cache/rattler/cache/backends-v0/pixi-build-r-4YaM9uO8iF8/bin/
+PATH: /home/figarofuga/.positron-server/bin/467ff390dd8b4ffc8972ebb84d9e05a1fd5a4fe2/bin/remote-cli/
+PATH: /home/figarofuga/.local/bin/
+PATH: /home/figarofuga/.nvm/versions/node/v22.23.2/bin/
 PATH: /home/figarofuga/.cargo/bin/
 PATH: /home/figarofuga/.local/bin/
-PATH: /mnt/c/Users/sumir/.codex/tmp/arg0/codex-arg0ONDCDn/
-PATH: /mnt/c/Users/sumir/.codex/bin/wsl/80652e088c21f249/
-PATH: /mnt/c/Users/sumir/.codex/bin/wsl/1a4f6f66dd2f3710/
+PATH: /home/figarofuga/.pixi/bin/
+PATH: /home/figarofuga/.pixi/bin/
 PATH: /usr/local/sbin/
 PATH: /usr/local/bin/
 PATH: /usr/sbin/
@@ -66,6 +68,7 @@ PATH: /mnt/c/Users/sumir/AppData/Local/Programs/Zed/bin/
 PATH: /mnt/c/Users/sumir/AppData/Local/pixi/bin/
 PATH: /mnt/c/Users/sumir/.pixi/bin/
 PATH: /mnt/c/Users/sumir/AppData/Local/PowerToys/DSCModules/
+PATH: /mnt/c/Program Files/gs/gs10.07.1/bin/
 PATH: /mnt/c/Program Files/gs/gs10.07.1/lib/
 PATH: /mnt/c/Users/sumir/AppData/Roaming/npm/
 PATH: /snap/bin/

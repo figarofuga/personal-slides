@@ -9,7 +9,7 @@ except NameError:
     # VS Code Interactive / Jupyter cell の場合
     here = Path.cwd()
 
-csv_path = here /"statistics"/"mlcausal"/"toy_data.csv"
+csv_path = here / "toy_data.csv"
 
 toy_data = pd.read_csv(csv_path)
 
@@ -25,7 +25,7 @@ from sklearn.ensemble import GradientBoostingRegressor, RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
 
-X = toy_data.loc[:, ["age", "sex", "bmi", "hf", "bnp", "lvef"]]
+X = toy_data.loc[:, ["age", "sexm1", "bmi", "hf", "bnp", "lvef"]]
 y = toy_data["afeqt_os"]
 T = toy_data["ca"]
 n = toy_data.shape[0]
@@ -52,8 +52,9 @@ intrp = SingleTreeCateInterpreter(
     include_model_uncertainty=False, max_depth=2, min_samples_leaf=10
 )
 # We interpret the CATE model's behavior based on the features used for heterogeneity
-intrp.interpret(DR_learner, X)
+intrp.interpret(X_learner, X)
 # Plot the tree
-intrp.plot(feature_names=["age", "sex", "bmi", "hf", "bnp", "lvef"], fontsize=12)
+intrp.plot(feature_names=["age", "sexm1", "bmi", "hf", "bnp", "lvef"], fontsize=8)
 
 # %%
+

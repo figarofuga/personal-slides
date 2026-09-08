@@ -10,6 +10,7 @@
 #
 # Recommended invocation:
 #   pixi run Rscript scripts/vendor_pixi_r_packages.R ExclusionTable forestploter
+#   pixi run Rscript scripts/vendor_pixi_r_packages.R --upgrade ExclusionTable
 
 `%||%` <- function(x, y) {
   if (is.null(x) || length(x) == 0L || all(is.na(x))) y else x
@@ -588,8 +589,8 @@ validate_extracted_source <- function(
   description_path <- file.path(source_dir, "DESCRIPTION")
   description <- read.dcf(description_path)
 
-  package <- description[1L, "Package"]
-  version <- description[1L, "Version"]
+  package <- unname(description[1L, "Package"])
+  version <- unname(description[1L, "Version"])
   needs_compilation <- if ("NeedsCompilation" %in% colnames(description)) {
     description[1L, "NeedsCompilation"]
   } else {
@@ -727,6 +728,77 @@ copy_directory <- function(from, to) {
   invisible(TRUE)
 }
 
+read_vendored_package_metadata <- function(
+  destination,
+  expected_package
+) {
+  description_path <- file.path(destination, "DESCRIPTION")
+
+  if (!file.exists(description_path)) {
+    stop(
+      "Cannot upgrade `",
+      expected_package,
+      "`: ",
+      description_path,
+      " was not found.",
+      call. = FALSE
+    )
+  }
+
+  description <- tryCatch(
+    read.dcf(description_path),
+    error = function(e) {
+      stop(
+        "Cannot read ",
+        description_path,
+        ": ",
+        conditionMessage(e),
+        call. = FALSE
+      )
+    }
+  )
+
+  required_fields <- c("Package", "Version")
+  missing_fields <- setdiff(required_fields, colnames(description))
+
+  if (length(missing_fields) > 0L) {
+    stop(
+      description_path,
+      " is missing required field(s): ",
+      paste(missing_fields, collapse = ", "),
+      ".",
+      call. = FALSE
+    )
+  }
+
+  package <- unname(description[1L, "Package"])
+  version <- unname(description[1L, "Version"])
+
+  if (!identical(package, expected_package)) {
+    stop(
+      "Cannot upgrade `",
+      expected_package,
+      "`: ",
+      description_path,
+      " declares package `",
+      package,
+      "`.",
+      call. = FALSE
+    )
+  }
+
+  if (is_blank_field(version)) {
+    stop(
+      "Cannot upgrade `",
+      expected_package,
+      "`: its vendored DESCRIPTION has no Version.",
+      call. = FALSE
+    )
+  }
+
+  list(package = package, version = version)
+}
+
 update_parent_pixi_dependencies <- function(
   parent_pixi,
   dependency_lines,
@@ -851,7 +923,8 @@ vendor_pixi_r_packages <- function(
   overwrite_vendor = FALSE,
   replace_existing = FALSE,
   dry_run = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  upgrade = FALSE
 ) {
   packages <- unique(trimws(packages))
   packages <- packages[nzchar(packages)]
@@ -862,6 +935,43 @@ vendor_pixi_r_packages <- function(
 
   if (!file.exists(parent_pixi) && update_parent) {
     stop("Parent pixi.toml was not found: ", parent_pixi, call. = FALSE)
+  }
+
+  destinations <- file.path(vendor_dir, packages)
+  already_exists <- destinations[dir.exists(destinations)]
+  current_versions <- setNames(rep(NA_character_, length(packages)), packages)
+
+  if (upgrade) {
+    not_vendored <- destinations[!dir.exists(destinations)]
+
+    if (length(not_vendored) > 0L) {
+      stop(
+        paste0(
+          "These packages cannot be upgraded because their vendor directories do not exist:\n  - ",
+          paste(not_vendored, collapse = "\n  - "),
+          "\nRun without `upgrade = TRUE` (or `--upgrade`) to vendor them first."
+        ),
+        call. = FALSE
+      )
+    }
+
+    for (i in seq_along(packages)) {
+      metadata <- read_vendored_package_metadata(
+        destination = destinations[[i]],
+        expected_package = packages[[i]]
+      )
+      current_versions[[packages[[i]]]] <- metadata$version
+    }
+  } else if (length(already_exists) > 0L && !overwrite_vendor) {
+    stop(
+      paste0(
+        "These vendor directories already exist:\n  - ",
+        paste(already_exists, collapse = "\n  - "),
+        "\nUse `upgrade = TRUE` to install only newer repository versions, ",
+        "or set `overwrite_vendor = TRUE` to replace them unconditionally."
+      ),
+      call. = FALSE
+    )
   }
 
   fields <- c("NeedsCompilation", "SystemRequirements")
@@ -888,6 +998,73 @@ vendor_pixi_r_packages <- function(
 
   package_db <- package_db[packages, , drop = FALSE]
 
+  if (upgrade) {
+    available_versions <- setNames(
+      as.character(package_db[packages, "Version"]),
+      packages
+    )
+    comparisons <- vapply(
+      packages,
+      function(package) {
+        utils::compareVersion(
+          available_versions[[package]],
+          current_versions[[package]]
+        )
+      },
+      numeric(1L)
+    )
+
+    up_to_date <- packages[comparisons == 0L]
+    repository_older <- packages[comparisons < 0L]
+
+    for (package in up_to_date) {
+      message(
+        package,
+        " is already up to date (",
+        current_versions[[package]],
+        ")."
+      )
+    }
+
+    for (package in repository_older) {
+      message(
+        "Skipping ",
+        package,
+        ": vendored version ",
+        current_versions[[package]],
+        " is newer than repository version ",
+        available_versions[[package]],
+        "."
+      )
+    }
+
+    packages <- packages[comparisons > 0L]
+
+    if (length(packages) == 0L) {
+      message("No vendor packages need upgrading.")
+      return(invisible(data.frame(
+        package = character(),
+        version = character(),
+        conda_package = character(),
+        destination = character(),
+        stringsAsFactors = FALSE
+      )))
+    }
+
+    package_db <- package_db[packages, , drop = FALSE]
+
+    for (package in packages) {
+      message(
+        "Upgrade available: ",
+        package,
+        " ",
+        current_versions[[package]],
+        " -> ",
+        package_db[package, "Version"]
+      )
+    }
+  }
+
   validate_repository_metadata(
     packages = packages,
     package_db = package_db,
@@ -906,20 +1083,6 @@ vendor_pixi_r_packages <- function(
   }
 
   dir.create(vendor_dir, recursive = TRUE, showWarnings = FALSE)
-
-  destinations <- file.path(vendor_dir, packages)
-  already_exists <- destinations[dir.exists(destinations)]
-
-  if (length(already_exists) > 0L && !overwrite_vendor) {
-    stop(
-      paste0(
-        "These vendor directories already exist:\n  - ",
-        paste(already_exists, collapse = "\n  - "),
-        "\nSet `overwrite_vendor = TRUE` to replace them."
-      ),
-      call. = FALSE
-    )
-  }
 
   stage_root <- file.path(
     vendor_dir,
@@ -1069,19 +1232,50 @@ vendor_pixi_r_packages <- function(
 #
 #   pixi run Rscript scripts/vendor_pixi_r_packages.R \
 #     ExclusionTable forestploter
+#   pixi run Rscript scripts/vendor_pixi_r_packages.R \
+#     --upgrade ExclusionTable forestploter
 #
 if (sys.nframe() == 0L) {
   args <- commandArgs(trailingOnly = TRUE)
 
-  if (length(args) == 0L) {
+  usage <- paste(
+    "Usage:",
+    paste0(
+      "  pixi run Rscript scripts/vendor_pixi_r_packages.R ",
+      "[--upgrade] PACKAGE [PACKAGE ...]"
+    ),
+    "",
+    "Options:",
+    "  --upgrade  Replace existing vendor packages only when a newer",
+    "             repository version is available.",
+    sep = "\n"
+  )
+
+  if (any(args %in% c("--help", "-h"))) {
+    cat(usage, "\n")
+    quit(status = 0L)
+  }
+
+  supported_options <- "--upgrade"
+  supplied_options <- args[startsWith(args, "-")]
+  unknown_options <- setdiff(supplied_options, supported_options)
+
+  if (length(unknown_options) > 0L) {
     stop(
-      paste(
-        "Usage:",
-        "  pixi run Rscript scripts/vendor_pixi_r_packages.R PACKAGE [PACKAGE ...]"
-      ),
+      "Unknown option(s): ",
+      paste(unknown_options, collapse = ", "),
+      "\n\n",
+      usage,
       call. = FALSE
     )
   }
 
-  vendor_pixi_r_packages(args)
+  upgrade <- "--upgrade" %in% args
+  args <- args[args != "--upgrade"]
+
+  if (length(args) == 0L) {
+    stop(usage, call. = FALSE)
+  }
+
+  vendor_pixi_r_packages(args, upgrade = upgrade)
 }
