@@ -89,8 +89,6 @@ r-lintr = ">=3.3.0_1,<4"
 r-rmsb = { path = "vendor/rmsb" }
 r-exclusiontable = { path = "vendor/ExclusionTable" }
 r-forestploter = { path = "vendor/forestploter" }
-r-glinternet = { path = "vendor/glinternet" }
-r-findit = { path = "vendor/FindIt" }
 quarto = ">=1.9.38,<2"
 
 r-ggcube = { path = "vendor/ggcube" }

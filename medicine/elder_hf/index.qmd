@@ -52,6 +52,15 @@ bibliography: references.bib
 
 # 高齢者と心不全の関係
 
+![](images/hf_age_trend.png)
+[@Kanaoka2024-yc]
+
+- 加齢は心不全発症の大きなRisk
+- 現代の日本は高齢社会であり心不全患者は著名に増えている
+  - 心不全Pandemic[@Shimokawa2015-zw]
+- 日本のDPCデータでは2016-2024年の新規心不全患者の平均年齢81±12歳[@Sato2026-wu]
+
+
 ## 心不全パンデミック
 
 

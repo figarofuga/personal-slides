@@ -57,6 +57,13 @@ If R packages were not registered in conda-forge, then run this script
 pixi run Rscript scripts/vendor_pixi_r_packages.R <<package-name>>
 ```
 
+If R packages to remove in /vendor...
+
+```bash
+pixi remove r-findit r-glinternet &&
+  rm -rf -- vendor/FindIt vendor/glinternet
+```  
+
 To upgrade an existing vendored package to a newer repository version, run:
 
 ```bash
