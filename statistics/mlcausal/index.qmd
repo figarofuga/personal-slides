@@ -21,13 +21,13 @@ author:
     affiliations: 東京医療センター総合内科
 date-format: "YYYY-MM-DD"
 engine: knitr
-execute: 
+execute:
   error: false
   warning: false
   echo: false
   cache: false
-knitr: 
-  opts_chunk: 
+knitr:
+  opts_chunk:
     dev: svglite
     fig-format: svg
 bibliography: references.bib
@@ -54,6 +54,9 @@ targets::tar_load(
   c(
     toy_data,
     full_toy_data,
+    test_toy_data,
+    full_test_toy_data,
+    external_shift_summary,
     ate_rd_summary,
     subclassification_result,
     matching_result,
@@ -63,6 +66,8 @@ targets::tar_load(
     orthogonalization_result,
     meta_learner_effects_file,
     meta_learner_evaluation_files,
+    external_meta_learner_effects_file,
+    external_meta_learner_evaluation_files,
     meta_explanation_figures,
     causal_forest_shap,
     causal_forest_dr_scores,
@@ -71,6 +76,11 @@ targets::tar_load(
     rate_results,
     grf_gate_data,
     grf_validation_summary,
+    external_causal_forest_predictions,
+    external_rate_results,
+    external_grf_gate_data,
+    external_grf_validation_summary,
+    external_c_for_benefit_summary,
     grf_pdp_data,
     grf_ice_data,
     grf_cate_shap,
@@ -129,6 +139,20 @@ meta_gate_figure <- target_artifact(
 meta_validation_figure <- target_artifact(
   meta_learner_evaluation_files,
   "meta-validation.svg"
+)
+external_learner_summary <- utils::read.csv(
+  target_artifact(
+    external_meta_learner_evaluation_files,
+    "external-meta-validation.csv"
+  )
+)
+external_meta_gate_figure <- target_artifact(
+  external_meta_learner_evaluation_files,
+  "external-meta-gates.svg"
+)
+external_meta_validation_figure <- target_artifact(
+  external_meta_learner_evaluation_files,
+  "external-meta-validation.svg"
 )
 meta_pdp_figure <- target_artifact(meta_explanation_figures, "meta-pdp.svg")
 meta_ice_figure <- target_artifact(meta_explanation_figures, "meta-ice.svg")
@@ -415,6 +439,7 @@ A_i=1\mid W_i
 
 ## Orthogonalization
 
+<!-- Todo: これも見やすくする -->
 ```{r}
 #| label: scratch-for-orthogonalization
 #| echo: true
@@ -441,6 +466,8 @@ coef(summary(fit))["a_resid", ]
 orthogonalization_result
 
 ```
+
+<!-- Todo: 式を確認、みやすくする -->
 
 $$\begin{aligned}
 Y_i &= \theta_0 D_i + g_0(X_i) + \varepsilon_i,
@@ -591,13 +618,14 @@ D_i &= m_0(X_i) + V_i,
 - S-learnerが最も直感的ではあるが・・・・・・
   - 一番の問題は95%信頼区間などは出せない
 - 過去のReviewだとDR-learnerが良さそう
-
+- あまり医学論文だと使われていない印象
 
 # Causal forestについて
 
 ## Random forestについて
 
-<!-- Todo: 絵を入れる -->
+![Random forest](images/rf-image.jpg)
+
 - Tree-based modelの大御所
 - Bootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る
   - 当然ながら、この時は「Outcome」を予測するようにTreeを分割させる
@@ -606,39 +634,28 @@ D_i &= m_0(X_i) + V_i,
 
 ## Causal forestの原理
 
+![Honesty](images/honesty.png)
+
 - HTE専用の機械学習
-- 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割する
+- 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)
 - Overfittingを防ぐために"Honest"を用いる
   - 分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める
-
-# Model作成の実務
 
 ## 結局どれがいいの？
 
 - ATEの場合はmeta-learnerでも良いがCausal forestでも別に良い
 - HTEの場合はCausal forestが現実的に最も良い
 
-## Overfittingを避けるために
-
-- 簡単に言うとCross validationを組み合わせる
-- Causal forestの場合は、分岐を決めるデータセットと、そこで得られる治療効果を分ける"honesty"という概念が独特
-- Data leakageを防ぐのは難しいのでPackageにお任せが良さそう
+# Modelを作った後
 
 ## モデルの評価の仕方の概論
 
-- ModelをBlackboxから出す: ICE, PDP, SHAPなど
-  - Tree Interpreter
 - Modelの性能の評価
   - Discrimination, Calibrationなど
+- ModelをBlackboxから出す: ICE, PDP, SHAPなど
+  - Tree Interpreter
 - モデルの実施方法
   - Policy tree
-
-## ModelをBlackboxから出す
-
-- 通常の予測モデルと大きな変化はない
-  - モデルが何をみているか？: SHAP
-  - ある連続値の共変量との関係性: PDP, ICE
-- 人に解釈できる方法として、HTEを浅い決定木で回帰させる"Surrogate tree"というのもある
 
 ## モデルの評価の仕方
 
@@ -646,9 +663,10 @@ D_i &= m_0(X_i) + V_i,
 - 通常のモデルと一緒で独立したtest datasetを用意しておく
 - 診る項目は2種類
   - Discrimination
-    - GATE, RATE(AUTOC), Qini
+    - RATE(AUTOC), Qini, C-for-benefit
   - Calibration
-    - best linear predictionの係数
+    - best linear predictor
+    - GATE
 - Meta-learnerの場合は通常の予測モデルの評価も行う
 
 ## CATEを図るモデル評価の難しさ
@@ -656,15 +674,6 @@ D_i &= m_0(X_i) + V_i,
 - 通常のモデルの評価方法は"正解"に対して、どの程度予測値が迫っているかを比べる
 - 一方で、因果推論モデルの場合は個人レベルの"正解(Individual treatment effects)"は決して分からない
 - その為、【ある程度の一貫性】を診たり、【ある群でのATE】を"正解ラベル"として比較している
-
-## Discrimination ~ GATES
-
-<!-- Todo: 図を書く -->
-
-- 各人で予想した治療効果を順番に並べる
-- 5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)
-- 各々の群を一つのデータセットとして別個にATEを出す(真値)
-- 実際にランキング通りかどうかを比べる
 
 ## Discrimination ~ RATES
 
@@ -681,29 +690,233 @@ D_i &= m_0(X_i) + V_i,
 - 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
 - 横軸にn%、縦軸にこのBenefitの値を並べて面積をとる
 - どちらかというと妥当性を診ているイメージ
+- Qini係数は、TOCにpercentageで重みづけをしている
+  - Cost performanceも見ることができる
 
-## Best linear prediction
+## Discrimination ~ C-for-benefit
 
-<!-- Todo: 図を書く -->
+<!-- Todo: 調べて書く -->
 
-- 予測されるITE ~ 予測値 + Propensity score + 誤差項　　として回帰させたもの
-- 予測値への係数が1であれば良い
+- 記載する
+- 
 
-## Calibration
+## Calibration ~ GATES
 
-<!-- Todo: 図を書く -->
 
-- GATESのようにランキングにしてGroup毎でのATEとのCalibration plot
+```{r}
+#| include: false
 
-## モデルの実施方法
+library(dplyr)
+library(yardstick)
+library(modeldata)
+
+
+
+```
+
+:::: columns
+
+::: {.column width="30%"}
+
+```{r}
+#| echo: false
+```
+
+:::
+
+::: {.column width="10%"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">閾値を動かしながら<br>予測値を作る</div>
+</div>
+
+:::
+
+::: {.column width="30%"}
+
+
+```{r}
+#| echo: false
+```
+
+:::
+
+::: {.column width="10%"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">各々の閾値での予測のClassから<br>感度・特異度を計算</div>
+</div>
+
+:::
+
+::: {.column width="30%"}
+
+
+```{r}
+#| echo: false
+```
+
+:::
+::::
+
+
+- 各人で予想した治療効果を順番に並べる
+- 5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)
+- 各々の群を一つのデータセットとして別個にATEを出す(真値)
+- 実際にランキング通りかどうかを比べる
+
+## Calibration ~ best linear predictor法
+
+
+- ATEの計算をして、各々の(ITE-ATE) ~ (treat - propensity score)でOrthogonalizationで出した係数
+- grfの中ではATEとCATEを別個にみるものがある(`test_calibration()`)
+  - mean.forest.predictionが群全体のATE: 1なら正確にATEを見つけられている
+  - differential.forest.predictionがHeterogeneity: 1ならHeterogneityがある
+- 実際の論文でも`grf::test_calibration()`だけを評価しているものが多い
+
+## ModelをBlackboxから出す
+
+- 通常の予測モデルと大きな変化はない
+  - モデルが何をみているか？: SHAP
+  - ある連続値の共変量との関係性: PDP, ICE
+- 人に解釈できる方法として、HTEを浅い決定木で回帰させる"Surrogate tree"というのもある
+
+## Modelの解釈～Best linear preojection
+
+- 予測されるITE ~ Covariatesで回帰させたもの
+- 各Covariatesがどのような影響にITEに影響しているかを見ている
+- ドメイン知識との整合性を診ることができる
+
+
+## モデルの実用法について
 
 - 誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという
-- Surrogate treeと異なり、ITEが
+- Surrogate treeと異なり、ITEが0を超えるかどうかで推奨を変える
+  - Rだと`policytree` package, pythonだと`econml`で可能
+- 実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotをまず記述している事が多い
 
 ## 実務において
 
 - Pythonだと`econml`のDRTester
 - Rだと`grf`で可能
+
+## Causal forestの場合は
+
+<!-- Todo: 埋める -->
+- 論文では・・・・・・の評価を推奨
+- grfの作者たちのお勧めは以下の順番
+  1. Propensity scoreのoverlap / positivity の確認
+  2. IPW後のcovariate balanceの確認
+  3. test_calibration() によるfitの評価
+  4. GATE/RATE による HTE 評価
+
+
+# 実際の論文
+
+## meta-learners
+
+- 正直ほとんどない
+- 通常のRobustな解析のSensitivity analysisくらいで良いかも
+
+::: {.panel-tabset}
+
+### RCTのSub解析-1
+
+- SepsisにCorticosteroidを用いたRCT複数の二次解析
+- SuperLearnerを用いたS-learnerの手法でITEを検出
+- ある治療閾値を設定してSurrogate treeを用いて、臨床判断への有用性を記載
+[@Pirracchio2020-ta]
+
+### RCTのSub解析-2
+
+- 個々人への適切なDAPT期間を決めるためのiDAPT scoreを作成
+- DAPTの期間をみた3 RCTを統合してX-learnerでITEを計算
+- 別のRCT dataでExternal validation
+- ModelはSHAPで評価
+- いわゆる通常のRisk model研究
+[@Lee2024-mp]
+
+### RCTのSub解析-3
+
+- VITAL-AF trialのSub解析
+- 高齢者の中で「どの患者で単回のAF screeningが有用か？」を見つける
+- T-learnerとRisk scoreを比較
+- Risk score毎にScreening betterを評価
+- 通常のRisk score研究
+[@Shah2025-ie]
+
+### 観察研究
+
+- STICH trialをEmulateしたイギリスの大規模データセット
+- PCI vs. CABGの治療効果を研究
+- 通常の解析以外の感度分析としてS/T/X-learnerを使っている
+- 細かい評価などはしていない
+[@Pathak2023-mo]
+
+:::
+
+
+## Causal forest ~ RCTのSub解析
+
+
+::: {.panel-tabset}
+
+### RCTのSub解析-1
+
+- SPRINTのSub解析
+- Causal forestを用いて解析
+- SBP ≧144 mmHg, Current smokerはIntensiveな降圧は有害かもしれない
+[@Scarpa2019-od]
+
+### RCTのSub解析-2
+
+- 高血圧患者への降圧療法をHigh risk approachではなくHigh benefit approachを提唱した論文
+- SPRINT + ACCORD-BP(RCT)のデータとNHANCEのデータを組み合わせている
+- SupplementaryにGATESやRATESもありかなりしっかりした解析
+[@Inoue2023-ek]
+
+### RCTのSub解析-3
+
+- The Oregon health insurance experiments(Medicaid)のSub解析
+- HbA1cの値とSBPの値をアウトカムにしてInstrumental causal foerstで解析
+- 全体では差がなくても、便益があるGroupを探すことができる
+- Clinical implicationはないが、Policy makerには重要な研究
+[@Inoue2024-cl]
+
+:::
+
+- 全体的にシンプルな構成が多い
+- RCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある
+
+## Causal forest ~ 観察研究
+
+::: {.panel-tabset}
+
+### 観察研究-1
+
+- MESAを用いたCACの予後に対する影響のHeterogeneityをみた解析(厳密にはHTEではない)
+    - 男性のHispanicでASCVD riskが高い患者でCACを計測する意義が高い
+- PS matchをした後のデータでCausal forestを使って解析
+- C-for-benefitでDiscriminationを評価
+- Best linear fitとCalibration plotでCalibrationを評価
+- 観察研究での見本となる研究
+[@Inoue2023-wl]
+
+### 観察研究-2
+
+- OptumLabs  Data  WarehouseでLAAO vs. DOACを比較 → MayoのデータセットでExternal validation
+- PS matchしたデータでCausal forest
+- `test_calibration()`でHeterogeneityを検索
+- LAAO Benefitial/neutral/harmfulで患者背景を分けて高齢者のComorbiditiesが多いと良いかもという仮説形成
+- 各個人のITEのWaterfall plotは結構良い印象
+[@Ngufor2025-sd]
+
+:::
+
+- Propensity score matchで疑似RCT → Causal forestが多い
+- target trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう
 
 # Advanced
 
@@ -976,6 +1189,8 @@ ggplot() +
 
 ```
 
+<!-- Todo: SESの色か線の種類を変える -->
+
 - 治療効果は各々別個にいれてある
 - DAGは上記の通り
 - CAがメインのInterventionで解析をするアウトカムは二値値のbin_outcome(死亡または心不全入院の有無など)
@@ -989,6 +1204,12 @@ ggplot() +
 print(head(toy_data))
 
 ```
+
+<!-- Todo: 説明を記載する -->
+- ATEは・・・・・・
+- 治療のPropensity scoreは・・・・・・・
+- 治療効果の式を書く
+
 
 ## Toy dataの可視化
 
@@ -1010,6 +1231,8 @@ tidyr::pivot_longer(toy_data, cols = everything()) |>
 
 ```
 
+<!-- Todo: 列名を直して順番を直す -->
+
 ## Pair plot
 
 ```{r}
@@ -1018,15 +1241,17 @@ tidyr::pivot_longer(toy_data, cols = everything()) |>
 library(tidyverse)
 library(GGally)
 
-dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |> 
+dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |>
   dplyr::slice_sample(n = 500) |>
   dplyr::mutate(
-    across(c(sexm1, hf, palpitation, ca), \(x)factor(x))) |> 
+    across(c(sexm1, hf, palpitation, ca), \(x)factor(x))) |>
   GGally::ggpairs() + theme_bw()
 
 
 ```
 :::
+
+<!-- Todo: 列名を直す -->
 
 ## Modification因子と治療効果
 
@@ -1040,7 +1265,8 @@ ate_rd_summary
 
 ```
 
-- ATEはほぼ0
+- 集団全体では、`ca = 1` によりイベントリスクが平均5 percentage points低下する
+- HTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する
 
 ## 共変量とOutcomeのRiskの1:1の関係性
 
@@ -1077,15 +1303,15 @@ dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, 
 library(tidyverse)
 library(tinyplot)
 
-dplyr::select(full_toy_data, age, bnp, bmi, lvef, ite_rd_bin) |> 
+dplyr::select(full_toy_data, age, bnp, bmi, lvef, ite_rd_bin) |>
   tidyr::pivot_longer(
     cols = -ite_rd_bin,
     names_to = "name",
     values_to = "value"
-  ) |> 
-  dplyr::mutate(ite_rd_bin = -ite_rd_bin) |> 
+  ) |>
+  dplyr::mutate(ite_rd_bin = -ite_rd_bin) |>
   tinyplot::plt(
-    ite_rd_bin ~ value, facet = ~ name, 
+    ite_rd_bin ~ value, facet = ~ name,
     type = type_loess(),
     draw = abline(h = 0, lty = 2, col = "black"),
     facet.args = list(free = TRUE),
@@ -1102,17 +1328,17 @@ dplyr::select(full_toy_data, age, bnp, bmi, lvef, ite_rd_bin) |>
 
 library(tidyverse)
 
-full_toy_data |> 
-  dplyr::select(sexm1, age, lvef, ite_rd_bin) |> 
+full_toy_data |>
+  dplyr::select(sexm1, age, lvef, ite_rd_bin) |>
   dplyr::mutate(
     sexm1 = if_else(sexm1 == 1, "Male", "Female"),
-    age_cat = base::cut(age, breaks = seq(30, 100, 10), labels = c("30s", "40s", "50s", "60s", "70s", "80s", "90s")), 
+    age_cat = base::cut(age, breaks = seq(30, 100, 10), labels = c("30s", "40s", "50s", "60s", "70s", "80s", "90s")),
     lvef_cat = base::cut(lvef, breaks = seq(20, 80, 10), labels = c("20s%", "30s%", "40s%", "50s%", "60s%", "70s%"))
-    ) |> 
+    ) |>
   dplyr::summarise(
-    mean_trt_eff = mean(-ite_rd_bin), 
+    mean_trt_eff = mean(-ite_rd_bin),
     .by = c(age_cat, lvef_cat, sexm1)
-  ) |> 
+  ) |>
   ggplot(aes(x = age_cat, y = lvef_cat, fill = mean_trt_eff)) +
   geom_tile(color = "white") +
   geom_text(aes(label = round(mean_trt_eff, 2)), size = 3) +
@@ -1122,7 +1348,7 @@ full_toy_data |>
     y = "LVEF category",
     fill = "Mean treatment effect"
   ) +
-  facet_grid(~sexm1) + 
+  facet_grid(~sexm1) +
   theme_bw()
 
 
@@ -1130,7 +1356,7 @@ full_toy_data |>
 :::
 
 ## Meta-learners
-
+<!-- Todo: スクリプトが見えるようにする -->
 ::: {.panel-tabset}
 
 ## S-learner
@@ -1499,36 +1725,72 @@ learner_summary |>
 - `min_propensity=0.01` は、推定propensity scoreが0または1に近い場合の極端な補正を制限する
 :::
 
-## Meta-learnerのCalibration / Discrimination
+## External validation cohort
+
+```{r}
+#| label: show-external-case-mix
+
+external_shift_summary$cohorts |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+external_shift_summary$differences |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+```
+
+開発コホートとは独立に $n=1000$ を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。
+
+## C-for-benefit（外部検証）
+
+```{r}
+#| label: show-external-c-for-benefit
+
+external_c_for_benefit_summary |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+```
+
+::: {.small}
+`test_toy_data`内でageだけを使って治療例と対照例を1:1 matchingする。観察benefit（対照のイベント−治療のイベント）が異なる二つのpairを比較し、予測benefitの順位が一致した割合をc-for-benefitとする。予測tieは0.5として扱い、95% CIはmatched pair単位のbootstrapで求める。
+:::
+
+## Meta-learnerのCalibration / Discrimination（外部検証）
 
 ```{r}
 #| label: show-meta-validation
 #| echo: false
 #| out-width: 100%
 
-knitr::include_graphics(meta_validation_figure)
+knitr::include_graphics(external_meta_validation_figure)
 ```
 
 ::: {.small}
 
-- 5モデルを同一のtrain/test splitと、EconML `DRTester`が作る共通のdoubly robust outcomeで横並びに評価
+- 5モデルは開発コホート全例で再学習して固定し、独立な`test_toy_data`で評価
+- EconML `DRTester`が開発コホートで学習した共通nuisance modelを外部コホートに適用し、doubly robust outcomeを構成
 - Calibration $R^2$ は1に近いほど良いが、通常のoutcome predictionの $R^2$ ではなく、CATEのgroup calibration指標
 - DiscriminationはAUTOC / QINI（0より大きいほど、治療効果の順位付け能力が高い）で評価
 
 :::
 
-## Meta-learnerのGATE
+## Meta-learnerのGATE（外部検証）
 
 ```{r}
 #| label: show-meta-gates
 #| echo: false
 #| out-width: 100%
 
-knitr::include_graphics(meta_gate_figure)
+knitr::include_graphics(external_meta_gate_figure)
 ```
 
 ::: {.small}
-train setの予測CATE五分位でtest setを分け、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。
+開発コホートの予測分布で定めたCATE五分位を外部コホートに適用し、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。
 :::
 
 ## Causal forest
@@ -1548,7 +1810,7 @@ plot(policy_tree, leaf.labels = c("Control", "CA"))
 
 ```
 
-## GRFの単体評価
+## GRFの外部検証
 
 ```{r}
 #| label: show-grf-validation
@@ -1558,14 +1820,14 @@ plot(policy_tree, leaf.labels = c("Control", "CA"))
 
 library(ggplot2)
 
-grf_validation_summary |>
+external_grf_validation_summary |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
   print()
 
 ggplot(
-  grf_gate_data,
+  external_grf_gate_data,
   aes(x = predicted_gate, y = gate)
 ) +
   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
@@ -1578,15 +1840,15 @@ ggplot(
   geom_text(aes(label = paste0("G", group)), nudge_x = 0.002, nudge_y = 0.002) +
   coord_equal() +
   labs(
-    x = "Mean OOB predicted CATE",
+    x = "Mean externally predicted CATE",
     y = "Doubly robust GATE",
-    title = "GRF grouped calibration"
+    title = "GRF grouped calibration: external validation"
   ) +
   theme_bw(base_size = 11)
 ```
 
 ::: {.small}
-GRF内だけで、OOB CATE、`grf::get_scores()`、`grf::test_calibration()`を用いて評価する。Grouped calibration $R^2$ はEconMLと同じ式をRで計算した補助指標で、`grf`組み込みの指標ではない。
+開発コホートで学習したcausal forestを固定して外部CATEを予測する。外部コホート内でcross-fittingした評価用forestの`grf::get_scores()`からDR scoreを作り、固定予測のBLPとgroup calibrationを評価する。評価用forest自身のCATE予測は使用しない。
 :::
 
 ## GRFのDiscrimination (RATE)
@@ -1599,8 +1861,8 @@ GRF内だけで、OOB CATE、`grf::get_scores()`、`grf::test_calibration()`を�
 
 library(grf)
 
-plot(rate_results$autoc)
-plot(rate_results$qini)
+plot(external_rate_results$autoc)
+plot(external_rate_results$qini)
 
 ```
 
@@ -1805,6 +2067,12 @@ knitr::include_graphics(single_tree_figures[["DR-learner"]])
 
 :::
 
+## 実務において
+
+- Rの`grf` packageが最も医学論文によい
+- C-for-benefitは`EpiFOrsk` packgeで可能
+- RCTのGATESは`evalITR` packageで可能だが、正直LLMに手書きで書かせて良いと思う
+- pythonなら`econML`が良いがSurvival analysisはなし
 
 ```{r}
 library(sessioninfo)

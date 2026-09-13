@@ -1,10 +1,35 @@
-make_toy_data <- function(n = 3000L, seed = 123L) {
+# 観測データと、真の潜在アウトカム・効果を含む検証用データを同時に生成する。
+make_toy_data <- function(
+  n = 3000L,
+  seed = 123L,
+  base_age = 60,
+  female_age_difference = 5,
+  base_log_bmi = log(22) - 0.20^2 / 2,
+  female_frac = 0.40,
+  base_lvef = 50,
+  base_ses_probability = 0.625,
+  base_log_bnp = log(150) - 0.90^2 / 2,
+  target_ca_prevalence = 0.52,
+  target_ate_rd = -0.05
+) {
+  stopifnot(
+    n >= 2L,
+    female_frac > 0,
+    female_frac < 1,
+    base_ses_probability > 0,
+    base_ses_probability < 1,
+    target_ca_prevalence > 0,
+    target_ca_prevalence < 1,
+    target_ate_rd > -1,
+    target_ate_rd < 1
+  )
   set.seed(seed)
 
   inv_logit <- function(x) {
     1 / (1 + exp(-x))
   }
 
+  # 範囲外の乱数は捨て、必要な個数になるまで補充する（端に丸める処理ではない）。
   rtruncnorm_simple <- function(n, mean, sd, lower, upper) {
     out <- numeric(0)
 
@@ -17,6 +42,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     out[seq_len(n)]
   }
 
+  # 個体ごとの平均を保ち、範囲外だった個体だけ再抽出する。
   rtruncnorm_vec <- function(mean, sd, lower, upper) {
     out <- rnorm(length(mean), mean = mean, sd = sd)
     bad <- out < lower | out > upper
@@ -29,6 +55,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     out
   }
 
+  # BMI などの右に裾が長い分布も、同じ棄却抽出で範囲を制限する。
   rtrunclnorm_simple <- function(n, meanlog, sdlog, lower, upper) {
     out <- numeric(0)
 
@@ -42,20 +69,22 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   }
 
   # Baseline variables
-  sexm1 <- rbinom(n, size = 1, prob = 0.60)
+  # sexm1 = 1 は男性。female_frac は女性（sexm1 = 0）の割合を指定する。
+  sexm1 <- rbinom(n, size = 1, prob = 1 - female_frac)
 
+  # 既存データとの再現性のため、群別の乱数生成順と ifelse のリサイクルを維持する。
   age <- ifelse(
     sexm1 == 0,
     rtruncnorm_simple(
       n = sum(sexm1 == 0),
-      mean = 65,
+      mean = base_age + female_age_difference,
       sd = 8,
       lower = 20,
       upper = 99
     ),
     rtruncnorm_simple(
       n = sum(sexm1 == 1),
-      mean = 60,
+      mean = base_age,
       sd = 8,
       lower = 20,
       upper = 95
@@ -64,7 +93,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     as.integer()
 
   sdlog_bmi <- 0.20
-  meanlog_bmi <- log(22) - sdlog_bmi^2 / 2
+  meanlog_bmi <- base_log_bmi
 
   bmi <- rtrunclnorm_simple(
     n = n,
@@ -76,7 +105,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
 
   lvef <- rtruncnorm_simple(
     n = n,
-    mean = 50,
+    mean = base_lvef,
     sd = 8,
     lower = 15,
     upper = 70
@@ -87,7 +116,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   bmi_z <- as.numeric(scale(bmi))
   lvef_z <- as.numeric(scale(lvef))
 
-  p_SES <- 0.625
+  p_SES <- base_ses_probability
   SES <- rbinom(n, size = 4, prob = p_SES)
   SES_z <- as.numeric(scale(SES))
 
@@ -105,7 +134,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
 
   # BNP
   sdlog_bnp <- 0.90
-  meanlog_bnp <- log(150) - sdlog_bnp^2 / 2
+  meanlog_bnp <- base_log_bnp
 
   bnp_base <- rtrunclnorm_simple(
     n = n,
@@ -156,7 +185,6 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     0.10 * bmi_z
 
   # Keep the overall CA prevalence stable across seeds and sample sizes.
-  target_ca_prevalence <- 0.52
   ca_intercept <- uniroot(
     function(intercept) {
       mean(inv_logit(intercept + ca_score)) - target_ca_prevalence
@@ -242,7 +270,8 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   rd_lower_bound <- 0.005 - p_bin_outcome_a0
   rd_upper_bound <- 0.995 - p_bin_outcome_a0
 
-  # Center the true sample ATE at zero after respecting probability bounds.
+  # Preserve the heterogeneous effect pattern while shifting the population
+  # average toward a clinically visible 5 percentage-point risk reduction.
   ate_calibration_shift <- uniroot(
     function(shift) {
       mean(
@@ -250,7 +279,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
           pmax(ite_rd_bin_raw + shift, rd_lower_bound),
           rd_upper_bound
         )
-      )
+      ) - target_ate_rd
     },
     interval = c(-1, 1)
   )$root
@@ -267,13 +296,13 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   treatment_effect <-
     linear_predictor_outcome_a0 - linear_predictor_outcome_a1
 
-  linear_predictor_outcome <- ifelse(
+  linear_predictor_outcome <- dplyr::if_else(
     ca == 1,
     linear_predictor_outcome_a1,
     linear_predictor_outcome_a0
   )
 
-  p_bin_outcome <- ifelse(
+  p_bin_outcome <- dplyr::if_else(
     ca == 1,
     p_bin_outcome_a1,
     p_bin_outcome_a0
@@ -307,7 +336,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     10.0 * palpitation
 
   afeqt_mean_a1 <- afeqt_mean_a0 + afeqt_treatment_effect
-  afeqt_mean <- ifelse(ca == 1, afeqt_mean_a1, afeqt_mean_a0)
+  afeqt_mean <- dplyr::if_else(ca == 1, afeqt_mean_a1, afeqt_mean_a0)
 
   afeqt_os <- rtruncnorm_vec(
     mean = afeqt_mean,
@@ -383,7 +412,8 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
     maxt = time_5y
   )
 
-  # Binomial outcome with no covariate-dependent treatment effect
+  # 比較教材用：対数オッズ尺度の治療効果を共変量に依存させない。
+  # リスク差尺度では、ベースラインリスクによる異質性は残る。
   treatment_effect_no_hte <- rnorm(
     n = n,
     mean = 4,
@@ -395,7 +425,7 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
   linear_predictor_outcome_no_hte_a1 <-
     linear_predictor_outcome_no_hte_a0 - treatment_effect_no_hte
 
-  linear_predictor_outcome_no_hte <- ifelse(
+  linear_predictor_outcome_no_hte <- dplyr::if_else(
     ca == 1,
     linear_predictor_outcome_no_hte_a1,
     linear_predictor_outcome_no_hte_a0
@@ -436,39 +466,20 @@ make_toy_data <- function(n = 3000L, seed = 123L) {
       surv_dat,
       by = "id"
     ) |>
-  dplyr::mutate(
-    # Individual risk difference
-    ite_rd_bin =
-      p_bin_outcome_a1 - p_bin_outcome_a0,
+    dplyr::mutate(
+      # 真の個体別効果は「治療あり − 治療なし」の向きに統一する。
+      ite_rd_bin = p_bin_outcome_a1 - p_bin_outcome_a0,
+      ite_log_or_bin = linear_predictor_outcome_a1 - linear_predictor_outcome_a0,
+      ite_or_bin = exp(-treatment_effect)
+    )
 
-    # Individual log odds ratio
-    ite_log_or_bin =
-      linear_predictor_outcome_a1 -
-      linear_predictor_outcome_a0,
-
-    # Individual odds ratio
-    ite_or_bin = exp(-treatment_effect)
-  )
-
-  toy_data <- dplyr::select(
-    full_toy_data,
-    id,
-    age,
-    sexm1,
-    bmi,
-    hf,
-    bnp,
-    lvef,
-    palpitation,
-    ca,
-    bin_outcome,
-    bin_event_free,
-    bin_outcome_no_hte,
-    afeqt_treatment_effect,
-    afeqt_os,
-    eventtime,
-    status
-  )
+  # 学習用には観測項目を渡し、潜在アウトカムや真の効果は full_toy_data に残す。
+  toy_data <- full_toy_data |>
+    dplyr::select(
+      id, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca,
+      bin_outcome, bin_event_free, bin_outcome_no_hte,
+      afeqt_treatment_effect, afeqt_os, eventtime, status
+    )
 
   list(
     toy_data = toy_data,

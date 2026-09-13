@@ -250,6 +250,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li><a href="#/meta-learner系" id="/toc-meta-learner系">meta-learner系</a></li>
 <li><a href="#/causal-forestについて" id="/toc-causal-forestについて">Causal forestについて</a></li>
 <li><a href="#/model作成の実務" id="/toc-model作成の実務">Model作成の実務</a></li>
+<li><a href="#/実際の論文" id="/toc-実際の論文">実際の論文</a></li>
 <li><a href="#/advanced" id="/toc-advanced">Advanced</a></li>
 <li><a href="#/実践" id="/toc-実践">実践！</a></li>
 </ul>
@@ -744,7 +745,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <section id="どれがいいの" class="slide level2">
 <h2>どれがいいの？</h2>
 <table class="caption-top">
-<caption>メタラーナーの特徴と限界 {#tbl-metalearner-comparison} <span class="citation" data-cites="Inoue2024-sb">(<a href="#/references" role="doc-biblioref" onclick="">Inoue et al. 2024</a>)</span></caption>
+<caption>メタラーナーの特徴と限界 {#tbl-metalearner-comparison} <span class="citation" data-cites="Inoue2024-sb">(<a href="#/references" role="doc-biblioref" onclick="">Inoue, Adomi, et al. 2024</a>)</span></caption>
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -786,6 +787,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>一番の問題は95%信頼区間などは出せない</li>
 </ul></li>
 <li>過去のReviewだとDR-learnerが良さそう</li>
+<li>あまり医学論文だと使われていない印象</li>
 </ul>
 </section></section>
 <section>
@@ -795,8 +797,8 @@ D_i &amp;= m_0(X_i) + V_i,
 </section>
 <section id="random-forestについて" class="slide level2">
 <h2>Random forestについて</h2>
-<!-- Todo: 絵を入れる -->
-<ul>
+
+<img data-src="images/rf-image.jpg" class="r-stretch quarto-figure-center"><p class="caption">Random forest</p><ul>
 <li>Tree-based modelの大御所</li>
 <li>Bootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る
 <ul>
@@ -808,9 +810,10 @@ D_i &amp;= m_0(X_i) + V_i,
 </section>
 <section id="causal-forestの原理" class="slide level2">
 <h2>Causal forestの原理</h2>
-<ul>
+
+<img data-src="images/honesty.png" class="r-stretch quarto-figure-center"><p class="caption">Honesty</p><ul>
 <li>HTE専用の機械学習</li>
-<li>基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割する</li>
+<li>基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)</li>
 <li>Overfittingを防ぐために”Honest”を用いる
 <ul>
 <li>分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める</li>
@@ -874,11 +877,12 @@ D_i &amp;= m_0(X_i) + V_i,
 <ul>
 <li>Discrimination
 <ul>
-<li>GATE, RATE(AUTOC), Qini</li>
+<li>RATE(AUTOC), Qini, C-for-benefit</li>
 </ul></li>
 <li>Calibration
 <ul>
-<li>best linear predictionの係数</li>
+<li>best linear predictor</li>
+<li>GATE</li>
 </ul></li>
 </ul></li>
 <li>Meta-learnerの場合は通常の予測モデルの評価も行う</li>
@@ -890,16 +894,6 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>通常のモデルの評価方法は”正解”に対して、どの程度予測値が迫っているかを比べる</li>
 <li>一方で、因果推論モデルの場合は個人レベルの”正解(Individual treatment effects)“は決して分からない</li>
 <li>その為、【ある程度の一貫性】を診たり、【ある群でのATE】を”正解ラベル”として比較している</li>
-</ul>
-</section>
-<section id="discrimination-gates" class="slide level2">
-<h2>Discrimination ~ GATES</h2>
-<!-- Todo: 図を書く -->
-<ul>
-<li>各人で予想した治療効果を順番に並べる</li>
-<li>5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)</li>
-<li>各々の群を一つのデータセットとして別個にATEを出す(真値)</li>
-<li>実際にランキング通りかどうかを比べる</li>
 </ul>
 </section>
 <section id="discrimination-rates" class="slide level2">
@@ -918,28 +912,86 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>上位n%でのITEの平均と全体のATEの差をとる(Benefit)</li>
 <li>横軸にn%、縦軸にこのBenefitの値を並べて面積をとる</li>
 <li>どちらかというと妥当性を診ているイメージ</li>
+<li>Qini係数は、TOCにpercentageで重みづけをしている
+<ul>
+<li>Cost performanceも見ることができる</li>
+</ul></li>
 </ul>
 </section>
-<section id="best-linear-prediction" class="slide level2">
-<h2>Best linear prediction</h2>
+<section id="discrimination-c-for-benefit" class="slide level2">
+<h2>Discrimination ~ C-for-benefit</h2>
 <!-- Todo: 図を書く -->
 <ul>
-<li>予測されるITE ~ 予測値 + Propensity score + 誤差項　　として回帰させたもの</li>
-<li>予測値への係数が1であれば良い</li>
+<li>各人で予想した治療効果を順番に並べる</li>
+<li>5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)</li>
+<li>各々の群を一つのデータセットとして別個にATEを出す(真値)</li>
+<li>実際にランキング通りかどうかを比べる</li>
 </ul>
 </section>
-<section id="calibration" class="slide level2">
-<h2>Calibration</h2>
-<!-- Todo: 図を書く -->
+<section id="calibration-gates" class="slide level2">
+<h2>Calibration ~ GATES</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+
+</div><div class="column" style="width:10%;">
+<div class="flow-operation">
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+閾値を動かしながら<br>予測値を作る
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+
+</div><div class="column" style="width:10%;">
+<div class="flow-operation">
+<div class="flow-arrow">
+→
+</div>
+<div class="flow-caption">
+各々の閾値での予測のClassから<br>感度・特異度を計算
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+
+</div></div>
 <ul>
-<li>GATESのようにランキングにしてGroup毎でのATEとのCalibration plot</li>
+<li>各人で予想した治療効果を順番に並べる</li>
+<li>5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)</li>
+<li>各々の群を一つのデータセットとして別個にATEを出す(真値)</li>
+<li>実際にランキング通りかどうかを比べる</li>
 </ul>
 </section>
-<section id="モデルの実施方法" class="slide level2">
-<h2>モデルの実施方法</h2>
+<section id="calibration-best-linear-predictor法" class="slide level2">
+<h2>Calibration ~ best linear predictor法</h2>
+<ul>
+<li>ATEの計算をして、各々の(ITE-ATE) ~ (treat - propensity score)でOrthogonalizationで出した係数</li>
+<li>grfの中ではATEとCATEを別個にみるものがある(<code>test_calibration()</code>)
+<ul>
+<li>mean.forest.predictionが群全体のATE: 1なら正確にATEを見つけられている</li>
+<li>differential.forest.predictionがHeterogeneity: 1ならHeterogneityがある</li>
+</ul></li>
+<li>実際の論文でも<code>grf::test_calibration()</code>だけを評価しているものが多い</li>
+</ul>
+</section>
+<section id="best-linear-preojection" class="slide level2">
+<h2>Best linear preojection</h2>
+<ul>
+<li>予測されるITE ~ Covariatesで回帰させたもの</li>
+<li>各Covariatesがどのような影響にITEに影響しているかを見ている</li>
+<li>ドメイン知識との整合性を診ることができる</li>
+</ul>
+</section>
+<section id="モデルの実用法について" class="slide level2">
+<h2>モデルの実用法について</h2>
 <ul>
 <li>誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという</li>
-<li>Surrogate treeと異なり、ITEが</li>
+<li>Surrogate treeと異なり、ITEが0を超えるかどうかで推奨を変える
+<ul>
+<li>Rだと<code>policytree</code> package, pythonだと<code>econml</code>で可能</li>
+</ul></li>
+<li>実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotをまず記述している事が多い</li>
 </ul>
 </section>
 <section id="実務において" class="slide level2">
@@ -947,6 +999,127 @@ D_i &amp;= m_0(X_i) + V_i,
 <ul>
 <li>Pythonだと<code>econml</code>のDRTester</li>
 <li>Rだと<code>grf</code>で可能</li>
+</ul>
+</section>
+<section id="causal-forestについて-1" class="slide level2 scrollable">
+<h2>Causal forestについて</h2>
+<ul>
+<li>論文では・・・・・・の評価を推奨</li>
+<li>grfの作者たちのお勧めは以下の順番
+<ol type="1">
+<li>Propensity scoreのoverlap / positivity の確認</li>
+<li>IPW後のcovariate balanceの確認</li>
+<li>test_calibration() によるfitの評価</li>
+<li>GATE/RATE による HTE 評価</li>
+</ol></li>
+</ul>
+</section></section>
+<section>
+<section id="実際の論文" class="title-slide slide level1 center">
+<h1>実際の論文</h1>
+
+</section>
+<section id="meta-learners" class="slide level2">
+<h2>meta-learners</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">RCTのSub解析-1</a></li><li><a href="#tabset-3-2">RCTのSub解析-2</a></li><li><a href="#tabset-3-3">RCTのSub解析-3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<ul>
+<li>SepsisにCorticosteroidを用いたRCT複数の二次解析</li>
+<li>SuperLearnerを用いたS-learnerの手法でITEを検出</li>
+<li>ある治療閾値を設定してSurrogate treeを用いて、臨床判断への有用性を記載 <span class="citation" data-cites="Pirracchio2020-ta">(<a href="#/references" role="doc-biblioref" onclick="">Pirracchio et al. 2020</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-3-2">
+<ul>
+<li>個々人への適切なDAPT期間を決めるためのiDAPT scoreを作成</li>
+<li>DAPTの期間をみた3 RCTを統合してX-learnerでITEを計算</li>
+<li>別のRCT dataでExternal validation</li>
+<li>ModelはSHAPで評価</li>
+<li>いわゆる通常のRisk model研究 <span class="citation" data-cites="Lee2024-mp">(<a href="#/references" role="doc-biblioref" onclick="">Lee et al. 2024</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-3-3">
+<ul>
+<li>STICH trialをEmulateしたイギリスの大規模データセット</li>
+<li>PCI vs.&nbsp;CABGの治療効果を研究</li>
+<li>通常の解析以外の感度分析としてS/T/X-learnerを使っている</li>
+<li>細かい評価などはしていない <span class="citation" data-cites="Pathak2023-mo">(<a href="#/references" role="doc-biblioref" onclick="">Pathak et al. 2023</a>)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>正直ほとんどない</li>
+<li>通常のRobustな解析のSensitivity analysisくらいで良いかも</li>
+</ul>
+</section>
+<section id="causal-forest-rctのsub解析" class="slide level2">
+<h2>Causal forest ~ RCTのSub解析</h2>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">RCTのSub解析-1</a></li><li><a href="#tabset-4-2">RCTのSub解析-2</a></li><li><a href="#tabset-4-3">RCTのSub解析-3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<ul>
+<li>SPRINTのSub解析</li>
+<li>Causal forestを用いて解析</li>
+<li>SBP ≧144 mmHg, Current smokerはIntensiveな降圧は有害かもしれない <span class="citation" data-cites="Scarpa2019-od">(<a href="#/references" role="doc-biblioref" onclick="">Scarpa et al. 2019</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-4-2">
+<ul>
+<li>高血圧患者への降圧療法をHigh risk approachではなくHigh benefit approachを提唱した論文</li>
+<li>SPRINT + ACCORD-BP(RCT)のデータとNHANCEのデータを組み合わせている</li>
+<li>SupplementaryにGATESやRATESもありかなりしっかりした解析 <span class="citation" data-cites="Inoue2023-ek">(<a href="#/references" role="doc-biblioref" onclick="">Inoue, Athey, et al. 2023</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-4-3">
+<ul>
+<li>The Oregon health insurance experiments(Medicaid)のSub解析</li>
+<li>HbA1cの値とSBPの値をアウトカムにしてInstrumental causal foerstで解析</li>
+<li>全体では差がなくても、便益があるGroupを探すことができる</li>
+<li>Clinical implicationはないが、Policy makerには重要な研究 <span class="citation" data-cites="Inoue2024-cl">(<a href="#/references" role="doc-biblioref" onclick="">Inoue, Athey, et al. 2024</a>)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>全体的にシンプルな構成が多い</li>
+<li>RCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある</li>
+</ul>
+</section>
+<section id="causal-forest-観察研究" class="slide level2">
+<h2>Causal forest ~ 観察研究</h2>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">観察研究-1</a></li><li><a href="#tabset-5-2">観察研究-2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<ul>
+<li>MESAを用いたCACの予後に対する影響のHeterogeneityをみた解析(厳密にはHTEではない)
+<ul>
+<li>男性のHispanicでASCVD riskが高い患者でCACを計測する意義が高い</li>
+</ul></li>
+<li>PS matchをした後のデータでCausal forestを使って解析</li>
+<li>C-for-benefitでDiscriminationを評価</li>
+<li>Best linear fitとCalibration plotでCalibrationを評価</li>
+<li>観察研究での見本となる研究 <span class="citation" data-cites="Inoue2023-wl">(<a href="#/references" role="doc-biblioref" onclick="">Inoue, Seeman, et al. 2023</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-5-2">
+<ul>
+<li>OptumLabs Data WarehouseでLAAO vs.&nbsp;DOACを比較 → MayoのデータセットでExternal validation</li>
+<li>PS matchしたデータでCausal forest</li>
+<li><code>test_calibration()</code>でHeterogeneityを検索</li>
+<li>LAAO Benefitial/neutral/harmfulで患者背景を分けて高齢者のComorbiditiesが多いと良いかもという仮説形成</li>
+<li>各個人のITEのWaterfall plotは結構良い印象 <span class="citation" data-cites="Ngufor2025-sd">(<a href="#/references" role="doc-biblioref" onclick="">Ngufor et al. 2025</a>)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>Propensity score matchで疑似RCT → Causal forestが多い</li>
+<li>target trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう</li>
 </ul>
 </section></section>
 <section>
@@ -1037,9 +1210,9 @@ D_i &amp;= m_0(X_i) + V_i,
 <section id="toy-dataの可視化" class="slide level2">
 <h2>Toy dataの可視化</h2>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">連続値の単変量</a></li><li><a href="#tabset-3-2">Pair plot</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">連続値の単変量</a></li><li><a href="#tabset-6-2">Pair plot</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-6-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1050,7 +1223,7 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-6-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1067,22 +1240,23 @@ D_i &amp;= m_0(X_i) + V_i,
 <section id="modification因子と治療効果" class="slide level2">
 <h2>Modification因子と治療効果</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">ATE</a></li><li><a href="#tabset-4-2">共変量とOutcomeのRiskの1:1の関係性</a></li><li><a href="#tabset-4-3">主要な連続値の因子とTreatment effects</a></li><li><a href="#tabset-4-4">Treatment effectのHeterogeneity</a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">ATE</a></li><li><a href="#tabset-7-2">共変量とOutcomeのRiskの1:1の関係性</a></li><li><a href="#tabset-7-3">主要な連続値の因子とTreatment effects</a></li><li><a href="#tabset-7-4">Treatment effectのHeterogeneity</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-7-1">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
-      n      ate_rd ite_rd_sd ate_rd_se ci_lower ci_upper
-  &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1  3000 -0.00000531     0.104   0.00191 -0.00374  0.00373</code></pre>
+      n  ate_rd ite_rd_sd ate_rd_se ci_lower ci_upper
+  &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1  3000 -0.0500     0.109   0.00199  -0.0539  -0.0461</code></pre>
 </div>
 </div>
 <ul>
-<li>ATEはほぼ0</li>
+<li>集団全体では、<code>ca = 1</code> によりイベントリスクが平均5 percentage points低下する</li>
+<li>HTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する</li>
 </ul>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-7-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1093,7 +1267,7 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
-<div id="tabset-4-3">
+<div id="tabset-7-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1104,7 +1278,7 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
-<div id="tabset-4-4">
+<div id="tabset-7-4">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1118,12 +1292,12 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </section>
-<section id="meta-learners" class="slide level2">
+<section id="meta-learners-1" class="slide level2">
 <h2>Meta-learners</h2>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">S-learner</a></li><li><a href="#tabset-5-2">T-learner</a></li><li><a href="#tabset-5-3">X-learner</a></li><li><a href="#tabset-5-4">R-learner</a></li><li><a href="#tabset-5-5">DR-learner</a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">S-learner</a></li><li><a href="#tabset-8-2">T-learner</a></li><li><a href="#tabset-8-3">X-learner</a></li><li><a href="#tabset-8-4">R-learner</a></li><li><a href="#tabset-8-5">DR-learner</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-8-1">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1187,15 +1361,15 @@ D_i &amp;= m_0(X_i) + V_i,
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>    id      cate_rd
-1 1213 -0.058573544
-2  241 -0.014187932
-3 1960  0.077415705
-4  485  0.028623044
-5  726  0.006469309
-6 2657 -0.090554357</code></pre>
+1 1363 -0.001827896
+2 1100  0.018982351
+3 1792 -0.153240204
+4  418 -0.206095099
+5 1885  0.034924030
+6  841 -0.035404503</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): 0.003</code></pre>
+<pre><code>ATE in test set (risk difference): -0.042</code></pre>
 </div>
 </div>
 <ul>
@@ -1204,7 +1378,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要</li>
 </ul>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-8-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="im">from</span> econml.metalearners <span class="im">import</span> TLearner</span>
 <span id="cb15-2"><a></a></span>
@@ -1231,15 +1405,15 @@ D_i &amp;= m_0(X_i) + V_i,
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>      id     cate_rd
-601 1213 -0.08676803
-602  241 -0.05012167
-603 1960  0.05148602
-604  485 -0.07560945
-605  726  0.03668851
-606 2657  0.06797814</code></pre>
+601 1363  0.01993090
+602 1100  0.11421780
+603 1792 -0.20991486
+604  418 -0.20878077
+605 1885  0.09759994
+606  841 -0.07793111</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.010</code></pre>
+<pre><code>ATE in test set (risk difference): -0.060</code></pre>
 </div>
 </div>
 <ul>
@@ -1247,7 +1421,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい</li>
 </ul>
 </div>
-<div id="tabset-5-3">
+<div id="tabset-8-3">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">from</span> econml.metalearners <span class="im">import</span> XLearner</span>
 <span id="cb18-2"><a></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingRegressor</span>
@@ -1298,15 +1472,15 @@ D_i &amp;= m_0(X_i) + V_i,
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>       id     cate_rd
-1201 1213 -0.18394315
-1202  241 -0.12883558
-1203 1960  0.06132306
-1204  485 -0.20044873
-1205  726  0.14357981
-1206 2657  0.08356146</code></pre>
+1201 1363 -0.04464093
+1202 1100  0.03624731
+1203 1792 -0.15314910
+1204  418 -0.13667150
+1205 1885  0.33390682
+1206  841 -0.16769601</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.006</code></pre>
+<pre><code>ATE in test set (risk difference): -0.053</code></pre>
 </div>
 </div>
 <ul>
@@ -1314,7 +1488,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する</li>
 </ul>
 </div>
-<div id="tabset-5-4">
+<div id="tabset-8-4">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="im">from</span> econml.dml <span class="im">import</span> NonParamDML</span>
 <span id="cb21-2"><a></a></span>
@@ -1366,16 +1540,16 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>       id    cate_rd
-1801 1213 -0.2973008
-1802  241 -0.1484302
-1803 1960  0.1327312
-1804  485 -0.6428122
-1805  726  0.1524836
-1806 2657  0.1501450</code></pre>
+<pre><code>       id     cate_rd
+1801 1363 -0.02996914
+1802 1100  0.23195176
+1803 1792 -0.16574607
+1804  418 -0.01754381
+1805 1885  0.31175334
+1806  841 -0.16387530</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.006</code></pre>
+<pre><code>ATE in test set (risk difference): -0.058</code></pre>
 </div>
 </div>
 <ul>
@@ -1383,7 +1557,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <li><code>NonParamDML</code> の非線形final modelにより、HTEを柔軟に表現する</li>
 </ul>
 </div>
-<div id="tabset-5-5">
+<div id="tabset-8-5">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a><span class="im">from</span> econml.dr <span class="im">import</span> DRLearner</span>
 <span id="cb24-2"><a></a></span>
@@ -1463,23 +1637,23 @@ D_i &amp;= m_0(X_i) + V_i,
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>       id     cate_rd
-2401 1213 -0.66810596
-2402  241 -0.08076074
-2403 1960  0.23896952
-2404  485 -0.98426791
-2405  726  0.22035149
-2406 2657  0.17602185</code></pre>
+2401 1363 -0.07307278
+2402 1100  0.28000831
+2403 1792 -0.23172642
+2404  418  0.07620628
+2405 1885  0.39313966
+2406  841 -0.11883594</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.000</code></pre>
+<pre><code>ATE in test set (risk difference): -0.068</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     learner ate_rd cate_sd
-1  S-learner  0.003   0.079
-2  T-learner -0.010   0.161
-3  X-learner -0.006   0.155
-4  R-learner -0.006   0.219
-5 DR-learner  0.000   0.285</code></pre>
+1  S-learner -0.042   0.075
+2  T-learner -0.060   0.162
+3  X-learner -0.053   0.156
+4  R-learner -0.058   0.220
+5 DR-learner -0.068   0.244</code></pre>
 </div>
 </div>
 <ul>
@@ -1491,22 +1665,62 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </section>
-<section id="meta-learnerのcalibration-discrimination" class="slide level2">
-<h2>Meta-learnerのCalibration / Discrimination</h2>
+<section id="external-validation-cohort" class="slide level2">
+<h2>External validation cohort</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  cohort                  n mean_age mean_bmi female_fraction
+  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;
+1 Development          3000     61.2     22.0           0.399
+2 External validation  1000     63.2     20.0           0.45 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  contrast                  age_difference bmi_difference female_fraction_diff…¹
+  &lt;chr&gt;                              &lt;dbl&gt;          &lt;dbl&gt;                  &lt;dbl&gt;
+1 External validation - De…           1.99          -2.00                  0.051
+# ℹ abbreviated name: ¹​female_fraction_difference</code></pre>
+</div>
+</div>
+<p>開発コホートとは独立に <span class="math inline">\(n=1000\)</span> を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。</p>
+</section>
+<section id="c-for-benefit外部検証" class="slide level2">
+<h2>C-for-benefit（外部検証）</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  learner       n_pairs c_for_benefit std_error ci_lower ci_upper
+  &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 Causal forest     377         0.557     0.028    0.504    0.606
+2 DR-learner        377         0.475     0.032    0.412    0.536
+3 R-learner         377         0.461     0.028    0.403    0.51 
+4 S-learner         377         0.539     0.028    0.484    0.595
+5 T-learner         377         0.537     0.03     0.473    0.591
+6 X-learner         377         0.535     0.03     0.473    0.589</code></pre>
+</div>
+</div>
+<div class="small">
+<p><code>test_toy_data</code>内でageだけを使って治療例と対照例を1:1 matchingする。観察benefit（対照のイベント−治療のイベント）が異なる二つのpairを比較し、予測benefitの順位が一致した割合をc-for-benefitとする。予測tieは0.5として扱い、95% CIはmatched pair単位のbootstrapで求める。</p>
+</div>
+</section>
+<section id="meta-learnerのcalibration-discrimination外部検証" class="slide level2">
+<h2>Meta-learnerのCalibration / Discrimination（外部検証）</h2>
 
-<img data-src="cache/figures/meta-validation.svg" style="width:100.0%" class="r-stretch"><div class="small">
+<img data-src="cache/figures/external-meta-validation.svg" style="width:100.0%" class="r-stretch"><div class="small">
 <ul>
-<li>5モデルを同一のtrain/test splitと、EconML <code>DRTester</code>が作る共通のdoubly robust outcomeで横並びに評価</li>
+<li>5モデルは開発コホート全例で再学習して固定し、独立な<code>test_toy_data</code>で評価</li>
+<li>EconML <code>DRTester</code>が開発コホートで学習した共通nuisance modelを外部コホートに適用し、doubly robust outcomeを構成</li>
 <li>Calibration <span class="math inline">\(R^2\)</span> は1に近いほど良いが、通常のoutcome predictionの <span class="math inline">\(R^2\)</span> ではなく、CATEのgroup calibration指標</li>
 <li>DiscriminationはAUTOC / QINI（0より大きいほど、治療効果の順位付け能力が高い）で評価</li>
 </ul>
 </div>
 </section>
-<section id="meta-learnerのgate" class="slide level2">
-<h2>Meta-learnerのGATE</h2>
+<section id="meta-learnerのgate外部検証" class="slide level2">
+<h2>Meta-learnerのGATE（外部検証）</h2>
 
-<img data-src="cache/figures/meta-gates.svg" style="width:100.0%" class="r-stretch"><div class="small">
-<p>train setの予測CATE五分位でtest setを分け、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。</p>
+<img data-src="cache/figures/external-meta-gates.svg" style="width:100.0%" class="r-stretch"><div class="small">
+<p>開発コホートの予測分布で定めたCATE五分位を外部コホートに適用し、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。</p>
 </div>
 </section>
 <section id="causal-forest" class="slide level2">
@@ -1521,12 +1735,12 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       control     treated
-[1,] 0.1189504 -0.07283693
-[2,] 1.0004347  1.08330540
-[3,] 0.3350726 -0.14037399
-[4,] 1.0104821  1.00955164
-[5,] 1.0509012  0.87677371
-[6,] 0.3772709  1.44629908</code></pre>
+[1,] 0.1332748 -0.05555335
+[2,] 0.9917551  1.16579378
+[3,] 0.3179463 -0.10799861
+[4,] 1.0082375  0.99549650
+[5,] 1.0393671  0.83895821
+[6,] 0.4256145  1.46803683</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -1540,37 +1754,37 @@ D_i &amp;= m_0(X_i) + V_i,
 Tree depth:  2 
 Actions:  1: control 2: treated 
 Variable splits: 
-(1) split_variable: bmi  split_value: 27.0173 
-  (2) split_variable: bnp  split_value: 90 
-    (4) * action: 1 
-    (5) * action: 2 
-  (3) split_variable: lvef  split_value: 58 
-    (6) * action: 2 
-    (7) * action: 1 </code></pre>
+(1) split_variable: bnp  split_value: 67 
+  (2) split_variable: lvef  split_value: 52 
+    (4) * action: 2 
+    (5) * action: 1 
+  (3) split_variable: bnp  split_value: 74 
+    (6) * action: 1 
+    (7) * action: 2 </code></pre>
 </div>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-b08f1f5eaf51af74feac" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-b08f1f5eaf51af74feac">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bmi <= 27.02 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" bnp <= 90 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n2 [label=\" lvef <= 58 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-dd759e8e2c5dc82443ba" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-dd759e8e2c5dc82443ba">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bnp <= 67 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" lvef <= 52 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n2 [label=\" bnp <= 74 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="grfの単体評価" class="slide level2">
-<h2>GRFの単体評価</h2>
+<section id="grfの外部検証" class="slide level2">
+<h2>GRFの外部検証</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
   metric                          estimate std_error p_value
   &lt;chr&gt;                              &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-1 Mean forest calibration            1.48      3.87    0.351
-2 Differential forest calibration    0.848     0.23    0    
-3 Grouped calibration R2             0.336    NA      NA    
-4 AUTOC                              0.049     0.017   0.002
-5 QINI                               0.015     0.004   0    </code></pre>
+1 Mean forest calibration            2.20      0.726   0.002
+2 Differential forest calibration    1.32      0.351   0    
+3 Grouped calibration R2             0.289    NA      NA    
+4 AUTOC                              0.081     0.023   0    
+5 QINI                               0.025     0.007   0.001</code></pre>
 </div>
 
 </div>
 <img data-src="index_files/figure-revealjs/show-grf-validation-1.svg" style="width:100.0%" class="r-stretch"><div class="small">
-<p>GRF内だけで、OOB CATE、<code>grf::get_scores()</code>、<code>grf::test_calibration()</code>を用いて評価する。Grouped calibration <span class="math inline">\(R^2\)</span> はEconMLと同じ式をRで計算した補助指標で、<code>grf</code>組み込みの指標ではない。</p>
+<p>開発コホートで学習したcausal forestを固定して外部CATEを予測する。外部コホート内でcross-fittingした評価用forestの<code>grf::get_scores()</code>からDR scoreを作り、固定予測のBLPとgroup calibrationを評価する。評価用forest自身のCATE予測は使用しない。</p>
 </div>
 </section>
 <section id="grfのdiscrimination-rate" class="slide level2">
@@ -1595,9 +1809,9 @@ Variable splits:
 <section id="econmlモデルを説明するpython" class="slide level2">
 <h2>EconMLモデルを説明する（Python）</h2>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">PDP</a></li><li><a href="#tabset-6-2">ICE</a></li><li><a href="#tabset-6-3">Global SHAP</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">PDP</a></li><li><a href="#tabset-9-2">ICE</a></li><li><a href="#tabset-9-3">Global SHAP</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-9-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1608,7 +1822,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-6-2">
+<div id="tabset-9-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1619,7 +1833,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-6-3">
+<div id="tabset-9-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1639,9 +1853,9 @@ Variable splits:
 <section id="grfモデルを説明するr" class="slide level2">
 <h2>GRFモデルを説明する（R）</h2>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">PDP</a></li><li><a href="#tabset-7-2">ICE</a></li><li><a href="#tabset-7-3">Global SHAP</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">PDP</a></li><li><a href="#tabset-10-2">ICE</a></li><li><a href="#tabset-10-3">Global SHAP</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
+<div id="tabset-10-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1652,7 +1866,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-7-2">
+<div id="tabset-10-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1663,7 +1877,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-7-3">
+<div id="tabset-10-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1683,9 +1897,9 @@ Variable splits:
 <p>各ノードの <code>value</code> は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じtest setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。</p>
 </div>
 <div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">S-learner</a></li><li><a href="#tabset-8-2">T-learner</a></li><li><a href="#tabset-8-3">X-learner</a></li><li><a href="#tabset-8-4">R-learner</a></li><li><a href="#tabset-8-5">DR-learner</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">S-learner</a></li><li><a href="#tabset-11-2">T-learner</a></li><li><a href="#tabset-11-3">X-learner</a></li><li><a href="#tabset-11-4">R-learner</a></li><li><a href="#tabset-11-5">DR-learner</a></li></ul>
 <div class="tab-content">
-<div id="tabset-8-1">
+<div id="tabset-11-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1696,7 +1910,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-8-2">
+<div id="tabset-11-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1707,7 +1921,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-8-3">
+<div id="tabset-11-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1718,7 +1932,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-8-4">
+<div id="tabset-11-4">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1729,7 +1943,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-8-5">
+<div id="tabset-11-5">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1742,6 +1956,15 @@ Variable splits:
 </div>
 </div>
 </div>
+</section>
+<section id="実務において-1" class="slide level2">
+<h2>実務において</h2>
+<ul>
+<li>Rの<code>grf</code> packageが最も医学論文によい</li>
+<li>C-for-benefitは<code>EpiFOrsk</code> packgeで可能</li>
+<li>RCTのGATESは<code>evalITR</code> packageで可能だが、正直LLMに手書きで書かせて良いと思う</li>
+<li>pythonなら<code>econML</code>が良いがSurvival analysisはなし</li>
+</ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
@@ -1754,7 +1977,7 @@ Variable splits:
  collate  ja_JP.UTF-8
  ctype    ja_JP.UTF-8
  tz       Asia/Tokyo
- date     2026-09-08
+ date     2026-09-13
  pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)
  quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto
 
@@ -1810,6 +2033,7 @@ Variable splits:
  MASS              7.3-65    2025-02-28 [1] CRAN (R 4.5.1)
  Matrix            1.7-5     2026-03-21 [1] CRAN (R 4.5.3)
  memoise           2.0.1     2021-11-26 [1] CRAN (R 4.5.1)
+ modeldata       * 1.5.1     2025-08-22 [1] CRAN (R 4.5.1)
  mvtnorm         * 1.4-1     2026-06-06 [1] CRAN (R 4.5.3)
  otel              0.2.0     2025-08-29 [1] CRAN (R 4.5.1)
  partykit        * 1.2-29    2026-07-17 [1] CRAN (R 4.5.3)
@@ -1862,6 +2086,7 @@ Variable splits:
  xfun              0.59      2026-06-19 [1] CRAN (R 4.5.3)
  xgboost           3.3.0.1   2026-06-26 [1] local
  yaml              2.3.12    2025-12-10 [1] CRAN (R 4.5.2)
+ yardstick       * 1.4.0     2026-04-07 [1] CRAN (R 4.5.3)
  zoo               1.8-15    2025-12-15 [1] CRAN (R 4.5.2)
 
  [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library
@@ -1886,11 +2111,35 @@ Feuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. <span>“Ca
 <div id="ref-Inoue2024-sb" class="csl-entry" role="listitem">
 Inoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. <span>“Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.”</span> <em>Journal of Clinical Epidemiology</em> 176 (111538): 111538. <a href="https://doi.org/10.1016/j.jclinepi.2024.111538">https://doi.org/10.1016/j.jclinepi.2024.111538</a>.
 </div>
+<div id="ref-Inoue2024-cl" class="csl-entry" role="listitem">
+Inoue, Kosuke, Susan Athey, Katherine Baicker, and Yusuke Tsugawa. 2024. <span>“Heterogeneous Effects of Medicaid Coverage on Cardiovascular Risk Factors: Secondary Analysis of Randomized Controlled Trial.”</span> <em>BMJ (Clinical Research Ed.)</em> 386 (September): e079377. <a href="https://doi.org/10.1136/bmj-2024-079377">https://doi.org/10.1136/bmj-2024-079377</a>.
+</div>
+<div id="ref-Inoue2023-ek" class="csl-entry" role="listitem">
+Inoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. <span>“Machine-Learning-Based High-Benefit Approach Versus Conventional High-Risk Approach in Blood Pressure Management.”</span> <em>International Journal of Epidemiology</em> 52 (4): 1243–56. <a href="https://doi.org/10.1093/ije/dyad037">https://doi.org/10.1093/ije/dyad037</a>.
+</div>
+<div id="ref-Inoue2023-wl" class="csl-entry" role="listitem">
+Inoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. <span>“Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the <span>MESA</span> Study.”</span> <em>Circulation</em> 147 (2): 132–41. <a href="https://doi.org/10.1161/CIRCULATIONAHA.122.062626">https://doi.org/10.1161/CIRCULATIONAHA.122.062626</a>.
+</div>
+<div id="ref-Lee2024-mp" class="csl-entry" role="listitem">
+Lee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. <span>“Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.”</span> <em>Journal of the American Heart Association</em> 13 (19): e034862. <a href="https://doi.org/10.1161/JAHA.124.034862">https://doi.org/10.1161/JAHA.124.034862</a>.
+</div>
 <div id="ref-Little2021-hz" class="csl-entry" role="listitem">
 Little, Roderick J, and Roger J Lewis. 2021. <span>“Estimands, Estimators, and Estimates.”</span> <em>JAMA: The Journal of the American Medical Association</em> 326 (10): 967–68. <a href="https://doi.org/10.1001/jama.2021.2886">https://doi.org/10.1001/jama.2021.2886</a>.
 </div>
 <div id="ref-Moller2026-xi" class="csl-entry" role="listitem">
 Möller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. <span>“Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.”</span> <em>Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research</em> 29 (5): 905–13. <a href="https://doi.org/10.1016/j.jval.2026.01.013">https://doi.org/10.1016/j.jval.2026.01.013</a>.
+</div>
+<div id="ref-Ngufor2025-sd" class="csl-entry" role="listitem">
+Ngufor, Che, Nan Zhang, Holly K Van Houten, et al. 2025. <span>“Causal Machine Learning for Left Atrial Appendage Occlusion in Patients with Atrial Fibrillation.”</span> <em>JACC. Clinical Electrophysiology</em> 11 (5): 977–86. <a href="https://doi.org/10.1016/j.jacep.2024.12.013">https://doi.org/10.1016/j.jacep.2024.12.013</a>.
+</div>
+<div id="ref-Pathak2023-mo" class="csl-entry" role="listitem">
+Pathak, Suraj, Florence Y Lai, Joanne Miksza, et al. 2023. <span>“Surgical or Percutaneous Coronary Revascularization for Heart Failure: An in Silico Model Using Routinely Collected Health Data to Emulate a Clinical Trial.”</span> <em>European Heart Journal</em> 44 (5): 351–64. <a href="https://doi.org/10.1093/eurheartj/ehac670">https://doi.org/10.1093/eurheartj/ehac670</a>.
+</div>
+<div id="ref-Pirracchio2020-ta" class="csl-entry" role="listitem">
+Pirracchio, Romain, Alan Hubbard, Charles L Sprung, Sylvie Chevret, Djillali Annane, and Rapid Recognition of Corticosteroid Resistant or Sensitive Sepsis (RECORDS) Collaborators. 2020. <span>“Assessment of Machine Learning to Estimate the Individual Treatment Effect of Corticosteroids in Septic Shock.”</span> <em>JAMA Network Open</em> 3 (12): e2029050. <a href="https://doi.org/10.1001/jamanetworkopen.2020.29050">https://doi.org/10.1001/jamanetworkopen.2020.29050</a>.
+</div>
+<div id="ref-Scarpa2019-od" class="csl-entry" role="listitem">
+Scarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and Aaron Baum. 2019. <span>“Assessment of Risk of Harm Associated with Intensive Blood Pressure Management Among Patients with Hypertension Who Smoke: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial.”</span> <em>JAMA Network Open</em> 2 (3): e190005. <a href="https://doi.org/10.1001/jamanetworkopen.2019.0005">https://doi.org/10.1001/jamanetworkopen.2019.0005</a>.
 </div>
 <div id="ref-Segal2023-gi" class="csl-entry" role="listitem">
 Segal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. <span>“Assessing Heterogeneity of Treatment Effect in Real-World Data.”</span> <em>Annals of Internal Medicine</em> 176 (4): 536–44. <a href="https://doi.org/10.7326/M22-1510">https://doi.org/10.7326/M22-1510</a>.

@@ -1,0 +1,62 @@
+---
+title: "Writing Package Functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Writing Package Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
+library(EpiForsk)
+```
+
+This vignettes contains hints and recommendations for writing R functions within
+a package. If you are not already comfortable with writing R functions, you can
+read the chapters from [R for data science](https://r4ds.had.co.nz/functions.html)
+and [Advanced R](https://adv-r.hadley.nz/functions.html). 
+
+## Setting up
+Your R function must be contained in a .R file under the R folder. As a rule, 
+one R script contains only one function. If you have functions that are
+closely related, such as a function returning an S3 object and associated S3 
+methods, it can make sense to have them all in the same script. We recommend 
+combining functions that share common documentation. Combining the documentation
+of multiple functions is achieved using the roxygen2 tag  `@rdname`.
+
+## Dependencies
+When writing an R function, you will likely call functions from other packages.
+You may be used to calling `library()` or `require()` to load the namespace of a
+package and attach it to the search path. Never do this when writing package
+functions, as dependencies are handles elsewhere. Specifically, the DESCRIPTION
+file contains an imports field, listing all external packages needed for our
+package to work. Packages listed here will be installed when EpiForsk is
+installed. To add a package to the imports, use `usethis::use_package()`. Note
+the packages added to the description file are not imported into the EpiForsk
+package. The imports field just ensures the packages are present on the users
+computer. To use functions from external packages, use the `::` operator.
+Writing `pkg::name` will load package `pkg` if it isn't already loaded and
+access the function `name`. It is possible to import functions from other
+packages into the EpiForsk namespace using `@importFrom` for a single function
+or `@import` for the full package. It must be added to the roxygen2
+documentation in the `EpiForsk_package.R` file. Doing this makes the imported
+functions part of the package, increasing the chance of conflicting function
+names as well as increasing the package size. Therefore `::` is the default way
+to use external functions. We recommend using `@importFrom` for operators with
+special syntax such as `%>%` and for functions used repeatedly. Calling `::`
+costs around 5 `r knitr::asis_output("\U03bc")`s, so repeatedly means when the
+function could potentially be called millions of times. We recommend avoiding
+`@import`. For more, see 
+[dependencies](https://r-pkgs.org/dependencies-mindset-background.html).
+
+## Loading package functions
+To test your function during development, you can use `devtools::load_all()`
+to make it available in the R session. This makes testing smoother than
+waiting for the package to install every time.

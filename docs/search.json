@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.40309\n\n\n2\n20.36533\n\n\n3\n22.33030\n\n\n4\n22.35660\n\n\n5\n19.48700\n\n\n6\n17.85777\n\n\n7\n22.36235\n\n\n8\n23.82932\n\n\n9\n25.45789\n\n\n10\n22.13609\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n23.64031\n\n\n2\n21.42640\n\n\n3\n18.56646\n\n\n4\n22.28176\n\n\n5\n20.59339\n\n\n6\n19.59469\n\n\n7\n23.21476\n\n\n8\n17.16928\n\n\n9\n23.07659\n\n\n10\n18.88663\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n70.26140\n175.5129\n\n\n\n2\n71.78175\n208.2906\n\n\n\n3\n74.70957\n196.5176\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n72.13029\n175.8176\n\n\n\n2\n71.96518\n189.9568\n\n\n\n3\n73.02304\n197.4708\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -2209,21 +2209,21 @@
     "href": "statistics/mlcausal/index.html#どれがいいの",
     "title": "機械学習を用いた因果推論",
     "section": "どれがいいの？",
-    "text": "どれがいいの？\n\nメタラーナーの特徴と限界 {#tbl-metalearner-comparison} (Inoue et al. 2024)\n\n\n\n\n\n\n\nAlgorithm\n強み（Strengths）\n限界（Limitations）\n\n\n\n\nS-learner\n- シンプル- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある- 治療群と対照群の人数が不均衡な場合、不安定になる\n\n\nT-learner\n- シンプル- 治療群と対照群を分けて明示的にモデル化する- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 治療群と対照群の人数が不均衡な場合、不安定になる\n\n\nX-learner / DR-learner\n- 異質な治療効果を直接推定する- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\nR-learner\n- 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する- 治療効果に対する直接的な損失関数を構成できる\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\n\n\nS-learnerが最も直感的ではあるが・・・・・・\n\n一番の問題は95%信頼区間などは出せない\n\n過去のReviewだとDR-learnerが良さそう"
+    "text": "どれがいいの？\n\nメタラーナーの特徴と限界 {#tbl-metalearner-comparison} (Inoue, Adomi, et al. 2024)\n\n\n\n\n\n\n\nAlgorithm\n強み（Strengths）\n限界（Limitations）\n\n\n\n\nS-learner\n- シンプル- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある- 治療群と対照群の人数が不均衡な場合、不安定になる\n\n\nT-learner\n- シンプル- 治療群と対照群を分けて明示的にモデル化する- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 治療群と対照群の人数が不均衡な場合、不安定になる\n\n\nX-learner / DR-learner\n- 異質な治療効果を直接推定する- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\nR-learner\n- 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する- 治療効果に対する直接的な損失関数を構成できる\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\n\n\nS-learnerが最も直感的ではあるが・・・・・・\n\n一番の問題は95%信頼区間などは出せない\n\n過去のReviewだとDR-learnerが良さそう\nあまり医学論文だと使われていない印象"
   },
   {
     "objectID": "statistics/mlcausal/index.html#random-forestについて",
     "href": "statistics/mlcausal/index.html#random-forestについて",
     "title": "機械学習を用いた因果推論",
     "section": "Random forestについて",
-    "text": "Random forestについて\n\n\nTree-based modelの大御所\nBootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る\n\n当然ながら、この時は「Outcome」を予測するようにTreeを分割させる\n\n自然に交互作用や非線形の関係を推測可能\nそのTreeの多数決で予測を行う"
+    "text": "Random forestについて\n\nRandom forest\nTree-based modelの大御所\nBootstrapをした行にランダムで少数の変数で簡単な決定木をたくさん作る\n\n当然ながら、この時は「Outcome」を予測するようにTreeを分割させる\n\n自然に交互作用や非線形の関係を推測可能\nそのTreeの多数決で予測を行う"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forestの原理",
     "href": "statistics/mlcausal/index.html#causal-forestの原理",
     "title": "機械学習を用いた因果推論",
     "section": "Causal forestの原理",
-    "text": "Causal forestの原理\n\nHTE専用の機械学習\n基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割する\nOverfittingを防ぐために”Honest”を用いる\n\n分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める"
+    "text": "Causal forestの原理\n\nHonesty\nHTE専用の機械学習\n基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)\nOverfittingを防ぐために”Honest”を用いる\n\n分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forestの強み",
@@ -3537,266 +3537,266 @@
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#可視化事始め",
     "href": "statistics/DAG_variable_selection_mi/index.html#可視化事始め",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "可視化事始め",
     "text": "可視化事始め\nそのフィギュア、必要ですか？\n2021/3/5 ＠Keio University\n新美 望"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#take-home-message",
     "href": "statistics/DAG_variable_selection_mi/index.html#take-home-message",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Take Home Message",
     "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n色覚多様性にも配慮した色を使う"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#what-is-this",
     "href": "statistics/DAG_variable_selection_mi/index.html#what-is-this",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "What Is This？",
     "text": "What Is This？"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#画像例",
     "href": "statistics/DAG_variable_selection_mi/index.html#画像例",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "画像例",
     "text": "画像例"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#visualization",
     "href": "statistics/DAG_variable_selection_mi/index.html#visualization",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Visualization",
     "text": "Visualization\n\nTableと異なり、Figureにすることで情報量は格段に上がる\n一方で、適切なFigureを描かないと見にくいばかりか、misleadingにもなりうる\n内科の問診のように、基礎中の基礎だけど重要極まりない工程\nVisualizationって誰かに習ったっけ？"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容-1",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容-1",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#よいfigureの条件",
     "href": "statistics/DAG_variable_selection_mi/index.html#よいfigureの条件",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "よいFigureの条件",
     "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nTufte, 1983, p. 51\n\n\n\nEdward Tufte"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#非常に良いfigureの見本",
     "href": "statistics/DAG_variable_selection_mi/index.html#非常に良いfigureの見本",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "非常に良いFigureの見本",
     "text": "非常に良いFigureの見本\n\n\n\n\n\n\n？？？"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#よいfigureの条件-1",
     "href": "statistics/DAG_variable_selection_mi/index.html#よいfigureの条件-1",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "よいFigureの条件",
     "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nデータ・インク比を最大化する\n\n\n\nEdward Tufte"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容-2",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容-2",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#インクデータ比の法則",
     "href": "statistics/DAG_variable_selection_mi/index.html#インクデータ比の法則",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "インク・データ比の法則",
     "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容-3",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容-3",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて\nTake home message"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#見せたいものって",
     "href": "statistics/DAG_variable_selection_mi/index.html#見せたいものって",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "見せたいものって？",
     "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#人間の得意苦手分野",
     "href": "statistics/DAG_variable_selection_mi/index.html#人間の得意苦手分野",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "人間の得意・苦手分野",
     "text": "人間の得意・苦手分野"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#example",
     "href": "statistics/DAG_variable_selection_mi/index.html#example",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Example",
     "text": "Example\n\n\n\n青が感染症\n赤が戦場での負傷\n黒がその他\nどちらが分かりやすいですか？"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#空白スライド",
     "href": "statistics/DAG_variable_selection_mi/index.html#空白スライド",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "空白スライド",
     "text": "空白スライド"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容-4",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容-4",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#nへの意識",
     "href": "statistics/DAG_variable_selection_mi/index.html#nへの意識",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Nへの意識",
     "text": "Nへの意識\n\n\n\n連続値の平均や中央値を比較する時には分布も非常に重要\n分布を見る時にはバイオリンプロットもよい\nサンプルサイズの大きさで、使う図表を分けるべき\n一つの目安として n &lt; 30 ではドットチャートを併用する"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#whats-this",
     "href": "statistics/DAG_variable_selection_mi/index.html#whats-this",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "What’s This？",
     "text": "What’s This？\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#whats-this-1",
     "href": "statistics/DAG_variable_selection_mi/index.html#whats-this-1",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "What’s This？",
     "text": "What’s This？\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???\n???"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#thats-it",
     "href": "statistics/DAG_variable_selection_mi/index.html#thats-it",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "That’s It!!",
     "text": "That’s It!!\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n!!!!"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#nへの意識-1",
     "href": "statistics/DAG_variable_selection_mi/index.html#nへの意識-1",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Nへの意識",
     "text": "Nへの意識\n\n\n\n何かの比較の時には必ず分布も考慮する\n箱ひげ図やバイオリンプロットは非常に見やすい\n一方で、Nが小さいときにはその意味も変わる\nNが少ないときはそのデータも入れた方が良い"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#nへの意識と見やすさの両立",
     "href": "statistics/DAG_variable_selection_mi/index.html#nへの意識と見やすさの両立",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Nへの意識と見やすさの両立",
     "text": "Nへの意識と見やすさの両立\n\nドットチャートに要約（平均・中央値）を追加する\nドットを出来るだけ薄くする"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#まとめ",
     "href": "statistics/DAG_variable_selection_mi/index.html#まとめ",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "まとめ",
     "text": "まとめ"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容-5",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容-5",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：Gestaltと色使いについて"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#次元プロットって",
     "href": "statistics/DAG_variable_selection_mi/index.html#次元プロットって",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "3次元プロットって？",
     "text": "3次元プロットって？\n\n\n\n基本的にはmisleading\n使わなくて済むなら絶対に使わない\n一番ダメなのが3次元円グラフ\n青と紫どちらが大きいですか？"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#どちらが見やすい",
     "href": "statistics/DAG_variable_selection_mi/index.html#どちらが見やすい",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "どちらが見やすい？",
     "text": "どちらが見やすい？"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#今日の内容-6",
     "href": "statistics/DAG_variable_selection_mi/index.html#今日の内容-6",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "今日の内容",
     "text": "今日の内容\n\nVisualization：良いFigureの条件\nデータ・インク比\n見せたいものと人間の得意分野\nNへの意識\n3次元プロットって？\nTips：ゲシュタルトと色使いについて"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#ゲシュタルトとは",
     "href": "statistics/DAG_variable_selection_mi/index.html#ゲシュタルトとは",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "ゲシュタルトとは",
     "text": "ゲシュタルトとは\n\n\n\n近接の法則\n類同の法則\n囲みの法則\n閉合の法則\n連続の法則\n接合の法則"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#推奨はしないけど",
     "href": "statistics/DAG_variable_selection_mi/index.html#推奨はしないけど",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "推奨はしないけど",
     "text": "推奨はしないけど"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#色使いについて",
     "href": "statistics/DAG_variable_selection_mi/index.html#色使いについて",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "色使いについて",
     "text": "色使いについて\n\n\n\n色覚異常は思っている以上にコモン\nカラーユニバーサルデザイン"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#カラーユニバーサルデザイン",
     "href": "statistics/DAG_variable_selection_mi/index.html#カラーユニバーサルデザイン",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "カラーユニバーサルデザイン",
     "text": "カラーユニバーサルデザイン\n\n具体的な色彩の選び方は以下を参照\nhttps://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#aha-figure-guidelines",
     "href": "statistics/DAG_variable_selection_mi/index.html#aha-figure-guidelines",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "AHA Figure Guidelines",
     "text": "AHA Figure Guidelines\nhttps://www.ahajournals.org/figure-guidelines"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#take-home-message-1",
     "href": "statistics/DAG_variable_selection_mi/index.html#take-home-message-1",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Take Home Message",
     "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n色覚多様性にも配慮した色を使う"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#reference",
     "href": "statistics/DAG_variable_selection_mi/index.html#reference",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "Reference",
     "text": "Reference\n\nReveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency.\n\nCirculation. 2019;140(18):1506-1518.\n\nGraphics and statistics for cardiology: Comparing categorical and continuous variables.\n\nHeart. 2016;102(5):349-355.\n\n永田ゆかり（2020）『データ視覚化のデザイン』SBクリエイティブ株式会社\nキーラン・ヒーリー（2021）『実践Data Scienceシリーズ データ分析のためのデータ可視化入門』KS情報科学専門書\nhttps://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html\nhttps://socviz.co/lookatdata.html\nhttps://seaborn.pydata.org/tutorial/function_overview.html"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#ご静聴ありがとうございました",
     "href": "statistics/DAG_variable_selection_mi/index.html#ご静聴ありがとうございました",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "ご静聴ありがとうございました",
     "text": "ご静聴ありがとうございました"
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#補足画像",
     "href": "statistics/DAG_variable_selection_mi/index.html#補足画像",
-    "title": "可視化事始め",
+    "title": "モデルに入れる因子の選択",
     "section": "補足画像",
     "text": "補足画像"
   },
@@ -4512,21 +4512,21 @@
     "href": "statistics/mlcausal/index.html#modification因子と治療効果",
     "title": "機械学習を用いた因果推論",
     "section": "Modification因子と治療効果",
-    "text": "Modification因子と治療効果\n\nATE共変量とOutcomeのRiskの1:1の関係性主要な連続値の因子とTreatment effectsTreatment effectのHeterogeneity\n\n\n\n\n# A tibble: 1 × 6\n      n      ate_rd ite_rd_sd ate_rd_se ci_lower ci_upper\n  &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1  3000 -0.00000531     0.104   0.00191 -0.00374  0.00373\n\n\n\nATEはほぼ0"
+    "text": "Modification因子と治療効果\n\nATE共変量とOutcomeのRiskの1:1の関係性主要な連続値の因子とTreatment effectsTreatment effectのHeterogeneity\n\n\n\n\n# A tibble: 1 × 6\n      n  ate_rd ite_rd_sd ate_rd_se ci_lower ci_upper\n  &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1  3000 -0.0500     0.109   0.00199  -0.0539  -0.0461\n\n\n\n集団全体では、ca = 1 によりイベントリスクが平均5 percentage points低下する\nHTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learners",
     "href": "statistics/mlcausal/index.html#meta-learners",
     "title": "機械学習を用いた因果推論",
-    "section": "Meta-learners",
-    "text": "Meta-learners\n\nS-learnerT-learnerX-learnerR-learnerDR-learner\n\n\n\nimport numpy as np\nimport pandas as pd\nfrom econml.metalearners import SLearner\nfrom sklearn.ensemble import HistGradientBoostingClassifier\nfrom sklearn.model_selection import train_test_split\nfrom xgboost import XGBRegressor\n\n\ntoy_data = r.toy_data.copy()\nfeature_names = [\"age\", \"sexm1\", \"bmi\", \"hf\", \"bnp\", \"lvef\"]\n\nX = toy_data.loc[:, feature_names].astype(float)\nY = toy_data[\"bin_outcome\"].astype(int)\nT = toy_data[\"ca\"].astype(int)\n\n# treatment と outcome の4群がおおむね保たれるように分割する\nstrata = T.astype(str) + \"_\" + Y.astype(str)\nX_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(\n    X, Y, T,\n    test_size=0.2,\n    random_state=123,\n    stratify=strata,\n)\n\nxgb_binary_params = {\n    \"objective\": \"binary:logistic\",\n    \"eval_metric\": \"logloss\",\n    \"n_estimators\": 300,\n    \"learning_rate\": 0.05,\n    \"max_depth\": 3,\n    \"min_child_weight\": 10,\n    \"subsample\": 0.8,\n    \"colsample_bytree\": 0.8,\n    \"reg_lambda\": 1.0,\n    \"random_state\": 123,\n    \"n_jobs\": -1,\n}\n\n# objective=\"binary:logistic\" では predict() が P(Y=1 | X, T) を返す\noutcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\ns_learner = SLearner(overall_model=outcome_model)\ns_learner.fit(Y_train, T_train, X=X_train)\n\n# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)\ns_cate_rd = np.asarray(\n    s_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ns_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": s_cate_rd,\n})\n\nprint(s_effect_df.head())\nprint(f\"ATE in test set (risk difference): {s_cate_rd.mean():.3f}\")\n\n\n\n    id      cate_rd\n1 1213 -0.058573544\n2  241 -0.014187932\n3 1960  0.077415705\n4  485  0.028623044\n5  726  0.006469309\n6 2657 -0.090554357\n\n\nATE in test set (risk difference): 0.003\n\n\n\ns_cate_rd は確率スケールの治療効果（risk difference）であり、負の値は ca = 1 によるイベントリスク低下を表す\nS-learnerは1つのモデルで \\(E(Y \\mid X, T)\\) を学習し、各対象者について T = 1 と T = 0 の予測確率の差を取る\n因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要\n\n\n\n\nfrom econml.metalearners import TLearner\n\nt_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# T=0 と T=1 で別々の outcome model を学習する\nt_learner = TLearner(models=t_outcome_model)\nt_learner.fit(Y_train, T_train, X=X_train)\n\nt_cate_rd = np.asarray(\n    t_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nt_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": t_cate_rd,\n})\n\nprint(t_effect_df.head())\nprint(f\"ATE in test set (risk difference): {t_cate_rd.mean():.3f}\")\n\n\n\n      id     cate_rd\n601 1213 -0.08676803\n602  241 -0.05012167\n603 1960  0.05148602\n604  485 -0.07560945\n605  726  0.03668851\n606 2657  0.06797814\n\n\nATE in test set (risk difference): -0.010\n\n\n\nT-learnerは T = 0 と T = 1 で2つの予測確率モデルを作り、その差をCATEとする\n各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい\n\n\n\n\nfrom econml.metalearners import XLearner\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nx_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# imputed treatment effect（連続値）を学習するための回帰モデル\nx_cate_model = HistGradientBoostingRegressor(\n    learning_rate=0.05,\n    max_iter=200,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\n# P(T=1 | X) を学習するモデル\nx_propensity_model = HistGradientBoostingClassifier(\n    learning_rate=0.05,\n    max_iter=150,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\nx_learner = XLearner(\n    models=x_outcome_model,\n    cate_models=x_cate_model,\n    propensity_model=x_propensity_model,\n)\nx_learner.fit(Y_train, T_train, X=X_train)\n\nx_cate_rd = np.asarray(\n    x_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nx_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": x_cate_rd,\n})\n\nprint(x_effect_df.head())\nprint(f\"ATE in test set (risk difference): {x_cate_rd.mean():.3f}\")\n\n\n\n       id     cate_rd\n1201 1213 -0.18394315\n1202  241 -0.12883558\n1203 1960  0.06132306\n1204  485 -0.20044873\n1205  726  0.14357981\n1206 2657  0.08356146\n\n\nATE in test set (risk difference): -0.006\n\n\n\nX-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する\n最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する\n\n\n\n\nfrom econml.dml import NonParamDML\n\nr_learner = NonParamDML(\n    model_y=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_t=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    discrete_treatment=True,\n    cv=5,\n    random_state=123,\n)\n\n# NonParamDML implements the R-learner residual-on-residual objective.\nr_learner.fit(Y_train, T_train, X=X_train)\n\nr_cate_rd = np.asarray(\n    r_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": r_cate_rd,\n})\n\nprint(r_effect_df.head())\nprint(f\"ATE in test set (risk difference): {r_cate_rd.mean():.3f}\")\n\n\n\n       id    cate_rd\n1801 1213 -0.2973008\n1802  241 -0.1484302\n1803 1960  0.1327312\n1804  485 -0.6428122\n1805  726  0.1524836\n1806 2657  0.1501450\n\n\nATE in test set (risk difference): -0.006\n\n\n\nR-learnerはoutcomeとtreatmentをcross-fittingで残差化し、残差同士の関係からCATEを学習する\nNonParamDML の非線形final modelにより、HTEを柔軟に表現する\n\n\n\n\nfrom econml.dr import DRLearner\n\ndr_learner = DRLearner(\n    model_propensity=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_regression=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    min_propensity=0.01,\n    cv=5,\n    random_state=123,\n)\n\n# nuisance modelはcv=5でcross-fittingされる\ndr_learner.fit(Y_train, T_train, X=X_train)\n\ndr_cate_rd = np.asarray(\n    dr_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ndr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": dr_cate_rd,\n})\n\nprint(dr_effect_df.head())\nprint(f\"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}\")\n\n# 5つのlearnerを同じtest setで比較する\nlearner_summary = pd.DataFrame({\n    \"learner\": [\n        \"S-learner\",\n        \"T-learner\",\n        \"X-learner\",\n        \"R-learner\",\n        \"DR-learner\",\n    ],\n    \"ate_rd\": [\n        s_cate_rd.mean(),\n        t_cate_rd.mean(),\n        x_cate_rd.mean(),\n        r_cate_rd.mean(),\n        dr_cate_rd.mean(),\n    ],\n    \"cate_sd\": [\n        s_cate_rd.std(ddof=1),\n        t_cate_rd.std(ddof=1),\n        x_cate_rd.std(ddof=1),\n        r_cate_rd.std(ddof=1),\n        dr_cate_rd.std(ddof=1),\n    ],\n})\n\nprint(learner_summary.round(3))\n\n\n\n       id     cate_rd\n2401 1213 -0.66810596\n2402  241 -0.08076074\n2403 1960  0.23896952\n2404  485 -0.98426791\n2405  726  0.22035149\n2406 2657  0.17602185\n\n\nATE in test set (risk difference): -0.000\n\n\n     learner ate_rd cate_sd\n1  S-learner  0.003   0.079\n2  T-learner -0.010   0.161\n3  X-learner -0.006   0.155\n4  R-learner -0.006   0.219\n5 DR-learner  0.000   0.285\n\n\n\ndiscrete_outcome=True により、EconMLがoutcome classifierの陽性確率を使用する\npropensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する\nmin_propensity=0.01 は、推定propensity scoreが0または1に近い場合の極端な補正を制限する"
+    "section": "meta-learners",
+    "text": "meta-learners\n\nRCTのSub解析-1RCTのSub解析-2RCTのSub解析-3\n\n\n\nSepsisにCorticosteroidを用いたRCT複数の二次解析\nSuperLearnerを用いたS-learnerの手法でITEを検出\nある治療閾値を設定してSurrogate treeを用いて、臨床判断への有用性を記載 (Pirracchio et al. 2020)\n\n\n\n\n個々人への適切なDAPT期間を決めるためのiDAPT scoreを作成\nDAPTの期間をみた3 RCTを統合してX-learnerでITEを計算\n別のRCT dataでExternal validation\nModelはSHAPで評価\nいわゆる通常のRisk model研究 (Lee et al. 2024)\n\n\n\n\nSTICH trialをEmulateしたイギリスの大規模データセット\nPCI vs. CABGの治療効果を研究\n通常の解析以外の感度分析としてS/T/X-learnerを使っている\n細かい評価などはしていない (Pathak et al. 2023)\n\n\n\n\n\n正直ほとんどない\n通常のRobustな解析のSensitivity analysisくらいで良いかも"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forest",
     "href": "statistics/mlcausal/index.html#causal-forest",
     "title": "機械学習を用いた因果推論",
     "section": "Causal forest",
-    "text": "Causal forest\n\n\n\n\n\n\n\n\n\n       control     treated\n[1,] 0.1189504 -0.07283693\n[2,] 1.0004347  1.08330540\n[3,] 0.3350726 -0.14037399\n[4,] 1.0104821  1.00955164\n[5,] 1.0509012  0.87677371\n[6,] 0.3772709  1.44629908\n\n\n\n\n\n\n\n\n\npolicy_tree object \nTree depth:  2 \nActions:  1: control 2: treated \nVariable splits: \n(1) split_variable: bmi  split_value: 27.0173 \n  (2) split_variable: bnp  split_value: 90 \n    (4) * action: 1 \n    (5) * action: 2 \n  (3) split_variable: lvef  split_value: 58 \n    (6) * action: 2 \n    (7) * action: 1"
+    "text": "Causal forest\n\n\n\n\n\n\n\n\n\n       control     treated\n[1,] 0.1332748 -0.05555335\n[2,] 0.9917551  1.16579378\n[3,] 0.3179463 -0.10799861\n[4,] 1.0082375  0.99549650\n[5,] 1.0393671  0.83895821\n[6,] 0.4256145  1.46803683\n\n\n\n\n\n\n\n\n\npolicy_tree object \nTree depth:  2 \nActions:  1: control 2: treated \nVariable splits: \n(1) split_variable: bnp  split_value: 67 \n  (2) split_variable: lvef  split_value: 52 \n    (4) * action: 2 \n    (5) * action: 1 \n  (3) split_variable: bnp  split_value: 74 \n    (6) * action: 1 \n    (7) * action: 2"
   },
   {
     "objectID": "statistics/mlcausal/index.html#男女差lvefcr等との治療効果",
@@ -4568,7 +4568,7 @@
     "href": "statistics/mlcausal/index.html#モデルの評価の仕方",
     "title": "機械学習を用いた因果推論",
     "section": "モデルの評価の仕方",
-    "text": "モデルの評価の仕方\n\n実際の研究では、HTEのモデルもTRIPOD-AIに従う事が推奨されている(Segal et al. 2023; Collins et al. 2024)\n通常のモデルと一緒で独立したtest datasetを用意しておく\n診る項目は2種類\n\nDiscrimination\n\nGATE, RATE(AUTOC), Qini\n\nCalibration\n\nbest linear predictionの係数\n\n\nMeta-learnerの場合は通常の予測モデルの評価も行う"
+    "text": "モデルの評価の仕方\n\n実際の研究では、HTEのモデルもTRIPOD-AIに従う事が推奨されている(Segal et al. 2023; Collins et al. 2024)\n通常のモデルと一緒で独立したtest datasetを用意しておく\n診る項目は2種類\n\nDiscrimination\n\nRATE(AUTOC), Qini, C-for-benefit\n\nCalibration\n\nbest linear predictor\nGATE\n\n\nMeta-learnerの場合は通常の予測モデルの評価も行う"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learnerの場合",
@@ -4603,7 +4603,7 @@
     "href": "statistics/mlcausal/index.html#autoctargeting-operator-curveとqini係数",
     "title": "機械学習を用いた因果推論",
     "section": "AUTOC(Targeting operator curve)とQini係数",
-    "text": "AUTOC(Targeting operator curve)とQini係数\n\n\nRankingを連続的に見ていく閾値\n上位n%でのITEの平均と全体のATEの差をとる(Benefit)\n横軸にn%、縦軸にこのBenefitの値を並べて面積をとる\nどちらかというと妥当性を診ているイメージ"
+    "text": "AUTOC(Targeting operator curve)とQini係数\n\n\nRankingを連続的に見ていく閾値\n上位n%でのITEの平均と全体のATEの差をとる(Benefit)\n横軸にn%、縦軸にこのBenefitの値を並べて面積をとる\nどちらかというと妥当性を診ているイメージ\nQini係数は、TOCにpercentageで重みづけをしている\n\nCost performanceも見ることができる"
   },
   {
     "objectID": "statistics/mlcausal/index.html#best-linear-prediction",
@@ -4701,7 +4701,7 @@
     "href": "statistics/mlcausal/index.html#econmlモデルをsingle-treeで説明",
     "title": "機械学習を用いた因果推論",
     "section": "EconMLモデルをSingle Treeで説明",
-    "text": "EconMLモデルをSingle Treeで説明\n\n各ノードの value は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じtest setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。\n\n\nS-learnerT-learnerX-learnerR-learnerDR-learner\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.5.3 (2026-03-11)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-09-08\n pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)\n quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version   date (UTC) lib source\n backports         1.5.1     2026-04-03 [1] CRAN (R 4.5.3)\n base64url         1.4       2018-05-14 [1] CRAN (R 4.5.1)\n boot              1.3-32    2025-08-29 [1] CRAN (R 4.5.1)\n cachem            1.1.0     2024-05-16 [1] CRAN (R 4.5.1)\n callr             3.7.6     2024-03-25 [1] CRAN (R 4.5.1)\n checkmate         2.3.3     2025-08-18 [1] CRAN (R 4.5.1)\n cli               3.6.6     2026-04-09 [1] CRAN (R 4.5.3)\n codetools         0.2-20    2024-03-31 [1] CRAN (R 4.5.1)\n curl              7.1.0     2026-04-22 [1] CRAN (R 4.5.3)\n dagitty         * 0.3-4     2023-12-07 [1] CRAN (R 4.5.1)\n data.table        1.17.8    2025-07-10 [1] CRAN (R 4.5.1)\n DiagrammeR        1.0.12    2026-04-27 [1] CRAN (R 4.5.3)\n digest            0.6.39    2025-11-19 [1] CRAN (R 4.5.2)\n dplyr           * 1.2.1     2026-04-03 [1] CRAN (R 4.5.3)\n evaluate          1.0.5     2025-08-27 [1] CRAN (R 4.5.1)\n farver            2.1.2     2024-05-13 [1] CRAN (R 4.5.1)\n fastmap           1.2.0     2024-05-15 [1] CRAN (R 4.5.1)\n forcats         * 1.0.1     2025-09-25 [1] CRAN (R 4.5.1)\n Formula           1.2-5     2023-02-24 [1] CRAN (R 4.5.1)\n generics          0.1.4     2025-05-09 [1] CRAN (R 4.5.1)\n GGally          * 2.4.0     2025-08-23 [1] CRAN (R 4.5.1)\n ggdag           * 0.2.13    2024-07-22 [1] CRAN (R 4.5.1)\n ggforce           0.5.0     2025-06-18 [1] CRAN (R 4.5.1)\n ggplot2         * 4.0.3     2026-04-22 [1] CRAN (R 4.5.3)\n ggraph            2.2.2     2025-08-24 [1] CRAN (R 4.5.2)\n ggrepel           0.9.8     2026-03-17 [1] CRAN (R 4.5.3)\n ggstats           0.13.0    2026-03-06 [1] CRAN (R 4.5.2)\n glue              1.8.1     2026-04-17 [1] CRAN (R 4.5.3)\n graphlayouts      1.2.4     2026-06-19 [1] CRAN (R 4.5.3)\n grf             * 2.6.1     2026-03-04 [1] CRAN (R 4.5.3)\n gridExtra         2.3.1     2026-06-25 [1] CRAN (R 4.5.3)\n gtable            0.3.6     2024-10-25 [1] CRAN (R 4.5.1)\n here            * 1.0.2     2025-09-15 [1] CRAN (R 4.5.1)\n hms               1.1.4     2025-10-17 [1] CRAN (R 4.5.1)\n htmltools         0.5.9     2025-12-04 [1] CRAN (R 4.5.2)\n htmlwidgets       1.6.4     2023-12-06 [1] CRAN (R 4.5.1)\n igraph            2.3.3     2026-06-26 [1] CRAN (R 4.5.3)\n inum              1.0-5     2023-03-09 [1] CRAN (R 4.5.1)\n jsonlite          2.0.0     2025-03-27 [1] CRAN (R 4.5.1)\n knitr             1.51      2025-12-20 [1] CRAN (R 4.5.2)\n labeling          0.4.3     2023-08-29 [1] CRAN (R 4.5.1)\n lattice           0.22-9    2026-02-09 [1] CRAN (R 4.5.2)\n libcoin         * 1.0-13    2026-06-04 [1] CRAN (R 4.5.3)\n lifecycle         1.0.5     2026-01-08 [1] CRAN (R 4.5.2)\n lubridate       * 1.9.5     2026-02-04 [1] CRAN (R 4.5.2)\n magrittr          2.0.5     2026-04-04 [1] CRAN (R 4.5.3)\n marginaleffects   0.32.0    2026-02-14 [1] CRAN (R 4.5.2)\n MASS              7.3-65    2025-02-28 [1] CRAN (R 4.5.1)\n Matrix            1.7-5     2026-03-21 [1] CRAN (R 4.5.3)\n memoise           2.0.1     2021-11-26 [1] CRAN (R 4.5.1)\n mvtnorm         * 1.4-1     2026-06-06 [1] CRAN (R 4.5.3)\n otel              0.2.0     2025-08-29 [1] CRAN (R 4.5.1)\n partykit        * 1.2-29    2026-07-17 [1] CRAN (R 4.5.3)\n pillar            1.11.1    2025-09-17 [1] CRAN (R 4.5.1)\n pkgconfig         2.0.3     2019-09-22 [1] CRAN (R 4.5.1)\n png               0.1-9     2026-03-15 [1] CRAN (R 4.5.3)\n policytree      * 1.2.4     2026-02-18 [1] CRAN (R 4.5.2)\n polyclip          1.10-7    2024-07-23 [1] CRAN (R 4.5.1)\n prettyunits       1.2.0     2023-09-24 [1] CRAN (R 4.5.1)\n processx          3.9.0     2026-04-22 [1] CRAN (R 4.5.3)\n ps                1.9.3     2026-04-20 [1] CRAN (R 4.5.3)\n purrr           * 1.2.2     2026-04-10 [1] CRAN (R 4.5.3)\n R6                2.6.1     2025-02-15 [1] CRAN (R 4.5.1)\n RColorBrewer      1.1-3     2022-04-03 [1] CRAN (R 4.5.1)\n Rcpp              1.1.1-1.1 2026-04-24 [1] CRAN (R 4.5.3)\n readr           * 2.2.0     2026-02-19 [1] CRAN (R 4.5.2)\n reticulate        1.46.0    2026-04-09 [1] CRAN (R 4.5.3)\n rlang             1.3.0     2026-07-05 [1] CRAN (R 4.5.3)\n rmarkdown         2.31      2026-03-26 [1] CRAN (R 4.5.3)\n rpart             4.1.27    2026-03-27 [1] CRAN (R 4.5.3)\n rprojroot         2.1.1     2025-08-26 [1] CRAN (R 4.5.1)\n rstudioapi        0.19.0    2026-06-11 [1] CRAN (R 4.5.3)\n S7                0.2.2     2026-04-22 [1] CRAN (R 4.5.3)\n sandwich          3.1-1     2024-09-15 [1] CRAN (R 4.5.1)\n scales            1.4.0     2025-04-24 [1] CRAN (R 4.5.1)\n secretbase        1.3.0     2026-06-12 [1] CRAN (R 4.5.3)\n sessioninfo     * 1.2.4     2026-06-04 [1] CRAN (R 4.5.3)\n shapviz         * 0.10.4    2026-08-31 [1] CRAN (R 4.5.3)\n stringi           1.8.7     2025-03-27 [1] CRAN (R 4.5.2)\n stringr         * 1.6.0     2025-11-04 [1] CRAN (R 4.5.2)\n survival          3.8-6     2026-01-16 [1] CRAN (R 4.5.2)\n targets         * 1.12.0    2026-02-09 [1] CRAN (R 4.5.2)\n tibble          * 3.3.1     2026-01-11 [1] CRAN (R 4.5.2)\n tidygraph         1.3.0     2023-12-18 [1] CRAN (R 4.5.1)\n tidyr           * 1.3.2     2025-12-19 [1] CRAN (R 4.5.2)\n tidyselect        1.2.1     2024-03-11 [1] CRAN (R 4.5.1)\n tidyverse       * 2.0.0     2023-02-22 [1] CRAN (R 4.5.1)\n timechange        0.4.0     2026-01-29 [1] CRAN (R 4.5.2)\n tinyplot        * 0.7.0     2026-07-03 [1] CRAN (R 4.5.3)\n tweenr            2.0.3     2024-02-26 [1] CRAN (R 4.5.1)\n tzdb              0.5.0     2025-03-15 [1] CRAN (R 4.5.1)\n utf8              1.2.6     2025-06-08 [1] CRAN (R 4.5.1)\n V8                8.2.0     2026-04-21 [1] CRAN (R 4.5.3)\n vctrs             0.7.3     2026-04-11 [1] CRAN (R 4.5.3)\n viridis           0.6.5     2024-01-29 [1] CRAN (R 4.5.1)\n viridisLite       0.4.3     2026-02-04 [1] CRAN (R 4.5.2)\n visNetwork        2.1.4     2025-09-04 [1] CRAN (R 4.5.1)\n WeightIt          1.7.0     2026-04-22 [1] CRAN (R 4.5.3)\n withr             3.0.3     2026-06-19 [1] CRAN (R 4.5.3)\n xfun              0.59      2026-06-19 [1] CRAN (R 4.5.3)\n xgboost           3.3.0.1   2026-06-26 [1] local\n yaml              2.3.12    2025-12-10 [1] CRAN (R 4.5.2)\n zoo               1.8-15    2025-12-15 [1] CRAN (R 4.5.2)\n\n [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library\n * ── Packages attached to the search path.\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "EconMLモデルをSingle Treeで説明\n\n各ノードの value は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じtest setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。\n\n\nS-learnerT-learnerX-learnerR-learnerDR-learner"
   },
   {
     "objectID": "statistics/mlcausal/index.html#x-learner-dr-learner",
@@ -4771,7 +4771,7 @@
     "href": "statistics/mlcausal/index.html#references",
     "title": "機械学習を用いた因果推論",
     "section": "References",
-    "text": "References\n\n\nCollins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. “TRIPOD+AI Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.” BMJ 385 (April): e078378. https://doi.org/10.1136/bmj-2023-078378.\n\n\nFeuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. “Causal Machine Learning for Predicting Treatment Outcomes.” Nature Medicine 30 (4): 958–68. https://doi.org/10.1038/s41591-024-02902-1.\n\n\nInoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. “Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.” Journal of Clinical Epidemiology 176 (111538): 111538. https://doi.org/10.1016/j.jclinepi.2024.111538.\n\n\nLittle, Roderick J, and Roger J Lewis. 2021. “Estimands, Estimators, and Estimates.” JAMA: The Journal of the American Medical Association 326 (10): 967–68. https://doi.org/10.1001/jama.2021.2886.\n\n\nMöller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. “Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.” Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research 29 (5): 905–13. https://doi.org/10.1016/j.jval.2026.01.013.\n\n\nSegal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. “Assessing Heterogeneity of Treatment Effect in Real-World Data.” Annals of Internal Medicine 176 (4): 536–44. https://doi.org/10.7326/M22-1510.\n\n\nThomas, Laine E, Fan Li, and Michael J Pencina. 2020. “Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.” The Journal of the American Medical Association 323 (23): 2417–18. https://doi.org/10.1001/jama.2020.7819.\n\n\n岩波データサイエンス刊行委員会, ed. 2016. 岩波データサイエンス Vol. 3: 特集 因果推論–実世界のデータから因果を読む. 岩波書店."
+    "text": "References\n\n\nCollins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. “TRIPOD+AI Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.” BMJ 385 (April): e078378. https://doi.org/10.1136/bmj-2023-078378.\n\n\nFeuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. “Causal Machine Learning for Predicting Treatment Outcomes.” Nature Medicine 30 (4): 958–68. https://doi.org/10.1038/s41591-024-02902-1.\n\n\nInoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. “Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.” Journal of Clinical Epidemiology 176 (111538): 111538. https://doi.org/10.1016/j.jclinepi.2024.111538.\n\n\nInoue, Kosuke, Susan Athey, Katherine Baicker, and Yusuke Tsugawa. 2024. “Heterogeneous Effects of Medicaid Coverage on Cardiovascular Risk Factors: Secondary Analysis of Randomized Controlled Trial.” BMJ (Clinical Research Ed.) 386 (September): e079377. https://doi.org/10.1136/bmj-2024-079377.\n\n\nInoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. “Machine-Learning-Based High-Benefit Approach Versus Conventional High-Risk Approach in Blood Pressure Management.” International Journal of Epidemiology 52 (4): 1243–56. https://doi.org/10.1093/ije/dyad037.\n\n\nInoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. “Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the MESA Study.” Circulation 147 (2): 132–41. https://doi.org/10.1161/CIRCULATIONAHA.122.062626.\n\n\nLee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. “Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.” Journal of the American Heart Association 13 (19): e034862. https://doi.org/10.1161/JAHA.124.034862.\n\n\nLittle, Roderick J, and Roger J Lewis. 2021. “Estimands, Estimators, and Estimates.” JAMA: The Journal of the American Medical Association 326 (10): 967–68. https://doi.org/10.1001/jama.2021.2886.\n\n\nMöller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. “Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.” Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research 29 (5): 905–13. https://doi.org/10.1016/j.jval.2026.01.013.\n\n\nNgufor, Che, Nan Zhang, Holly K Van Houten, et al. 2025. “Causal Machine Learning for Left Atrial Appendage Occlusion in Patients with Atrial Fibrillation.” JACC. Clinical Electrophysiology 11 (5): 977–86. https://doi.org/10.1016/j.jacep.2024.12.013.\n\n\nPathak, Suraj, Florence Y Lai, Joanne Miksza, et al. 2023. “Surgical or Percutaneous Coronary Revascularization for Heart Failure: An in Silico Model Using Routinely Collected Health Data to Emulate a Clinical Trial.” European Heart Journal 44 (5): 351–64. https://doi.org/10.1093/eurheartj/ehac670.\n\n\nPirracchio, Romain, Alan Hubbard, Charles L Sprung, Sylvie Chevret, Djillali Annane, and Rapid Recognition of Corticosteroid Resistant or Sensitive Sepsis (RECORDS) Collaborators. 2020. “Assessment of Machine Learning to Estimate the Individual Treatment Effect of Corticosteroids in Septic Shock.” JAMA Network Open 3 (12): e2029050. https://doi.org/10.1001/jamanetworkopen.2020.29050.\n\n\nScarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and Aaron Baum. 2019. “Assessment of Risk of Harm Associated with Intensive Blood Pressure Management Among Patients with Hypertension Who Smoke: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial.” JAMA Network Open 2 (3): e190005. https://doi.org/10.1001/jamanetworkopen.2019.0005.\n\n\nSegal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. “Assessing Heterogeneity of Treatment Effect in Real-World Data.” Annals of Internal Medicine 176 (4): 536–44. https://doi.org/10.7326/M22-1510.\n\n\nThomas, Laine E, Fan Li, and Michael J Pencina. 2020. “Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.” The Journal of the American Medical Association 323 (23): 2417–18. https://doi.org/10.1001/jama.2020.7819.\n\n\n岩波データサイエンス刊行委員会, ed. 2016. 岩波データサイエンス Vol. 3: 特集 因果推論–実世界のデータから因果を読む. 岩波書店."
   },
   {
     "objectID": "statistics/mlcausal/index.html#estimandの重要性",
@@ -4779,5 +4779,250 @@
     "title": "機械学習を用いた因果推論",
     "section": "Estimandの重要性",
     "text": "Estimandの重要性\n\n医学論文において、患者の背景というのはRCTの解釈で非常に重要\n\nMitra valveのTEERにおけるCOAPT vs. MITRA-FR trial\nCryptogenic strokeに対するPFO closureのRCTの結果の変遷\nAFのrhythm controlの優位性を示せたEAST-AFNET4 trial\n\n患者の性質によって異なる介入の治療効果(Estimand)がある(Little and Lewis 2021)"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#discrimination-c-for-benefit",
+    "href": "statistics/mlcausal/index.html#discrimination-c-for-benefit",
+    "title": "機械学習を用いた因果推論",
+    "section": "Discrimination ~ C-for-benefit",
+    "text": "Discrimination ~ C-for-benefit\n\n\n各人で予想した治療効果を順番に並べる\n5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)\n各々の群を一つのデータセットとして別個にATEを出す(真値)\n実際にランキング通りかどうかを比べる"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#calibration-gates",
+    "href": "statistics/mlcausal/index.html#calibration-gates",
+    "title": "機械学習を用いた因果推論",
+    "section": "Calibration ~ GATES",
+    "text": "Calibration ~ GATES\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n\n\n\n各人で予想した治療効果を順番に並べる\n5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)\n各々の群を一つのデータセットとして別個にATEを出す(真値)\n実際にランキング通りかどうかを比べる"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#calibration-best-linear-predictor法",
+    "href": "statistics/mlcausal/index.html#calibration-best-linear-predictor法",
+    "title": "機械学習を用いた因果推論",
+    "section": "Calibration ~ best linear predictor法",
+    "text": "Calibration ~ best linear predictor法\n\nATEの計算をして、各々の(ITE-ATE) ~ (treat - propensity score)でOrthogonalizationで出した係数\ngrfの中ではATEとCATEを別個にみるものがある(test_calibration())\n\nmean.forest.predictionが群全体のATE: 1なら正確にATEを見つけられている\ndifferential.forest.predictionがHeterogeneity: 1ならHeterogneityがある\n\n実際の論文でもgrf::test_calibration()だけを評価しているものが多い"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#best-linear-preojection",
+    "href": "statistics/mlcausal/index.html#best-linear-preojection",
+    "title": "機械学習を用いた因果推論",
+    "section": "Best linear preojection",
+    "text": "Best linear preojection\n\n予測されるITE ~ Covariatesで回帰させたもの\n各Covariatesがどのような影響にITEに影響しているかを見ている\nドメイン知識との整合性を診ることができる"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#モデルの実用法について",
+    "href": "statistics/mlcausal/index.html#モデルの実用法について",
+    "title": "機械学習を用いた因果推論",
+    "section": "モデルの実用法について",
+    "text": "モデルの実用法について\n\n誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという\nSurrogate treeと異なり、ITEが0を超えるかどうかで推奨を変える\n\nRだとpolicytree package, pythonだとeconmlで可能\n\n実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotをまず記述している事が多い"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forestについて-1",
+    "href": "statistics/mlcausal/index.html#causal-forestについて-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forestについて",
+    "text": "Causal forestについて\n\n論文では・・・・・・の評価を推奨\ngrfの作者たちのお勧めは以下の順番\n\nPropensity scoreのoverlap / positivity の確認\nIPW後のcovariate balanceの確認\ntest_calibration() によるfitの評価\nGATE/RATE による HTE 評価"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forest-rctのsub解析",
+    "href": "statistics/mlcausal/index.html#causal-forest-rctのsub解析",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forest ~ RCTのSub解析",
+    "text": "Causal forest ~ RCTのSub解析\n\nRCTのSub解析-1RCTのSub解析-2RCTのSub解析-3\n\n\n\nSPRINTのSub解析\nCausal forestを用いて解析\nSBP ≧144 mmHg, Current smokerはIntensiveな降圧は有害かもしれない (Scarpa et al. 2019)\n\n\n\n\n高血圧患者への降圧療法をHigh risk approachではなくHigh benefit approachを提唱した論文\nSPRINT + ACCORD-BP(RCT)のデータとNHANCEのデータを組み合わせている\nSupplementaryにGATESやRATESもありかなりしっかりした解析 (Inoue, Athey, et al. 2023)\n\n\n\n\nThe Oregon health insurance experiments(Medicaid)のSub解析\nHbA1cの値とSBPの値をアウトカムにしてInstrumental causal foerstで解析\n全体では差がなくても、便益があるGroupを探すことができる\nClinical implicationはないが、Policy makerには重要な研究 (Inoue, Athey, et al. 2024)\n\n\n\n\n\n全体的にシンプルな構成が多い\nRCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forest-観察研究",
+    "href": "statistics/mlcausal/index.html#causal-forest-観察研究",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forest ~ 観察研究",
+    "text": "Causal forest ~ 観察研究\n\n観察研究-1観察研究-2\n\n\n\nMESAを用いたCACの予後に対する影響のHeterogeneityをみた解析(厳密にはHTEではない)\n\n男性のHispanicでASCVD riskが高い患者でCACを計測する意義が高い\n\nPS matchをした後のデータでCausal forestを使って解析\nC-for-benefitでDiscriminationを評価\nBest linear fitとCalibration plotでCalibrationを評価\n観察研究での見本となる研究 (Inoue, Seeman, et al. 2023)\n\n\n\n\nOptumLabs Data WarehouseでLAAO vs. DOACを比較 → MayoのデータセットでExternal validation\nPS matchしたデータでCausal forest\ntest_calibration()でHeterogeneityを検索\nLAAO Benefitial/neutral/harmfulで患者背景を分けて高齢者のComorbiditiesが多いと良いかもという仮説形成\n各個人のITEのWaterfall plotは結構良い印象 (Ngufor et al. 2025)\n\n\n\n\n\nPropensity score matchで疑似RCT → Causal forestが多い\ntarget trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#meta-learners-1",
+    "href": "statistics/mlcausal/index.html#meta-learners-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "Meta-learners",
+    "text": "Meta-learners\n\nS-learnerT-learnerX-learnerR-learnerDR-learner\n\n\n\nimport numpy as np\nimport pandas as pd\nfrom econml.metalearners import SLearner\nfrom sklearn.ensemble import HistGradientBoostingClassifier\nfrom sklearn.model_selection import train_test_split\nfrom xgboost import XGBRegressor\n\n\ntoy_data = r.toy_data.copy()\nfeature_names = [\"age\", \"sexm1\", \"bmi\", \"hf\", \"bnp\", \"lvef\"]\n\nX = toy_data.loc[:, feature_names].astype(float)\nY = toy_data[\"bin_outcome\"].astype(int)\nT = toy_data[\"ca\"].astype(int)\n\n# treatment と outcome の4群がおおむね保たれるように分割する\nstrata = T.astype(str) + \"_\" + Y.astype(str)\nX_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(\n    X, Y, T,\n    test_size=0.2,\n    random_state=123,\n    stratify=strata,\n)\n\nxgb_binary_params = {\n    \"objective\": \"binary:logistic\",\n    \"eval_metric\": \"logloss\",\n    \"n_estimators\": 300,\n    \"learning_rate\": 0.05,\n    \"max_depth\": 3,\n    \"min_child_weight\": 10,\n    \"subsample\": 0.8,\n    \"colsample_bytree\": 0.8,\n    \"reg_lambda\": 1.0,\n    \"random_state\": 123,\n    \"n_jobs\": -1,\n}\n\n# objective=\"binary:logistic\" では predict() が P(Y=1 | X, T) を返す\noutcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\ns_learner = SLearner(overall_model=outcome_model)\ns_learner.fit(Y_train, T_train, X=X_train)\n\n# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)\ns_cate_rd = np.asarray(\n    s_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ns_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": s_cate_rd,\n})\n\nprint(s_effect_df.head())\nprint(f\"ATE in test set (risk difference): {s_cate_rd.mean():.3f}\")\n\n\n\n    id      cate_rd\n1 1363 -0.001827896\n2 1100  0.018982351\n3 1792 -0.153240204\n4  418 -0.206095099\n5 1885  0.034924030\n6  841 -0.035404503\n\n\nATE in test set (risk difference): -0.042\n\n\n\ns_cate_rd は確率スケールの治療効果（risk difference）であり、負の値は ca = 1 によるイベントリスク低下を表す\nS-learnerは1つのモデルで \\(E(Y \\mid X, T)\\) を学習し、各対象者について T = 1 と T = 0 の予測確率の差を取る\n因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要\n\n\n\n\nfrom econml.metalearners import TLearner\n\nt_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# T=0 と T=1 で別々の outcome model を学習する\nt_learner = TLearner(models=t_outcome_model)\nt_learner.fit(Y_train, T_train, X=X_train)\n\nt_cate_rd = np.asarray(\n    t_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nt_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": t_cate_rd,\n})\n\nprint(t_effect_df.head())\nprint(f\"ATE in test set (risk difference): {t_cate_rd.mean():.3f}\")\n\n\n\n      id     cate_rd\n601 1363  0.01993090\n602 1100  0.11421780\n603 1792 -0.20991486\n604  418 -0.20878077\n605 1885  0.09759994\n606  841 -0.07793111\n\n\nATE in test set (risk difference): -0.060\n\n\n\nT-learnerは T = 0 と T = 1 で2つの予測確率モデルを作り、その差をCATEとする\n各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい\n\n\n\n\nfrom econml.metalearners import XLearner\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nx_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# imputed treatment effect（連続値）を学習するための回帰モデル\nx_cate_model = HistGradientBoostingRegressor(\n    learning_rate=0.05,\n    max_iter=200,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\n# P(T=1 | X) を学習するモデル\nx_propensity_model = HistGradientBoostingClassifier(\n    learning_rate=0.05,\n    max_iter=150,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\nx_learner = XLearner(\n    models=x_outcome_model,\n    cate_models=x_cate_model,\n    propensity_model=x_propensity_model,\n)\nx_learner.fit(Y_train, T_train, X=X_train)\n\nx_cate_rd = np.asarray(\n    x_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nx_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": x_cate_rd,\n})\n\nprint(x_effect_df.head())\nprint(f\"ATE in test set (risk difference): {x_cate_rd.mean():.3f}\")\n\n\n\n       id     cate_rd\n1201 1363 -0.04464093\n1202 1100  0.03624731\n1203 1792 -0.15314910\n1204  418 -0.13667150\n1205 1885  0.33390682\n1206  841 -0.16769601\n\n\nATE in test set (risk difference): -0.053\n\n\n\nX-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する\n最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する\n\n\n\n\nfrom econml.dml import NonParamDML\n\nr_learner = NonParamDML(\n    model_y=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_t=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    discrete_treatment=True,\n    cv=5,\n    random_state=123,\n)\n\n# NonParamDML implements the R-learner residual-on-residual objective.\nr_learner.fit(Y_train, T_train, X=X_train)\n\nr_cate_rd = np.asarray(\n    r_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": r_cate_rd,\n})\n\nprint(r_effect_df.head())\nprint(f\"ATE in test set (risk difference): {r_cate_rd.mean():.3f}\")\n\n\n\n       id     cate_rd\n1801 1363 -0.02996914\n1802 1100  0.23195176\n1803 1792 -0.16574607\n1804  418 -0.01754381\n1805 1885  0.31175334\n1806  841 -0.16387530\n\n\nATE in test set (risk difference): -0.058\n\n\n\nR-learnerはoutcomeとtreatmentをcross-fittingで残差化し、残差同士の関係からCATEを学習する\nNonParamDML の非線形final modelにより、HTEを柔軟に表現する\n\n\n\n\nfrom econml.dr import DRLearner\n\ndr_learner = DRLearner(\n    model_propensity=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_regression=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    min_propensity=0.01,\n    cv=5,\n    random_state=123,\n)\n\n# nuisance modelはcv=5でcross-fittingされる\ndr_learner.fit(Y_train, T_train, X=X_train)\n\ndr_cate_rd = np.asarray(\n    dr_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ndr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": dr_cate_rd,\n})\n\nprint(dr_effect_df.head())\nprint(f\"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}\")\n\n# 5つのlearnerを同じtest setで比較する\nlearner_summary = pd.DataFrame({\n    \"learner\": [\n        \"S-learner\",\n        \"T-learner\",\n        \"X-learner\",\n        \"R-learner\",\n        \"DR-learner\",\n    ],\n    \"ate_rd\": [\n        s_cate_rd.mean(),\n        t_cate_rd.mean(),\n        x_cate_rd.mean(),\n        r_cate_rd.mean(),\n        dr_cate_rd.mean(),\n    ],\n    \"cate_sd\": [\n        s_cate_rd.std(ddof=1),\n        t_cate_rd.std(ddof=1),\n        x_cate_rd.std(ddof=1),\n        r_cate_rd.std(ddof=1),\n        dr_cate_rd.std(ddof=1),\n    ],\n})\n\nprint(learner_summary.round(3))\n\n\n\n       id     cate_rd\n2401 1363 -0.07307278\n2402 1100  0.28000831\n2403 1792 -0.23172642\n2404  418  0.07620628\n2405 1885  0.39313966\n2406  841 -0.11883594\n\n\nATE in test set (risk difference): -0.068\n\n\n     learner ate_rd cate_sd\n1  S-learner -0.042   0.075\n2  T-learner -0.060   0.162\n3  X-learner -0.053   0.156\n4  R-learner -0.058   0.220\n5 DR-learner -0.068   0.244\n\n\n\ndiscrete_outcome=True により、EconMLがoutcome classifierの陽性確率を使用する\npropensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する\nmin_propensity=0.01 は、推定propensity scoreが0または1に近い場合の極端な補正を制限する"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#external-validation-cohort",
+    "href": "statistics/mlcausal/index.html#external-validation-cohort",
+    "title": "機械学習を用いた因果推論",
+    "section": "External validation cohort",
+    "text": "External validation cohort\n\n\n# A tibble: 2 × 5\n  cohort                  n mean_age mean_bmi female_fraction\n  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;\n1 Development          3000     61.2     22.0           0.399\n2 External validation  1000     63.2     20.0           0.45 \n\n\n# A tibble: 1 × 4\n  contrast                  age_difference bmi_difference female_fraction_diff…¹\n  &lt;chr&gt;                              &lt;dbl&gt;          &lt;dbl&gt;                  &lt;dbl&gt;\n1 External validation - De…           1.99          -2.00                  0.051\n# ℹ abbreviated name: ¹​female_fraction_difference\n\n\n開発コホートとは独立に \\(n=1000\\) を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#c-for-benefit外部検証",
+    "href": "statistics/mlcausal/index.html#c-for-benefit外部検証",
+    "title": "機械学習を用いた因果推論",
+    "section": "C-for-benefit（外部検証）",
+    "text": "C-for-benefit（外部検証）\n\n\n# A tibble: 6 × 6\n  learner       n_pairs c_for_benefit std_error ci_lower ci_upper\n  &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 Causal forest     377         0.557     0.028    0.504    0.606\n2 DR-learner        377         0.475     0.032    0.412    0.536\n3 R-learner         377         0.461     0.028    0.403    0.51 \n4 S-learner         377         0.539     0.028    0.484    0.595\n5 T-learner         377         0.537     0.03     0.473    0.591\n6 X-learner         377         0.535     0.03     0.473    0.589\n\n\n\ntest_toy_data内でageだけを使って治療例と対照例を1:1 matchingする。観察benefit（対照のイベント−治療のイベント）が異なる二つのpairを比較し、予測benefitの順位が一致した割合をc-for-benefitとする。予測tieは0.5として扱い、95% CIはmatched pair単位のbootstrapで求める。"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#meta-learnerのcalibration-discrimination外部検証",
+    "href": "statistics/mlcausal/index.html#meta-learnerのcalibration-discrimination外部検証",
+    "title": "機械学習を用いた因果推論",
+    "section": "Meta-learnerのCalibration / Discrimination（外部検証）",
+    "text": "Meta-learnerのCalibration / Discrimination（外部検証）\n\n\n\n5モデルは開発コホート全例で再学習して固定し、独立なtest_toy_dataで評価\nEconML DRTesterが開発コホートで学習した共通nuisance modelを外部コホートに適用し、doubly robust outcomeを構成\nCalibration \\(R^2\\) は1に近いほど良いが、通常のoutcome predictionの \\(R^2\\) ではなく、CATEのgroup calibration指標\nDiscriminationはAUTOC / QINI（0より大きいほど、治療効果の順位付け能力が高い）で評価"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#meta-learnerのgate外部検証",
+    "href": "statistics/mlcausal/index.html#meta-learnerのgate外部検証",
+    "title": "機械学習を用いた因果推論",
+    "section": "Meta-learnerのGATE（外部検証）",
+    "text": "Meta-learnerのGATE（外部検証）\n\n\n開発コホートの予測分布で定めたCATE五分位を外部コホートに適用し、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#grfの外部検証",
+    "href": "statistics/mlcausal/index.html#grfの外部検証",
+    "title": "機械学習を用いた因果推論",
+    "section": "GRFの外部検証",
+    "text": "GRFの外部検証\n\n\n# A tibble: 5 × 4\n  metric                          estimate std_error p_value\n  &lt;chr&gt;                              &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 Mean forest calibration            2.20      0.726   0.002\n2 Differential forest calibration    1.32      0.351   0    \n3 Grouped calibration R2             0.289    NA      NA    \n4 AUTOC                              0.081     0.023   0    \n5 QINI                               0.025     0.007   0.001\n\n\n\n\n開発コホートで学習したcausal forestを固定して外部CATEを予測する。外部コホート内でcross-fittingした評価用forestのgrf::get_scores()からDR scoreを作り、固定予測のBLPとgroup calibrationを評価する。評価用forest自身のCATE予測は使用しない。"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#実務において-1",
+    "href": "statistics/mlcausal/index.html#実務において-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "実務において",
+    "text": "実務において\n\nRのgrf packageが最も医学論文によい\nC-for-benefitはEpiFOrsk packgeで可能\nRCTのGATESはevalITR packageで可能だが、正直LLMに手書きで書かせて良いと思う\npythonならeconMLが良いがSurvival analysisはなし\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.5.3 (2026-03-11)\n os       Ubuntu 24.04.4 LTS\n system   x86_64, linux-gnu\n ui       X11\n language (EN)\n collate  ja_JP.UTF-8\n ctype    ja_JP.UTF-8\n tz       Asia/Tokyo\n date     2026-09-13\n pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)\n quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package         * version   date (UTC) lib source\n backports         1.5.1     2026-04-03 [1] CRAN (R 4.5.3)\n base64url         1.4       2018-05-14 [1] CRAN (R 4.5.1)\n boot              1.3-32    2025-08-29 [1] CRAN (R 4.5.1)\n cachem            1.1.0     2024-05-16 [1] CRAN (R 4.5.1)\n callr             3.7.6     2024-03-25 [1] CRAN (R 4.5.1)\n checkmate         2.3.3     2025-08-18 [1] CRAN (R 4.5.1)\n cli               3.6.6     2026-04-09 [1] CRAN (R 4.5.3)\n codetools         0.2-20    2024-03-31 [1] CRAN (R 4.5.1)\n curl              7.1.0     2026-04-22 [1] CRAN (R 4.5.3)\n dagitty         * 0.3-4     2023-12-07 [1] CRAN (R 4.5.1)\n data.table        1.17.8    2025-07-10 [1] CRAN (R 4.5.1)\n DiagrammeR        1.0.12    2026-04-27 [1] CRAN (R 4.5.3)\n digest            0.6.39    2025-11-19 [1] CRAN (R 4.5.2)\n dplyr           * 1.2.1     2026-04-03 [1] CRAN (R 4.5.3)\n evaluate          1.0.5     2025-08-27 [1] CRAN (R 4.5.1)\n farver            2.1.2     2024-05-13 [1] CRAN (R 4.5.1)\n fastmap           1.2.0     2024-05-15 [1] CRAN (R 4.5.1)\n forcats         * 1.0.1     2025-09-25 [1] CRAN (R 4.5.1)\n Formula           1.2-5     2023-02-24 [1] CRAN (R 4.5.1)\n generics          0.1.4     2025-05-09 [1] CRAN (R 4.5.1)\n GGally          * 2.4.0     2025-08-23 [1] CRAN (R 4.5.1)\n ggdag           * 0.2.13    2024-07-22 [1] CRAN (R 4.5.1)\n ggforce           0.5.0     2025-06-18 [1] CRAN (R 4.5.1)\n ggplot2         * 4.0.3     2026-04-22 [1] CRAN (R 4.5.3)\n ggraph            2.2.2     2025-08-24 [1] CRAN (R 4.5.2)\n ggrepel           0.9.8     2026-03-17 [1] CRAN (R 4.5.3)\n ggstats           0.13.0    2026-03-06 [1] CRAN (R 4.5.2)\n glue              1.8.1     2026-04-17 [1] CRAN (R 4.5.3)\n graphlayouts      1.2.4     2026-06-19 [1] CRAN (R 4.5.3)\n grf             * 2.6.1     2026-03-04 [1] CRAN (R 4.5.3)\n gridExtra         2.3.1     2026-06-25 [1] CRAN (R 4.5.3)\n gtable            0.3.6     2024-10-25 [1] CRAN (R 4.5.1)\n here            * 1.0.2     2025-09-15 [1] CRAN (R 4.5.1)\n hms               1.1.4     2025-10-17 [1] CRAN (R 4.5.1)\n htmltools         0.5.9     2025-12-04 [1] CRAN (R 4.5.2)\n htmlwidgets       1.6.4     2023-12-06 [1] CRAN (R 4.5.1)\n igraph            2.3.3     2026-06-26 [1] CRAN (R 4.5.3)\n inum              1.0-5     2023-03-09 [1] CRAN (R 4.5.1)\n jsonlite          2.0.0     2025-03-27 [1] CRAN (R 4.5.1)\n knitr             1.51      2025-12-20 [1] CRAN (R 4.5.2)\n labeling          0.4.3     2023-08-29 [1] CRAN (R 4.5.1)\n lattice           0.22-9    2026-02-09 [1] CRAN (R 4.5.2)\n libcoin         * 1.0-13    2026-06-04 [1] CRAN (R 4.5.3)\n lifecycle         1.0.5     2026-01-08 [1] CRAN (R 4.5.2)\n lubridate       * 1.9.5     2026-02-04 [1] CRAN (R 4.5.2)\n magrittr          2.0.5     2026-04-04 [1] CRAN (R 4.5.3)\n marginaleffects   0.32.0    2026-02-14 [1] CRAN (R 4.5.2)\n MASS              7.3-65    2025-02-28 [1] CRAN (R 4.5.1)\n Matrix            1.7-5     2026-03-21 [1] CRAN (R 4.5.3)\n memoise           2.0.1     2021-11-26 [1] CRAN (R 4.5.1)\n modeldata       * 1.5.1     2025-08-22 [1] CRAN (R 4.5.1)\n mvtnorm         * 1.4-1     2026-06-06 [1] CRAN (R 4.5.3)\n otel              0.2.0     2025-08-29 [1] CRAN (R 4.5.1)\n partykit        * 1.2-29    2026-07-17 [1] CRAN (R 4.5.3)\n pillar            1.11.1    2025-09-17 [1] CRAN (R 4.5.1)\n pkgconfig         2.0.3     2019-09-22 [1] CRAN (R 4.5.1)\n png               0.1-9     2026-03-15 [1] CRAN (R 4.5.3)\n policytree      * 1.2.4     2026-02-18 [1] CRAN (R 4.5.2)\n polyclip          1.10-7    2024-07-23 [1] CRAN (R 4.5.1)\n prettyunits       1.2.0     2023-09-24 [1] CRAN (R 4.5.1)\n processx          3.9.0     2026-04-22 [1] CRAN (R 4.5.3)\n ps                1.9.3     2026-04-20 [1] CRAN (R 4.5.3)\n purrr           * 1.2.2     2026-04-10 [1] CRAN (R 4.5.3)\n R6                2.6.1     2025-02-15 [1] CRAN (R 4.5.1)\n RColorBrewer      1.1-3     2022-04-03 [1] CRAN (R 4.5.1)\n Rcpp              1.1.1-1.1 2026-04-24 [1] CRAN (R 4.5.3)\n readr           * 2.2.0     2026-02-19 [1] CRAN (R 4.5.2)\n reticulate        1.46.0    2026-04-09 [1] CRAN (R 4.5.3)\n rlang             1.3.0     2026-07-05 [1] CRAN (R 4.5.3)\n rmarkdown         2.31      2026-03-26 [1] CRAN (R 4.5.3)\n rpart             4.1.27    2026-03-27 [1] CRAN (R 4.5.3)\n rprojroot         2.1.1     2025-08-26 [1] CRAN (R 4.5.1)\n rstudioapi        0.19.0    2026-06-11 [1] CRAN (R 4.5.3)\n S7                0.2.2     2026-04-22 [1] CRAN (R 4.5.3)\n sandwich          3.1-1     2024-09-15 [1] CRAN (R 4.5.1)\n scales            1.4.0     2025-04-24 [1] CRAN (R 4.5.1)\n secretbase        1.3.0     2026-06-12 [1] CRAN (R 4.5.3)\n sessioninfo     * 1.2.4     2026-06-04 [1] CRAN (R 4.5.3)\n shapviz         * 0.10.4    2026-08-31 [1] CRAN (R 4.5.3)\n stringi           1.8.7     2025-03-27 [1] CRAN (R 4.5.2)\n stringr         * 1.6.0     2025-11-04 [1] CRAN (R 4.5.2)\n survival          3.8-6     2026-01-16 [1] CRAN (R 4.5.2)\n targets         * 1.12.0    2026-02-09 [1] CRAN (R 4.5.2)\n tibble          * 3.3.1     2026-01-11 [1] CRAN (R 4.5.2)\n tidygraph         1.3.0     2023-12-18 [1] CRAN (R 4.5.1)\n tidyr           * 1.3.2     2025-12-19 [1] CRAN (R 4.5.2)\n tidyselect        1.2.1     2024-03-11 [1] CRAN (R 4.5.1)\n tidyverse       * 2.0.0     2023-02-22 [1] CRAN (R 4.5.1)\n timechange        0.4.0     2026-01-29 [1] CRAN (R 4.5.2)\n tinyplot        * 0.7.0     2026-07-03 [1] CRAN (R 4.5.3)\n tweenr            2.0.3     2024-02-26 [1] CRAN (R 4.5.1)\n tzdb              0.5.0     2025-03-15 [1] CRAN (R 4.5.1)\n utf8              1.2.6     2025-06-08 [1] CRAN (R 4.5.1)\n V8                8.2.0     2026-04-21 [1] CRAN (R 4.5.3)\n vctrs             0.7.3     2026-04-11 [1] CRAN (R 4.5.3)\n viridis           0.6.5     2024-01-29 [1] CRAN (R 4.5.1)\n viridisLite       0.4.3     2026-02-04 [1] CRAN (R 4.5.2)\n visNetwork        2.1.4     2025-09-04 [1] CRAN (R 4.5.1)\n WeightIt          1.7.0     2026-04-22 [1] CRAN (R 4.5.3)\n withr             3.0.3     2026-06-19 [1] CRAN (R 4.5.3)\n xfun              0.59      2026-06-19 [1] CRAN (R 4.5.3)\n xgboost           3.3.0.1   2026-06-26 [1] local\n yaml              2.3.12    2025-12-10 [1] CRAN (R 4.5.2)\n yardstick       * 1.4.0     2026-04-07 [1] CRAN (R 4.5.3)\n zoo               1.8-15    2025-12-15 [1] CRAN (R 4.5.2)\n\n [1] /home/figarofuga/analysis/pixi-test/.pixi/envs/default/lib/R/library\n * ── Packages attached to the search path.\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#月になりましたね",
+    "href": "medicine/sepsis_iv_mi/index.html#月になりましたね",
+    "title": "敗血症における輸液療法今昔",
+    "section": "9月になりましたね",
+    "text": "9月になりましたね\n9月と言えば……\n\n秋だ！\n月見だ！\n敗血症だ！！1\n\n\n9月13日は世界敗血症デー。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#という事で",
+    "href": "medicine/sepsis_iv_mi/index.html#という事で",
+    "title": "敗血症における輸液療法今昔",
+    "section": "という事で",
+    "text": "という事で\n今日は敗血症における輸液療法について考えてみたい。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#egdtについて",
+    "href": "medicine/sepsis_iv_mi/index.html#egdtについて",
+    "title": "敗血症における輸液療法今昔",
+    "section": "EGDTについて",
+    "text": "EGDTについて\n\nEGDTは複数の介入（バンドル）で構成される。\n主な介入の一つは、大量輸液による早期の組織灌流改善である。\n組織灌流は平均血圧（MAP）で規定されていた。\nEGDTにより死亡率が 16% 改善した（46.5% vs. 30.5%）(Rivers et al. 2001)。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#egdt時代の終焉",
+    "href": "medicine/sepsis_iv_mi/index.html#egdt時代の終焉",
+    "title": "敗血症における輸液療法今昔",
+    "section": "EGDT時代の終焉",
+    "text": "EGDT時代の終焉\n\n\n通常治療とEGDTを比較した3つのRCTでは、死亡率に差を認めなかった(The PRISM Investigators 2017)。\nさらに、輸液過剰の害が指摘されるようになった。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#輸液過剰の害",
+    "href": "medicine/sepsis_iv_mi/index.html#輸液過剰の害",
+    "title": "敗血症における輸液療法今昔",
+    "section": "輸液過剰の害",
+    "text": "輸液過剰の害\n\n大量輸液（初日に5 L/day以上）により、以下が上昇することが示された(Marik et al. 2017)。\n\n人工呼吸器装着期間\nICU入室期間\n死亡率"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#post-egdt時代のギモン",
+    "href": "medicine/sepsis_iv_mi/index.html#post-egdt時代のギモン",
+    "title": "敗血症における輸液療法今昔",
+    "section": "Post EGDT時代のギモン",
+    "text": "Post EGDT時代のギモン\n\n輸液はどのくらい入れればよいのか。どこまで絞ってもよいのか。\n輸液量を抑える代わりの治療法は何か。\n組織灌流を評価する別の方法は何か。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#輸液はどれくらいいれるどれくらい絞っても大丈夫",
+    "href": "medicine/sepsis_iv_mi/index.html#輸液はどれくらいいれるどれくらい絞っても大丈夫",
+    "title": "敗血症における輸液療法今昔",
+    "section": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）",
+    "text": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）\n\n現在、初期輸液後にどこまで輸液を行うべきかは明確でない。\n輸液反応性をみて必要に応じて投与する、という実践になりがちである。\n初期輸液以降の輸液量を評価したRCTとして、次の2つがある。\n\nCLASSIC trial\nCLOVERS trial"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#classic-trial",
+    "href": "medicine/sepsis_iv_mi/index.html#classic-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "CLASSIC trial",
+    "text": "CLASSIC trial\n\n\nP: 24時間以内に1 L以上の補液下で敗血症性ショックが持続する患者（n = 1,554）\nI: 輸液制限群（ICUでのin balance 1,645 mL）1\nC: 通常治療群（ICUでのin balance 2,368 mL）\nO: 90日死亡に差なし（42.3% vs. 42.1%）(Meyhoff et al. 2022)\n\nプロトコル違反が20%であった点には注意を要する。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#clovers-trial",
+    "href": "medicine/sepsis_iv_mi/index.html#clovers-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "CLOVERS trial",
+    "text": "CLOVERS trial\n\n\nP: 1–3 Lの輸液でも改善しない、敗血症による低灌流患者（n = 1,563）\nI: 輸液制限療法（24時間平均 1,267 mL、95% CI: 555–2,279 mL）\nC: 輸液自由療法（24時間平均 3,400 mL、95% CI: 2,500–4,495 mL）\nO: 90日死亡に差なし（14.0% vs. 14.9%）(National Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network et al. 2023)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#まとめると",
+    "href": "medicine/sepsis_iv_mi/index.html#まとめると",
+    "title": "敗血症における輸液療法今昔",
+    "section": "まとめると……",
+    "text": "まとめると……\n\n理論上、輸液制限は敗血症性ショック患者の予後を改善しうると考えられた。\nしかし実際には差はなく、輸液制限による明確なメリットは示されなかった。\n\n逆に言えば、明確なデメリットも示されていない。\n\n\n敗血症への輸液をどのように考えればいい？"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#適切な輸液",
+    "href": "medicine/sepsis_iv_mi/index.html#適切な輸液",
+    "title": "敗血症における輸液療法今昔",
+    "section": "適切な輸液？",
+    "text": "適切な輸液？\n\n呼吸状態不良、心不全、腎不全など、輸液を絞りたい状況は多い。\n輸液はMAPを65 mmHg以上に保ち、末梢循環を改善するための手段である。\n輸液を絞るとMAP目標の達成は難しくなる。その場合の選択肢:\n\n早期の昇圧薬使用\n目標MAPの引き下げ\n\nシンプルにMAP目標を下げる\nMAP以外の指標を用いる"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#censer-trial",
+    "href": "medicine/sepsis_iv_mi/index.html#censer-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "CENSER trial",
+    "text": "CENSER trial\n\n\nP: 敗血症による低血圧患者（n = 310）\nI: 早期ノルアドレナリン併用群（n = 155）\nC: 通常治療群（n = 155）\nO: 6時間後のショックコントロールは早期ノルアドレナリン群で良好（76.1% vs. 48.4%）(Permpikul et al. 2019)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#シンプルに目標のmapの値を下げる",
+    "href": "medicine/sepsis_iv_mi/index.html#シンプルに目標のmapの値を下げる",
+    "title": "敗血症における輸液療法今昔",
+    "section": "シンプルに目標のMAPの値を下げる",
+    "text": "シンプルに目標のMAPの値を下げる\n\nMAP 65 mmHg以上という目標は、少数のICU患者における乳酸値などから決められており、根拠は限定的である。\nSEPSISPAM trialでは、より高いMAP目標は必ずしも必要ではないとされた（65–70 mmHg vs. 75–80 mmHg）(Asfar et al. 2014)。\n高齢者（65歳以上）では、MAP目標を下げてノルアドレナリン使用量を減らす方がよいかもしれない。\n高齢者を対象とした65 trialがある。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#trial",
+    "href": "medicine/sepsis_iv_mi/index.html#trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "65 trial",
+    "text": "65 trial\n\n\nP: ICU入室後、輸液および昇圧薬使用初期の65歳以上の患者（n = 2,600）\nI: 低血圧許容群（MAP 60–65 mmHg、n = 1,291）\nC: 通常治療群（MAP &gt;65 mmHg、n = 1,307）\nO: 90日死亡に差なし（41.0% vs. 43.8%）(Lamontagne et al. 2020)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#map以外の指標を用いる",
+    "href": "medicine/sepsis_iv_mi/index.html#map以外の指標を用いる",
+    "title": "敗血症における輸液療法今昔",
+    "section": "MAP以外の指標を用いる",
+    "text": "MAP以外の指標を用いる\n\nMAPの目的は臓器灌流の改善である。\n\n臓器灌流を直接評価した方がよいかもしれない。\n\nショック時の循環評価の代表的な指標:\n\n腎臓: 尿量 0.5 mL/kg/hr\n脳: 意識\n皮膚: Capillary Refilling Time（CRT）\n全身臓器: 乳酸値\n\nSSCG 2021では乳酸値を用いた蘇生を弱く推奨している(Evans et al. 2021)。\nMAPを65 mmHgと固定せず、上記の指標を参考に調整してもよいかもしれない。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#capillary-refilling-time",
+    "href": "medicine/sepsis_iv_mi/index.html#capillary-refilling-time",
+    "title": "敗血症における輸液療法今昔",
+    "section": "Capillary refilling time",
+    "text": "Capillary refilling time\n\n\n中指の末節骨を5秒間圧迫し、離してから血管が再充満するまでの時間。\n正常範囲: 成人男性は2秒以内、成人女性は3秒、高齢者は4秒。\n脱水の指標としてLR 6.9と有用性が高い(McGee et al. 1999)。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#andromeda-shock-trial",
+    "href": "medicine/sepsis_iv_mi/index.html#andromeda-shock-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "ANDROMEDA-SHOCK trial",
+    "text": "ANDROMEDA-SHOCK trial\n\n\n\nP: 20 mL/kg以上の初期輸液に反応しない敗血症性ショック患者（n = 424）\nI: CRT guided therapy（30分ごとにCRTを確認）\nC: Lactate guided therapy（2時間ごとに乳酸値を確認）\nO: 28日死亡に差なし（CRT群 34.9% vs. Lactate群 43.4%）(Hernández et al. 2018, 2019)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#小括",
+    "href": "medicine/sepsis_iv_mi/index.html#小括",
+    "title": "敗血症における輸液療法今昔",
+    "section": "小括",
+    "text": "小括\n\n輸液を大量に投与することは Harm から Neutral と考えられる。\n輸液をやや絞るために、次を検討してもよいかもしれない。\n\n高齢者ではMAP目標を60–65 mmHgへ下げる。\n早期のノルアドレナリン併用。\nMAPに加えて、ほかの灌流指標を用いる。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#注意点",
+    "href": "medicine/sepsis_iv_mi/index.html#注意点",
+    "title": "敗血症における輸液療法今昔",
+    "section": "注意点！！",
+    "text": "注意点！！\n\n上記RCTの多くは、1–3 L（およそ30 mL/kg）の晶質液を投与した後の介入を評価している。\n\nOptimization and stabilization phaseと呼ばれる(Zampieri et al. 2023)。\n\nまずは30 mL/kgの初期輸液を行う。\n\n心不全が背景にあっても、ショック時の大量初期輸液を支持する観察研究が多い(Jones et al. 2021)。\n\n初期輸液をためらわない。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#take-home-message",
+    "href": "medicine/sepsis_iv_mi/index.html#take-home-message",
+    "title": "敗血症における輸液療法今昔",
+    "section": "Take home message",
+    "text": "Take home message\n\nSepsisの輸液は、まずはしっかり投与し、その後は絞る。\n早期のノルアドレナリン併用を考慮する。\n患者背景やほかの指標を考え、MAPの目標値を変更してもよいかもしれない。\n\n\n\n\n\nAsfar, Pierre, Ferhat Meziani, Jean-François Hamel, et al. 2014. “High Versus Low Blood-Pressure Target in Patients with Septic Shock.” The New England Journal of Medicine 370 (17): 1583–93. https://doi.org/10.1056/NEJMoa1312173.\n\n\nEvans, Laura, Andrew Rhodes, Waleed Alhazzani, et al. 2021. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021.” Intensive Care Medicine 47: 1181–247. https://doi.org/10.1007/s00134-021-06506-y.\n\n\nHernández, Glenn, Alexandre Biasi Cavalcanti, Gustavo Ospina-Tascón, et al. 2018. “Early Goal-Directed Therapy Using a Physiological Holistic View: The ANDROMEDA-SHOCK Randomized Controlled Trial.” Annals of Intensive Care 8 (1): 52. https://doi.org/10.1186/s13613-018-0398-2.\n\n\nHernández, Glenn, Gustavo A. Ospina-Tascón, Lucas P. Damiani, et al. 2019. “Effect of a Resuscitation Strategy Targeting Peripheral Perfusion Status Vs Serum Lactate Levels on 28-Day Mortality Among Patients with Septic Shock: The ANDROMEDA-SHOCK Randomized Clinical Trial.” JAMA 321 (7): 654–64. https://doi.org/10.1001/jama.2019.0071.\n\n\nJones, Timothy W., Sarah E. Smith, Joshua S. Van Tuyl, and A. Scott Newsome. 2021. “Sepsis with Preexisting Heart Failure: Management of Confounding Clinical Features.” Journal of Intensive Care Medicine 36 (9): 989–1012. https://doi.org/10.1177/0885066620928299.\n\n\nLamontagne, François, Alvin Richards-Belle, Karen Thomas, et al. 2020. “Effect of Reduced Exposure to Vasopressors on 90-Day Mortality in Older Critically Ill Patients with Vasodilatory Hypotension: A Randomized Clinical Trial.” JAMA 323 (10): 938–49. https://doi.org/10.1001/jama.2020.0930.\n\n\nMarik, Paul E., Walter T. Linde-Zwirble, Edward A. Bittner, et al. 2017. “Fluid Administration in Severe Sepsis and Septic Shock, Patterns and Outcomes: An Analysis of a Large National Database.” Intensive Care Medicine 43 (5): 625–32. https://doi.org/10.1007/s00134-016-4675-y.\n\n\nMcGee, Steven, William B. Abernethy, and David L. Simel. 1999. “Is This Patient Hypovolemic?” JAMA 281 (11): 1022–29. https://doi.org/10.1001/jama.281.11.1022.\n\n\nMeyhoff, Tine S., Peter B. Hjortrup, Jørn Wetterslev, et al. 2022. “Restriction of Intravenous Fluid in ICU Patients with Septic Shock.” The New England Journal of Medicine 386 (26): 2459–70. https://doi.org/10.1056/NEJMoa2202707.\n\n\nNational Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network, Nathan I. Shapiro, Ivor S. Douglas, et al. 2023. “Early Restrictive or Liberal Fluid Management for Sepsis-Induced Hypotension.” The New England Journal of Medicine 388 (6): 499–510. https://doi.org/10.1056/NEJMoa2212663.\n\n\nPermpikul, Chairat, Surat Tongyoo, Tanuwong Viarasilpa, et al. 2019. “Early Use of Norepinephrine in Septic Shock Resuscitation (CENSER): A Randomized Trial.” American Journal of Respiratory and Critical Care Medicine 199 (9): 1097–105. https://doi.org/10.1164/rccm.201806-1034OC.\n\n\nRivers, Emanuel, Brian Nguyen, Stephen Havstad, et al. 2001. “Early Goal-Directed Therapy in the Treatment of Severe Sepsis and Septic Shock.” The New England Journal of Medicine 345 (19): 1368–77. https://doi.org/10.1056/NEJMoa010307.\n\n\nThe PRISM Investigators. 2017. “Early, Goal-Directed Therapy for Septic Shock: A Patient-Level Meta-Analysis.” The New England Journal of Medicine 376 (23): 2223–34. https://doi.org/10.1056/NEJMoa1701380.\n\n\nZampieri, Fernando G., Sean M. Bagshaw, and Matthew W. Semler. 2023. “Fluid Therapy for Critically Ill Adults with Sepsis: A Review.” JAMA 329 (22): 1967–80. https://doi.org/10.1001/jama.2023.7560."
   }
 ]

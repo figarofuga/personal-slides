@@ -1,3 +1,5 @@
+# R は推定結果を targets に保存し、Python はモデル・表・図のファイルパスを返す。
+# 各ターゲットの引数が依存関係となり、入力が更新された処理から再計算される。
 library(targets)
 library(reticulate)
 library(here)
@@ -49,7 +51,9 @@ tar_option_set(
     "MatchIt",
     "partykit",
     "policytree",
+    "purrr",
     "reticulate",
+    "sandwich",
     "shapviz",
     "simsurv",
     "SuperLearner",
@@ -62,6 +66,7 @@ tar_option_set(
   garbage_collection = TRUE
 )
 
+# Python ファイルを明示的に参照することで、ソース変更も再計算の契機にする。
 list(
   tar_target(
     python_models_file,
@@ -87,11 +92,42 @@ list(
   # Toy data ---------------------------------------------------------------
   tar_target(
     toy_objects,
-    make_toy_data(n = 3000L, seed = 123L)
+    make_toy_data(
+      n = 3000L,
+      seed = 123L,
+      base_age = 60,
+      base_log_bmi = log(22) - 0.20^2 / 2,
+      female_frac = 0.40
+    )
   ),
   tar_target(toy_data, toy_objects$toy_data),
   tar_target(full_toy_data, toy_objects$full_toy_data),
   tar_target(ate_rd_summary, make_ate_rd_summary(full_toy_data)),
+  tar_target(
+    test_toy_objects,
+    make_toy_data(
+      n = 1000L,
+      seed = 135L,
+      base_age = 61.44,
+      base_log_bmi = log(19.88) - 0.20^2 / 2,
+      female_frac = 0.45
+    )
+  ),
+  tar_target(test_toy_data, test_toy_objects$toy_data),
+  tar_target(full_test_toy_data, test_toy_objects$full_toy_data),
+  tar_target(
+    external_shift_summary,
+    {
+      shift <- make_external_shift_summary(toy_data, test_toy_data)
+      differences <- shift$differences
+      stopifnot(
+        abs(differences$age_difference - 2) < 0.05,
+        abs(differences$bmi_difference + 2) < 0.05,
+        abs(differences$female_fraction_difference - 0.05) < 0.01
+      )
+      shift
+    }
+  ),
 
   # Small teaching examples: precompute the numerical output shown in slides.
   tar_target(lalonde_data, MatchIt::lalonde),
@@ -121,11 +157,19 @@ list(
 
   # Shared preprocessing for all R and Python learners --------------------
   tar_target(policy_features, make_policy_features(toy_data)),
+  tar_target(test_policy_features, make_policy_features(test_toy_data)),
   tar_target(
     ml_split,
     {
       python_models_file
       make_ml_split(toy_data, test_size = 0.2, random_state = 123L)
+    }
+  ),
+  tar_target(
+    full_training_split,
+    {
+      python_models_file
+      make_full_training_split(toy_data)
     }
   ),
 
@@ -191,6 +235,68 @@ list(
     format = "file"
   ),
 
+  # Refit on the complete development cohort before external validation. --
+  tar_target(
+    external_s_learner_model_file,
+    {
+      python_models_file
+      fit_s_learner(
+        toy_data,
+        full_training_split,
+        mlcausal_path("cache", "models", "external-s-learner.joblib")
+      )
+    },
+    format = "file"
+  ),
+  tar_target(
+    external_t_learner_model_file,
+    {
+      python_models_file
+      fit_t_learner(
+        toy_data,
+        full_training_split,
+        mlcausal_path("cache", "models", "external-t-learner.joblib")
+      )
+    },
+    format = "file"
+  ),
+  tar_target(
+    external_x_learner_model_file,
+    {
+      python_models_file
+      fit_x_learner(
+        toy_data,
+        full_training_split,
+        mlcausal_path("cache", "models", "external-x-learner.joblib")
+      )
+    },
+    format = "file"
+  ),
+  tar_target(
+    external_r_learner_model_file,
+    {
+      python_models_file
+      fit_r_learner(
+        toy_data,
+        full_training_split,
+        mlcausal_path("cache", "models", "external-r-learner.joblib")
+      )
+    },
+    format = "file"
+  ),
+  tar_target(
+    external_dr_learner_model_file,
+    {
+      python_models_file
+      fit_dr_learner(
+        toy_data,
+        full_training_split,
+        mlcausal_path("cache", "models", "external-dr-learner.joblib")
+      )
+    },
+    format = "file"
+  ),
+
   # Python predictions and validation remain Python-owned file artifacts. --
   tar_target(
     meta_learner_effects_file,
@@ -235,6 +341,60 @@ list(
     },
     format = "file"
   ),
+  tar_target(
+    external_meta_learner_effects_file,
+    {
+      python_evaluation_file
+      write_external_meta_learner_predictions(
+        external_s_learner_model_file,
+        external_t_learner_model_file,
+        external_x_learner_model_file,
+        external_r_learner_model_file,
+        external_dr_learner_model_file,
+        test_toy_data,
+        mlcausal_path(
+          "cache", "tables", "external-meta-learner-effects.csv"
+        )
+      )
+    },
+    format = "file"
+  ),
+  tar_target(
+    external_meta_learner_evaluation_files,
+    {
+      python_evaluation_file
+      unlist(
+        evaluate_external_meta_learners(
+          external_s_learner_model_file,
+          external_t_learner_model_file,
+          external_x_learner_model_file,
+          external_r_learner_model_file,
+          external_dr_learner_model_file,
+          toy_data,
+          test_toy_data,
+          mlcausal_path(
+            "cache", "tables", "external-meta-validation.csv"
+          ),
+          mlcausal_path(
+            "cache", "tables", "external-meta-gates.csv"
+          ),
+          mlcausal_path(
+            "cache", "tables", "external-meta-uplift-curves.csv"
+          ),
+          mlcausal_path(
+            "cache", "figures", "external-meta-gates.svg"
+          ),
+          mlcausal_path(
+            "cache", "figures", "external-meta-validation.svg"
+          ),
+          n_groups = 5L,
+          n_bootstrap = 1000L
+        ),
+        use.names = FALSE
+      )
+    },
+    format = "file"
+  ),
 
   # Native R causal forest, interpretation, policy, and evaluation. -------
   tar_target(
@@ -270,6 +430,59 @@ list(
   ),
   tar_target(grf_gate_data, grf_validation$gates),
   tar_target(grf_validation_summary, grf_validation$summary),
+  tar_target(
+    external_causal_forest_predictions,
+    make_external_causal_forest_predictions(
+      causal_forest_bin,
+      test_policy_features,
+      test_toy_data
+    )
+  ),
+  tar_target(
+    external_evaluation_forest,
+    fit_external_evaluation_forest(
+      test_policy_features,
+      test_toy_data
+    )
+  ),
+  tar_target(
+    external_rate_results,
+    make_external_rate_results(
+      external_evaluation_forest,
+      external_causal_forest_predictions
+    )
+  ),
+  tar_target(
+    external_grf_validation,
+    make_external_grf_validation(
+      external_causal_forest_predictions,
+      external_evaluation_forest,
+      external_rate_results,
+      n_groups = 5L
+    )
+  ),
+  tar_target(external_grf_gate_data, external_grf_validation$gates),
+  tar_target(
+    external_grf_validation_summary,
+    external_grf_validation$summary
+  ),
+  tar_target(
+    external_benefit_pairs,
+    make_external_benefit_pairs(test_toy_data)
+  ),
+  tar_target(
+    external_c_for_benefit,
+    make_external_c_for_benefit(
+      external_benefit_pairs,
+      external_meta_learner_effects_file,
+      external_causal_forest_predictions,
+      n_bootstrap = 500L
+    )
+  ),
+  tar_target(
+    external_c_for_benefit_summary,
+    external_c_for_benefit$summary
+  ),
 
   # GRF explanations are computed only with native R functions. -----------
   tar_target(explanation_samples, make_explanation_samples(policy_features)),

@@ -8,7 +8,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from econml.validate import DRTester
-from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import (
+    HistGradientBoostingClassifier,
+)
 
 
 warnings.filterwarnings(
@@ -47,6 +49,13 @@ class _FlatEffectAdapter:
         ).reshape(-1)
 
 
+class _PositiveProbabilityClassifier(HistGradientBoostingClassifier):
+    """Expose the positive-class probability through predict() for DRTester."""
+
+    def predict(self, X):
+        return super().predict_proba(X)[:, 1]
+
+
 def _toy_frame(toy_data):
     data = pd.DataFrame(toy_data).copy()
     data["id"] = data["id"].astype(int)
@@ -62,6 +71,7 @@ def _split_value(split, name):
 
 
 def _partitions(toy_data, split):
+    # 学習時に保存した ID を再利用し、訓練例が評価データへ混ざらないようにする。
     data = _toy_frame(toy_data).set_index("id", drop=False)
 
     def select(partition):
@@ -75,6 +85,16 @@ def _partitions(toy_data, split):
         )
 
     return select("train"), select("test")
+
+
+def _full_sample(toy_data):
+    data = _toy_frame(toy_data)
+    return (
+        data,
+        data.loc[:, FEATURE_NAMES].astype(float),
+        data["bin_outcome"].to_numpy(dtype=int),
+        data["ca"].to_numpy(dtype=int),
+    )
 
 
 def _output_path(path):
@@ -116,6 +136,7 @@ def write_meta_learner_predictions(
 
     frames = []
     for model_name, model in models.items():
+        # ここで保存するのはイベントリスク差（治療あり − なし）。負なら利益を表す。
         cate = np.asarray(model.effect(X_test, T0=0, T1=1)).reshape(-1)
         frames.append(
             pd.DataFrame(
@@ -132,8 +153,51 @@ def write_meta_learner_predictions(
     return str(output)
 
 
+def write_external_meta_learner_predictions(
+    s_model_path,
+    t_model_path,
+    x_model_path,
+    r_model_path,
+    dr_model_path,
+    validation_data,
+    output_path,
+):
+    """Persist predictions from frozen development models in an external cohort."""
+    validation, X_validation, _, _ = _full_sample(validation_data)
+    models = _load_models(
+        [
+            s_model_path,
+            t_model_path,
+            x_model_path,
+            r_model_path,
+            dr_model_path,
+        ]
+    )
+
+    frames = []
+    for model_name, model in models.items():
+        cate = np.asarray(
+            model.effect(X_validation, T0=0, T1=1)
+        ).reshape(-1)
+        frames.append(
+            pd.DataFrame(
+                {
+                    "id": validation["id"].to_numpy(dtype=int),
+                    "learner": model_name,
+                    "cate_rd": cate,
+                }
+            )
+        )
+
+    output = _output_path(output_path)
+    pd.concat(frames, ignore_index=True).to_csv(output, index=False)
+    return str(output)
+
+
 def _nuisance_regression_model():
-    return HistGradientBoostingClassifier(
+    # DRTester calls predict(), while sklearn classifiers ordinarily return
+    # hard labels there. The adapter keeps nuisance predictions on [0, 1].
+    return _PositiveProbabilityClassifier(
         learning_rate=0.05,
         max_iter=200,
         max_leaf_nodes=15,
@@ -154,11 +218,16 @@ def _nuisance_propensity_model():
     )
 
 
-def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
+def _evaluate_partitions(
+    models,
+    train_partition,
+    validation_partition,
+    n_groups,
+    n_bootstrap,
+):
     """Use one common DR outcome construction for every CATE estimator."""
-    (_, X_train, Y_train, T_train), (_, X_test, Y_test, T_test) = _partitions(
-        toy_data, split
-    )
+    _, X_train, Y_train, T_train = train_partition
+    _, X_test, Y_test, T_test = validation_partition
     X_train_array = X_train.to_numpy(dtype=float)
     X_test_array = X_test.to_numpy(dtype=float)
 
@@ -169,6 +238,7 @@ def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
         cate=first_model,
         cv=5,
     )
+    # 効果モデルとは別に評価用の補助モデルを学習し、共通の DR アウトカムを構成する。
     tester.fit_nuisance(
         Xval=X_test_array,
         Dval=T_test,
@@ -188,13 +258,16 @@ def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
         tester.cate = _FlatEffectAdapter(model)
         tester.get_cate_preds(Xval=X_test_array, Xtrain=X_train_array)
 
+        # BLP は効果予測と DR アウトカムの関係、群別 calibration は予測水準の一致を調べる。
         blp = tester.evaluate_blp()
         calibration = tester.evaluate_cal(n_groups=n_groups)
 
+        # 同じ乱数 seed を使い、bootstrap による比較を再現可能にする。
         np.random.seed(123)
         autoc = tester.evaluate_uplift(
             metric="toc", n_bootstrap=n_bootstrap
         )
+        # 同じ乱数 seed を使い、bootstrap による比較を再現可能にする。
         np.random.seed(123)
         qini = tester.evaluate_uplift(
             metric="qini", n_bootstrap=n_bootstrap
@@ -219,6 +292,7 @@ def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
             }
         )
 
+        # キー 1 は二値治療の比較。図で使う群番号を 0 始まりから 1 始まりへ変換する。
         gate = calibration.plot_data_dict[1].copy()
         gate.insert(0, "learner", model_name)
         gate["group"] = gate["ind"].astype(int) + 1
@@ -237,7 +311,34 @@ def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
     )
 
 
-def _plot_gate_comparison(gates, output):
+def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
+    train_partition, validation_partition = _partitions(toy_data, split)
+    return _evaluate_partitions(
+        models,
+        train_partition,
+        validation_partition,
+        n_groups,
+        n_bootstrap,
+    )
+
+
+def _evaluate_external_models(
+    models,
+    development_data,
+    validation_data,
+    n_groups,
+    n_bootstrap,
+):
+    return _evaluate_partitions(
+        models,
+        _full_sample(development_data),
+        _full_sample(validation_data),
+        n_groups,
+        n_bootstrap,
+    )
+
+
+def _plot_gate_comparison(gates, output, cohort_label):
     figure, axes = plt.subplots(1, len(MODEL_NAMES), figsize=(15, 3.4))
 
     limits = [
@@ -246,6 +347,7 @@ def _plot_gate_comparison(gates, output):
         gates["g_cate"].min(),
         gates["g_cate"].max(),
     ]
+    # 全モデルで同じ軸範囲を使い、校正の良し悪しを視覚的に比較できるようにする。
     low, high = min(limits), max(limits)
     padding = max((high - low) * 0.06, 0.002)
     low, high = low - padding, high + padding
@@ -278,7 +380,7 @@ def _plot_gate_comparison(gates, output):
         axis.set_xlabel("Mean predicted CATE")
 
     figure.suptitle(
-        "EconML DRTester: GATE calibration on the held-out test set",
+        f"EconML DRTester: GATE calibration in the {cohort_label}",
         fontsize=12,
     )
     figure.tight_layout()
@@ -286,7 +388,7 @@ def _plot_gate_comparison(gates, output):
     plt.close(figure)
 
 
-def _plot_validation_summary(summary, output):
+def _plot_validation_summary(summary, output, cohort_label):
     figure, axes = plt.subplots(1, 2, figsize=(12, 4.2))
     positions = np.arange(len(MODEL_NAMES))
     ordered = summary.set_index("learner").loc[MODEL_NAMES].reset_index()
@@ -333,7 +435,9 @@ def _plot_validation_summary(summary, output):
     axes[1].legend(frameon=False)
     axes[1].grid(axis="x", alpha=0.2)
 
-    figure.suptitle("Meta-learner validation with a common EconML DRTester")
+    figure.suptitle(
+        f"Meta-learner validation in the {cohort_label}"
+    )
     figure.tight_layout()
     figure.savefig(output, format=output.suffix.lstrip("."), bbox_inches="tight")
     plt.close(figure)
@@ -379,11 +483,75 @@ def evaluate_meta_learners(
     gate_figure_output = _output_path(gate_figure_path)
     summary_figure_output = _output_path(summary_figure_path)
 
+    # 数値表と図を同じ評価結果から保存し、R には追跡対象のパスだけを返す。
     summary.to_csv(summary_output, index=False)
     gates.to_csv(gates_output, index=False)
     curves.to_csv(curves_output, index=False)
-    _plot_gate_comparison(gates, gate_figure_output)
-    _plot_validation_summary(summary, summary_figure_output)
+    _plot_gate_comparison(
+        gates, gate_figure_output, "held-out internal test set"
+    )
+    _plot_validation_summary(
+        summary, summary_figure_output, "held-out internal test set"
+    )
+
+    return [
+        str(summary_output),
+        str(gates_output),
+        str(curves_output),
+        str(gate_figure_output),
+        str(summary_figure_output),
+    ]
+
+
+def evaluate_external_meta_learners(
+    s_model_path,
+    t_model_path,
+    x_model_path,
+    r_model_path,
+    dr_model_path,
+    development_data,
+    validation_data,
+    summary_path,
+    gates_path,
+    curves_path,
+    gate_figure_path,
+    summary_figure_path,
+    n_groups=5,
+    n_bootstrap=1000,
+):
+    """Validate frozen, fully refitted models in a separate external cohort."""
+    models = _load_models(
+        [
+            s_model_path,
+            t_model_path,
+            x_model_path,
+            r_model_path,
+            dr_model_path,
+        ]
+    )
+    summary, gates, curves = _evaluate_external_models(
+        models,
+        development_data,
+        validation_data,
+        n_groups=int(n_groups),
+        n_bootstrap=int(n_bootstrap),
+    )
+
+    summary_output = _output_path(summary_path)
+    gates_output = _output_path(gates_path)
+    curves_output = _output_path(curves_path)
+    gate_figure_output = _output_path(gate_figure_path)
+    summary_figure_output = _output_path(summary_figure_path)
+
+    summary.to_csv(summary_output, index=False)
+    gates.to_csv(gates_output, index=False)
+    curves.to_csv(curves_output, index=False)
+    _plot_gate_comparison(
+        gates, gate_figure_output, "external validation cohort"
+    )
+    _plot_validation_summary(
+        summary, summary_figure_output, "external validation cohort"
+    )
 
     return [
         str(summary_output),

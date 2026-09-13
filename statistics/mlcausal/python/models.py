@@ -34,12 +34,14 @@ XGB_BINARY_PARAMS = {
 
 
 def _toy_frame(toy_data):
+    # R から渡された表をコピーし、元データを変更せず ID の型を揃える。
     data = pd.DataFrame(toy_data).copy()
     data["id"] = data["id"].astype(int)
     return data
 
 
 def _split_value(split, name):
+    # reticulate が返す辞書と、属性として要素を持つオブジェクトの両方に対応する。
     if isinstance(split, dict):
         value = split[name]
     else:
@@ -50,6 +52,7 @@ def _split_value(split, name):
 def _partition(toy_data, split, partition):
     data = _toy_frame(toy_data).set_index("id", drop=False)
     ids = _split_value(split, f"{partition}_ids")
+    # 行番号ではなく保存済み ID で抽出し、全モデルで同じ個体・順序を使う。
     selected = data.loc[ids].copy()
     X = selected.loc[:, FEATURE_NAMES].astype(float)
     Y = selected["bin_outcome"].astype(int)
@@ -65,11 +68,13 @@ def _model_path(path):
 
 def _dump_model(model, path):
     output = _model_path(path)
+    # targets は返されたパスを追跡する。学習済み Python オブジェクトは joblib に保存する。
     joblib.dump(model, output)
     return str(output)
 
 
 def _xgb_outcome_model():
+    # 二値アウトカムの確率を predict() で返すため、logistic 目的関数の回帰器を使う。
     return XGBRegressor(**XGB_BINARY_PARAMS)
 
 
@@ -78,6 +83,7 @@ def make_ml_split(toy_data, test_size=0.2, random_state=123):
     data = _toy_frame(toy_data)
     treatment = data["ca"].astype(int)
     outcome = data["bin_outcome"].astype(int)
+    # 治療 × イベントの 4 層で層化し、訓練・評価データの構成を揃える。
     strata = treatment.astype(str) + "_" + outcome.astype(str)
 
     train_ids, test_ids = train_test_split(
@@ -93,8 +99,20 @@ def make_ml_split(toy_data, test_size=0.2, random_state=123):
     }
 
 
+def make_full_training_split(toy_data):
+    """Use every development-cohort subject when refitting for external validation."""
+    data = _toy_frame(toy_data)
+    return {
+        "train_ids": data["id"].to_numpy(dtype=int),
+        # The fitting helpers only consume train_ids. Keep the same interface
+        # without pretending that a development-cohort holdout is external data.
+        "test_ids": np.asarray([], dtype=int),
+    }
+
+
 def fit_s_learner(toy_data, split, model_path):
     _, X_train, Y_train, T_train = _partition(toy_data, split, "train")
+    # S-learner：治療も説明変数として一つのモデルに含め、治療を切り替えた予測を比較する。
     learner = SLearner(overall_model=_xgb_outcome_model())
     learner.fit(Y_train, T_train, X=X_train)
     return _dump_model(learner, model_path)
@@ -102,6 +120,7 @@ def fit_s_learner(toy_data, split, model_path):
 
 def fit_t_learner(toy_data, split, model_path):
     _, X_train, Y_train, T_train = _partition(toy_data, split, "train")
+    # T-learner：治療群・対照群で別々にアウトカムを学習し、その予測差を効果とする。
     learner = TLearner(models=_xgb_outcome_model())
     learner.fit(Y_train, T_train, X=X_train)
     return _dump_model(learner, model_path)
@@ -127,6 +146,7 @@ def fit_x_learner(toy_data, split, model_path):
         random_state=123,
     )
 
+    # X-learner：補完した個体別効果を学習し、傾向スコアで両群の効果予測を合成する。
     learner = XLearner(
         models=_xgb_outcome_model(),
         cate_models=cate_model,
@@ -139,6 +159,7 @@ def fit_x_learner(toy_data, split, model_path):
 def fit_r_learner(toy_data, split, model_path):
     _, X_train, Y_train, T_train = _partition(toy_data, split, "train")
 
+    # R-learner：5 分割の cross-fitting でアウトカムと治療を残差化し、効果を回帰する。
     learner = NonParamDML(
         model_y=HistGradientBoostingClassifier(
             learning_rate=0.05,
@@ -176,6 +197,8 @@ def fit_r_learner(toy_data, split, model_path):
 def fit_dr_learner(toy_data, split, model_path):
     _, X_train, Y_train, T_train = _partition(toy_data, split, "train")
 
+    # DR-learner：アウトカム予測と傾向スコアから二重頑健な擬似アウトカムを作る。
+    # min_propensity は極端な逆確率重みによる不安定化を抑える。
     learner = DRLearner(
         model_propensity=HistGradientBoostingClassifier(
             learning_rate=0.05,

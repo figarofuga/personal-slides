@@ -103,12 +103,12 @@ pixi run preview
 pixi run render
 
 # Base Folder（pixi.tomlがある場所）からの相対パスで1つだけ
-pixi run render statistics/model_performance_mi/index.qmd
+pixi run render statistics/mlcausal/index.qmd
 pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "Add evalITR package"
+git commit -m "minimal changes"
 git push
 
 ```

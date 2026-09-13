@@ -62,12 +62,15 @@ def _features(toy_data):
 
 def _predict_benefit(model, data):
     frame = pd.DataFrame(data, columns=FEATURE_NAMES).astype(float)
+    # イベントリスク差の符号を反転し、図では正の値ほど利益（リスク低下）が大きい。
     return -np.asarray(model.effect(frame, T0=0, T1=1)).reshape(-1)
 
 
 def _effect_curves(models, features):
+    # 全モデルで参照集団とグリッドを共有し、モデル差と抽出対象の差を切り分ける。
     reference = features.sample(n=min(500, len(features)), random_state=42)
     ice = reference.sample(n=min(20, len(reference)), random_state=42)
+    # 極端な値への外挿を抑えるため、参照集団の 5〜95 パーセンタイルを動かす。
     grids = {
         feature: np.linspace(
             reference[feature].quantile(0.05),
@@ -82,6 +85,7 @@ def _effect_curves(models, features):
     for model_name, model in models.items():
         for feature in EXPLAIN_FEATURES:
             grid = grids[feature]
+            # グリッド値ごとに全個体を複製し、一つの特徴量だけを置き換えて一括予測する。
             pdp_newdata = pd.concat(
                 [reference.copy() for _ in grid], ignore_index=True
             )
@@ -93,6 +97,7 @@ def _effect_curves(models, features):
                         "learner": model_name,
                         "feature": feature,
                         "value": grid,
+                        # 個体方向の平均が PDP。配列は「グリッド × 個体」の順で並んでいる。
                         "hte": pdp_prediction.reshape(
                             len(grid), len(reference)
                         ).mean(axis=1),
@@ -100,6 +105,7 @@ def _effect_curves(models, features):
                 )
             )
 
+            # ICE は平均せず同じ個体の予測を追い、個体間の反応の違いを残す。
             ice_newdata = pd.concat(
                 [ice.copy() for _ in grid], ignore_index=True
             )
@@ -186,6 +192,7 @@ def _plot_ice(pdp, ice, output):
 
 
 def _kernel_shap_values(models, features):
+    # background は比較の基準集団、explained は寄与を説明する対象個体。
     background = features.sample(n=min(30, len(features)), random_state=42)
     explained = features.sample(n=min(40, len(features)), random_state=123)
     results = {}
@@ -197,6 +204,7 @@ def _kernel_shap_values(models, features):
         )
         values = explainer.shap_values(
             explained,
+            # 6 特徴量の部分集合を網羅できる予算を確保する。
             nsamples=2 ** len(FEATURE_NAMES),
             silent=True,
         )
@@ -212,6 +220,7 @@ def _plot_shap(explained, shap_values, output):
 
     for axis, model_name in zip(axes.flat, MODEL_NAMES):
         values = shap_values[model_name]
+        # 平均絶対 SHAP 値で寄与の大きさを並べ、色で元の特徴量の大小を示す。
         order = np.argsort(np.mean(np.abs(values), axis=0))[-6:]
         for position, feature_index in enumerate(order):
             feature_values = explained.iloc[:, feature_index].to_numpy()
