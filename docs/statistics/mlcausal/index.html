@@ -249,7 +249,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li><a href="#/機械学習と因果推論の出会い" id="/toc-機械学習と因果推論の出会い">機械学習と因果推論の出会い</a></li>
 <li><a href="#/meta-learner系" id="/toc-meta-learner系">meta-learner系</a></li>
 <li><a href="#/causal-forestについて" id="/toc-causal-forestについて">Causal forestについて</a></li>
-<li><a href="#/model作成の実務" id="/toc-model作成の実務">Model作成の実務</a></li>
+<li><a href="#/modelを作った後" id="/toc-modelを作った後">Modelを作った後</a></li>
 <li><a href="#/実際の論文" id="/toc-実際の論文">実際の論文</a></li>
 <li><a href="#/advanced" id="/toc-advanced">Advanced</a></li>
 <li><a href="#/実践" id="/toc-実践">実践！</a></li>
@@ -533,6 +533,7 @@ A_i=1\mid W_i
 </ul>
 </div>
 <div id="tabset-2-3">
+<!-- Todo: これも見やすくする -->
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>lalonde <span class="ot">&lt;-</span> MatchIt<span class="sc">::</span>lalonde</span>
 <span id="cb8-2"><a></a>xvars <span class="ot">&lt;-</span> <span class="st">"age + educ + race + married + nodegree + re74 + re75"</span></span>
@@ -556,6 +557,7 @@ A_i=1\mid W_i
 1 Orthogonalization    1233.    -292.     2758.</code></pre>
 </div>
 </div>
+<!-- Todo: 式を確認、みやすくする -->
 <p><span class="math display">\[\begin{aligned}
 Y_i &amp;= \theta_0 D_i + g_0(X_i) + \varepsilon_i,
 \qquad
@@ -679,7 +681,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <ul>
 <li>アウトカムモデル、PS modelを柔軟に扱う</li>
 <li>Interaction termを自然に扱える</li>
-<li>柔軟なモデルであれば、HTEを自然に扱えないか？</li>
+<li>柔軟なモデルであれば、HTEを自然に扱えないか？<span class="citation" data-cites="Khera2024-ho">(<a href="#/references" role="doc-biblioref" onclick="">Khera et al. 2024</a>)</span></li>
 </ul>
 </section>
 <section id="機械学習を用いた因果推論について" class="slide level2">
@@ -819,11 +821,6 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める</li>
 </ul></li>
 </ul>
-</section></section>
-<section>
-<section id="model作成の実務" class="title-slide slide level1 center">
-<h1>Model作成の実務</h1>
-
 </section>
 <section id="結局どれがいいの" class="slide level2">
 <h2>結局どれがいいの？</h2>
@@ -831,41 +828,27 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>ATEの場合はmeta-learnerでも良いがCausal forestでも別に良い</li>
 <li>HTEの場合はCausal forestが現実的に最も良い</li>
 </ul>
-</section>
-<section id="overfittingを避けるために" class="slide level2">
-<h2>Overfittingを避けるために</h2>
-<ul>
-<li>簡単に言うとCross validationを組み合わせる</li>
-<li>Causal forestの場合は、分岐を決めるデータセットと、そこで得られる治療効果を分ける”honesty”という概念が独特</li>
-<li>Data leakageを防ぐのは難しいのでPackageにお任せが良さそう</li>
-</ul>
+</section></section>
+<section>
+<section id="modelを作った後" class="title-slide slide level1 center">
+<h1>Modelを作った後</h1>
+
 </section>
 <section id="モデルの評価の仕方の概論" class="slide level2">
 <h2>モデルの評価の仕方の概論</h2>
 <ul>
-<li>ModelをBlackboxから出す: ICE, PDP, SHAPなど
-<ul>
-<li>Tree Interpreter</li>
-</ul></li>
 <li>Modelの性能の評価
 <ul>
 <li>Discrimination, Calibrationなど</li>
+</ul></li>
+<li>ModelをBlackboxから出す: ICE, PDP, SHAPなど
+<ul>
+<li>Tree Interpreter</li>
 </ul></li>
 <li>モデルの実施方法
 <ul>
 <li>Policy tree</li>
 </ul></li>
-</ul>
-</section>
-<section id="modelをblackboxから出す" class="slide level2">
-<h2>ModelをBlackboxから出す</h2>
-<ul>
-<li>通常の予測モデルと大きな変化はない
-<ul>
-<li>モデルが何をみているか？: SHAP</li>
-<li>ある連続値の共変量との関係性: PDP, ICE</li>
-</ul></li>
-<li>人に解釈できる方法として、HTEを浅い決定木で回帰させる”Surrogate tree”というのもある</li>
 </ul>
 </section>
 <section id="モデルの評価の仕方" class="slide level2">
@@ -920,12 +903,12 @@ D_i &amp;= m_0(X_i) + V_i,
 </section>
 <section id="discrimination-c-for-benefit" class="slide level2">
 <h2>Discrimination ~ C-for-benefit</h2>
-<!-- Todo: 図を書く -->
 <ul>
-<li>各人で予想した治療効果を順番に並べる</li>
-<li>5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)</li>
-<li>各々の群を一つのデータセットとして別個にATEを出す(真値)</li>
-<li>実際にランキング通りかどうかを比べる</li>
+<li>治療群の患者と対照群の患者を、予測CATEまたは背景因子で1対1マッチングする</li>
+<li>観察されたOutcomeを治療群のOutcome - Ctrl群のOutcomeで計算</li>
+<li>ITEを(治療群のITE + Ctrl群のITE)/2とする</li>
+<li>全てのペアで確認して、観察されたOutcomeとITEの大小関係が一致する割合をみる</li>
+<li>観察されたOutcomeを真の治療効果に近似している</li>
 </ul>
 </section>
 <section id="calibration-gates" class="slide level2">
@@ -965,18 +948,51 @@ D_i &amp;= m_0(X_i) + V_i,
 </section>
 <section id="calibration-best-linear-predictor法" class="slide level2">
 <h2>Calibration ~ best linear predictor法</h2>
+<p><span class="math display">\[
+Y_i - \hat{m}(X_i), \qquad W_i - \hat{e}(X_i)
+\]</span></p>
+<p><span class="math display">\[
+Y_i - \hat{m}(X_i)
+=
+\alpha
+\left\{
+W_i - \hat{e}(X_i)
+\right\}
+\bar{\hat{\tau}}
++
+\beta
+\left\{
+W_i - \hat{e}(X_i)
+\right\}
+\left(
+\hat{\tau}_i - \bar{\hat{\tau}}
+\right)
++
+\varepsilon_i
+\]</span></p>
 <ul>
-<li>ATEの計算をして、各々の(ITE-ATE) ~ (treat - propensity score)でOrthogonalizationで出した係数</li>
-<li>grfの中ではATEとCATEを別個にみるものがある(<code>test_calibration()</code>)
+<li>causal forestのOOB CATE予測を「平均治療効果成分」と「heterogeneity成分」に分け、outcome/treatmentをorthogonalizeした回帰でcalibrationを評価する。</li>
+<li>grf::test_calibration()では、
 <ul>
-<li>mean.forest.predictionが群全体のATE: 1なら正確にATEを見つけられている</li>
-<li>differential.forest.predictionがHeterogeneity: 1ならHeterogneityがある</li>
+<li>mean.forest.prediction(上式の <span class="math inline">\(\alpha\)</span> ): 平均CATE予測のcalibration係数。1に近いほど平均効果のscaleが正しい。</li>
+<li>differential.forest.prediction(上式の <span class="math inline">\(\beta\)</span> ): CATE heterogeneityのcalibration slope。1に近いほどheterogeneityのscaleが正しく、0より有意に大きければHTEの存在を支持する。</li>
 </ul></li>
 <li>実際の論文でも<code>grf::test_calibration()</code>だけを評価しているものが多い</li>
 </ul>
 </section>
-<section id="best-linear-preojection" class="slide level2">
-<h2>Best linear preojection</h2>
+<section id="modelをblackboxから出す" class="slide level2">
+<h2>ModelをBlackboxから出す</h2>
+<ul>
+<li>通常の予測モデルと大きな変化はない
+<ul>
+<li>モデルが何をみているか？: SHAP</li>
+<li>ある連続値の共変量との関係性: PDP, ICE</li>
+</ul></li>
+<li>人に解釈できる方法として、HTEを浅い決定木で回帰させる”Surrogate tree”というのもある</li>
+</ul>
+</section>
+<section id="modelの解釈best-linear-preojection" class="slide level2">
+<h2>Modelの解釈～Best linear preojection</h2>
 <ul>
 <li>予測されるITE ~ Covariatesで回帰させたもの</li>
 <li>各Covariatesがどのような影響にITEに影響しているかを見ている</li>
@@ -1001,8 +1017,9 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>Rだと<code>grf</code>で可能</li>
 </ul>
 </section>
-<section id="causal-forestについて-1" class="slide level2 scrollable">
-<h2>Causal forestについて</h2>
+<section id="causal-forestの場合は" class="slide level2 scrollable">
+<h2>Causal forestの場合は</h2>
+<!-- Todo: 埋める -->
 <ul>
 <li>論文では・・・・・・の評価を推奨</li>
 <li>grfの作者たちのお勧めは以下の順番
@@ -1021,8 +1038,12 @@ D_i &amp;= m_0(X_i) + V_i,
 </section>
 <section id="meta-learners" class="slide level2">
 <h2>meta-learners</h2>
+<ul>
+<li>正直ほとんどない</li>
+<li>通常のRobustな解析のSensitivity analysisくらいで良いかも</li>
+</ul>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">RCTのSub解析-1</a></li><li><a href="#tabset-3-2">RCTのSub解析-2</a></li><li><a href="#tabset-3-3">RCTのSub解析-3</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">RCTのSub解析-1</a></li><li><a href="#tabset-3-2">RCTのSub解析-2</a></li><li><a href="#tabset-3-3">RCTのSub解析-3</a></li><li><a href="#tabset-3-4">観察研究</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
 <ul>
@@ -1042,6 +1063,15 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 <div id="tabset-3-3">
 <ul>
+<li>VITAL-AF trialのSub解析</li>
+<li>高齢者の中で「どの患者で単回のAF screeningが有用か？」を見つける</li>
+<li>T-learnerとRisk scoreを比較</li>
+<li>Risk score毎にScreening betterを評価</li>
+<li>通常のRisk score研究 <span class="citation" data-cites="Shah2025-ie">(<a href="#/references" role="doc-biblioref" onclick="">Shah et al. 2025</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-3-4">
+<ul>
 <li>STICH trialをEmulateしたイギリスの大規模データセット</li>
 <li>PCI vs.&nbsp;CABGの治療効果を研究</li>
 <li>通常の解析以外の感度分析としてS/T/X-learnerを使っている</li>
@@ -1050,15 +1080,15 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
-<ul>
-<li>正直ほとんどない</li>
-<li>通常のRobustな解析のSensitivity analysisくらいで良いかも</li>
-</ul>
 </section>
 <section id="causal-forest-rctのsub解析" class="slide level2">
 <h2>Causal forest ~ RCTのSub解析</h2>
+<ul>
+<li>全体的にシンプルな構成が多い</li>
+<li>RCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある</li>
+</ul>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">RCTのSub解析-1</a></li><li><a href="#tabset-4-2">RCTのSub解析-2</a></li><li><a href="#tabset-4-3">RCTのSub解析-3</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">RCTのSub解析-1</a></li><li><a href="#tabset-4-2">RCTのSub解析-2</a></li><li><a href="#tabset-4-3">RCTのSub解析-3</a></li><li><a href="#tabset-4-4">RCTのSub解析-4</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
 <ul>
@@ -1082,15 +1112,23 @@ D_i &amp;= m_0(X_i) + V_i,
 <li>Clinical implicationはないが、Policy makerには重要な研究 <span class="citation" data-cites="Inoue2024-cl">(<a href="#/references" role="doc-biblioref" onclick="">Inoue, Athey, et al. 2024</a>)</span></li>
 </ul>
 </div>
-</div>
-</div>
+<div id="tabset-4-4">
 <ul>
-<li>全体的にシンプルな構成が多い</li>
-<li>RCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある</li>
+<li>TOPCAT trialのSub解析</li>
+<li>Survival causal forestを用いている</li>
+<li>C for benefitとRATEで評価している</li>
 </ul>
+<p><span class="citation" data-cites="Desai2024-pr">(<a href="#/references" role="doc-biblioref" onclick="">Desai et al. 2024</a>)</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="causal-forest-観察研究" class="slide level2">
 <h2>Causal forest ~ 観察研究</h2>
+<ul>
+<li>Propensity score matchで疑似RCT → Causal forestが多い</li>
+<li>target trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう</li>
+</ul>
 <div class="panel-tabset">
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">観察研究-1</a></li><li><a href="#tabset-5-2">観察研究-2</a></li></ul>
 <div class="tab-content">
@@ -1117,10 +1155,6 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
-<ul>
-<li>Propensity score matchで疑似RCT → Causal forestが多い</li>
-<li>target trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう</li>
-</ul>
 </section></section>
 <section>
 <section id="advanced" class="title-slide slide level1 center">
@@ -1182,6 +1216,7 @@ D_i &amp;= m_0(X_i) + V_i,
 <section id="test-dataset①" class="slide level2">
 <h2>Test-dataset①</h2>
 
+<!-- Todo: SESの色か線の種類を変える -->
 <img data-src="index_files/figure-revealjs/DAG-for-ToyData-1.svg" width="960" class="r-stretch"><ul>
 <li>治療効果は各々別個にいれてある</li>
 <li>DAGは上記の通り</li>
@@ -1206,6 +1241,12 @@ D_i &amp;= m_0(X_i) + V_i,
 #   afeqt_treatment_effect &lt;dbl&gt;, afeqt_os &lt;dbl&gt;, eventtime &lt;dbl&gt;, status &lt;int&gt;</code></pre>
 </div>
 </div>
+<!-- Todo: 説明を記載する -->
+<ul>
+<li>ATEは・・・・・・</li>
+<li>治療のPropensity scoreは・・・・・・・</li>
+<li>治療効果の式を書く</li>
+</ul>
 </section>
 <section id="toy-dataの可視化" class="slide level2">
 <h2>Toy dataの可視化</h2>
@@ -1222,6 +1263,7 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
+<!-- Todo: 列名を直して順番を直す -->
 </div>
 <div id="tabset-6-2">
 <div class="cell">
@@ -1236,6 +1278,7 @@ D_i &amp;= m_0(X_i) + V_i,
 </div>
 </div>
 </div>
+<!-- Todo: 列名を直す -->
 </section>
 <section id="modification因子と治療効果" class="slide level2">
 <h2>Modification因子と治療効果</h2>
@@ -1294,6 +1337,7 @@ D_i &amp;= m_0(X_i) + V_i,
 </section>
 <section id="meta-learners-1" class="slide level2">
 <h2>Meta-learners</h2>
+<!-- Todo: スクリプトが見えるようにする -->
 <div class="panel-tabset">
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">S-learner</a></li><li><a href="#tabset-8-2">T-learner</a></li><li><a href="#tabset-8-3">X-learner</a></li><li><a href="#tabset-8-4">R-learner</a></li><li><a href="#tabset-8-5">DR-learner</a></li></ul>
 <div class="tab-content">
@@ -1763,8 +1807,8 @@ Variable splits:
     (7) * action: 2 </code></pre>
 </div>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-dd759e8e2c5dc82443ba" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-dd759e8e2c5dc82443ba">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bnp <= 67 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" lvef <= 52 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n2 [label=\" bnp <= 74 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-3cfe7f0380d49d35ecfc" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-3cfe7f0380d49d35ecfc">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bnp <= 67 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" lvef <= 52 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n2 [label=\" bnp <= 74 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -1977,7 +2021,7 @@ Variable splits:
  collate  ja_JP.UTF-8
  ctype    ja_JP.UTF-8
  tz       Asia/Tokyo
- date     2026-09-13
+ date     2026-09-14
  pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)
  quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto
 
@@ -2029,7 +2073,7 @@ Variable splits:
  lifecycle         1.0.5     2026-01-08 [1] CRAN (R 4.5.2)
  lubridate       * 1.9.5     2026-02-04 [1] CRAN (R 4.5.2)
  magrittr          2.0.5     2026-04-04 [1] CRAN (R 4.5.3)
- marginaleffects   0.32.0    2026-02-14 [1] CRAN (R 4.5.2)
+ marginaleffects   1.0.0     2026-09-03 [1] CRAN (R 4.5.3)
  MASS              7.3-65    2025-02-28 [1] CRAN (R 4.5.1)
  Matrix            1.7-5     2026-03-21 [1] CRAN (R 4.5.3)
  memoise           2.0.1     2021-11-26 [1] CRAN (R 4.5.1)
@@ -2040,7 +2084,7 @@ Variable splits:
  pillar            1.11.1    2025-09-17 [1] CRAN (R 4.5.1)
  pkgconfig         2.0.3     2019-09-22 [1] CRAN (R 4.5.1)
  png               0.1-9     2026-03-15 [1] CRAN (R 4.5.3)
- policytree      * 1.2.4     2026-02-18 [1] CRAN (R 4.5.2)
+ policytree      * 1.2.5     2026-08-04 [1] CRAN (R 4.5.3)
  polyclip          1.10-7    2024-07-23 [1] CRAN (R 4.5.1)
  prettyunits       1.2.0     2023-09-24 [1] CRAN (R 4.5.1)
  processx          3.9.0     2026-04-22 [1] CRAN (R 4.5.3)
@@ -2050,7 +2094,7 @@ Variable splits:
  RColorBrewer      1.1-3     2022-04-03 [1] CRAN (R 4.5.1)
  Rcpp              1.1.1-1.1 2026-04-24 [1] CRAN (R 4.5.3)
  readr           * 2.2.0     2026-02-19 [1] CRAN (R 4.5.2)
- reticulate        1.46.0    2026-04-09 [1] CRAN (R 4.5.3)
+ reticulate        1.47.0    2026-09-03 [1] CRAN (R 4.5.3)
  rlang             1.3.0     2026-07-05 [1] CRAN (R 4.5.3)
  rmarkdown         2.31      2026-03-26 [1] CRAN (R 4.5.3)
  rpart             4.1.27    2026-03-27 [1] CRAN (R 4.5.3)
@@ -2081,10 +2125,10 @@ Variable splits:
  viridis           0.6.5     2024-01-29 [1] CRAN (R 4.5.1)
  viridisLite       0.4.3     2026-02-04 [1] CRAN (R 4.5.2)
  visNetwork        2.1.4     2025-09-04 [1] CRAN (R 4.5.1)
- WeightIt          1.7.0     2026-04-22 [1] CRAN (R 4.5.3)
+ WeightIt          2.0.0     2026-08-03 [1] CRAN (R 4.5.3)
  withr             3.0.3     2026-06-19 [1] CRAN (R 4.5.3)
  xfun              0.59      2026-06-19 [1] CRAN (R 4.5.3)
- xgboost           3.3.0.1   2026-06-26 [1] local
+ xgboost           3.4.1.1   2026-08-19 [1] local
  yaml              2.3.12    2025-12-10 [1] CRAN (R 4.5.2)
  yardstick       * 1.4.0     2026-04-07 [1] CRAN (R 4.5.3)
  zoo               1.8-15    2025-12-15 [1] CRAN (R 4.5.2)
@@ -2105,6 +2149,9 @@ Variable splits:
 <div id="ref-Collins2024-mg" class="csl-entry" role="listitem">
 Collins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. <span>“<span>TRIPOD+AI</span> Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.”</span> <em>BMJ</em> 385 (April): e078378. <a href="https://doi.org/10.1136/bmj-2023-078378">https://doi.org/10.1136/bmj-2023-078378</a>.
 </div>
+<div id="ref-Desai2024-pr" class="csl-entry" role="listitem">
+Desai, Rishi J, Robert J Glynn, Scott D Solomon, Brian Claggett, Shirley V Wang, and Muthiah Vaduganathan. 2024. <span>“Individualized Treatment Effect Prediction with Machine Learning - Salient Considerations.”</span> <em>NEJM Evidence</em> 3 (4): EVIDoa2300041. <a href="https://doi.org/10.1056/EVIDoa2300041">https://doi.org/10.1056/EVIDoa2300041</a>.
+</div>
 <div id="ref-Feuerriegel2024-ya" class="csl-entry" role="listitem">
 Feuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. <span>“Causal Machine Learning for Predicting Treatment Outcomes.”</span> <em>Nature Medicine</em> 30 (4): 958–68. <a href="https://doi.org/10.1038/s41591-024-02902-1">https://doi.org/10.1038/s41591-024-02902-1</a>.
 </div>
@@ -2119,6 +2166,9 @@ Inoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. <span>“Machine-Learning-
 </div>
 <div id="ref-Inoue2023-wl" class="csl-entry" role="listitem">
 Inoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. <span>“Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the <span>MESA</span> Study.”</span> <em>Circulation</em> 147 (2): 132–41. <a href="https://doi.org/10.1161/CIRCULATIONAHA.122.062626">https://doi.org/10.1161/CIRCULATIONAHA.122.062626</a>.
+</div>
+<div id="ref-Khera2024-ho" class="csl-entry" role="listitem">
+Khera, Rohan, Evangelos K Oikonomou, Girish N Nadkarni, et al. 2024. <span>“Transforming Cardiovascular Care with Artificial Intelligence: From Discovery to Practice: <span>JACC</span> State-of-the-Art Review.”</span> <em>Journal of the American College of Cardiology</em> 84 (1): 97–114. <a href="https://doi.org/10.1016/j.jacc.2024.05.003">https://doi.org/10.1016/j.jacc.2024.05.003</a>.
 </div>
 <div id="ref-Lee2024-mp" class="csl-entry" role="listitem">
 Lee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. <span>“Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.”</span> <em>Journal of the American Heart Association</em> 13 (19): e034862. <a href="https://doi.org/10.1161/JAHA.124.034862">https://doi.org/10.1161/JAHA.124.034862</a>.
@@ -2143,6 +2193,9 @@ Scarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and
 </div>
 <div id="ref-Segal2023-gi" class="csl-entry" role="listitem">
 Segal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. <span>“Assessing Heterogeneity of Treatment Effect in Real-World Data.”</span> <em>Annals of Internal Medicine</em> 176 (4): 536–44. <a href="https://doi.org/10.7326/M22-1510">https://doi.org/10.7326/M22-1510</a>.
+</div>
+<div id="ref-Shah2025-ie" class="csl-entry" role="listitem">
+Shah, Sachin J, Jay M Iyer, Leila Agha, et al. 2025. <span>“Identifying a Heterogeneous Effect of Atrial Fibrillation Screening in Older Adults: A Secondary Analysis of the <span>VITAL</span>-<span>AF</span> Trial.”</span> <em>Circulation. Cardiovascular Quality and Outcomes</em> 18 (7): e011482. <a href="https://doi.org/10.1161/CIRCOUTCOMES.124.011482">https://doi.org/10.1161/CIRCOUTCOMES.124.011482</a>.
 </div>
 <div id="ref-Thomas2020-qe" class="csl-entry" role="listitem">
 Thomas, Laine E, Fan Li, and Michael J Pencina. 2020. <span>“Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.”</span> <em>The Journal of the American Medical Association</em> 323 (23): 2417–18. <a href="https://doi.org/10.1001/jama.2020.7819">https://doi.org/10.1001/jama.2020.7819</a>.

@@ -1,0 +1,152 @@
+---
+title: "動脈血液ガス分析の基礎と概念"
+subtitle: "たった一つの簡単な概念"
+date: "2026/12/4"
+bibliography: reference.bib
+link-citations: true
+format:
+  clean-revealjs:
+    toc: true
+    toc-depth: 1
+    slide-level: 2
+    theme: default
+    scrollable: true
+    smaller: true
+    transition: slide
+    incremental: false
+    pdf-separate-fragments: false
+    pdf-max-pages-per-slide: 3
+    slide-number: true
+    footer: '<a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a>'
+author:
+  - name: Nozomi Niimi
+    orcid: 0000-0002-6909-0740
+    email: figarofuga@gmail.com
+    affiliations: 東京医療センター総合内科
+date-format: "YYYY-MM-DD"
+engine: knitr
+execute: 
+  error: false
+  warning: false
+  echo: false
+  cache: false
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
+---
+
+```{=html}
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.5em;
+  margin-top: 0.7em;
+  text-align: right;
+}
+.reveal table {
+  font-size: 0.55em;
+}
+.reveal .small {
+  font-size: 0.75em;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+</style>
+```
+
+
+## Acid–Base Disorders {#acid-base-map}
+
+```{mermaid}
+%%| fig-width: 10
+%%| fig-height: 6
+
+flowchart TD
+    ABG["Acid–Base Disorders"]
+
+    ABG --> MA["代謝性アシドーシス"]
+    ABG --> MK["代謝性アルカローシス"]
+    ABG --> RA["呼吸性アシドーシス"]
+    ABG --> RK["呼吸性アルカローシス"]
+    
+    MA --> AG["Anion Gap開大"]
+    MA --> NAG["Anion Gap正常"]
+
+    click AG "#/ag-acidosis"
+    click NAG "#/nag-acidosis"
+    click MK "#/metabolic-alkalosis"
+    click RA "#/respiratory-acidosis"
+    click RK "#/respiratory-alkalosis"
+```
+
+---
+
+## High Anion Gap 代謝性 アシドーシス {#ag-acidosis}
+
+### Anion gap
+
+$$
+AG = Na^+ - (Cl^- + HCO_3^-)
+$$
+
+- Lactic アシドーシス
+- Ketoアシドーシス
+- Renal failure
+- Toxins
+
+[← Acid–Base Map](#/acid-base-map)
+
+---
+
+## Normal Anion Gap 代謝性 アシドーシス {#nag-acidosis}
+
+### Differential diagnosis
+
+- GI bicarbonate loss
+- Renal tubular アシドーシス
+- Saline administration
+
+[← Acid–Base Map](#/acid-base-map)
+
+---
+
+## 代謝性 アルカローシス {#metabolic-alkalosis}
+
+### Think about urine chloride
+
+- Chloride responsive
+- Chloride resistant
+
+[← Acid–Base Map](#/acid-base-map)
+
+---
+
+## 呼吸性 アシドーシス {#respiratory-acidosis}
+
+### Hypoventilation
+
+- CNS depression
+- Neuromuscular disease
+- Airway / pulmonary disease
+
+[← Acid–Base Map](#/acid-base-map)
+
+---
+
+## 呼吸性 アルカローシス {#respiratory-alkalosis}
+
+### Hyperventilation
+
+- Hypoxemia
+- Sepsis
+- Pregnancy
+- CNS disorders
+
+[← Acid–Base Map](#/acid-base-map)
+
+## References {.scrollable}
+
+::: {#refs}
+:::

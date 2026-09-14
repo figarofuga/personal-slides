@@ -477,8 +477,7 @@ make_toy_data <- function(
   toy_data <- full_toy_data |>
     dplyr::select(
       id, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca,
-      bin_outcome, bin_event_free, bin_outcome_no_hte,
-      afeqt_treatment_effect, afeqt_os, eventtime, status
+      bin_outcome, bin_event_free
     )
 
   list(

@@ -550,7 +550,7 @@ D_i &= m_0(X_i) + V_i,
 
 - アウトカムモデル、PS modelを柔軟に扱う
 - Interaction termを自然に扱える
-- 柔軟なモデルであれば、HTEを自然に扱えないか？
+- 柔軟なモデルであれば、HTEを自然に扱えないか？[@Khera2024-ho]
 
 ## 機械学習を用いた因果推論について
 
@@ -695,10 +695,12 @@ D_i &= m_0(X_i) + V_i,
 
 ## Discrimination ~ C-for-benefit
 
-<!-- Todo: 調べて書く -->
 
-- 記載する
-- 
+- 治療群の患者と対照群の患者を、予測CATEまたは背景因子で1対1マッチングする
+- 観察されたOutcomeを治療群のOutcome - Ctrl群のOutcomeで計算
+- ITEを(治療群のITE + Ctrl群のITE)/2とする
+- 全てのペアで確認して、観察されたOutcomeとITEの大小関係が一致する割合をみる
+- 観察されたOutcomeを真の治療効果に近似している
 
 ## Calibration ~ GATES
 
@@ -770,11 +772,35 @@ library(modeldata)
 ## Calibration ~ best linear predictor法
 
 
-- ATEの計算をして、各々の(ITE-ATE) ~ (treat - propensity score)でOrthogonalizationで出した係数
-- grfの中ではATEとCATEを別個にみるものがある(`test_calibration()`)
-  - mean.forest.predictionが群全体のATE: 1なら正確にATEを見つけられている
-  - differential.forest.predictionがHeterogeneity: 1ならHeterogneityがある
-- 実際の論文でも`grf::test_calibration()`だけを評価しているものが多い
+$$
+Y_i - \hat{m}(X_i), \qquad W_i - \hat{e}(X_i)
+$$
+
+$$
+Y_i - \hat{m}(X_i)
+=
+\alpha
+\left\{
+W_i - \hat{e}(X_i)
+\right\}
+\bar{\hat{\tau}}
++
+\beta
+\left\{
+W_i - \hat{e}(X_i)
+\right\}
+\left(
+\hat{\tau}_i - \bar{\hat{\tau}}
+\right)
++
+\varepsilon_i
+$$
+
+- causal forestのOOB CATE予測を「平均治療効果成分」と「heterogeneity成分」に分け、outcome/treatmentをorthogonalizeした回帰でcalibrationを評価する。
+- grf::test_calibration()では、
+  - mean.forest.prediction(上式の $\alpha$ ): 平均CATE予測のcalibration係数。1に近いほど平均効果のscaleが正しい。
+  - differential.forest.prediction(上式の $\beta$ ): CATE heterogeneityのcalibration slope。1に近いほどheterogeneityのscaleが正しく、0より有意に大きければHTEの存在を支持する。
+- 実際の論文でも`grf::test_calibration()`を評価しているものが多い
 
 ## ModelをBlackboxから出す
 
@@ -822,14 +848,14 @@ library(modeldata)
 
 ::: {.panel-tabset}
 
-### RCTのSub解析-1
+## RCTのSub解析-1
 
 - SepsisにCorticosteroidを用いたRCT複数の二次解析
 - SuperLearnerを用いたS-learnerの手法でITEを検出
 - ある治療閾値を設定してSurrogate treeを用いて、臨床判断への有用性を記載
 [@Pirracchio2020-ta]
 
-### RCTのSub解析-2
+## RCTのSub解析-2
 
 - 個々人への適切なDAPT期間を決めるためのiDAPT scoreを作成
 - DAPTの期間をみた3 RCTを統合してX-learnerでITEを計算
@@ -838,7 +864,7 @@ library(modeldata)
 - いわゆる通常のRisk model研究
 [@Lee2024-mp]
 
-### RCTのSub解析-3
+## RCTのSub解析-3
 
 - VITAL-AF trialのSub解析
 - 高齢者の中で「どの患者で単回のAF screeningが有用か？」を見つける
@@ -847,7 +873,7 @@ library(modeldata)
 - 通常のRisk score研究
 [@Shah2025-ie]
 
-### 観察研究
+## 観察研究
 
 - STICH trialをEmulateしたイギリスの大規模データセット
 - PCI vs. CABGの治療効果を研究
@@ -860,6 +886,8 @@ library(modeldata)
 
 ## Causal forest ~ RCTのSub解析
 
+- 全体的にシンプルな構成が多い
+- RCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある
 
 ::: {.panel-tabset}
 
@@ -885,12 +913,21 @@ library(modeldata)
 - Clinical implicationはないが、Policy makerには重要な研究
 [@Inoue2024-cl]
 
+### RCTのSub解析-4
+
+- TOPCAT trialのSub解析
+- Survival causal forestを用いている
+- C for benefitとRATEで評価している
+
+[@Desai2024-pr]
+
 :::
 
-- 全体的にシンプルな構成が多い
-- RCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある
-
 ## Causal forest ~ 観察研究
+
+- Propensity score matchで疑似RCT → Causal forestが多い
+- target trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう
+
 
 ::: {.panel-tabset}
 
@@ -915,8 +952,6 @@ library(modeldata)
 
 :::
 
-- Propensity score matchで疑似RCT → Causal forestが多い
-- target trial emulationを謳うものが多く、Time 0やアウトカムの選定などは今後厳しくなりそう
 
 # Advanced
 
@@ -1222,8 +1257,30 @@ print(head(toy_data))
 library(tidyverse)
 library(tinyplot)
 
+toy_data_label <- tribble(
+  ~from, ~to,
+  "age", "Age", 
+  "sexm1","Male", 
+  "bmi", "BMI", 
+  "hf" , "HF", 
+  "bnp" , "BNP", 
+  "lvef" , "LVEF", 
+  "palpitation" , "Palpitation", 
+  "ca" , "Ablation", 
+  "bin_outcome" , "Outcome"
+)
 
-tidyr::pivot_longer(toy_data, cols = everything()) |>
+tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |> 
+  dplyr::mutate(
+    name = dplyr::recode_values(
+      name, 
+      from = toy_data_label$from, 
+      to = toy_data_label$to
+    ) |> 
+      forcats::fct_relevel(
+        c("Age", "Male", "BMI", "LVEF", "BNP", "HF", "Palpitation", "Ablation", "Outcome")
+      )
+  ) |> 
   tinyplot::plt(
   ~ value, facet = ~ name, facet.args = list(free = TRUE),
   data = _,
@@ -1241,17 +1298,22 @@ tidyr::pivot_longer(toy_data, cols = everything()) |>
 library(tidyverse)
 library(GGally)
 
-dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |>
+rename_vec <- setNames(
+  toy_data_label$from,
+  toy_data_label$to
+)
+
+dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |> 
+  rename(any_of(rename_vec)) |>
   dplyr::slice_sample(n = 500) |>
   dplyr::mutate(
-    across(c(sexm1, hf, palpitation, ca), \(x)factor(x))) |>
+    across(c(Male, HF, Palpitation, Ablation), \(x)factor(x))) |>
   GGally::ggpairs() + theme_bw()
 
 
 ```
 :::
 
-<!-- Todo: 列名を直す -->
 
 ## Modification因子と治療効果
 

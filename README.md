@@ -60,8 +60,8 @@ pixi run Rscript scripts/vendor_pixi_r_packages.R <<package-name>>
 If R packages to remove in /vendor...
 
 ```bash
-pixi remove r-findit r-glinternet &&
-  rm -rf -- vendor/FindIt vendor/glinternet
+pixi remove r-doubleml &&
+  rm -rf -- vendor/DoubleML
 ```  
 
 To upgrade an existing vendored package to a newer repository version, run:
@@ -120,5 +120,5 @@ TODO: PROのordinalの図のFactorを直す
 
 ## Plans
 
-- Medicine: HF in elderly, Rickettsia, Eosinophilia, hypokalemia, treatment of acute severe hyponatremia, Whipple disease, thrombophlic test for VTE, and antithrombosis drugs.
+- Medicine: HF in elderly, Rickettsia, Eosinophilia, hypokalemia, treatment of acute severe hyponatremia, Whipple disease, thrombophlic test for VTE, and blood gas analysis.
 - Stats: Clustering, DAG, Model performance, visualizations, Advanced survival analysis including time-varying cox, splines, propensity score analysis, and multiple imputations
