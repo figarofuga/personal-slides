@@ -56,33 +56,20 @@ targets::tar_load(
     full_toy_data,
     test_toy_data,
     full_test_toy_data,
-    external_shift_summary,
-    ate_rd_summary,
-    subclassification_result,
-    matching_result,
-    weighting_result,
-    aipw_result,
-    tmle_result,
-    orthogonalization_result,
     meta_learner_effects_file,
     meta_learner_evaluation_files,
     external_meta_learner_effects_file,
     external_meta_learner_evaluation_files,
-    meta_explanation_figures,
+    meta_explanation_data_files,
+    policy_features,
+    causal_forest_bin,
+    causal_forest_policy,
     causal_forest_shap,
-    causal_forest_dr_scores,
-    causal_forest_surrogate_tree,
-    policy_tree,
-    rate_results,
-    grf_gate_data,
-    grf_validation_summary,
     external_causal_forest_predictions,
     external_rate_results,
-    external_grf_gate_data,
-    external_grf_validation_summary,
-    external_c_for_benefit_summary,
+    external_grf_validation,
+    external_c_for_benefit,
     grf_pdp_data,
-    grf_ice_data,
     grf_cate_shap,
     s_learner_tree_figure,
     t_learner_tree_figure,
@@ -154,9 +141,12 @@ external_meta_validation_figure <- target_artifact(
   external_meta_learner_evaluation_files,
   "external-meta-validation.svg"
 )
-meta_pdp_figure <- target_artifact(meta_explanation_figures, "meta-pdp.svg")
-meta_ice_figure <- target_artifact(meta_explanation_figures, "meta-ice.svg")
-meta_shap_figure <- target_artifact(meta_explanation_figures, "meta-shap.svg")
+meta_pdp_data <- utils::read.csv(
+  target_artifact(meta_explanation_data_files, "meta-pdp.csv")
+)
+meta_shap_data <- utils::read.csv(
+  target_artifact(meta_explanation_data_files, "meta-shap.csv")
+)
 
 ```
 
@@ -257,8 +247,26 @@ tidy_dagitty(dag) |>
 ## Stratification
 
 ```{r}
-subclassification_result
+lalonde <- MatchIt::lalonde
+subclassification_fit <- MatchIt::matchit(
+  treat ~ age + educ + nodegree + married + re74 + re75,
+  data = lalonde,
+  method = "subclass",
+  subclass = 5,
+  estimand = "ATT"
+)
+subclassification_data <- MatchIt::match_data(subclassification_fit)
+subclassification_model <- stats::lm(
+  re78 ~ treat * (age + educ + nodegree + married + re74 + re75),
+  data = subclassification_data
+)
 
+marginaleffects::avg_comparisons(
+  subclassification_model,
+  variables = "treat",
+  vcov = "HC3",
+  newdata = dplyr::filter(subclassification_data, treat == 1)
+)
 ```
 
 - Propensity scoreの値を5分位に分けて、各々の層同士で比較して最後に統合する
@@ -266,8 +274,25 @@ subclassification_result
 ## Matching
 
 ```{r}
-matching_result
+matching_fit <- MatchIt::matchit(
+  treat ~ age + educ + race + nodegree + married + re74 + re75,
+  data = lalonde,
+  method = "nearest",
+  estimand = "ATT"
+)
+matching_data <- MatchIt::match_data(matching_fit)
+matching_model <- stats::lm(
+  re78 ~ treat * (age + educ + nodegree + married + re74 + re75),
+  data = matching_data,
+  weights = weights
+)
 
+marginaleffects::avg_comparisons(
+  matching_model,
+  variables = "treat",
+  vcov = ~subclass,
+  newdata = dplyr::filter(matching_data, treat == 1)
+)
 ```
 
 - Propensity scoreが似たものを1:1でMatchingさせる
@@ -277,7 +302,22 @@ matching_result
 ## Weighting
 
 ```{r}
-weighting_result
+weighting_fit <- WeightIt::weightit(
+  treat ~ age + educ + race + nodegree + married + re74 + re75,
+  data = lalonde,
+  method = "glm"
+)
+weighting_model <- WeightIt::lm_weightit(
+  re78 ~ treat * (age + educ + race + married + nodegree + re74 + re75),
+  data = lalonde,
+  weightit = weighting_fit
+)
+
+marginaleffects::avg_comparisons(
+  weighting_model,
+  variables = "treat",
+  newdata = dplyr::filter(lalonde, treat == 1)
+)
 ```
 
 - Propensity scoreをベースに色々な重みづけをしてバランスをとる
@@ -308,7 +348,6 @@ weighting_result
 ```{r}
 #| label: scratch-for-AIPW
 #| echo: true
-#| eval: false
 
 library(AIPW)
 library(SuperLearner) # AIPWからSL.glmを使うために必要
@@ -325,13 +364,6 @@ fit <- AIPW$new(
 fit$fit()
 fit$summary()
 fit$result["Mean Difference", ]
-```
-
-```{r}
-#| label: show-AIPW-result
-
-aipw_result
-
 ```
 
 $$\begin{aligned}
@@ -358,18 +390,18 @@ $$\begin{aligned}
 \{Y_i-\hat{\mu}_0(X_i)\}
 }_{\text{IPW correction}}
 \right]
-\end{aligned}$$
+\end{aligned}
+$$
 
 - イメージだと、G-computationによるアウトカムモデルでの仮想データに以下の補正を加えている
   - 治療を受ける/受けないのPropensity scoreの補正
 - Doubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない
 
-## TMLE
+### TMLE
 
 ```{r}
 #| label: scratch-for-TMLE
 #| echo: true
-#| eval: false
 
 lalonde <- MatchIt::lalonde
 W <- lalonde[c("age", "educ", "race", "married", "nodegree", "re74", "re75")]
@@ -383,14 +415,8 @@ fit <- tmle::tmle(
 fit$estimates$ATE[c("psi", "CI")]
 ```
 
-```{r}
-#| label: show-TMLE-result
-
-tmle_result
-
-```
-
-$$\widehat Q^{\,0}(a,W_i)
+$$
+\widehat Q^{\,0}(a,W_i)
 =
 \widehat{\mathrm E}
 \left(
@@ -429,7 +455,8 @@ A_i=1\mid W_i
 +
 \frac{1}{1-\widehat g(W_i)}
 \right\}
-\right]$$
+\right]
+$$
 
 1. アウトカムモデルによる予測と実測値の残差を出す
 2. 傾向スコアの逆数から作ったclever covariateで回帰して修正量を求める
@@ -439,46 +466,47 @@ A_i=1\mid W_i
 
 ## Orthogonalization
 
-<!-- Todo: これも見やすくする -->
 ```{r}
 #| label: scratch-for-orthogonalization
 #| echo: true
-#| eval: false
+
+library(MatchIt)
+library(dplyr)
+library(parameters)
 
 lalonde <- MatchIt::lalonde
-xvars <- "age + educ + race + married + nodegree + re74 + re75"
 
-m_y <- glm(as.formula(paste("re78 ~", xvars)), gaussian(), data = lalonde)
-m_a <- glm(as.formula(paste("treat ~", xvars)), binomial(), data = lalonde)
+y_fit <- glm(re78 ~ age + educ + race + married + nodegree + re74 + re75, gaussian(), data = lalonde)
+treat_fit <- glm("treat ~ age + educ + race + married + nodegree + re74 + re75", binomial(), data = lalonde)
 
-dat <- transform(
+dat <- dplyr::mutate(
   lalonde,
-  y_resid = residuals(m_y, type = "response"),
-  a_resid = treat - fitted(m_a)
+  y_residual = residuals(y_fit, type = "response"),
+  a_residual = treat - fitted(treat_fit)
 )
-fit <- glm(y_resid ~ 0 + a_resid, gaussian(), data = dat)
-coef(summary(fit))["a_resid", ]
+
+orthogonalization_fit <- glm(y_residual ~ 0 + a_residual, gaussian(), data = dat)
+
+parameters::model_parameters(orthogonalization_fit)
 ```
 
-```{r}
-#| label: show-orthogonalization-result
-
-orthogonalization_result
-
-```
-
-<!-- Todo: 式を確認、みやすくする -->
-
-$$\begin{aligned}
-Y_i &= \theta_0 D_i + g_0(X_i) + \varepsilon_i,
+$$
+\begin{aligned}
+\underbrace{Y_i - \widehat{Y}_i}_{\text{アウトカムの残差}}
+&=
+\theta
+\underbrace{\left(A_i - \widehat{A}_i\right)}_{\text{介入の残差}}
++ \varepsilon_i, \\[8pt]
+\widehat{Y}_i
+&= \widehat{\mathrm{E}}\left(Y_i \mid X_i\right),
 \qquad
-\mathbb{E}[\varepsilon_i \mid X_i, D_i] = 0, \\[6pt]
-D_i &= m_0(X_i) + V_i,
-\qquad
-\mathbb{E}[V_i \mid X_i] = 0.
-\end{aligned}$$
+\widehat{A}_i
+= \widehat{\Pr}\left(A_i=1 \mid X_i\right).
+\end{aligned}
+$$
 
 - 「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する
+- $\theta$ は交絡因子の影響を取り除いた後の治療効果、$\varepsilon_i$ はこの回帰で説明されない誤差を表す
 - outcome側はGaussian GLM、treatment側はbinomial GLMで残差化している
 - treatment側も線形確率モデルで残差化した場合は、Frisch--Waugh--Lovell定理により通常の線形回帰と一致する
 
@@ -504,7 +532,21 @@ D_i &= m_0(X_i) + V_i,
 - 因果推論の根源的問題により、ある個人への治療効果(Individual treatment effect)は原理的に推測不可能
 - 一方で、患者背景の組み合わせ(46歳、HTN、DMあり、脳梗塞既往なしなど)における治療効果は推定可能
 - これをIndividualized treatment effect(ITE)といったりConditional average treatment effect(CATE)と言ったりする[@Segal2023-gi]
+- 特にCATEの治療効果のばらつきをHeterogeneity treatment effect(HTE)という
 
+## HTEを見つける意義
+
+**表1. 異質的治療効果（HTE）解析の意義**
+
+| 意義 | 代表的な問い |
+|---|---|
+| **標的を絞った介入による効率的な医療資源の配分** | ・治療によって特に大きな利益または害を受けるのは誰か？<br>・最も効果的な治療選択肢は何か？<br>・あるサブグループには治療が有効だが、他のサブグループには有害である場合、誰を治療し、誰を治療すべきでないか？ |
+| **介入がアウトカムに影響を及ぼすメカニズムの理解** | ・治療効果を規定する特性は何か？<br>・治療はどのようにアウトカムに影響を及ぼすのか？ |
+| **仮説生成** | ・さらに検討する価値のある治療効果の異質性には、どのようなパターンがあるか？ |
+| **健康格差・公平性（Health equity）** | ・治療は、社会経済的状況が異なる人々に不均衡な影響を及ぼすか？<br>・治療は健康格差を拡大するか、それとも縮小するか？ |
+| **一般化可能性とトランスポータビリティ** | ・特定のサンプルで推定された治療効果を、より広い集団に外挿できるか？<br>・対象集団に属する人々が十分に含まれていない（あるいは完全に除外されている）サンプルから推定された治療効果を、その対象集団にも適用できるか？ |
+
+[@Komura2026-se]
 
 # 機械学習 at glance
 
@@ -603,7 +645,7 @@ D_i &= m_0(X_i) + V_i,
 - HTEをやる場合は最後の回帰が少し特殊
 
 
-## どれがいいの？
+## meta-learnerの比較
 
 | Algorithm | 強み（Strengths） | 限界（Limitations） |
 |:---|:---|:---|
@@ -611,6 +653,11 @@ D_i &= m_0(X_i) + V_i,
 | T-learner | - シンプル<br>- 治療群と対照群を分けて明示的にモデル化する<br>- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 治療群と対照群の人数が不均衡な場合、不安定になる |
 | X-learner / DR-learner | - 異質な治療効果を直接推定する<br>- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
 | R-learner | - 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する<br>- 治療効果に対する直接的な損失関数を構成できる | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
+
+
+    Komura T, Bargagli-Stoffi FJ, Arah OA, Inoue K. Estimating and discovering heterogeneous treatment effects using machine learning in epidemiological studies: a practical guide. Int J Epidemiol. 2026;55(3). doi:10.1093/ije/dyag092
+  
+も追記する
 
 : メタラーナーの特徴と限界 {#tbl-metalearner-comparison}
 [@Inoue2024-sb]
@@ -643,8 +690,9 @@ D_i &= m_0(X_i) + V_i,
 
 ## 結局どれがいいの？
 
-- ATEの場合はmeta-learnerでも良いがCausal forestでも別に良い
-- HTEの場合はCausal forestが現実的に最も良い
+- いずれのモデルもATE, HTEを推定可能
+- Meta-learnerの一番の問題は95%信頼区間が出せないこと(あるいは信頼がおけない)
+- Robustさを出したり最初に比較をいしても良いが、HTEの研究なら[**Causal forest**]{style="color: red;font-size: 1.2em;"}が現実的に最も良い
 
 # Modelを作った後
 
@@ -652,7 +700,7 @@ D_i &= m_0(X_i) + V_i,
 
 - Modelの性能の評価
   - Discrimination, Calibrationなど
-- ModelをBlackboxから出す: ICE, PDP, SHAPなど
+- ModelをBlackboxから出す: PDP, SHAPなど
   - Tree Interpreter
 - モデルの実施方法
   - Policy tree
@@ -677,14 +725,226 @@ D_i &= m_0(X_i) + V_i,
 
 ## Discrimination ~ RATES
 
-<!-- Todo: 図を書く -->
+:::: columns
+
+::: {.column width="30%"}
+
+```{r}
+#| label: make-rate-table
+#| results: asis
+
+library(tidyverse)
+
+set.seed(3)
+
+rate_dat <- tibble::tibble(
+  id = 1:100,
+  predicted_ite = rnorm(100, mean = 2, sd = 3.5),
+  ate = 2
+) |>
+  dplyr::arrange(desc(predicted_ite)) |>
+  dplyr::mutate(
+    rank = dplyr::row_number(),
+    target_fraction = rank / dplyr::n(),
+    targeted_ate = dplyr::cummean(predicted_ite),
+    toc = targeted_ate - dplyr::first(ate)
+  )
+
+rate_table <- rate_dat |>
+  dplyr::slice_head(n = 4) |>
+  dplyr::mutate(
+    predicted_ite_show = round(predicted_ite, 1),
+    gain_show = predicted_ite_show - ate,
+    toc_show = dplyr::cummean(gain_show),
+    `予測された<br>治療効果` = sprintf("%.1f", predicted_ite_show),
+    `ATEとの差` = sprintf(
+      "%.1f − %.1f<br>= %.1f",
+      predicted_ite_show,
+      ate,
+      gain_show
+    ),
+    TOC = purrr::map2_chr(
+      rank,
+      toc_show,
+      \(k, toc_k) {
+        terms <- sprintf("%.1f", gain_show[seq_len(k)]) |>
+          paste(collapse = " + ")
+
+        sprintf("(%s) / %d<br>= %.2f", terms, k, toc_k)
+      }
+    )
+  ) |>
+  dplyr::transmute(
+    `予測された<br>治療効果`,
+    Ranking = rank,
+    `ATEとの差`,
+    TOC
+  )
+
+knitr::kable(
+  rate_table,
+  format = "html",
+  escape = FALSE,
+  align = c("r", "r", "l", "l"),
+  caption = "1行 = 1%、ATE = 2"
+)
+```
+
+:::
+
+::: {.column width="70%"}
+
+```{r}
+#| label: make-rate-fig
+
+autoc <- mean(rate_dat$toc)
+
+ggplot2::ggplot(
+  rate_dat,
+  ggplot2::aes(target_fraction, toc)
+) +
+  ggplot2::geom_hline(
+    yintercept = 0,
+    linetype = "dashed",
+    color = "grey50"
+  ) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(ymin = 0, ymax = toc),
+    fill = "#4E79A7",
+    alpha = 0.2
+  ) +
+  ggplot2::geom_line(
+    color = "#4E79A7",
+    linewidth = 1.2
+  ) +
+  ggplot2::scale_x_continuous(
+    labels = scales::label_percent(),
+    limits = c(0, 1)
+  ) +
+  ggplot2::labs(
+    x = "治療対象とする上位割合 q",
+    y = "TOC(q): 上位qの平均治療効果 − 全体ATE"
+  ) +
+  ggplot2::theme_bw()
+```
+
+:::
+
+::: {.column width="10%"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">上位q%の平均治療効果から<br>全体ATEを引く</div>
+</div>
+
+:::
+
+::: {.column width="30%"}
+
+
+```{r}
+#| echo: false
+
+ggplot2::ggplot(
+  rate_dat,
+  ggplot2::aes(x = target_fraction, y = toc)
+) +
+  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(ymin = 0, ymax = toc),
+    fill = "#4E79A7",
+    alpha = 0.2
+  ) +
+  ggplot2::geom_line(color = "#4E79A7", linewidth = 1.2) +
+  ggplot2::annotate(
+    "label",
+    x = 0.98,
+    y = max(rate_dat$toc),
+    hjust = 1,
+    vjust = 1,
+    label = sprintf("AUTOC ≈ %.2f", autoc),
+    size = 3.5
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = seq(0, 1, by = 0.25),
+    labels = scales::label_percent(),
+    limits = c(0, 1)
+  ) +
+  ggplot2::labs(
+    x = "治療対象とする上位割合 q",
+    y = "TOC(q): 上位qの平均治療効果 − 全体ATE"
+  ) +
+  ggplot2::theme_bw(base_size = 11)
+```
+
+:::
+::::
+
+::: {.small}
+この図では説明のため `predicted_ite` を各人の真の治療効果とみなしている。実解析では、独立した評価データから得たdoubly robust scoreで上位群の治療効果を評価する。
+:::
+
 
 - Rankingを連続的に見ていく閾値
 - 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
 
-## AUTOC(Targeting operator curve)とQini係数
+## RATE: AUTOCとQini係数
 
-<!-- Todo: 図を書く -->
+```{r}
+#| label: plot-qini
+#| echo: false
+
+qini_dat <- rate_dat |>
+  dplyr::mutate(
+    weighted_toc = target_fraction * toc
+  )
+
+qini <- mean(qini_dat$weighted_toc)
+
+ggplot2::ggplot(
+  qini_dat,
+  ggplot2::aes(x = target_fraction)
+) +
+  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(ymin = 0, ymax = weighted_toc),
+    fill = "#E15759",
+    alpha = 0.2
+  ) +
+  ggplot2::geom_line(
+    ggplot2::aes(y = toc, color = "TOC(q)"),
+    linewidth = 0.9,
+    linetype = "dashed"
+  ) +
+  ggplot2::geom_line(
+    ggplot2::aes(y = weighted_toc, color = "q × TOC(q)"),
+    linewidth = 1.2
+  ) +
+  ggplot2::annotate(
+    "label",
+    x = 0.98,
+    y = max(qini_dat$weighted_toc),
+    hjust = 1,
+    vjust = 1,
+    label = sprintf("QINI ≈ %.2f", qini),
+    size = 3.5
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = seq(0, 1, by = 0.25),
+    labels = scales::label_percent(),
+    limits = c(0, 1)
+  ) +
+  ggplot2::scale_color_manual(
+    values = c("TOC(q)" = "#4E79A7", "q × TOC(q)" = "#E15759"),
+    name = NULL
+  ) +
+  ggplot2::labs(
+    x = "治療対象とする上位割合 q",
+    y = "Treatment-effect gain"
+  ) +
+  ggplot2::theme_bw(base_size = 11) +
+  ggplot2::theme(legend.position = "top")
+```
 
 - Rankingを連続的に見ていく閾値
 - 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
@@ -705,13 +965,68 @@ D_i &= m_0(X_i) + V_i,
 ## Calibration ~ GATES
 
 
+
 ```{r}
-#| include: false
 
-library(dplyr)
-library(yardstick)
-library(modeldata)
+library(tidyverse)
+library(MatchIt)
+library(grf)
 
+
+test_dat <- MatchIt::lalonde
+
+lalonde_cf <- causal_forest(
+  X = dplyr::select(test_dat, age, educ, married, nodegree, re74, re75), 
+  Y = test_dat$re78, 
+  W = test_dat$treat
+)
+
+test_dat_prep <- test_dat |> 
+  dplyr::mutate(
+    predicted_ite = predict(lalonde_cf)$predictions
+  ) |> 
+  dplyr::mutate(
+    rank = dplyr::ntile(
+      predicted_ite, 
+      n = 4
+    )
+  ) 
+
+tmp <- dplyr::group_nest(
+  test_dat_prep, 
+  rank) |> 
+  dplyr::mutate(
+    model = purrr::map(
+      data, \(dat){
+        lalonde_cf <- causal_forest(
+  X = dplyr::select(dat, age, educ, married, nodegree, re74), 
+  Y = dat$re78, 
+  W = dat$treat
+)
+      return(lalonde_cf)
+      }
+    ), 
+    ate = purrr::map(
+      model, \(cf){
+        grf::average_treatment_effect(
+          cf
+        )
+      }
+    )
+  )
+
+dplyr::select(
+  tmp, -model
+) |> 
+tidyr::unnest_wider(ate) |> 
+tidyr::unnest(data) |> 
+dplyr::summarise(
+  mean_ite = mean(predicted_ite), 
+  grouped_ate = mean(estimate), 
+  .by = rank
+) |> 
+ggplot2::ggplot() + 
+  geom_line(aes(x = mean_ite, y = grouped_ate))
 
 
 ```
@@ -806,7 +1121,7 @@ $$
 
 - 通常の予測モデルと大きな変化はない
   - モデルが何をみているか？: SHAP
-  - ある連続値の共変量との関係性: PDP, ICE
+  - ある連続値の共変量との関係性: PDP
 - 人に解釈できる方法として、HTEを浅い決定木で回帰させる"Surrogate tree"というのもある
 
 ## Modelの解釈～Best linear preojection
@@ -830,8 +1145,10 @@ $$
 
 ## Causal forestの場合は
 
-<!-- Todo: 埋める -->
-- 論文では・・・・・・の評価を推奨
+
+- 論文ではCATE estimation → Calibration → HTE insightsの評価を推奨 [@Komura2026-se]
+  - Calibration: Best linear prediction, Calibration plot
+  - HTE insights: VIP, SHAP, 各群での患者背景の比較
 - grfの作者たちのお勧めは以下の順番
   1. Propensity scoreのoverlap / positivity の確認
   2. IPW後のcovariate balanceの確認
@@ -841,9 +1158,20 @@ $$
 
 # 実際の論文
 
+## HTEの論文は増えている
+
+![Number of Publications of HTE estimation](images/hte_journal_num.png)
+
+- 2023年からRWDを用いたHTE関連の研究が急激に増えている
+- 循環器領域は全体の23%で悪性腫瘍についで2番目に多い
+  - Tree-basedが34%, meta-learnerが26%
+- External validation不足(4%のみ)が指摘されている
+
+[@Moller2026-xi]
+
 ## meta-learners
 
-- 正直ほとんどない
+- Causal forestに比べると少ない
 - 通常のRobustな解析のSensitivity analysisくらいで良いかも
 
 ::: {.panel-tabset}
@@ -866,12 +1194,13 @@ $$
 
 ## RCTのSub解析-3
 
-- VITAL-AF trialのSub解析
-- 高齢者の中で「どの患者で単回のAF screeningが有用か？」を見つける
-- T-learnerとRisk scoreを比較
-- Risk score毎にScreening betterを評価
-- 通常のRisk score研究
-[@Shah2025-ie]
+- 誰が高SpO2目標の管理が有益か？を見つけるための研究
+- PILOT trialでModelを作ってICU-ROX trialでExternal validation
+- R-learnerを用いてITEを評価
+- C-for-benefitとQini curveでDiscrimination、calibration plotでCalibration、PDP plotにSHAPの亜種のSpaghetti plotを記載
+- 3群に分けて、どのような群で酸素療法をちゃんとすべきか？を見ている
+
+[@Buell2024-iv]
 
 ## 観察研究
 
@@ -964,20 +1293,23 @@ $$
 
 ## 95%信頼区間が出せるか？
 
-- Causal forestは出せるが通常のMLは信頼区間は出せない
-  - 機械学習モデルの代表的な弱点
-- いわゆる、AIPWやTMLEの局外パラメーターだけMLにして最終モデルを通常のGlmやSuperlearnerにする方法もある
+- Causal forestは出せるがmeta-learnerは信頼区間は出せない
+  - Bootstrapは可能だが、理論的な妥当性が乏しい
+- `econml`の中だとLinearDML, LinearDRLearnerなどは信頼区間を出せるが少し仮定を置いている
+- いわゆる、AIPWやTMLEの局外パラメーターだけMLにして最終モデルを通常のglmやSuperlearnerにする方法もある
 
 ## Missingnessについて
 
 - 通常の機械学習では多重代入は使えない
 - 一方でtree-based approachはnaturalに欠損値を扱える
   - 欠損値だったら……という条件を決定木に読ませる
+- 実際の論文だと、Random forestなどのTree-basedのSingle imputationをしている事が多い
 
 ## Sensitivity analysisはどうすればいい？
 
 - `EconML`ではRefutation methodで可能[@Feuerriegel2024-ya]
   - 治療やアウトカムをランダムに数値に置き換える, ランダムな数値の交絡因子を入れても問題ないか, 未測定交絡因子を入れても大丈夫かどうか など
+- grfでは特に推奨などはなし
 
 ## 生存分析について
 
@@ -985,6 +1317,7 @@ $$
 - meta learnerで無理やりやるなら、pseudopopulation(Jackknife法を使って、打ち切りデータを最後まで観察できたものとする)で予測させるなど
 - causal forestではnaturalに実装されている
 - 論文にはBalanced Individual Treatment Effect in Survival Data (BITES)なども紹介されている[@Moller2026-xi]
+
 
 # 実践！
 
@@ -1010,20 +1343,17 @@ dag {
   SES
   BNP
   LVEF
-  Palpitation
 
   CA
   Outcome
 
   Age -> HF
   Age -> BNP
-  Age -> Palpitation
   Age -> CA
   Age -> Outcome
 
   Sex -> HF
   Sex -> BNP
-  Sex -> Palpitation
   Sex -> CA
   Sex -> Outcome
 
@@ -1038,7 +1368,6 @@ dag {
   LVEF -> Outcome
 
   SES -> HF
-  SES -> Palpitation
   SES -> CA
   SES -> Outcome
 
@@ -1047,8 +1376,6 @@ dag {
 
   HF -> CA
   HF -> Outcome
-
-  Palpitation -> CA
 
   CA -> Outcome
 }
@@ -1070,7 +1397,6 @@ coordinates(dag) <- list(
     # intermediate layer 2
     HF = 1,
     BNP = 1,
-    Palpitation = 1,
 
     # treatment
     CA = 2,
@@ -1089,7 +1415,6 @@ coordinates(dag) <- list(
     # intermediate layer 2
     HF = 5,
     BNP = 3,
-    Palpitation = 1,
 
     # treatment and outcome
     CA = 3,
@@ -1100,7 +1425,7 @@ coordinates(dag) <- list(
 dag_df <- tidy_dagitty(dag) %>%
   mutate(
     node_type = case_when(
-      name == "Frail"   ~ "Unobserved confounder",
+      name == "SES"     ~ "Unobserved confounder",
       name == "CA"      ~ "Intervention",
       name == "Outcome" ~ "Outcome",
       TRUE              ~ "Confounder"
@@ -1120,6 +1445,11 @@ edge_df <- dag_df$data %>%
             yend > y ~ "up",
             yend < y ~ "down",
             TRUE ~ "flat"
+        ),
+        edge_observation = dplyr::if_else(
+            name == "SES",
+            "From unobserved SES",
+            "Observed path"
         )
     ) %>%
     mutate(
@@ -1137,7 +1467,10 @@ ggplot() +
     # upward curved arrows
     geom_curve(
         data = filter(edge_df, edge_type == "up"),
-        aes(x = x, y = y, xend = xend2, yend = yend2),
+        aes(
+            x = x, y = y, xend = xend2, yend = yend2,
+            linetype = edge_observation
+        ),
         curvature = 0.18,
         angle = 90,
         ncp = 10,
@@ -1152,7 +1485,10 @@ ggplot() +
     # downward curved arrows
     geom_curve(
         data = filter(edge_df, edge_type == "down"),
-        aes(x = x, y = y, xend = xend2, yend = yend2),
+        aes(
+            x = x, y = y, xend = xend2, yend = yend2,
+            linetype = edge_observation
+        ),
         curvature = -0.18,
         angle = 90,
         ncp = 10,
@@ -1167,7 +1503,10 @@ ggplot() +
     # flat curved arrows except CA -> Outcome
     geom_curve(
         data = filter(edge_df, edge_type == "flat"),
-        aes(x = x, y = y, xend = xend2, yend = yend2),
+        aes(
+            x = x, y = y, xend = xend2, yend = yend2,
+            linetype = edge_observation
+        ),
         curvature = 0.08,
         angle = 90,
         ncp = 10,
@@ -1215,16 +1554,32 @@ ggplot() +
         )
     ) +
 
+    scale_linetype_manual(
+        values = c(
+            "Observed path" = "solid",
+            "From unobserved SES" = "dashed"
+        )
+    ) +
+
+    coord_cartesian(
+        xlim = c(-0.5, 4.5),
+        ylim = c(0.35, 5.65),
+        clip = "off"
+    ) +
+
     theme_dag() +
+    theme(
+        plot.margin = margin(18, 24, 18, 24),
+        legend.position = "bottom"
+    ) +
     labs(
         title = "DAG for Toy Causal Data",
         subtitle = "Hierarchical layout ending with CA → Outcome",
-        fill = "Node type"
+        fill = "Node type",
+        linetype = "Path type"
     )
 
 ```
-
-<!-- Todo: SESの色か線の種類を変える -->
 
 - 治療効果は各々別個にいれてある
 - DAGは上記の通り
@@ -1241,9 +1596,25 @@ print(head(toy_data))
 ```
 
 <!-- Todo: 説明を記載する -->
-- ATEは・・・・・・
-- 治療のPropensity scoreは・・・・・・・
-- 治療効果の式を書く
+- ATEはRisk differenceで-0.05(Ablationでアウトカムが絶対値で5%減る)
+- 治療のPropensity scoreは
+  - 男性/若いと受けやすい
+  - LVEFが低い/心不全既往があると受けやすい
+  - BMIが高いと受けやすく
+  - Social economic statusが良いと受けやすい
+- 治療効果の式は
+$$
+\begin{aligned}
+\eta_i
+={}& -2.00
++ 0.70\,\mathrm{AgeRisk}_i
++ 0.90\,\mathrm{HF}_i \\
+&- 0.85\,\mathrm{SES}_i
++ 0.55\,\mathrm{BNPRisk}_i \\
+&+ 0.04\,\mathrm{BMIRisk}_i
++ 0.10\,\mathrm{LVEFRisk}_i
+\end{aligned}
+$$
 
 
 ## Toy dataの可視化
@@ -1288,7 +1659,6 @@ tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |>
 
 ```
 
-<!-- Todo: 列名を直して順番を直す -->
 
 ## Pair plot
 
@@ -1322,12 +1692,26 @@ dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |>
 ## ATE
 
 ```{r}
-
-ate_rd_summary
-
+full_toy_data |>
+  dplyr::summarise(
+    n = sum(!is.na(ite_rd_bin)),
+    ate_rd = mean(ite_rd_bin, na.rm = TRUE),
+    ite_rd_sd = stats::sd(ite_rd_bin, na.rm = TRUE)
+  ) |>
+  dplyr::mutate(
+    ate_rd_se = ite_rd_sd / sqrt(n),
+    critical_value = stats::qt(0.975, df = n - 1),
+    ci_lower = ate_rd - critical_value * ate_rd_se,
+    ci_upper = ate_rd + critical_value * ate_rd_se, 
+    `RD 95%CI` = paste0(round(ate_rd, 3), "[", round(ci_lower, 3), " - ", round(ci_upper, 3), "]")
+  ) |>
+  dplyr::select(
+    n,
+    `RD 95%CI`
+  )　
 ```
 
-- 集団全体では、`ca = 1` によりイベントリスクが平均5 percentage points低下する
+- 集団全体では、`ca = 1` によりイベントリスクが平均5 percent points低下する
 - HTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する
 
 ## 共変量とOutcomeのRiskの1:1の関係性
@@ -1356,6 +1740,8 @@ dplyr::select(full_toy_data, age, age_risk, bnp, bnp_risk, bmi, bmi_risk, lvef, 
   )
 
 ```
+
+<!-- Todo: Hmiscとqreportで作る -->
 
 ## 主要な連続値の因子とTreatment effects
 
@@ -1792,12 +2178,42 @@ learner_summary |>
 ```{r}
 #| label: show-external-case-mix
 
-external_shift_summary$cohorts |>
+summarise_cohort <- function(data, cohort) {
+  tibble::tibble(
+    cohort = cohort,
+    n = nrow(data),
+    mean_age = mean(data$age),
+    mean_bmi = mean(data$bmi),
+    female_fraction = mean(data$sexm1 == 0)
+  )
+}
+
+cohort_summary <- dplyr::bind_rows(
+  summarise_cohort(toy_data, "Development"),
+  summarise_cohort(test_toy_data, "External validation")
+)
+development_summary <- dplyr::filter(
+  cohort_summary,
+  cohort == "Development"
+)
+external_summary <- dplyr::filter(
+  cohort_summary,
+  cohort == "External validation"
+)
+shift_differences <- tibble::tibble(
+  contrast = "External validation - Development",
+  age_difference = external_summary$mean_age - development_summary$mean_age,
+  bmi_difference = external_summary$mean_bmi - development_summary$mean_bmi,
+  female_fraction_difference =
+    external_summary$female_fraction - development_summary$female_fraction
+)
+
+cohort_summary |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
   print()
-external_shift_summary$differences |>
+shift_differences |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
@@ -1811,7 +2227,7 @@ external_shift_summary$differences |>
 ```{r}
 #| label: show-external-c-for-benefit
 
-external_c_for_benefit_summary |>
+external_c_for_benefit$summary |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
@@ -1860,13 +2276,102 @@ knitr::include_graphics(external_meta_gate_figure)
 ```{r}
 #| label: causal-forest
 
+library(grf)
+library(tinyplot)
 library(partykit)
 library(policytree)
 library(shapviz)
+library(cobalt)
+
+ipw = if_else(toy_data$ca == 1, 1 / causal_forest_bin$W.hat, 1 / (1 - causal_forest_bin$W.hat))
+
+grf_data <- toy_data |>
+  dplyr::mutate(
+    tau_hat = stats::predict(causal_forest_bin)$predictions, 
+    tau_hat_rev = -tau_hat, 
+    pscore = causal_forest_bin$W.hat,
+    ipw = ipw
+
+  ) |>
+  tibble::as_tibble()
+
+tinyplot::plt(~ pscore, data = grf_data, type = type_histogram())
+
+balance <- cobalt::bal.tab(
+  ca ~ age + sexm1 + bmi + hf + bnp + lvef,
+  data = grf_data,
+  weights = "ipw",
+  method = "weighting",
+  un = TRUE,
+  continuous = "std",
+  binary = "std",
+  s.d.denom = "pooled",
+  thresholds = c(m = 0.1)
+)
+
+cobalt::love.plot(
+  balance,
+  stats = "mean.diffs",
+  abs = TRUE,
+  var.order = "unadjusted",
+  thresholds = c(m = 0.1),
+  sample.names = c("Before weighting", "After weighting"),
+  colors = c("#E15759", "#4E79A7"),
+  shapes = c(16, 17),
+  size = 3,
+  line = TRUE
+)
+
+```
+
+```{r}
+#| label: calibration-test-grf
+
+library(grf)
+
+grf::test_calibration(causal_forest_bin)
+
+```
+
+```{r}
+#| label: GATE-grf
+
+
+```
+
+```{r}
+#| label: RATE-grf
+
+
+```
+
+```{r}
+#| label: c-for-benefit
+
+library(EpiForsk)
+
+```
+
+
+```{r}
+#| label: shap
 
 shapviz::sv_importance(causal_forest_shap, kind = "bee")
+causal_forest_dr_scores <- policytree::double_robust_scores(causal_forest_bin)
 utils::head(causal_forest_dr_scores)
+causal_forest_surrogate_tree <- partykit::ctree(
+  tau_hat_rev ~ age + sexm1 + bmi + hf + bnp + lvef,
+  data = grf_data,
+  control = partykit::ctree_control(maxdepth = 3)
+)
 plot(causal_forest_surrogate_tree)
+
+policy_scores <- policytree::double_robust_scores(causal_forest_policy)
+policy_tree <- policytree::policy_tree(
+  policy_features,
+  policy_scores,
+  depth = 2
+)
 print(policy_tree)
 plot(policy_tree, leaf.labels = c("Control", "CA"))
 
@@ -1882,14 +2387,14 @@ plot(policy_tree, leaf.labels = c("Control", "CA"))
 
 library(ggplot2)
 
-external_grf_validation_summary |>
+external_grf_validation$summary |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
   print()
 
 ggplot(
-  external_grf_gate_data,
+  external_grf_validation$gates,
   aes(x = predicted_gate, y = gate)
 ) +
   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
@@ -1937,19 +2442,55 @@ plot(external_rate_results$qini)
 ```{r}
 #| label: plot-meta-pdp
 #| echo: false
+#| fig-width: 10
+#| fig-height: 4.8
 #| out-width: 100%
 
-knitr::include_graphics(meta_pdp_figure)
-```
+meta_model_order <- c(
+  "S-learner",
+  "T-learner",
+  "X-learner",
+  "R-learner",
+  "DR-learner"
+)
+meta_model_colors <- c(
+  "S-learner" = "#59A14F",
+  "T-learner" = "#EDC948",
+  "X-learner" = "#F28E2B",
+  "R-learner" = "#B07AA1",
+  "DR-learner" = "#E15759"
+)
+meta_feature_labels <- c(
+  age = "Age",
+  sexm1 = "Sex (male)",
+  bmi = "BMI",
+  hf = "Heart failure",
+  bnp = "BNP",
+  lvef = "LVEF (%)"
+)
 
-### ICE
-
-```{r}
-#| label: plot-meta-ice
-#| echo: false
-#| out-width: 100%
-
-knitr::include_graphics(meta_ice_figure)
+meta_pdp_data |>
+  dplyr::mutate(
+    learner = factor(learner, levels = meta_model_order),
+    feature = factor(
+      unname(meta_feature_labels[feature]),
+      levels = c("Age", "LVEF (%)", "BNP")
+    )
+  ) |>
+  ggplot2::ggplot(
+    ggplot2::aes(x = value, y = hte, color = learner, group = learner)
+  ) +
+  ggplot2::geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  ggplot2::geom_line(linewidth = 1.1) +
+  ggplot2::facet_wrap(~feature, scales = "free_x", nrow = 1) +
+  ggplot2::scale_color_manual(values = meta_model_colors, drop = FALSE) +
+  ggplot2::labs(
+    x = NULL,
+    y = "Estimated HTE: risk reduction",
+    color = NULL
+  ) +
+  ggplot2::theme_bw(base_size = 11) +
+  ggplot2::theme(legend.position = "bottom")
 ```
 
 ### Global SHAP
@@ -1957,15 +2498,62 @@ knitr::include_graphics(meta_ice_figure)
 ```{r}
 #| label: plot-meta-shap
 #| echo: false
+#| fig-width: 10
+#| fig-height: 7
 #| out-width: 100%
 
-knitr::include_graphics(meta_shap_figure)
+shap_feature_order <- meta_shap_data |>
+  dplyr::group_by(feature) |>
+  dplyr::summarise(
+    mean_abs_shap = mean(abs(shap_value)),
+    .groups = "drop"
+  ) |>
+  dplyr::arrange(mean_abs_shap) |>
+  dplyr::pull(feature)
+
+meta_shap_data |>
+  dplyr::mutate(
+    learner = factor(learner, levels = meta_model_order),
+    feature = factor(
+      unname(meta_feature_labels[feature]),
+      levels = unname(meta_feature_labels[shap_feature_order])
+    )
+  ) |>
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = shap_value,
+      y = feature,
+      color = feature_value_scaled
+    )
+  ) +
+  ggplot2::geom_vline(xintercept = 0, color = "grey65", linewidth = 0.4) +
+  ggplot2::geom_point(
+    position = ggplot2::position_jitter(width = 0, height = 0.12, seed = 123),
+    alpha = 0.75,
+    size = 1
+  ) +
+  ggplot2::facet_wrap(~learner, ncol = 3) +
+  ggplot2::scale_color_gradient2(
+    low = "#3B4CC0",
+    mid = "#F7F7F7",
+    high = "#B40426",
+    midpoint = 0.5,
+    breaks = c(0, 1),
+    labels = c("Low", "High")
+  ) +
+  ggplot2::labs(
+    x = "SHAP value for risk reduction",
+    y = NULL,
+    color = "Feature value"
+  ) +
+  ggplot2::theme_bw(base_size = 10) +
+  ggplot2::theme(legend.position = "bottom")
 ```
 
 :::
 
 ::: {.small}
-PDP、ICE、Kernel SHAPの計算と描画はPython内で完結し、Quartoはtargetsが追跡するSVGを表示するだけである。ここでもGRFは比較対象に含めない。
+PDPとKernel SHAPの数値計算はPythonで行い、targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。
 :::
 
 ## GRFモデルを説明する（R）
@@ -1981,8 +2569,6 @@ library(shapviz)
 feature_order <- c("Age", "LVEF (%)", "BNP")
 grf_pdp_data <- grf_pdp_data |>
   dplyr::mutate(feature = factor(feature, levels = feature_order))
-grf_ice_data <- grf_ice_data |>
-  dplyr::mutate(feature = factor(feature, levels = feature_order))
 
 grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
   geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
@@ -1990,22 +2576,6 @@ grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
   facet_wrap(~feature, scales = "free_x", nrow = 1) +
   labs(x = NULL, y = "Estimated HTE: risk reduction") +
   theme_bw(base_size = 11)
-
-grf_ice_plot <- ggplot(
-  grf_ice_data,
-  aes(x = value, y = hte, group = id)
-) +
-  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
-  geom_line(color = "#4E79A7", alpha = 0.15, linewidth = 0.35) +
-  geom_line(
-    data = grf_pdp_data,
-    aes(x = value, y = hte, group = 1),
-    color = "#4E79A7",
-    linewidth = 1.2
-  ) +
-  facet_wrap(~feature, scales = "free_x", nrow = 1) +
-  labs(x = NULL, y = "Estimated HTE: risk reduction") +
-  theme_bw(base_size = 10)
 ```
 
 ::: {.panel-tabset}
@@ -2019,17 +2589,6 @@ grf_ice_plot <- ggplot(
 #| out-width: 100%
 
 grf_pdp_plot
-```
-
-### ICE
-
-```{r}
-#| label: plot-grf-ice
-#| fig-width: 10
-#| fig-height: 5.2
-#| out-width: 100%
-
-grf_ice_plot
 ```
 
 ### Global SHAP

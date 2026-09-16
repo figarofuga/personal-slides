@@ -102,7 +102,6 @@ list(
   ),
   tar_target(toy_data, toy_objects$toy_data),
   tar_target(full_toy_data, toy_objects$full_toy_data),
-  tar_target(ate_rd_summary, make_ate_rd_summary(full_toy_data)),
   tar_target(
     test_toy_objects,
     make_toy_data(
@@ -115,45 +114,6 @@ list(
   ),
   tar_target(test_toy_data, test_toy_objects$toy_data),
   tar_target(full_test_toy_data, test_toy_objects$full_toy_data),
-  tar_target(
-    external_shift_summary,
-    {
-      shift <- make_external_shift_summary(toy_data, test_toy_data)
-      differences <- shift$differences
-      stopifnot(
-        abs(differences$age_difference - 2) < 0.05,
-        abs(differences$bmi_difference + 2) < 0.05,
-        abs(differences$female_fraction_difference - 0.05) < 0.01
-      )
-      shift
-    }
-  ),
-
-  # Small teaching examples: precompute the numerical output shown in slides.
-  tar_target(lalonde_data, MatchIt::lalonde),
-  tar_target(
-    subclassification_fit,
-    make_subclassification_fit(lalonde_data)
-  ),
-  tar_target(
-    subclassification_result,
-    make_subclassification_result(subclassification_fit)
-  ),
-  tar_target(
-    nearest_matching_fit,
-    make_nearest_matching_fit(lalonde_data)
-  ),
-  tar_target(
-    matching_result,
-    make_matching_result(nearest_matching_fit)
-  ),
-  tar_target(weighting_result, make_weighting_result(lalonde_data)),
-  tar_target(aipw_result, make_aipw_result(lalonde_data)),
-  tar_target(tmle_result, make_tmle_result(lalonde_data)),
-  tar_target(
-    orthogonalization_result,
-    make_orthogonalization_result(lalonde_data)
-  ),
 
   # Shared preprocessing for all R and Python learners --------------------
   tar_target(policy_features, make_policy_features(toy_data)),
@@ -402,34 +362,13 @@ list(
     fit_causal_forest_bin(policy_features, toy_data)
   ),
   tar_target(
-    causal_forest_predictions,
-    make_causal_forest_predictions(causal_forest_bin, toy_data)
-  ),
-  tar_target(
-    causal_forest_dr_scores,
-    make_causal_forest_dr_scores(causal_forest_bin)
-  ),
-  tar_target(
     causal_forest_shap,
     make_causal_forest_shap(causal_forest_bin, policy_features)
-  ),
-  tar_target(
-    causal_forest_surrogate_tree,
-    make_causal_forest_surrogate_tree(causal_forest_bin, toy_data)
   ),
   tar_target(
     causal_forest_policy,
     fit_causal_forest_policy(policy_features, toy_data)
   ),
-  tar_target(policy_scores, make_policy_scores(causal_forest_policy)),
-  tar_target(policy_tree, fit_policy_tree(policy_features, policy_scores)),
-  tar_target(rate_results, make_rate_results(causal_forest_bin)),
-  tar_target(
-    grf_validation,
-    make_grf_validation(causal_forest_bin, rate_results, n_groups = 5L)
-  ),
-  tar_target(grf_gate_data, grf_validation$gates),
-  tar_target(grf_validation_summary, grf_validation$summary),
   tar_target(
     external_causal_forest_predictions,
     make_external_causal_forest_predictions(
@@ -461,58 +400,42 @@ list(
       n_groups = 5L
     )
   ),
-  tar_target(external_grf_gate_data, external_grf_validation$gates),
-  tar_target(
-    external_grf_validation_summary,
-    external_grf_validation$summary
-  ),
-  tar_target(
-    external_benefit_pairs,
-    make_external_benefit_pairs(test_toy_data)
-  ),
   tar_target(
     external_c_for_benefit,
     make_external_c_for_benefit(
-      external_benefit_pairs,
+      make_external_benefit_pairs(test_toy_data),
       external_meta_learner_effects_file,
       external_causal_forest_predictions,
       n_bootstrap = 500L
     )
   ),
-  tar_target(
-    external_c_for_benefit_summary,
-    external_c_for_benefit$summary
-  ),
 
   # GRF explanations are computed only with native R functions. -----------
   tar_target(explanation_samples, make_explanation_samples(policy_features)),
   tar_target(
-    grf_effect_curves,
-    make_grf_effect_curves(causal_forest_policy, explanation_samples)
+    grf_pdp_data,
+    make_grf_pdp_data(causal_forest_policy, explanation_samples)
   ),
-  tar_target(grf_pdp_data, grf_effect_curves$pdp),
-  tar_target(grf_ice_data, grf_effect_curves$ice),
   tar_target(
     grf_cate_shap,
     make_grf_cate_shap(causal_forest_policy, explanation_samples)
   ),
 
-  # Meta-learner explanations are computed and rendered entirely in Python.
+  # Expensive meta-learner PDP and SHAP values are cached as tidy tables.
   tar_target(
-    meta_explanation_figures,
+    meta_explanation_data_files,
     {
       python_explanations_file
       unlist(
-        make_meta_explanation_figures(
+        write_meta_explanation_data(
           s_learner_model_file,
           t_learner_model_file,
           x_learner_model_file,
           r_learner_model_file,
           dr_learner_model_file,
           toy_data,
-          mlcausal_path("cache", "figures", "meta-pdp.svg"),
-          mlcausal_path("cache", "figures", "meta-ice.svg"),
-          mlcausal_path("cache", "figures", "meta-shap.svg")
+          mlcausal_path("cache", "tables", "meta-pdp.csv"),
+          mlcausal_path("cache", "tables", "meta-shap.csv")
         ),
         use.names = FALSE
       )

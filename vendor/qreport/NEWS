@@ -1,0 +1,24 @@
+Version 1.1-0
+- 2025-09-30
+- makedot: new function to make general graphviz dot diagrams from plain text with variable insertions
+
+Version 1.0-2
+- 2025-04-11
+- makegvflow: new function to make graphviz hierarchical flow diagrams from plain text with LaTeX expression and variable insertions
+
+Version 1.0-1
+
+- 2024-05-26
+- Changed multDataOverview print output to have dataset name only in rownames, not also as variable name dataset
+
+Version 1.0-0
+
+- 2023-09-12
+- Added hooktime function to automatically time knitr chunks
+- Added cwidth argument to maketabs
+- Fixed bug dataOverview when number of NAs does not vary and continuous color scale gradient was attempted
+- Added redundancy, imputation, and spc (sparse principal components)  arguments to vClus
+
+Version 0.1-0
+
+- Initial submission to CRAN 2023-03-04

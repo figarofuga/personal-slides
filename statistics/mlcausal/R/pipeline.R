@@ -728,7 +728,7 @@ make_external_c_for_benefit <- function(
   )
 }
 
-# 計算量を抑えつつ再現可能にするため、PDP・ICE・SHAP の対象と背景集団を固定する。
+# 計算量を抑えつつ再現可能にするため、PDP・SHAP の対象と背景集団を固定する。
 make_explanation_samples <- function(policy_features) {
   explain_features <- c("age", "lvef", "bnp")
   explain_data <- as.data.frame(policy_features)
@@ -736,8 +736,6 @@ make_explanation_samples <- function(policy_features) {
   set.seed(42)
   reference_features <- explain_data |>
     dplyr::slice_sample(n = min(500L, nrow(explain_data)))
-  ice_features <- reference_features |>
-    dplyr::slice_sample(n = min(20L, nrow(reference_features)))
   shap_features <- explain_data |>
     dplyr::slice_sample(n = min(40L, nrow(explain_data)))
   background_features <- explain_data |>
@@ -763,14 +761,13 @@ make_explanation_samples <- function(policy_features) {
 
   list(
     reference = reference_features,
-    ice = ice_features,
     shap = shap_features,
     background = background_features,
     feature_grids = feature_grids
   )
 }
 
-make_grf_effect_curves <- function(
+make_grf_pdp_data <- function(
   causal_forest_policy,
   explanation_samples
 ) {
@@ -781,7 +778,6 @@ make_grf_effect_curves <- function(
     bnp = "BNP"
   )
   reference_features <- explanation_samples$reference
-  ice_features <- explanation_samples$ice
 
   predict_benefit <- function(newdata) {
     as.numeric(
@@ -793,8 +789,8 @@ make_grf_effect_curves <- function(
   }
 
   # 一つの特徴量だけを置き換え、他の特徴量は各個体の観測値に固定する。
-  # グリッドごとにまとめて予測し、PDP は集団平均、ICE は個体別の値を残す。
-  effect_curves <- purrr::map(explain_features, function(feature) {
+  # グリッドごとにまとめて予測し、集団平均をPDPとして返す。
+  purrr::map(explain_features, function(feature) {
     feature_grid <- explanation_samples$feature_grids[[feature]]
 
     make_curve_data <- function(features) {
@@ -806,7 +802,7 @@ make_grf_effect_curves <- function(
     }
 
     pdp_predictions <- predict_benefit(make_curve_data(reference_features))
-    pdp <- tibble::tibble(
+    tibble::tibble(
       grid_id = rep(seq_along(feature_grid), each = nrow(reference_features)),
       value = rep(feature_grid, each = nrow(reference_features)),
       hte = pdp_predictions
@@ -825,22 +821,8 @@ make_grf_effect_curves <- function(
         # 従来の集計が付けていたグリッド番号の名前属性も維持する。
         hte = purrr::set_names(hte, as.character(grid_id))
       )
-
-    ice <- tibble::tibble(
-      model = "GRF causal forest",
-      feature = feature_labels[[feature]],
-      id = rep(seq_len(nrow(ice_features)), times = length(feature_grid)),
-      value = rep(feature_grid, each = nrow(ice_features)),
-      hte = predict_benefit(make_curve_data(ice_features))
-    )
-
-    list(pdp = pdp, ice = ice)
-  })
-
-  list(
-    pdp = effect_curves |> purrr::map("pdp") |> dplyr::bind_rows(),
-    ice = effect_curves |> purrr::map("ice") |> dplyr::bind_rows()
-  )
+  }) |>
+    dplyr::bind_rows()
 }
 
 # 方策用 GRF の予測は非発生確率の差なので、そのままリスク低下量として扱える。

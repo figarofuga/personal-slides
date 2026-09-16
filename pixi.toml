@@ -138,6 +138,8 @@ deno = ">=2.4.5,<2.5"
 r-evalitr = { path = "vendor/evalITR" }
 r-bartcause = { path = "vendor/bartCause" }
 r-epiforsk = { path = "vendor/EpiForsk" }
+r-sensemakr = ">=0.1.6,<0.2"
+r-qreport = { path = "vendor/qreport" }
 [activation.env]
 RETICULATE_PYTHON = "$CONDA_PREFIX/bin/python"
 RETICULATE_USE_MANAGED_VENV = "no"
