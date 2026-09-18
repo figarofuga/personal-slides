@@ -30,8 +30,11 @@ uname -v = #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026
 PATH: /home/figarofuga/analysis/pixi-test/.pixi/bld/r-stochtree/SrEKM1UMdO4/bld/bin/
 PATH: /home/figarofuga/analysis/pixi-test/.pixi/bld/r-stochtree/SrEKM1UMdO4/host_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_/bin/
 PATH: /home/figarofuga/.cache/rattler/cache/backends-v0/pixi-build-r-DgK-WTsw1z8/bin/
+PATH: /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/
+PATH: /home/figarofuga/.pixi/bin/
+PATH: /home/figarofuga/.pixi/bin/
 PATH: /opt/quarto/bin/
-PATH: /home/figarofuga/.vscode-server/bin/645f29cc3176500b4b5762ba887cf2a7f0ffdf2c/bin/remote-cli/
+PATH: /home/figarofuga/.vscode-server/bin/7debcd0e2acdea1c52de81bf9ee1620444407dda/bin/remote-cli/
 PATH: /home/figarofuga/.local/bin/
 PATH: /home/figarofuga/.nvm/versions/node/v22.23.2/bin/
 PATH: /home/figarofuga/.cargo/bin/

@@ -128,15 +128,12 @@ arf = ">=0.5.1,<0.6"
 r-aipw = { path = "vendor/AIPW" }
 r-dbarts = ">=0.9_33,<0.10"
 r-stochtree = { path = "vendor/stochtree" }
-r-predieval = { path = "vendor/predieval" }
 r-dalex = ">=2.5.4,<3"
 r-shapviz = ">=0.10.4,<0.11"
 dalex = ">=1.7.0,<2"
 r-kernelshap = ">=0.9.1,<0.10"
 r-partykit = ">=1.2_29,<2"
 deno = ">=2.4.5,<2.5"
-r-evalitr = { path = "vendor/evalITR" }
-r-bartcause = { path = "vendor/bartCause" }
 r-sensemakr = ">=0.1.6,<0.2"
 r-qreport = { path = "vendor/qreport" }
 [activation.env]
