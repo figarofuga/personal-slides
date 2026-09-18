@@ -60,8 +60,8 @@ pixi run Rscript scripts/vendor_pixi_r_packages.R <<package-name>>
 If R packages to remove in /vendor...
 
 ```bash
-pixi remove r-doubleml &&
-  rm -rf -- vendor/DoubleML
+pixi remove r-epiforsk &&
+  rm -rf -- vendor/EpiForsk
 ```  
 
 To upgrade an existing vendored package to a newer repository version, run:
@@ -78,7 +78,7 @@ Afterward, run these script to save vendor/ to github
 
 ```bash
 git add pixi.toml pixi.lock vendor/
-git commit -m "Vendor new packages for Pixi"
+git commit -m "remove Vendor packages for Pixi"
 
 ```
 
@@ -108,7 +108,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "minimal changes"
+git commit -m "C for benefit changes"
 git push
 
 ```

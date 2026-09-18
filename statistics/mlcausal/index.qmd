@@ -60,15 +60,13 @@ targets::tar_load(
     meta_learner_evaluation_files,
     external_meta_learner_effects_file,
     external_meta_learner_evaluation_files,
-    meta_explanation_data_files,
+    meta_pdp_data_file,
+    meta_shap_data_file,
     policy_features,
     causal_forest_bin,
     causal_forest_policy,
     causal_forest_shap,
-    external_causal_forest_predictions,
-    external_rate_results,
-    external_grf_validation,
-    external_c_for_benefit,
+    external_evaluation_forest,
     grf_pdp_data,
     grf_cate_shap,
     s_learner_tree_figure,
@@ -85,6 +83,17 @@ target_artifact <- function(paths, filename) {
   matched <- paths[basename(paths) == filename]
   stopifnot(length(matched) == 1L)
   unname(matched)
+}
+
+target_artifacts_ending_with <- function(paths, suffix) {
+  paths[endsWith(basename(paths), suffix)] |> unname()
+}
+
+read_validation_tables <- function(paths, suffix) {
+  paths |>
+    target_artifacts_ending_with(suffix) |>
+    lapply(utils::read.csv) |>
+    dplyr::bind_rows()
 }
 
 # Python owns the numerical work. R reads the cached CSV/SVG artifacts only
@@ -119,33 +128,15 @@ dr_learner_effect <- subset(
   select = c(id, cate_rd)
 )
 
-meta_gate_figure <- target_artifact(
-  meta_learner_evaluation_files,
-  "meta-gates.svg"
-)
-meta_validation_figure <- target_artifact(
-  meta_learner_evaluation_files,
-  "meta-validation.svg"
-)
-external_learner_summary <- utils::read.csv(
-  target_artifact(
-    external_meta_learner_evaluation_files,
-    "external-meta-validation.csv"
-  )
-)
-external_meta_gate_figure <- target_artifact(
+external_learner_summary <- read_validation_tables(
   external_meta_learner_evaluation_files,
-  "external-meta-gates.svg"
-)
-external_meta_validation_figure <- target_artifact(
-  external_meta_learner_evaluation_files,
-  "external-meta-validation.svg"
+  "-summary.csv"
 )
 meta_pdp_data <- utils::read.csv(
-  target_artifact(meta_explanation_data_files, "meta-pdp.csv")
+  meta_pdp_data_file
 )
 meta_shap_data <- utils::read.csv(
-  target_artifact(meta_explanation_data_files, "meta-shap.csv")
+  meta_shap_data_file
 )
 
 ```
@@ -1595,21 +1586,19 @@ print(head(toy_data))
 
 ```
 
-<!-- Todo: 説明を記載する -->
-- ATEはRisk differenceで-0.05(Ablationでアウトカムが絶対値で5%減る)
 - 治療のPropensity scoreは
   - 男性/若いと受けやすい
   - LVEFが低い/心不全既往があると受けやすい
   - BMIが高いと受けやすく
   - Social economic statusが良いと受けやすい
-- 治療効果の式は
+- 非治療時のイベントリスクの線形予測子は（SESは標準化値）
 $$
 \begin{aligned}
 \eta_i
-={}& -2.00
+={}& -7.55
 + 0.70\,\mathrm{AgeRisk}_i
 + 0.90\,\mathrm{HF}_i \\
-&- 0.85\,\mathrm{SES}_i
+&- 0.85\,\mathrm{SES}_{z,i}
 + 0.55\,\mathrm{BNPRisk}_i \\
 &+ 0.04\,\mathrm{BMIRisk}_i
 + 0.10\,\mathrm{LVEFRisk}_i
@@ -1620,11 +1609,16 @@ $$
 ## Toy dataの可視化
 
 ::: panel-tabset
+
 ## 連続値の単変量
 
 ```{r}
 #| label: Visualize-ToyData2
 
+require(Hmisc)
+options(prType='html')   # have certain Hmisc functions render in html
+require(qreport)
+hookaddcap()  
 library(tidyverse)
 library(tinyplot)
 
@@ -1641,21 +1635,35 @@ toy_data_label <- tribble(
   "bin_outcome" , "Outcome"
 )
 
-tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |> 
+rename_vec <- setNames(
+  toy_data_label$from,
+  toy_data_label$to
+)
+
+
+toy_data |> 
+  dplyr::rename(any_of(rename_vec)) |> 
+  dplyr::select(-id, -bin_event_free) |> 
   dplyr::mutate(
-    name = dplyr::recode_values(
-      name, 
-      from = toy_data_label$from, 
-      to = toy_data_label$to
-    ) |> 
-      forcats::fct_relevel(
-        c("Age", "Male", "BMI", "LVEF", "BNP", "HF", "Palpitation", "Ablation", "Outcome")
-      )
+    dplyr::across(.cols = c(Male, HF, Palpitation, Ablation, Outcome), .fns = \(x)as.factor(x))
   ) |> 
-  tinyplot::plt(
-  ~ value, facet = ~ name, facet.args = list(free = TRUE),
-  data = _,
-  type = type_histogram(free = TRUE))
+  Hmisc::describe(x = _)
+
+# tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |> 
+#   dplyr::mutate(
+#     name = dplyr::recode_values(
+#       name, 
+#       from = toy_data_label$from, 
+#       to = toy_data_label$to
+#     ) |> 
+#       forcats::fct_relevel(
+#         c("Age", "Male", "BMI", "LVEF", "BNP", "HF", "Palpitation", "Ablation", "Outcome")
+#       )
+#   ) |> 
+#   tinyplot::plt(
+#   ~ value, facet = ~ name, facet.args = list(free = TRUE),
+#   data = _,
+#   type = type_histogram(free = TRUE))
 
 ```
 
@@ -1668,10 +1676,6 @@ tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |>
 library(tidyverse)
 library(GGally)
 
-rename_vec <- setNames(
-  toy_data_label$from,
-  toy_data_label$to
-)
 
 dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |> 
   rename(any_of(rename_vec)) |>
@@ -1804,7 +1808,7 @@ full_toy_data |>
 :::
 
 ## Meta-learners
-<!-- Todo: スクリプトが見えるようにする -->
+
 ::: {.panel-tabset}
 
 ## S-learner
@@ -2222,216 +2226,135 @@ shift_differences |>
 
 開発コホートとは独立に $n=1000$ を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。
 
-## C-for-benefit（外部検証）
+## Meta-learnerの評価：test dataset
 
-```{r}
-#| label: show-external-c-for-benefit
+5つのモデルを開発コホート全例で学習して固定し、独立な`test_toy_data`で比較する。
 
-external_c_for_benefit$summary |>
-  dplyr::mutate(
-    dplyr::across(where(is.numeric), \(value) round(value, 3))
-  ) |>
-  print()
+- 学習・評価用nuisance model・bootstrapはtargetsで計算する
+- 各モデルの評価済み`DRTester` objectもjoblibで保存する
+- 各objectの`EvaluationResults`からGATE・TOC・Qini・AUTOCのraw tableをモデル別CSVに保存する
+- **利益 = イベントリスクの減少量**に統一：評価outcomeは`1 - bin_outcome`、予測利益は`-model.effect(X)`
+- 以下の図は保存した評価値からQmd内で描画する
+
+```{python}
+#| label: econml-evaluation-api
+#| eval: false
+#| echo: true
+
+# targetsが保存した評価済みDRTesterを再利用できる。
+import joblib
+
+tester = joblib.load("cache/validation/external/dr_learner-drtester.joblib")
+result = tester.res
+result.summary()          # BLP / calibration / AUTOC / QINI
+result.cal.plot_data_dict[1]  # GATEのraw DataFrame
+result.toc.curves[1]          # TOCのraw DataFrame
+result.qini.curves[1]         # Qiniのraw DataFrame
 ```
 
-::: {.small}
-`test_toy_data`内でageだけを使って治療例と対照例を1:1 matchingする。観察benefit（対照のイベント−治療のイベント）が異なる二つのpairを比較し、予測benefitの順位が一致した割合をc-for-benefitとする。予測tieは0.5として扱い、95% CIはmatched pair単位のbootstrapで求める。
-:::
-
-## Meta-learnerのCalibration / Discrimination（外部検証）
-
-```{r}
-#| label: show-meta-validation
-#| echo: false
-#| out-width: 100%
-
-knitr::include_graphics(external_meta_validation_figure)
-```
-
-::: {.small}
-
-- 5モデルは開発コホート全例で再学習して固定し、独立な`test_toy_data`で評価
-- EconML `DRTester`が開発コホートで学習した共通nuisance modelを外部コホートに適用し、doubly robust outcomeを構成
-- Calibration $R^2$ は1に近いほど良いが、通常のoutcome predictionの $R^2$ ではなく、CATEのgroup calibration指標
-- DiscriminationはAUTOC / QINI（0より大きいほど、治療効果の順位付け能力が高い）で評価
-
-:::
-
-## Meta-learnerのGATE（外部検証）
+## Meta-learnerのGATE（test dataset）
 
 ```{r}
 #| label: show-meta-gates
-#| echo: false
-#| out-width: 100%
-
-knitr::include_graphics(external_meta_gate_figure)
-```
-
-::: {.small}
-開発コホートの予測分布で定めたCATE五分位を外部コホートに適用し、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。
-:::
-
-## Causal forest
-
-```{r}
-#| label: causal-forest
-
-library(grf)
-library(tinyplot)
-library(partykit)
-library(policytree)
-library(shapviz)
-library(cobalt)
-
-ipw = if_else(toy_data$ca == 1, 1 / causal_forest_bin$W.hat, 1 / (1 - causal_forest_bin$W.hat))
-
-grf_data <- toy_data |>
-  dplyr::mutate(
-    tau_hat = stats::predict(causal_forest_bin)$predictions, 
-    tau_hat_rev = -tau_hat, 
-    pscore = causal_forest_bin$W.hat,
-    ipw = ipw
-
-  ) |>
-  tibble::as_tibble()
-
-tinyplot::plt(~ pscore, data = grf_data, type = type_histogram())
-
-balance <- cobalt::bal.tab(
-  ca ~ age + sexm1 + bmi + hf + bnp + lvef,
-  data = grf_data,
-  weights = "ipw",
-  method = "weighting",
-  un = TRUE,
-  continuous = "std",
-  binary = "std",
-  s.d.denom = "pooled",
-  thresholds = c(m = 0.1)
-)
-
-cobalt::love.plot(
-  balance,
-  stats = "mean.diffs",
-  abs = TRUE,
-  var.order = "unadjusted",
-  thresholds = c(m = 0.1),
-  sample.names = c("Before weighting", "After weighting"),
-  colors = c("#E15759", "#4E79A7"),
-  shapes = c(16, 17),
-  size = 3,
-  line = TRUE
-)
-
-```
-
-```{r}
-#| label: calibration-test-grf
-
-library(grf)
-
-grf::test_calibration(causal_forest_bin)
-
-```
-
-```{r}
-#| label: GATE-grf
-
-
-```
-
-```{r}
-#| label: RATE-grf
-
-
-```
-
-```{r}
-#| label: c-for-benefit
-
-library(EpiForsk)
-
-```
-
-
-```{r}
-#| label: shap
-
-shapviz::sv_importance(causal_forest_shap, kind = "bee")
-causal_forest_dr_scores <- policytree::double_robust_scores(causal_forest_bin)
-utils::head(causal_forest_dr_scores)
-causal_forest_surrogate_tree <- partykit::ctree(
-  tau_hat_rev ~ age + sexm1 + bmi + hf + bnp + lvef,
-  data = grf_data,
-  control = partykit::ctree_control(maxdepth = 3)
-)
-plot(causal_forest_surrogate_tree)
-
-policy_scores <- policytree::double_robust_scores(causal_forest_policy)
-policy_tree <- policytree::policy_tree(
-  policy_features,
-  policy_scores,
-  depth = 2
-)
-print(policy_tree)
-plot(policy_tree, leaf.labels = c("Control", "CA"))
-
-```
-
-## GRFの外部検証
-
-```{r}
-#| label: show-grf-validation
-#| fig-width: 9
-#| fig-height: 4.5
-#| out-width: 100%
+#| fig-width: 12
+#| fig-height: 4
 
 library(ggplot2)
 
-external_grf_validation$summary |>
-  dplyr::mutate(
-    dplyr::across(where(is.numeric), \(value) round(value, 3))
-  ) |>
-  print()
-
-ggplot(
-  external_grf_validation$gates,
-  aes(x = predicted_gate, y = gate)
-) +
+meta_model_order <- c("S-learner", "T-learner", "X-learner", "R-learner", "DR-learner")
+meta_model_colors <- c(
+  "S-learner" = "#59A14F", "T-learner" = "#EDC948",
+  "X-learner" = "#F28E2B", "R-learner" = "#B07AA1", "DR-learner" = "#E15759"
+)
+meta_gates <- read_validation_tables(
+  external_meta_learner_evaluation_files,
+  "-gate.csv"
+)
+meta_gates |>
+  dplyr::mutate(learner = factor(learner, levels = meta_model_order)) |>
+  ggplot(aes(g_cate, gate, color = learner)) +
   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
-  geom_errorbar(
-    aes(ymin = gate - 1.96 * gate_se, ymax = gate + 1.96 * gate_se),
-    width = 0
-  ) +
-  geom_line(color = "#4E79A7") +
-  geom_point(color = "#4E79A7", size = 2.5) +
-  geom_text(aes(label = paste0("G", group)), nudge_x = 0.002, nudge_y = 0.002) +
-  coord_equal() +
-  labs(
-    x = "Mean externally predicted CATE",
-    y = "Doubly robust GATE",
-    title = "GRF grouped calibration: external validation"
-  ) +
-  theme_bw(base_size = 11)
+  geom_errorbar(aes(ymin = gate - 1.96 * se_gate, ymax = gate + 1.96 * se_gate), width = 0) +
+  geom_line() + geom_point() +
+  facet_wrap(~ learner, nrow = 1) +
+  scale_color_manual(values = meta_model_colors) +
+  labs(x = "Mean predicted benefit", y = "DR GATE: risk reduction") +
+  theme_bw() + theme(legend.position = "none")
 ```
 
-::: {.small}
-開発コホートで学習したcausal forestを固定して外部CATEを予測する。外部コホート内でcross-fittingした評価用forestの`grf::get_scores()`からDR scoreを作り、固定予測のBLPとgroup calibrationを評価する。評価用forest自身のCATE予測は使用しない。
-:::
+開発コホートの予測利益の五分位で群を定め、testデータの予測平均とDR GATEを比較する。誤差棒は点ごとの95% CI。
 
-## GRFのDiscrimination (RATE)
+## Meta-learnerのTOC・Qini（test dataset）
 
 ```{r}
-#| label: show-grf-rate
-#| fig-width: 9
-#| fig-height: 4.5
-#| out-width: 100%
+#| label: show-meta-uplift-curves
+#| fig-width: 10
+#| fig-height: 4.8
 
-library(grf)
+meta_curves <- dplyr::bind_rows(
+  read_validation_tables(
+    external_meta_learner_evaluation_files,
+    "-toc.csv"
+  ),
+  read_validation_tables(
+    external_meta_learner_evaluation_files,
+    "-qini.csv"
+  )
+) |>
+  dplyr::mutate(
+    learner = factor(learner, levels = meta_model_order),
+    curve = factor(curve, levels = c("TOC", "Qini")),
+    q = Percentage.treated / 100
+  )
 
-plot(external_rate_results$autoc)
-plot(external_rate_results$qini)
-
+ggplot(meta_curves, aes(q, value, color = learner, fill = learner)) +
+  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  geom_ribbon(aes(ymin = value - 1.96 * err, ymax = value + 1.96 * err),
+              alpha = 0.07, color = NA) +
+  geom_line(linewidth = 0.9) +
+  facet_wrap(~ curve, scales = "free_y") +
+  scale_color_manual(values = meta_model_colors) +
+  scale_fill_manual(values = meta_model_colors) +
+  labs(x = "Targeted fraction (development-score thresholds)",
+       y = "Gain over random targeting", color = NULL, fill = NULL) +
+  theme_bw() + theme(legend.position = "bottom")
 ```
+
+予測利益が大きい側から選択する。EconMLの横軸は開発コホートの分位点に基づく名目割合で、testデータでの実際の選択割合とは異なる場合がある。帯は点ごとの95% CI。
+
+## Meta-learnerのAUTOC比較（test dataset）
+
+```{r}
+#| label: show-meta-validation
+#| fig-width: 9
+#| fig-height: 4
+
+meta_rate_summary <- external_learner_summary |>
+  dplyr::transmute(
+    learner,
+    autoc = autoc_est,
+    autoc_se,
+    qini = qini_est,
+    qini_se
+  )
+meta_rate_summary |> knitr::kable(digits = 3)
+
+dplyr::bind_rows(
+  dplyr::transmute(meta_rate_summary, learner, metric = "AUTOC", estimate = autoc, se = autoc_se),
+  dplyr::transmute(meta_rate_summary, learner, metric = "QINI", estimate = qini, se = qini_se)
+) |>
+  ggplot(aes(estimate, factor(learner, levels = rev(meta_model_order)), color = learner)) +
+  geom_vline(xintercept = 0, linetype = 2, color = "grey55") +
+  geom_errorbar(aes(xmin = estimate - 1.96 * se, xmax = estimate + 1.96 * se),
+                orientation = "y", width = 0.15) +
+  geom_point(size = 2) +
+  facet_wrap(~ metric, scales = "free_x") +
+  scale_color_manual(values = meta_model_colors) +
+  labs(x = "RATE estimate (95% CI)", y = NULL) +
+  theme_bw() + theme(legend.position = "none")
+```
+
+AUTOCはTOC、QINI係数はQini曲線の面積に対応する。ここではEconML既定の5〜95%の分位点グリッドによる推定値を示す。GRFとは既定の積分グリッドが異なるため、数値をそのまま同一視しない。
 
 ## EconMLモデルを説明する（Python）
 
@@ -2446,20 +2369,6 @@ plot(external_rate_results$qini)
 #| fig-height: 4.8
 #| out-width: 100%
 
-meta_model_order <- c(
-  "S-learner",
-  "T-learner",
-  "X-learner",
-  "R-learner",
-  "DR-learner"
-)
-meta_model_colors <- c(
-  "S-learner" = "#59A14F",
-  "T-learner" = "#EDC948",
-  "X-learner" = "#F28E2B",
-  "R-learner" = "#B07AA1",
-  "DR-learner" = "#E15759"
-)
 meta_feature_labels <- c(
   age = "Age",
   sexm1 = "Sex (male)",
@@ -2474,7 +2383,7 @@ meta_pdp_data |>
     learner = factor(learner, levels = meta_model_order),
     feature = factor(
       unname(meta_feature_labels[feature]),
-      levels = c("Age", "LVEF (%)", "BNP")
+      levels = c("Age", "BMI", "BNP", "LVEF (%)")
     )
   ) |>
   ggplot2::ggplot(
@@ -2553,66 +2462,7 @@ meta_shap_data |>
 :::
 
 ::: {.small}
-PDPとKernel SHAPの数値計算はPythonで行い、targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。
-:::
-
-## GRFモデルを説明する（R）
-
-```{r}
-#| label: prepare-grf-explanations
-#| include: false
-
-library(dplyr)
-library(ggplot2)
-library(shapviz)
-
-feature_order <- c("Age", "LVEF (%)", "BNP")
-grf_pdp_data <- grf_pdp_data |>
-  dplyr::mutate(feature = factor(feature, levels = feature_order))
-
-grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
-  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
-  geom_line(color = "#4E79A7", linewidth = 1.1) +
-  facet_wrap(~feature, scales = "free_x", nrow = 1) +
-  labs(x = NULL, y = "Estimated HTE: risk reduction") +
-  theme_bw(base_size = 11)
-```
-
-::: {.panel-tabset}
-
-### PDP
-
-```{r}
-#| label: plot-grf-pdp
-#| fig-width: 10
-#| fig-height: 4.8
-#| out-width: 100%
-
-grf_pdp_plot
-```
-
-### Global SHAP
-
-```{r}
-#| label: plot-grf-shap
-#| fig-width: 10
-#| fig-height: 5.2
-#| out-width: 100%
-
-shapviz::sv_importance(
-  grf_cate_shap,
-  kind = "beeswarm",
-  max_display = 6,
-  alpha = 0.65,
-  size = 1
-) +
-  labs(
-    title = "GRF causal forest",
-    x = "SHAP value for risk reduction"
-  ) +
-  theme_bw(base_size = 10)
-```
-
+開発コホート全例で学習した5モデルを固定し、testデータを参照集団として説明する。PDP（Age・BMI・BNP・LVEF）とKernel SHAPは別々のPython関数・targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。
 :::
 
 ## EconMLモデルをSingle Treeで説明
@@ -2631,7 +2481,7 @@ single_tree_figures <- list(
 ```
 
 ::: {.small}
-各ノードの `value` は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じtest setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。
+このSingle Treeは前半で学習したinternal splitのモデルを説明する。各ノードの `value` は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じinternal test setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。
 :::
 
 ::: {.panel-tabset}
@@ -2688,10 +2538,475 @@ knitr::include_graphics(single_tree_figures[["DR-learner"]])
 
 :::
 
+## Causal forest：学習データでの診断
+
+
+    Sverdrup E, Petukhova M, Wager S. Estimating treatment effect heterogeneity in psychiatry: A review and tutorial with causal forests. Int J Methods Psychiatr Res. 2025;34(2):e70015. doi:10.1002/mpr.70015
+  
+このやり方をまねる
+
+```{r}
+#| label: causal-forest
+
+library(grf)
+library(tinyplot)
+library(dplyr)
+library(partykit)
+library(policytree)
+library(shapviz)
+library(cobalt)
+
+grf_data <- toy_data |>
+  dplyr::mutate(
+    tau_hat = stats::predict(causal_forest_bin)$predictions, 
+    tau_hat_rev = -tau_hat, 
+    pscore = causal_forest_bin$W.hat, 
+    ipw = dplyr::if_else(ca == 1, 1 / pscore, 1 / (1 - pscore))
+  ) |>
+  tibble::as_tibble()
+
+tinyplot::plt(~ pscore, data = grf_data, type = type_histogram())
+
+balance <- cobalt::bal.tab(
+  ca ~ age + sexm1 + bmi + hf + bnp + lvef,
+  data = grf_data,
+  weights = "ipw",
+  method = "weighting",
+  un = TRUE,
+  continuous = "std",
+  binary = "std",
+  s.d.denom = "pooled",
+  thresholds = c(m = 0.2)
+)
+
+cobalt::love.plot(
+  balance,
+  stats = "mean.diffs",
+  abs = TRUE,
+  var.order = "unadjusted",
+  thresholds = c(m = 0.2),
+  sample.names = c("Before weighting", "After weighting"),
+  colors = c("#E15759", "#4E79A7"),
+  shapes = c(16, 17),
+  size = 3,
+  line = TRUE
+)
+
+```
+
+```{r}
+#| label: calibration-test-grf
+
+library(grf)
+
+grf::test_calibration(causal_forest_bin)
+
+```
+
+
+```{r}
+#| label: shap
+
+shapviz::sv_importance(causal_forest_shap, kind = "bee")
+causal_forest_dr_scores <- policytree::double_robust_scores(causal_forest_bin)
+utils::head(causal_forest_dr_scores)
+causal_forest_surrogate_tree <- partykit::ctree(
+  tau_hat_rev ~ age + sexm1 + bmi + hf + bnp + lvef,
+  data = grf_data,
+  control = partykit::ctree_control(maxdepth = 3)
+)
+plot(causal_forest_surrogate_tree)
+
+policy_scores <- policytree::double_robust_scores(causal_forest_policy)
+policy_tree <- policytree::policy_tree(
+  policy_features,
+  policy_scores,
+  depth = 2
+)
+print(policy_tree)
+plot(policy_tree, leaf.labels = c("Control", "CA"))
+
+```
+
+## GRF：test datasetへの予測
+
+```{r}
+#| label: grf-test-predictions
+#| echo: true
+
+library(grf)
+
+# 学習済みモデルを固定し、学習時と同じ列順でtestデータを渡す。
+X_test_grf <- test_toy_data |>
+  dplyr::select(dplyr::all_of(colnames(causal_forest_bin$X.orig))) |>
+  as.data.frame()
+tau_test_grf <- as.numeric(predict(
+  causal_forest_bin, newdata = as.matrix(X_test_grf)
+)$predictions)
+benefit_test_grf <- -tau_test_grf
+
+# 評価用forestの学習だけをtargetsに保存している。
+# Y = 1 - bin_outcomeなので、DR scoreは利益の尺度。
+# このforest自身のCATEで順位付けはしない。
+dr_benefit_test <- as.numeric(grf::get_scores(external_evaluation_forest))
+stopifnot(length(benefit_test_grf) == length(dr_benefit_test))
+```
+
+評価用forestはtestデータ内のOOB予測からnuisanceを推定する。評価対象は開発データで学習した`causal_forest_bin`の固定予測であり、testデータで再学習した効果予測ではない。
+
+## GRFのGATE（test dataset）
+
+```{r}
+#| label: grf-GATE
+#| echo: true
+#| fig-width: 8
+#| fig-height: 4.5
+
+# testのoutcomeを使わず、開発データのOOB予測で五分位境界を定める。
+benefit_train_grf <- -as.numeric(predict(causal_forest_bin)$predictions)
+gate_breaks <- c(-Inf, unique(as.numeric(quantile(
+  benefit_train_grf, probs = seq(0.2, 0.8, 0.2)
+))), Inf)
+grf_gates <- tibble::tibble(
+  group = cut(benefit_test_grf, breaks = gate_breaks, labels = FALSE),
+  predicted_benefit = benefit_test_grf,
+  dr_benefit = dr_benefit_test
+) |>
+  dplyr::group_by(group) |>
+  dplyr::summarise(
+    n = dplyr::n(), predicted_gate = mean(predicted_benefit),
+    gate = mean(dr_benefit), gate_se = sd(dr_benefit) / sqrt(n),
+    .groups = "drop"
+  )
+
+ggplot(grf_gates, aes(predicted_gate, gate)) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
+  geom_errorbar(aes(ymin = gate - 1.96 * gate_se, ymax = gate + 1.96 * gate_se), width = 0) +
+  geom_line(color = "#4E79A7") + geom_point(color = "#4E79A7", size = 2.5) +
+  geom_text(aes(label = paste0("G", group)), nudge_x = 0.002) +
+  labs(x = "Mean predicted benefit", y = "DR GATE: risk reduction") + theme_bw()
+```
+
+## GRFのRATE：AUTOC / QINI（test dataset）
+
+```{r}
+#| label: grf-rate-estimates
+#| echo: true
+
+# RATEは順位付けの評価指標の総称。重みを変えるとAUTOC / QINIになる。
+set.seed(123)
+grf_autoc <- grf::rank_average_treatment_effect(
+  external_evaluation_forest, priorities = benefit_test_grf,
+  target = "AUTOC", q = seq(0.1, 1, by = 0.1), R = 500
+)
+set.seed(123)
+grf_qini <- grf::rank_average_treatment_effect(
+  external_evaluation_forest, priorities = benefit_test_grf,
+  target = "QINI", q = seq(0.1, 1, by = 0.1), R = 500
+)
+
+tibble::tibble(
+  metric = c("AUTOC", "QINI"),
+  estimate = c(grf_autoc$estimate, grf_qini$estimate),
+  se = c(grf_autoc$std.err, grf_qini$std.err)
+) |>
+  dplyr::mutate(lower = estimate - 1.96 * se, upper = estimate + 1.96 * se) |>
+  knitr::kable(digits = 3)
+```
+
+## GRFのTOC / Qini plot（test dataset）
+
+```{r}
+#| label: show-grf-rate
+#| echo: true
+#| fig-width: 10
+#| fig-height: 4.5
+
+# plot(grf_qini)もTOCを描くため、Qini曲線はq × TOCとして明示する。
+# 最初のpriorityが入力した予測順位（残りは比較用の系列）。
+grf_toc <- grf_autoc$TOC |>
+  dplyr::filter(priority == dplyr::first(priority))
+grf_curves <- dplyr::bind_rows(
+  dplyr::transmute(grf_toc, q, curve = "TOC", value = estimate, se = std.err),
+  dplyr::transmute(grf_toc, q, curve = "Qini", value = q * estimate, se = q * std.err)
+)
+ggplot(grf_curves, aes(q, value)) +
+  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  geom_ribbon(aes(ymin = value - 1.96 * se, ymax = value + 1.96 * se),
+              fill = "#4E79A7", alpha = 0.15) +
+  geom_line(color = "#4E79A7", linewidth = 1) +
+  facet_wrap(~ curve, scales = "free_y") +
+  labs(x = "Top fraction ranked by predicted benefit", y = "Gain over random targeting") +
+  theme_bw()
+```
+
+## GRFのC-for-benefit（test dataset）
+
+```{r}
+#| label: show-external-c-for-benefit
+#| echo: true
+
+# 1. testデータ内で、予測benefitが近い治療例と対照例を1:1 matching。
+# 予測benefitは正ほど有益。outcomeはmatchingに使わない。
+cfb_data <- test_toy_data |>
+  dplyr::mutate(predicted_benefit = benefit_test_grf)
+matching_estimand <- if (sum(cfb_data$ca == 1) <= sum(cfb_data$ca == 0)) {
+  "ATT"
+} else {
+  "ATC"
+}
+
+set.seed(42)
+cfb_matching <- MatchIt::matchit(
+  ca ~ predicted_benefit,
+  data = cfb_data,
+  method = "nearest",
+  distance = "mahalanobis",
+  estimand = matching_estimand,
+  ratio = 1,
+  replace = FALSE,
+  m.order = "closest"
+)
+
+# 2. 患者2人を1行にまとめる。ここからの比較単位はmatched pair。
+cfb_pairs <- MatchIt::match_data(cfb_matching) |>
+  dplyr::group_by(subclass) |>
+  dplyr::summarise(
+    treated_id = id[ca == 1],
+    control_id = id[ca == 0],
+    observed_benefit = bin_outcome[ca == 0] - bin_outcome[ca == 1],
+    predicted_benefit = mean(predicted_benefit),
+    .groups = "drop"
+  )
+head(cfb_pairs) |> knitr::kable(digits = 3)
+```
+
+少ない側の群を基準に、予測benefitのMahalanobis距離で非復元matchingする。観測benefitは「対照のイベント − 治療のイベント」、予測benefitはペアの2人の予測利益の平均。
+
+## GRFのC-for-benefit：一致率と信頼区間
+
+```{r}
+#| label: calculate-external-c-for-benefit
+#| echo: true
+
+c_for_benefit <- function(data) {
+
+  tidyr::crossing(
+    i = seq_len(nrow(data)),
+    j = seq_len(nrow(data))
+  ) |>
+    filter(
+      i < j,
+      data$observed_benefit[i] !=
+        data$observed_benefit[j]
+    ) |>
+    transmute(
+      obs_diff =
+        data$observed_benefit[i] -
+        data$observed_benefit[j],
+
+      pred_diff =
+        data$predicted_benefit[i] -
+        data$predicted_benefit[j],
+
+      score = case_when(
+        obs_diff * pred_diff > 0 ~ 1,
+        pred_diff == 0 ~ 0.5,
+        TRUE ~ 0
+      )
+    ) |>
+    summarise(
+      cfb = mean(score)
+    ) |>
+    pull(cfb)
+}
+
+# Point estimate
+# c_for_benefit(cfb_pairs)
+
+#--------------------------------------------------
+# pair bootstrap
+#--------------------------------------------------
+
+cfb_stat <- function(data, indices) {
+  c_for_benefit(data[indices, ])
+}
+
+set.seed(123)
+
+boot_cfb <- boot::boot(
+  data = cfb_pairs,
+  statistic = cfb_stat,
+  R = 199
+)
+
+#--------------------------------------------------
+# result
+#--------------------------------------------------
+
+cfb_study <- tibble(
+  C_for_benefit = boot_cfb$t0,
+  lower_95 = quantile(
+    boot_cfb$t,
+    0.025,
+    na.rm = TRUE
+  ),
+  upper_95 = quantile(
+    boot_cfb$t,
+    0.975,
+    na.rm = TRUE
+  )
+)
+
+cfb_study |> knitr::kable(digits = 3)
+
+# # 3. 二つのmatched pairを選び、観測benefitと予測benefitの順序を比べる。
+# c_for_benefit_fast <- function(observed_benefit, predicted_benefit) {
+#   stopifnot(
+#     length(observed_benefit) == length(predicted_benefit),
+#     length(observed_benefit) >= 2L,
+#     all(is.finite(observed_benefit)),
+#     all(is.finite(predicted_benefit))
+#   )
+
+#   observed_levels <- sort(unique(observed_benefit))
+#   if (length(observed_levels) < 2L) {
+#     return(NA_real_)
+#   }
+
+#   total_score <- 0
+#   number_of_comparisons <- 0
+
+#   # 観測benefitが高い群を、それより低い全ての群と比較する。
+#   for (higher_level in observed_levels[-1]) {
+#     predictions_in_higher_group <- predicted_benefit[
+#       observed_benefit == higher_level
+#     ]
+#     predictions_in_lower_groups <- predicted_benefit[
+#       observed_benefit < higher_level
+#     ]
+
+#     # 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。
+#     score_for_each_pair <- vapply(
+#       predictions_in_higher_group,
+#       function(higher_prediction) {
+#         sum(higher_prediction > predictions_in_lower_groups) +
+#           0.5 * sum(higher_prediction == predictions_in_lower_groups)
+#       },
+#       numeric(1)
+#     )
+
+#     total_score <- total_score + sum(score_for_each_pair)
+#     number_of_comparisons <- number_of_comparisons +
+#       length(predictions_in_higher_group) *
+#       length(predictions_in_lower_groups)
+#   }
+
+#   total_score / number_of_comparisons
+# }
+
+# # boot()は、この関数のindicesに復元抽出した行番号を渡す。
+# bootstrap_c_for_benefit_fast <- function(data, indices) {
+#   sampled_pairs <- data[indices, , drop = FALSE]
+
+#   c_for_benefit_fast(
+#     observed_benefit = sampled_pairs$observed_benefit,
+#     predicted_benefit = sampled_pairs$predicted_benefit
+#   )
+# }
+
+# # 4. matched pairを単位に500回bootstrapする。
+# set.seed(123)
+# cfb_bootstrap_fast <- boot::boot(
+#   data = cfb_pairs,
+#   statistic = bootstrap_c_for_benefit_fast,
+#   R = 500
+# )
+
+# # t0が元データの点推定、tが各bootstrap標本の推定値。
+# cfb_estimate <- as.numeric(cfb_bootstrap_fast$t0)
+# cfb_ci_result <- boot::boot.ci(
+#   cfb_bootstrap_fast,
+#   conf = 0.95,
+#   type = "perc"
+# )
+# cfb_ci <- cfb_ci_result$percent[4:5]
+
+# cfb_summary <- tibble::tibble(
+#   n_pairs = nrow(cfb_pairs),
+#   c_for_benefit = cfb_estimate,
+#   lower_95 = unname(cfb_ci[1]),
+#   upper_95 = unname(cfb_ci[2]),
+#   valid_bootstraps = sum(is.finite(cfb_bootstrap_fast$t))
+# )
+
+```
+
+予測順位の一致を1、不一致を0、予測が同値なら0.5として平均する。CIは固定したモデル・matchingに条件づけた500回のpair bootstrapであり、再学習・再matchingの不確実性を含まない。
+
+## GRFモデルを説明する（R）
+
+```{r}
+#| label: prepare-grf-explanations
+#| include: false
+
+library(dplyr)
+library(ggplot2)
+library(shapviz)
+
+feature_order <- c("Age", "BMI", "BNP", "LVEF (%)")
+grf_pdp_data <- grf_pdp_data |>
+  dplyr::mutate(feature = factor(feature, levels = feature_order))
+
+grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
+  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  geom_line(color = "#4E79A7", linewidth = 1.1) +
+  facet_wrap(~feature, scales = "free_x", nrow = 1) +
+  labs(x = NULL, y = "Estimated HTE: risk reduction") +
+  theme_bw(base_size = 11)
+```
+
+::: {.panel-tabset}
+
+### PDP
+
+```{r}
+#| label: plot-grf-pdp
+#| fig-width: 10
+#| fig-height: 4.8
+#| out-width: 100%
+
+grf_pdp_plot
+```
+
+### Global SHAP
+
+```{r}
+#| label: plot-grf-shap
+#| fig-width: 10
+#| fig-height: 5.2
+#| out-width: 100%
+
+shapviz::sv_importance(
+  grf_cate_shap,
+  kind = "beeswarm",
+  max_display = 6,
+  alpha = 0.65,
+  size = 1
+) +
+  labs(
+    title = "GRF causal forest",
+    x = "SHAP value for risk reduction"
+  ) +
+  theme_bw(base_size = 10)
+```
+
+:::
+
 ## 実務において
 
 - Rの`grf` packageが最も医学論文によい
-- C-for-benefitは`EpiFOrsk` packgeで可能
+- C-for-benefitは`MatchIt`でペアを作り、観測benefitと予測benefitの順位一致率として計算できる
 - RCTのGATESは`evalITR` packageで可能だが、正直LLMに手書きで書かせて良いと思う
 - pythonなら`econML`が良いがSurvival analysisはなし
 
@@ -2706,3 +3021,11 @@ sessioninfo::session_info()
 
 ::: {#refs}
 :::
+
+<!-- memo: 
+
+PDP, heatmapを推奨している論文もあり
+
+    Shiba K, Inoue K. Harnessing causal forests for epidemiologic research: key considerations. Am J Epidemiol. 2024;193(6):813-818. doi:10.1093/aje/kwae003
+  
+ -->

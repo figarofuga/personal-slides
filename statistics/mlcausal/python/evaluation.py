@@ -1,13 +1,15 @@
 """Python-only validation artifacts for the cached EconML estimators."""
 
 from pathlib import Path
+import copy
 import warnings
 
+import cloudpickle
 import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from econml.validate import DRTester
+from econml.validate import DRTester, EvaluationResults
 from sklearn.ensemble import (
     HistGradientBoostingClassifier,
 )
@@ -38,13 +40,13 @@ MODEL_COLORS = {
 
 
 class _FlatEffectAdapter:
-    """Give DRTester the one-dimensional binary-treatment effect it expects."""
+    """Express event-risk CATE as benefit (event-free probability difference)."""
 
     def __init__(self, estimator):
         self.estimator = estimator
 
     def effect(self, X, T0=0, T1=1):
-        return np.asarray(
+        return -np.asarray(
             self.estimator.effect(X, T0=T0, T1=T1)
         ).reshape(-1)
 
@@ -232,52 +234,52 @@ def _evaluate_partitions(
     X_test_array = X_test.to_numpy(dtype=float)
 
     first_model = _FlatEffectAdapter(next(iter(models.values())))
-    tester = DRTester(
+    nuisance_tester = DRTester(
         model_regression=_nuisance_regression_model(),
         model_propensity=_nuisance_propensity_model(),
         cate=first_model,
         cv=5,
     )
     # 効果モデルとは別に評価用の補助モデルを学習し、共通の DR アウトカムを構成する。
-    tester.fit_nuisance(
+    nuisance_tester.fit_nuisance(
         Xval=X_test_array,
         Dval=T_test,
-        yval=Y_test,
+        yval=1 - Y_test,
         Xtrain=X_train_array,
         Dtrain=T_train,
-        ytrain=Y_train,
+        ytrain=1 - Y_train,
     )
 
+    testers = {}
     summaries = []
     gate_frames = []
     curve_frames = []
 
     for model_name, model in models.items():
-        # Nuisance predictions and DR outcomes stay fixed; only CATE predictions
-        # change. This makes the five-model comparison directly comparable.
+        # Copy the fitted nuisance state so every learner is saved as its own
+        # complete DRTester object, while all learners still use identical DR outcomes.
+        tester = copy.deepcopy(nuisance_tester)
         tester.cate = _FlatEffectAdapter(model)
         tester.get_cate_preds(Xval=X_test_array, Xtrain=X_train_array)
 
-        # BLP は効果予測と DR アウトカムの関係、群別 calibration は予測水準の一致を調べる。
-        blp = tester.evaluate_blp()
-        calibration = tester.evaluate_cal(n_groups=n_groups)
-
-        # 同じ乱数 seed を使い、bootstrap による比較を再現可能にする。
+        # evaluate_all() returns an EvaluationResults for this frozen model.
+        # Refresh CATE predictions above on every iteration; nuisance DR outcomes
+        # are shared by all five models. Positive values now mean risk reduction.
         np.random.seed(123)
-        autoc = tester.evaluate_uplift(
-            metric="toc", n_bootstrap=n_bootstrap
+        result = tester.evaluate_all(
+            n_groups=n_groups, n_bootstrap=n_bootstrap
         )
-        # 同じ乱数 seed を使い、bootstrap による比較を再現可能にする。
-        np.random.seed(123)
-        qini = tester.evaluate_uplift(
-            metric="qini", n_bootstrap=n_bootstrap
-        )
+        assert isinstance(result, EvaluationResults)
+        testers[model_name] = tester
+        blp, calibration = result.blp, result.cal
+        autoc, qini = result.toc, result.qini
 
         cate_test = np.asarray(tester.cate_preds_val_).reshape(-1)
         summaries.append(
             {
                 "learner": model_name,
-                "ate_rd": cate_test.mean(),
+                "ate_rd": -cate_test.mean(),
+                "mean_benefit": cate_test.mean(),
                 "cate_sd": cate_test.std(ddof=1),
                 "calibration_r2": float(calibration.cal_r_squared[0]),
                 "blp_slope": float(blp.params[0]),
@@ -308,6 +310,7 @@ def _evaluate_partitions(
         pd.DataFrame(summaries),
         pd.concat(gate_frames, ignore_index=True),
         pd.concat(curve_frames, ignore_index=True),
+        testers,
     )
 
 
@@ -375,9 +378,9 @@ def _plot_gate_comparison(gates, output, cohort_label):
         axis.set(xlim=(low, high), ylim=(low, high), title=model_name)
         axis.grid(alpha=0.2)
 
-    axes[0].set_ylabel("Observed DR GATE (event risk difference)")
+    axes[0].set_ylabel("Observed DR GATE (risk reduction)")
     for axis in axes:
-        axis.set_xlabel("Mean predicted CATE")
+        axis.set_xlabel("Mean predicted benefit")
 
     figure.suptitle(
         f"EconML DRTester: GATE calibration in the {cohort_label}",
@@ -443,6 +446,57 @@ def _plot_validation_summary(summary, output, cohort_label):
     plt.close(figure)
 
 
+def _model_slug(model_name):
+    return model_name.lower().replace("-", "_").replace(" ", "_")
+
+
+def _write_drtester_artifacts(testers, output_dir):
+    """Save each fitted DRTester and its model-specific raw plotting tables."""
+    directory = _output_path(output_dir)
+    directory.mkdir(parents=True, exist_ok=True)
+    paths = []
+
+    for model_name, tester in testers.items():
+        slug = _model_slug(model_name)
+        result = tester.res
+
+        tester_path = directory / f"{slug}-drtester.joblib"
+        summary_path = directory / f"{slug}-summary.csv"
+        gate_path = directory / f"{slug}-gate.csv"
+        toc_path = directory / f"{slug}-toc.csv"
+        qini_path = directory / f"{slug}-qini.csv"
+
+        # source_python() defines the small adapters dynamically. cloudpickle
+        # embeds those definitions, so the DRTester can be loaded later from a
+        # plain Python session (joblib.load remains compatible with this file).
+        with tester_path.open("wb") as stream:
+            cloudpickle.dump(tester, stream)
+
+        summary = result.summary().copy()
+        summary.insert(0, "learner", model_name)
+        summary.to_csv(summary_path, index=False)
+
+        gate = result.cal.plot_data_dict[1].copy()
+        gate.insert(0, "learner", model_name)
+        gate["group"] = gate["ind"].astype(int) + 1
+        gate.drop(columns="ind").to_csv(gate_path, index=False)
+
+        for metric, uplift_result, path in (
+            ("TOC", result.toc, toc_path),
+            ("Qini", result.qini, qini_path),
+        ):
+            curve = uplift_result.curves[1].copy()
+            curve.insert(0, "learner", model_name)
+            curve.insert(1, "curve", metric)
+            curve.to_csv(path, index=False)
+
+        paths.extend(
+            [tester_path, summary_path, gate_path, toc_path, qini_path]
+        )
+
+    return [str(path) for path in paths]
+
+
 def evaluate_meta_learners(
     s_model_path,
     t_model_path,
@@ -456,6 +510,7 @@ def evaluate_meta_learners(
     curves_path,
     gate_figure_path,
     summary_figure_path,
+    drtester_dir,
     n_groups=5,
     n_bootstrap=1000,
 ):
@@ -469,7 +524,7 @@ def evaluate_meta_learners(
             dr_model_path,
         ]
     )
-    summary, gates, curves = _evaluate_models(
+    summary, gates, curves, testers = _evaluate_models(
         models,
         toy_data,
         split,
@@ -494,7 +549,9 @@ def evaluate_meta_learners(
         summary, summary_figure_output, "held-out internal test set"
     )
 
-    return [
+    tester_artifacts = _write_drtester_artifacts(testers, drtester_dir)
+
+    return tester_artifacts + [
         str(summary_output),
         str(gates_output),
         str(curves_output),
@@ -516,6 +573,7 @@ def evaluate_external_meta_learners(
     curves_path,
     gate_figure_path,
     summary_figure_path,
+    drtester_dir,
     n_groups=5,
     n_bootstrap=1000,
 ):
@@ -529,7 +587,7 @@ def evaluate_external_meta_learners(
             dr_model_path,
         ]
     )
-    summary, gates, curves = _evaluate_external_models(
+    summary, gates, curves, testers = _evaluate_external_models(
         models,
         development_data,
         validation_data,
@@ -553,7 +611,9 @@ def evaluate_external_meta_learners(
         summary, summary_figure_output, "external validation cohort"
     )
 
-    return [
+    tester_artifacts = _write_drtester_artifacts(testers, drtester_dir)
+
+    return tester_artifacts + [
         str(summary_output),
         str(gates_output),
         str(curves_output),

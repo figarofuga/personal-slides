@@ -428,23 +428,6 @@ make_grf_validation <- function(
   )
 }
 
-# 開発コホートで学習済みのforestを固定し、外部コホートだけに予測する。
-make_external_causal_forest_predictions <- function(
-  causal_forest_bin,
-  test_policy_features,
-  test_toy_data
-) {
-  tibble::tibble(
-    id = test_toy_data$id,
-    cate_rd = as.numeric(
-      stats::predict(
-        causal_forest_bin,
-        newdata = as.data.frame(test_policy_features)
-      )$predictions
-    )
-  )
-}
-
 # 外部検証コホート内でcross-fittingされたnuisance推定からDR scoreを作る。
 # このforestのCATE予測は使わず、開発コホート由来の固定予測を評価する。
 fit_external_evaluation_forest <- function(
@@ -453,284 +436,16 @@ fit_external_evaluation_forest <- function(
 ) {
   grf::causal_forest(
     X = test_policy_features,
-    Y = test_toy_data$bin_outcome,
+    Y = 1 - test_toy_data$bin_outcome,
     W = test_toy_data$ca,
     honesty = TRUE,
     seed = 43
   )
 }
 
-make_external_rate_results <- function(
-  external_evaluation_forest,
-  external_causal_forest_predictions
-) {
-  priorities <- external_causal_forest_predictions$cate_rd
-
-  list(
-    autoc = grf::rank_average_treatment_effect(
-      external_evaluation_forest,
-      priorities,
-      target = "AUTOC"
-    ),
-    qini = grf::rank_average_treatment_effect(
-      external_evaluation_forest,
-      priorities,
-      target = "QINI"
-    )
-  )
-}
-
-# 固定された外部CATE予測を、DR scoreに対するBLPとGATEで校正評価する。
-make_external_grf_validation <- function(
-  external_causal_forest_predictions,
-  external_evaluation_forest,
-  external_rate_results,
-  n_groups = 5L
-) {
-  cate_predictions <- external_causal_forest_predictions$cate_rd
-  dr_scores <- as.numeric(grf::get_scores(external_evaluation_forest))
-  stopifnot(length(cate_predictions) == length(dr_scores))
-
-  mean_prediction <- rep(mean(cate_predictions), length(cate_predictions))
-  calibration_data <- tibble::tibble(
-    dr_score = dr_scores,
-    mean_prediction = mean_prediction,
-    differential_prediction = cate_predictions - mean(cate_predictions)
-  )
-  calibration_fit <- stats::lm(
-    dr_score ~ 0 + mean_prediction + differential_prediction,
-    data = calibration_data
-  )
-  calibration_vcov <- sandwich::vcovHC(calibration_fit, type = "HC3")
-  calibration_estimate <- stats::coef(calibration_fit)
-  calibration_se <- sqrt(diag(calibration_vcov))
-  calibration_df <- stats::df.residual(calibration_fit)
-
-  order_index <- order(cate_predictions)
-  gate_group <- integer(length(cate_predictions))
-  gate_group[order_index] <- pmin(
-    n_groups,
-    ceiling(seq_along(order_index) / length(order_index) * n_groups)
-  )
-
-  gate_data <- purrr::map_dfr(seq_len(n_groups), function(group) {
-    selected <- gate_group == group
-    tibble::tibble(
-      group = group,
-      n = sum(selected),
-      predicted_gate = mean(cate_predictions[selected]),
-      gate = mean(dr_scores[selected]),
-      gate_se = stats::sd(dr_scores[selected]) / sqrt(sum(selected))
-    )
-  })
-
-  group_probability <- gate_data$n / sum(gate_data$n)
-  calibration_error <- sum(
-    abs(gate_data$gate - gate_data$predicted_gate) * group_probability
-  )
-  overall_error <- sum(
-    abs(gate_data$gate - mean(dr_scores)) * group_probability
-  )
-  calibration_r2 <- if (overall_error > 0) {
-    1 - calibration_error / overall_error
-  } else {
-    NA_real_
-  }
-
-  calibration_rows <- tibble::tibble(
-    metric = c(
-      "Mean forest calibration",
-      "Differential forest calibration"
-    ),
-    estimate = unname(calibration_estimate),
-    std_error = unname(calibration_se),
-    p_value = 2 * stats::pt(
-      -abs(calibration_estimate / calibration_se),
-      df = calibration_df
-    )
-  )
-  discrimination_rows <- tibble::tibble(
-    metric = c("AUTOC", "QINI"),
-    estimate = c(
-      external_rate_results$autoc$estimate,
-      external_rate_results$qini$estimate
-    ),
-    std_error = c(
-      external_rate_results$autoc$std.err,
-      external_rate_results$qini$std.err
-    ),
-    p_value = 2 * stats::pnorm(-abs(estimate / std_error))
-  )
-
-  list(
-    gates = gate_data,
-    summary = dplyr::bind_rows(
-      calibration_rows,
-      tibble::tibble(
-        metric = "Grouped calibration R2",
-        estimate = calibration_r2,
-        std_error = NA_real_,
-        p_value = NA_real_
-      ),
-      discrimination_rows
-    ),
-    calibration_fit = calibration_fit,
-    dr_scores = dr_scores
-  )
-}
-
-# ageだけで治療・対照を1:1対応させ、全HTEモデルに共通の評価ペアを作る。
-make_external_benefit_pairs <- function(test_toy_data) {
-  set.seed(44)
-  estimand <- if (sum(test_toy_data$ca == 1) <= sum(test_toy_data$ca == 0)) {
-    "ATT"
-  } else {
-    "ATC"
-  }
-  matching_fit <- MatchIt::matchit(
-    ca ~ age,
-    data = test_toy_data,
-    method = "nearest",
-    distance = "mahalanobis",
-    caliper = c(age = 0.1),
-    estimand = estimand,
-    ratio = 1,
-    replace = FALSE
-  )
-
-  MatchIt::match_data(matching_fit) |>
-    dplyr::group_by(subclass) |>
-    dplyr::filter(dplyr::n() == 2L, dplyr::n_distinct(ca) == 2L) |>
-    dplyr::summarise(
-      treated_id = id[ca == 1][1],
-      control_id = id[ca == 0][1],
-      # 有害イベントなので、対照−治療が正なら観察上のbenefitが大きい。
-      observed_benefit =
-        bin_outcome[ca == 0][1] - bin_outcome[ca == 1][1],
-      age_difference = age[ca == 1][1] - age[ca == 0][1],
-      .groups = "drop"
-    )
-}
-
-# 異なるobserved benefitを持つ二つのmatched pairを比較し、予測順位の
-# concordance（予測tieは0.5）をc-for-benefitとして計算する。
-calculate_c_for_benefit <- function(
-  predicted_benefit,
-  observed_benefit
-) {
-  keep <- stats::complete.cases(predicted_benefit, observed_benefit)
-  predicted_benefit <- predicted_benefit[keep]
-  observed_benefit <- observed_benefit[keep]
-
-  observed_levels <- sort(unique(observed_benefit))
-  if (length(observed_levels) < 2L) {
-    return(NA_real_)
-  }
-
-  concordant_pairs <- 0
-  comparable_pairs <- 0
-  for (high_index in 2:length(observed_levels)) {
-    for (low_index in seq_len(high_index - 1L)) {
-      high_predictions <- predicted_benefit[
-        observed_benefit == observed_levels[high_index]
-      ]
-      low_predictions <- predicted_benefit[
-        observed_benefit == observed_levels[low_index]
-      ]
-      n_high <- length(high_predictions)
-      n_low <- length(low_predictions)
-      pooled_ranks <- rank(
-        c(high_predictions, low_predictions),
-        ties.method = "average"
-      )
-      # Wilcoxon rank-sum identity: prediction ties contribute 0.5.
-      concordant_pairs <- concordant_pairs +
-        sum(pooled_ranks[seq_len(n_high)]) - n_high * (n_high + 1) / 2
-      comparable_pairs <- comparable_pairs + n_high * n_low
-    }
-  }
-  concordant_pairs / comparable_pairs
-}
-
-make_external_c_for_benefit <- function(
-  external_benefit_pairs,
-  external_meta_learner_effects_file,
-  external_causal_forest_predictions,
-  n_bootstrap = 500L
-) {
-  meta_predictions <- utils::read.csv(
-    external_meta_learner_effects_file
-  ) |>
-    tibble::as_tibble()
-  predictions <- dplyr::bind_rows(
-    meta_predictions,
-    external_causal_forest_predictions |>
-      dplyr::mutate(learner = "Causal forest", .before = cate_rd)
-  )
-
-  pair_predictions <- predictions |>
-    dplyr::inner_join(
-      external_benefit_pairs,
-      by = c("id" = "treated_id")
-    ) |>
-    dplyr::rename(treated_cate_rd = cate_rd) |>
-    dplyr::select(-id) |>
-    dplyr::inner_join(
-      predictions |>
-        dplyr::select(id, learner, control_cate_rd = cate_rd),
-      by = c("control_id" = "id", "learner")
-    ) |>
-    dplyr::mutate(
-      # CATEはevent risk differenceなので、符号を反転してbenefit尺度にする。
-      predicted_benefit = -(treated_cate_rd + control_cate_rd) / 2
-    )
-
-  set.seed(44)
-  summary <- pair_predictions |>
-    dplyr::group_by(learner) |>
-    dplyr::group_modify(function(data, key) {
-      estimate <- calculate_c_for_benefit(
-        data$predicted_benefit,
-        data$observed_benefit
-      )
-      bootstrap_estimates <- replicate(n_bootstrap, {
-        index <- sample.int(nrow(data), replace = TRUE)
-        calculate_c_for_benefit(
-          data$predicted_benefit[index],
-          data$observed_benefit[index]
-        )
-      })
-
-      tibble::tibble(
-        n_pairs = nrow(data),
-        c_for_benefit = estimate,
-        std_error = stats::sd(bootstrap_estimates, na.rm = TRUE),
-        ci_lower = stats::quantile(
-          bootstrap_estimates,
-          0.025,
-          na.rm = TRUE,
-          names = FALSE
-        ),
-        ci_upper = stats::quantile(
-          bootstrap_estimates,
-          0.975,
-          na.rm = TRUE,
-          names = FALSE
-        )
-      )
-    }) |>
-    dplyr::ungroup()
-
-  list(
-    pairs = external_benefit_pairs,
-    pair_predictions = pair_predictions,
-    summary = summary
-  )
-}
-
 # 計算量を抑えつつ再現可能にするため、PDP・SHAP の対象と背景集団を固定する。
 make_explanation_samples <- function(policy_features) {
-  explain_features <- c("age", "lvef", "bnp")
+  explain_features <- c("age", "bmi", "bnp", "lvef")
   explain_data <- as.data.frame(policy_features)
 
   set.seed(42)
@@ -771,9 +486,10 @@ make_grf_pdp_data <- function(
   causal_forest_policy,
   explanation_samples
 ) {
-  explain_features <- c("age", "lvef", "bnp")
+  explain_features <- c("age", "bmi", "bnp", "lvef")
   feature_labels <- c(
     age = "Age",
+    bmi = "BMI",
     lvef = "LVEF (%)",
     bnp = "BNP"
   )

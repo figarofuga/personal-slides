@@ -17,7 +17,7 @@ warnings.filterwarnings(
 
 
 FEATURE_NAMES = ["age", "sexm1", "bmi", "hf", "bnp", "lvef"]
-EXPLAIN_FEATURES = ["age", "lvef", "bnp"]
+EXPLAIN_FEATURES = ["age", "bmi", "bnp", "lvef"]
 MODEL_NAMES = [
     "S-learner",
     "T-learner",
@@ -136,35 +136,28 @@ def _tidy_shap_values(explained, shap_values):
     return pd.concat(frames, ignore_index=True)
 
 
-def write_meta_explanation_data(
-    s_model_path,
-    t_model_path,
-    x_model_path,
-    r_model_path,
-    dr_model_path,
-    toy_data,
-    pdp_table_path,
-    shap_table_path,
+def write_meta_pdp_data(
+    s_model_path, t_model_path, x_model_path, r_model_path, dr_model_path,
+    toy_data, output_path,
 ):
-    """Compute reusable PDP and SHAP values and persist tidy CSV tables."""
-    models = _load_models(
-        [
-            s_model_path,
-            t_model_path,
-            x_model_path,
-            r_model_path,
-            dr_model_path,
-        ]
-    )
-    features = _features(toy_data)
+    """Cache PDP independently from SHAP (four continuous covariates)."""
+    models = _load_models([
+        s_model_path, t_model_path, x_model_path, r_model_path, dr_model_path
+    ])
+    output = _output_path(output_path)
+    _pdp_curves(models, _features(toy_data)).to_csv(output, index=False)
+    return str(output)
 
-    pdp = _pdp_curves(models, features)
-    explained, shap_values = _kernel_shap_values(models, features)
-    shap_table = _tidy_shap_values(explained, shap_values)
 
-    pdp_output = _output_path(pdp_table_path)
-    shap_output = _output_path(shap_table_path)
-    pdp.to_csv(pdp_output, index=False)
-    shap_table.to_csv(shap_output, index=False)
-
-    return [str(pdp_output), str(shap_output)]
+def write_meta_shap_data(
+    s_model_path, t_model_path, x_model_path, r_model_path, dr_model_path,
+    toy_data, output_path,
+):
+    """Cache Python Kernel SHAP; R GRF SHAP is an independent R target."""
+    models = _load_models([
+        s_model_path, t_model_path, x_model_path, r_model_path, dr_model_path
+    ])
+    explained, values = _kernel_shap_values(models, _features(toy_data))
+    output = _output_path(output_path)
+    _tidy_shap_values(explained, values).to_csv(output, index=False)
+    return str(output)

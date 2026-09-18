@@ -10,7 +10,8 @@ make_toy_data <- function(
   base_ses_probability = 0.625,
   base_log_bnp = log(150) - 0.90^2 / 2,
   target_ca_prevalence = 0.52,
-  target_ate_rd = -0.05
+  target_ate_rd = -0.05,
+  outcome_intercept = -7.55
 ) {
   stopifnot(
     n >= 2L,
@@ -223,9 +224,11 @@ make_toy_data <- function(
 
   bnp_risk <- as.numeric(scale(bnp_risk_raw))
 
-  # Outcome risk under no treatment
+  # Fixed intercept gives approximately 30% observed events in the development
+  # cohort. Use the same intercept externally to preserve case-mix differences.
+  # Prognostic coefficients and treatment-effect modifiers stay unchanged.
   linear_predictor_outcome_a0_raw <-
-    -2.0 +
+    outcome_intercept +
     0.70 * age_risk +
     0.90 * hf -
     0.85 * SES_z +

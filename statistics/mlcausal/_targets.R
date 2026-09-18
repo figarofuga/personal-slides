@@ -293,6 +293,7 @@ list(
           mlcausal_path("cache", "tables", "meta-uplift-curves.csv"),
           mlcausal_path("cache", "figures", "meta-gates.svg"),
           mlcausal_path("cache", "figures", "meta-validation.svg"),
+          mlcausal_path("cache", "validation", "internal"),
           n_groups = 5L,
           n_bootstrap = 1000L
         ),
@@ -347,6 +348,7 @@ list(
           mlcausal_path(
             "cache", "figures", "external-meta-validation.svg"
           ),
+          mlcausal_path("cache", "validation", "external"),
           n_groups = 5L,
           n_bootstrap = 1000L
         ),
@@ -369,14 +371,7 @@ list(
     causal_forest_policy,
     fit_causal_forest_policy(policy_features, toy_data)
   ),
-  tar_target(
-    external_causal_forest_predictions,
-    make_external_causal_forest_predictions(
-      causal_forest_bin,
-      test_policy_features,
-      test_toy_data
-    )
-  ),
+
   tar_target(
     external_evaluation_forest,
     fit_external_evaluation_forest(
@@ -384,31 +379,9 @@ list(
       test_toy_data
     )
   ),
-  tar_target(
-    external_rate_results,
-    make_external_rate_results(
-      external_evaluation_forest,
-      external_causal_forest_predictions
-    )
-  ),
-  tar_target(
-    external_grf_validation,
-    make_external_grf_validation(
-      external_causal_forest_predictions,
-      external_evaluation_forest,
-      external_rate_results,
-      n_groups = 5L
-    )
-  ),
-  tar_target(
-    external_c_for_benefit,
-    make_external_c_for_benefit(
-      make_external_benefit_pairs(test_toy_data),
-      external_meta_learner_effects_file,
-      external_causal_forest_predictions,
-      n_bootstrap = 500L
-    )
-  ),
+
+
+
 
   # GRF explanations are computed only with native R functions. -----------
   tar_target(explanation_samples, make_explanation_samples(policy_features)),
@@ -421,23 +394,35 @@ list(
     make_grf_cate_shap(causal_forest_policy, explanation_samples)
   ),
 
-  # Expensive meta-learner PDP and SHAP values are cached as tidy tables.
+  # PDP and Python SHAP have separate targets; both use the frozen external models.
   tar_target(
-    meta_explanation_data_files,
+    meta_pdp_data_file,
     {
       python_explanations_file
-      unlist(
-        write_meta_explanation_data(
-          s_learner_model_file,
-          t_learner_model_file,
-          x_learner_model_file,
-          r_learner_model_file,
-          dr_learner_model_file,
-          toy_data,
-          mlcausal_path("cache", "tables", "meta-pdp.csv"),
-          mlcausal_path("cache", "tables", "meta-shap.csv")
-        ),
-        use.names = FALSE
+      write_meta_pdp_data(
+        external_s_learner_model_file,
+        external_t_learner_model_file,
+        external_x_learner_model_file,
+        external_r_learner_model_file,
+        external_dr_learner_model_file,
+        test_toy_data,
+        mlcausal_path("cache", "tables", "meta-pdp.csv")
+      )
+    },
+    format = "file"
+  ),
+  tar_target(
+    meta_shap_data_file,
+    {
+      python_explanations_file
+      write_meta_shap_data(
+        external_s_learner_model_file,
+        external_t_learner_model_file,
+        external_x_learner_model_file,
+        external_r_learner_model_file,
+        external_dr_learner_model_file,
+        test_toy_data,
+        mlcausal_path("cache", "tables", "meta-shap.csv")
       )
     },
     format = "file"

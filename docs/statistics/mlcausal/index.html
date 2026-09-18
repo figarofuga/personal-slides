@@ -788,8 +788,8 @@ a residual |     1233.05 | 778.08 | [-294.98, 2761.07] |   1.58 | 0.113</code></
 <li>HTEをやる場合は最後の回帰が少し特殊</li>
 </ul>
 </section>
-<section id="どれがいいの" class="slide level2">
-<h2>どれがいいの？</h2>
+<section id="meta-learnerの比較" class="slide level2">
+<h2>meta-learnerの比較</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -875,8 +875,9 @@ a residual |     1233.05 | 778.08 | [-294.98, 2761.07] |   1.58 | 0.113</code></
 <section id="結局どれがいいの" class="slide level2">
 <h2>結局どれがいいの？</h2>
 <ul>
-<li>ATEの場合はmeta-learnerでも良いがCausal forestでも別に良い</li>
-<li>HTEの場合はCausal forestが現実的に最も良い</li>
+<li>いずれのモデルもATE, HTEを推定可能</li>
+<li>Meta-learnerの一番の問題は95%信頼区間が出せないこと(あるいは信頼がおけない)</li>
+<li>Robustさを出したり最初に比較をいしても良いが、HTEの研究なら<span style="color: red;font-size: 1.2em;"><strong>Causal forest</strong></span>が現実的に最も良い</li>
 </ul>
 </section></section>
 <section>
@@ -1327,11 +1328,12 @@ W_i - \hat{e}(X_i)
 <section id="信頼区間が出せるか" class="slide level2">
 <h2>95%信頼区間が出せるか？</h2>
 <ul>
-<li>Causal forestは出せるが通常のMLは信頼区間は出せない
+<li>Causal forestは出せるがmeta-learnerは信頼区間は出せない
 <ul>
-<li>機械学習モデルの代表的な弱点</li>
+<li>Bootstrapは可能だが、理論的な妥当性が乏しい</li>
 </ul></li>
-<li>いわゆる、AIPWやTMLEの局外パラメーターだけMLにして最終モデルを通常のGlmやSuperlearnerにする方法もある</li>
+<li><code>econml</code>の中だとLinearDML, LinearDRLearnerなどは信頼区間を出せるが少し仮定を置いている</li>
+<li>いわゆる、AIPWやTMLEの局外パラメーターだけMLにして最終モデルを通常のglmやSuperlearnerにする方法もある</li>
 </ul>
 </section>
 <section id="missingnessについて" class="slide level2">
@@ -1389,17 +1391,25 @@ W_i - \hat{e}(X_i)
 1     1    39     1  25.5     0     8    57           0     1           0
 2     2    62     0  18.8     0   718    44           0     1           1
 3     3    56     1  28.0     0   261    54           1     1           0
-4     4    70     0  17.7     0    79    48           0     0           1
-5     5    73     0  25.0     0   187    48           0     0           1
-6     6    58     1  27.7     0    29    54           1     1           1
+4     4    70     0  17.7     0    79    48           0     0           0
+5     5    73     0  25.0     0   187    48           0     0           0
+6     6    58     1  27.7     0    29    54           1     1           0
 # ℹ 1 more variable: bin_event_free &lt;int&gt;</code></pre>
 </div>
 </div>
-<!-- Todo: 説明を記載する -->
 <ul>
-<li>ATEは・・・・・・</li>
-<li>治療のPropensity scoreは・・・・・・・</li>
-<li>治療効果の式を書く</li>
+<li>治療のPropensity scoreは
+<ul>
+<li>男性/若いと受けやすい</li>
+<li>LVEFが低い/心不全既往があると受けやすい</li>
+<li>BMIが高いと受けやすく</li>
+<li>Social economic statusが良いと受けやすい</li>
+</ul></li>
+<li>非治療時のイベントリスクの線形予測子は（SESは標準化値） $$ \begin{aligned} _i ={}&amp; -7.55</li>
+<li>0.70,_i</li>
+<li>0.90,<em>i \ &amp;- 0.85,</em>{z,i}</li>
+<li>0.55,_i \ &amp;+ 0.04,_i</li>
+<li>0.10,_i \end{aligned} $$</li>
 </ul>
 </section>
 <section id="toy-dataの可視化" class="slide level2">
@@ -1410,11 +1420,273 @@ W_i - \hat{e}(X_i)
 <div id="tabset-6-1">
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/Visualize-ToyData2-1.svg" width="960"></p>
-</figure>
-</div>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style>
+.earrows {color:silver;font-size:11px;}
+
+fcap {
+ font-family: Verdana;
+ font-size: 12px;
+ color: MidnightBlue
+ }
+
+smg {
+ font-family: Verdana;
+ font-size: 10px;
+ color: &#808080;
+}
+
+hr.thinhr { margin-top: 0.15em; margin-bottom: 0.15em; }
+
+span.xscript {
+position: relative;
+}
+span.xscript sub {
+position: absolute;
+left: 0.1em;
+bottom: -1ex;
+}
+</style>
+
+<title>dplyr::mutate(dplyr::select(dplyr::rename(toy_data, any_of(rename_vec)), -id, -bin_event_free), dplyr::across(.cols = c(Male, HF, Palpitation, Ablation, Outcome), .fns = function(x) as.factor(x))) Descriptives</title>
+<font color="MidnightBlue"><div align="center"><span style="font-weight:bold">dplyr::mutate(dplyr::select(dplyr::rename(toy_data, any_of(rename_vec)), -id, -bin_event_free), dplyr::across(.cols = c(Male, HF, Palpitation, Ablation, Outcome), .fns = function(x) as.factor(x))) <br><br> 9  Variables   3000  Observations</span></div></font>
+<hr class="thinhr">
+<span style="font-weight:bold">Age</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAJcAAAANCAMAAACTvAxuAAAB41BMVEUAAAABAQECAgIDAwMEBAQGBgYHBwcICAgMDAwNDQ0ODg4VFRUWFhYYGBgZGRkbGxscHBwgICAjIyMlJSUmJiYnJycpKSkqKiorKyssLCwtLS0uLi4wMDAyMjI2NjY3Nzc4ODg5OTk7Ozs8PDw9PT0/Pz9AQEBCQkJDQ0NFRUVGRkZKSkpMTExOTk5PT09QUFBSUlJTU1NWVlZXV1dZWVlaWlpdXV1eXl5fX19gYGBhYWFjY2NnZ2doaGhpaWlqampra2tycnJzc3N1dXV2dnZ7e3t9fX1+fn6AgICCgoKDg4OGhoaHh4eIiIiJiYmLi4uNjY2Pj4+QkJCRkZGSkpKUlJSWlpaYmJiZmZmbm5ucnJyenp6goKCjo6OkpKSlpaWnp6eoqKipqamrq6utra2urq6xsbGysrKzs7O0tLS2tra4uLi7u7u9vb2/v7/BwcHCwsLExMTFxcXGxsbHx8fIyMjJycnLy8vNzc3Ozs7Pz8/Q0NDR0dHT09PU1NTV1dXX19fY2NjZ2dna2trb29vc3Nzd3d3f39/g4ODh4eHi4uLk5OTl5eXm5ubn5+fo6Ojq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHz8/P19fX29vb4+Pj5+fn6+vr7+/v+/v7///+YvnagAAACCklEQVQ4jcXV21NSURgF8EXHymsmmQUpFBFFmAYJXkoTQ6kQKoRSKUyKuHvphkSmeCIuUXKwIgJi/6ntpkeaRjjNsB7W47d/883es8HxjQ0R3jOqA8I3DiRpJyrFDLnurSRIfIf3SBrwnkBdN80pgd/YSVr1fkFKpSC7lQa6Kv6y9eIfl0y5BZe+lbpc2FLKuKanDXRFERjvINLH1a4kHF9ekDOWRri202F4qYuZ+avr1mHSMf7+XLZ+F1tzHoVpnVK5MT/UxjKTs1jpk/lhHWtmm8es8Mv6VjA7ybBtQ/NwPw+xr3Zc6toPqXVfb3zlA3fWZKXewX/ua4ah+/IifEX6/ZDThGK51pewX1fOR+ujPDV8rAiTHdl9ugZ7s7BT11lD/GTi/7uc2buCYiSxipBOWJdLqAthNeQgH0r5IPn8la8r/5PkiGfhG+wWFE4M83Rpj5cO2u8jL9XV5yqQzY0f519HbxOR4aUgphbvYY66urV8Xd0FWOawJ1bvyuPvPOSSL7fw+94lSfFTlYv+RQNOWiNX4+LQQzV32vKsKaqUvMU9A7gjumUE+ntYmIxIC9UeuDVdGUybEROpglgabeeYKfo/ShTrWJxo4VomFrGukERgm2K49tElBFWiGMzTyHRp3PCohWkYTWB7+gNYHunkcMOGTe21DcET/VHuwoM1eUJzmUqcA7R+ASmLu+vlDP2TAAAAAElFTkSuQmCC" alt="image"></div>
+<style>
+ .hmisctable729195 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable729195 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable729195 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable729195">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>pMedian</th><th>Gmd</th><th>.05</th><th>.10</th><th>.25</th><th>.50</th><th>.75</th><th>.90</th><th>.95</th></tr>
+ <tr><td>3000</td><td>0</td><td>54</td><td>0.999</td><td>61.23</td><td>61</td><td>9.364</td><td>47</td><td>51</td><td>56</td><td>61</td><td>67</td><td>72</td><td>75</td></tr>
+ </tbody></table>
+
+<span style="font-size: 85%;"><font color="MidnightBlue">lowest</font>&nbsp;: 34 36 37 38 39 ,  <font color="MidnightBlue">highest</font>: 84 85 86 87 89</span>
+<hr class="thinhr">
+<span style="font-weight:bold">Male</span>
+<style>
+ .hmisctable707113 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable707113 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable707113 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable707113">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th></tr>
+ <tr><td>3000</td><td>0</td><td>2</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value          0     1
+ Frequency   1196  1804
+ Proportion 0.399 0.601 </pre>
+
+<hr class="thinhr">
+<span style="font-weight:bold">BMI</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAJcAAAANCAMAAACTvAxuAAAB7FBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERESEhITExMUFBQWFhYXFxcZGRkaGhobGxscHBweHh4fHx8gICAhISEkJCQlJSUmJiYnJycoKCgpKSkqKiorKystLS0wMDAxMTEyMjIzMzM0NDQ1NTU2NjY3Nzc5OTk6Ojo7Ozs8PDxAQEBCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlKSkpMTExOTk5RUVFSUlJVVVVWVlZXV1dZWVlbW1tcXFxeXl5fX19gYGBiYmJjY2NkZGRlZWVmZmZnZ2dra2ttbW1vb29zc3N0dHR6enp7e3t9fX1/f3+BgYGCgoKFhYWGhoaHh4eKioqNjY2Ojo6QkJCWlpaXl5eYmJiZmZmbm5ucnJydnZ2enp6fn5+hoaGmpqanp6eoqKipqamrq6usrKytra2xsbGysrK0tLS1tbW6urq8vLy9vb2/v7/CwsLDw8PKysrLy8vMzMzPz8/S0tLU1NTV1dXX19fY2Nja2trb29vc3Nzd3d3e3t7f39/g4ODi4uLj4+Pm5ubn5+fp6enr6+vs7Ozt7e3v7+/w8PDx8fH09PT19fX29vb39/f5+fn6+vr7+/v8/Pz9/f3+/v7/////TC5gAAACJ0lEQVQ4jWOYTByobwNToUb+Anm2ROqhBDAsJg6oe5dULs6O95QLFvBm7E1odW0nUiOZgBh3tcxcvFjBTV8p1l7LU0icg43RiyGZgal/zuKGRYsb5w2cu3gUcyIk3PSETO3ltHi5OVgYGRkcGRgyWEsZqicx5i6umUZfd00061+8eLpkWRQzm7gAH9Bd6tqCAmB3MYAAI4MlQ74wQ+Z85ni6umtSDUPl4g4uhhgGJjZOHj47DSEhIWR3gUA6A4NrFINDu4NDWWJ+aHhP6+LFWQ7UcVc7DpDL6M6gLMzEwMDCwMTKwcXDL8DPz8/Hy83JjuQuFzDJ5CnApSNlrW1grtmeqCSAy0SSAI7w6vQrhlsOCS8BISzhBZXnAskryIiLq5R68vB5hFIjvLCKVooyBJDgLlaQvCBIXliEh5OVuXvx4pmFi6jsroXTKnRMUO0l3l0CfEB3MbGn1BUwKHB2LV68KHUKxe6aOnXx4nwLTUMxH3R7SXUXMLOKAsVFpeKtGPQay6f0dQUXkeGuphmtExaEuGgaBZqp8nKxszBR7i4kwMOoxs/HY2PolBYZUQ2MjirfsFm9WbMmpS6AuWE2OMrnzkdxF7Au4pEWFJEXExAUFAQawMnOzIBuLxsnNy8/UF5AgJ+Hix3DXYysHCB5AZA80N2s6P5iYGHnAusXlHCeHCLIxsTJxsDCzFA7uVm2BlQXCsYZJ012kJUPCvKcHG0zOUUXKAYAuwIyNLMB4cQAAAAASUVORK5CYII=" alt="image"></div>
+<style>
+ .hmisctable618383 {
+ border: none;
+ font-size: 74%;
+ }
+ .hmisctable618383 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable618383 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable618383">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>pMedian</th><th>Gmd</th><th>.05</th><th>.10</th><th>.25</th><th>.50</th><th>.75</th><th>.90</th><th>.95</th></tr>
+ <tr><td>3000</td><td>0</td><td>3000</td><td>1</td><td>22.01</td><td>21.83</td><td>4.832</td><td>15.77</td><td>16.72</td><td>18.92</td><td>21.55</td><td>24.84</td><td>27.61</td><td>29.70</td></tr>
+ </tbody></table>
+
+<span style="font-size: 85%;"><font color="MidnightBlue">lowest</font>&nbsp;: 12.0153 12.0225 12.1073 12.2122 12.4624 ,  <font color="MidnightBlue">highest</font>: 38.1784 38.2074 38.7381 39.2263 39.9565</span>
+<hr class="thinhr">
+<span style="font-weight:bold">HF</span>
+<style>
+ .hmisctable128289 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable128289 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable128289 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable128289">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th></tr>
+ <tr><td>3000</td><td>0</td><td>2</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value         0    1
+ Frequency  2281  719
+ Proportion 0.76 0.24 </pre>
+
+<hr class="thinhr">
+<span style="font-weight:bold">BNP</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAJcAAAANCAMAAACTvAxuAAABWVBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsNDQ0ODg4PDw8TExMWFhYXFxcYGBgaGhobGxscHBwdHR0hISEiIiIjIyMmJiYnJycrKyssLCwtLS0vLy80NDQ2NjY9PT0+Pj5AQEBFRUVHR0dISEhLS0tMTExTU1NYWFhbW1tfX19kZGRmZmZnZ2dsbGxtbW1vb29xcXFzc3N0dHR3d3d5eXl6enp7e3t8fHx+fn6AgICDg4OEhISFhYWPj4+SkpKTk5OUlJSampqbm5uenp6goKChoaGioqKkpKSxsbG0tLS5ubm7u7u8vLy9vb2+vr7Dw8PExMTFxcXIyMjJycnPz8/R0dHS0tLT09PU1NTX19fa2trc3Nzd3d3f39/g4ODi4uLj4+Pl5eXn5+fp6enr6+vs7Ozw8PDy8vL29vb4+Pj5+fn7+/v8/Pz9/f3///+1pkESAAABLUlEQVQ4jc3VV1PCQBSG4W8TEtCIJkSw994LqCgi9opdURGjYlsLKvn/FyYbx0kcb53Ne3Fmdq+e2ZmdA2q334AL6qtg2rUA96avYq58BEid8aZ4Yq64AASmeVM82a5zEEBoXedtcWe7DpkL0jNvjCsYhrHtuIiePS0YPsn1XgRRpY+WeL+Uk8dljfrGS94klu3ac7mAuYPVV94qx6V5XCEFFU3x1AL7Be88XQGPyxkiYmpipCM0sHaUm03uFo4/8jePD1vFndJd2bx9+/xHUvnFdlm76C/XN866FAmRIBFZhCRCRo0gVxFJqY4FK6NhXQ9Hgpqm6ZM97Xp/c51aO7g5lVkapzPpleG2k1zXNZ1P0mL3xFjn1c/qSyzSoQ1Kl0fZKdv79Gs1plVrfAEvC/kKQfmSAAAAAABJRU5ErkJggg==" alt="image"></div>
+<style>
+ .hmisctable850958 {
+ border: none;
+ font-size: 74%;
+ }
+ .hmisctable850958 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable850958 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable850958">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>pMedian</th><th>Gmd</th><th>.05</th><th>.10</th><th>.25</th><th>.50</th><th>.75</th><th>.90</th><th>.95</th></tr>
+ <tr><td>3000</td><td>0</td><td>597</td><td>1</td><td>172.8</td><td>127</td><td>182.2</td><td> 18.0</td><td> 28.0</td><td> 51.0</td><td>102.5</td><td>205.2</td><td>395.0</td><td>589.1</td></tr>
+ </tbody></table>
+
+<span style="font-size: 85%;"><font color="MidnightBlue">lowest</font>&nbsp;:    4    5    6    7    8 ,  <font color="MidnightBlue">highest</font>: 1552 1597 1652 1759 2000</span>
+<hr class="thinhr">
+<span style="font-weight:bold">LVEF</span><div style="float: right; text-align: right;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAIsAAAANCAMAAACuLm0IAAAB9VBMVEUAAAABAQEEBAQFBQUGBgYJCQkMDAwNDQ0QEBARERESEhITExMUFBQVFRUWFhYXFxcYGBgaGhogICAhISEjIyMkJCQlJSUnJycoKCgqKiorKyssLCwtLS0vLy8wMDAzMzM0NDQ3Nzc4ODg5OTk6Ojo8PDw9PT0+Pj4/Pz9AQEBCQkJERERHR0dISEhMTExNTU1OTk5SUlJUVFRVVVVWVlZZWVlaWlpbW1tdXV1eXl5fX19gYGBiYmJkZGRlZWVmZmZnZ2doaGhpaWlqampsbGxtbW1ubm5xcXFzc3N1dXV2dnZ3d3d4eHh5eXl6enp7e3t/f3+AgICEhISFhYWGhoaJiYmKioqLi4uMjIyNjY2Pj4+Tk5OVlZWWlpabm5ucnJyfn5+goKChoaGioqKlpaWmpqapqamqqqqsrKytra2urq6wsLCysrK0tLS1tbW4uLi5ubm6urq7u7u9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjLy8vMzMzNzc3Ozs7Q0NDR0dHS0tLV1dXW1tbZ2dna2trb29vc3Nzd3d3e3t7g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fr6+vs7Ozu7u7v7+/w8PDz8/P19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///9YvYoXAAACEUlEQVQ4jb3V21NSURQG8HWALooZYaZdNKMLiZeiNKMIClMyI9RSCoywY2RAVzDooiFouiNIzFYhaUeF9XcGU9ObDhyy72Xv2Q/f/OZ72YClR9Pw5xJbRI0rd85JnGJ6gEpPi4q+LZFuiPZZSGrNPSTB+b1xtuie0izpeXrtzluazlBNO1V25izZK+GcZQbG1h+t0cp/srw00DUlnavNW1Qtfy1psP22vIXgO1kidllYT2ytRfhIVil1VlJ7zUaWIPi9EHkA8fuy5YIGEmURwjQs/VmYZQTidkgN7y7EwkTExk32QtQkYR1y1lrF1PWsXs2qWpm8g0lMUegNwa0n4BgF/h54ByFwE8JdHHvFs/fjm9YWs4swmMpOZCd2LjohaYN0Mbv0cWTeRcaDdFW7yS4FSwIrUfC9gckxmBFl6S6n83vp1OF819IPsZaEsHZifAEeRsDrh2DJFpOZjupFWS64aftQCuxxGPlHluNNdOAsGXl6ltzYInyi5c/kNlNmlV48pYsWusFTeTdxfVtg2WOkHZbMIU/2zgLNZTOPV3MWxMixD/79zK2Yvy37el2OOgVeUmOjCuuaUdmGZQbkemIwMAWOAPAe8LkgZIfpfkiYpaivQG11/j9q0GC1Fiv0KDUnoH8a7CFw+cDDQ8ABUwMQ6+HQUIZtSmyuwyMnsfY0KnS4resLWGfhboQbfQ4exF+c7HHJncZhCQAAAABJRU5ErkJggg==" alt="image"></div>
+<style>
+ .hmisctable687132 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable687132 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable687132 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable687132">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th><th>Info</th><th>Mean</th><th>pMedian</th><th>Gmd</th><th>.05</th><th>.10</th><th>.25</th><th>.50</th><th>.75</th><th>.90</th><th>.95</th></tr>
+ <tr><td>3000</td><td>0</td><td>46</td><td>0.999</td><td>49.32</td><td>49.5</td><td>8.919</td><td>36</td><td>39</td><td>44</td><td>49</td><td>55</td><td>60</td><td>62</td></tr>
+ </tbody></table>
+
+<span style="font-size: 85%;"><font color="MidnightBlue">lowest</font>&nbsp;: 24 25 26 27 28 ,  <font color="MidnightBlue">highest</font>: 65 66 67 68 69</span>
+<hr class="thinhr">
+<span style="font-weight:bold">Palpitation</span>
+<style>
+ .hmisctable318905 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable318905 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable318905 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable318905">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th></tr>
+ <tr><td>3000</td><td>0</td><td>2</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value          0     1
+ Frequency   2034   966
+ Proportion 0.678 0.322 </pre>
+
+<hr class="thinhr">
+<span style="font-weight:bold">Ablation</span>
+<style>
+ .hmisctable170354 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable170354 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable170354 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable170354">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th></tr>
+ <tr><td>3000</td><td>0</td><td>2</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value          0     1
+ Frequency   1481  1519
+ Proportion 0.494 0.506 </pre>
+
+<hr class="thinhr">
+<span style="font-weight:bold">Outcome</span>
+<style>
+ .hmisctable182211 {
+ border: none;
+ font-size: 85%;
+ }
+ .hmisctable182211 td {
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ }
+ .hmisctable182211 th {
+ color: MidnightBlue;
+ text-align: center;
+ padding: 0 1ex 0 1ex;
+ font-weight: normal;
+ }
+ </style>
+ <table data-quarto-disable-processing="true" class="hmisctable182211">
+ <tbody><tr><th>n</th><th>missing</th><th>distinct</th></tr>
+ <tr><td>3000</td><td>0</td><td>2</td></tr>
+ </tbody></table>
+
+<pre style="font-size:85%;"> Value          0     1
+ Frequency   2096   904
+ Proportion 0.699 0.301 </pre>
+
+<hr class="thinhr">
 </div>
 </div>
 </div>
@@ -1440,14 +1712,14 @@ W_i - \hat{e}(X_i)
 <div id="tabset-7-1">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 6
-      n  ate_rd ite_rd_sd ate_rd_se ci_lower ci_upper
-  &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1  3000 -0.0500     0.109   0.00199  -0.0539  -0.0461</code></pre>
+<pre><code># A tibble: 1 × 2
+      n `RD 95%CI`            
+  &lt;int&gt; &lt;chr&gt;                 
+1  3000 -0.05[-0.054 - -0.046]</code></pre>
 </div>
 </div>
 <ul>
-<li>集団全体では、<code>ca = 1</code> によりイベントリスクが平均5 percentage points低下する</li>
+<li>集団全体では、<code>ca = 1</code> によりイベントリスクが平均5 percent points低下する</li>
 <li>HTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する</li>
 </ul>
 </div>
@@ -1461,6 +1733,7 @@ W_i - \hat{e}(X_i)
 </div>
 </div>
 </div>
+<!-- Todo: Hmiscとqreportで作る -->
 </div>
 <div id="tabset-7-3">
 <div class="cell">
@@ -1489,7 +1762,6 @@ W_i - \hat{e}(X_i)
 </section>
 <section id="meta-learners-1" class="slide level2">
 <h2>Meta-learners</h2>
-<!-- Todo: スクリプトが見えるようにする -->
 <div class="panel-tabset">
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">S-learner</a></li><li><a href="#tabset-8-2">T-learner</a></li><li><a href="#tabset-8-3">X-learner</a></li><li><a href="#tabset-8-4">R-learner</a></li><li><a href="#tabset-8-5">DR-learner</a></li></ul>
 <div class="tab-content">
@@ -1557,15 +1829,15 @@ W_i - \hat{e}(X_i)
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>    id      cate_rd
-1 1363 -0.001827896
-2 1100  0.018982351
-3 1792 -0.153240204
-4  418 -0.206095099
-5 1885  0.034924030
-6  841 -0.035404503</code></pre>
+1  844 -0.158507407
+2 2962 -0.089760900
+3  591  0.018236868
+4 1071 -0.051064193
+5 1280  0.004456153
+6 2984  0.007386910</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.042</code></pre>
+<pre><code>ATE in test set (risk difference): -0.047</code></pre>
 </div>
 </div>
 <ul>
@@ -1600,16 +1872,16 @@ W_i - \hat{e}(X_i)
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>      id     cate_rd
-601 1363  0.01993090
-602 1100  0.11421780
-603 1792 -0.20991486
-604  418 -0.20878077
-605 1885  0.09759994
-606  841 -0.07793111</code></pre>
+<pre><code>      id      cate_rd
+601  844 -0.366873562
+602 2962 -0.060811996
+603  591  0.017260257
+604 1071  0.279686093
+605 1280  0.013552464
+606 2984 -0.004789183</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.060</code></pre>
+<pre><code>ATE in test set (risk difference): -0.048</code></pre>
 </div>
 </div>
 <ul>
@@ -1667,16 +1939,16 @@ W_i - \hat{e}(X_i)
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>       id      cate_rd
-1201 1363 -0.004382382
-1202 1100  0.053857017
-1203 1792 -0.130338478
-1204  418 -0.140574203
-1205 1885  0.276027241
-1206  841 -0.186706256</code></pre>
+<pre><code>       id       cate_rd
+1201  844 -0.3453601779
+1202 2962 -0.1379575937
+1203  591  0.0595690955
+1204 1071  0.1459459263
+1205 1280 -0.0413900195
+1206 2984  0.0002099974</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.054</code></pre>
+<pre><code>ATE in test set (risk difference): -0.042</code></pre>
 </div>
 </div>
 <ul>
@@ -1737,15 +2009,15 @@ W_i - \hat{e}(X_i)
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>       id      cate_rd
-1801 1363 -0.007040136
-1802 1100  0.377039475
-1803 1792 -0.202397527
-1804  418 -0.193101050
-1805 1885  0.280654481
-1806  841 -0.170613123</code></pre>
+1801  844 -0.393444797
+1802 2962  0.030637595
+1803  591 -0.025004028
+1804 1071  0.078752496
+1805 1280  0.056748913
+1806 2984 -0.008724799</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.054</code></pre>
+<pre><code>ATE in test set (risk difference): -0.032</code></pre>
 </div>
 </div>
 <ul>
@@ -1832,24 +2104,24 @@ W_i - \hat{e}(X_i)
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>       id     cate_rd
-2401 1363 -0.04567561
-2402 1100  0.31857558
-2403 1792 -0.16734811
-2404  418 -0.03650512
-2405 1885  0.26865817
-2406  841 -0.13191743</code></pre>
+<pre><code>       id      cate_rd
+2401  844 -0.341203781
+2402 2962  0.146618699
+2403  591  0.182928592
+2404 1071 -0.003370782
+2405 1280  0.055323033
+2406 2984  0.168132478</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ATE in test set (risk difference): -0.064</code></pre>
+<pre><code>ATE in test set (risk difference): -0.023</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     learner ate_rd cate_sd
-1  S-learner -0.042   0.075
-2  T-learner -0.060   0.162
-3  X-learner -0.054   0.155
-4  R-learner -0.054   0.212
-5 DR-learner -0.064   0.260</code></pre>
+1  S-learner -0.047   0.090
+2  T-learner -0.048   0.150
+3  X-learner -0.042   0.145
+4  R-learner -0.032   0.213
+5 DR-learner -0.023   0.275</code></pre>
 </div>
 </div>
 <ul>
@@ -1881,126 +2153,94 @@ W_i - \hat{e}(X_i)
 </div>
 <p>開発コホートとは独立に <span class="math inline">\(n=1000\)</span> を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。</p>
 </section>
-<section id="c-for-benefit外部検証" class="slide level2">
-<h2>C-for-benefit（外部検証）</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  learner       n_pairs c_for_benefit std_error ci_lower ci_upper
-  &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 Causal forest     377         0.557     0.028    0.504    0.606
-2 DR-learner        377         0.466     0.032    0.4      0.525
-3 R-learner         377         0.473     0.029    0.415    0.526
-4 S-learner         377         0.539     0.028    0.484    0.595
-5 T-learner         377         0.537     0.03     0.473    0.591
-6 X-learner         377         0.51      0.03     0.449    0.569</code></pre>
-</div>
-</div>
-<div class="small">
-<p><code>test_toy_data</code>内でageだけを使って治療例と対照例を1:1 matchingする。観察benefit（対照のイベント−治療のイベント）が異なる二つのpairを比較し、予測benefitの順位が一致した割合をc-for-benefitとする。予測tieは0.5として扱い、95% CIはmatched pair単位のbootstrapで求める。</p>
-</div>
-</section>
-<section id="meta-learnerのcalibration-discrimination外部検証" class="slide level2">
-<h2>Meta-learnerのCalibration / Discrimination（外部検証）</h2>
-
-<img data-src="cache/figures/external-meta-validation.svg" style="width:100.0%" class="r-stretch"><div class="small">
+<section id="meta-learnerの評価test-dataset" class="slide level2">
+<h2>Meta-learnerの評価：test dataset</h2>
+<p>5つのモデルを開発コホート全例で学習して固定し、独立な<code>test_toy_data</code>で比較する。</p>
 <ul>
-<li>5モデルは開発コホート全例で再学習して固定し、独立な<code>test_toy_data</code>で評価</li>
-<li>EconML <code>DRTester</code>が開発コホートで学習した共通nuisance modelを外部コホートに適用し、doubly robust outcomeを構成</li>
-<li>Calibration <span class="math inline">\(R^2\)</span> は1に近いほど良いが、通常のoutcome predictionの <span class="math inline">\(R^2\)</span> ではなく、CATEのgroup calibration指標</li>
-<li>DiscriminationはAUTOC / QINI（0より大きいほど、治療効果の順位付け能力が高い）で評価</li>
+<li>学習・評価用nuisance model・bootstrapはtargetsで計算する</li>
+<li>各モデルの評価済み<code>DRTester</code> objectもjoblibで保存する</li>
+<li>各objectの<code>EvaluationResults</code>からGATE・TOC・Qini・AUTOCのraw tableをモデル別CSVに保存する</li>
+<li><strong>利益 = イベントリスクの減少量</strong>に統一：評価outcomeは<code>1 - bin_outcome</code>、予測利益は<code>-model.effect(X)</code></li>
+<li>以下の図は保存した評価値からQmd内で描画する</li>
 </ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="co"># targetsが保存した評価済みDRTesterを再利用できる。</span></span>
+<span id="cb31-2"><a></a><span class="im">import</span> joblib</span>
+<span id="cb31-3"><a></a></span>
+<span id="cb31-4"><a></a>tester <span class="op">=</span> joblib.load(<span class="st">"cache/validation/external/dr_learner-drtester.joblib"</span>)</span>
+<span id="cb31-5"><a></a>result <span class="op">=</span> tester.res</span>
+<span id="cb31-6"><a></a>result.summary()          <span class="co"># BLP / calibration / AUTOC / QINI</span></span>
+<span id="cb31-7"><a></a>result.cal.plot_data_dict[<span class="dv">1</span>]  <span class="co"># GATEのraw DataFrame</span></span>
+<span id="cb31-8"><a></a>result.toc.curves[<span class="dv">1</span>]          <span class="co"># TOCのraw DataFrame</span></span>
+<span id="cb31-9"><a></a>result.qini.curves[<span class="dv">1</span>]         <span class="co"># Qiniのraw DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="meta-learnerのgate外部検証" class="slide level2">
-<h2>Meta-learnerのGATE（外部検証）</h2>
+<section id="meta-learnerのgatetest-dataset" class="slide level2">
+<h2>Meta-learnerのGATE（test dataset）</h2>
 
-<img data-src="cache/figures/external-meta-gates.svg" style="width:100.0%" class="r-stretch"><div class="small">
-<p>開発コホートの予測分布で定めたCATE五分位を外部コホートに適用し、各群の予測CATE平均とdoubly robust GATE（95% CI）を比較する。破線は完全なgroup calibrationを示す。</p>
-</div>
+<img data-src="index_files/figure-revealjs/show-meta-gates-1.svg" width="1152" class="r-stretch"><p>開発コホートの予測利益の五分位で群を定め、testデータの予測平均とDR GATEを比較する。誤差棒は点ごとの95% CI。</p>
 </section>
-<section id="causal-forest" class="slide level2">
-<h2>Causal forest</h2>
+<section id="meta-learnerのtocqinitest-dataset" class="slide level2">
+<h2>Meta-learnerのTOC・Qini（test dataset）</h2>
+
+<img data-src="index_files/figure-revealjs/show-meta-uplift-curves-1.svg" width="960" class="r-stretch"><p>予測利益が大きい側から選択する。EconMLの横軸は開発コホートの分位点に基づく名目割合で、testデータでの実際の選択割合とは異なる場合がある。帯は点ごとの95% CI。</p>
+</section>
+<section id="meta-learnerのautoc比較test-dataset" class="slide level2">
+<h2>Meta-learnerのAUTOC比較（test dataset）</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/causal-forest-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       control     treated
-[1,] 0.1332748 -0.05555335
-[2,] 0.9917551  1.16579378
-[3,] 0.3179463 -0.10799861
-[4,] 1.0082375  0.99549650
-[5,] 1.0393671  0.83895821
-[6,] 0.4256145  1.46803683</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/causal-forest-2.svg" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>policy_tree object 
-Tree depth:  2 
-Actions:  1: control 2: treated 
-Variable splits: 
-(1) split_variable: bnp  split_value: 67 
-  (2) split_variable: lvef  split_value: 52 
-    (4) * action: 2 
-    (5) * action: 1 
-  (3) split_variable: bnp  split_value: 74 
-    (6) * action: 1 
-    (7) * action: 2 </code></pre>
-</div>
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-0af9807c774dfe4d195c" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-0af9807c774dfe4d195c">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" bnp <= 67 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" lvef <= 52 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n2 [label=\" bnp <= 74 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="grfの外部検証" class="slide level2">
-<h2>GRFの外部検証</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 4
-  metric                          estimate std_error p_value
-  &lt;chr&gt;                              &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-1 Mean forest calibration            2.20      0.726   0.002
-2 Differential forest calibration    1.32      0.351   0    
-3 Grouped calibration R2             0.289    NA      NA    
-4 AUTOC                              0.081     0.023   0    
-5 QINI                               0.025     0.007   0.001</code></pre>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">learner</th>
+<th style="text-align: right;">autoc</th>
+<th style="text-align: right;">autoc_se</th>
+<th style="text-align: right;">qini</th>
+<th style="text-align: right;">qini_se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">S-learner</td>
+<td style="text-align: right;">0.136</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.051</td>
+<td style="text-align: right;">0.015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">T-learner</td>
+<td style="text-align: right;">0.029</td>
+<td style="text-align: right;">0.047</td>
+<td style="text-align: right;">0.012</td>
+<td style="text-align: right;">0.015</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">X-learner</td>
+<td style="text-align: right;">0.115</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.012</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R-learner</td>
+<td style="text-align: right;">0.109</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">0.032</td>
+<td style="text-align: right;">0.011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DR-learner</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.013</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 </div>
-<img data-src="index_files/figure-revealjs/show-grf-validation-1.svg" style="width:100.0%" class="r-stretch"><div class="small">
-<p>開発コホートで学習したcausal forestを固定して外部CATEを予測する。外部コホート内でcross-fittingした評価用forestの<code>grf::get_scores()</code>からDR scoreを作り、固定予測のBLPとgroup calibrationを評価する。評価用forest自身のCATE予測は使用しない。</p>
-</div>
-</section>
-<section id="grfのdiscrimination-rate" class="slide level2">
-<h2>GRFのDiscrimination (RATE)</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/show-grf-rate-1.svg" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/show-grf-rate-2.svg" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<img data-src="index_files/figure-revealjs/show-meta-validation-1.svg" width="864" class="r-stretch"><p>AUTOCはTOC、QINI係数はQini曲線の面積に対応する。ここではEconML既定の5〜95%の分位点グリッドによる推定値を示す。GRFとは既定の積分グリッドが異なるため、数値をそのまま同一視しない。</p>
 </section>
 <section id="econmlモデルを説明するpython" class="slide level2">
 <h2>EconMLモデルを説明する（Python）</h2>
@@ -2032,48 +2272,18 @@ Variable splits:
 </div>
 </div>
 <div class="small">
-<p>PDPとKernel SHAPの数値計算はPythonで行い、targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。</p>
-</div>
-</section>
-<section id="grfモデルを説明するr" class="slide level2">
-<h2>GRFモデルを説明する（R）</h2>
-<div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">PDP</a></li><li><a href="#tabset-10-2">Global SHAP</a></li></ul>
-<div class="tab-content">
-<div id="tabset-10-1">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/plot-grf-pdp-1.svg" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-10-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/plot-grf-shap-1.svg" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p>開発コホート全例で学習した5モデルを固定し、testデータを参照集団として説明する。PDP（Age・BMI・BNP・LVEF）とKernel SHAPは別々のPython関数・targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。</p>
 </div>
 </section>
 <section id="econmlモデルをsingle-treeで説明" class="slide level2">
 <h2>EconMLモデルをSingle Treeで説明</h2>
 <div class="small">
-<p>各ノードの <code>value</code> は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じtest setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。</p>
+<p>このSingle Treeは前半で学習したinternal splitのモデルを説明する。各ノードの <code>value</code> は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じinternal test setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。</p>
 </div>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">S-learner</a></li><li><a href="#tabset-11-2">T-learner</a></li><li><a href="#tabset-11-3">X-learner</a></li><li><a href="#tabset-11-4">R-learner</a></li><li><a href="#tabset-11-5">DR-learner</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">S-learner</a></li><li><a href="#tabset-10-2">T-learner</a></li><li><a href="#tabset-10-3">X-learner</a></li><li><a href="#tabset-10-4">R-learner</a></li><li><a href="#tabset-10-5">DR-learner</a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1">
+<div id="tabset-10-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2084,7 +2294,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-10-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2095,7 +2305,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-11-3">
+<div id="tabset-10-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2106,7 +2316,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-11-4">
+<div id="tabset-10-4">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2117,7 +2327,7 @@ Variable splits:
 </div>
 </div>
 </div>
-<div id="tabset-11-5">
+<div id="tabset-10-5">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2131,11 +2341,448 @@ Variable splits:
 </div>
 </div>
 </section>
+<section id="causal-forest学習データでの診断" class="slide level2">
+<h2>Causal forest：学習データでの診断</h2>
+<pre><code>Sverdrup E, Petukhova M, Wager S. Estimating treatment effect heterogeneity in psychiatry: A review and tutorial with causal forests. Int J Methods Psychiatr Res. 2025;34(2):e70015. doi:10.1002/mpr.70015</code></pre>
+<p>このやり方をまねる</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/causal-forest-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/causal-forest-2.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Best linear fit using forest predictions (on held-out data)
+as well as the mean forest prediction as regressors, along
+with one-sided heteroskedasticity-robust (HC3) SEs:
+
+                               Estimate Std. Error t value    Pr(&gt;t)    
+mean.forest.prediction          0.99135    0.24186  4.0989 2.130e-05 ***
+differential.forest.prediction  1.04334    0.14507  7.1919 4.017e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/shap-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          control      treated
+[1,]  0.009072925 -0.005697594
+[2,]  0.923624888  1.446712804
+[3,]  0.024952538 -0.007246572
+[4,] -0.056970088  0.337517670
+[5,] -0.056830342  0.127805451
+[6,]  0.009730544 -0.012729685</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/shap-2.svg" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>policy_tree object 
+Tree depth:  2 
+Actions:  1: control 2: treated 
+Variable splits: 
+(1) split_variable: lvef  split_value: 53 
+  (2) split_variable: bmi  split_value: 17.6407 
+    (4) * action: 1 
+    (5) * action: 2 
+  (3) split_variable: age  split_value: 55 
+    (6) * action: 2 
+    (7) * action: 1 </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item" id="htmlwidget-e2c24cf7de94cf55cb26" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-e2c24cf7de94cf55cb26">{"x":{"diagram":"digraph nodes { \n node [shape=box] ;\n0 [label=\" lvef <= 53 \"] ;\n0 -> 1 [labeldistance=2.5, labelangle=45, headlabel=\"True\"];\n0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel=\"False\"]\n1 [label=\" bmi <= 17.64 \"] ;\n1 -> 3  ;\n1 -> 4  ;\n3  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n4  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n2 [label=\" age <= 55 \"] ;\n2 -> 5  ;\n2 -> 6  ;\n5  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" CA \"];\n6  [shape=box,style=filled,color=\".7 .3 1.0\" , label=\" Control \"];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="grftest-datasetへの予測" class="slide level2">
+<h2>GRF：test datasetへの予測</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">library</span>(grf)</span>
+<span id="cb36-2"><a></a></span>
+<span id="cb36-3"><a></a><span class="co"># 学習済みモデルを固定し、学習時と同じ列順でtestデータを渡す。</span></span>
+<span id="cb36-4"><a></a>X_test_grf <span class="ot">&lt;-</span> test_toy_data <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">all_of</span>(<span class="fu">colnames</span>(causal_forest_bin<span class="sc">$</span>X.orig))) <span class="sc">|&gt;</span></span>
+<span id="cb36-6"><a></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb36-7"><a></a>tau_test_grf <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">predict</span>(</span>
+<span id="cb36-8"><a></a>  causal_forest_bin, <span class="at">newdata =</span> <span class="fu">as.matrix</span>(X_test_grf)</span>
+<span id="cb36-9"><a></a>)<span class="sc">$</span>predictions)</span>
+<span id="cb36-10"><a></a>benefit_test_grf <span class="ot">&lt;-</span> <span class="sc">-</span>tau_test_grf</span>
+<span id="cb36-11"><a></a></span>
+<span id="cb36-12"><a></a><span class="co"># 評価用forestの学習だけをtargetsに保存している。</span></span>
+<span id="cb36-13"><a></a><span class="co"># Y = 1 - bin_outcomeなので、DR scoreは利益の尺度。</span></span>
+<span id="cb36-14"><a></a><span class="co"># このforest自身のCATEで順位付けはしない。</span></span>
+<span id="cb36-15"><a></a>dr_benefit_test <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(grf<span class="sc">::</span><span class="fu">get_scores</span>(external_evaluation_forest))</span>
+<span id="cb36-16"><a></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(benefit_test_grf) <span class="sc">==</span> <span class="fu">length</span>(dr_benefit_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>評価用forestはtestデータ内のOOB予測からnuisanceを推定する。評価対象は開発データで学習した<code>causal_forest_bin</code>の固定予測であり、testデータで再学習した効果予測ではない。</p>
+</section>
+<section id="grfのgatetest-dataset" class="slide level2">
+<h2>GRFのGATE（test dataset）</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="co"># testのoutcomeを使わず、開発データのOOB予測で五分位境界を定める。</span></span>
+<span id="cb37-2"><a></a>benefit_train_grf <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">as.numeric</span>(<span class="fu">predict</span>(causal_forest_bin)<span class="sc">$</span>predictions)</span>
+<span id="cb37-3"><a></a>gate_breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fu">unique</span>(<span class="fu">as.numeric</span>(<span class="fu">quantile</span>(</span>
+<span id="cb37-4"><a></a>  benefit_train_grf, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="fl">0.2</span>)</span>
+<span id="cb37-5"><a></a>))), <span class="cn">Inf</span>)</span>
+<span id="cb37-6"><a></a>grf_gates <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb37-7"><a></a>  <span class="at">group =</span> <span class="fu">cut</span>(benefit_test_grf, <span class="at">breaks =</span> gate_breaks, <span class="at">labels =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb37-8"><a></a>  <span class="at">predicted_benefit =</span> benefit_test_grf,</span>
+<span id="cb37-9"><a></a>  <span class="at">dr_benefit =</span> dr_benefit_test</span>
+<span id="cb37-10"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb37-11"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">|&gt;</span></span>
+<span id="cb37-12"><a></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb37-13"><a></a>    <span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(), <span class="at">predicted_gate =</span> <span class="fu">mean</span>(predicted_benefit),</span>
+<span id="cb37-14"><a></a>    <span class="at">gate =</span> <span class="fu">mean</span>(dr_benefit), <span class="at">gate_se =</span> <span class="fu">sd</span>(dr_benefit) <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb37-15"><a></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb37-16"><a></a>  )</span>
+<span id="cb37-17"><a></a></span>
+<span id="cb37-18"><a></a><span class="fu">ggplot</span>(grf_gates, <span class="fu">aes</span>(predicted_gate, gate)) <span class="sc">+</span></span>
+<span id="cb37-19"><a></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"grey55"</span>) <span class="sc">+</span></span>
+<span id="cb37-20"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> gate <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> gate_se, <span class="at">ymax =</span> gate <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> gate_se), <span class="at">width =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb37-21"><a></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#4E79A7"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#4E79A7"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb37-22"><a></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"G"</span>, group)), <span class="at">nudge_x =</span> <span class="fl">0.002</span>) <span class="sc">+</span></span>
+<span id="cb37-23"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mean predicted benefit"</span>, <span class="at">y =</span> <span class="st">"DR GATE: risk reduction"</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/grf-GATE-1.svg" width="768" class="r-stretch"></section>
+<section id="grfのrateautoc-qinitest-dataset" class="slide level2">
+<h2>GRFのRATE：AUTOC / QINI（test dataset）</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="co"># RATEは順位付けの評価指標の総称。重みを変えるとAUTOC / QINIになる。</span></span>
+<span id="cb38-2"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb38-3"><a></a>grf_autoc <span class="ot">&lt;-</span> grf<span class="sc">::</span><span class="fu">rank_average_treatment_effect</span>(</span>
+<span id="cb38-4"><a></a>  external_evaluation_forest, <span class="at">priorities =</span> benefit_test_grf,</span>
+<span id="cb38-5"><a></a>  <span class="at">target =</span> <span class="st">"AUTOC"</span>, <span class="at">q =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">R =</span> <span class="dv">500</span></span>
+<span id="cb38-6"><a></a>)</span>
+<span id="cb38-7"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb38-8"><a></a>grf_qini <span class="ot">&lt;-</span> grf<span class="sc">::</span><span class="fu">rank_average_treatment_effect</span>(</span>
+<span id="cb38-9"><a></a>  external_evaluation_forest, <span class="at">priorities =</span> benefit_test_grf,</span>
+<span id="cb38-10"><a></a>  <span class="at">target =</span> <span class="st">"QINI"</span>, <span class="at">q =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">R =</span> <span class="dv">500</span></span>
+<span id="cb38-11"><a></a>)</span>
+<span id="cb38-12"><a></a></span>
+<span id="cb38-13"><a></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb38-14"><a></a>  <span class="at">metric =</span> <span class="fu">c</span>(<span class="st">"AUTOC"</span>, <span class="st">"QINI"</span>),</span>
+<span id="cb38-15"><a></a>  <span class="at">estimate =</span> <span class="fu">c</span>(grf_autoc<span class="sc">$</span>estimate, grf_qini<span class="sc">$</span>estimate),</span>
+<span id="cb38-16"><a></a>  <span class="at">se =</span> <span class="fu">c</span>(grf_autoc<span class="sc">$</span>std.err, grf_qini<span class="sc">$</span>std.err)</span>
+<span id="cb38-17"><a></a>) <span class="sc">|&gt;</span></span>
+<span id="cb38-18"><a></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">lower =</span> estimate <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se, <span class="at">upper =</span> estimate <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se) <span class="sc">|&gt;</span></span>
+<span id="cb38-19"><a></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">metric</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">se</th>
+<th style="text-align: right;">lower</th>
+<th style="text-align: right;">upper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AUTOC</td>
+<td style="text-align: right;">0.102</td>
+<td style="text-align: right;">0.023</td>
+<td style="text-align: right;">0.056</td>
+<td style="text-align: right;">0.147</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">QINI</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.017</td>
+<td style="text-align: right;">0.045</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="grfのtoc-qini-plottest-dataset" class="slide level2">
+<h2>GRFのTOC / Qini plot（test dataset）</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># plot(grf_qini)もTOCを描くため、Qini曲線はq × TOCとして明示する。</span></span>
+<span id="cb39-2"><a></a><span class="co"># 最初のpriorityが入力した予測順位（残りは比較用の系列）。</span></span>
+<span id="cb39-3"><a></a>grf_toc <span class="ot">&lt;-</span> grf_autoc<span class="sc">$</span>TOC <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(priority <span class="sc">==</span> dplyr<span class="sc">::</span><span class="fu">first</span>(priority))</span>
+<span id="cb39-5"><a></a>grf_curves <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(</span>
+<span id="cb39-6"><a></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(grf_toc, q, <span class="at">curve =</span> <span class="st">"TOC"</span>, <span class="at">value =</span> estimate, <span class="at">se =</span> std.err),</span>
+<span id="cb39-7"><a></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(grf_toc, q, <span class="at">curve =</span> <span class="st">"Qini"</span>, <span class="at">value =</span> q <span class="sc">*</span> estimate, <span class="at">se =</span> q <span class="sc">*</span> std.err)</span>
+<span id="cb39-8"><a></a>)</span>
+<span id="cb39-9"><a></a><span class="fu">ggplot</span>(grf_curves, <span class="fu">aes</span>(q, value)) <span class="sc">+</span></span>
+<span id="cb39-10"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"grey55"</span>) <span class="sc">+</span></span>
+<span id="cb39-11"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> value <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se, <span class="at">ymax =</span> value <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se),</span>
+<span id="cb39-12"><a></a>              <span class="at">fill =</span> <span class="st">"#4E79A7"</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb39-13"><a></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#4E79A7"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb39-14"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> curve, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb39-15"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Top fraction ranked by predicted benefit"</span>, <span class="at">y =</span> <span class="st">"Gain over random targeting"</span>) <span class="sc">+</span></span>
+<span id="cb39-16"><a></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/show-grf-rate-1.svg" width="960" class="r-stretch"></section>
+<section id="grfのc-for-benefittest-dataset" class="slide level2">
+<h2>GRFのC-for-benefit（test dataset）</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># 1. testデータ内で、予測benefitが近い治療例と対照例を1:1 matching。</span></span>
+<span id="cb40-2"><a></a><span class="co"># 予測benefitは正ほど有益。outcomeはmatchingに使わない。</span></span>
+<span id="cb40-3"><a></a>cfb_data <span class="ot">&lt;-</span> test_toy_data <span class="sc">|&gt;</span></span>
+<span id="cb40-4"><a></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">predicted_benefit =</span> benefit_test_grf)</span>
+<span id="cb40-5"><a></a>matching_estimand <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">sum</span>(cfb_data<span class="sc">$</span>ca <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">&lt;=</span> <span class="fu">sum</span>(cfb_data<span class="sc">$</span>ca <span class="sc">==</span> <span class="dv">0</span>)) {</span>
+<span id="cb40-6"><a></a>  <span class="st">"ATT"</span></span>
+<span id="cb40-7"><a></a>} <span class="cf">else</span> {</span>
+<span id="cb40-8"><a></a>  <span class="st">"ATC"</span></span>
+<span id="cb40-9"><a></a>}</span>
+<span id="cb40-10"><a></a></span>
+<span id="cb40-11"><a></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb40-12"><a></a>cfb_matching <span class="ot">&lt;-</span> MatchIt<span class="sc">::</span><span class="fu">matchit</span>(</span>
+<span id="cb40-13"><a></a>  ca <span class="sc">~</span> predicted_benefit,</span>
+<span id="cb40-14"><a></a>  <span class="at">data =</span> cfb_data,</span>
+<span id="cb40-15"><a></a>  <span class="at">method =</span> <span class="st">"nearest"</span>,</span>
+<span id="cb40-16"><a></a>  <span class="at">distance =</span> <span class="st">"mahalanobis"</span>,</span>
+<span id="cb40-17"><a></a>  <span class="at">estimand =</span> matching_estimand,</span>
+<span id="cb40-18"><a></a>  <span class="at">ratio =</span> <span class="dv">1</span>,</span>
+<span id="cb40-19"><a></a>  <span class="at">replace =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb40-20"><a></a>  <span class="at">m.order =</span> <span class="st">"closest"</span></span>
+<span id="cb40-21"><a></a>)</span>
+<span id="cb40-22"><a></a></span>
+<span id="cb40-23"><a></a><span class="co"># 2. 患者2人を1行にまとめる。ここからの比較単位はmatched pair。</span></span>
+<span id="cb40-24"><a></a>cfb_pairs <span class="ot">&lt;-</span> MatchIt<span class="sc">::</span><span class="fu">match_data</span>(cfb_matching) <span class="sc">|&gt;</span></span>
+<span id="cb40-25"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(subclass) <span class="sc">|&gt;</span></span>
+<span id="cb40-26"><a></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb40-27"><a></a>    <span class="at">treated_id =</span> id[ca <span class="sc">==</span> <span class="dv">1</span>],</span>
+<span id="cb40-28"><a></a>    <span class="at">control_id =</span> id[ca <span class="sc">==</span> <span class="dv">0</span>],</span>
+<span id="cb40-29"><a></a>    <span class="at">observed_benefit =</span> bin_outcome[ca <span class="sc">==</span> <span class="dv">0</span>] <span class="sc">-</span> bin_outcome[ca <span class="sc">==</span> <span class="dv">1</span>],</span>
+<span id="cb40-30"><a></a>    <span class="at">predicted_benefit =</span> <span class="fu">mean</span>(predicted_benefit),</span>
+<span id="cb40-31"><a></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb40-32"><a></a>  )</span>
+<span id="cb40-33"><a></a><span class="fu">head</span>(cfb_pairs) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">subclass</th>
+<th style="text-align: right;">treated_id</th>
+<th style="text-align: right;">control_id</th>
+<th style="text-align: right;">observed_benefit</th>
+<th style="text-align: right;">predicted_benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">758</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.080</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">768</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-0.013</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">266</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.010</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">146</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-0.050</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">560</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0.070</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">667</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.042</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>少ない側の群を基準に、予測benefitのMahalanobis距離で非復元matchingする。観測benefitは「対照のイベント − 治療のイベント」、予測benefitはペアの2人の予測利益の平均。</p>
+</section>
+<section id="grfのc-for-benefit一致率と信頼区間" class="slide level2">
+<h2>GRFのC-for-benefit：一致率と信頼区間</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># 3. 二つのmatched pairを選び、観測benefitと予測benefitの順序を比べる。</span></span>
+<span id="cb41-2"><a></a>c_for_benefit <span class="ot">&lt;-</span> <span class="cf">function</span>(observed_benefit, predicted_benefit) {</span>
+<span id="cb41-3"><a></a>  <span class="fu">stopifnot</span>(</span>
+<span id="cb41-4"><a></a>    <span class="fu">length</span>(observed_benefit) <span class="sc">==</span> <span class="fu">length</span>(predicted_benefit),</span>
+<span id="cb41-5"><a></a>    <span class="fu">length</span>(observed_benefit) <span class="sc">&gt;=</span> <span class="dv">2</span>L,</span>
+<span id="cb41-6"><a></a>    <span class="fu">all</span>(<span class="fu">is.finite</span>(observed_benefit)),</span>
+<span id="cb41-7"><a></a>    <span class="fu">all</span>(<span class="fu">is.finite</span>(predicted_benefit))</span>
+<span id="cb41-8"><a></a>  )</span>
+<span id="cb41-9"><a></a></span>
+<span id="cb41-10"><a></a>  observed_levels <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(observed_benefit))</span>
+<span id="cb41-11"><a></a>  <span class="cf">if</span> (<span class="fu">length</span>(observed_levels) <span class="sc">&lt;</span> <span class="dv">2</span>L) {</span>
+<span id="cb41-12"><a></a>    <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
+<span id="cb41-13"><a></a>  }</span>
+<span id="cb41-14"><a></a></span>
+<span id="cb41-15"><a></a>  total_score <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb41-16"><a></a>  number_of_comparisons <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb41-17"><a></a></span>
+<span id="cb41-18"><a></a>  <span class="co"># 観測benefitが高い群を、それより低い全ての群と比較する。</span></span>
+<span id="cb41-19"><a></a>  <span class="cf">for</span> (higher_level <span class="cf">in</span> observed_levels[<span class="sc">-</span><span class="dv">1</span>]) {</span>
+<span id="cb41-20"><a></a>    predictions_in_higher_group <span class="ot">&lt;-</span> predicted_benefit[</span>
+<span id="cb41-21"><a></a>      observed_benefit <span class="sc">==</span> higher_level</span>
+<span id="cb41-22"><a></a>    ]</span>
+<span id="cb41-23"><a></a>    predictions_in_lower_groups <span class="ot">&lt;-</span> predicted_benefit[</span>
+<span id="cb41-24"><a></a>      observed_benefit <span class="sc">&lt;</span> higher_level</span>
+<span id="cb41-25"><a></a>    ]</span>
+<span id="cb41-26"><a></a></span>
+<span id="cb41-27"><a></a>    <span class="co"># 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。</span></span>
+<span id="cb41-28"><a></a>    score_for_each_pair <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
+<span id="cb41-29"><a></a>      predictions_in_higher_group,</span>
+<span id="cb41-30"><a></a>      <span class="cf">function</span>(higher_prediction) {</span>
+<span id="cb41-31"><a></a>        <span class="fu">sum</span>(higher_prediction <span class="sc">&gt;</span> predictions_in_lower_groups) <span class="sc">+</span></span>
+<span id="cb41-32"><a></a>          <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">sum</span>(higher_prediction <span class="sc">==</span> predictions_in_lower_groups)</span>
+<span id="cb41-33"><a></a>      },</span>
+<span id="cb41-34"><a></a>      <span class="fu">numeric</span>(<span class="dv">1</span>)</span>
+<span id="cb41-35"><a></a>    )</span>
+<span id="cb41-36"><a></a></span>
+<span id="cb41-37"><a></a>    total_score <span class="ot">&lt;-</span> total_score <span class="sc">+</span> <span class="fu">sum</span>(score_for_each_pair)</span>
+<span id="cb41-38"><a></a>    number_of_comparisons <span class="ot">&lt;-</span> number_of_comparisons <span class="sc">+</span></span>
+<span id="cb41-39"><a></a>      <span class="fu">length</span>(predictions_in_higher_group) <span class="sc">*</span></span>
+<span id="cb41-40"><a></a>      <span class="fu">length</span>(predictions_in_lower_groups)</span>
+<span id="cb41-41"><a></a>  }</span>
+<span id="cb41-42"><a></a></span>
+<span id="cb41-43"><a></a>  total_score <span class="sc">/</span> number_of_comparisons</span>
+<span id="cb41-44"><a></a>}</span>
+<span id="cb41-45"><a></a></span>
+<span id="cb41-46"><a></a><span class="co"># boot()は、この関数のindicesに復元抽出した行番号を渡す。</span></span>
+<span id="cb41-47"><a></a>bootstrap_c_for_benefit <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb41-48"><a></a>  sampled_pairs <span class="ot">&lt;-</span> data[indices, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb41-49"><a></a></span>
+<span id="cb41-50"><a></a>  <span class="fu">c_for_benefit</span>(</span>
+<span id="cb41-51"><a></a>    <span class="at">observed_benefit =</span> sampled_pairs<span class="sc">$</span>observed_benefit,</span>
+<span id="cb41-52"><a></a>    <span class="at">predicted_benefit =</span> sampled_pairs<span class="sc">$</span>predicted_benefit</span>
+<span id="cb41-53"><a></a>  )</span>
+<span id="cb41-54"><a></a>}</span>
+<span id="cb41-55"><a></a></span>
+<span id="cb41-56"><a></a><span class="co"># 4. matched pairを単位に500回bootstrapする。</span></span>
+<span id="cb41-57"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb41-58"><a></a>cfb_bootstrap <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot</span>(</span>
+<span id="cb41-59"><a></a>  <span class="at">data =</span> cfb_pairs,</span>
+<span id="cb41-60"><a></a>  <span class="at">statistic =</span> bootstrap_c_for_benefit,</span>
+<span id="cb41-61"><a></a>  <span class="at">R =</span> <span class="dv">500</span></span>
+<span id="cb41-62"><a></a>)</span>
+<span id="cb41-63"><a></a></span>
+<span id="cb41-64"><a></a><span class="co"># t0が元データの点推定、tが各bootstrap標本の推定値。</span></span>
+<span id="cb41-65"><a></a>cfb_estimate <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cfb_bootstrap<span class="sc">$</span>t0)</span>
+<span id="cb41-66"><a></a>cfb_ci_result <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot.ci</span>(</span>
+<span id="cb41-67"><a></a>  cfb_bootstrap,</span>
+<span id="cb41-68"><a></a>  <span class="at">conf =</span> <span class="fl">0.95</span>,</span>
+<span id="cb41-69"><a></a>  <span class="at">type =</span> <span class="st">"perc"</span></span>
+<span id="cb41-70"><a></a>)</span>
+<span id="cb41-71"><a></a>cfb_ci <span class="ot">&lt;-</span> cfb_ci_result<span class="sc">$</span>percent[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb41-72"><a></a></span>
+<span id="cb41-73"><a></a>cfb_summary <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb41-74"><a></a>  <span class="at">n_pairs =</span> <span class="fu">nrow</span>(cfb_pairs),</span>
+<span id="cb41-75"><a></a>  <span class="at">c_for_benefit =</span> cfb_estimate,</span>
+<span id="cb41-76"><a></a>  <span class="at">lower_95 =</span> <span class="fu">unname</span>(cfb_ci[<span class="dv">1</span>]),</span>
+<span id="cb41-77"><a></a>  <span class="at">upper_95 =</span> <span class="fu">unname</span>(cfb_ci[<span class="dv">2</span>]),</span>
+<span id="cb41-78"><a></a>  <span class="at">valid_bootstraps =</span> <span class="fu">sum</span>(<span class="fu">is.finite</span>(cfb_bootstrap<span class="sc">$</span>t))</span>
+<span id="cb41-79"><a></a>)</span>
+<span id="cb41-80"><a></a>cfb_summary <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">n_pairs</th>
+<th style="text-align: right;">c_for_benefit</th>
+<th style="text-align: right;">lower_95</th>
+<th style="text-align: right;">upper_95</th>
+<th style="text-align: right;">valid_bootstraps</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">457</td>
+<td style="text-align: right;">0.588</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">0.645</td>
+<td style="text-align: right;">500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>予測順位の一致を1、不一致を0、予測が同値なら0.5として平均する。CIは固定したモデル・matchingに条件づけた500回のpair bootstrapであり、再学習・再matchingの不確実性を含まない。</p>
+</section>
+<section id="grfモデルを説明するr" class="slide level2">
+<h2>GRFモデルを説明する（R）</h2>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">PDP</a></li><li><a href="#tabset-11-2">Global SHAP</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/plot-grf-pdp-1.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-11-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/plot-grf-shap-1.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="実務において-1" class="slide level2">
 <h2>実務において</h2>
 <ul>
 <li>Rの<code>grf</code> packageが最も医学論文によい</li>
-<li>C-for-benefitは<code>EpiFOrsk</code> packgeで可能</li>
+<li>C-for-benefitは<code>MatchIt</code>でペアを作り、観測benefitと予測benefitの順位一致率として計算できる</li>
 <li>RCTのGATESは<code>evalITR</code> packageで可能だが、正直LLMに手書きで書かせて良いと思う</li>
 <li>pythonなら<code>econML</code>が良いがSurvival analysisはなし</li>
 </ul>
@@ -2151,7 +2798,7 @@ Variable splits:
  collate  C.UTF-8
  ctype    C.UTF-8
  tz       Asia/Tokyo
- date     2026-09-16
+ date     2026-09-18
  pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)
  quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto
 
@@ -2160,6 +2807,7 @@ Variable splits:
  AIPW            * 0.6.9.3    2026-04-12 [1] CRAN (R 4.5.3)
  arg               0.1.1      2026-05-27 [1] CRAN (R 4.5.3)
  backports         1.5.1      2026-04-03 [1] CRAN (R 4.5.3)
+ base64enc         0.1-6      2026-02-02 [1] CRAN (R 4.5.2)
  base64url         1.4        2018-05-14 [1] CRAN (R 4.5.1)
  bayestestR        0.18.1     2026-05-24 [1] CRAN (R 4.5.3)
  boot              1.3-32     2025-08-29 [1] CRAN (R 4.5.1)
@@ -2168,7 +2816,10 @@ Variable splits:
  checkmate         2.3.3      2025-08-18 [1] CRAN (R 4.5.1)
  chk               0.10.0     2025-01-24 [1] CRAN (R 4.5.1)
  cli               3.6.6      2026-04-09 [1] CRAN (R 4.5.3)
+ cluster           2.1.8.2    2026-02-05 [1] CRAN (R 4.5.2)
+ cobalt          * 4.6.3      2026-05-30 [1] CRAN (R 4.5.3)
  codetools         0.2-20     2024-03-31 [1] CRAN (R 4.5.1)
+ colorspace        2.1-2      2025-09-22 [1] CRAN (R 4.5.1)
  curl              7.1.0      2026-04-22 [1] CRAN (R 4.5.3)
  dagitty         * 0.3-4      2023-12-07 [1] CRAN (R 4.5.1)
  data.table        1.17.8     2025-07-10 [1] CRAN (R 4.5.1)
@@ -2181,6 +2832,7 @@ Variable splits:
  fastmap           1.2.0      2024-05-15 [1] CRAN (R 4.5.1)
  forcats         * 1.0.1      2025-09-25 [1] CRAN (R 4.5.1)
  foreach         * 1.5.2      2022-02-02 [1] CRAN (R 4.5.1)
+ foreign           0.8-91     2026-01-29 [1] CRAN (R 4.5.2)
  Formula           1.2-5      2023-02-24 [1] CRAN (R 4.5.1)
  future            1.70.0     2026-03-14 [1] CRAN (R 4.5.3)
  future.apply      1.20.2     2026-02-20 [1] CRAN (R 4.5.2)
@@ -2201,7 +2853,9 @@ Variable splits:
  gridExtra         2.3.1      2026-06-25 [1] CRAN (R 4.5.3)
  gtable            0.3.6      2024-10-25 [1] CRAN (R 4.5.1)
  here            * 1.0.2      2025-09-15 [1] CRAN (R 4.5.1)
+ Hmisc           * 5.2-6      2026-06-19 [1] CRAN (R 4.5.3)
  hms               1.1.4      2025-10-17 [1] CRAN (R 4.5.1)
+ htmlTable         2.5.0      2026-04-22 [1] CRAN (R 4.5.3)
  htmltools         0.5.9      2025-12-04 [1] CRAN (R 4.5.2)
  htmlwidgets       1.6.4      2023-12-06 [1] CRAN (R 4.5.1)
  igraph            2.3.3      2026-06-26 [1] CRAN (R 4.5.3)
@@ -2215,14 +2869,19 @@ Variable splits:
  libcoin         * 1.0-13     2026-06-04 [1] CRAN (R 4.5.3)
  lifecycle         1.0.5      2026-01-08 [1] CRAN (R 4.5.2)
  listenv           1.0.0      2026-06-22 [1] CRAN (R 4.5.3)
+ lmtest            0.9-40     2022-03-21 [1] CRAN (R 4.5.1)
  lubridate       * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)
  magrittr          2.0.5      2026-04-04 [1] CRAN (R 4.5.3)
  marginaleffects   1.0.0      2026-09-03 [1] CRAN (R 4.5.3)
  MASS              7.3-65     2025-02-28 [1] CRAN (R 4.5.1)
  MatchIt         * 4.7.2      2025-05-30 [1] CRAN (R 4.5.1)
  Matrix            1.7-5      2026-03-21 [1] CRAN (R 4.5.3)
+ MatrixModels      0.5-4      2025-03-26 [1] CRAN (R 4.5.1)
  memoise           2.0.1      2021-11-26 [1] CRAN (R 4.5.1)
+ multcomp          1.4-30     2026-03-09 [1] CRAN (R 4.5.2)
  mvtnorm         * 1.4-1      2026-06-06 [1] CRAN (R 4.5.3)
+ nlme              3.1-169    2026-03-27 [1] CRAN (R 4.5.3)
+ nnet              7.3-20     2025-01-01 [1] CRAN (R 4.5.1)
  nnls            * 1.6        2024-10-23 [1] CRAN (R 4.5.1)
  numDeriv          2016.8-1.1 2019-06-06 [1] CRAN (R 4.5.1)
  otel              0.2.0      2025-08-29 [1] CRAN (R 4.5.1)
@@ -2233,12 +2892,15 @@ Variable splits:
  pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.5.1)
  png               0.1-9      2026-03-15 [1] CRAN (R 4.5.3)
  policytree      * 1.2.5      2026-08-04 [1] CRAN (R 4.5.3)
+ polspline         1.1.25     2024-05-10 [1] CRAN (R 4.5.1)
  polyclip          1.10-7     2024-07-23 [1] CRAN (R 4.5.1)
  prettyunits       1.2.0      2023-09-24 [1] CRAN (R 4.5.1)
  processx          3.9.0      2026-04-22 [1] CRAN (R 4.5.3)
  progressr         1.0.0      2026-07-04 [1] CRAN (R 4.5.3)
  ps                1.9.3      2026-04-20 [1] CRAN (R 4.5.3)
  purrr           * 1.2.2      2026-04-10 [1] CRAN (R 4.5.3)
+ qreport         * 1.1-0      2025-10-02 [1] CRAN (R 4.5.3)
+ quantreg          6.1        2025-03-10 [1] CRAN (R 4.5.1)
  R6                2.6.1      2025-02-15 [1] CRAN (R 4.5.1)
  RColorBrewer      1.1-3      2022-04-03 [1] CRAN (R 4.5.1)
  Rcpp              1.1.1-1.1  2026-04-24 [1] CRAN (R 4.5.3)
@@ -2246,6 +2908,7 @@ Variable splits:
  reticulate        1.47.0     2026-09-03 [1] CRAN (R 4.5.3)
  rlang             1.3.0      2026-07-05 [1] CRAN (R 4.5.3)
  rmarkdown         2.31       2026-03-26 [1] CRAN (R 4.5.3)
+ rms               8.1-1      2026-02-18 [1] CRAN (R 4.5.2)
  rpart             4.1.27     2026-03-27 [1] CRAN (R 4.5.3)
  rprojroot         2.1.1      2025-08-26 [1] CRAN (R 4.5.1)
  Rsolnp            2.0.1      2025-06-30 [1] CRAN (R 4.5.1)
@@ -2257,11 +2920,13 @@ Variable splits:
  sessioninfo     * 1.2.4      2026-06-04 [1] CRAN (R 4.5.3)
  shape             1.4.6.1    2024-02-23 [1] CRAN (R 4.5.1)
  shapviz         * 0.10.4     2026-08-31 [1] CRAN (R 4.5.3)
+ SparseM           1.84-2     2024-07-17 [1] CRAN (R 4.5.1)
  stringi           1.8.7      2025-03-27 [1] CRAN (R 4.5.2)
  stringr         * 1.6.0      2025-11-04 [1] CRAN (R 4.5.2)
  SuperLearner    * 2.0-41     2026-08-21 [1] CRAN (R 4.5.3)
  survival          3.8-6      2026-01-16 [1] CRAN (R 4.5.2)
  targets         * 1.12.0     2026-02-09 [1] CRAN (R 4.5.2)
+ TH.data           1.1-5      2025-11-17 [1] CRAN (R 4.5.2)
  tibble          * 3.3.1      2026-01-11 [1] CRAN (R 4.5.2)
  tidygraph         1.3.0      2023-12-18 [1] CRAN (R 4.5.1)
  tidyr           * 1.3.2      2025-12-19 [1] CRAN (R 4.5.2)
@@ -2360,6 +3025,13 @@ Thomas, Laine E, Fan Li, and Michael J Pencina. 2020. <span>“Overlap Weighting
 岩波データサイエンス刊行委員会, ed. 2016. <em>岩波データサイエンス Vol. 3: 特集 因果推論–実世界のデータから因果を読む</em>. 岩波書店.
 </div>
 </div>
+<!-- memo: 
+
+PDP, heatmapを推奨している論文もあり
+
+    Shiba K, Inoue K. Harnessing causal forests for epidemiologic research: key considerations. Am J Epidemiol. 2024;193(6):813-818. doi:10.1093/aje/kwae003
+  
+ -->
 
 
 </section></section>

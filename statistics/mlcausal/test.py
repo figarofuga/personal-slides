@@ -1,60 +1,73 @@
 # %%
-import pandas as pd
 from pathlib import Path
+import joblib
+import pandas as pd
 
-try:
-    # python test.py として通常実行した場合
-    here = Path(__file__).resolve().parent
-except NameError:
-    # VS Code Interactive / Jupyter cell の場合
-    here = Path.cwd()
+mlcausal_dir = Path(__file__).resolve().parent
+model_dir = mlcausal_dir / "cache" / "models"
 
-csv_path = here / "toy_data.csv"
+dr_learner = joblib.load(
+    model_dir / "external-dr-learner.joblib"
+)
 
-toy_data = pd.read_csv(csv_path)
+train_toy_data = pd.read_csv(mlcausal_dir / "toy_data.csv")
+test_toy_data = pd.read_csv(mlcausal_dir / "test_toy_data.csv")
 
+FEATURE_NAMES = ["age", "sexm1", "bmi", "hf", "bnp", "lvef"]
 
+Xtrain = train_toy_data[FEATURE_NAMES].to_numpy()
+Dtrain = train_toy_data["ca"]
+Ytrain = train_toy_data["bin_outcome"]
 
-# Main imports
-# Helper imports
+Xval = test_toy_data[FEATURE_NAMES].to_numpy()
+Dval = test_toy_data["ca"]
+Yval = test_toy_data["bin_outcome"]
+
+print(type(dr_learner))
+
+class BenefitEffectAdapter:
+    def __init__(self, estimator):
+        self.estimator = estimator
+
+    def effect(self, X, T0=0, T1=1):
+        return -np.asarray(
+            self.estimator.effect(X, T0=T0, T1=T1)
+        ).reshape(-1)
+    
+# %%
 import numpy as np
 import pandas as pd
-from econml.metalearners import XLearner
-from numpy.random import binomial, multivariate_normal, normal, uniform
-from sklearn.ensemble import GradientBoostingRegressor, RandomForestClassifier
-from sklearn.model_selection import train_test_split
+import scipy.stats as st
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingRegressor
 
+from econml.dr import DRLearner
 
-X = toy_data.loc[:, ["age", "sexm1", "bmi", "hf", "bnp", "lvef"]]
-y = toy_data["afeqt_os"]
-T = toy_data["ca"]
-n = toy_data.shape[0]
+from econml.validate.drtester import DRTester
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=T
+model_regression = GradientBoostingRegressor(random_state=0)
+model_propensity = RandomForestClassifier(random_state=0)
+
+# Initialize DRTester and fit/predict nuisance models
+dr_tester = DRTester(
+    model_regression=model_regression,
+    model_propensity=model_propensity,
+    cate=BenefitEffectAdapter(dr_learner),
+).fit_nuisance(
+    Xval=Xval,
+    Dval=Dval.to_numpy(),
+    yval=1 - Yval.to_numpy(),
+    Xtrain=Xtrain,
+    Dtrain=Dtrain.to_numpy(),
+    ytrain=1 - Ytrain.to_numpy(),
 )
+res_dr = dr_tester.evaluate_all(
+    Xval, Xtrain,
+    n_groups=5,
+    n_bootstrap=1000)
+res_dr.summary()
 
-T_train = T.loc[y_train.index]
-T_test = T.loc[y_test.index]
+gate_df = res_dr.cal.plot_data_dict[1].copy()
 
-# モデルの構築
-models = GradientBoostingRegressor(max_depth=3, random_state=0)
-propensity_model = RandomForestClassifier()
-X_learner = XLearner(models=models, propensity_model=propensity_model)
-X_learner.fit(y_train, T_train, X=X_train)
-
+print(gate_df)
 
 # %%
-
-from econml.cate_interpreter import SingleTreeCateInterpreter
-
-intrp = SingleTreeCateInterpreter(
-    include_model_uncertainty=False, max_depth=2, min_samples_leaf=10
-)
-# We interpret the CATE model's behavior based on the features used for heterogeneity
-intrp.interpret(X_learner, X)
-# Plot the tree
-intrp.plot(feature_names=["age", "sexm1", "bmi", "hf", "bnp", "lvef"], fontsize=8)
-
-# %%
-
