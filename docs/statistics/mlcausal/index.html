@@ -401,7 +401,7 @@ Comparison: 1 - 0</code></pre>
 <section id="特殊な手法" class="slide level2 scrollable">
 <h2>特殊な手法</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Augmented Inverse Probability Weighting (AIPW)</a></li><li><a href="#tabset-2-2">Orthogonalization</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Augmented Inverse Probability Weighting (AIPW)</a></li><li><a href="#tabset-2-2">TMLE</a></li><li><a href="#tabset-2-3">Orthogonalization</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
 <div class="cell">
@@ -458,7 +458,8 @@ Comparison: 1 - 0</code></pre>
 </ul></li>
 <li>Doubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない</li>
 </ul>
-<h3 id="tmle">TMLE</h3>
+</div>
+<div id="tabset-2-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>lalonde <span class="ot">&lt;-</span> MatchIt<span class="sc">::</span>lalonde</span>
 <span id="cb6-2"><a></a>W <span class="ot">&lt;-</span> lalonde[<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"educ"</span>, <span class="st">"race"</span>, <span class="st">"married"</span>, <span class="st">"nodegree"</span>, <span class="st">"re74"</span>, <span class="st">"re75"</span>)]</span>
@@ -529,7 +530,7 @@ A_i=1\mid W_i
 <li>簡単に言うと強くなったAIPW</li>
 </ul>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-2-3">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(MatchIt)</span>
 <span id="cb8-2"><a></a><span class="fu">library</span>(dplyr)</span>
@@ -710,7 +711,11 @@ a residual |     1233.05 | 778.08 | [-294.98, 2761.07] |   1.58 | 0.113</code></
 </ul></li>
 <li>Overfittingの問題
 <ul>
-<li><span style="color: red;font-size: 1.2em;"><strong>モデルの評価</strong></span>が必須</li>
+<li><span style="color: red;font-size: 1.2em;"><strong>モデルの評価</strong></span>が必須
+<ul>
+<li>Riskの高低を正確に出せるかを見るDiscrimination</li>
+<li>Riskの絶対値が正しいかをみるCalibrationが基本</li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -865,7 +870,10 @@ a residual |     1233.05 | 778.08 | [-294.98, 2761.07] |   1.58 | 0.113</code></
 
 <img data-src="images/honesty.png" class="r-stretch quarto-figure-center"><p class="caption">Honesty</p><ul>
 <li>HTE専用の機械学習</li>
-<li>基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)</li>
+<li>基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)
+<ul>
+<li>正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰</li>
+</ul></li>
 <li>Overfittingを防ぐために”Honest”を用いる
 <ul>
 <li>分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める</li>
@@ -2643,104 +2651,172 @@ Variable splits:
 <section id="grfのc-for-benefit一致率と信頼区間" class="slide level2">
 <h2>GRFのC-for-benefit：一致率と信頼区間</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># 3. 二つのmatched pairを選び、観測benefitと予測benefitの順序を比べる。</span></span>
-<span id="cb41-2"><a></a>c_for_benefit <span class="ot">&lt;-</span> <span class="cf">function</span>(observed_benefit, predicted_benefit) {</span>
-<span id="cb41-3"><a></a>  <span class="fu">stopifnot</span>(</span>
-<span id="cb41-4"><a></a>    <span class="fu">length</span>(observed_benefit) <span class="sc">==</span> <span class="fu">length</span>(predicted_benefit),</span>
-<span id="cb41-5"><a></a>    <span class="fu">length</span>(observed_benefit) <span class="sc">&gt;=</span> <span class="dv">2</span>L,</span>
-<span id="cb41-6"><a></a>    <span class="fu">all</span>(<span class="fu">is.finite</span>(observed_benefit)),</span>
-<span id="cb41-7"><a></a>    <span class="fu">all</span>(<span class="fu">is.finite</span>(predicted_benefit))</span>
-<span id="cb41-8"><a></a>  )</span>
-<span id="cb41-9"><a></a></span>
-<span id="cb41-10"><a></a>  observed_levels <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(observed_benefit))</span>
-<span id="cb41-11"><a></a>  <span class="cf">if</span> (<span class="fu">length</span>(observed_levels) <span class="sc">&lt;</span> <span class="dv">2</span>L) {</span>
-<span id="cb41-12"><a></a>    <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
-<span id="cb41-13"><a></a>  }</span>
-<span id="cb41-14"><a></a></span>
-<span id="cb41-15"><a></a>  total_score <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb41-16"><a></a>  number_of_comparisons <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb41-17"><a></a></span>
-<span id="cb41-18"><a></a>  <span class="co"># 観測benefitが高い群を、それより低い全ての群と比較する。</span></span>
-<span id="cb41-19"><a></a>  <span class="cf">for</span> (higher_level <span class="cf">in</span> observed_levels[<span class="sc">-</span><span class="dv">1</span>]) {</span>
-<span id="cb41-20"><a></a>    predictions_in_higher_group <span class="ot">&lt;-</span> predicted_benefit[</span>
-<span id="cb41-21"><a></a>      observed_benefit <span class="sc">==</span> higher_level</span>
-<span id="cb41-22"><a></a>    ]</span>
-<span id="cb41-23"><a></a>    predictions_in_lower_groups <span class="ot">&lt;-</span> predicted_benefit[</span>
-<span id="cb41-24"><a></a>      observed_benefit <span class="sc">&lt;</span> higher_level</span>
-<span id="cb41-25"><a></a>    ]</span>
-<span id="cb41-26"><a></a></span>
-<span id="cb41-27"><a></a>    <span class="co"># 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。</span></span>
-<span id="cb41-28"><a></a>    score_for_each_pair <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
-<span id="cb41-29"><a></a>      predictions_in_higher_group,</span>
-<span id="cb41-30"><a></a>      <span class="cf">function</span>(higher_prediction) {</span>
-<span id="cb41-31"><a></a>        <span class="fu">sum</span>(higher_prediction <span class="sc">&gt;</span> predictions_in_lower_groups) <span class="sc">+</span></span>
-<span id="cb41-32"><a></a>          <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">sum</span>(higher_prediction <span class="sc">==</span> predictions_in_lower_groups)</span>
-<span id="cb41-33"><a></a>      },</span>
-<span id="cb41-34"><a></a>      <span class="fu">numeric</span>(<span class="dv">1</span>)</span>
-<span id="cb41-35"><a></a>    )</span>
-<span id="cb41-36"><a></a></span>
-<span id="cb41-37"><a></a>    total_score <span class="ot">&lt;-</span> total_score <span class="sc">+</span> <span class="fu">sum</span>(score_for_each_pair)</span>
-<span id="cb41-38"><a></a>    number_of_comparisons <span class="ot">&lt;-</span> number_of_comparisons <span class="sc">+</span></span>
-<span id="cb41-39"><a></a>      <span class="fu">length</span>(predictions_in_higher_group) <span class="sc">*</span></span>
-<span id="cb41-40"><a></a>      <span class="fu">length</span>(predictions_in_lower_groups)</span>
-<span id="cb41-41"><a></a>  }</span>
-<span id="cb41-42"><a></a></span>
-<span id="cb41-43"><a></a>  total_score <span class="sc">/</span> number_of_comparisons</span>
-<span id="cb41-44"><a></a>}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># c_for_benefit &lt;- function(data) {</span></span>
+<span id="cb41-2"><a></a></span>
+<span id="cb41-3"><a></a><span class="co">#   tidyr::crossing(</span></span>
+<span id="cb41-4"><a></a><span class="co">#     i = seq_len(nrow(data)),</span></span>
+<span id="cb41-5"><a></a><span class="co">#     j = seq_len(nrow(data))</span></span>
+<span id="cb41-6"><a></a><span class="co">#   ) |&gt;</span></span>
+<span id="cb41-7"><a></a><span class="co">#     filter(</span></span>
+<span id="cb41-8"><a></a><span class="co">#       i &lt; j,</span></span>
+<span id="cb41-9"><a></a><span class="co">#       data$observed_benefit[i] !=</span></span>
+<span id="cb41-10"><a></a><span class="co">#         data$observed_benefit[j]</span></span>
+<span id="cb41-11"><a></a><span class="co">#     ) |&gt;</span></span>
+<span id="cb41-12"><a></a><span class="co">#     transmute(</span></span>
+<span id="cb41-13"><a></a><span class="co">#       obs_diff =</span></span>
+<span id="cb41-14"><a></a><span class="co">#         data$observed_benefit[i] -</span></span>
+<span id="cb41-15"><a></a><span class="co">#         data$observed_benefit[j],</span></span>
+<span id="cb41-16"><a></a></span>
+<span id="cb41-17"><a></a><span class="co">#       pred_diff =</span></span>
+<span id="cb41-18"><a></a><span class="co">#         data$predicted_benefit[i] -</span></span>
+<span id="cb41-19"><a></a><span class="co">#         data$predicted_benefit[j],</span></span>
+<span id="cb41-20"><a></a></span>
+<span id="cb41-21"><a></a><span class="co">#       score = case_when(</span></span>
+<span id="cb41-22"><a></a><span class="co">#         obs_diff * pred_diff &gt; 0 ~ 1,</span></span>
+<span id="cb41-23"><a></a><span class="co">#         pred_diff == 0 ~ 0.5,</span></span>
+<span id="cb41-24"><a></a><span class="co">#         TRUE ~ 0</span></span>
+<span id="cb41-25"><a></a><span class="co">#       )</span></span>
+<span id="cb41-26"><a></a><span class="co">#     ) |&gt;</span></span>
+<span id="cb41-27"><a></a><span class="co">#     summarise(</span></span>
+<span id="cb41-28"><a></a><span class="co">#       cfb = mean(score)</span></span>
+<span id="cb41-29"><a></a><span class="co">#     ) |&gt;</span></span>
+<span id="cb41-30"><a></a><span class="co">#     pull(cfb)</span></span>
+<span id="cb41-31"><a></a><span class="co"># }</span></span>
+<span id="cb41-32"><a></a></span>
+<span id="cb41-33"><a></a><span class="co"># # Point estimate</span></span>
+<span id="cb41-34"><a></a><span class="co"># # c_for_benefit(cfb_pairs)</span></span>
+<span id="cb41-35"><a></a></span>
+<span id="cb41-36"><a></a><span class="co"># #--------------------------------------------------</span></span>
+<span id="cb41-37"><a></a><span class="co"># # pair bootstrap</span></span>
+<span id="cb41-38"><a></a><span class="co"># #--------------------------------------------------</span></span>
+<span id="cb41-39"><a></a></span>
+<span id="cb41-40"><a></a><span class="co"># cfb_stat &lt;- function(data, indices) {</span></span>
+<span id="cb41-41"><a></a><span class="co">#   c_for_benefit(data[indices, ])</span></span>
+<span id="cb41-42"><a></a><span class="co"># }</span></span>
+<span id="cb41-43"><a></a></span>
+<span id="cb41-44"><a></a><span class="co"># set.seed(123)</span></span>
 <span id="cb41-45"><a></a></span>
-<span id="cb41-46"><a></a><span class="co"># boot()は、この関数のindicesに復元抽出した行番号を渡す。</span></span>
-<span id="cb41-47"><a></a>bootstrap_c_for_benefit <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
-<span id="cb41-48"><a></a>  sampled_pairs <span class="ot">&lt;-</span> data[indices, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb41-49"><a></a></span>
-<span id="cb41-50"><a></a>  <span class="fu">c_for_benefit</span>(</span>
-<span id="cb41-51"><a></a>    <span class="at">observed_benefit =</span> sampled_pairs<span class="sc">$</span>observed_benefit,</span>
-<span id="cb41-52"><a></a>    <span class="at">predicted_benefit =</span> sampled_pairs<span class="sc">$</span>predicted_benefit</span>
-<span id="cb41-53"><a></a>  )</span>
-<span id="cb41-54"><a></a>}</span>
+<span id="cb41-46"><a></a><span class="co"># boot_cfb &lt;- boot::boot(</span></span>
+<span id="cb41-47"><a></a><span class="co">#   data = cfb_pairs,</span></span>
+<span id="cb41-48"><a></a><span class="co">#   statistic = cfb_stat,</span></span>
+<span id="cb41-49"><a></a><span class="co">#   R = 199</span></span>
+<span id="cb41-50"><a></a><span class="co"># )</span></span>
+<span id="cb41-51"><a></a></span>
+<span id="cb41-52"><a></a><span class="co"># #--------------------------------------------------</span></span>
+<span id="cb41-53"><a></a><span class="co"># # result</span></span>
+<span id="cb41-54"><a></a><span class="co"># #--------------------------------------------------</span></span>
 <span id="cb41-55"><a></a></span>
-<span id="cb41-56"><a></a><span class="co"># 4. matched pairを単位に500回bootstrapする。</span></span>
-<span id="cb41-57"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb41-58"><a></a>cfb_bootstrap <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot</span>(</span>
-<span id="cb41-59"><a></a>  <span class="at">data =</span> cfb_pairs,</span>
-<span id="cb41-60"><a></a>  <span class="at">statistic =</span> bootstrap_c_for_benefit,</span>
-<span id="cb41-61"><a></a>  <span class="at">R =</span> <span class="dv">500</span></span>
-<span id="cb41-62"><a></a>)</span>
-<span id="cb41-63"><a></a></span>
-<span id="cb41-64"><a></a><span class="co"># t0が元データの点推定、tが各bootstrap標本の推定値。</span></span>
-<span id="cb41-65"><a></a>cfb_estimate <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cfb_bootstrap<span class="sc">$</span>t0)</span>
-<span id="cb41-66"><a></a>cfb_ci_result <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot.ci</span>(</span>
-<span id="cb41-67"><a></a>  cfb_bootstrap,</span>
-<span id="cb41-68"><a></a>  <span class="at">conf =</span> <span class="fl">0.95</span>,</span>
-<span id="cb41-69"><a></a>  <span class="at">type =</span> <span class="st">"perc"</span></span>
-<span id="cb41-70"><a></a>)</span>
-<span id="cb41-71"><a></a>cfb_ci <span class="ot">&lt;-</span> cfb_ci_result<span class="sc">$</span>percent[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb41-72"><a></a></span>
-<span id="cb41-73"><a></a>cfb_summary <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb41-74"><a></a>  <span class="at">n_pairs =</span> <span class="fu">nrow</span>(cfb_pairs),</span>
-<span id="cb41-75"><a></a>  <span class="at">c_for_benefit =</span> cfb_estimate,</span>
-<span id="cb41-76"><a></a>  <span class="at">lower_95 =</span> <span class="fu">unname</span>(cfb_ci[<span class="dv">1</span>]),</span>
-<span id="cb41-77"><a></a>  <span class="at">upper_95 =</span> <span class="fu">unname</span>(cfb_ci[<span class="dv">2</span>]),</span>
-<span id="cb41-78"><a></a>  <span class="at">valid_bootstraps =</span> <span class="fu">sum</span>(<span class="fu">is.finite</span>(cfb_bootstrap<span class="sc">$</span>t))</span>
-<span id="cb41-79"><a></a>)</span>
-<span id="cb41-80"><a></a>cfb_summary <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb41-56"><a></a><span class="co"># cfb_study &lt;- tibble(</span></span>
+<span id="cb41-57"><a></a><span class="co">#   C_for_benefit = boot_cfb$t0,</span></span>
+<span id="cb41-58"><a></a><span class="co">#   lower_95 = quantile(</span></span>
+<span id="cb41-59"><a></a><span class="co">#     boot_cfb$t,</span></span>
+<span id="cb41-60"><a></a><span class="co">#     0.025,</span></span>
+<span id="cb41-61"><a></a><span class="co">#     na.rm = TRUE</span></span>
+<span id="cb41-62"><a></a><span class="co">#   ),</span></span>
+<span id="cb41-63"><a></a><span class="co">#   upper_95 = quantile(</span></span>
+<span id="cb41-64"><a></a><span class="co">#     boot_cfb$t,</span></span>
+<span id="cb41-65"><a></a><span class="co">#     0.975,</span></span>
+<span id="cb41-66"><a></a><span class="co">#     na.rm = TRUE</span></span>
+<span id="cb41-67"><a></a><span class="co">#   )</span></span>
+<span id="cb41-68"><a></a><span class="co"># )</span></span>
+<span id="cb41-69"><a></a></span>
+<span id="cb41-70"><a></a><span class="co"># cfb_study |&gt; knitr::kable(digits = 3)</span></span>
+<span id="cb41-71"><a></a></span>
+<span id="cb41-72"><a></a><span class="co"># 3. 二つのmatched pairを選び、観測benefitと予測benefitの順序を比べる。</span></span>
+<span id="cb41-73"><a></a>c_for_benefit_fast <span class="ot">&lt;-</span> <span class="cf">function</span>(observed_benefit, predicted_benefit) {</span>
+<span id="cb41-74"><a></a>  <span class="fu">stopifnot</span>(</span>
+<span id="cb41-75"><a></a>    <span class="fu">length</span>(observed_benefit) <span class="sc">==</span> <span class="fu">length</span>(predicted_benefit),</span>
+<span id="cb41-76"><a></a>    <span class="fu">length</span>(observed_benefit) <span class="sc">&gt;=</span> <span class="dv">2</span>L,</span>
+<span id="cb41-77"><a></a>    <span class="fu">all</span>(<span class="fu">is.finite</span>(observed_benefit)),</span>
+<span id="cb41-78"><a></a>    <span class="fu">all</span>(<span class="fu">is.finite</span>(predicted_benefit))</span>
+<span id="cb41-79"><a></a>  )</span>
+<span id="cb41-80"><a></a></span>
+<span id="cb41-81"><a></a>  observed_levels <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(observed_benefit))</span>
+<span id="cb41-82"><a></a>  <span class="cf">if</span> (<span class="fu">length</span>(observed_levels) <span class="sc">&lt;</span> <span class="dv">2</span>L) {</span>
+<span id="cb41-83"><a></a>    <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
+<span id="cb41-84"><a></a>  }</span>
+<span id="cb41-85"><a></a></span>
+<span id="cb41-86"><a></a>  total_score <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb41-87"><a></a>  number_of_comparisons <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb41-88"><a></a></span>
+<span id="cb41-89"><a></a>  <span class="co"># 観測benefitが高い群を、それより低い全ての群と比較する。</span></span>
+<span id="cb41-90"><a></a>  <span class="cf">for</span> (higher_level <span class="cf">in</span> observed_levels[<span class="sc">-</span><span class="dv">1</span>]) {</span>
+<span id="cb41-91"><a></a>    predictions_in_higher_group <span class="ot">&lt;-</span> predicted_benefit[</span>
+<span id="cb41-92"><a></a>      observed_benefit <span class="sc">==</span> higher_level</span>
+<span id="cb41-93"><a></a>    ]</span>
+<span id="cb41-94"><a></a>    predictions_in_lower_groups <span class="ot">&lt;-</span> predicted_benefit[</span>
+<span id="cb41-95"><a></a>      observed_benefit <span class="sc">&lt;</span> higher_level</span>
+<span id="cb41-96"><a></a>    ]</span>
+<span id="cb41-97"><a></a></span>
+<span id="cb41-98"><a></a>    <span class="co"># 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。</span></span>
+<span id="cb41-99"><a></a>    score_for_each_pair <span class="ot">&lt;-</span> <span class="fu">vapply</span>(</span>
+<span id="cb41-100"><a></a>      predictions_in_higher_group,</span>
+<span id="cb41-101"><a></a>      <span class="cf">function</span>(higher_prediction) {</span>
+<span id="cb41-102"><a></a>        <span class="fu">sum</span>(higher_prediction <span class="sc">&gt;</span> predictions_in_lower_groups) <span class="sc">+</span></span>
+<span id="cb41-103"><a></a>          <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">sum</span>(higher_prediction <span class="sc">==</span> predictions_in_lower_groups)</span>
+<span id="cb41-104"><a></a>      },</span>
+<span id="cb41-105"><a></a>      <span class="fu">numeric</span>(<span class="dv">1</span>)</span>
+<span id="cb41-106"><a></a>    )</span>
+<span id="cb41-107"><a></a></span>
+<span id="cb41-108"><a></a>    total_score <span class="ot">&lt;-</span> total_score <span class="sc">+</span> <span class="fu">sum</span>(score_for_each_pair)</span>
+<span id="cb41-109"><a></a>    number_of_comparisons <span class="ot">&lt;-</span> number_of_comparisons <span class="sc">+</span></span>
+<span id="cb41-110"><a></a>      <span class="fu">length</span>(predictions_in_higher_group) <span class="sc">*</span></span>
+<span id="cb41-111"><a></a>      <span class="fu">length</span>(predictions_in_lower_groups)</span>
+<span id="cb41-112"><a></a>  }</span>
+<span id="cb41-113"><a></a></span>
+<span id="cb41-114"><a></a>  total_score <span class="sc">/</span> number_of_comparisons</span>
+<span id="cb41-115"><a></a>}</span>
+<span id="cb41-116"><a></a></span>
+<span id="cb41-117"><a></a><span class="co"># boot()は、この関数のindicesに復元抽出した行番号を渡す。</span></span>
+<span id="cb41-118"><a></a>bootstrap_c_for_benefit_fast <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb41-119"><a></a>  sampled_pairs <span class="ot">&lt;-</span> data[indices, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb41-120"><a></a></span>
+<span id="cb41-121"><a></a>  <span class="fu">c_for_benefit_fast</span>(</span>
+<span id="cb41-122"><a></a>    <span class="at">observed_benefit =</span> sampled_pairs<span class="sc">$</span>observed_benefit,</span>
+<span id="cb41-123"><a></a>    <span class="at">predicted_benefit =</span> sampled_pairs<span class="sc">$</span>predicted_benefit</span>
+<span id="cb41-124"><a></a>  )</span>
+<span id="cb41-125"><a></a>}</span>
+<span id="cb41-126"><a></a></span>
+<span id="cb41-127"><a></a><span class="co"># 4. matched pairを単位に500回bootstrapする。</span></span>
+<span id="cb41-128"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb41-129"><a></a>cfb_bootstrap_fast <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot</span>(</span>
+<span id="cb41-130"><a></a>  <span class="at">data =</span> cfb_pairs,</span>
+<span id="cb41-131"><a></a>  <span class="at">statistic =</span> bootstrap_c_for_benefit_fast,</span>
+<span id="cb41-132"><a></a>  <span class="at">R =</span> <span class="dv">500</span></span>
+<span id="cb41-133"><a></a>)</span>
+<span id="cb41-134"><a></a></span>
+<span id="cb41-135"><a></a><span class="co"># t0が元データの点推定、tが各bootstrap標本の推定値。</span></span>
+<span id="cb41-136"><a></a>cfb_estimate <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cfb_bootstrap_fast<span class="sc">$</span>t0)</span>
+<span id="cb41-137"><a></a></span>
+<span id="cb41-138"><a></a>cfb_ci_result <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot.ci</span>(</span>
+<span id="cb41-139"><a></a>  cfb_bootstrap_fast,</span>
+<span id="cb41-140"><a></a>  <span class="at">conf =</span> <span class="fl">0.95</span>,</span>
+<span id="cb41-141"><a></a>  <span class="at">type =</span> <span class="st">"bca"</span></span>
+<span id="cb41-142"><a></a>)</span>
+<span id="cb41-143"><a></a>cfb_ci <span class="ot">&lt;-</span> cfb_ci_result<span class="sc">$</span>bca[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb41-144"><a></a></span>
+<span id="cb41-145"><a></a>cfb_summary <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb41-146"><a></a>  <span class="at">c_for_benefit =</span> cfb_estimate,</span>
+<span id="cb41-147"><a></a>  <span class="at">lower_95 =</span> <span class="fu">unname</span>(cfb_ci[<span class="dv">1</span>]),</span>
+<span id="cb41-148"><a></a>  <span class="at">upper_95 =</span> <span class="fu">unname</span>(cfb_ci[<span class="dv">2</span>])</span>
+<span id="cb41-149"><a></a></span>
+<span id="cb41-150"><a></a>)</span>
+<span id="cb41-151"><a></a></span>
+<span id="cb41-152"><a></a>cfb_summary <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: right;">n_pairs</th>
 <th style="text-align: right;">c_for_benefit</th>
 <th style="text-align: right;">lower_95</th>
 <th style="text-align: right;">upper_95</th>
-<th style="text-align: right;">valid_bootstraps</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">457</td>
 <td style="text-align: right;">0.588</td>
 <td style="text-align: right;">0.529</td>
 <td style="text-align: right;">0.645</td>
-<td style="text-align: right;">500</td>
 </tr>
 </tbody>
 </table>
@@ -2795,10 +2871,10 @@ Variable splits:
  system   x86_64, linux-gnu
  ui       X11
  language (EN)
- collate  C.UTF-8
- ctype    C.UTF-8
+ collate  ja_JP.UTF-8
+ ctype    ja_JP.UTF-8
  tz       Asia/Tokyo
- date     2026-09-18
+ date     2026-09-19
  pandoc   3.8.3 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/ (via rmarkdown)
  quarto   1.9.38 @ /home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/quarto
 

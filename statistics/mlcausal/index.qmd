@@ -144,7 +144,7 @@ meta_shap_data <- utils::read.csv(
 ## 因果関係
 
 - 医学研究の第一の目標と言っても過言ではない
-- "Aの薬を使うと患者の予後は良くなるか？"
+- "目の前の心不全の患者にAの薬を使うと予後は良くなるか？"
 - 実際は口で言うほど簡単ではない
 
 ## どうして難しいか？
@@ -153,77 +153,16 @@ meta_shap_data <- utils::read.csv(
   - ある個人に「介入をしなかった時」と「介入をした時」の結果を同時に観測できない
 - これを解決するために種々の方法が存在する
 - 最も有名なのはRCTであるが、RCTは万能ではない
-- ConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある
-- 観察研究はConfounderがコントロール出来ない
+  - ConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある
+- 観察研究は外的妥当性が高いが、Confounderがコントロール出来ない
 
 ## 因果関係の考え方
 
 - 大きく分けて2つの考え方がある
   - 潜在的アウトカムを考えるRubin流
   - DAGを作り、do operatorを使うPearl流
-- 詳細は省くが、今回はPearl流のDAGを中心に考える
-
-## DAGの基本
-
-```{r}
-#| label: DAG
-#| fig-width: 10
-#| fig-height: 4
-
-library(dagitty)
-library(ggdag)
-library(dplyr)
-library(ggplot2)
-library(grid)
-
-dag <- dagitty("dag {
-  D -> A
-  A -> B
-  B -> C
-  D -> C
-  A -> E
-  C -> E
-}")
-
-# Graphviz版の見た目に合わせて座標を固定
-coordinates(dag) <- list(
-  x = c(A = 1, B = 4, C = 7, D = 4, E = 4),
-  y = c(A = 0, B = 0, C = 0, D = -1, E = 1)
-)
-
-labels_ja <- c(
-  A = "曝露",
-  B = "中間因子",
-  C = "アウトカム",
-  D = "交絡因子",
-  E = "Collider"
-)
-
-tidy_dagitty(dag) |>
-  mutate(
-    label = labels_ja[name],
-    label_x = if_else(name == "C", x + 0.05, x),
-    label_y = y
-  ) |>
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges(
-    arrow_directed = grid::arrow(length = grid::unit(8, "pt"), type = "closed")
-  ) +
-  geom_dag_point(size = 32, alpha = 0.2, color = "#2C7FB8") +
-  geom_dag_text(aes(x = label_x, y = label_y, label = label), size = 4, color = "black") +
-  theme_dag() +
-  coord_equal(xlim = c(0, 8), ylim = c(-1.5, 1.5), clip = "off")
-
-
-```
-
-- 交絡因子は介入とOutcome両方に関連する上流の因子(介入 \<- 交絡 -\> アウトカム)
-- 中間因子は介入とOutcomeの間にある因子(介入 -\> 中間 -\> アウトカム)
-- Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -\> Colider \<- アウトカム)
-- 基本は交絡因子のみ補正が必要
-  - 中間因子を補正すると治療効果が薄まる
-  - Coliderを補正してしまうと逆にバイアスが出てくる
-- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール[@Iwanami-2016-sy]
+- 詳細は省くが、今回はRubin流の潜在的アウトカムを中心に考える
+- 交絡因子の制御にまずは目を向ける
 
 ## 世界は結構複雑にできている
 
@@ -238,6 +177,12 @@ tidy_dagitty(dag) |>
 ## Stratification
 
 ```{r}
+#| label: stratification-image
+#| echo: true
+
+library(MatchIt)
+library(marginaleffects)
+
 lalonde <- MatchIt::lalonde
 subclassification_fit <- MatchIt::matchit(
   treat ~ age + educ + nodegree + married + re74 + re75,
@@ -246,7 +191,11 @@ subclassification_fit <- MatchIt::matchit(
   subclass = 5,
   estimand = "ATT"
 )
+
+summary(subclassification_fit)$Observation
+
 subclassification_data <- MatchIt::match_data(subclassification_fit)
+
 subclassification_model <- stats::lm(
   re78 ~ treat * (age + educ + nodegree + married + re74 + re75),
   data = subclassification_data
@@ -258,6 +207,8 @@ marginaleffects::avg_comparisons(
   vcov = "HC3",
   newdata = dplyr::filter(subclassification_data, treat == 1)
 )
+
+
 ```
 
 - Propensity scoreの値を5分位に分けて、各々の層同士で比較して最後に統合する
@@ -265,12 +216,22 @@ marginaleffects::avg_comparisons(
 ## Matching
 
 ```{r}
+#| label: matching-image
+#| echo: true
+
+library(cobalt)
+library(MatchIt)
+library(marginaleffects)
+
 matching_fit <- MatchIt::matchit(
   treat ~ age + educ + race + nodegree + married + re74 + re75,
   data = lalonde,
   method = "nearest",
   estimand = "ATT"
 )
+
+cobalt::bal.tab(matching_fit)$Observations
+
 matching_data <- MatchIt::match_data(matching_fit)
 matching_model <- stats::lm(
   re78 ~ treat * (age + educ + nodegree + married + re74 + re75),
@@ -284,6 +245,7 @@ marginaleffects::avg_comparisons(
   vcov = ~subclass,
   newdata = dplyr::filter(matching_data, treat == 1)
 )
+
 ```
 
 - Propensity scoreが似たものを1:1でMatchingさせる
@@ -293,11 +255,21 @@ marginaleffects::avg_comparisons(
 ## Weighting
 
 ```{r}
+#| label: weighting-image
+#| echo: true
+
+library(cobalt)
+library(WeightIt)
+library(marginaleffects)
+
 weighting_fit <- WeightIt::weightit(
   treat ~ age + educ + race + nodegree + married + re74 + re75,
   data = lalonde,
   method = "glm"
 )
+
+cobalt::bal.plot(weighting_fit, which = "both")
+
 weighting_model <- WeightIt::lm_weightit(
   re78 ~ treat * (age + educ + race + married + nodegree + re74 + re75),
   data = lalonde,
@@ -327,13 +299,62 @@ marginaleffects::avg_comparisons(
 
 - 自由度を上げるために、連続値をrestricted cubic splineに入れる
 - 交互作用項を入れる　などなど
-- AIPW, TMLE, orthogonalizationなどでDoubly robustな手法
+- AIPW, TMLE, **Orthogonalization**などの特殊な手法
   - Outcome modelとPropensity modelを用いてDoubly robustにする
 - これらのモデルで機械学習を入れることも可能
 
 ## 特殊な手法
 
 ::: panel-tabset
+## Orthogonalization
+
+```{r}
+#| label: scratch-for-orthogonalization
+#| echo: true
+
+library(MatchIt)
+library(dplyr)
+library(parameters)
+library(report)
+
+lalonde <- MatchIt::lalonde
+
+y_fit <- glm(re78 ~ age + educ + race + married + nodegree + re74 + re75, gaussian(), data = lalonde)
+treat_fit <- glm("treat ~ age + educ + race + married + nodegree + re74 + re75", binomial(), data = lalonde)
+
+dat <- dplyr::mutate(
+  lalonde,
+  y_residual = residuals(y_fit, type = "response"),
+  a_residual = treat - fitted(treat_fit)
+)
+
+orthogonalization_fit <- glm(y_residual ~ 0 + a_residual, gaussian(), data = dat)
+
+parameters::model_parameters(orthogonalization_fit) |> 
+  report::display(format = "html")
+
+```
+
+$$
+\begin{aligned}
+\underbrace{Y_i - \widehat{Y}_i}_{\text{アウトカムの残差}}
+&=
+\theta
+\underbrace{\left(A_i - \widehat{A}_i\right)}_{\text{介入の残差}}
++ \varepsilon_i, \\[8pt]
+\widehat{Y}_i
+&= \widehat{\mathrm{E}}\left(Y_i \mid X_i\right),
+\qquad
+\widehat{A}_i
+= \widehat{\Pr}\left(A_i=1 \mid X_i\right).
+\end{aligned}
+$$
+
+- 「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する
+- $\theta$ は交絡因子の影響を取り除いた後の治療効果、$\varepsilon_i$ はこの回帰で説明されない誤差を表す
+- outcome側はGaussian GLM、treatment側はbinomial GLMで残差化している
+- treatment側も線形確率モデルで残差化した場合は、Frisch--Waugh--Lovell定理により通常の線形回帰と一致する
+
 ## Augmented Inverse Probability Weighting (AIPW)
 
 ```{r}
@@ -388,11 +409,14 @@ $$
   - 治療を受ける/受けないのPropensity scoreの補正
 - Doubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない
 
-### TMLE
+## TMLE
 
 ```{r}
 #| label: scratch-for-TMLE
 #| echo: true
+
+library(tmle)
+library(MatchIt)
 
 lalonde <- MatchIt::lalonde
 W <- lalonde[c("age", "educ", "race", "married", "nodegree", "re74", "re75")]
@@ -455,68 +479,24 @@ $$
 
 - 簡単に言うと強くなったAIPW
 
-## Orthogonalization
-
-```{r}
-#| label: scratch-for-orthogonalization
-#| echo: true
-
-library(MatchIt)
-library(dplyr)
-library(parameters)
-
-lalonde <- MatchIt::lalonde
-
-y_fit <- glm(re78 ~ age + educ + race + married + nodegree + re74 + re75, gaussian(), data = lalonde)
-treat_fit <- glm("treat ~ age + educ + race + married + nodegree + re74 + re75", binomial(), data = lalonde)
-
-dat <- dplyr::mutate(
-  lalonde,
-  y_residual = residuals(y_fit, type = "response"),
-  a_residual = treat - fitted(treat_fit)
-)
-
-orthogonalization_fit <- glm(y_residual ~ 0 + a_residual, gaussian(), data = dat)
-
-parameters::model_parameters(orthogonalization_fit)
-```
-
-$$
-\begin{aligned}
-\underbrace{Y_i - \widehat{Y}_i}_{\text{アウトカムの残差}}
-&=
-\theta
-\underbrace{\left(A_i - \widehat{A}_i\right)}_{\text{介入の残差}}
-+ \varepsilon_i, \\[8pt]
-\widehat{Y}_i
-&= \widehat{\mathrm{E}}\left(Y_i \mid X_i\right),
-\qquad
-\widehat{A}_i
-= \widehat{\Pr}\left(A_i=1 \mid X_i\right).
-\end{aligned}
-$$
-
-- 「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する
-- $\theta$ は交絡因子の影響を取り除いた後の治療効果、$\varepsilon_i$ はこの回帰で説明されない誤差を表す
-- outcome側はGaussian GLM、treatment側はbinomial GLMで残差化している
-- treatment側も線形確率モデルで残差化した場合は、Frisch--Waugh--Lovell定理により通常の線形回帰と一致する
-
 :::
 
 ## しかしながら・・・・・・
 
 - 結局のところ、モデルは人が作らないといけない
 - 非線形な関係も、Interaction termもいずれにせよ人が作る必要がある
-- 治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる
-  - この治療は眼の前の患者さんに有益ですか？
+- さらに、治療効果の異質性については古典的な線形回帰では考慮できない
+  - 治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる
+[**この治療は眼の前の患者さんに有益ですか？**]{style="color: red;font-size: 1.2em;text-align=center"}
 
-## Estimandの重要性
+## 治療の異質性とは？
 
 - 医学論文において、[**患者の背景**]{style="color: red;font-size: 1.2em;"}というのはRCTの解釈で非常に重要
   - Mitra valveのTEERにおけるCOAPT vs. MITRA-FR trial
   - Cryptogenic strokeに対するPFO closureのRCTの結果の変遷
   - AFのrhythm controlの優位性を示せたEAST-AFNET4 trial
-- 患者の性質によって異なる介入の治療効果(Estimand)がある[@Little2021-hz]
+- 「誰への治療効果？」という事を示す用語としてEstimandが近年重要性を上げている[@Little2021-hz]
+  - ATE, ATT, ATU
 
 ## 目の前の患者への有効性
 
@@ -531,11 +511,11 @@ $$
 
 | 意義 | 代表的な問い |
 |---|---|
-| **標的を絞った介入による効率的な医療資源の配分** | ・治療によって特に大きな利益または害を受けるのは誰か？<br>・最も効果的な治療選択肢は何か？<br>・あるサブグループには治療が有効だが、他のサブグループには有害である場合、誰を治療し、誰を治療すべきでないか？ |
-| **介入がアウトカムに影響を及ぼすメカニズムの理解** | ・治療効果を規定する特性は何か？<br>・治療はどのようにアウトカムに影響を及ぼすのか？ |
-| **仮説生成** | ・さらに検討する価値のある治療効果の異質性には、どのようなパターンがあるか？ |
-| **健康格差・公平性（Health equity）** | ・治療は、社会経済的状況が異なる人々に不均衡な影響を及ぼすか？<br>・治療は健康格差を拡大するか、それとも縮小するか？ |
-| **一般化可能性とトランスポータビリティ** | ・特定のサンプルで推定された治療効果を、より広い集団に外挿できるか？<br>・対象集団に属する人々が十分に含まれていない（あるいは完全に除外されている）サンプルから推定された治療効果を、その対象集団にも適用できるか？ |
+| **効率的な医療資源の配分** | ・治療によって特に大きな利益/害を受けるのは誰か？<br>・どの治療が最も有効か？<br>・(ある介入において)誰を治療し、誰を治療すべきでないか？ |
+| **介入がアウトカムに影響を及ぼすメカニズムの理解** | ・治療効果を規定する患者背景は何か？<br>・治療はどのようにアウトカムに影響を及ぼすのか？ |
+| **仮説生成** | ・治療効果の異質性のパターンから、更なる研究が進むか？ |
+| **健康格差・公平性（Health equity）** | ・治療は社会経済的状況が異なる人々で治療効果が変わるか？<br>・治療は健康格差を拡大/縮小するか？ |
+| **一般化可能性とトランスポータビリティ** | ・特定のサンプルで推定された治療効果を、より広い集団に外挿できるか？<br>・ある研究から手に入れたデータは、Underrepresentされている集団への外的妥当性が保たれるか？ |
 
 [@Komura2026-se]
 
@@ -552,17 +532,21 @@ $$
 ## 代表的な機械学習
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="45%"}
 ![Tree-based models](images/treebased_model.png)
 
 - これはRandom forest
 - 小さい木のモデルを並列ではなく直列にするとXGBoostなど
 :::
 
-::: {.column width="50%"}
+::: {.column width="3%"}
+
+:::
+
+::: {.column width="52%"}
 ![Neural network models](images/neuralnetwork.png)
 
-- 沢山のLogistic regression modelを重ねたようなもの
+- 沢山のLogistic回帰を重ねたようなもの
 :::
 :::::
 
@@ -576,25 +560,29 @@ $$
     - [**現実世界への有用性と妥当性**]{style="color: red;font-size: 1.2em;"}の評価が必要
   - Overfittingの問題
     - [**モデルの評価**]{style="color: red;font-size: 1.2em;"}が必須
+      - Riskの高低を正確に出せるかを見るDiscrimination
+      - Riskの絶対値が正しいかをみるCalibrationが基本
 
 # 機械学習と因果推論の出会い
 
 ## 因果推論における機械学習の役割
 
-- アウトカムモデル、PS modelを柔軟に扱う
+- アウトカムモデル、PS modelを柔軟に扱える
 - Interaction termを自然に扱える
 - 柔軟なモデルであれば、HTEを自然に扱えないか？[@Khera2024-ho]
 
 ## 機械学習を用いた因果推論について
 
-- 大別してMeta learner系とmodified machine-learning系(代表としてCausal forest)に分けられる[@Segal2023-gi]
+- 大別して以下の2種類に分けられる[@Segal2023-gi]
+1. Meta learner系
+2. modified machine-learning系(代表としてCausal forest)
 - 柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest
 - とはいえ、Causal forestだけで良い気もする
 
 ## 注意点
 
 - 基本的にUnobserved confoundingには対応できない
-- Collider biasには対応できない
+- Collider biasが入ると、推定精度は下がる
 [**魔法の杖ではなく、Designは常に重要**]{style="color: red;font-size: 1.2em;"}
 - RCTなどでATEが0だったものについてHTEを探すのは基本的に無意味な事が多い[@Segal2023-gi]
 
@@ -640,23 +628,16 @@ $$
 
 | Algorithm | 強み（Strengths） | 限界（Limitations） |
 |:---|:---|:---|
-| S-learner | - シンプル<br>- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある<br>- 治療群と対照群の人数が不均衡な場合、不安定になる |
-| T-learner | - シンプル<br>- 治療群と対照群を分けて明示的にモデル化する<br>- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 治療群と対照群の人数が不均衡な場合、不安定になる |
-| X-learner / DR-learner | - 異質な治療効果を直接推定する<br>- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
-| R-learner | - 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する<br>- 治療効果に対する直接的な損失関数を構成できる | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
-
-
-    Komura T, Bargagli-Stoffi FJ, Arah OA, Inoue K. Estimating and discovering heterogeneous treatment effects using machine learning in epidemiological studies: a practical guide. Int J Epidemiol. 2026;55(3). doi:10.1093/ije/dyag092
-  
-も追記する
-
+| S-learner | - シンプル<br>- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある<br>- 治療群と対照群の人数が不均衡な場合、不安定になる<br>- modelのmisspecificationに弱い |
+| T-learner | - シンプル<br>- 治療群と対照群を分けて明示的にモデル化する<br>- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す | - 治療効果の推定に直接最適化されていない<br>- 治療群と対照群の人数が不均衡な場合、不安定になる<br>- modelのmisspecificationに弱い |
+| X-learner / DR-learner | - 異質な治療効果を直接推定する<br>- 観察研究での不均衡なSubgroupにおいて有効 | - 複雑である<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい |
+| R-learner | - CATEの計算が効率的<br>- 治療効果に対する直接的な損失関数を構成できる<br>- Double robustである<br>- 信頼区間を計算可能 | - 複雑である<br>- Propensity scoreのOverlapが十分にあることが前提<br>- 極端な傾向スコアが存在する場合、不安定になる<br>- 傾向スコアモデルの誤設定に影響されやすい(DR-learnerよりも) |
 : メタラーナーの特徴と限界 {#tbl-metalearner-comparison}
-[@Inoue2024-sb]
+
+[@Inoue2024-sb;@Komura2026-se]
 
 - S-learnerが最も直感的ではあるが・・・・・・
-  - 一番の問題は95%信頼区間などは出せない
 - 過去のReviewだとDR-learnerが良さそう
-- あまり医学論文だと使われていない印象
 
 # Causal forestについて
 
@@ -672,12 +653,21 @@ $$
 
 ## Causal forestの原理
 
-![Honesty](images/honesty.png)
+![Honestyの原理](images/honesty.png)
 
 - HTE専用の機械学習
 - 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)
+  - 正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰
 - Overfittingを防ぐために"Honest"を用いる
   - 分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める
+
+## Causal forestの特徴
+
+- HTEを検出するのに特化したモデル
+- HonestやOOB(Out of bagg)推定のおかげでOverfittingが少ない
+- HyperparameterのTuningがなくても性能が高い
+- 論文だと、計算コストが言われているが数千くらいのDataなら問題なく出来る
+- Blackbox感は強いが……
 
 ## 結局どれがいいの？
 
@@ -693,13 +683,13 @@ $$
   - Discrimination, Calibrationなど
 - ModelをBlackboxから出す: PDP, SHAPなど
   - Tree Interpreter
-- モデルの実施方法
+- モデルの現実世界へのImplementation
   - Policy tree
 
 ## モデルの評価の仕方
 
 - 実際の研究では、HTEのモデルもTRIPOD-AIに従う事が推奨されている[@Segal2023-gi; @Collins2024-mg]
-- 通常のモデルと一緒で独立したtest datasetを用意しておく
+- 通常のモデルと一緒で独立したtest datasetを用意しておく方がBetter
 - 診る項目は2種類
   - Discrimination
     - RATE(AUTOC), Qini, C-for-benefit
@@ -714,7 +704,7 @@ $$
 - 一方で、因果推論モデルの場合は個人レベルの"正解(Individual treatment effects)"は決して分からない
 - その為、【ある程度の一貫性】を診たり、【ある群でのATE】を"正解ラベル"として比較している
 
-## Discrimination ~ RATES
+## Discrimination ~ RATES(AUTOC)
 
 :::: columns
 
@@ -783,7 +773,16 @@ knitr::kable(
 
 :::
 
-::: {.column width="70%"}
+::: {.column width="10%"}
+
+<div class="flow-operation">
+  <div class="flow-arrow">&rarr;</div>
+  <div class="flow-caption">上位q%の平均治療効果から<br>全体ATEを引く</div>
+</div>
+
+:::
+
+::: {.column width="60%"}
 
 ```{r}
 #| label: make-rate-fig
@@ -815,71 +814,20 @@ ggplot2::ggplot(
   ggplot2::labs(
     x = "治療対象とする上位割合 q",
     y = "TOC(q): 上位qの平均治療効果 − 全体ATE"
-  ) +
-  ggplot2::theme_bw()
-```
-
-:::
-
-::: {.column width="10%"}
-
-<div class="flow-operation">
-  <div class="flow-arrow">&rarr;</div>
-  <div class="flow-caption">上位q%の平均治療効果から<br>全体ATEを引く</div>
-</div>
-
-:::
-
-::: {.column width="30%"}
-
-
-```{r}
-#| echo: false
-
-ggplot2::ggplot(
-  rate_dat,
-  ggplot2::aes(x = target_fraction, y = toc)
-) +
-  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
-  ggplot2::geom_ribbon(
-    ggplot2::aes(ymin = 0, ymax = toc),
-    fill = "#4E79A7",
-    alpha = 0.2
-  ) +
-  ggplot2::geom_line(color = "#4E79A7", linewidth = 1.2) +
+  ) + 
   ggplot2::annotate(
-    "label",
-    x = 0.98,
-    y = max(rate_dat$toc),
-    hjust = 1,
-    vjust = 1,
-    label = sprintf("AUTOC ≈ %.2f", autoc),
-    size = 3.5
-  ) +
-  ggplot2::scale_x_continuous(
-    breaks = seq(0, 1, by = 0.25),
-    labels = scales::label_percent(),
-    limits = c(0, 1)
-  ) +
-  ggplot2::labs(
-    x = "治療対象とする上位割合 q",
-    y = "TOC(q): 上位qの平均治療効果 − 全体ATE"
-  ) +
-  ggplot2::theme_bw(base_size = 11)
+    "text", x = .75, y = 5, label = paste0("AUTOC: ", round(autoc, 2))
+  ) + 
+  ggplot2::theme_bw()
 ```
 
 :::
 ::::
 
-::: {.small}
-この図では説明のため `predicted_ite` を各人の真の治療効果とみなしている。実解析では、独立した評価データから得たdoubly robust scoreで上位群の治療効果を評価する。
-:::
+- ITEをRankingを連続的に見て上位n%でのITEの平均と全体のATEの差をとる(Benefit)
+- この面積がAUTOC
 
-
-- Rankingを連続的に見ていく閾値
-- 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
-
-## RATE: AUTOCとQini係数
+## Discrimination ~ RATES(Qini係数)
 
 ```{r}
 #| label: plot-qini
@@ -937,15 +885,92 @@ ggplot2::ggplot(
   ggplot2::theme(legend.position = "top")
 ```
 
-- Rankingを連続的に見ていく閾値
-- 上位n%でのITEの平均と全体のATEの差をとる(Benefit)
-- 横軸にn%、縦軸にこのBenefitの値を並べて面積をとる
-- どちらかというと妥当性を診ているイメージ
 - Qini係数は、TOCにpercentageで重みづけをしている
-  - Cost performanceも見ることができる
+- Qini係数はTOCよりもCost performanceの解釈で有用[@grf_qini]
+  - 複数Armの治療で比較に使える(Rの`maq`)
 
 ## Discrimination ~ C-for-benefit
 
+
+```{r}
+#| label: calculate-external-c-for-benefit
+#| echo: true
+
+# c_for_benefit <- function(data) {
+
+#   tidyr::crossing(
+#     i = seq_len(nrow(data)),
+#     j = seq_len(nrow(data))
+#   ) |>
+#     filter(
+#       i < j,
+#       data$observed_benefit[i] !=
+#         data$observed_benefit[j]
+#     ) |>
+#     transmute(
+#       obs_diff =
+#         data$observed_benefit[i] -
+#         data$observed_benefit[j],
+
+#       pred_diff =
+#         data$predicted_benefit[i] -
+#         data$predicted_benefit[j],
+
+#       score = case_when(
+#         obs_diff * pred_diff > 0 ~ 1,
+#         pred_diff == 0 ~ 0.5,
+#         TRUE ~ 0
+#       )
+#     ) |>
+#     summarise(
+#       cfb = mean(score)
+#     ) |>
+#     pull(cfb)
+# }
+
+# # Point estimate
+# # c_for_benefit(cfb_pairs)
+
+# #--------------------------------------------------
+# # pair bootstrap
+# #--------------------------------------------------
+
+# cfb_stat <- function(data, indices) {
+#   c_for_benefit(data[indices, ])
+# }
+
+# set.seed(123)
+
+# boot_cfb <- boot::boot(
+#   data = cfb_pairs,
+#   statistic = cfb_stat,
+#   R = 199
+# )
+
+# #--------------------------------------------------
+# # result
+# #--------------------------------------------------
+
+# cfb_study <- tibble(
+#   C_for_benefit = boot_cfb$t0,
+#   lower_95 = quantile(
+#     boot_cfb$t,
+#     0.025,
+#     na.rm = TRUE
+#   ),
+#   upper_95 = quantile(
+#     boot_cfb$t,
+#     0.975,
+#     na.rm = TRUE
+#   )
+# )
+
+# cfb_study |> knitr::kable(digits = 3)
+
+# 予測順位の一致を1、不一致を0、予測が同値なら0.5として平均する。CIは固定したモデル・matchingに条件づけた500回のpair bootstrapであり、再学習・再matchingの不確実性を含まない。
+
+
+```
 
 - 治療群の患者と対照群の患者を、予測CATEまたは背景因子で1対1マッチングする
 - 観察されたOutcomeを治療群のOutcome - Ctrl群のOutcomeで計算
@@ -955,70 +980,24 @@ ggplot2::ggplot(
 
 ## Calibration ~ GATES
 
-
-
+<!-- Todo: しっかり作り直す -->
 ```{r}
+#| label: gate-data
 
-library(tidyverse)
-library(MatchIt)
-library(grf)
+library(tibble)
+library(dplyr)
 
-
-test_dat <- MatchIt::lalonde
-
-lalonde_cf <- causal_forest(
-  X = dplyr::select(test_dat, age, educ, married, nodegree, re74, re75), 
-  Y = test_dat$re78, 
-  W = test_dat$treat
-)
-
-test_dat_prep <- test_dat |> 
+tibble::tibble(
+  risk_category = rep(1:5, 100)
+) |> 
   dplyr::mutate(
-    predicted_ite = predict(lalonde_cf)$predictions
-  ) |> 
-  dplyr::mutate(
-    rank = dplyr::ntile(
-      predicted_ite, 
-      n = 4
-    )
-  ) 
-
-tmp <- dplyr::group_nest(
-  test_dat_prep, 
-  rank) |> 
-  dplyr::mutate(
-    model = purrr::map(
-      data, \(dat){
-        lalonde_cf <- causal_forest(
-  X = dplyr::select(dat, age, educ, married, nodegree, re74), 
-  Y = dat$re78, 
-  W = dat$treat
-)
-      return(lalonde_cf)
-      }
-    ), 
-    ate = purrr::map(
-      model, \(cf){
-        grf::average_treatment_effect(
-          cf
-        )
-      }
+    predicted_ite = purrr::map_dbl(risk_category, \(x)rnorm(n = 1, mean = 0.1 * x, sd = 0.2)), 
+    predicted_ite = dplyr::case_when(
+      predicted_ite > 1 ~ 1, 
+      predicted_ite < 0 ~ 0, 
+      TRUE ~ predicted_ite
     )
   )
-
-dplyr::select(
-  tmp, -model
-) |> 
-tidyr::unnest_wider(ate) |> 
-tidyr::unnest(data) |> 
-dplyr::summarise(
-  mean_ite = mean(predicted_ite), 
-  grouped_ate = mean(estimate), 
-  .by = rank
-) |> 
-ggplot2::ggplot() + 
-  geom_line(aes(x = mean_ite, y = grouped_ate))
-
 
 ```
 
@@ -1102,7 +1081,8 @@ W_i - \hat{e}(X_i)
 \varepsilon_i
 $$
 
-- causal forestのOOB CATE予測を「平均治療効果成分」と「heterogeneity成分」に分け、outcome/treatmentをorthogonalizeした回帰でcalibrationを評価する。
+- Causal forestのOOBのOutcome予測を治療でOrthogonalizationをした後にITEで回帰している
+  - 「平均治療効果成分」と「heterogeneity成分」に分けて評価している
 - grf::test_calibration()では、
   - mean.forest.prediction(上式の $\alpha$ ): 平均CATE予測のcalibration係数。1に近いほど平均効果のscaleが正しい。
   - differential.forest.prediction(上式の $\beta$ ): CATE heterogeneityのcalibration slope。1に近いほどheterogeneityのscaleが正しく、0より有意に大きければHTEの存在を支持する。
@@ -1112,30 +1092,43 @@ $$
 
 - 通常の予測モデルと大きな変化はない
   - モデルが何をみているか？: SHAP
-  - ある連続値の共変量との関係性: PDP
+  - ある連続値の共変量との関係性: Best linear projection, PDP
 - 人に解釈できる方法として、HTEを浅い決定木で回帰させる"Surrogate tree"というのもある
+
+## SHAP
+
+- ゲーム理論に基づいて、「その変数がどれくらい役に立っているか？」を全組み合わせで見ている指標
+- 局所～全体的に「Modelが何を見ているか？」を見ることが出来る
+- Variable importanceと同じように使えるが情報量は多い
+  - 個人的に見方が難しいが……
 
 ## Modelの解釈～Best linear preojection
 
 - 予測されるITE ~ Covariatesで回帰させたもの
 - 各Covariatesがどのような影響にITEに影響しているかを見ている
+  - "線形回帰とすると、年齢が1歳あがる毎にITEはどれくらい変化するか？"
 - ドメイン知識との整合性を診ることができる
+- PDPとほぼ同じような役割
+- ITEの分布について、PDPやHeat mapを推奨している論文もある[@Shiba2024-fc]
 
+## Modelの解釈
+
+- 複雑なModelを浅い決定木で近似させる
+- 多少単純化されるものの、「どのルールでITEが最も変化されるか？」が分かる
 
 ## モデルの実用法について
 
 - 誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという
 - Surrogate treeと異なり、ITEが0を超えるかどうかで推奨を変える
   - Rだと`policytree` package, pythonだと`econml`で可能
-- 実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotをまず記述している事が多い
+- 実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotで記述している事が多い
 
-## 実務において
+## Causal forestのPackage
 
 - Pythonだと`econml`のDRTester
 - Rだと`grf`で可能
 
-## Causal forestの場合は
-
+## Causal forestのモデル評価の推奨
 
 - 論文ではCATE estimation → Calibration → HTE insightsの評価を推奨 [@Komura2026-se]
   - Calibration: Best linear prediction, Calibration plot
@@ -1149,14 +1142,14 @@ $$
 
 # 実際の論文
 
-## HTEの論文は増えている
+## RWDのHTEの論文は増えている
 
 ![Number of Publications of HTE estimation](images/hte_journal_num.png)
 
 - 2023年からRWDを用いたHTE関連の研究が急激に増えている
 - 循環器領域は全体の23%で悪性腫瘍についで2番目に多い
   - Tree-basedが34%, meta-learnerが26%
-- External validation不足(4%のみ)が指摘されている
+- External validation不足(4%でしか行われていない)が指摘されている
 
 [@Moller2026-xi]
 
@@ -1236,9 +1229,11 @@ $$
 ### RCTのSub解析-4
 
 - TOPCAT trialのSub解析
+- HFpEFに対するMRAの治療効果のHTEを評価目的
 - Survival causal forestを用いている
-- C for benefitとRATEで評価している
-
+- C for benefitとRATE, RMSTのCalibration plotで評価している
+- 治療効果にHeterogeneityが多く、その原因としてBMI, eGFR, LVEF, Ageが大きく寄与している事を示している
+- 基本は仮説形成の研究だがかなり丁寧
 [@Desai2024-pr]
 
 :::
@@ -1592,16 +1587,17 @@ print(head(toy_data))
   - BMIが高いと受けやすく
   - Social economic statusが良いと受けやすい
 - 非治療時のイベントリスクの線形予測子は（SESは標準化値）
+
 $$
 \begin{aligned}
 \eta_i
-={}& -7.55
-+ 0.70\,\mathrm{AgeRisk}_i
-+ 0.90\,\mathrm{HF}_i \\
-&- 0.85\,\mathrm{SES}_{z,i}
-+ 0.55\,\mathrm{BNPRisk}_i \\
-&+ 0.04\,\mathrm{BMIRisk}_i
-+ 0.10\,\mathrm{LVEFRisk}_i
+&= -7.55
+  + 0.70\,\mathrm{AgeRisk}_i
+  + 0.90\,\mathrm{HF}_i \\
+&\quad - 0.85\,\mathrm{SES}_{z,i}
+  + 0.55\,\mathrm{BNPRisk}_i \\
+&\quad + 0.04\,\mathrm{BMIRisk}_i
+  + 0.10\,\mathrm{LVEFRisk}_i
 \end{aligned}
 $$
 
@@ -1615,10 +1611,6 @@ $$
 ```{r}
 #| label: Visualize-ToyData2
 
-require(Hmisc)
-options(prType='html')   # have certain Hmisc functions render in html
-require(qreport)
-hookaddcap()  
 library(tidyverse)
 library(tinyplot)
 
@@ -1641,29 +1633,21 @@ rename_vec <- setNames(
 )
 
 
-toy_data |> 
-  dplyr::rename(any_of(rename_vec)) |> 
-  dplyr::select(-id, -bin_event_free) |> 
+tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |> 
   dplyr::mutate(
-    dplyr::across(.cols = c(Male, HF, Palpitation, Ablation, Outcome), .fns = \(x)as.factor(x))
+    name = dplyr::recode_values(
+      name, 
+      from = toy_data_label$from, 
+      to = toy_data_label$to
+    ) |> 
+      forcats::fct_relevel(
+        c("Age", "Male", "BMI", "LVEF", "BNP", "HF", "Palpitation", "Ablation", "Outcome")
+      )
   ) |> 
-  Hmisc::describe(x = _)
-
-# tidyr::pivot_longer(dplyr::select(toy_data, -id), cols = everything()) |> 
-#   dplyr::mutate(
-#     name = dplyr::recode_values(
-#       name, 
-#       from = toy_data_label$from, 
-#       to = toy_data_label$to
-#     ) |> 
-#       forcats::fct_relevel(
-#         c("Age", "Male", "BMI", "LVEF", "BNP", "HF", "Palpitation", "Ablation", "Outcome")
-#       )
-#   ) |> 
-#   tinyplot::plt(
-#   ~ value, facet = ~ name, facet.args = list(free = TRUE),
-#   data = _,
-#   type = type_histogram(free = TRUE))
+  tinyplot::plt(
+  ~ value, facet = ~ name, facet.args = list(free = TRUE),
+  data = _,
+  type = type_histogram(free = TRUE))
 
 ```
 
@@ -1707,12 +1691,14 @@ full_toy_data |>
     critical_value = stats::qt(0.975, df = n - 1),
     ci_lower = ate_rd - critical_value * ate_rd_se,
     ci_upper = ate_rd + critical_value * ate_rd_se, 
-    `RD 95%CI` = paste0(round(ate_rd, 3), "[", round(ci_lower, 3), " - ", round(ci_upper, 3), "]")
+    `Risk Difference [95%CI]` = paste0(round(ate_rd, 3), "[", round(ci_lower, 3), " - ", round(ci_upper, 3), "]")
   ) |>
   dplyr::select(
     n,
-    `RD 95%CI`
-  )　
+    `Risk Difference [95%CI]`
+  ) |> 
+  knitr::kable()
+
 ```
 
 - 集団全体では、`ca = 1` によりイベントリスクが平均5 percent points低下する
@@ -1807,6 +1793,57 @@ full_toy_data |>
 ```
 :::
 
+
+## External validation cohort
+
+```{r}
+#| label: show-external-case-mix
+
+summarise_cohort <- function(data, cohort) {
+  tibble::tibble(
+    cohort = cohort,
+    n = nrow(data),
+    mean_age = mean(data$age),
+    mean_bmi = mean(data$bmi),
+    female_fraction = mean(data$sexm1 == 0)
+  )
+}
+
+cohort_summary <- dplyr::bind_rows(
+  summarise_cohort(toy_data, "Development"),
+  summarise_cohort(test_toy_data, "External validation")
+)
+development_summary <- dplyr::filter(
+  cohort_summary,
+  cohort == "Development"
+)
+external_summary <- dplyr::filter(
+  cohort_summary,
+  cohort == "External validation"
+)
+shift_differences <- tibble::tibble(
+  contrast = "External validation - Development",
+  age_difference = external_summary$mean_age - development_summary$mean_age,
+  bmi_difference = external_summary$mean_bmi - development_summary$mean_bmi,
+  female_fraction_difference =
+    external_summary$female_fraction - development_summary$female_fraction
+)
+
+cohort_summary |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+shift_differences |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  print()
+```
+
+開発コホートとは独立に $n=1000$ を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。
+
+
 ## Meta-learners
 
 ::: {.panel-tabset}
@@ -1816,7 +1853,7 @@ full_toy_data |>
 ```{python}
 #| label: s-learner-binary
 #| echo: true
-#| eval: false
+#| eval: true
 
 import numpy as np
 import pandas as pd
@@ -1879,26 +1916,12 @@ print(f"ATE in test set (risk difference): {s_cate_rd.mean():.3f}")
 
 ```
 
-```{r}
-#| label: show-s-learner-result
-
-print(utils::head(s_learner_effect))
-cat(sprintf(
-  "ATE in test set (risk difference): %.3f\n",
-  mean(s_learner_effect$cate_rd)
-))
-```
-
-- `s_cate_rd` は確率スケールの治療効果（risk difference）であり、負の値は `ca = 1` によるイベントリスク低下を表す
-- S-learnerは1つのモデルで $E(Y \mid X, T)$ を学習し、各対象者について `T = 1` と `T = 0` の予測確率の差を取る
-- 因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要
-
 ## T-learner
 
 ```{python}
 #| label: t-learner-binary
 #| echo: true
-#| eval: false
+#| eval: true
 
 from econml.metalearners import TLearner
 
@@ -1923,25 +1946,12 @@ print(t_effect_df.head())
 print(f"ATE in test set (risk difference): {t_cate_rd.mean():.3f}")
 ```
 
-```{r}
-#| label: show-t-learner-result
-
-print(utils::head(t_learner_effect))
-cat(sprintf(
-  "ATE in test set (risk difference): %.3f\n",
-  mean(t_learner_effect$cate_rd)
-))
-```
-
-- T-learnerは `T = 0` と `T = 1` で2つの予測確率モデルを作り、その差をCATEとする
-- 各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい
-
 ## X-learner
 
 ```{python}
 #| label: x-learner-binary
 #| echo: true
-#| eval: false
+#| eval: true
 
 from econml.metalearners import XLearner
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -1991,87 +2001,6 @@ print(f"ATE in test set (risk difference): {x_cate_rd.mean():.3f}")
 
 ```
 
-```{r}
-#| label: show-x-learner-result
-
-print(utils::head(x_learner_effect))
-cat(sprintf(
-  "ATE in test set (risk difference): %.3f\n",
-  mean(x_learner_effect$cate_rd)
-))
-```
-
-- X-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する
-- 最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する
-
-## R-learner
-
-```{python}
-#| label: r-learner-binary
-#| echo: true
-#| eval: false
-
-from econml.dml import NonParamDML
-
-r_learner = NonParamDML(
-    model_y=HistGradientBoostingClassifier(
-        learning_rate=0.05,
-        max_iter=200,
-        max_leaf_nodes=15,
-        min_samples_leaf=30,
-        l2_regularization=1.0,
-        random_state=123,
-    ),
-    model_t=HistGradientBoostingClassifier(
-        learning_rate=0.05,
-        max_iter=150,
-        max_leaf_nodes=15,
-        min_samples_leaf=30,
-        l2_regularization=1.0,
-        random_state=123,
-    ),
-    model_final=HistGradientBoostingRegressor(
-        learning_rate=0.05,
-        max_iter=200,
-        max_leaf_nodes=15,
-        min_samples_leaf=30,
-        l2_regularization=1.0,
-        random_state=123,
-    ),
-    discrete_outcome=True,
-    discrete_treatment=True,
-    cv=5,
-    random_state=123,
-)
-
-# NonParamDML implements the R-learner residual-on-residual objective.
-r_learner.fit(Y_train, T_train, X=X_train)
-
-r_cate_rd = np.asarray(
-    r_learner.effect(X_test, T0=0, T1=1)
-).reshape(-1)
-
-r_effect_df = pd.DataFrame({
-    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
-    "cate_rd": r_cate_rd,
-})
-
-print(r_effect_df.head())
-print(f"ATE in test set (risk difference): {r_cate_rd.mean():.3f}")
-```
-
-```{r}
-#| label: show-r-learner-result
-
-print(utils::head(r_learner_effect))
-cat(sprintf(
-  "ATE in test set (risk difference): %.3f\n",
-  mean(r_learner_effect$cate_rd)
-))
-```
-
-- R-learnerはoutcomeとtreatmentをcross-fittingで残差化し、残差同士の関係からCATEを学習する
-- `NonParamDML` の非線形final modelにより、HTEを柔軟に表現する
 
 ## DR-learner
 
@@ -2128,6 +2057,67 @@ dr_effect_df = pd.DataFrame({
 print(dr_effect_df.head())
 print(f"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}")
 
+```
+
+## R-learner
+
+```{python}
+#| label: r-learner-binary
+#| echo: true
+#| eval: true
+
+from econml.dml import NonParamDML
+
+r_learner = NonParamDML(
+    model_y=HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    model_t=HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_iter=150,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    model_final=HistGradientBoostingRegressor(
+        learning_rate=0.05,
+        max_iter=200,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        l2_regularization=1.0,
+        random_state=123,
+    ),
+    discrete_outcome=True,
+    discrete_treatment=True,
+    cv=5,
+    random_state=123,
+)
+
+# NonParamDML implements the R-learner residual-on-residual objective.
+r_learner.fit(Y_train, T_train, X=X_train)
+
+r_cate_rd = np.asarray(
+    r_learner.effect(X_test, T0=0, T1=1)
+).reshape(-1)
+
+r_effect_df = pd.DataFrame({
+    "id": toy_data.loc[X_test.index, "id"].to_numpy(),
+    "cate_rd": r_cate_rd,
+})
+
+print(r_effect_df.head())
+print(f"ATE in test set (risk difference): {r_cate_rd.mean():.3f}")
+```
+
+## Meta-learnerのまとめ
+```{python}
+
 # 5つのlearnerを同じtest setで比較する
 learner_summary = pd.DataFrame({
     "learner": [
@@ -2154,87 +2144,13 @@ learner_summary = pd.DataFrame({
 })
 
 print(learner_summary.round(3))
+
 ```
 
-```{r}
-#| label: show-dr-learner-result
-
-print(utils::head(dr_learner_effect))
-cat(sprintf(
-  "ATE in test set (risk difference): %.3f\n",
-  mean(dr_learner_effect$cate_rd)
-))
-learner_summary |>
-  dplyr::select(learner, ate_rd, cate_sd) |>
-  dplyr::mutate(
-    dplyr::across(where(is.numeric), \(value) round(value, 3))
-  ) |>
-  print()
-```
-
-- `discrete_outcome=True` により、EconMLがoutcome classifierの陽性確率を使用する
-- propensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する
-- `min_propensity=0.01` は、推定propensity scoreが0または1に近い場合の極端な補正を制限する
 :::
-
-## External validation cohort
-
-```{r}
-#| label: show-external-case-mix
-
-summarise_cohort <- function(data, cohort) {
-  tibble::tibble(
-    cohort = cohort,
-    n = nrow(data),
-    mean_age = mean(data$age),
-    mean_bmi = mean(data$bmi),
-    female_fraction = mean(data$sexm1 == 0)
-  )
-}
-
-cohort_summary <- dplyr::bind_rows(
-  summarise_cohort(toy_data, "Development"),
-  summarise_cohort(test_toy_data, "External validation")
-)
-development_summary <- dplyr::filter(
-  cohort_summary,
-  cohort == "Development"
-)
-external_summary <- dplyr::filter(
-  cohort_summary,
-  cohort == "External validation"
-)
-shift_differences <- tibble::tibble(
-  contrast = "External validation - Development",
-  age_difference = external_summary$mean_age - development_summary$mean_age,
-  bmi_difference = external_summary$mean_bmi - development_summary$mean_bmi,
-  female_fraction_difference =
-    external_summary$female_fraction - development_summary$female_fraction
-)
-
-cohort_summary |>
-  dplyr::mutate(
-    dplyr::across(where(is.numeric), \(value) round(value, 3))
-  ) |>
-  print()
-shift_differences |>
-  dplyr::mutate(
-    dplyr::across(where(is.numeric), \(value) round(value, 3))
-  ) |>
-  print()
-```
-
-開発コホートとは独立に $n=1000$ を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。
 
 ## Meta-learnerの評価：test dataset
 
-5つのモデルを開発コホート全例で学習して固定し、独立な`test_toy_data`で比較する。
-
-- 学習・評価用nuisance model・bootstrapはtargetsで計算する
-- 各モデルの評価済み`DRTester` objectもjoblibで保存する
-- 各objectの`EvaluationResults`からGATE・TOC・Qini・AUTOCのraw tableをモデル別CSVに保存する
-- **利益 = イベントリスクの減少量**に統一：評価outcomeは`1 - bin_outcome`、予測利益は`-model.effect(X)`
-- 以下の図は保存した評価値からQmd内で描画する
 
 ```{python}
 #| label: econml-evaluation-api
@@ -2242,9 +2158,14 @@ shift_differences |>
 #| echo: true
 
 # targetsが保存した評価済みDRTesterを再利用できる。
+from pathlib import Path
 import joblib
 
-tester = joblib.load("cache/validation/external/dr_learner-drtester.joblib")
+tester_path = Path(
+    "statistics/mlcausal/cache/validation/external/"
+    "dr_learner-drtester.joblib"
+)
+tester = joblib.load(tester_path)
 result = tester.res
 result.summary()          # BLP / calibration / AUTOC / QINI
 result.cal.plot_data_dict[1]  # GATEのraw DataFrame
@@ -2282,7 +2203,7 @@ meta_gates |>
   theme_bw() + theme(legend.position = "none")
 ```
 
-開発コホートの予測利益の五分位で群を定め、testデータの予測平均とDR GATEを比較する。誤差棒は点ごとの95% CI。
+- 5群でのデータ
 
 ## Meta-learnerのTOC・Qini（test dataset）
 
@@ -2339,22 +2260,8 @@ meta_rate_summary <- external_learner_summary |>
   )
 meta_rate_summary |> knitr::kable(digits = 3)
 
-dplyr::bind_rows(
-  dplyr::transmute(meta_rate_summary, learner, metric = "AUTOC", estimate = autoc, se = autoc_se),
-  dplyr::transmute(meta_rate_summary, learner, metric = "QINI", estimate = qini, se = qini_se)
-) |>
-  ggplot(aes(estimate, factor(learner, levels = rev(meta_model_order)), color = learner)) +
-  geom_vline(xintercept = 0, linetype = 2, color = "grey55") +
-  geom_errorbar(aes(xmin = estimate - 1.96 * se, xmax = estimate + 1.96 * se),
-                orientation = "y", width = 0.15) +
-  geom_point(size = 2) +
-  facet_wrap(~ metric, scales = "free_x") +
-  scale_color_manual(values = meta_model_colors) +
-  labs(x = "RATE estimate (95% CI)", y = NULL) +
-  theme_bw() + theme(legend.position = "none")
 ```
 
-AUTOCはTOC、QINI係数はQini曲線の面積に対応する。ここではEconML既定の5〜95%の分位点グリッドによる推定値を示す。GRFとは既定の積分グリッドが異なるため、数値をそのまま同一視しない。
 
 ## EconMLモデルを説明する（Python）
 
@@ -2461,9 +2368,6 @@ meta_shap_data |>
 
 :::
 
-::: {.small}
-開発コホート全例で学習した5モデルを固定し、testデータを参照集団として説明する。PDP（Age・BMI・BNP・LVEF）とKernel SHAPは別々のPython関数・targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。
-:::
 
 ## EconMLモデルをSingle Treeで説明
 
@@ -2480,9 +2384,6 @@ single_tree_figures <- list(
 )
 ```
 
-::: {.small}
-このSingle Treeは前半で学習したinternal splitのモデルを説明する。各ノードの `value` は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じinternal test setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。
-:::
 
 ::: {.panel-tabset}
 
@@ -2540,11 +2441,6 @@ knitr::include_graphics(single_tree_figures[["DR-learner"]])
 
 ## Causal forest：学習データでの診断
 
-
-    Sverdrup E, Petukhova M, Wager S. Estimating treatment effect heterogeneity in psychiatry: A review and tutorial with causal forests. Int J Methods Psychiatr Res. 2025;34(2):e70015. doi:10.1002/mpr.70015
-  
-このやり方をまねる
-
 ```{r}
 #| label: causal-forest
 
@@ -2565,12 +2461,41 @@ grf_data <- toy_data |>
   ) |>
   tibble::as_tibble()
 
-tinyplot::plt(~ pscore, data = grf_data, type = type_histogram())
+```
+
+:::
+::: {.panel-tabset}
+
+## Propensity scoreの分布
+
+```{r}
+#| label: propensity-score-overlap
+
+grf_data |> 
+  tidyr::pivot_longer(
+    cols = c(pscore, ipw)
+  ) |> 
+  dplyr::mutate(
+    ca = factor(ca), 
+    name = factor(name, levels = c("pscore", "ipw"))) |> 
+    tinyplot::plt(~ value | ca, facet = ~ name, facet.args = list(free = TRUE), data = _, type = type_histogram(free.breaks = TRUE, freq = FALSE))
+
+
+```
+
+- 十分重なっており、IPWだとPropensity scoreは重なりが良い
+
+## 各因子のBalance
+
+```{r}
+#| label: balance-for-grf
+
+library(cobalt)
 
 balance <- cobalt::bal.tab(
   ca ~ age + sexm1 + bmi + hf + bnp + lvef,
   data = grf_data,
-  weights = "ipw",
+  weights = grf_data$ipw,
   method = "weighting",
   un = TRUE,
   continuous = "std",
@@ -2594,6 +2519,18 @@ cobalt::love.plot(
 
 ```
 
+- 正直あまりよくない
+
+:::
+
+
+## grfの評価
+
+:::
+::: {.panel-tabset}
+
+## Calibration ~ Best linear prediction
+
 ```{r}
 #| label: calibration-test-grf
 
@@ -2603,89 +2540,7 @@ grf::test_calibration(causal_forest_bin)
 
 ```
 
-
-```{r}
-#| label: shap
-
-shapviz::sv_importance(causal_forest_shap, kind = "bee")
-causal_forest_dr_scores <- policytree::double_robust_scores(causal_forest_bin)
-utils::head(causal_forest_dr_scores)
-causal_forest_surrogate_tree <- partykit::ctree(
-  tau_hat_rev ~ age + sexm1 + bmi + hf + bnp + lvef,
-  data = grf_data,
-  control = partykit::ctree_control(maxdepth = 3)
-)
-plot(causal_forest_surrogate_tree)
-
-policy_scores <- policytree::double_robust_scores(causal_forest_policy)
-policy_tree <- policytree::policy_tree(
-  policy_features,
-  policy_scores,
-  depth = 2
-)
-print(policy_tree)
-plot(policy_tree, leaf.labels = c("Control", "CA"))
-
-```
-
-## GRF：test datasetへの予測
-
-```{r}
-#| label: grf-test-predictions
-#| echo: true
-
-library(grf)
-
-# 学習済みモデルを固定し、学習時と同じ列順でtestデータを渡す。
-X_test_grf <- test_toy_data |>
-  dplyr::select(dplyr::all_of(colnames(causal_forest_bin$X.orig))) |>
-  as.data.frame()
-tau_test_grf <- as.numeric(predict(
-  causal_forest_bin, newdata = as.matrix(X_test_grf)
-)$predictions)
-benefit_test_grf <- -tau_test_grf
-
-# 評価用forestの学習だけをtargetsに保存している。
-# Y = 1 - bin_outcomeなので、DR scoreは利益の尺度。
-# このforest自身のCATEで順位付けはしない。
-dr_benefit_test <- as.numeric(grf::get_scores(external_evaluation_forest))
-stopifnot(length(benefit_test_grf) == length(dr_benefit_test))
-```
-
-評価用forestはtestデータ内のOOB予測からnuisanceを推定する。評価対象は開発データで学習した`causal_forest_bin`の固定予測であり、testデータで再学習した効果予測ではない。
-
-## GRFのGATE（test dataset）
-
-```{r}
-#| label: grf-GATE
-#| echo: true
-#| fig-width: 8
-#| fig-height: 4.5
-
-# testのoutcomeを使わず、開発データのOOB予測で五分位境界を定める。
-benefit_train_grf <- -as.numeric(predict(causal_forest_bin)$predictions)
-gate_breaks <- c(-Inf, unique(as.numeric(quantile(
-  benefit_train_grf, probs = seq(0.2, 0.8, 0.2)
-))), Inf)
-grf_gates <- tibble::tibble(
-  group = cut(benefit_test_grf, breaks = gate_breaks, labels = FALSE),
-  predicted_benefit = benefit_test_grf,
-  dr_benefit = dr_benefit_test
-) |>
-  dplyr::group_by(group) |>
-  dplyr::summarise(
-    n = dplyr::n(), predicted_gate = mean(predicted_benefit),
-    gate = mean(dr_benefit), gate_se = sd(dr_benefit) / sqrt(n),
-    .groups = "drop"
-  )
-
-ggplot(grf_gates, aes(predicted_gate, gate)) +
-  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
-  geom_errorbar(aes(ymin = gate - 1.96 * gate_se, ymax = gate + 1.96 * gate_se), width = 0) +
-  geom_line(color = "#4E79A7") + geom_point(color = "#4E79A7", size = 2.5) +
-  geom_text(aes(label = paste0("G", group)), nudge_x = 0.002) +
-  labs(x = "Mean predicted benefit", y = "DR GATE: risk reduction") + theme_bw()
-```
+## Discrimination ~ TOC, Qini
 
 ## GRFのRATE：AUTOC / QINI（test dataset）
 
@@ -2740,7 +2595,8 @@ ggplot(grf_curves, aes(q, value)) +
   theme_bw()
 ```
 
-## GRFのC-for-benefit（test dataset）
+## Discrimination ~ C for benefit
+
 
 ```{r}
 #| label: show-external-c-for-benefit
@@ -2750,6 +2606,7 @@ ggplot(grf_curves, aes(q, value)) +
 # 予測benefitは正ほど有益。outcomeはmatchingに使わない。
 cfb_data <- test_toy_data |>
   dplyr::mutate(predicted_benefit = benefit_test_grf)
+
 matching_estimand <- if (sum(cfb_data$ca == 1) <= sum(cfb_data$ca == 0)) {
   "ATT"
 } else {
@@ -2778,193 +2635,143 @@ cfb_pairs <- MatchIt::match_data(cfb_matching) |>
     predicted_benefit = mean(predicted_benefit),
     .groups = "drop"
   )
-head(cfb_pairs) |> knitr::kable(digits = 3)
+
+c_for_benefit_fast <- function(observed_benefit, predicted_benefit) {
+  stopifnot(
+    length(observed_benefit) == length(predicted_benefit),
+    length(observed_benefit) >= 2L,
+    all(is.finite(observed_benefit)),
+    all(is.finite(predicted_benefit))
+  )
+
+  observed_levels <- sort(unique(observed_benefit))
+  if (length(observed_levels) < 2L) {
+    return(NA_real_)
+  }
+
+  total_score <- 0
+  number_of_comparisons <- 0
+
+  # 観測benefitが高い群を、それより低い全ての群と比較する。
+  for (higher_level in observed_levels[-1]) {
+    predictions_in_higher_group <- predicted_benefit[
+      observed_benefit == higher_level
+    ]
+    predictions_in_lower_groups <- predicted_benefit[
+      observed_benefit < higher_level
+    ]
+
+    # 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。
+    score_for_each_pair <- vapply(
+      predictions_in_higher_group,
+      function(higher_prediction) {
+        sum(higher_prediction > predictions_in_lower_groups) +
+          0.5 * sum(higher_prediction == predictions_in_lower_groups)
+      },
+      numeric(1)
+    )
+
+    total_score <- total_score + sum(score_for_each_pair)
+    number_of_comparisons <- number_of_comparisons +
+      length(predictions_in_higher_group) *
+      length(predictions_in_lower_groups)
+  }
+
+  total_score / number_of_comparisons
+}
+
+# boot()は、この関数のindicesに復元抽出した行番号を渡す。
+bootstrap_c_for_benefit_fast <- function(data, indices) {
+  sampled_pairs <- data[indices, , drop = FALSE]
+
+  c_for_benefit_fast(
+    observed_benefit = sampled_pairs$observed_benefit,
+    predicted_benefit = sampled_pairs$predicted_benefit
+  )
+}
+
+# 4. matched pairを単位に500回bootstrapする。
+set.seed(123)
+cfb_bootstrap_fast <- boot::boot(
+  data = cfb_pairs,
+  statistic = bootstrap_c_for_benefit_fast,
+  R = 500
+)
+
+# t0が元データの点推定、tが各bootstrap標本の推定値。
+cfb_estimate <- as.numeric(cfb_bootstrap_fast$t0)
+
+cfb_ci_result <- boot::boot.ci(
+  cfb_bootstrap_fast,
+  conf = 0.95,
+  type = "bca"
+)
+cfb_ci <- cfb_ci_result$bca[4:5]
+
+cfb_summary <- tibble::tibble(
+  c_for_benefit = cfb_estimate,
+  lower_95 = unname(cfb_ci[1]),
+  upper_95 = unname(cfb_ci[2])
+
+)
+
+cfb_summary |> knitr::kable(digits = 3)
+
 ```
 
-少ない側の群を基準に、予測benefitのMahalanobis距離で非復元matchingする。観測benefitは「対照のイベント − 治療のイベント」、予測benefitはペアの2人の予測利益の平均。
-
-## GRFのC-for-benefit：一致率と信頼区間
+## Calibration ~ GATE
 
 ```{r}
-#| label: calculate-external-c-for-benefit
+#| label: grf-test-predictions
 #| echo: true
+#| fig-width: 8
+#| fig-height: 4.5
 
-c_for_benefit <- function(data) {
+library(grf)
 
-  tidyr::crossing(
-    i = seq_len(nrow(data)),
-    j = seq_len(nrow(data))
-  ) |>
-    filter(
-      i < j,
-      data$observed_benefit[i] !=
-        data$observed_benefit[j]
-    ) |>
-    transmute(
-      obs_diff =
-        data$observed_benefit[i] -
-        data$observed_benefit[j],
+# 学習済みモデルを固定し、学習時と同じ列順でtestデータを渡す。
+X_test_grf <- test_toy_data |>
+  dplyr::select(dplyr::all_of(colnames(causal_forest_bin$X.orig))) |>
+  as.data.frame()
+tau_test_grf <- as.numeric(predict(
+  causal_forest_bin, newdata = as.matrix(X_test_grf)
+)$predictions)
+benefit_test_grf <- -tau_test_grf
 
-      pred_diff =
-        data$predicted_benefit[i] -
-        data$predicted_benefit[j],
+# 評価用forestの学習だけをtargetsに保存している。
+# Y = 1 - bin_outcomeなので、DR scoreは利益の尺度。
+# このforest自身のCATEで順位付けはしない。
+dr_benefit_test <- as.numeric(grf::get_scores(external_evaluation_forest))
+stopifnot(length(benefit_test_grf) == length(dr_benefit_test))
 
-      score = case_when(
-        obs_diff * pred_diff > 0 ~ 1,
-        pred_diff == 0 ~ 0.5,
-        TRUE ~ 0
-      )
-    ) |>
-    summarise(
-      cfb = mean(score)
-    ) |>
-    pull(cfb)
-}
-
-# Point estimate
-# c_for_benefit(cfb_pairs)
-
-#--------------------------------------------------
-# pair bootstrap
-#--------------------------------------------------
-
-cfb_stat <- function(data, indices) {
-  c_for_benefit(data[indices, ])
-}
-
-set.seed(123)
-
-boot_cfb <- boot::boot(
-  data = cfb_pairs,
-  statistic = cfb_stat,
-  R = 199
-)
-
-#--------------------------------------------------
-# result
-#--------------------------------------------------
-
-cfb_study <- tibble(
-  C_for_benefit = boot_cfb$t0,
-  lower_95 = quantile(
-    boot_cfb$t,
-    0.025,
-    na.rm = TRUE
-  ),
-  upper_95 = quantile(
-    boot_cfb$t,
-    0.975,
-    na.rm = TRUE
+# testのoutcomeを使わず、開発データのOOB予測で五分位境界を定める。
+benefit_train_grf <- -as.numeric(predict(causal_forest_bin)$predictions)
+gate_breaks <- c(-Inf, unique(as.numeric(quantile(
+  benefit_train_grf, probs = seq(0.2, 0.8, 0.2)
+))), Inf)
+grf_gates <- tibble::tibble(
+  group = cut(benefit_test_grf, breaks = gate_breaks, labels = FALSE),
+  predicted_benefit = benefit_test_grf,
+  dr_benefit = dr_benefit_test
+) |>
+  dplyr::group_by(group) |>
+  dplyr::summarise(
+    n = dplyr::n(), predicted_gate = mean(predicted_benefit),
+    gate = mean(dr_benefit), gate_se = sd(dr_benefit) / sqrt(n),
+    .groups = "drop"
   )
-)
 
-cfb_study |> knitr::kable(digits = 3)
-
-# # 3. 二つのmatched pairを選び、観測benefitと予測benefitの順序を比べる。
-# c_for_benefit_fast <- function(observed_benefit, predicted_benefit) {
-#   stopifnot(
-#     length(observed_benefit) == length(predicted_benefit),
-#     length(observed_benefit) >= 2L,
-#     all(is.finite(observed_benefit)),
-#     all(is.finite(predicted_benefit))
-#   )
-
-#   observed_levels <- sort(unique(observed_benefit))
-#   if (length(observed_levels) < 2L) {
-#     return(NA_real_)
-#   }
-
-#   total_score <- 0
-#   number_of_comparisons <- 0
-
-#   # 観測benefitが高い群を、それより低い全ての群と比較する。
-#   for (higher_level in observed_levels[-1]) {
-#     predictions_in_higher_group <- predicted_benefit[
-#       observed_benefit == higher_level
-#     ]
-#     predictions_in_lower_groups <- predicted_benefit[
-#       observed_benefit < higher_level
-#     ]
-
-#     # 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。
-#     score_for_each_pair <- vapply(
-#       predictions_in_higher_group,
-#       function(higher_prediction) {
-#         sum(higher_prediction > predictions_in_lower_groups) +
-#           0.5 * sum(higher_prediction == predictions_in_lower_groups)
-#       },
-#       numeric(1)
-#     )
-
-#     total_score <- total_score + sum(score_for_each_pair)
-#     number_of_comparisons <- number_of_comparisons +
-#       length(predictions_in_higher_group) *
-#       length(predictions_in_lower_groups)
-#   }
-
-#   total_score / number_of_comparisons
-# }
-
-# # boot()は、この関数のindicesに復元抽出した行番号を渡す。
-# bootstrap_c_for_benefit_fast <- function(data, indices) {
-#   sampled_pairs <- data[indices, , drop = FALSE]
-
-#   c_for_benefit_fast(
-#     observed_benefit = sampled_pairs$observed_benefit,
-#     predicted_benefit = sampled_pairs$predicted_benefit
-#   )
-# }
-
-# # 4. matched pairを単位に500回bootstrapする。
-# set.seed(123)
-# cfb_bootstrap_fast <- boot::boot(
-#   data = cfb_pairs,
-#   statistic = bootstrap_c_for_benefit_fast,
-#   R = 500
-# )
-
-# # t0が元データの点推定、tが各bootstrap標本の推定値。
-# cfb_estimate <- as.numeric(cfb_bootstrap_fast$t0)
-# cfb_ci_result <- boot::boot.ci(
-#   cfb_bootstrap_fast,
-#   conf = 0.95,
-#   type = "perc"
-# )
-# cfb_ci <- cfb_ci_result$percent[4:5]
-
-# cfb_summary <- tibble::tibble(
-#   n_pairs = nrow(cfb_pairs),
-#   c_for_benefit = cfb_estimate,
-#   lower_95 = unname(cfb_ci[1]),
-#   upper_95 = unname(cfb_ci[2]),
-#   valid_bootstraps = sum(is.finite(cfb_bootstrap_fast$t))
-# )
-
+ggplot(grf_gates, aes(predicted_gate, gate)) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
+  geom_errorbar(aes(ymin = gate - 1.96 * gate_se, ymax = gate + 1.96 * gate_se), width = 0) +
+  geom_line(color = "#4E79A7") + geom_point(color = "#4E79A7", size = 2.5) +
+  geom_text(aes(label = paste0("G", group)), nudge_x = 0.002) +
+  labs(x = "Mean predicted benefit", y = "DR GATE: risk reduction") + theme_bw()
 ```
 
-予測順位の一致を1、不一致を0、予測が同値なら0.5として平均する。CIは固定したモデル・matchingに条件づけた500回のpair bootstrapであり、再学習・再matchingの不確実性を含まない。
+:::
 
 ## GRFモデルを説明する（R）
-
-```{r}
-#| label: prepare-grf-explanations
-#| include: false
-
-library(dplyr)
-library(ggplot2)
-library(shapviz)
-
-feature_order <- c("Age", "BMI", "BNP", "LVEF (%)")
-grf_pdp_data <- grf_pdp_data |>
-  dplyr::mutate(feature = factor(feature, levels = feature_order))
-
-grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
-  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
-  geom_line(color = "#4E79A7", linewidth = 1.1) +
-  facet_wrap(~feature, scales = "free_x", nrow = 1) +
-  labs(x = NULL, y = "Estimated HTE: risk reduction") +
-  theme_bw(base_size = 11)
-```
 
 ::: {.panel-tabset}
 
@@ -2976,10 +2783,25 @@ grf_pdp_plot <- ggplot(grf_pdp_data, aes(x = value, y = hte)) +
 #| fig-height: 4.8
 #| out-width: 100%
 
-grf_pdp_plot
+library(dplyr)
+library(ggplot2)
+
+feature_order <- c("Age", "BMI", "BNP", "LVEF (%)")
+grf_pdp_data <- grf_pdp_data |>
+  dplyr::mutate(feature = factor(feature, levels = feature_order))
+
+ggplot(grf_pdp_data, aes(x = value, y = hte)) +
+  geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
+  geom_line(color = "#4E79A7", linewidth = 1.1) +
+  facet_wrap(~feature, scales = "free_x", nrow = 1) +
+  labs(x = NULL, y = "Estimated HTE: risk reduction") +
+  theme_bw(base_size = 11)
+
+
 ```
 
 ### Global SHAP
+
 
 ```{r}
 #| label: plot-grf-shap
@@ -2999,6 +2821,38 @@ shapviz::sv_importance(
     x = "SHAP value for risk reduction"
   ) +
   theme_bw(base_size = 10)
+
+```
+
+### Surrogate tree
+
+```{r}
+#| label: shap
+
+causal_forest_surrogate_tree <- partykit::ctree(
+  tau_hat_rev ~ age + sexm1 + bmi + hf + bnp + lvef,
+  data = grf_data,
+  control = partykit::ctree_control(maxdepth = 3)
+)
+plot(causal_forest_surrogate_tree)
+
+```
+
+
+### Policy tree
+
+```{r}
+#| label: grf-policytree
+
+policy_scores <- policytree::double_robust_scores(causal_forest_policy)
+policy_tree <- policytree::policy_tree(
+  policy_features,
+  policy_scores,
+  depth = 2
+)
+print(policy_tree)
+plot(policy_tree, leaf.labels = c("Control", "CA"))
+
 ```
 
 :::

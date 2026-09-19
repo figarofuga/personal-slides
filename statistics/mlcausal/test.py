@@ -70,4 +70,6 @@ gate_df = res_dr.cal.plot_data_dict[1].copy()
 
 print(gate_df)
 
-# %%
+res_dr.plot_cal(tmt=1)
+res_dr.plot_qini(1)
+

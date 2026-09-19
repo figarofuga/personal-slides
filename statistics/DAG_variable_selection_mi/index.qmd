@@ -100,6 +100,70 @@ blockquote {
 - 3次元プロットって？
 - Tips：Gestaltと色使いについて
 
+
+## DAGの基本
+
+```{r}
+#| label: DAG
+#| fig-width: 10
+#| fig-height: 4
+
+library(dagitty)
+library(ggdag)
+library(dplyr)
+library(ggplot2)
+library(grid)
+
+dag <- dagitty("dag {
+  D -> A
+  A -> B
+  B -> C
+  D -> C
+  A -> E
+  C -> E
+}")
+
+# Graphviz版の見た目に合わせて座標を固定
+coordinates(dag) <- list(
+  x = c(A = 1, B = 4, C = 7, D = 4, E = 4),
+  y = c(A = 0, B = 0, C = 0, D = -1, E = 1)
+)
+
+labels_ja <- c(
+  A = "曝露",
+  B = "中間因子",
+  C = "アウトカム",
+  D = "交絡因子",
+  E = "Collider"
+)
+
+tidy_dagitty(dag) |>
+  mutate(
+    label = labels_ja[name],
+    label_x = if_else(name == "C", x + 0.05, x),
+    label_y = y
+  ) |>
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(
+    arrow_directed = grid::arrow(length = grid::unit(8, "pt"), type = "closed")
+  ) +
+  geom_dag_point(size = 32, alpha = 0.2, color = "#2C7FB8") +
+  geom_dag_text(aes(x = label_x, y = label_y, label = label), size = 4, color = "black") +
+  theme_dag() +
+  coord_equal(xlim = c(0, 8), ylim = c(-1.5, 1.5), clip = "off")
+
+
+```
+
+- 交絡因子は介入とOutcome両方に関連する上流の因子(介入 \<- 交絡 -\> アウトカム)
+- 中間因子は介入とOutcomeの間にある因子(介入 -\> 中間 -\> アウトカム)
+- Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -\> Colider \<- アウトカム)
+- 基本は交絡因子のみ補正が必要
+  - 中間因子を補正すると治療効果が薄まる
+  - Coliderを補正してしまうと逆にバイアスが出てくる
+- 分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール[@Iwanami-2016-sy]
+
+
 ## よいFigureの条件
 
 :::: columns

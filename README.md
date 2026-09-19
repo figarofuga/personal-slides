@@ -60,8 +60,8 @@ pixi run Rscript scripts/vendor_pixi_r_packages.R <<package-name>>
 If R packages to remove in /vendor...
 
 ```bash
-pixi remove r-epiforsk &&
-  rm -rf -- vendor/EpiForsk
+pixi remove r-bartcause &&
+  rm -rf -- vendor/bartCause
 ```  
 
 To upgrade an existing vendored package to a newer repository version, run:
@@ -108,7 +108,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "C for benefit changes"
+git commit -m "update Jissen"
 git push
 
 ```
