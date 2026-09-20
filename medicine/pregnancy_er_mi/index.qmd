@@ -1,7 +1,7 @@
 ---
-title: "下垂体偶発種について"
-subtitle: "なんで頭部CT撮ってんだよ！"
-date: "2026-05-27"
+title: "妊娠患者をERで診たとき"
+subtitle: "婦人科がとってくれない・・・・・・"
+date: "2026-11-27"
 format:
   clean-revealjs:
     toc: true

@@ -2062,21 +2062,21 @@
     "href": "statistics/mlcausal/index.html#因果関係",
     "title": "機械学習を用いた因果推論",
     "section": "因果関係",
-    "text": "因果関係\n\n医学研究の第一の目標と言っても過言ではない\n“Aの薬を使うと患者の予後は良くなるか？”\n実際は口で言うほど簡単ではない"
+    "text": "因果関係\n\n医学研究の第一の目標と言っても過言ではない\n“目の前の心不全の患者にAの薬を使うと予後は良くなるか？”\n実際は口で言うほど簡単ではない"
   },
   {
     "objectID": "statistics/mlcausal/index.html#どうして難しいか",
     "href": "statistics/mlcausal/index.html#どうして難しいか",
     "title": "機械学習を用いた因果推論",
     "section": "どうして難しいか？",
-    "text": "どうして難しいか？\n\n因果関係の根本的問題\n\nある個人に「介入をしなかった時」と「介入をした時」の結果を同時に観測できない\n\nこれを解決するために種々の方法が存在する\n最も有名なのはRCTであるが、RCTは万能ではない\nConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある\n観察研究はConfounderがコントロール出来ない"
+    "text": "どうして難しいか？\n\n因果関係の根本的問題\n\nある個人に「介入をしなかった時」と「介入をした時」の結果を同時に観測できない\n\nこれを解決するために種々の方法が存在する\n最も有名なのはRCTであるが、RCTは万能ではない\n\nConfounderはRandom化でコントロールは出来るが外的妥当性の問題がある\n\n観察研究は外的妥当性が高いが、Confounderがコントロール出来ない"
   },
   {
     "objectID": "statistics/mlcausal/index.html#因果関係の考え方",
     "href": "statistics/mlcausal/index.html#因果関係の考え方",
     "title": "機械学習を用いた因果推論",
     "section": "因果関係の考え方",
-    "text": "因果関係の考え方\n\n大きく分けて2つの考え方がある\n\n潜在的アウトカムを考えるRubin流\nDAGを作り、do operatorを使うPearl流\n\n詳細は省くが、今回はPearl流のDAGを中心に考える"
+    "text": "因果関係の考え方\n\n大きく分けて2つの考え方がある\n\n潜在的アウトカムを考えるRubin流\nDAGを作り、do operatorを使うPearl流\n\n詳細は省くが、今回はRubin流の潜在的アウトカムを中心に考える\n交絡因子の制御にまずは目を向ける"
   },
   {
     "objectID": "statistics/mlcausal/index.html#dagの基本",
@@ -2104,7 +2104,7 @@
     "href": "statistics/mlcausal/index.html#次の手",
     "title": "機械学習を用いた因果推論",
     "section": "次の手",
-    "text": "次の手\n\n自由度を上げるために、連続値をrestricted cubic splineに入れる\n交互作用項を入れる　などなど\nAIPW, TMLE, orthogonalizationなどでDoubly robustな手法\n\nOutcome modelとPropensity modelを用いてDoubly robustにする\n\nこれらのモデルで機械学習を入れることも可能"
+    "text": "次の手\n\n自由度を上げるために、連続値をrestricted cubic splineに入れる\n交互作用項を入れる　などなど\nAIPW, TMLE, Orthogonalizationなどの特殊な手法\n\nOutcome modelとPropensity modelを用いてDoubly robustにする\n\nこれらのモデルで機械学習を入れることも可能"
   },
   {
     "objectID": "statistics/mlcausal/index.html#さらなる補正",
@@ -2118,7 +2118,7 @@
     "href": "statistics/mlcausal/index.html#しかしながら",
     "title": "機械学習を用いた因果推論",
     "section": "しかしながら・・・・・・",
-    "text": "しかしながら・・・・・・\n\n結局のところ、モデルは人が作らないといけない\n非線形な関係も、Interaction termもいずれにせよ人が作る必要がある\n治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる\n\nこの治療は眼の前の患者さんに有益ですか？"
+    "text": "しかしながら・・・・・・\n\n結局のところ、モデルは人が作らないといけない\n非線形な関係も、Interaction termもいずれにせよ人が作る必要がある\nさらに、治療効果の異質性については古典的な線形回帰では考慮できない\n\n治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる この治療は眼の前の患者さんに有益ですか？"
   },
   {
     "objectID": "statistics/mlcausal/index.html#通常の回帰だとどうすればいい",
@@ -2139,7 +2139,7 @@
     "href": "statistics/mlcausal/index.html#代表的な機械学習",
     "title": "機械学習を用いた因果推論",
     "section": "代表的な機械学習",
-    "text": "代表的な機械学習\n\n\n\n\n\nTree-based models\n\n\n\nこれはRandom forest\n小さい木のモデルを並列ではなく直列にするとXGBoostなど\n\n\n\n\n\nNeural network models\n\n\n\n沢山のLogistic regression modelを重ねたようなもの"
+    "text": "代表的な機械学習\n\n\n\n\n\nTree-based models\n\n\n\nこれはRandom forest\n小さい木のモデルを並列ではなく直列にするとXGBoostなど\n\n\n\n\n\n\n\nNeural network models\n\n\n\n沢山のLogistic回帰を重ねたようなもの"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習の強みと弱み",
@@ -2153,14 +2153,14 @@
     "href": "statistics/mlcausal/index.html#因果推論における機械学習の役割",
     "title": "機械学習を用いた因果推論",
     "section": "因果推論における機械学習の役割",
-    "text": "因果推論における機械学習の役割\n\nアウトカムモデル、PS modelを柔軟に扱う\nInteraction termを自然に扱える\n柔軟なモデルであれば、HTEを自然に扱えないか？(Khera et al. 2024)"
+    "text": "因果推論における機械学習の役割\n\nアウトカムモデル、PS modelを柔軟に扱える\nInteraction termを自然に扱える\n柔軟なモデルであれば、HTEを自然に扱えないか？(Khera et al. 2024)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
     "href": "statistics/mlcausal/index.html#機械学習を用いた因果推論について",
     "title": "機械学習を用いた因果推論",
     "section": "機械学習を用いた因果推論について",
-    "text": "機械学習を用いた因果推論について\n\n大別してMeta learner系とmodified machine-learning系(代表としてCausal forest)に分けられる(Segal et al. 2023)\n柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest\nとはいえ、Causal forestだけで良い気もする"
+    "text": "機械学習を用いた因果推論について\n\n大別して以下の2種類に分けられる(Segal et al. 2023)\n\n\nMeta learner系\nmodified machine-learning系(代表としてCausal forest)\n\n\n柔軟なモデル作成としてMeta learnerがあり、HTEに強いのがCausal forest\nとはいえ、Causal forestだけで良い気もする"
   },
   {
     "objectID": "statistics/mlcausal/index.html#古典的な因果推論の問題点",
@@ -2223,7 +2223,7 @@
     "href": "statistics/mlcausal/index.html#causal-forestの原理",
     "title": "機械学習を用いた因果推論",
     "section": "Causal forestの原理",
-    "text": "Causal forestの原理\n\nHonesty\nHTE専用の機械学習\n基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)\n\n正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰\n\nOverfittingを防ぐために”Honest”を用いる\n\n分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める"
+    "text": "Causal forestの原理\n\nHonestyの原理\nHTE専用の機械学習\n基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)\n\n正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰\n\nOverfittingを防ぐために”Honest”を用いる\n\n分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forestの強み",
@@ -2265,7 +2265,7 @@
     "href": "statistics/mlcausal/index.html#test-dataset②",
     "title": "機械学習を用いた因果推論",
     "section": "Test-dataset②",
-    "text": "Test-dataset②\n\n\n# A tibble: 6 × 11\n     id   age sexm1   bmi    hf   bnp  lvef palpitation    ca bin_outcome\n  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;\n1     1    39     1  25.5     0     8    57           0     1           0\n2     2    62     0  18.8     0   718    44           0     1           1\n3     3    56     1  28.0     0   261    54           1     1           0\n4     4    70     0  17.7     0    79    48           0     0           0\n5     5    73     0  25.0     0   187    48           0     0           0\n6     6    58     1  27.7     0    29    54           1     1           0\n# ℹ 1 more variable: bin_event_free &lt;int&gt;\n\n\n\n治療のPropensity scoreは\n\n男性/若いと受けやすい\nLVEFが低い/心不全既往があると受けやすい\nBMIが高いと受けやすく\nSocial economic statusが良いと受けやすい\n\n非治療時のイベントリスクの線形予測子は（SESは標準化値） $$ \\begin{aligned} _i ={}& -7.55\n0.70,_i\n0.90,i \\ &- 0.85,{z,i}\n0.55,_i \\ &+ 0.04,_i\n0.10,_i \\end{aligned} $$"
+    "text": "Test-dataset②\n\n\n# A tibble: 6 × 11\n     id   age sexm1   bmi    hf   bnp  lvef palpitation    ca bin_outcome\n  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;       &lt;int&gt;\n1     1    39     1  25.5     0     8    57           0     1           0\n2     2    62     0  18.8     0   718    44           0     1           1\n3     3    56     1  28.0     0   261    54           1     1           0\n4     4    70     0  17.7     0    79    48           0     0           0\n5     5    73     0  25.0     0   187    48           0     0           0\n6     6    58     1  27.7     0    29    54           1     1           0\n# ℹ 1 more variable: bin_event_free &lt;int&gt;\n\n\n\n治療のPropensity scoreは\n\n男性/若いと受けやすい\nLVEFが低い/心不全既往があると受けやすい\nBMIが高いと受けやすく\nSocial economic statusが良いと受けやすい\n\n非治療時のイベントリスクの線形予測子は（SESは標準化値）\n\n\\[\n\\begin{aligned}\n\\eta_i\n&= -7.55\n  + 0.70\\,\\mathrm{AgeRisk}_i\n  + 0.90\\,\\mathrm{HF}_i \\\\\n&\\quad - 0.85\\,\\mathrm{SES}_{z,i}\n  + 0.55\\,\\mathrm{BNPRisk}_i \\\\\n&\\quad + 0.04\\,\\mathrm{BMIRisk}_i\n  + 0.10\\,\\mathrm{LVEFRisk}_i\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "statistics/mlcausal/index.html#thank-you-for-your-listening",
@@ -4477,7 +4477,7 @@
     "href": "statistics/mlcausal/index.html#交絡因子の制御の方法",
     "title": "機械学習を用いた因果推論",
     "section": "交絡因子の制御の方法",
-    "text": "交絡因子の制御の方法\n\nStratificationMatchingWeighting\n\n\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n      942        693 1.36    0.174 2.5  -417   2300\n\nTerm: treat\nType: response\nComparison: 1 - 0\n\n\n\nPropensity scoreの値を5分位に分けて、各々の層同士で比較して最後に統合する\n\n\n\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n      926        687 1.35    0.178 2.5  -421   2273\n\nTerm: treat\nType: response\nComparison: 1 - 0\n\n\n\nPropensity scoreが似たものを1:1でMatchingさせる\n治療側、コントロール側のどちらに合わせるかでATT, ATUが分かる\n\n\n\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1637        797 2.05     0.04 4.6  75.1   3199\n\nTerm: treat\nType: probs\nComparison: 1 - 0\n\n\n\nPropensity scoreをベースに色々な重みづけをしてバランスをとる\n疑似RCTとするAverate Treatment Overlappingなども可能(Thomas et al. 2020)"
+    "text": "交絡因子の制御の方法\n\nStratificationMatchingWeighting\n\n\n\n\n          1   2   3  4  5 All\nControl 230  65  68 49 17 429\nTreated  37  37  37 37 37 185\nTotal   267 102 105 86 54 614\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n      942        693 1.36    0.174 2.5  -417   2300\n\nTerm: treat\nType: response\nComparison: 1 - 0\n\n\n\nPropensity scoreの値を5分位に分けて、各々の層同士で比較して最後に統合する\n\n\n\n\n\n                     Control Treated\nAll (ESS)                429     185\nAll (Unweighted)         429     185\nMatched (ESS)            185     185\nMatched (Unweighted)     185     185\nUnmatched                244       0\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n      926        687 1.35    0.178 2.5  -421   2273\n\nTerm: treat\nType: response\nComparison: 1 - 0\n\n\n\nPropensity scoreが似たものを1:1でMatchingさせる\n治療側、コントロール側のどちらに合わせるかでATT, ATUが分かる\n\n\n\n\n\n\n\n\n\n\n\n\n\n Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %\n     1637        797 2.05     0.04 4.6  75.1   3199\n\nTerm: treat\nType: probs\nComparison: 1 - 0\n\n\n\nPropensity scoreをベースに色々な重みづけをしてバランスをとる\n疑似RCTとするAverate Treatment Overlappingなども可能(Thomas et al. 2020)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#通常の回帰モデル",
@@ -4491,28 +4491,28 @@
     "href": "statistics/mlcausal/index.html#特殊な手法",
     "title": "機械学習を用いた因果推論",
     "section": "特殊な手法",
-    "text": "特殊な手法\n\nAugmented Inverse Probability Weighting (AIPW)TMLEOrthogonalization\n\n\n\nlibrary(AIPW)\nlibrary(SuperLearner) # AIPWからSL.glmを使うために必要\n\nlalonde &lt;- MatchIt::lalonde\nW &lt;- lalonde[c(\"age\", \"educ\", \"race\", \"married\", \"nodegree\", \"re74\", \"re75\")]\n\nset.seed(123)\nfit &lt;- AIPW$new(\n  Y = lalonde$re78, A = lalonde$treat, W = W,\n  Q.SL.library = \"SL.glm\", g.SL.library = \"SL.glm\",\n  k_split = 5, verbose = FALSE\n)\nfit$fit()\nfit$summary()\nfit$result[\"Mean Difference\", ]\n\n Estimate        SE   95% LCL   95% UCL         N \n 1066.590  1072.203 -1034.928  3168.107   614.000 \n\n\n\\[\\begin{aligned}\n\\hat{\\mu}_1^{\\mathrm{AIPW}}\n&=\n\\frac{1}{n}\\sum_{i=1}^{n}\n\\left[\n\\underbrace{\\hat{\\mu}_1(X_i)}_{\\text{Outcome prediction}}\n+\n\\underbrace{\n\\frac{A_i}{\\hat{e}(X_i)}\n\\{Y_i-\\hat{\\mu}_1(X_i)\\}\n}_{\\text{IPW correction}}\n\\right]\n\\\\[10pt]\n\\hat{\\mu}_0^{\\mathrm{AIPW}}\n&=\n\\frac{1}{n}\\sum_{i=1}^{n}\n\\left[\n\\underbrace{\\hat{\\mu}_0(X_i)}_{\\text{Outcome prediction}}\n+\n\\underbrace{\n\\frac{1-A_i}{1-\\hat{e}(X_i)}\n\\{Y_i-\\hat{\\mu}_0(X_i)\\}\n}_{\\text{IPW correction}}\n\\right]\n\\end{aligned}\n\\]\n\nイメージだと、G-computationによるアウトカムモデルでの仮想データに以下の補正を加えている\n\n治療を受ける/受けないのPropensity scoreの補正\n\nDoubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない\n\n\n\n\nlalonde &lt;- MatchIt::lalonde\nW &lt;- lalonde[c(\"age\", \"educ\", \"race\", \"married\", \"nodegree\", \"re74\", \"re75\")]\n\nset.seed(123)\nfit &lt;- tmle::tmle(\n  Y = lalonde$re78, A = lalonde$treat, W = W,\n  Q.SL.library = \"SL.glm\", g.SL.library = \"SL.glm\",\n  family = \"gaussian\"\n)\nfit$estimates$ATE[c(\"psi\", \"CI\")]\n\n$psi\n[1] 585.406\n\n$CI\n[1] -992.2834 2163.0954\n\n\n\\[\n\\widehat Q^{\\,0}(a,W_i)\n=\n\\widehat{\\mathrm E}\n\\left(\nY_i\\mid A_i=a,W_i\n\\right)\n\\\\[6pt]\n\\widehat g(W_i)\n=\n\\widehat{\\Pr}\n\\left(\nA_i=1\\mid W_i\n\\right)\n\\\\[6pt]\n\\begin{aligned}\n\\widehat Q^{\\,0}_1(W_i)\n&=\n\\widehat Q^{\\,0}(1,W_i)\n\\\\[6pt]\n\\widehat Q^{\\,0}_0(W_i)\n&=\n\\widehat Q^{\\,0}(0,W_i)\n\\end{aligned}\n\\\\[6pt]\n\\widehat{\\mathrm{ATE}}_{\\mathrm{TMLE}}\n=\n\\frac{1}{n}\n\\sum_{i=1}^{n}\n\\left[\n\\widehat Q^{\\,0}_1(W_i)\n-\n\\widehat Q^{\\,0}_0(W_i)\n+\n\\widehat\\varepsilon\n\\left\\{\n\\frac{1}{\\widehat g(W_i)}\n+\n\\frac{1}{1-\\widehat g(W_i)}\n\\right\\}\n\\right]\n\\]\n\nアウトカムモデルによる予測と実測値の残差を出す\n傾向スコアの逆数から作ったclever covariateで回帰して修正量を求める\nアウトカムモデルと修正量でAIPWをしているイメージ\n\n\n簡単に言うと強くなったAIPW\n\n\n\n\nlibrary(MatchIt)\nlibrary(dplyr)\nlibrary(parameters)\n\nlalonde &lt;- MatchIt::lalonde\n\ny_fit &lt;- glm(re78 ~ age + educ + race + married + nodegree + re74 + re75, gaussian(), data = lalonde)\ntreat_fit &lt;- glm(\"treat ~ age + educ + race + married + nodegree + re74 + re75\", binomial(), data = lalonde)\n\ndat &lt;- dplyr::mutate(\n  lalonde,\n  y_residual = residuals(y_fit, type = \"response\"),\n  a_residual = treat - fitted(treat_fit)\n)\n\northogonalization_fit &lt;- glm(y_residual ~ 0 + a_residual, gaussian(), data = dat)\n\nparameters::model_parameters(orthogonalization_fit)\n\nParameter  | Coefficient |     SE |             95% CI | t(613) |     p\n-----------------------------------------------------------------------\na residual |     1233.05 | 778.08 | [-294.98, 2761.07] |   1.58 | 0.113\n\n\n\\[\n\\begin{aligned}\n\\underbrace{Y_i - \\widehat{Y}_i}_{\\text{アウトカムの残差}}\n&=\n\\theta\n\\underbrace{\\left(A_i - \\widehat{A}_i\\right)}_{\\text{介入の残差}}\n+ \\varepsilon_i, \\\\[8pt]\n\\widehat{Y}_i\n&= \\widehat{\\mathrm{E}}\\left(Y_i \\mid X_i\\right),\n\\qquad\n\\widehat{A}_i\n= \\widehat{\\Pr}\\left(A_i=1 \\mid X_i\\right).\n\\end{aligned}\n\\]\n\n「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する\n\\(\\theta\\) は交絡因子の影響を取り除いた後の治療効果、\\(\\varepsilon_i\\) はこの回帰で説明されない誤差を表す\noutcome側はGaussian GLM、treatment側はbinomial GLMで残差化している\ntreatment側も線形確率モデルで残差化した場合は、Frisch–Waugh–Lovell定理により通常の線形回帰と一致する"
+    "text": "特殊な手法\n\nOrthogonalizationAugmented Inverse Probability Weighting (AIPW)TMLE\n\n\n\nlibrary(MatchIt)\nlibrary(dplyr)\nlibrary(parameters)\nlibrary(report)\n\nlalonde &lt;- MatchIt::lalonde\n\ny_fit &lt;- glm(re78 ~ age + educ + race + married + nodegree + re74 + re75, gaussian(), data = lalonde)\ntreat_fit &lt;- glm(\"treat ~ age + educ + race + married + nodegree + re74 + re75\", binomial(), data = lalonde)\n\ndat &lt;- dplyr::mutate(\n  lalonde,\n  y_residual = residuals(y_fit, type = \"response\"),\n  a_residual = treat - fitted(treat_fit)\n)\n\northogonalization_fit &lt;- glm(y_residual ~ 0 + a_residual, gaussian(), data = dat)\n\nparameters::model_parameters(orthogonalization_fit) |&gt; \n  report::display(format = \"html\")\n\n\n\n\n\n\n\nModel Summary\n\n\nParameter\nCoefficient\nSE\n95% CI\nt(613)\np\n\n\n\n\na residual\n1233.05\n778.08\n(-294.98, 2761.07)\n1.58\n0.113\n\n\n\n\n\n\n\n\\[\n\\begin{aligned}\n\\underbrace{Y_i - \\widehat{Y}_i}_{\\text{アウトカムの残差}}\n&=\n\\theta\n\\underbrace{\\left(A_i - \\widehat{A}_i\\right)}_{\\text{介入の残差}}\n+ \\varepsilon_i, \\\\[8pt]\n\\widehat{Y}_i\n&= \\widehat{\\mathrm{E}}\\left(Y_i \\mid X_i\\right),\n\\qquad\n\\widehat{A}_i\n= \\widehat{\\Pr}\\left(A_i=1 \\mid X_i\\right).\n\\end{aligned}\n\\]\n\n「アウトカムの実測値と、共変量から予測したアウトカムとの差（残差）」を、「実際の介入と、共変量から予測した介入確率との差（残差）」で回帰する\n\\(\\theta\\) は交絡因子の影響を取り除いた後の治療効果、\\(\\varepsilon_i\\) はこの回帰で説明されない誤差を表す\noutcome側はGaussian GLM、treatment側はbinomial GLMで残差化している\ntreatment側も線形確率モデルで残差化した場合は、Frisch–Waugh–Lovell定理により通常の線形回帰と一致する\n\n\n\n\nlibrary(AIPW)\nlibrary(SuperLearner) # AIPWからSL.glmを使うために必要\n\nlalonde &lt;- MatchIt::lalonde\nW &lt;- lalonde[c(\"age\", \"educ\", \"race\", \"married\", \"nodegree\", \"re74\", \"re75\")]\n\nset.seed(123)\nfit &lt;- AIPW$new(\n  Y = lalonde$re78, A = lalonde$treat, W = W,\n  Q.SL.library = \"SL.glm\", g.SL.library = \"SL.glm\",\n  k_split = 5, verbose = FALSE\n)\nfit$fit()\nfit$summary()\nfit$result[\"Mean Difference\", ]\n\n Estimate        SE   95% LCL   95% UCL         N \n 1066.590  1072.203 -1034.928  3168.107   614.000 \n\n\n\\[\\begin{aligned}\n\\hat{\\mu}_1^{\\mathrm{AIPW}}\n&=\n\\frac{1}{n}\\sum_{i=1}^{n}\n\\left[\n\\underbrace{\\hat{\\mu}_1(X_i)}_{\\text{Outcome prediction}}\n+\n\\underbrace{\n\\frac{A_i}{\\hat{e}(X_i)}\n\\{Y_i-\\hat{\\mu}_1(X_i)\\}\n}_{\\text{IPW correction}}\n\\right]\n\\\\[10pt]\n\\hat{\\mu}_0^{\\mathrm{AIPW}}\n&=\n\\frac{1}{n}\\sum_{i=1}^{n}\n\\left[\n\\underbrace{\\hat{\\mu}_0(X_i)}_{\\text{Outcome prediction}}\n+\n\\underbrace{\n\\frac{1-A_i}{1-\\hat{e}(X_i)}\n\\{Y_i-\\hat{\\mu}_0(X_i)\\}\n}_{\\text{IPW correction}}\n\\right]\n\\end{aligned}\n\\]\n\nイメージだと、G-computationによるアウトカムモデルでの仮想データに以下の補正を加えている\n\n治療を受ける/受けないのPropensity scoreの補正\n\nDoubly robustになっていて、どちらかが一致すれば結果にバイアスは生まれない\n\n\n\n\nlibrary(tmle)\nlibrary(MatchIt)\n\nlalonde &lt;- MatchIt::lalonde\nW &lt;- lalonde[c(\"age\", \"educ\", \"race\", \"married\", \"nodegree\", \"re74\", \"re75\")]\n\nset.seed(123)\nfit &lt;- tmle::tmle(\n  Y = lalonde$re78, A = lalonde$treat, W = W,\n  Q.SL.library = \"SL.glm\", g.SL.library = \"SL.glm\",\n  family = \"gaussian\"\n)\nfit$estimates$ATE[c(\"psi\", \"CI\")]\n\n$psi\n[1] 585.406\n\n$CI\n[1] -992.2834 2163.0954\n\n\n\\[\n\\widehat Q^{\\,0}(a,W_i)\n=\n\\widehat{\\mathrm E}\n\\left(\nY_i\\mid A_i=a,W_i\n\\right)\n\\\\[6pt]\n\\widehat g(W_i)\n=\n\\widehat{\\Pr}\n\\left(\nA_i=1\\mid W_i\n\\right)\n\\\\[6pt]\n\\begin{aligned}\n\\widehat Q^{\\,0}_1(W_i)\n&=\n\\widehat Q^{\\,0}(1,W_i)\n\\\\[6pt]\n\\widehat Q^{\\,0}_0(W_i)\n&=\n\\widehat Q^{\\,0}(0,W_i)\n\\end{aligned}\n\\\\[6pt]\n\\widehat{\\mathrm{ATE}}_{\\mathrm{TMLE}}\n=\n\\frac{1}{n}\n\\sum_{i=1}^{n}\n\\left[\n\\widehat Q^{\\,0}_1(W_i)\n-\n\\widehat Q^{\\,0}_0(W_i)\n+\n\\widehat\\varepsilon\n\\left\\{\n\\frac{1}{\\widehat g(W_i)}\n+\n\\frac{1}{1-\\widehat g(W_i)}\n\\right\\}\n\\right]\n\\]\n\nアウトカムモデルによる予測と実測値の残差を出す\n傾向スコアの逆数から作ったclever covariateで回帰して修正量を求める\nアウトカムモデルと修正量でAIPWをしているイメージ\n\n\n簡単に言うと強くなったAIPW"
   },
   {
     "objectID": "statistics/mlcausal/index.html#注意点",
     "href": "statistics/mlcausal/index.html#注意点",
     "title": "機械学習を用いた因果推論",
     "section": "注意点",
-    "text": "注意点\n\n基本的にUnobserved confoundingには対応できない\nCollider biasには対応できない 魔法の杖ではなく、Designは常に重要\nRCTなどでATEが0だったものについてHTEを探すのは基本的に無意味な事が多い(Segal et al. 2023)"
+    "text": "注意点\n\n基本的にUnobserved confoundingには対応できない\nCollider biasが入ると、推定精度は下がる 魔法の杖ではなく、Designは常に重要\nRCTなどでATEが0だったものについてHTEを探すのは基本的に無意味な事が多い(Segal et al. 2023)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#toy-dataの可視化",
     "href": "statistics/mlcausal/index.html#toy-dataの可視化",
     "title": "機械学習を用いた因果推論",
     "section": "Toy dataの可視化",
-    "text": "Toy dataの可視化\n\n連続値の単変量Pair plot\n\n\n\n\n\n\n\n\ndplyr::mutate(dplyr::select(dplyr::rename(toy_data, any_of(rename_vec)), -id, -bin_event_free), dplyr::across(.cols = c(Male, HF, Palpitation, Ablation, Outcome), .fns = function(x) as.factor(x))) Descriptives\ndplyr::mutate(dplyr::select(dplyr::rename(toy_data, any_of(rename_vec)), -id, -bin_event_free), dplyr::across(.cols = c(Male, HF, Palpitation, Ablation, Outcome), .fns = function(x) as.factor(x)))  9  Variables   3000  Observations\n\nAge\n\n \n nmissingdistinctInfoMeanpMedianGmd.05.10.25.50.75.90.95\n 30000540.99961.23619.36447515661677275\n \n\nlowest : 34 36 37 38 39 ,  highest: 84 85 86 87 89\n\nMale\n\n \n nmissingdistinct\n 300002\n \n\n Value          0     1\n Frequency   1196  1804\n Proportion 0.399 0.601 \n\n\nBMI\n\n \n nmissingdistinctInfoMeanpMedianGmd.05.10.25.50.75.90.95\n 300003000122.0121.834.83215.7716.7218.9221.5524.8427.6129.70\n \n\nlowest : 12.0153 12.0225 12.1073 12.2122 12.4624 ,  highest: 38.1784 38.2074 38.7381 39.2263 39.9565\n\nHF\n\n \n nmissingdistinct\n 300002\n \n\n Value         0    1\n Frequency  2281  719\n Proportion 0.76 0.24 \n\n\nBNP\n\n \n nmissingdistinctInfoMeanpMedianGmd.05.10.25.50.75.90.95\n 300005971172.8127182.2 18.0 28.0 51.0102.5205.2395.0589.1\n \n\nlowest :    4    5    6    7    8 ,  highest: 1552 1597 1652 1759 2000\n\nLVEF\n\n \n nmissingdistinctInfoMeanpMedianGmd.05.10.25.50.75.90.95\n 30000460.99949.3249.58.91936394449556062\n \n\nlowest : 24 25 26 27 28 ,  highest: 65 66 67 68 69\n\nPalpitation\n\n \n nmissingdistinct\n 300002\n \n\n Value          0     1\n Frequency   2034   966\n Proportion 0.678 0.322 \n\n\nAblation\n\n \n nmissingdistinct\n 300002\n \n\n Value          0     1\n Frequency   1481  1519\n Proportion 0.494 0.506 \n\n\nOutcome\n\n \n nmissingdistinct\n 300002\n \n\n Value          0     1\n Frequency   2096   904\n Proportion 0.699 0.301"
+    "text": "Toy dataの可視化\n\n連続値の単変量Pair plot"
   },
   {
     "objectID": "statistics/mlcausal/index.html#modification因子と治療効果",
     "href": "statistics/mlcausal/index.html#modification因子と治療効果",
     "title": "機械学習を用いた因果推論",
     "section": "Modification因子と治療効果",
-    "text": "Modification因子と治療効果\n\nATE共変量とOutcomeのRiskの1:1の関係性主要な連続値の因子とTreatment effectsTreatment effectのHeterogeneity\n\n\n\n\n# A tibble: 1 × 2\n      n `RD 95%CI`            \n  &lt;int&gt; &lt;chr&gt;                 \n1  3000 -0.05[-0.054 - -0.046]\n\n\n\n集団全体では、ca = 1 によりイベントリスクが平均5 percent points低下する\nHTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する"
+    "text": "Modification因子と治療効果\n\nATE共変量とOutcomeのRiskの1:1の関係性主要な連続値の因子とTreatment effectsTreatment effectのHeterogeneity\n\n\n\n\n\n\n\nn\nRisk Difference [95%CI]\n\n\n\n\n3000\n-0.05[-0.054 - -0.046]\n\n\n\n\n\n\n集団全体では、ca = 1 によりイベントリスクが平均5 percent points低下する\nHTEの形は保たれており、患者背景によってbenefitとharmの両方が存在する"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learners",
@@ -4568,7 +4568,7 @@
     "href": "statistics/mlcausal/index.html#モデルの評価の仕方",
     "title": "機械学習を用いた因果推論",
     "section": "モデルの評価の仕方",
-    "text": "モデルの評価の仕方\n\n実際の研究では、HTEのモデルもTRIPOD-AIに従う事が推奨されている(Segal et al. 2023; Collins et al. 2024)\n通常のモデルと一緒で独立したtest datasetを用意しておく\n診る項目は2種類\n\nDiscrimination\n\nRATE(AUTOC), Qini, C-for-benefit\n\nCalibration\n\nbest linear predictor\nGATE\n\n\nMeta-learnerの場合は通常の予測モデルの評価も行う"
+    "text": "モデルの評価の仕方\n\n実際の研究では、HTEのモデルもTRIPOD-AIに従う事が推奨されている(Segal et al. 2023; Collins et al. 2024)\n通常のモデルと一緒で独立したtest datasetを用意しておく方がBetter\n診る項目は2種類\n\nDiscrimination\n\nRATE(AUTOC), Qini, C-for-benefit\n\nCalibration\n\nbest linear predictor\nGATE\n\n\nMeta-learnerの場合は通常の予測モデルの評価も行う"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learnerの場合",
@@ -4624,7 +4624,7 @@
     "href": "statistics/mlcausal/index.html#実務において",
     "title": "機械学習を用いた因果推論",
     "section": "実務において",
-    "text": "実務において\n\nPythonだとeconmlのDRTester\nRだとgrfで可能"
+    "text": "実務において\n\nRのgrf packageが最も医学論文によい\nC-for-benefitはMatchItでペアを作り、観測benefitと予測benefitの順位一致率として計算できる\nRCTのGATESはevalITR packageで可能だが、正直LLMに手書きで書かせて良いと思う\npythonならeconMLが良いがSurvival analysisはなし"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習",
@@ -4666,14 +4666,14 @@
     "href": "statistics/mlcausal/index.html#モデルの評価の仕方の概論",
     "title": "機械学習を用いた因果推論",
     "section": "モデルの評価の仕方の概論",
-    "text": "モデルの評価の仕方の概論\n\nModelの性能の評価\n\nDiscrimination, Calibrationなど\n\nModelをBlackboxから出す: PDP, SHAPなど\n\nTree Interpreter\n\nモデルの実施方法\n\nPolicy tree"
+    "text": "モデルの評価の仕方の概論\n\nModelの性能の評価\n\nDiscrimination, Calibrationなど\n\nModelをBlackboxから出す: PDP, SHAPなど\n\nTree Interpreter\n\nモデルの現実世界へのImplementation\n\nPolicy tree"
   },
   {
     "objectID": "statistics/mlcausal/index.html#modelをblackboxから出す",
     "href": "statistics/mlcausal/index.html#modelをblackboxから出す",
     "title": "機械学習を用いた因果推論",
     "section": "ModelをBlackboxから出す",
-    "text": "ModelをBlackboxから出す\n\n通常の予測モデルと大きな変化はない\n\nモデルが何をみているか？: SHAP\nある連続値の共変量との関係性: PDP\n\n人に解釈できる方法として、HTEを浅い決定木で回帰させる”Surrogate tree”というのもある"
+    "text": "ModelをBlackboxから出す\n\n通常の予測モデルと大きな変化はない\n\nモデルが何をみているか？: SHAP\nある連続値の共変量との関係性: Best linear projection, PDP\n\n人に解釈できる方法として、HTEを浅い決定木で回帰させる”Surrogate tree”というのもある"
   },
   {
     "objectID": "statistics/mlcausal/index.html#cateを図るモデル評価の難しさ",
@@ -4701,7 +4701,7 @@
     "href": "statistics/mlcausal/index.html#econmlモデルをsingle-treeで説明",
     "title": "機械学習を用いた因果推論",
     "section": "EconMLモデルをSingle Treeで説明",
-    "text": "EconMLモデルをSingle Treeで説明\n\nこのSingle Treeは前半で学習したinternal splitのモデルを説明する。各ノードの value は予測イベントリスクの低下量（正ほどCAが有益）。全モデルを同じinternal test setで近似し、葉の最小人数をtest setの5%（最低10人）に設定した。\n\n\nS-learnerT-learnerX-learnerR-learnerDR-learner"
+    "text": "EconMLモデルをSingle Treeで説明\n\nS-learnerT-learnerX-learnerR-learnerDR-learner"
   },
   {
     "objectID": "statistics/mlcausal/index.html#x-learner-dr-learner",
@@ -4757,21 +4757,21 @@
     "href": "statistics/mlcausal/index.html#econmlモデルを説明するpython",
     "title": "機械学習を用いた因果推論",
     "section": "EconMLモデルを説明する（Python）",
-    "text": "EconMLモデルを説明する（Python）\n\nPDPGlobal SHAP\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n開発コホート全例で学習した5モデルを固定し、testデータを参照集団として説明する。PDP（Age・BMI・BNP・LVEF）とKernel SHAPは別々のPython関数・targetsでCSVを追跡する。図の組み立てはQuarto内で行うため、モデルやSHAP値を再計算せずに表示を調整できる。ここでもGRFは比較対象に含めない。"
+    "text": "EconMLモデルを説明する（Python）\n\nPDPGlobal SHAP"
   },
   {
     "objectID": "statistics/mlcausal/index.html#grfモデルを説明するr",
     "href": "statistics/mlcausal/index.html#grfモデルを説明するr",
     "title": "機械学習を用いた因果推論",
     "section": "GRFモデルを説明する（R）",
-    "text": "GRFモデルを説明する（R）\n\nPDPGlobal SHAP"
+    "text": "GRFモデルを説明する（R）\n\nPDPGlobal SHAPSurrogate treePolicy tree"
   },
   {
     "objectID": "statistics/mlcausal/index.html#references",
     "href": "statistics/mlcausal/index.html#references",
     "title": "機械学習を用いた因果推論",
     "section": "References",
-    "text": "References\n\n\nBuell, Kevin G, Alexandra B Spicer, Jonathan D Casey, et al. 2024. “Individualized Treatment Effects of Oxygen Targets in Mechanically Ventilated Critically Ill Adults.” The Journal of the American Medical Association 331 (14): 1195–204. https://doi.org/10.1001/jama.2024.2933.\n\n\nCollins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. “TRIPOD+AI Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.” BMJ 385 (April): e078378. https://doi.org/10.1136/bmj-2023-078378.\n\n\nDesai, Rishi J, Robert J Glynn, Scott D Solomon, Brian Claggett, Shirley V Wang, and Muthiah Vaduganathan. 2024. “Individualized Treatment Effect Prediction with Machine Learning - Salient Considerations.” NEJM Evidence 3 (4): EVIDoa2300041. https://doi.org/10.1056/EVIDoa2300041.\n\n\nFeuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. “Causal Machine Learning for Predicting Treatment Outcomes.” Nature Medicine 30 (4): 958–68. https://doi.org/10.1038/s41591-024-02902-1.\n\n\nInoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. “Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.” Journal of Clinical Epidemiology 176 (111538): 111538. https://doi.org/10.1016/j.jclinepi.2024.111538.\n\n\nInoue, Kosuke, Susan Athey, Katherine Baicker, and Yusuke Tsugawa. 2024. “Heterogeneous Effects of Medicaid Coverage on Cardiovascular Risk Factors: Secondary Analysis of Randomized Controlled Trial.” BMJ (Clinical Research Ed.) 386 (September): e079377. https://doi.org/10.1136/bmj-2024-079377.\n\n\nInoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. “Machine-Learning-Based High-Benefit Approach Versus Conventional High-Risk Approach in Blood Pressure Management.” International Journal of Epidemiology 52 (4): 1243–56. https://doi.org/10.1093/ije/dyad037.\n\n\nInoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. “Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the MESA Study.” Circulation 147 (2): 132–41. https://doi.org/10.1161/CIRCULATIONAHA.122.062626.\n\n\nKhera, Rohan, Evangelos K Oikonomou, Girish N Nadkarni, et al. 2024. “Transforming Cardiovascular Care with Artificial Intelligence: From Discovery to Practice: JACC State-of-the-Art Review.” Journal of the American College of Cardiology 84 (1): 97–114. https://doi.org/10.1016/j.jacc.2024.05.003.\n\n\nKomura, Toshiaki, Falco J Bargagli-Stoffi, Onyebuchi A Arah, and Kosuke Inoue. 2026. “Estimating and Discovering Heterogeneous Treatment Effects Using Machine Learning in Epidemiological Studies: A Practical Guide.” International Journal of Epidemiology 55 (3). https://doi.org/10.1093/ije/dyag092.\n\n\nLee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. “Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.” Journal of the American Heart Association 13 (19): e034862. https://doi.org/10.1161/JAHA.124.034862.\n\n\nLittle, Roderick J, and Roger J Lewis. 2021. “Estimands, Estimators, and Estimates.” JAMA: The Journal of the American Medical Association 326 (10): 967–68. https://doi.org/10.1001/jama.2021.2886.\n\n\nMöller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. “Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.” Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research 29 (5): 905–13. https://doi.org/10.1016/j.jval.2026.01.013.\n\n\nNgufor, Che, Nan Zhang, Holly K Van Houten, et al. 2025. “Causal Machine Learning for Left Atrial Appendage Occlusion in Patients with Atrial Fibrillation.” JACC. Clinical Electrophysiology 11 (5): 977–86. https://doi.org/10.1016/j.jacep.2024.12.013.\n\n\nPathak, Suraj, Florence Y Lai, Joanne Miksza, et al. 2023. “Surgical or Percutaneous Coronary Revascularization for Heart Failure: An in Silico Model Using Routinely Collected Health Data to Emulate a Clinical Trial.” European Heart Journal 44 (5): 351–64. https://doi.org/10.1093/eurheartj/ehac670.\n\n\nPirracchio, Romain, Alan Hubbard, Charles L Sprung, Sylvie Chevret, Djillali Annane, and Rapid Recognition of Corticosteroid Resistant or Sensitive Sepsis (RECORDS) Collaborators. 2020. “Assessment of Machine Learning to Estimate the Individual Treatment Effect of Corticosteroids in Septic Shock.” JAMA Network Open 3 (12): e2029050. https://doi.org/10.1001/jamanetworkopen.2020.29050.\n\n\nScarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and Aaron Baum. 2019. “Assessment of Risk of Harm Associated with Intensive Blood Pressure Management Among Patients with Hypertension Who Smoke: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial.” JAMA Network Open 2 (3): e190005. https://doi.org/10.1001/jamanetworkopen.2019.0005.\n\n\nSegal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. “Assessing Heterogeneity of Treatment Effect in Real-World Data.” Annals of Internal Medicine 176 (4): 536–44. https://doi.org/10.7326/M22-1510.\n\n\nThomas, Laine E, Fan Li, and Michael J Pencina. 2020. “Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.” The Journal of the American Medical Association 323 (23): 2417–18. https://doi.org/10.1001/jama.2020.7819.\n\n\n岩波データサイエンス刊行委員会, ed. 2016. 岩波データサイエンス Vol. 3: 特集 因果推論–実世界のデータから因果を読む. 岩波書店."
+    "text": "References\n\n\nBuell, Kevin G, Alexandra B Spicer, Jonathan D Casey, et al. 2024. “Individualized Treatment Effects of Oxygen Targets in Mechanically Ventilated Critically Ill Adults.” The Journal of the American Medical Association 331 (14): 1195–204. https://doi.org/10.1001/jama.2024.2933.\n\n\nCollins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. “TRIPOD+AI Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.” BMJ 385 (April): e078378. https://doi.org/10.1136/bmj-2023-078378.\n\n\nDesai, Rishi J, Robert J Glynn, Scott D Solomon, Brian Claggett, Shirley V Wang, and Muthiah Vaduganathan. 2024. “Individualized Treatment Effect Prediction with Machine Learning - Salient Considerations.” NEJM Evidence 3 (4): EVIDoa2300041. https://doi.org/10.1056/EVIDoa2300041.\n\n\nFeuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. “Causal Machine Learning for Predicting Treatment Outcomes.” Nature Medicine 30 (4): 958–68. https://doi.org/10.1038/s41591-024-02902-1.\n\n\nGRF Development Team. n.d. “Qini Curves: Automatic Cost-Benefit Analysis.” Accessed September 19, 2026. https://grf-labs.github.io/grf/articles/maq.html.\n\n\nInoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. “Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.” Journal of Clinical Epidemiology 176 (111538): 111538. https://doi.org/10.1016/j.jclinepi.2024.111538.\n\n\nInoue, Kosuke, Susan Athey, Katherine Baicker, and Yusuke Tsugawa. 2024. “Heterogeneous Effects of Medicaid Coverage on Cardiovascular Risk Factors: Secondary Analysis of Randomized Controlled Trial.” BMJ (Clinical Research Ed.) 386 (September): e079377. https://doi.org/10.1136/bmj-2024-079377.\n\n\nInoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. “Machine-Learning-Based High-Benefit Approach Versus Conventional High-Risk Approach in Blood Pressure Management.” International Journal of Epidemiology 52 (4): 1243–56. https://doi.org/10.1093/ije/dyad037.\n\n\nInoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. “Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the MESA Study.” Circulation 147 (2): 132–41. https://doi.org/10.1161/CIRCULATIONAHA.122.062626.\n\n\nKhera, Rohan, Evangelos K Oikonomou, Girish N Nadkarni, et al. 2024. “Transforming Cardiovascular Care with Artificial Intelligence: From Discovery to Practice: JACC State-of-the-Art Review.” Journal of the American College of Cardiology 84 (1): 97–114. https://doi.org/10.1016/j.jacc.2024.05.003.\n\n\nKomura, Toshiaki, Falco J Bargagli-Stoffi, Onyebuchi A Arah, and Kosuke Inoue. 2026. “Estimating and Discovering Heterogeneous Treatment Effects Using Machine Learning in Epidemiological Studies: A Practical Guide.” International Journal of Epidemiology 55 (3). https://doi.org/10.1093/ije/dyag092.\n\n\nLee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. “Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.” Journal of the American Heart Association 13 (19): e034862. https://doi.org/10.1161/JAHA.124.034862.\n\n\nLittle, Roderick J, and Roger J Lewis. 2021. “Estimands, Estimators, and Estimates.” JAMA: The Journal of the American Medical Association 326 (10): 967–68. https://doi.org/10.1001/jama.2021.2886.\n\n\nMöller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. “Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.” Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research 29 (5): 905–13. https://doi.org/10.1016/j.jval.2026.01.013.\n\n\nNgufor, Che, Nan Zhang, Holly K Van Houten, et al. 2025. “Causal Machine Learning for Left Atrial Appendage Occlusion in Patients with Atrial Fibrillation.” JACC. Clinical Electrophysiology 11 (5): 977–86. https://doi.org/10.1016/j.jacep.2024.12.013.\n\n\nPathak, Suraj, Florence Y Lai, Joanne Miksza, et al. 2023. “Surgical or Percutaneous Coronary Revascularization for Heart Failure: An in Silico Model Using Routinely Collected Health Data to Emulate a Clinical Trial.” European Heart Journal 44 (5): 351–64. https://doi.org/10.1093/eurheartj/ehac670.\n\n\nPirracchio, Romain, Alan Hubbard, Charles L Sprung, Sylvie Chevret, Djillali Annane, and Rapid Recognition of Corticosteroid Resistant or Sensitive Sepsis (RECORDS) Collaborators. 2020. “Assessment of Machine Learning to Estimate the Individual Treatment Effect of Corticosteroids in Septic Shock.” JAMA Network Open 3 (12): e2029050. https://doi.org/10.1001/jamanetworkopen.2020.29050.\n\n\nScarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and Aaron Baum. 2019. “Assessment of Risk of Harm Associated with Intensive Blood Pressure Management Among Patients with Hypertension Who Smoke: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial.” JAMA Network Open 2 (3): e190005. https://doi.org/10.1001/jamanetworkopen.2019.0005.\n\n\nSegal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. “Assessing Heterogeneity of Treatment Effect in Real-World Data.” Annals of Internal Medicine 176 (4): 536–44. https://doi.org/10.7326/M22-1510.\n\n\nShiba, Koichiro, and Kosuke Inoue. 2024. “Harnessing Causal Forests for Epidemiologic Research: Key Considerations.” American Journal of Epidemiology 193 (6): 813–18. https://doi.org/10.1093/aje/kwae003.\n\n\nThomas, Laine E, Fan Li, and Michael J Pencina. 2020. “Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.” The Journal of the American Medical Association 323 (23): 2417–18. https://doi.org/10.1001/jama.2020.7819."
   },
   {
     "objectID": "statistics/mlcausal/index.html#estimandの重要性",
@@ -4785,21 +4785,21 @@
     "href": "statistics/mlcausal/index.html#discrimination-c-for-benefit",
     "title": "機械学習を用いた因果推論",
     "section": "Discrimination ~ C-for-benefit",
-    "text": "Discrimination ~ C-for-benefit\n\n治療群の患者と対照群の患者を、予測CATEまたは背景因子で1対1マッチングする\n観察されたOutcomeを治療群のOutcome - Ctrl群のOutcomeで計算\nITEを(治療群のITE + Ctrl群のITE)/2とする\n全てのペアで確認して、観察されたOutcomeとITEの大小関係が一致する割合をみる\n観察されたOutcomeを真の治療効果に近似している"
+    "text": "Discrimination ~ C-for-benefit\n\nC for benefit\n治療群の患者と対照群の患者を、予測CATEまたは背景因子で1対1マッチングする\n観察されたOutcomeを治療群のOutcome - Ctrl群のOutcomeで計算\nITEを(治療群のITE + Ctrl群のITE)/2とする\nOutcomeが一致しない、ペアで確認して、観察されたOutcomeとITEの正負が一致する割合をみる"
   },
   {
     "objectID": "statistics/mlcausal/index.html#calibration-gates",
     "href": "statistics/mlcausal/index.html#calibration-gates",
     "title": "機械学習を用いた因果推論",
     "section": "Calibration ~ GATES",
-    "text": "Calibration ~ GATES\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n\n\n\n各人で予想した治療効果を順番に並べる\n5分位くらいにRankを作って、その中でのITEの平均を出す(予測値)\n各々の群を一つのデータセットとして別個にATEを出す(真値)\n実際にランキング通りかどうかを比べる"
+    "text": "Calibration ~ GATES\n\n\n\n\n\n\n\nranking\nnumber_of_pts\nmean_predicted_ite\nid\n\n\n\n\n4\n100\n2.5141823\n1, 4, 6,…\n\n\n2\n100\n1.4485230\n2, 9, 11,…\n\n\n5\n100\n3.5195519\n3, 5, 14,…\n\n\n3\n100\n2.0028796\n7, 12, 17,…\n\n\n1\n100\n0.6129358\n8, 21, 29,…\n\n\n\n\n\n\npredicted_iteの大きさで5群に分ける\nranking毎に患者を集約させる\n全員のpredicted_iteを平均したのをX軸とする\n\n\n\n\n→\n\n\n群毎にAIPWなどでGrouped ATEを別個に出す\n\n\n\n\n\n\n\n\nranking\nmean_predicted_ite\ngrouped_ate\n\n\n\n\n1\n0.6129358\n0.1641101\n\n\n2\n1.4485230\n1.4979009\n\n\n3\n2.0028796\n2.4428824\n\n\n4\n2.5141823\n2.3890783\n\n\n5\n3.5195519\n3.0486638"
   },
   {
     "objectID": "statistics/mlcausal/index.html#calibration-best-linear-predictor法",
     "href": "statistics/mlcausal/index.html#calibration-best-linear-predictor法",
     "title": "機械学習を用いた因果推論",
     "section": "Calibration ~ best linear predictor法",
-    "text": "Calibration ~ best linear predictor法\n\\[\nY_i - \\hat{m}(X_i), \\qquad W_i - \\hat{e}(X_i)\n\\]\n\\[\nY_i - \\hat{m}(X_i)\n=\n\\alpha\n\\left\\{\nW_i - \\hat{e}(X_i)\n\\right\\}\n\\bar{\\hat{\\tau}}\n+\n\\beta\n\\left\\{\nW_i - \\hat{e}(X_i)\n\\right\\}\n\\left(\n\\hat{\\tau}_i - \\bar{\\hat{\\tau}}\n\\right)\n+\n\\varepsilon_i\n\\]\n\ncausal forestのOOB CATE予測を「平均治療効果成分」と「heterogeneity成分」に分け、outcome/treatmentをorthogonalizeした回帰でcalibrationを評価する。\ngrf::test_calibration()では、\n\nmean.forest.prediction(上式の \\(\\alpha\\) ): 平均CATE予測のcalibration係数。1に近いほど平均効果のscaleが正しい。\ndifferential.forest.prediction(上式の \\(\\beta\\) ): CATE heterogeneityのcalibration slope。1に近いほどheterogeneityのscaleが正しく、0より有意に大きければHTEの存在を支持する。\n\n実際の論文でもgrf::test_calibration()を評価しているものが多い"
+    "text": "Calibration ~ best linear predictor法\n\\[\nY_i - \\hat{m}(X_i), \\qquad W_i - \\hat{e}(X_i)\n\\]\n\\[\nY_i - \\hat{m}(X_i)\n=\n\\alpha\n\\left\\{\nW_i - \\hat{e}(X_i)\n\\right\\}\n\\bar{\\hat{\\tau}}\n+\n\\beta\n\\left\\{\nW_i - \\hat{e}(X_i)\n\\right\\}\n\\left(\n\\hat{\\tau}_i - \\bar{\\hat{\\tau}}\n\\right)\n+\n\\varepsilon_i\n\\]\n\nCausal forestのOOBのOutcome予測を治療でOrthogonalizationをした後にITEで回帰している\n\n「平均治療効果成分」と「heterogeneity成分」に分けて評価している\n\ngrf::test_calibration()では、\n\nmean.forest.prediction(上式の \\(\\alpha\\) ): 平均CATE予測のcalibration係数。1に近いほど平均効果のscaleが正しい。\ndifferential.forest.prediction(上式の \\(\\beta\\) ): CATE heterogeneityのcalibration slope。1に近いほどheterogeneityのscaleが正しく、0より有意に大きければHTEの存在を支持する。\n\n実際の論文でもgrf::test_calibration()を評価しているものが多い"
   },
   {
     "objectID": "statistics/mlcausal/index.html#best-linear-preojection",
@@ -4813,7 +4813,7 @@
     "href": "statistics/mlcausal/index.html#モデルの実用法について",
     "title": "機械学習を用いた因果推論",
     "section": "モデルの実用法について",
-    "text": "モデルの実用法について\n\n誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという\nSurrogate treeと異なり、ITEが0を超えるかどうかで推奨を変える\n\nRだとpolicytree package, pythonだとeconmlで可能\n\n実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotをまず記述している事が多い"
+    "text": "モデルの実用法について\n\n誰に対して行うとIndividualized treatment effectが1より高くなるかを見る決定木をPolicy treeという\nSurrogate treeと異なり、ITEが0を超えるかどうかで推奨を変える\n\nRだとpolicytree package, pythonだとeconmlで可能\n\n実際の論文だと、High/Low riskとHigh/Low benefitの患者のScatter plotで記述している事が多い"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forestについて-1",
@@ -4827,7 +4827,7 @@
     "href": "statistics/mlcausal/index.html#causal-forest-rctのsub解析",
     "title": "機械学習を用いた因果推論",
     "section": "Causal forest ~ RCTのSub解析",
-    "text": "Causal forest ~ RCTのSub解析\n\n全体的にシンプルな構成が多い\nRCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある\n\n\nRCTのSub解析-1RCTのSub解析-2RCTのSub解析-3RCTのSub解析-4\n\n\n\nSPRINTのSub解析\nCausal forestを用いて解析\nSBP ≧144 mmHg, Current smokerはIntensiveな降圧は有害かもしれない (Scarpa et al. 2019)\n\n\n\n\n高血圧患者への降圧療法をHigh risk approachではなくHigh benefit approachを提唱した論文\nSPRINT + ACCORD-BP(RCT)のデータとNHANCEのデータを組み合わせている\nSupplementaryにGATESやRATESもありかなりしっかりした解析 (Inoue, Athey, et al. 2023)\n\n\n\n\nThe Oregon health insurance experiments(Medicaid)のSub解析\nHbA1cの値とSBPの値をアウトカムにしてInstrumental causal foerstで解析\n全体では差がなくても、便益があるGroupを探すことができる\nClinical implicationはないが、Policy makerには重要な研究 (Inoue, Athey, et al. 2024)\n\n\n\n\nTOPCAT trialのSub解析\nSurvival causal forestを用いている\nC for benefitとRATEで評価している\n\n(Desai et al. 2024)"
+    "text": "Causal forest ~ RCTのSub解析\n\n全体的にシンプルな構成が多い\nRCTの結果→観察研究への落とし込みで別個の統計的手法が必要ではある\n\n\nRCTのSub解析-1RCTのSub解析-2RCTのSub解析-3RCTのSub解析-4\n\n\n\nSPRINTのSub解析\nCausal forestを用いて解析\nSBP ≧144 mmHg, Current smokerはIntensiveな降圧は有害かもしれない (Scarpa et al. 2019)\n\n\n\n\n高血圧患者への降圧療法をHigh risk approachではなくHigh benefit approachを提唱した論文\nSPRINT + ACCORD-BP(RCT)のデータとNHANCEのデータを組み合わせている\nSupplementaryにGATESやRATESもありかなりしっかりした解析 (Inoue, Athey, et al. 2023)\n\n\n\n\nThe Oregon health insurance experiments(Medicaid)のSub解析\nHbA1cの値とSBPの値をアウトカムにしてInstrumental causal foerstで解析\n全体では差がなくても、便益があるGroupを探すことができる\nClinical implicationはないが、Policy makerには重要な研究 (Inoue, Athey, et al. 2024)\n\n\n\n\nTOPCAT trialのSub解析\nHFpEFに対するMRAの治療効果のHTEを評価目的\nSurvival causal forestを用いている\nC for benefitとRATE, RMSTのCalibration plotで評価している\n治療効果にHeterogeneityが多く、その原因としてBMI, eGFR, LVEF, Ageが大きく寄与している事を示している\n基本は仮説形成の研究だがかなり丁寧 (Desai et al. 2024)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forest-観察研究",
@@ -4841,14 +4841,14 @@
     "href": "statistics/mlcausal/index.html#meta-learners-1",
     "title": "機械学習を用いた因果推論",
     "section": "Meta-learners",
-    "text": "Meta-learners\n\nS-learnerT-learnerX-learnerR-learnerDR-learner\n\n\n\nimport numpy as np\nimport pandas as pd\nfrom econml.metalearners import SLearner\nfrom sklearn.ensemble import HistGradientBoostingClassifier\nfrom sklearn.model_selection import train_test_split\nfrom xgboost import XGBRegressor\n\n\ntoy_data = r.toy_data.copy()\nfeature_names = [\"age\", \"sexm1\", \"bmi\", \"hf\", \"bnp\", \"lvef\"]\n\nX = toy_data.loc[:, feature_names].astype(float)\nY = toy_data[\"bin_outcome\"].astype(int)\nT = toy_data[\"ca\"].astype(int)\n\n# treatment と outcome の4群がおおむね保たれるように分割する\nstrata = T.astype(str) + \"_\" + Y.astype(str)\nX_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(\n    X, Y, T,\n    test_size=0.2,\n    random_state=123,\n    stratify=strata,\n)\n\nxgb_binary_params = {\n    \"objective\": \"binary:logistic\",\n    \"eval_metric\": \"logloss\",\n    \"n_estimators\": 300,\n    \"learning_rate\": 0.05,\n    \"max_depth\": 3,\n    \"min_child_weight\": 10,\n    \"subsample\": 0.8,\n    \"colsample_bytree\": 0.8,\n    \"reg_lambda\": 1.0,\n    \"random_state\": 123,\n    \"n_jobs\": -1,\n}\n\n# objective=\"binary:logistic\" では predict() が P(Y=1 | X, T) を返す\noutcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\ns_learner = SLearner(overall_model=outcome_model)\ns_learner.fit(Y_train, T_train, X=X_train)\n\n# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)\ns_cate_rd = np.asarray(\n    s_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ns_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": s_cate_rd,\n})\n\nprint(s_effect_df.head())\nprint(f\"ATE in test set (risk difference): {s_cate_rd.mean():.3f}\")\n\n\n\n    id      cate_rd\n1  844 -0.158507407\n2 2962 -0.089760900\n3  591  0.018236868\n4 1071 -0.051064193\n5 1280  0.004456153\n6 2984  0.007386910\n\n\nATE in test set (risk difference): -0.047\n\n\n\ns_cate_rd は確率スケールの治療効果（risk difference）であり、負の値は ca = 1 によるイベントリスク低下を表す\nS-learnerは1つのモデルで \\(E(Y \\mid X, T)\\) を学習し、各対象者について T = 1 と T = 0 の予測確率の差を取る\n因果効果として解釈するには、未測定交絡がないこと、positivity、consistencyなどの仮定が必要\n\n\n\n\nfrom econml.metalearners import TLearner\n\nt_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# T=0 と T=1 で別々の outcome model を学習する\nt_learner = TLearner(models=t_outcome_model)\nt_learner.fit(Y_train, T_train, X=X_train)\n\nt_cate_rd = np.asarray(\n    t_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nt_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": t_cate_rd,\n})\n\nprint(t_effect_df.head())\nprint(f\"ATE in test set (risk difference): {t_cate_rd.mean():.3f}\")\n\n\n\n      id      cate_rd\n601  844 -0.366873562\n602 2962 -0.060811996\n603  591  0.017260257\n604 1071  0.279686093\n605 1280  0.013552464\n606 2984 -0.004789183\n\n\nATE in test set (risk difference): -0.048\n\n\n\nT-learnerは T = 0 と T = 1 で2つの予測確率モデルを作り、その差をCATEとする\n各治療群のサンプル数が少ない場合、それぞれのoutcome modelが不安定になりやすい\n\n\n\n\nfrom econml.metalearners import XLearner\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nx_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# imputed treatment effect（連続値）を学習するための回帰モデル\nx_cate_model = HistGradientBoostingRegressor(\n    learning_rate=0.05,\n    max_iter=200,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\n# P(T=1 | X) を学習するモデル\nx_propensity_model = HistGradientBoostingClassifier(\n    learning_rate=0.05,\n    max_iter=150,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\nx_learner = XLearner(\n    models=x_outcome_model,\n    cate_models=x_cate_model,\n    propensity_model=x_propensity_model,\n)\nx_learner.fit(Y_train, T_train, X=X_train)\n\nx_cate_rd = np.asarray(\n    x_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nx_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": x_cate_rd,\n})\n\nprint(x_effect_df.head())\nprint(f\"ATE in test set (risk difference): {x_cate_rd.mean():.3f}\")\n\n\n\n       id       cate_rd\n1201  844 -0.3453601779\n1202 2962 -0.1379575937\n1203  591  0.0595690955\n1204 1071  0.1459459263\n1205 1280 -0.0413900195\n1206 2984  0.0002099974\n\n\nATE in test set (risk difference): -0.042\n\n\n\nX-learnerは2つのoutcome modelから治療効果を補完し、その疑似効果をさらに回帰モデルで学習する\n最後にpropensity scoreを使って、対照群由来と治療群由来のCATEを統合する\n\n\n\n\nfrom econml.dml import NonParamDML\n\nr_learner = NonParamDML(\n    model_y=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_t=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    discrete_treatment=True,\n    cv=5,\n    random_state=123,\n)\n\n# NonParamDML implements the R-learner residual-on-residual objective.\nr_learner.fit(Y_train, T_train, X=X_train)\n\nr_cate_rd = np.asarray(\n    r_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": r_cate_rd,\n})\n\nprint(r_effect_df.head())\nprint(f\"ATE in test set (risk difference): {r_cate_rd.mean():.3f}\")\n\n\n\n       id      cate_rd\n1801  844 -0.393444797\n1802 2962  0.030637595\n1803  591 -0.025004028\n1804 1071  0.078752496\n1805 1280  0.056748913\n1806 2984 -0.008724799\n\n\nATE in test set (risk difference): -0.032\n\n\n\nR-learnerはoutcomeとtreatmentをcross-fittingで残差化し、残差同士の関係からCATEを学習する\nNonParamDML の非線形final modelにより、HTEを柔軟に表現する\n\n\n\n\nfrom econml.dr import DRLearner\n\ndr_learner = DRLearner(\n    model_propensity=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_regression=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    min_propensity=0.01,\n    cv=5,\n    random_state=123,\n)\n\n# nuisance modelはcv=5でcross-fittingされる\ndr_learner.fit(Y_train, T_train, X=X_train)\n\ndr_cate_rd = np.asarray(\n    dr_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ndr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": dr_cate_rd,\n})\n\nprint(dr_effect_df.head())\nprint(f\"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}\")\n\n# 5つのlearnerを同じtest setで比較する\nlearner_summary = pd.DataFrame({\n    \"learner\": [\n        \"S-learner\",\n        \"T-learner\",\n        \"X-learner\",\n        \"R-learner\",\n        \"DR-learner\",\n    ],\n    \"ate_rd\": [\n        s_cate_rd.mean(),\n        t_cate_rd.mean(),\n        x_cate_rd.mean(),\n        r_cate_rd.mean(),\n        dr_cate_rd.mean(),\n    ],\n    \"cate_sd\": [\n        s_cate_rd.std(ddof=1),\n        t_cate_rd.std(ddof=1),\n        x_cate_rd.std(ddof=1),\n        r_cate_rd.std(ddof=1),\n        dr_cate_rd.std(ddof=1),\n    ],\n})\n\nprint(learner_summary.round(3))\n\n\n\n       id      cate_rd\n2401  844 -0.341203781\n2402 2962  0.146618699\n2403  591  0.182928592\n2404 1071 -0.003370782\n2405 1280  0.055323033\n2406 2984  0.168132478\n\n\nATE in test set (risk difference): -0.023\n\n\n     learner ate_rd cate_sd\n1  S-learner -0.047   0.090\n2  T-learner -0.048   0.150\n3  X-learner -0.042   0.145\n4  R-learner -0.032   0.213\n5 DR-learner -0.023   0.275\n\n\n\ndiscrete_outcome=True により、EconMLがoutcome classifierの陽性確率を使用する\npropensity modelまたはoutcome modelのどちらか一方が正しく推定されればATE/CATE推定のバイアスを抑えられる、というdoubly robust性を利用する\nmin_propensity=0.01 は、推定propensity scoreが0または1に近い場合の極端な補正を制限する"
+    "text": "Meta-learners\n\nS-learnerT-learnerX-learnerDR-learnerR-learnerMeta-learnerのまとめ\n\n\n\nimport numpy as np\nimport pandas as pd\nfrom econml.metalearners import SLearner\nfrom sklearn.ensemble import HistGradientBoostingClassifier\nfrom sklearn.model_selection import train_test_split\nfrom xgboost import XGBRegressor\n\n\ntoy_data = r.toy_data.copy()\nfeature_names = [\"age\", \"sexm1\", \"bmi\", \"hf\", \"bnp\", \"lvef\"]\n\nX = toy_data.loc[:, feature_names].astype(float)\nY = toy_data[\"bin_outcome\"].astype(int)\nT = toy_data[\"ca\"].astype(int)\n\n# treatment と outcome の4群がおおむね保たれるように分割する\nstrata = T.astype(str) + \"_\" + Y.astype(str)\nX_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(\n    X, Y, T,\n    test_size=0.2,\n    random_state=123,\n    stratify=strata,\n)\n\nxgb_binary_params = {\n    \"objective\": \"binary:logistic\",\n    \"eval_metric\": \"logloss\",\n    \"n_estimators\": 300,\n    \"learning_rate\": 0.05,\n    \"max_depth\": 3,\n    \"min_child_weight\": 10,\n    \"subsample\": 0.8,\n    \"colsample_bytree\": 0.8,\n    \"reg_lambda\": 1.0,\n    \"random_state\": 123,\n    \"n_jobs\": -1,\n}\n\n# objective=\"binary:logistic\" では predict() が P(Y=1 | X, T) を返す\noutcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\ns_learner = SLearner(overall_model=outcome_model)\ns_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x7b18b2501940&gt;\n\n# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)\ns_cate_rd = np.asarray(\n    s_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ns_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": s_cate_rd,\n})\n\nprint(s_effect_df.head())\n\n     id   cate_rd\n0   844 -0.158507\n1  2962 -0.089761\n2   591  0.018237\n3  1071 -0.051064\n4  1280  0.004456\n\nprint(f\"ATE in test set (risk difference): {s_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.047\n\n\n\n\n\nfrom econml.metalearners import TLearner\n\nt_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# T=0 と T=1 で別々の outcome model を学習する\nt_learner = TLearner(models=t_outcome_model)\nt_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x7b18b1ecb320&gt;\n\nt_cate_rd = np.asarray(\n    t_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nt_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": t_cate_rd,\n})\n\nprint(t_effect_df.head())\n\n     id   cate_rd\n0   844 -0.366874\n1  2962 -0.060812\n2   591  0.017260\n3  1071  0.279686\n4  1280  0.013552\n\nprint(f\"ATE in test set (risk difference): {t_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.048\n\n\n\n\n\nfrom econml.metalearners import XLearner\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nx_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# imputed treatment effect（連続値）を学習するための回帰モデル\nx_cate_model = HistGradientBoostingRegressor(\n    learning_rate=0.05,\n    max_iter=200,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\n# P(T=1 | X) を学習するモデル\nx_propensity_model = HistGradientBoostingClassifier(\n    learning_rate=0.05,\n    max_iter=150,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\nx_learner = XLearner(\n    models=x_outcome_model,\n    cate_models=x_cate_model,\n    propensity_model=x_propensity_model,\n)\nx_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x7b18b1a47ec0&gt;\n\nx_cate_rd = np.asarray(\n    x_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nx_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": x_cate_rd,\n})\n\nprint(x_effect_df.head())\n\n     id   cate_rd\n0   844 -0.345360\n1  2962 -0.137958\n2   591  0.059569\n3  1071  0.145946\n4  1280 -0.041390\n\nprint(f\"ATE in test set (risk difference): {x_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.042\n\n\n\n\n\nfrom econml.dr import DRLearner\n\ndr_learner = DRLearner(\n    model_propensity=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_regression=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    min_propensity=0.01,\n    cv=5,\n    random_state=123,\n)\n\n# nuisance modelはcv=5でcross-fittingされる\ndr_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.dr._drlearner.DRLearner object at 0x7b186c72fda0&gt;\n\ndr_cate_rd = np.asarray(\n    dr_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ndr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": dr_cate_rd,\n})\n\nprint(dr_effect_df.head())\n\n     id   cate_rd\n0   844 -0.341204\n1  2962  0.146619\n2   591  0.182929\n3  1071 -0.003371\n4  1280  0.055323\n\nprint(f\"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.023\n\n\n\n\n\nfrom econml.dml import NonParamDML\n\nr_learner = NonParamDML(\n    model_y=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_t=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    discrete_treatment=True,\n    cv=5,\n    random_state=123,\n)\n\n# NonParamDML implements the R-learner residual-on-residual objective.\nr_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.dml.dml.NonParamDML object at 0x7b186c42ac90&gt;\n\nr_cate_rd = np.asarray(\n    r_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": r_cate_rd,\n})\n\nprint(r_effect_df.head())\n\n     id   cate_rd\n0   844 -0.393445\n1  2962  0.030638\n2   591 -0.025004\n3  1071  0.078752\n4  1280  0.056749\n\nprint(f\"ATE in test set (risk difference): {r_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.032\n\n\n\n\n\n\n      learner  ate_rd  cate_sd\n0   S-learner  -0.047    0.090\n1   T-learner  -0.048    0.150\n2   X-learner  -0.042    0.145\n3   R-learner  -0.032    0.213\n4  DR-learner  -0.023    0.275"
   },
   {
     "objectID": "statistics/mlcausal/index.html#external-validation-cohort",
     "href": "statistics/mlcausal/index.html#external-validation-cohort",
     "title": "機械学習を用いた因果推論",
     "section": "External validation cohort",
-    "text": "External validation cohort\n\n\n# A tibble: 2 × 5\n  cohort                  n mean_age mean_bmi female_fraction\n  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;\n1 Development          3000     61.2     22.0           0.399\n2 External validation  1000     63.2     20.0           0.45 \n\n\n# A tibble: 1 × 4\n  contrast                  age_difference bmi_difference female_fraction_diff…¹\n  &lt;chr&gt;                              &lt;dbl&gt;          &lt;dbl&gt;                  &lt;dbl&gt;\n1 External validation - De…           1.99          -2.00                  0.051\n# ℹ abbreviated name: ¹​female_fraction_difference\n\n\n開発コホートとは独立に \\(n=1000\\) を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。"
+    "text": "External validation cohort\n\n\n# A tibble: 2 × 5\n  cohort                  n mean_age mean_bmi female_fraction\n  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;\n1 Development          3000     61.2     22.0           0.399\n2 External validation  1000     63.2     20.0           0.45 \n\n\n# A tibble: 1 × 4\n  contrast                  age_difference bmi_difference female_fraction_diff…¹\n  &lt;chr&gt;                              &lt;dbl&gt;          &lt;dbl&gt;                  &lt;dbl&gt;\n1 External validation - De…           1.99          -2.00                  0.051\n# ℹ abbreviated name: ¹​female_fraction_difference\n\n\n Mean |   SD |  IQR |         Range | Skewness | Kurtosis |    n | n_Missing\n----------------------------------------------------------------------------\n-0.05 | 0.11 | 0.11 | [-0.52, 0.30] |    -0.80 |     0.81 | 3000 |         0\n\n\n\n開発コホートとは独立に \\(n=1000\\) を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。\nATEは0.05, ITEは今回は有意ではない"
   },
   {
     "objectID": "statistics/mlcausal/index.html#c-for-benefit外部検証",
@@ -5030,7 +5030,7 @@
     "href": "statistics/mlcausal/index.html#modelの解釈best-linear-preojection",
     "title": "機械学習を用いた因果推論",
     "section": "Modelの解釈～Best linear preojection",
-    "text": "Modelの解釈～Best linear preojection\n\n予測されるITE ~ Covariatesで回帰させたもの\n各Covariatesがどのような影響にITEに影響しているかを見ている\nドメイン知識との整合性を診ることができる"
+    "text": "Modelの解釈～Best linear preojection\n\n予測されるITE ~ Covariatesで回帰させたもの\n各Covariatesがどのような影響にITEに影響しているかを見ている\n\n“線形回帰とすると、年齢が1歳あがる毎にITEはどれくらい変化するか？”\n\nドメイン知識との整合性を診ることができる\nPDPとほぼ同じような役割\nITEの分布について、PDPやHeat mapを推奨している論文もある(Shiba and Inoue 2024)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forestの場合は",
@@ -5093,7 +5093,7 @@
     "href": "statistics/mlcausal/index.html#hteを見つける意義",
     "title": "機械学習を用いた因果推論",
     "section": "HTEを見つける意義",
-    "text": "HTEを見つける意義\n表1. 異質的治療効果（HTE）解析の意義\n\n\n\n\n\n\n\n意義\n代表的な問い\n\n\n\n\n標的を絞った介入による効率的な医療資源の配分\n・治療によって特に大きな利益または害を受けるのは誰か？・最も効果的な治療選択肢は何か？・あるサブグループには治療が有効だが、他のサブグループには有害である場合、誰を治療し、誰を治療すべきでないか？\n\n\n介入がアウトカムに影響を及ぼすメカニズムの理解\n・治療効果を規定する特性は何か？・治療はどのようにアウトカムに影響を及ぼすのか？\n\n\n仮説生成\n・さらに検討する価値のある治療効果の異質性には、どのようなパターンがあるか？\n\n\n健康格差・公平性（Health equity）\n・治療は、社会経済的状況が異なる人々に不均衡な影響を及ぼすか？・治療は健康格差を拡大するか、それとも縮小するか？\n\n\n一般化可能性とトランスポータビリティ\n・特定のサンプルで推定された治療効果を、より広い集団に外挿できるか？・対象集団に属する人々が十分に含まれていない（あるいは完全に除外されている）サンプルから推定された治療効果を、その対象集団にも適用できるか？\n\n\n\n(Komura et al. 2026)"
+    "text": "HTEを見つける意義\n表1. 異質的治療効果（HTE）解析の意義\n\n\n\n\n\n\n\n意義\n代表的な問い\n\n\n\n\n効率的な医療資源の配分\n・治療によって特に大きな利益/害を受けるのは誰か？・どの治療が最も有効か？・(ある介入において)誰を治療し、誰を治療すべきでないか？\n\n\n介入がアウトカムに影響を及ぼすメカニズムの理解\n・治療効果を規定する患者背景は何か？・治療はどのようにアウトカムに影響を及ぼすのか？\n\n\n仮説生成\n・治療効果の異質性のパターンから、更なる研究が進むか？\n\n\n健康格差・公平性（Health equity）\n・治療は社会経済的状況が異なる人々で治療効果が変わるか？・治療は健康格差を拡大/縮小するか？\n\n\n一般化可能性とトランスポータビリティ\n・特定のサンプルで推定された治療効果を、より広い集団に外挿できるか？・ある研究から手に入れたデータは、Underrepresentされている集団への外的妥当性が保たれるか？\n\n\n\n(Komura et al. 2026)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#rate-autocとqini係数",
@@ -5114,21 +5114,21 @@
     "href": "statistics/mlcausal/index.html#meta-learnerの比較",
     "title": "機械学習を用いた因果推論",
     "section": "meta-learnerの比較",
-    "text": "meta-learnerの比較\n\n\n\n\n\n\n\n\nAlgorithm\n強み（Strengths）\n限界（Limitations）\n\n\n\n\nS-learner\n- シンプル- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある- 治療群と対照群の人数が不均衡な場合、不安定になる\n\n\nT-learner\n- シンプル- 治療群と対照群を分けて明示的にモデル化する- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 治療群と対照群の人数が不均衡な場合、不安定になる\n\n\nX-learner / DR-learner\n- 異質な治療効果を直接推定する- 観察研究でよくみられる不均衡な研究デザインにおいて、特に有効である\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\nR-learner\n- 異なるサブサンプルを用いて、補助的パラメータを推定し、CATEを予測する- 治療効果に対する直接的な損失関数を構成できる\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\n\nKomura T, Bargagli-Stoffi FJ, Arah OA, Inoue K. Estimating and discovering heterogeneous treatment effects using machine learning in epidemiological studies: a practical guide. Int J Epidemiol. 2026;55(3). doi:10.1093/ije/dyag092\n\nも追記する\n\nメタラーナーの特徴と限界 {#tbl-metalearner-comparison} (Inoue, Adomi, et al. 2024)\n\n\n\nS-learnerが最も直感的ではあるが・・・・・・\n\n一番の問題は95%信頼区間などは出せない\n\n過去のReviewだとDR-learnerが良さそう\nあまり医学論文だと使われていない印象"
+    "text": "meta-learnerの比較\n\n\n\nTable 1: メタラーナーの特徴と限界\n\n\n\n\n\n\n\n\n\n\nAlgorithm\n強み（Strengths）\n限界（Limitations）\n\n\n\n\nS-learner\n- シンプル- 治療効果が単純、またはゼロの場合、T-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 変数選択を行う手法をベース学習器に用いると、治療変数がモデルから除外される可能性がある- 治療群と対照群の人数が不均衡な場合、不安定になる- modelのmisspecificationに弱い\n\n\nT-learner\n- シンプル- 治療群と対照群を分けて明示的にモデル化する- 治療効果の異質性が強い場合、S-learnerより優れた性能を示す\n- 治療効果の推定に直接最適化されていない- 治療群と対照群の人数が不均衡な場合、不安定になる- modelのmisspecificationに弱い\n\n\nX-learner / DR-learner\n- 異質な治療効果を直接推定する- 観察研究での不均衡なSubgroupにおいて有効\n- 複雑である- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい\n\n\nR-learner\n- CATEの計算が効率的- 治療効果に対する直接的な損失関数を構成できる- Double robustである- 信頼区間を計算可能\n- 複雑である- Propensity scoreのOverlapが十分にあることが前提- 極端な傾向スコアが存在する場合、不安定になる- 傾向スコアモデルの誤設定に影響されやすい(DR-learnerよりも)\n\n\n\n\n\n\n(Inoue, Adomi, et al. 2024; Komura et al. 2026)\n\nS-learnerが最も直感的ではあるが・・・・・・\n過去のReviewだとDR-learnerが良さそう"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learnerの評価test-dataset",
     "href": "statistics/mlcausal/index.html#meta-learnerの評価test-dataset",
     "title": "機械学習を用いた因果推論",
     "section": "Meta-learnerの評価：test dataset",
-    "text": "Meta-learnerの評価：test dataset\n5つのモデルを開発コホート全例で学習して固定し、独立なtest_toy_dataで比較する。\n\n学習・評価用nuisance model・bootstrapはtargetsで計算する\n各モデルの評価済みDRTester objectもjoblibで保存する\n各objectのEvaluationResultsからGATE・TOC・Qini・AUTOCのraw tableをモデル別CSVに保存する\n利益 = イベントリスクの減少量に統一：評価outcomeは1 - bin_outcome、予測利益は-model.effect(X)\n以下の図は保存した評価値からQmd内で描画する\n\n\n# targetsが保存した評価済みDRTesterを再利用できる。\nimport joblib\n\ntester = joblib.load(\"cache/validation/external/dr_learner-drtester.joblib\")\nresult = tester.res\nresult.summary()          # BLP / calibration / AUTOC / QINI\nresult.cal.plot_data_dict[1]  # GATEのraw DataFrame\nresult.toc.curves[1]          # TOCのraw DataFrame\nresult.qini.curves[1]         # Qiniのraw DataFrame"
+    "text": "Meta-learnerの評価：test dataset\n\n# targetsが保存した評価済みDRTesterを再利用できる。\nfrom pathlib import Path\nimport joblib\n\ntester_path = Path(\n    \"statistics/mlcausal/cache/validation/external/\"\n    \"dr_learner-drtester.joblib\"\n)\ntester = joblib.load(tester_path)\nresult = tester.res\nresult.summary()          # BLP / calibration / AUTOC / QINI\nresult.cal.plot_data_dict[1]  # GATEのraw DataFrame\nresult.toc.curves[1]          # TOCのraw DataFrame\nresult.qini.curves[1]         # Qiniのraw DataFrame\n\n\n今回はやらないが、PythonでモデルをSaveするとかなり簡単に評価できる\nまぁ、LLMにやらせればあまり間違えないと思う"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learnerのgatetest-dataset",
     "href": "statistics/mlcausal/index.html#meta-learnerのgatetest-dataset",
     "title": "機械学習を用いた因果推論",
     "section": "Meta-learnerのGATE（test dataset）",
-    "text": "Meta-learnerのGATE（test dataset）\n\n開発コホートの予測利益の五分位で群を定め、testデータの予測平均とDR GATEを比較する。誤差棒は点ごとの95% CI。"
+    "text": "Meta-learnerのGATE（test dataset）\n\n\n5群でのデータ"
   },
   {
     "objectID": "statistics/mlcausal/index.html#meta-learnerのtocqinitest-dataset",
@@ -5142,14 +5142,14 @@
     "href": "statistics/mlcausal/index.html#meta-learnerのautoc比較test-dataset",
     "title": "機械学習を用いた因果推論",
     "section": "Meta-learnerのAUTOC比較（test dataset）",
-    "text": "Meta-learnerのAUTOC比較（test dataset）\n\n\n\n\n\nlearner\nautoc\nautoc_se\nqini\nqini_se\n\n\n\n\nS-learner\n0.136\n0.037\n0.051\n0.015\n\n\nT-learner\n0.029\n0.047\n0.012\n0.015\n\n\nX-learner\n0.115\n0.035\n0.037\n0.012\n\n\nR-learner\n0.109\n0.031\n0.032\n0.011\n\n\nDR-learner\n0.113\n0.036\n0.036\n0.013\n\n\n\n\n\n\nAUTOCはTOC、QINI係数はQini曲線の面積に対応する。ここではEconML既定の5〜95%の分位点グリッドによる推定値を示す。GRFとは既定の積分グリッドが異なるため、数値をそのまま同一視しない。"
+    "text": "Meta-learnerのAUTOC比較（test dataset）\n\n\n\n\n\nlearner\nautoc\nautoc_se\nqini\nqini_se\n\n\n\n\nS-learner\n0.136\n0.037\n0.051\n0.015\n\n\nT-learner\n0.029\n0.047\n0.012\n0.015\n\n\nX-learner\n0.115\n0.035\n0.037\n0.012\n\n\nR-learner\n0.109\n0.031\n0.032\n0.011\n\n\nDR-learner\n0.113\n0.036\n0.036\n0.013"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forest学習データでの診断",
     "href": "statistics/mlcausal/index.html#causal-forest学習データでの診断",
     "title": "機械学習を用いた因果推論",
     "section": "Causal forest：学習データでの診断",
-    "text": "Causal forest：学習データでの診断\nSverdrup E, Petukhova M, Wager S. Estimating treatment effect heterogeneity in psychiatry: A review and tutorial with causal forests. Int J Methods Psychiatr Res. 2025;34(2):e70015. doi:10.1002/mpr.70015\nこのやり方をまねる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBest linear fit using forest predictions (on held-out data)\nas well as the mean forest prediction as regressors, along\nwith one-sided heteroskedasticity-robust (HC3) SEs:\n\n                               Estimate Std. Error t value    Pr(&gt;t)    \nmean.forest.prediction          0.99135    0.24186  4.0989 2.130e-05 ***\ndifferential.forest.prediction  1.04334    0.14507  7.1919 4.017e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\n\n\n          control      treated\n[1,]  0.009072925 -0.005697594\n[2,]  0.923624888  1.446712804\n[3,]  0.024952538 -0.007246572\n[4,] -0.056970088  0.337517670\n[5,] -0.056830342  0.127805451\n[6,]  0.009730544 -0.012729685\n\n\n\n\n\n\n\n\n\npolicy_tree object \nTree depth:  2 \nActions:  1: control 2: treated \nVariable splits: \n(1) split_variable: lvef  split_value: 53 \n  (2) split_variable: bmi  split_value: 17.6407 \n    (4) * action: 1 \n    (5) * action: 2 \n  (3) split_variable: age  split_value: 55 \n    (6) * action: 2 \n    (7) * action: 1"
+    "text": "Causal forest：学習データでの診断\n\nPropensity scoreの分布各因子のBalance\n\n\n\n\n\n\n\n\n\n\n\n\n十分重なっており、IPWだとPropensity scoreは重なりが良い\n\n\n\n\n\n\n\n\n\n\n\n\n\n正直あまりよくない"
   },
   {
     "objectID": "statistics/mlcausal/index.html#grftest-datasetへの予測",
@@ -5170,7 +5170,7 @@
     "href": "statistics/mlcausal/index.html#grfのrateautoc-qinitest-dataset",
     "title": "機械学習を用いた因果推論",
     "section": "GRFのRATE：AUTOC / QINI（test dataset）",
-    "text": "GRFのRATE：AUTOC / QINI（test dataset）\n\n# RATEは順位付けの評価指標の総称。重みを変えるとAUTOC / QINIになる。\nset.seed(123)\ngrf_autoc &lt;- grf::rank_average_treatment_effect(\n  external_evaluation_forest, priorities = benefit_test_grf,\n  target = \"AUTOC\", q = seq(0.1, 1, by = 0.1), R = 500\n)\nset.seed(123)\ngrf_qini &lt;- grf::rank_average_treatment_effect(\n  external_evaluation_forest, priorities = benefit_test_grf,\n  target = \"QINI\", q = seq(0.1, 1, by = 0.1), R = 500\n)\n\ntibble::tibble(\n  metric = c(\"AUTOC\", \"QINI\"),\n  estimate = c(grf_autoc$estimate, grf_qini$estimate),\n  se = c(grf_autoc$std.err, grf_qini$std.err)\n) |&gt;\n  dplyr::mutate(lower = estimate - 1.96 * se, upper = estimate + 1.96 * se) |&gt;\n  knitr::kable(digits = 3)\n\n\n\n\nmetric\nestimate\nse\nlower\nupper\n\n\n\n\nAUTOC\n0.102\n0.023\n0.056\n0.147\n\n\nQINI\n0.031\n0.007\n0.017\n0.045"
+    "text": "GRFのRATE：AUTOC / QINI（test dataset）\n\n# 学習済みforestを固定し、学習時と同じ列順でtestデータを予測する。\nX_test_grf &lt;- test_toy_data |&gt;\n  dplyr::select(dplyr::all_of(colnames(causal_forest_bin$X.orig))) |&gt;\n  as.data.frame()\ntau_test_grf &lt;- as.numeric(predict(\n  causal_forest_bin, newdata = as.matrix(X_test_grf)\n)$predictions)\n\n# outcomeはイベントなので、符号を反転して「正ほど有益」にそろえる。\nbenefit_test_grf &lt;- -tau_test_grf\n\n# RATEは順位付けの評価指標の総称。重みを変えるとAUTOC / QINIになる。\nset.seed(123)\ngrf_autoc &lt;- grf::rank_average_treatment_effect(\n  external_evaluation_forest, priorities = benefit_test_grf,\n  target = \"AUTOC\", q = seq(0.1, 1, by = 0.1), R = 500\n)\nset.seed(123)\ngrf_qini &lt;- grf::rank_average_treatment_effect(\n  external_evaluation_forest, priorities = benefit_test_grf,\n  target = \"QINI\", q = seq(0.1, 1, by = 0.1), R = 500\n)\n\ntibble::tibble(\n  metric = c(\"AUTOC\", \"QINI\"),\n  estimate = c(grf_autoc$estimate, grf_qini$estimate),\n  se = c(grf_autoc$std.err, grf_qini$std.err)\n) |&gt;\n  dplyr::mutate(lower = estimate - 1.96 * se, upper = estimate + 1.96 * se) |&gt;\n  knitr::kable(digits = 3)\n\n\n\n\nmetric\nestimate\nse\nlower\nupper\n\n\n\n\nAUTOC\n0.102\n0.023\n0.056\n0.147\n\n\nQINI\n0.031\n0.007\n0.017\n0.045"
   },
   {
     "objectID": "statistics/mlcausal/index.html#grfのtoc-qini-plottest-dataset",
@@ -5192,5 +5192,124 @@
     "title": "機械学習を用いた因果推論",
     "section": "GRFのC-for-benefit：一致率と信頼区間",
     "text": "GRFのC-for-benefit：一致率と信頼区間\n\n# c_for_benefit &lt;- function(data) {\n\n#   tidyr::crossing(\n#     i = seq_len(nrow(data)),\n#     j = seq_len(nrow(data))\n#   ) |&gt;\n#     filter(\n#       i &lt; j,\n#       data$observed_benefit[i] !=\n#         data$observed_benefit[j]\n#     ) |&gt;\n#     transmute(\n#       obs_diff =\n#         data$observed_benefit[i] -\n#         data$observed_benefit[j],\n\n#       pred_diff =\n#         data$predicted_benefit[i] -\n#         data$predicted_benefit[j],\n\n#       score = case_when(\n#         obs_diff * pred_diff &gt; 0 ~ 1,\n#         pred_diff == 0 ~ 0.5,\n#         TRUE ~ 0\n#       )\n#     ) |&gt;\n#     summarise(\n#       cfb = mean(score)\n#     ) |&gt;\n#     pull(cfb)\n# }\n\n# # Point estimate\n# # c_for_benefit(cfb_pairs)\n\n# #--------------------------------------------------\n# # pair bootstrap\n# #--------------------------------------------------\n\n# cfb_stat &lt;- function(data, indices) {\n#   c_for_benefit(data[indices, ])\n# }\n\n# set.seed(123)\n\n# boot_cfb &lt;- boot::boot(\n#   data = cfb_pairs,\n#   statistic = cfb_stat,\n#   R = 199\n# )\n\n# #--------------------------------------------------\n# # result\n# #--------------------------------------------------\n\n# cfb_study &lt;- tibble(\n#   C_for_benefit = boot_cfb$t0,\n#   lower_95 = quantile(\n#     boot_cfb$t,\n#     0.025,\n#     na.rm = TRUE\n#   ),\n#   upper_95 = quantile(\n#     boot_cfb$t,\n#     0.975,\n#     na.rm = TRUE\n#   )\n# )\n\n# cfb_study |&gt; knitr::kable(digits = 3)\n\n# 3. 二つのmatched pairを選び、観測benefitと予測benefitの順序を比べる。\nc_for_benefit_fast &lt;- function(observed_benefit, predicted_benefit) {\n  stopifnot(\n    length(observed_benefit) == length(predicted_benefit),\n    length(observed_benefit) &gt;= 2L,\n    all(is.finite(observed_benefit)),\n    all(is.finite(predicted_benefit))\n  )\n\n  observed_levels &lt;- sort(unique(observed_benefit))\n  if (length(observed_levels) &lt; 2L) {\n    return(NA_real_)\n  }\n\n  total_score &lt;- 0\n  number_of_comparisons &lt;- 0\n\n  # 観測benefitが高い群を、それより低い全ての群と比較する。\n  for (higher_level in observed_levels[-1]) {\n    predictions_in_higher_group &lt;- predicted_benefit[\n      observed_benefit == higher_level\n    ]\n    predictions_in_lower_groups &lt;- predicted_benefit[\n      observed_benefit &lt; higher_level\n    ]\n\n    # 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。\n    score_for_each_pair &lt;- vapply(\n      predictions_in_higher_group,\n      function(higher_prediction) {\n        sum(higher_prediction &gt; predictions_in_lower_groups) +\n          0.5 * sum(higher_prediction == predictions_in_lower_groups)\n      },\n      numeric(1)\n    )\n\n    total_score &lt;- total_score + sum(score_for_each_pair)\n    number_of_comparisons &lt;- number_of_comparisons +\n      length(predictions_in_higher_group) *\n      length(predictions_in_lower_groups)\n  }\n\n  total_score / number_of_comparisons\n}\n\n# boot()は、この関数のindicesに復元抽出した行番号を渡す。\nbootstrap_c_for_benefit_fast &lt;- function(data, indices) {\n  sampled_pairs &lt;- data[indices, , drop = FALSE]\n\n  c_for_benefit_fast(\n    observed_benefit = sampled_pairs$observed_benefit,\n    predicted_benefit = sampled_pairs$predicted_benefit\n  )\n}\n\n# 4. matched pairを単位に500回bootstrapする。\nset.seed(123)\ncfb_bootstrap_fast &lt;- boot::boot(\n  data = cfb_pairs,\n  statistic = bootstrap_c_for_benefit_fast,\n  R = 500\n)\n\n# t0が元データの点推定、tが各bootstrap標本の推定値。\ncfb_estimate &lt;- as.numeric(cfb_bootstrap_fast$t0)\n\ncfb_ci_result &lt;- boot::boot.ci(\n  cfb_bootstrap_fast,\n  conf = 0.95,\n  type = \"bca\"\n)\ncfb_ci &lt;- cfb_ci_result$bca[4:5]\n\ncfb_summary &lt;- tibble::tibble(\n  c_for_benefit = cfb_estimate,\n  lower_95 = unname(cfb_ci[1]),\n  upper_95 = unname(cfb_ci[2])\n\n)\n\ncfb_summary |&gt; knitr::kable(digits = 3)\n\n\n\n\nc_for_benefit\nlower_95\nupper_95\n\n\n\n\n0.588\n0.529\n0.645\n\n\n\n\n\n予測順位の一致を1、不一致を0、予測が同値なら0.5として平均する。CIは固定したモデル・matchingに条件づけた500回のpair bootstrapであり、再学習・再matchingの不確実性を含まない。"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#治療の異質性とは",
+    "href": "statistics/mlcausal/index.html#治療の異質性とは",
+    "title": "機械学習を用いた因果推論",
+    "section": "治療の異質性とは？",
+    "text": "治療の異質性とは？\n\n医学論文において、患者の背景というのはRCTの解釈で非常に重要\n\nMitra valveのTEERにおけるCOAPT vs. MITRA-FR trial\nCryptogenic strokeに対するPFO closureのRCTの結果の変遷\nAFのrhythm controlの優位性を示せたEAST-AFNET4 trial\n\n「誰への治療効果？」という事を示す用語としてEstimandが近年重要性を上げている(Little and Lewis 2021)\n\nATE, ATT, ATU"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forestの特徴",
+    "href": "statistics/mlcausal/index.html#causal-forestの特徴",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forestの特徴",
+    "text": "Causal forestの特徴\n\nHTEを検出するのに特化したモデル\nHonestやOOB(Out of bagg)推定のおかげでOverfittingが少ない\nHyperparameterのTuningがなくても性能が高い\n論文だと、計算コストが言われているが数千くらいのDataなら問題なく出来る\nBlackbox感は強いが……"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#discrimination-ratesautoc",
+    "href": "statistics/mlcausal/index.html#discrimination-ratesautoc",
+    "title": "機械学習を用いた因果推論",
+    "section": "Discrimination ~ RATES(AUTOC)",
+    "text": "Discrimination ~ RATES(AUTOC)\n\n\n\n1行 = 1%、ATE = 2\n\n\n\n\n\n\n\n\n予測された\n治療効果\nRanking\nATEとの差\nTOC\n\n\n\n\n8.1\n1\n8.1 − 2.0\n= 6.1\n(6.1) / 1\n= 6.10\n\n\n7.9\n2\n7.9 − 2.0\n= 5.9\n(6.1 + 5.9) / 2\n= 6.00\n\n\n6.8\n3\n6.8 − 2.0\n= 4.8\n(6.1 + 5.9 + 4.8) / 3\n= 5.60\n\n\n6.6\n4\n6.6 − 2.0\n= 4.6\n(6.1 + 5.9 + 4.8 + 4.6) / 4\n= 5.35\n\n\n\n\n\n\n→\n\n\n上位q%の平均治療効果から全体ATEを引く\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nITEをRankingを連続的に見て上位n%でのITEの平均と全体のATEの差をとる(Benefit)\nこの面積がAUTOC"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#discrimination-ratesqini係数",
+    "href": "statistics/mlcausal/index.html#discrimination-ratesqini係数",
+    "title": "機械学習を用いた因果推論",
+    "section": "Discrimination ~ RATES(Qini係数)",
+    "text": "Discrimination ~ RATES(Qini係数)\n\n\nQini係数は、TOCにpercentageで重みづけをしている\nQini係数はTOCよりもCost performanceの解釈で有用(GRF Development Team, n.d.)\n\n複数Armの治療で比較に使える(Rのmaq)"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#shap",
+    "href": "statistics/mlcausal/index.html#shap",
+    "title": "機械学習を用いた因果推論",
+    "section": "SHAP",
+    "text": "SHAP\n\nゲーム理論に基づいて、「その変数がどれくらい役に立っているか？」を全組み合わせで見ている指標\n局所～全体的に「Modelが何を見ているか？」を見ることが出来る\nVariable importanceと同じように使えるが情報量は多い\n\n個人的に見方が難しいが……"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#modelの解釈",
+    "href": "statistics/mlcausal/index.html#modelの解釈",
+    "title": "機械学習を用いた因果推論",
+    "section": "Modelの解釈",
+    "text": "Modelの解釈\n\n複雑なModelを浅い決定木で近似させる\n多少単純化されるものの、「どのルールでITEが最も変化されるか？」が分かる"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forestのpackage",
+    "href": "statistics/mlcausal/index.html#causal-forestのpackage",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forestのPackage",
+    "text": "Causal forestのPackage\n\nPythonだとeconmlのDRTester\nRだとgrfで可能"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#causal-forestのモデル評価の推奨",
+    "href": "statistics/mlcausal/index.html#causal-forestのモデル評価の推奨",
+    "title": "機械学習を用いた因果推論",
+    "section": "Causal forestのモデル評価の推奨",
+    "text": "Causal forestのモデル評価の推奨\n\n論文ではCATE estimation → Calibration → HTE insightsの評価を推奨 (Komura et al. 2026)\n\nCalibration: Best linear prediction, Calibration plot\nHTE insights: VIP, SHAP, 各群での患者背景の比較\n\ngrfの作者たちのお勧めは以下の順番\n\nPropensity scoreのoverlap / positivity の確認\nIPW後のcovariate balanceの確認\ntest_calibration() によるfitの評価\nGATE/RATE による HTE 評価"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#rwdのhteの論文は増えている",
+    "href": "statistics/mlcausal/index.html#rwdのhteの論文は増えている",
+    "title": "機械学習を用いた因果推論",
+    "section": "RWDのHTEの論文は増えている",
+    "text": "RWDのHTEの論文は増えている\n\nNumber of Publications of HTE estimation\n2023年からRWDを用いたHTE関連の研究が急激に増えている\n循環器領域は全体の23%で悪性腫瘍についで2番目に多い\n\nTree-basedが34%, meta-learnerが26%\n\nExternal validation不足(4%でしか行われていない)が指摘されている\n\n(Möller et al. 2026)"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#propensity-scoreの分布",
+    "href": "statistics/mlcausal/index.html#propensity-scoreの分布",
+    "title": "機械学習を用いた因果推論",
+    "section": "Propensity scoreの分布",
+    "text": "Propensity scoreの分布\n\n\n十分重なっており、IPWだとPropensity scoreは重なりが良い"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#各因子のbalance",
+    "href": "statistics/mlcausal/index.html#各因子のbalance",
+    "title": "機械学習を用いた因果推論",
+    "section": "各因子のBalance",
+    "text": "各因子のBalance\n\n\n正直あまりよくない\n\n:::"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#grfの評価",
+    "href": "statistics/mlcausal/index.html#grfの評価",
+    "title": "機械学習を用いた因果推論",
+    "section": "grfの評価",
+    "text": "grfの評価\n\nCalibration ~ Best linear predictionGRFのRATE：AUTOC / QINIDiscrimination ~ C for benefitCalibration ~ GATE\n\n\n\n\n\nBest linear fit using forest predictions (on held-out data)\nas well as the mean forest prediction as regressors, along\nwith one-sided heteroskedasticity-robust (HC3) SEs:\n\n                               Estimate Std. Error t value    Pr(&gt;t)    \nmean.forest.prediction          0.99135    0.24186  4.0989 2.130e-05 ***\ndifferential.forest.prediction  1.04334    0.14507  7.1919 4.017e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\nmetric\nestimate\nse\nlower\nupper\n\n\n\n\nAUTOC\n0.102\n0.023\n0.056\n0.147\n\n\nQINI\n0.031\n0.007\n0.017\n0.045\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nc_for_benefit\nlower_95\nupper_95\n\n\n\n\n0.588\n0.529\n0.645"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#calibration-best-linear-prediction",
+    "href": "statistics/mlcausal/index.html#calibration-best-linear-prediction",
+    "title": "機械学習を用いた因果推論",
+    "section": "Calibration ~ Best linear prediction",
+    "text": "Calibration ~ Best linear prediction\n\n\n\nBest linear fit using forest predictions (on held-out data)\nas well as the mean forest prediction as regressors, along\nwith one-sided heteroskedasticity-robust (HC3) SEs:\n\n                               Estimate Std. Error t value    Pr(&gt;t)    \nmean.forest.prediction          0.99135    0.24186  4.0989 2.130e-05 ***\ndifferential.forest.prediction  1.04334    0.14507  7.1919 4.017e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#discrimination-toc-qini",
+    "href": "statistics/mlcausal/index.html#discrimination-toc-qini",
+    "title": "機械学習を用いた因果推論",
+    "section": "Discrimination ~ TOC, Qini",
+    "text": "Discrimination ~ TOC, Qini"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#discrimination-c-for-benefit-1",
+    "href": "statistics/mlcausal/index.html#discrimination-c-for-benefit-1",
+    "title": "機械学習を用いた因果推論",
+    "section": "Discrimination ~ C for benefit",
+    "text": "Discrimination ~ C for benefit\n\n# 1. testデータ内で、予測benefitが近い治療例と対照例を1:1 matching。\n# 予測benefitは正ほど有益。outcomeはmatchingに使わない。\ncfb_data &lt;- test_toy_data |&gt;\n  dplyr::mutate(predicted_benefit = benefit_test_grf)\n\nmatching_estimand &lt;- if (sum(cfb_data$ca == 1) &lt;= sum(cfb_data$ca == 0)) {\n  \"ATT\"\n} else {\n  \"ATC\"\n}\n\nset.seed(42)\ncfb_matching &lt;- MatchIt::matchit(\n  ca ~ predicted_benefit,\n  data = cfb_data,\n  method = \"nearest\",\n  distance = \"mahalanobis\",\n  estimand = matching_estimand,\n  ratio = 1,\n  replace = FALSE,\n  m.order = \"closest\"\n)\n\n# 2. 患者2人を1行にまとめる。ここからの比較単位はmatched pair。\ncfb_pairs &lt;- MatchIt::match_data(cfb_matching) |&gt;\n  dplyr::group_by(subclass) |&gt;\n  dplyr::summarise(\n    treated_id = id[ca == 1],\n    control_id = id[ca == 0],\n    observed_benefit = bin_outcome[ca == 0] - bin_outcome[ca == 1],\n    predicted_benefit = mean(predicted_benefit),\n    .groups = \"drop\"\n  )\n\nc_for_benefit_fast &lt;- function(observed_benefit, predicted_benefit) {\n  stopifnot(\n    length(observed_benefit) == length(predicted_benefit),\n    length(observed_benefit) &gt;= 2L,\n    all(is.finite(observed_benefit)),\n    all(is.finite(predicted_benefit))\n  )\n\n  observed_levels &lt;- sort(unique(observed_benefit))\n  if (length(observed_levels) &lt; 2L) {\n    return(NA_real_)\n  }\n\n  total_score &lt;- 0\n  number_of_comparisons &lt;- 0\n\n  # 観測benefitが高い群を、それより低い全ての群と比較する。\n  for (higher_level in observed_levels[-1]) {\n    predictions_in_higher_group &lt;- predicted_benefit[\n      observed_benefit == higher_level\n    ]\n    predictions_in_lower_groups &lt;- predicted_benefit[\n      observed_benefit &lt; higher_level\n    ]\n\n    # 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。\n    score_for_each_pair &lt;- vapply(\n      predictions_in_higher_group,\n      function(higher_prediction) {\n        sum(higher_prediction &gt; predictions_in_lower_groups) +\n          0.5 * sum(higher_prediction == predictions_in_lower_groups)\n      },\n      numeric(1)\n    )\n\n    total_score &lt;- total_score + sum(score_for_each_pair)\n    number_of_comparisons &lt;- number_of_comparisons +\n      length(predictions_in_higher_group) *\n      length(predictions_in_lower_groups)\n  }\n\n  total_score / number_of_comparisons\n}\n\n# boot()は、この関数のindicesに復元抽出した行番号を渡す。\nbootstrap_c_for_benefit_fast &lt;- function(data, indices) {\n  sampled_pairs &lt;- data[indices, , drop = FALSE]\n\n  c_for_benefit_fast(\n    observed_benefit = sampled_pairs$observed_benefit,\n    predicted_benefit = sampled_pairs$predicted_benefit\n  )\n}\n\n# 4. matched pairを単位に500回bootstrapする。\nset.seed(123)\ncfb_bootstrap_fast &lt;- boot::boot(\n  data = cfb_pairs,\n  statistic = bootstrap_c_for_benefit_fast,\n  R = 500\n)\n\n# t0が元データの点推定、tが各bootstrap標本の推定値。\ncfb_estimate &lt;- as.numeric(cfb_bootstrap_fast$t0)\n\ncfb_ci_result &lt;- boot::boot.ci(\n  cfb_bootstrap_fast,\n  conf = 0.95,\n  type = \"bca\"\n)\ncfb_ci &lt;- cfb_ci_result$bca[4:5]\n\ncfb_summary &lt;- tibble::tibble(\n  c_for_benefit = cfb_estimate,\n  lower_95 = unname(cfb_ci[1]),\n  upper_95 = unname(cfb_ci[2])\n\n)\n\ncfb_summary |&gt; knitr::kable(digits = 3)\n\n\n\n\nc_for_benefit\nlower_95\nupper_95\n\n\n\n\n0.588\n0.529\n0.645"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#calibration-gate",
+    "href": "statistics/mlcausal/index.html#calibration-gate",
+    "title": "機械学習を用いた因果推論",
+    "section": "Calibration ~ GATE",
+    "text": "Calibration ~ GATE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRank\nN\nMean predicted\nITE\nPatient ID\n\n\n\n\n1\n100\n0.261\n8, 21, 29,...\n\n\n2\n100\n0.345\n2, 9, 11,...\n\n\n3\n100\n0.400\n7, 12, 17,...\n\n\n4\n100\n0.451\n1, 4, 6,...\n\n\n5\n100\n0.552\n3, 5, 14,...\n\n\n\n\n\n\n\n\n\n\n\n群ごとにAIPWなどで&lt;br&gt;\nGrouped ATEを算出\n\n\n\n\n\n\n\n\n\n\n\n\n\nRank\nMean predicted\nITE\nGrouped\nATE\n\n\n\n\n1\n0.261\n0.240\n\n\n2\n0.345\n0.353\n\n\n3\n0.400\n0.322\n\n\n4\n0.451\n0.525\n\n\n5\n0.552\n0.477"
+  },
+  {
+    "objectID": "statistics/mlcausal/index.html#grfモデルの解釈",
+    "href": "statistics/mlcausal/index.html#grfモデルの解釈",
+    "title": "機械学習を用いた因果推論",
+    "section": "GRFモデルの解釈",
+    "text": "GRFモデルの解釈\n\nPDPGlobal SHAPSurrogate treePolicy tree"
   }
 ]
