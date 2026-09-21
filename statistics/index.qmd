@@ -14,3 +14,4 @@ format: html
 | [ブートストラップ入門](bootstrap/) | 通常の計算が難しい時の信頼区間の出し方 |
 | [g-computation入門](marginaleffects/) | 統計モデルのより良い解釈の方法 |
 | [PRO(patient reported outcomes) analysis入門](PROanalysis/) | PROの解析時の注意点です |
+| [機械学習を用いた因果推論](mlcausal/) | 機械学習を用いた因果推論、特にCausal forestについて |

@@ -31,7 +31,7 @@ knitr:
     dev: svglite
     fig-format: svg
 bibliography: references.bib
-date: "2026-08-01"
+date: "2026-09-21"
 ---
 
 # 因果推論 at glance
@@ -667,8 +667,14 @@ $$
 - HTE専用の機械学習
 - 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)
   - 正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰
-- Overfittingを防ぐために"Honest"を用いる
+1. Outcomeを予測しているregression forest()
+2. 治療を予測しているPropensity scoreのregression forest()
+3. 治療効果に最も差が出るように分割ルールを変更しているITEを測定する大本のregression forest
+4. 3の重み付けを利用したlinear regression回帰
+の4つのモデルを使っている
+- 3の時に、Overfittingを防ぐために"Honest"を用いる
   - 分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める
+
 
 ## Causal forestの特徴
 
