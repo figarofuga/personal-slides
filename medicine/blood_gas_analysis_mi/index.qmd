@@ -1,6 +1,6 @@
 ---
-title: "動脈血液ガス分析の基礎と概念"
-subtitle: "たった一つの簡単な概念"
+title: "動脈血液ガス分析の酸塩基平衡の基礎"
+subtitle: "たった2つの簡単なルール"
 date: "2026/12/4"
 bibliography: reference.bib
 link-citations: true
@@ -56,8 +56,33 @@ knitr:
 </style>
 ```
 
+## Take home message
 
-## Acid–Base Disorders {#acid-base-map}
+- 血液ガスは「今の状態(acidemia/alkalemia)」と「ベクトル(alkalosis/acidosis)」を区別する
+  - 見た目が正常でも、何が起きているかは分からないと考える
+- 「もしも、目に見えるその異常がなかったらどういうガスになる？」というルール = 神様ルール/玉ねぎの皮むきルール
+- 特に代謝性の代償を考えるときはTime courseをしっかり考える
+
+# 血液ガスについて
+
+## 血液ガスでわかること
+
+- 主に以下の2つが分かる
+  - 酸素化と換気(呼吸の評価)
+  - [**酸塩基平衡**]{style="color: red;font-size: 1.2em;"}
+- 実はCPAの時にほぼほぼ全ての4H4Tを推測可能
+
+## 動脈血液ガス vs. 静脈血液ガス
+
+- 基本的には、pHとHCO3-は信じてよい
+- O2は信じちゃダメ
+- 過去にはCO2-は変換式があるといわれたが微妙かも
+- 「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断
+- DKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている
+
+# 酸塩基平衡の基礎
+
+## 酸塩基平衡のマインドマップ {#acid-base-map}
 
 ```{mermaid}
 %%| fig-width: 10
@@ -71,8 +96,11 @@ flowchart TD
     ABG --> RA["呼吸性アシドーシス"]
     ABG --> RK["呼吸性アルカローシス"]
     
-    MA --> AG["Anion Gap開大"]
-    MA --> NAG["Anion Gap正常"]
+    MA --> Albcorrect["Alb補正"]
+    Albcorrect --> NAG["Anion Gap正常代謝性アシドーシス"]
+    Albcorrect --> AG["Anion Gap開大性代謝性アシドーシス"]
+    AG --> HCO3["補正HCO3-を計算する"]
+    NAG --> urineag["尿中AGを計算"]
 
     click AG "#/ag-acidosis"
     click NAG "#/nag-acidosis"
@@ -82,6 +110,33 @@ flowchart TD
 ```
 
 ---
+
+## 酸塩基平衡の考え方
+
+- pHの実際の値がAcidemia/Alkalemia
+- そこに持っていく力(ベクトル)がAcidosis/Alkalosis
+  - 呼吸性/代謝性に分かれる
+- 明らかな時もあるが、打ち消しあって目に見えないこともある
+
+## 例えば
+
+- pH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？
+- 答え1: 
+  - まったく問題がない健常人のA gas
+- 答え2: 
+  - 呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas
+...
+- 答え4: 
+  - 呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas
+
+## どうやって区別する？
+
+- 明らかな異常がある場合、「それがなかったら……」という風に考える
+- 代表的なのが
+  - 代償
+  - Alb補正
+  - 補正HCO3-
+- まずは、AG開大代謝性Acidosisで考えてみましょう
 
 ## High Anion Gap 代謝性 アシドーシス {#ag-acidosis}
 

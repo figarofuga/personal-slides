@@ -22,13 +22,13 @@ author:
     affiliations: 東京医療センター総合内科
 date-format: "YYYY-MM-DD"
 engine: knitr
-execute: 
+execute:
   error: false
   warning: false
   echo: false
   cache: false
-knitr: 
-  opts_chunk: 
+knitr:
+  opts_chunk:
     dev: svglite
     fig-format: svg
 date: "2026-09-14"
@@ -91,6 +91,17 @@ Nohria stevenson
 利尿薬はしっかり使うべき？
 Baはどうする？
 
+## 慢性心不全の管理
+
+## 高齢者心不全のGBMTの是非？
+
+- GBMTはAKI, 高K血症, 徐脈, 低血圧などの有害事象がある
+- 実際にFrailな高齢者においては薬のAdverse eventsは多い印象がある
+
+## GBMTの高齢者のEvidence
+
+<!-- Tableで書く-->
+
 ## 高齢者HFrEFの管理
 
 GBMTの効果
@@ -104,6 +115,8 @@ GLP1-RA？
 ## 食事について
 
 malnutritionの問題
+
+## 高齢心不全患者へのリハビリ
 
 ## ACPの確立
 

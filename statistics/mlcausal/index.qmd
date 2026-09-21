@@ -485,8 +485,11 @@ $$
 - 結局のところ、モデルは人が作らないといけない
 - 非線形な関係も、Interaction termもいずれにせよ人が作る必要がある
 - さらに、治療効果の異質性については古典的な線形回帰では考慮できない
-  - 治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる
-[**この治療は眼の前の患者さんに有益ですか？**]{style="color: red;font-size: 1.2em;text-align=center"}
+  - 治療効果の異質性はSubgroup analysisを行えばわかるが多重検定の問題となる<br>
+
+::: {style="text-align: center; color: red; font-size: 1.2em;"}
+**この治療は眼の前の患者さんに有益ですか？**
+:::
 
 ## 治療の異質性とは？
 
@@ -1864,7 +1867,8 @@ shift_differences |>
   ) |>
   print()
 
-datawizard::describe_distribution(full_toy_data$ite_rd_bin)
+datawizard::describe_distribution(full_toy_data$ite_rd_bin) |> 
+  report::display(format = "html")
 
 ```
 
