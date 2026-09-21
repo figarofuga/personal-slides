@@ -6,7 +6,6 @@ import warnings
 
 import cloudpickle
 import joblib
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from econml.validate import DRTester, EvaluationResults
@@ -30,15 +29,6 @@ MODEL_NAMES = [
     "R-learner",
     "DR-learner",
 ]
-MODEL_COLORS = {
-    "S-learner": "#59A14F",
-    "T-learner": "#EDC948",
-    "X-learner": "#F28E2B",
-    "R-learner": "#B07AA1",
-    "DR-learner": "#E15759",
-}
-
-
 class _FlatEffectAdapter:
     """Express event-risk CATE as benefit (event-free probability difference)."""
 
@@ -155,47 +145,6 @@ def write_meta_learner_predictions(
     return str(output)
 
 
-def write_external_meta_learner_predictions(
-    s_model_path,
-    t_model_path,
-    x_model_path,
-    r_model_path,
-    dr_model_path,
-    validation_data,
-    output_path,
-):
-    """Persist predictions from frozen development models in an external cohort."""
-    validation, X_validation, _, _ = _full_sample(validation_data)
-    models = _load_models(
-        [
-            s_model_path,
-            t_model_path,
-            x_model_path,
-            r_model_path,
-            dr_model_path,
-        ]
-    )
-
-    frames = []
-    for model_name, model in models.items():
-        cate = np.asarray(
-            model.effect(X_validation, T0=0, T1=1)
-        ).reshape(-1)
-        frames.append(
-            pd.DataFrame(
-                {
-                    "id": validation["id"].to_numpy(dtype=int),
-                    "learner": model_name,
-                    "cate_rd": cate,
-                }
-            )
-        )
-
-    output = _output_path(output_path)
-    pd.concat(frames, ignore_index=True).to_csv(output, index=False)
-    return str(output)
-
-
 def _nuisance_regression_model():
     # DRTester calls predict(), while sklearn classifiers ordinarily return
     # hard labels there. The adapter keeps nuisance predictions on [0, 1].
@@ -251,9 +200,6 @@ def _evaluate_partitions(
     )
 
     testers = {}
-    summaries = []
-    gate_frames = []
-    curve_frames = []
 
     for model_name, model in models.items():
         # Copy the fitted nuisance state so every learner is saved as its own
@@ -271,58 +217,8 @@ def _evaluate_partitions(
         )
         assert isinstance(result, EvaluationResults)
         testers[model_name] = tester
-        blp, calibration = result.blp, result.cal
-        autoc, qini = result.toc, result.qini
 
-        cate_test = np.asarray(tester.cate_preds_val_).reshape(-1)
-        summaries.append(
-            {
-                "learner": model_name,
-                "ate_rd": -cate_test.mean(),
-                "mean_benefit": cate_test.mean(),
-                "cate_sd": cate_test.std(ddof=1),
-                "calibration_r2": float(calibration.cal_r_squared[0]),
-                "blp_slope": float(blp.params[0]),
-                "blp_se": float(blp.errs[0]),
-                "blp_p_value": float(blp.pvals[0]),
-                "autoc": float(autoc.params[0]),
-                "autoc_se": float(autoc.errs[0]),
-                "autoc_p_value": float(autoc.pvals[0]),
-                "qini": float(qini.params[0]),
-                "qini_se": float(qini.errs[0]),
-                "qini_p_value": float(qini.pvals[0]),
-            }
-        )
-
-        # キー 1 は二値治療の比較。図で使う群番号を 0 始まりから 1 始まりへ変換する。
-        gate = calibration.plot_data_dict[1].copy()
-        gate.insert(0, "learner", model_name)
-        gate["group"] = gate["ind"].astype(int) + 1
-        gate_frames.append(gate.drop(columns="ind"))
-
-        for metric, result in (("AUTOC", autoc), ("QINI", qini)):
-            curve = result.curves[1].copy()
-            curve.insert(0, "learner", model_name)
-            curve.insert(1, "metric", metric)
-            curve_frames.append(curve)
-
-    return (
-        pd.DataFrame(summaries),
-        pd.concat(gate_frames, ignore_index=True),
-        pd.concat(curve_frames, ignore_index=True),
-        testers,
-    )
-
-
-def _evaluate_models(models, toy_data, split, n_groups, n_bootstrap):
-    train_partition, validation_partition = _partitions(toy_data, split)
-    return _evaluate_partitions(
-        models,
-        train_partition,
-        validation_partition,
-        n_groups,
-        n_bootstrap,
-    )
+    return testers
 
 
 def _evaluate_external_models(
@@ -339,111 +235,6 @@ def _evaluate_external_models(
         n_groups,
         n_bootstrap,
     )
-
-
-def _plot_gate_comparison(gates, output, cohort_label):
-    figure, axes = plt.subplots(1, len(MODEL_NAMES), figsize=(15, 3.4))
-
-    limits = [
-        gates["gate"].min() - 1.96 * gates["se_gate"].max(),
-        gates["gate"].max() + 1.96 * gates["se_gate"].max(),
-        gates["g_cate"].min(),
-        gates["g_cate"].max(),
-    ]
-    # 全モデルで同じ軸範囲を使い、校正の良し悪しを視覚的に比較できるようにする。
-    low, high = min(limits), max(limits)
-    padding = max((high - low) * 0.06, 0.002)
-    low, high = low - padding, high + padding
-
-    for axis, model_name in zip(axes, MODEL_NAMES):
-        model_gates = gates.loc[gates["learner"] == model_name]
-        axis.axline((0, 0), slope=1, color="0.55", linestyle="--", linewidth=1)
-        axis.errorbar(
-            model_gates["g_cate"],
-            model_gates["gate"],
-            yerr=1.96 * model_gates["se_gate"],
-            fmt="o-",
-            color=MODEL_COLORS[model_name],
-            capsize=3,
-            linewidth=1.2,
-        )
-        for _, row in model_gates.iterrows():
-            axis.annotate(
-                f"G{int(row['group'])}",
-                (row["g_cate"], row["gate"]),
-                xytext=(3, 3),
-                textcoords="offset points",
-                fontsize=7,
-            )
-        axis.set(xlim=(low, high), ylim=(low, high), title=model_name)
-        axis.grid(alpha=0.2)
-
-    axes[0].set_ylabel("Observed DR GATE (risk reduction)")
-    for axis in axes:
-        axis.set_xlabel("Mean predicted benefit")
-
-    figure.suptitle(
-        f"EconML DRTester: GATE calibration in the {cohort_label}",
-        fontsize=12,
-    )
-    figure.tight_layout()
-    figure.savefig(output, format=output.suffix.lstrip("."), bbox_inches="tight")
-    plt.close(figure)
-
-
-def _plot_validation_summary(summary, output, cohort_label):
-    figure, axes = plt.subplots(1, 2, figsize=(12, 4.2))
-    positions = np.arange(len(MODEL_NAMES))
-    ordered = summary.set_index("learner").loc[MODEL_NAMES].reset_index()
-
-    axes[0].barh(
-        positions,
-        ordered["calibration_r2"],
-        color=[MODEL_COLORS[name] for name in MODEL_NAMES],
-    )
-    axes[0].axvline(0, color="0.35", linewidth=0.8)
-    axes[0].axvline(1, color="0.55", linestyle="--", linewidth=1)
-    axes[0].set(
-        yticks=positions,
-        yticklabels=MODEL_NAMES,
-        xlabel="Calibration R² (closer to 1 is better)",
-        title="Calibration",
-    )
-    axes[0].invert_yaxis()
-    axes[0].grid(axis="x", alpha=0.2)
-
-    offsets = {"AUTOC": -0.12, "QINI": 0.12}
-    markers = {"AUTOC": "o", "QINI": "s"}
-    for metric, column, se_column in (
-        ("AUTOC", "autoc", "autoc_se"),
-        ("QINI", "qini", "qini_se"),
-    ):
-        y = positions + offsets[metric]
-        axes[1].errorbar(
-            ordered[column],
-            y,
-            xerr=1.96 * ordered[se_column],
-            fmt=markers[metric],
-            capsize=3,
-            label=metric,
-        )
-    axes[1].axvline(0, color="0.55", linestyle="--", linewidth=1)
-    axes[1].set(
-        yticks=positions,
-        yticklabels=MODEL_NAMES,
-        xlabel="Discrimination coefficient (95% CI)",
-        title="Discrimination",
-    )
-    axes[1].invert_yaxis()
-    axes[1].legend(frameon=False)
-    axes[1].grid(axis="x", alpha=0.2)
-
-    figure.suptitle(
-        f"Meta-learner validation in the {cohort_label}"
-    )
-    figure.tight_layout()
-    figure.savefig(output, format=output.suffix.lstrip("."), bbox_inches="tight")
-    plt.close(figure)
 
 
 def _model_slug(model_name):
@@ -497,69 +288,6 @@ def _write_drtester_artifacts(testers, output_dir):
     return [str(path) for path in paths]
 
 
-def evaluate_meta_learners(
-    s_model_path,
-    t_model_path,
-    x_model_path,
-    r_model_path,
-    dr_model_path,
-    toy_data,
-    split,
-    summary_path,
-    gates_path,
-    curves_path,
-    gate_figure_path,
-    summary_figure_path,
-    drtester_dir,
-    n_groups=5,
-    n_bootstrap=1000,
-):
-    """Persist all EconML comparison results as CSV/SVG artifacts."""
-    models = _load_models(
-        [
-            s_model_path,
-            t_model_path,
-            x_model_path,
-            r_model_path,
-            dr_model_path,
-        ]
-    )
-    summary, gates, curves, testers = _evaluate_models(
-        models,
-        toy_data,
-        split,
-        n_groups=int(n_groups),
-        n_bootstrap=int(n_bootstrap),
-    )
-
-    summary_output = _output_path(summary_path)
-    gates_output = _output_path(gates_path)
-    curves_output = _output_path(curves_path)
-    gate_figure_output = _output_path(gate_figure_path)
-    summary_figure_output = _output_path(summary_figure_path)
-
-    # 数値表と図を同じ評価結果から保存し、R には追跡対象のパスだけを返す。
-    summary.to_csv(summary_output, index=False)
-    gates.to_csv(gates_output, index=False)
-    curves.to_csv(curves_output, index=False)
-    _plot_gate_comparison(
-        gates, gate_figure_output, "held-out internal test set"
-    )
-    _plot_validation_summary(
-        summary, summary_figure_output, "held-out internal test set"
-    )
-
-    tester_artifacts = _write_drtester_artifacts(testers, drtester_dir)
-
-    return tester_artifacts + [
-        str(summary_output),
-        str(gates_output),
-        str(curves_output),
-        str(gate_figure_output),
-        str(summary_figure_output),
-    ]
-
-
 def evaluate_external_meta_learners(
     s_model_path,
     t_model_path,
@@ -568,11 +296,6 @@ def evaluate_external_meta_learners(
     dr_model_path,
     development_data,
     validation_data,
-    summary_path,
-    gates_path,
-    curves_path,
-    gate_figure_path,
-    summary_figure_path,
     drtester_dir,
     n_groups=5,
     n_bootstrap=1000,
@@ -587,36 +310,11 @@ def evaluate_external_meta_learners(
             dr_model_path,
         ]
     )
-    summary, gates, curves, testers = _evaluate_external_models(
+    testers = _evaluate_external_models(
         models,
         development_data,
         validation_data,
         n_groups=int(n_groups),
         n_bootstrap=int(n_bootstrap),
     )
-
-    summary_output = _output_path(summary_path)
-    gates_output = _output_path(gates_path)
-    curves_output = _output_path(curves_path)
-    gate_figure_output = _output_path(gate_figure_path)
-    summary_figure_output = _output_path(summary_figure_path)
-
-    summary.to_csv(summary_output, index=False)
-    gates.to_csv(gates_output, index=False)
-    curves.to_csv(curves_output, index=False)
-    _plot_gate_comparison(
-        gates, gate_figure_output, "external validation cohort"
-    )
-    _plot_validation_summary(
-        summary, summary_figure_output, "external validation cohort"
-    )
-
-    tester_artifacts = _write_drtester_artifacts(testers, drtester_dir)
-
-    return tester_artifacts + [
-        str(summary_output),
-        str(gates_output),
-        str(curves_output),
-        str(gate_figure_output),
-        str(summary_figure_output),
-    ]
+    return _write_drtester_artifacts(testers, drtester_dir)

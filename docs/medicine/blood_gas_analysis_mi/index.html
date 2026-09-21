@@ -11,7 +11,7 @@
 
   <meta name="author" content="Nozomi Niimi">
   <meta name="dcterms.date" content="2026-12-04">
-  <title>My personal slides – 動脈血液ガス分析の基礎と概念</title>
+  <title>My personal slides – 動脈血液ガス分析の酸塩基平衡の基礎</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -155,8 +155,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">動脈血液ガス分析の基礎と概念</h1>
-  <p class="subtitle">たった一つの簡単な概念</p>
+  <h1 class="title">動脈血液ガス分析の酸塩基平衡の基礎</h1>
+  <p class="subtitle">たった2つの簡単なルール</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -173,6 +173,14 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </div>
 
   <p class="date">2026-12-04</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/血液ガスについて" id="/toc-血液ガスについて">血液ガスについて</a></li>
+<li><a href="#/酸塩基平衡の基礎" id="/toc-酸塩基平衡の基礎">酸塩基平衡の基礎</a></li>
+</ul>
+</nav>
 </section>
 <section class="slide level2">
 
@@ -194,8 +202,50 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 }
 </style>
 </section>
+<section id="take-home-message" class="slide level2">
+<h2>Take home message</h2>
+<ul>
+<li>血液ガスは「今の状態(acidemia/alkalemia)」と「ベクトル(alkalosis/acidosis)」を区別する
+<ul>
+<li>見た目が正常でも、何が起きているかは分からないと考える</li>
+</ul></li>
+<li>「もしも、目に見えるその異常がなかったらどういうガスになる？」というルール = 神様ルール/玉ねぎの皮むきルール</li>
+<li>特に代謝性の代償を考えるときはTime courseをしっかり考える</li>
+</ul>
+</section>
+<section>
+<section id="血液ガスについて" class="title-slide slide level1 center">
+<h1>血液ガスについて</h1>
+
+</section>
+<section id="血液ガスでわかること" class="slide level2">
+<h2>血液ガスでわかること</h2>
+<ul>
+<li>主に以下の2つが分かる
+<ul>
+<li>酸素化と換気(呼吸の評価)</li>
+<li><span style="color: red;font-size: 1.2em;"><strong>酸塩基平衡</strong></span></li>
+</ul></li>
+<li>実はCPAの時にほぼほぼ全ての4H4Tを推測可能</li>
+</ul>
+</section>
+<section id="動脈血液ガス-vs.-静脈血液ガス" class="slide level2">
+<h2>動脈血液ガス vs.&nbsp;静脈血液ガス</h2>
+<ul>
+<li>基本的には、pHとHCO3-は信じてよい</li>
+<li>O2は信じちゃダメ</li>
+<li>過去にはCO2-は変換式があるといわれたが微妙かも</li>
+<li>「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断</li>
+<li>DKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている</li>
+</ul>
+</section></section>
+<section>
+<section id="酸塩基平衡の基礎" class="title-slide slide level1 center">
+<h1>酸塩基平衡の基礎</h1>
+
+</section>
 <section id="acid-base-map" class="slide level2">
-<h2>Acid–Base Disorders</h2>
+<h2>酸塩基平衡のマインドマップ</h2>
 <div class="cell" data-reveal="true" data-fig-width="10" data-fig-height="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -204,13 +254,17 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <pre class="mermaid mermaid-js">flowchart TD
     ABG["Acid–Base Disorders"]
 
-    ABG --&gt; MA["Metabolic Acidosis"]
-    ABG --&gt; MK["Metabolic Alkalosis"]
-    ABG --&gt; RA["Respiratory Acidosis"]
-    ABG --&gt; RK["Respiratory Alkalosis"]
-
-    MA --&gt; AG["High Anion Gap"]
-    MA --&gt; NAG["Normal Anion Gap"]
+    ABG --&gt; MA["代謝性アシドーシス"]
+    ABG --&gt; MK["代謝性アルカローシス"]
+    ABG --&gt; RA["呼吸性アシドーシス"]
+    ABG --&gt; RK["呼吸性アルカローシス"]
+    
+    MA --&gt; Albcorrect["Alb補正"]
+    Albcorrect --&gt; NAG["Anion Gap正常代謝性アシドーシス"]
+    Albcorrect --&gt; AG["Anion Gap開大性代謝性アシドーシス"]
+    AG --&gt; HCO3["補正HCO3-を計算する"]
+    HCO3 --&gt; osmgap["(必要があれば)浸透圧ギャップで毒物の検索"]
+    NAG --&gt; urineag["尿中AGを計算"]
 
     click AG "#/ag-acidosis"
     click NAG "#/nag-acidosis"
@@ -224,32 +278,233 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </div>
 </div>
 </section>
-<section id="ag-acidosis" class="slide level2">
-<h2>High Anion Gap Metabolic Acidosis</h2>
-<h3 id="anion-gap">Anion gap</h3>
-<p><span class="math display">\[
-AG = Na^+ - (Cl^- + HCO_3^-)
-\]</span></p>
+<section id="酸塩基平衡の考え方" class="slide level2">
+<h2>酸塩基平衡の考え方</h2>
 <ul>
-<li>Lactic acidosis</li>
-<li>Ketoacidosis</li>
-<li>Renal failure</li>
-<li>Toxins</li>
+<li>pHの実際の値がAcidemia/Alkalemia</li>
+<li>そこに持っていく力(ベクトル)がAcidosis/Alkalosis
+<ul>
+<li>呼吸性/代謝性に分かれる</li>
+</ul></li>
+<li>明らかな時もあるが、打ち消しあって目に見えないこともある</li>
+</ul>
+</section>
+<section id="例えば" class="slide level2">
+<h2>例えば</h2>
+<ul>
+<li>pH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？</li>
+<li>答え1:
+<ul>
+<li>まったく問題がない健常人のA gas</li>
+</ul></li>
+<li>答え2:
+<ul>
+<li>呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas …</li>
+</ul></li>
+<li>答え4:
+<ul>
+<li>呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas</li>
+</ul></li>
+</ul>
+</section>
+<section id="どうやって区別する" class="slide level2">
+<h2>どうやって区別する？</h2>
+<ul>
+<li><p>明らかな異常がある場合、「それがなかったら……」という風に考える ::: {style=“color: red; font-size: 1.2em;”}</p></li>
+<li><p><strong>目の前の、酸塩基の異常を魔法で消し去ったらどうなる？</strong> :::</p></li>
+<li><p>代表的なのが</p>
+<ul>
+<li>代償</li>
+<li>Alb補正</li>
+<li>補正HCO3-</li>
+</ul></li>
+<li><p>まずは、AG開大代謝性Acidosisで考えてみましょう</p></li>
+</ul>
+</section>
+<section id="ag-acidosis" class="slide level2">
+<h2>High Anion Gap 代謝性 アシドーシス</h2>
+<table class="caption-top">
+<caption>AG開大性代謝性アシドーシスの鑑別<span class="citation" data-cites="Mehta2008-mi">(<a href="#/references" role="doc-biblioref" onclick="">Mehta et al. 2008</a>)</span></caption>
+<colgroup>
+<col style="width: 54%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GOLDMARK</th>
+<th>KUSSMAUL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Glycols(Ethylene and propylene)</td>
+<td>Ketoacidosis</td>
+</tr>
+<tr class="even">
+<td>Oxoproline</td>
+<td>Uremia</td>
+</tr>
+<tr class="odd">
+<td>L-lactate</td>
+<td>Salicylate poisoning</td>
+</tr>
+<tr class="even">
+<td>D-lactate</td>
+<td>Methanol</td>
+</tr>
+<tr class="odd">
+<td>Methanol</td>
+<td>Aldehyde</td>
+</tr>
+<tr class="even">
+<td>Aspirin</td>
+<td>Lactic acidosis</td>
+</tr>
+<tr class="odd">
+<td>Renal failure</td>
+<td>Ethylene glycol</td>
+</tr>
+<tr class="even">
+<td>Ketoacidosis</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="anion-gap">Anion gap</h3>
+<p><span class="math display">\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\]</span></p>
+<ul>
+<li><p>通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)</p></li>
+<li><p>Anion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質</p>
+<ul>
+<li>正確にはUnmeasured anion(測定されない分の陰イオン)</li>
+</ul></li>
+<li><p>未測定陰イオン - 未測定陽イオン = AG</p></li>
+<li><p>AG開大の真に意味する事は？</p></li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
-<section id="nag-acidosis" class="slide level2">
-<h2>Normal Anion Gap Metabolic Acidosis</h2>
-<h3 id="differential-diagnosis">Differential diagnosis</h3>
+<section id="agの真に意味すること" class="slide level2">
+<h2>AGの真に意味すること</h2>
+
+<img data-src="images/anion_gap_image.drawio.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li><p>Unmeasured anionの増加あるいはUnmeasured cationの減少により</p>
 <ul>
-<li>GI bicarbonate loss</li>
-<li>Renal tubular acidosis</li>
-<li>Saline administration</li>
+<li><p>例えばγｸﾞﾛﾌﾞﾘﾝが増加する病態(MMなど)でもAGは偽性に正常化する(実際はほぼないが)</p></li>
+<li><p>ただし、Unmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない</p></li>
+</ul></li>
+<li><p>Unmeasured anionって何ですか？</p></li>
+</ul>
+</section>
+<section id="unmeasured-anionとは" class="slide level2">
+<h2>Unmeasured anionとは</h2>
+<table class="caption-top" style="width:75%;">
+<caption>AGの寄与因子<span class="citation" data-cites="Marino2026ICU">(<a href="#/references" role="doc-biblioref" onclick="">Marino 2026</a>)</span></caption>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>測定されていない陰イオン</th>
+<th>測定されていない陽イオン</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><ul>
+<li><p><strong>Alb(15 mEq/L)</strong></p></li>
+<li><p>有機酸(5 mEq/L)</p></li>
+<li><p>リン酸塩(2 mEq/L)</p></li>
+<li><p>硫酸塩(1 mEq/L)</p></li>
+</ul>
+<p>= 23 mEq/L</p></td>
+<td><ul>
+<li><p>Ca(5 mEq/L)</p></li>
+<li><p>K(4.5 mEq/L)</p></li>
+<li><p>Mg (1.5 mEq/L)</p></li>
+</ul>
+<p>= 11 mEq/L</p></td>
+</tr>
+</tbody>
+</table>
+<p>ICU bookのTableを入れる</p>
+<ul>
+<li><p>UAのほとんどはAlbでできている</p></li>
+<li><p>そのため、低Alb血症の時に補正が必要</p></li>
+</ul>
+</section>
+<section id="低alb血症の補正の考え方" class="slide level2">
+<h2>低Alb血症の補正の考え方</h2>
+<ul>
+<li><p>Alb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・</p></li>
+<li><p>魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」</p></li>
+<li><p>そうすると、AGはどうなる？ → UAが増えるのだから、その分AGは開大する！</p></li>
+<li><p>補正の式は補正AG = AG + (4 - 血清Alb) * 2.5</p></li>
+</ul>
+</section>
+<section id="補正hco3-の考え方" class="slide level2">
+<h2>補正HCO3-の考え方</h2>
+<ul>
+<li><p>AG開大している = 異常物質(UA)が増えている = 代謝性Acidosisが起きている = HCO3-はUAの分見た目上減っている</p></li>
+<li><p>AGが開大していたら、HCO3-やCO2が正常でも少なくとも1種類の異常(AG開大性代謝性Acidosis)が起きている！</p></li>
+<li><p>なら、このUAを消したらどうなる？</p></li>
+<li><p>AGのGapの分が減ると、その分HCO3-が増加する</p></li>
+<li><p>補正HCO3- = (AG - 12) + HCO3-</p>
+<ul>
+<li>22 mEq/L以下でAG非開大性代謝性Aidosisの合併、26 mEq/L以上で代謝性Alkalosisの合併</li>
+</ul></li>
+</ul>
+</section>
+<section id="浸透圧gap" class="slide level2">
+<h2>浸透圧Gap</h2>
+<ul>
+<li><p>「AG開大しているのにLactateやケトン体が陰性」の時に毒物の存在を疑うきっかけとなる指標</p>
+<p><span class="math display">\[Osm_{gap} = Serum_{osm} - 2 * [Na] + BUN/2.8 + Glu/18 \]</span></p></li>
+<li><p>10-15 mOsm/L以上の場合に毒物の存在を疑う</p></li>
+<li><p>ケトン体の場合はどれくらいがDisproportionalかは分からないのが難点・・・・・・</p></li>
+</ul>
+</section>
+<section id="ここまでのまとめ" class="slide level2">
+<h2>ここまでのまとめ</h2>
+<ul>
+<li>AGとはUA - UCであり、UAのメインの成分はAlb</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>AGが開大していたら、<strong>絶対に</strong>AG開大性代謝性Acidosisはある</p>
+<ul>
+<li>AGの開大は常に探したほうが良い</li>
+</ul></li>
+<li><p>「もしもこの患者に低Albがなかったら？」→補正AG</p></li>
+<li><p>「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-</p></li>
+</ul>
+</section>
+<section id="nag-acidosis" class="slide level2">
+<h2>Normal Anion Gap 代謝性 アシドーシス</h2>
+<ul>
+<li>「測定されるAnionの異常」
+<ul>
+<li>具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)</li>
+</ul></li>
+<li>腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける</li>
+</ul>
+<p><span class="math display">\[Urinari AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\]</span></p>
+<ul>
+<li><p>腎臓が<strong>原因でなければ</strong>、尿中のNH4+が増加→Urine AGは負の値となる</p></li>
+<li><p>血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い</p>
+<ul>
+<li>そのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低地</li>
+</ul></li>
+<li><p>実際は実臨床で覚える鑑別は2種類</p>
+<ul>
+<li><p>下痢(腸液のHCO3-の排泄による代謝性Acidosis)</p></li>
+<li><p>Renal tubular アシドーシス</p></li>
+</ul></li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
 <section id="metabolic-alkalosis" class="slide level2">
-<h2>Metabolic Alkalosis</h2>
+<h2>代謝性 アルカローシス</h2>
 <h3 id="think-about-urine-chloride">Think about urine chloride</h3>
 <ul>
 <li>Chloride responsive</li>
@@ -258,7 +513,7 @@ AG = Na^+ - (Cl^- + HCO_3^-)
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
 <section id="respiratory-acidosis" class="slide level2">
-<h2>Respiratory Acidosis</h2>
+<h2>呼吸性 アシドーシス</h2>
 <h3 id="hypoventilation">Hypoventilation</h3>
 <ul>
 <li>CNS depression</li>
@@ -268,7 +523,7 @@ AG = Na^+ - (Cl^- + HCO_3^-)
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
 <section id="respiratory-alkalosis" class="slide level2">
-<h2>Respiratory Alkalosis</h2>
+<h2>呼吸性 アルカローシス</h2>
 <h3 id="hyperventilation">Hyperventilation</h3>
 <ul>
 <li>Hypoxemia</li>
@@ -280,12 +535,17 @@ AG = Na^+ - (Cl^- + HCO_3^-)
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Marino2026ICU" class="csl-entry" role="listitem">
+Marino, Paul L. 2026. <em>Icuブック</em>. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.
+</div>
+<div id="ref-Mehta2008-mi" class="csl-entry" role="listitem">
+Mehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. <span>“<span>GOLD</span> <span>MARK</span>: An Anion Gap Mnemonic for the 21st Century.”</span> <em>Lancet</em> 372 (9642): 892.
+</div>
 </div>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

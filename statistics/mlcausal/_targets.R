@@ -43,23 +43,17 @@ reticulate::source_python(
 
 tar_option_set(
   packages = c(
-    "AIPW",
     "dplyr",
     "grf",
     "kernelshap",
-    "marginaleffects",
     "MatchIt",
     "partykit",
     "policytree",
     "purrr",
     "reticulate",
-    "sandwich",
     "shapviz",
     "simsurv",
-    "SuperLearner",
-    "tibble",
-    "tmle",
-    "WeightIt"
+    "tibble"
   ),
   seed = 123L,
   memory = "transient",
@@ -102,6 +96,7 @@ list(
   ),
   tar_target(toy_data, toy_objects$toy_data),
   tar_target(full_toy_data, toy_objects$full_toy_data),
+  tar_target(ate_rd_summary, make_ate_rd_summary(full_toy_data)),
   tar_target(
     test_toy_objects,
     make_toy_data(
@@ -114,6 +109,14 @@ list(
   ),
   tar_target(test_toy_data, test_toy_objects$toy_data),
   tar_target(full_test_toy_data, test_toy_objects$full_toy_data),
+  tar_target(
+    external_ate_rd_summary,
+    make_ate_rd_summary(full_test_toy_data)
+  ),
+  tar_target(
+    external_shift_summary,
+    make_external_shift_summary(toy_data, test_toy_data)
+  ),
 
   # Shared preprocessing for all R and Python learners --------------------
   tar_target(policy_features, make_policy_features(toy_data)),
@@ -257,7 +260,7 @@ list(
     format = "file"
   ),
 
-  # Python predictions and validation remain Python-owned file artifacts. --
+  # Python predictions and external validation remain file artifacts. -----
   tar_target(
     meta_learner_effects_file,
     {
@@ -276,51 +279,6 @@ list(
     format = "file"
   ),
   tar_target(
-    meta_learner_evaluation_files,
-    {
-      python_evaluation_file
-      unlist(
-        evaluate_meta_learners(
-          s_learner_model_file,
-          t_learner_model_file,
-          x_learner_model_file,
-          r_learner_model_file,
-          dr_learner_model_file,
-          toy_data,
-          ml_split,
-          mlcausal_path("cache", "tables", "meta-validation.csv"),
-          mlcausal_path("cache", "tables", "meta-gates.csv"),
-          mlcausal_path("cache", "tables", "meta-uplift-curves.csv"),
-          mlcausal_path("cache", "figures", "meta-gates.svg"),
-          mlcausal_path("cache", "figures", "meta-validation.svg"),
-          mlcausal_path("cache", "validation", "internal"),
-          n_groups = 5L,
-          n_bootstrap = 1000L
-        ),
-        use.names = FALSE
-      )
-    },
-    format = "file"
-  ),
-  tar_target(
-    external_meta_learner_effects_file,
-    {
-      python_evaluation_file
-      write_external_meta_learner_predictions(
-        external_s_learner_model_file,
-        external_t_learner_model_file,
-        external_x_learner_model_file,
-        external_r_learner_model_file,
-        external_dr_learner_model_file,
-        test_toy_data,
-        mlcausal_path(
-          "cache", "tables", "external-meta-learner-effects.csv"
-        )
-      )
-    },
-    format = "file"
-  ),
-  tar_target(
     external_meta_learner_evaluation_files,
     {
       python_evaluation_file
@@ -333,21 +291,6 @@ list(
           external_dr_learner_model_file,
           toy_data,
           test_toy_data,
-          mlcausal_path(
-            "cache", "tables", "external-meta-validation.csv"
-          ),
-          mlcausal_path(
-            "cache", "tables", "external-meta-gates.csv"
-          ),
-          mlcausal_path(
-            "cache", "tables", "external-meta-uplift-curves.csv"
-          ),
-          mlcausal_path(
-            "cache", "figures", "external-meta-gates.svg"
-          ),
-          mlcausal_path(
-            "cache", "figures", "external-meta-validation.svg"
-          ),
           mlcausal_path("cache", "validation", "external"),
           n_groups = 5L,
           n_bootstrap = 1000L
@@ -364,12 +307,24 @@ list(
     fit_causal_forest_bin(policy_features, toy_data)
   ),
   tar_target(
-    causal_forest_shap,
-    make_causal_forest_shap(causal_forest_bin, policy_features)
+    grf_data,
+    make_grf_diagnostics(causal_forest_bin, toy_data)
+  ),
+  tar_target(
+    causal_forest_calibration,
+    make_causal_forest_calibration(causal_forest_bin)
+  ),
+  tar_target(
+    causal_forest_surrogate_tree,
+    make_causal_forest_surrogate_tree(causal_forest_bin, toy_data)
   ),
   tar_target(
     causal_forest_policy,
     fit_causal_forest_policy(policy_features, toy_data)
+  ),
+  tar_target(
+    policy_tree,
+    fit_policy_tree(causal_forest_policy, policy_features)
   ),
 
   tar_target(
@@ -379,9 +334,39 @@ list(
       test_toy_data
     )
   ),
-
-
-
+  tar_target(
+    external_causal_forest_predictions,
+    make_external_causal_forest_predictions(
+      causal_forest_bin,
+      test_policy_features,
+      test_toy_data
+    )
+  ),
+  tar_target(
+    external_rate_results,
+    make_external_rate_results(
+      external_evaluation_forest,
+      external_causal_forest_predictions,
+      n_bootstrap = 500L
+    )
+  ),
+  tar_target(
+    external_grf_gates,
+    make_external_grf_gates(
+      causal_forest_bin,
+      external_evaluation_forest,
+      external_causal_forest_predictions,
+      n_groups = 5L
+    )
+  ),
+  tar_target(
+    external_c_for_benefit,
+    make_external_c_for_benefit(
+      test_toy_data,
+      external_causal_forest_predictions,
+      n_bootstrap = 500L
+    )
+  ),
 
   # GRF explanations are computed only with native R functions. -----------
   tar_target(explanation_samples, make_explanation_samples(policy_features)),

@@ -1,2 +1,6 @@
 _targets/
 cache/
+index_files/
+toy_data.csv
+*_toy_data.csv
+python/__pycache__/

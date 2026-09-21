@@ -53,19 +53,20 @@ targets::tar_load(
   c(
     toy_data,
     full_toy_data,
-    test_toy_data,
-    full_test_toy_data,
+    ate_rd_summary,
+    external_ate_rd_summary,
+    external_shift_summary,
     meta_learner_effects_file,
-    meta_learner_evaluation_files,
-    external_meta_learner_effects_file,
     external_meta_learner_evaluation_files,
     meta_pdp_data_file,
     meta_shap_data_file,
-    policy_features,
-    causal_forest_bin,
-    causal_forest_policy,
-    causal_forest_shap,
-    external_evaluation_forest,
+    grf_data,
+    causal_forest_calibration,
+    causal_forest_surrogate_tree,
+    policy_tree,
+    external_rate_results,
+    external_grf_gates,
+    external_c_for_benefit,
     grf_pdp_data,
     grf_cate_shap,
     s_learner_tree_figure,
@@ -77,12 +78,6 @@ targets::tar_load(
   store = mlcausal_store,
   envir = knitr::knit_global()
 )
-
-target_artifact <- function(paths, filename) {
-  matched <- paths[basename(paths) == filename]
-  stopifnot(length(matched) == 1L)
-  unname(matched)
-}
 
 target_artifacts_ending_with <- function(paths, suffix) {
   paths[endsWith(basename(paths), suffix)] |> unname()
@@ -98,9 +93,6 @@ read_validation_tables <- function(paths, suffix) {
 # Python owns the numerical work. R reads the cached CSV/SVG artifacts only
 # for presentation in the slides; no Python object crosses the session boundary.
 meta_learner_effects <- utils::read.csv(meta_learner_effects_file)
-learner_summary <- utils::read.csv(
-  target_artifact(meta_learner_evaluation_files, "meta-validation.csv")
-)
 s_learner_effect <- subset(
   meta_learner_effects,
   learner == "S-learner",
@@ -126,6 +118,21 @@ dr_learner_effect <- subset(
   learner == "DR-learner",
   select = c(id, cate_rd)
 )
+learner_effect_summary <- meta_learner_effects |>
+  dplyr::group_by(learner) |>
+  dplyr::summarise(
+    ate_rd = mean(cate_rd),
+    cate_sd = stats::sd(cate_rd),
+    .groups = "drop"
+  )
+
+show_learner_effect <- function(effect_data) {
+  print(utils::head(effect_data))
+  cat(sprintf(
+    "ATE in test set (risk difference): %.3f\n",
+    mean(effect_data$cate_rd)
+  ))
+}
 
 external_learner_summary <- read_validation_tables(
   external_meta_learner_evaluation_files,
@@ -1704,17 +1711,8 @@ dplyr::select(toy_data, age, sexm1, bmi, hf, bnp, lvef, palpitation, ca) |>
 ## ATE
 
 ```{r}
-full_toy_data |>
-  dplyr::summarise(
-    n = sum(!is.na(ite_rd_bin)),
-    ate_rd = mean(ite_rd_bin, na.rm = TRUE),
-    ite_rd_sd = stats::sd(ite_rd_bin, na.rm = TRUE)
-  ) |>
+ate_rd_summary |>
   dplyr::mutate(
-    ate_rd_se = ite_rd_sd / sqrt(n),
-    critical_value = stats::qt(0.975, df = n - 1),
-    ci_lower = ate_rd - critical_value * ate_rd_se,
-    ci_upper = ate_rd + critical_value * ate_rd_se, 
     `Risk Difference [95%CI]` = paste0(round(ate_rd, 3), "[", round(ci_lower, 3), " - ", round(ci_upper, 3), "]")
   ) |>
   dplyr::select(
@@ -1822,58 +1820,35 @@ full_toy_data |>
 ```{r}
 #| label: show-external-case-mix
 
-library(tibble)
 library(dplyr)
-library(datawizard)
 
-summarise_cohort <- function(data, cohort) {
-  tibble::tibble(
-    cohort = cohort,
-    n = nrow(data),
-    mean_age = mean(data$age),
-    mean_bmi = mean(data$bmi),
-    female_fraction = mean(data$sexm1 == 0)
-  )
-}
-
-cohort_summary <- dplyr::bind_rows(
-  summarise_cohort(toy_data, "Development"),
-  summarise_cohort(test_toy_data, "External validation")
-)
-development_summary <- dplyr::filter(
-  cohort_summary,
-  cohort == "Development"
-)
-external_summary <- dplyr::filter(
-  cohort_summary,
-  cohort == "External validation"
-)
-shift_differences <- tibble::tibble(
-  contrast = "External validation - Development",
-  age_difference = external_summary$mean_age - development_summary$mean_age,
-  bmi_difference = external_summary$mean_bmi - development_summary$mean_bmi,
-  female_fraction_difference =
-    external_summary$female_fraction - development_summary$female_fraction
-)
-
-cohort_summary |>
+external_shift_summary$cohorts |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
   print()
-shift_differences |>
+external_shift_summary$differences |>
   dplyr::mutate(
     dplyr::across(where(is.numeric), \(value) round(value, 3))
   ) |>
   print()
 
-datawizard::describe_distribution(full_toy_data$ite_rd_bin) |> 
-  report::display(format = "html")
+external_ate_rd_summary |>
+  dplyr::transmute(
+    n,
+    `Risk Difference [95%CI]` = sprintf(
+      "%.3f [%.3f - %.3f]",
+      ate_rd,
+      ci_lower,
+      ci_upper
+    )
+  ) |>
+  knitr::kable()
 
 ```
 
 - 開発コホートとは独立に $n=1000$ を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。
-- ATEは0.05, ITEは今回は有意ではない
+- ATE（risk difference）は−0.05で、95%信頼区間は0を跨がない
 
 ## Meta-learners
 
@@ -1884,7 +1859,7 @@ datawizard::describe_distribution(full_toy_data$ite_rd_bin) |>
 ```{python}
 #| label: s-learner-binary
 #| echo: true
-#| eval: true
+#| eval: false
 
 import numpy as np
 import pandas as pd
@@ -1947,12 +1922,18 @@ print(f"ATE in test set (risk difference): {s_cate_rd.mean():.3f}")
 
 ```
 
+```{r}
+#| label: show-s-learner-effect
+
+show_learner_effect(s_learner_effect)
+```
+
 ## T-learner
 
 ```{python}
 #| label: t-learner-binary
 #| echo: true
-#| eval: true
+#| eval: false
 
 from econml.metalearners import TLearner
 
@@ -1977,12 +1958,18 @@ print(t_effect_df.head())
 print(f"ATE in test set (risk difference): {t_cate_rd.mean():.3f}")
 ```
 
+```{r}
+#| label: show-t-learner-effect
+
+show_learner_effect(t_learner_effect)
+```
+
 ## X-learner
 
 ```{python}
 #| label: x-learner-binary
 #| echo: true
-#| eval: true
+#| eval: false
 
 from econml.metalearners import XLearner
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -2032,13 +2019,19 @@ print(f"ATE in test set (risk difference): {x_cate_rd.mean():.3f}")
 
 ```
 
+```{r}
+#| label: show-x-learner-effect
+
+show_learner_effect(x_learner_effect)
+```
+
 
 ## DR-learner
 
 ```{python}
 #| label: dr-learner-binary
 #| echo: true
-#| eval: true
+#| eval: false
 
 from econml.dr import DRLearner
 
@@ -2090,12 +2083,18 @@ print(f"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}")
 
 ```
 
+```{r}
+#| label: show-dr-learner-effect
+
+show_learner_effect(dr_learner_effect)
+```
+
 ## R-learner
 
 ```{python}
 #| label: r-learner-binary
 #| echo: true
-#| eval: true
+#| eval: false
 
 from econml.dml import NonParamDML
 
@@ -2146,9 +2145,16 @@ print(r_effect_df.head())
 print(f"ATE in test set (risk difference): {r_cate_rd.mean():.3f}")
 ```
 
+```{r}
+#| label: show-r-learner-effect
+
+show_learner_effect(r_learner_effect)
+```
+
 ## Meta-learnerのまとめ
 ```{python}
 #| label: meta-learner-compare
+#| eval: false
 # 5つのlearnerを同じtest setで比較する
 learner_summary = pd.DataFrame({
     "learner": [
@@ -2176,6 +2182,16 @@ learner_summary = pd.DataFrame({
 
 print(learner_summary.round(3))
 
+```
+
+```{r}
+#| label: show-meta-learner-summary
+
+learner_effect_summary |>
+  dplyr::mutate(
+    dplyr::across(where(is.numeric), \(value) round(value, 3))
+  ) |>
+  knitr::kable()
 ```
 
 :::
@@ -2485,15 +2501,6 @@ library(policytree)
 library(shapviz)
 library(cobalt)
 
-grf_data <- toy_data |>
-  dplyr::mutate(
-    tau_hat = stats::predict(causal_forest_bin)$predictions, 
-    tau_hat_rev = -tau_hat, 
-    pscore = causal_forest_bin$W.hat, 
-    ipw = dplyr::if_else(ca == 1, 1 / pscore, 1 / (1 - pscore))
-  ) |>
-  tibble::as_tibble()
-
 ```
 
 ::: {.panel-tabset}
@@ -2567,7 +2574,7 @@ cobalt::love.plot(
 
 library(grf)
 
-grf::test_calibration(causal_forest_bin)
+causal_forest_calibration
 
 ```
 
@@ -2578,35 +2585,7 @@ grf::test_calibration(causal_forest_bin)
 #| label: grf-rate-estimates
 #| echo: false
 
-# 学習済みforestを固定し、学習時と同じ列順でtestデータを予測する。
-X_test_grf <- test_toy_data |>
-  dplyr::select(dplyr::all_of(colnames(causal_forest_bin$X.orig))) |>
-  as.data.frame()
-tau_test_grf <- as.numeric(predict(
-  causal_forest_bin, newdata = as.matrix(X_test_grf)
-)$predictions)
-
-# outcomeはイベントなので、符号を反転して「正ほど有益」にそろえる。
-benefit_test_grf <- -tau_test_grf
-
-# RATEは順位付けの評価指標の総称。重みを変えるとAUTOC / QINIになる。
-set.seed(123)
-grf_autoc <- grf::rank_average_treatment_effect(
-  external_evaluation_forest, priorities = benefit_test_grf,
-  target = "AUTOC", q = seq(0.1, 1, by = 0.1), R = 500
-)
-set.seed(123)
-grf_qini <- grf::rank_average_treatment_effect(
-  external_evaluation_forest, priorities = benefit_test_grf,
-  target = "QINI", q = seq(0.1, 1, by = 0.1), R = 500
-)
-
-tibble::tibble(
-  metric = c("AUTOC", "QINI"),
-  estimate = c(grf_autoc$estimate, grf_qini$estimate),
-  se = c(grf_autoc$std.err, grf_qini$std.err)
-) |>
-  dplyr::mutate(lower = estimate - 1.96 * se, upper = estimate + 1.96 * se) |>
+external_rate_results$summary |>
   knitr::kable(digits = 3)
 ```
 
@@ -2616,15 +2595,7 @@ tibble::tibble(
 #| fig-width: 10
 #| fig-height: 4.5
 
-# plot(grf_qini)もTOCを描くため、Qini曲線はq × TOCとして明示する。
-# 最初のpriorityが入力した予測順位（残りは比較用の系列）。
-grf_toc <- grf_autoc$TOC |>
-  dplyr::filter(priority == dplyr::first(priority))
-grf_curves <- dplyr::bind_rows(
-  dplyr::transmute(grf_toc, q, curve = "TOC", value = estimate, se = std.err),
-  dplyr::transmute(grf_toc, q, curve = "Qini", value = q * estimate, se = q * std.err)
-)
-ggplot(grf_curves, aes(q, value)) +
+ggplot(external_rate_results$curves, aes(q, value)) +
   geom_hline(yintercept = 0, linetype = 2, color = "grey55") +
   geom_ribbon(aes(ymin = value - 1.96 * se, ymax = value + 1.96 * se),
               fill = "#4E79A7", alpha = 0.15) +
@@ -2641,120 +2612,8 @@ ggplot(grf_curves, aes(q, value)) +
 #| label: show-external-c-for-benefit
 #| echo: false
 
-# 1. testデータ内で、予測benefitが近い治療例と対照例を1:1 matching。
-# 予測benefitは正ほど有益。outcomeはmatchingに使わない。
-cfb_data <- test_toy_data |>
-  dplyr::mutate(predicted_benefit = benefit_test_grf)
-
-matching_estimand <- if (sum(cfb_data$ca == 1) <= sum(cfb_data$ca == 0)) {
-  "ATT"
-} else {
-  "ATC"
-}
-
-set.seed(42)
-cfb_matching <- MatchIt::matchit(
-  ca ~ predicted_benefit,
-  data = cfb_data,
-  method = "nearest",
-  distance = "mahalanobis",
-  estimand = matching_estimand,
-  ratio = 1,
-  replace = FALSE,
-  m.order = "closest"
-)
-
-# 2. 患者2人を1行にまとめる。ここからの比較単位はmatched pair。
-cfb_pairs <- MatchIt::match_data(cfb_matching) |>
-  dplyr::group_by(subclass) |>
-  dplyr::summarise(
-    treated_id = id[ca == 1],
-    control_id = id[ca == 0],
-    observed_benefit = bin_outcome[ca == 0] - bin_outcome[ca == 1],
-    predicted_benefit = mean(predicted_benefit),
-    .groups = "drop"
-  )
-
-c_for_benefit_fast <- function(observed_benefit, predicted_benefit) {
-  stopifnot(
-    length(observed_benefit) == length(predicted_benefit),
-    length(observed_benefit) >= 2L,
-    all(is.finite(observed_benefit)),
-    all(is.finite(predicted_benefit))
-  )
-
-  observed_levels <- sort(unique(observed_benefit))
-  if (length(observed_levels) < 2L) {
-    return(NA_real_)
-  }
-
-  total_score <- 0
-  number_of_comparisons <- 0
-
-  # 観測benefitが高い群を、それより低い全ての群と比較する。
-  for (higher_level in observed_levels[-1]) {
-    predictions_in_higher_group <- predicted_benefit[
-      observed_benefit == higher_level
-    ]
-    predictions_in_lower_groups <- predicted_benefit[
-      observed_benefit < higher_level
-    ]
-
-    # 高い群の各予測について、一致は1点、予測同値は0.5点、不一致は0点。
-    score_for_each_pair <- vapply(
-      predictions_in_higher_group,
-      function(higher_prediction) {
-        sum(higher_prediction > predictions_in_lower_groups) +
-          0.5 * sum(higher_prediction == predictions_in_lower_groups)
-      },
-      numeric(1)
-    )
-
-    total_score <- total_score + sum(score_for_each_pair)
-    number_of_comparisons <- number_of_comparisons +
-      length(predictions_in_higher_group) *
-      length(predictions_in_lower_groups)
-  }
-
-  total_score / number_of_comparisons
-}
-
-# boot()は、この関数のindicesに復元抽出した行番号を渡す。
-bootstrap_c_for_benefit_fast <- function(data, indices) {
-  sampled_pairs <- data[indices, , drop = FALSE]
-
-  c_for_benefit_fast(
-    observed_benefit = sampled_pairs$observed_benefit,
-    predicted_benefit = sampled_pairs$predicted_benefit
-  )
-}
-
-# 4. matched pairを単位に500回bootstrapする。
-set.seed(123)
-cfb_bootstrap_fast <- boot::boot(
-  data = cfb_pairs,
-  statistic = bootstrap_c_for_benefit_fast,
-  R = 500
-)
-
-# t0が元データの点推定、tが各bootstrap標本の推定値。
-cfb_estimate <- as.numeric(cfb_bootstrap_fast$t0)
-
-cfb_ci_result <- boot::boot.ci(
-  cfb_bootstrap_fast,
-  conf = 0.95,
-  type = "bca"
-)
-cfb_ci <- cfb_ci_result$bca[4:5]
-
-cfb_summary <- tibble::tibble(
-  c_for_benefit = cfb_estimate,
-  lower_95 = unname(cfb_ci[1]),
-  upper_95 = unname(cfb_ci[2])
-
-)
-
-cfb_summary |> knitr::kable(digits = 3)
+external_c_for_benefit$summary |>
+  knitr::kable(digits = 3)
 
 ```
 
@@ -2766,32 +2625,7 @@ cfb_summary |> knitr::kable(digits = 3)
 #| fig-width: 8
 #| fig-height: 4.5
 
-library(grf)
-
-# 評価用forestの学習だけをtargetsに保存している。
-# Y = 1 - bin_outcomeなので、DR scoreは利益の尺度。
-# このforest自身のCATEで順位付けはしない。
-dr_benefit_test <- as.numeric(grf::get_scores(external_evaluation_forest))
-stopifnot(length(benefit_test_grf) == length(dr_benefit_test))
-
-# testのoutcomeを使わず、開発データのOOB予測で五分位境界を定める。
-benefit_train_grf <- -as.numeric(predict(causal_forest_bin)$predictions)
-gate_breaks <- c(-Inf, unique(as.numeric(quantile(
-  benefit_train_grf, probs = seq(0.2, 0.8, 0.2)
-))), Inf)
-grf_gates <- tibble::tibble(
-  group = cut(benefit_test_grf, breaks = gate_breaks, labels = FALSE),
-  predicted_benefit = benefit_test_grf,
-  dr_benefit = dr_benefit_test
-) |>
-  dplyr::group_by(group) |>
-  dplyr::summarise(
-    n = dplyr::n(), predicted_gate = mean(predicted_benefit),
-    gate = mean(dr_benefit), gate_se = sd(dr_benefit) / sqrt(n),
-    .groups = "drop"
-  )
-
-ggplot(grf_gates, aes(predicted_gate, gate)) +
+ggplot(external_grf_gates, aes(predicted_gate, gate)) +
   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey55") +
   geom_errorbar(aes(ymin = gate - 1.96 * gate_se, ymax = gate + 1.96 * gate_se), width = 0) +
   geom_line(color = "#4E79A7") + geom_point(color = "#4E79A7", size = 2.5) +
@@ -2859,11 +2693,6 @@ shapviz::sv_importance(
 ```{r}
 #| label: shap
 
-causal_forest_surrogate_tree <- partykit::ctree(
-  tau_hat_rev ~ age + sexm1 + bmi + hf + bnp + lvef,
-  data = grf_data,
-  control = partykit::ctree_control(maxdepth = 3)
-)
 plot(causal_forest_surrogate_tree)
 
 ```
@@ -2874,13 +2703,6 @@ plot(causal_forest_surrogate_tree)
 ```{r}
 #| label: grf-policytree
 
-policy_scores <- policytree::double_robust_scores(causal_forest_policy)
-policy_tree <- policytree::policy_tree(
-  policy_features,
-  policy_scores,
-  depth = 2
-)
-# print(policy_tree)
 plot(policy_tree, leaf.labels = c("Control", "CA"))
 
 ```

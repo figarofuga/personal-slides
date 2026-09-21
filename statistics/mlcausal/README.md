@@ -2,8 +2,10 @@
 
 ## targetsで保存するもの
 
+- 開発・外部検証用のtoy data、ATE要約、case-mix shift要約。
 - EconMLのS / T / X / R / DR-learnerの学習。前半のinternal split用と、最後のtest datasetに適用する開発コホート全例のモデルは別々に保存する。
 - Rのcausal forest、方策用forest、および外部評価用のnuisance推定forestの学習。
+- GRFの外部予測、GATE、RATE（AUTOC / QINI）、C-for-benefit、surrogate tree、policy tree。bootstrapを含む数値計算はrender時に繰り返さない。
 - EconML `DRTester.evaluate_all()` による評価。5モデルで共通のDR outcomeを使用し、各モデルの評価済み`DRTester`を個別のjoblib、GATE・TOC・Qini・summaryをモデル別CSVに保存する。
 - PDPの数値、Python Kernel SHAP、R SHAP。PythonのPDPとSHAPは別の関数・targets。RのSHAPはR側の関数で独立に計算する。
 
@@ -11,17 +13,17 @@
 
 ## index.qmdで計算するもの
 
-- GRFのtestデータへの予測、GATE、RATE（AUTOC / QINI）、TOC・Qini曲線、MatchItによるmatchingとスクラッチ実装のC-for-benefit。
-- Meta-learnerのGATE・TOC・Qini・AUTOC比較図、PDP・SHAPの表示。
-- 前半の軽い教材例、学習データでのGRF診断。
+- 前半の軽い教材例と、targetsが返した表・モデル・図の表示。
+- Meta-learnerのGATE・TOC・Qini・AUTOC比較図、PDP・SHAPの描画。
+- Meta-learnerのコード例は表示のみとし、数値出力にはtargetsで学習済みの結果を使う。
 
-GRFの評価用forestの効果予測は順位付けに使用しない。開発データで学習した固定モデルで順位付けし、testデータの評価用forestから得るDR scoreで評価する。
+GRFの評価用forest自身の効果予測は順位付けに使用しない。開発データで学習した固定モデルで順位付けし、testデータの評価用forestから得るDR scoreで評価する。
 
 ## 符号と曲線
 
 - モデル学習のoutcomeはイベント発生。`tau = E[Y(1) - Y(0)]`が負なら利益。
 - TOC / Qini / GATEの表示は利益の尺度。EconMLでは評価outcomeを`1 - Y`、モデル予測を`-tau`に変換する。GRFの評価用forestも`1 - Y`で学習する。
-- C-for-benefitは観測benefit（対照のイベント−治療のイベント）と予測benefit（ペアの平均`-tau`）の順位一致率をスクラッチで求める。観測同値は除外し、予測同値は0.5点。95% CIは固定したmatched pairを単位とする500回のpercentile bootstrap。
+- C-for-benefitは観測benefit（対照のイベント−治療のイベント）と予測benefit（ペアの平均`-tau`）の順位一致率をスクラッチで求める。観測同値は除外し、予測同値は0.5点。95% CIは固定したmatched pairを単位とする500回のBCa bootstrap。
 - `plot(grf_qini)`はQini曲線ではなくTOCを表示する。QmdではQiniを`q * TOC(q)`で描く。
 - EconMLとGRFは既定の分位点・積分法が異なる。ここでは各パッケージの推定値を別々のスライドで示す。
 
@@ -39,6 +41,8 @@ targets::tar_make(
 ```bash
 quarto render statistics/mlcausal/index.qmd
 ```
+
+`tar_make()`完了後は、renderがモデル再学習やbootstrapを行うことはない。QMDはtargets storeと`cache/`内のファイル成果物を読み込む。
 
 保存済みのEconML評価をPythonから確認する場合（プロジェクトルート）：
 

@@ -4841,14 +4841,14 @@
     "href": "statistics/mlcausal/index.html#meta-learners-1",
     "title": "機械学習を用いた因果推論",
     "section": "Meta-learners",
-    "text": "Meta-learners\n\nS-learnerT-learnerX-learnerDR-learnerR-learnerMeta-learnerのまとめ\n\n\n\nimport numpy as np\nimport pandas as pd\nfrom econml.metalearners import SLearner\nfrom sklearn.ensemble import HistGradientBoostingClassifier\nfrom sklearn.model_selection import train_test_split\nfrom xgboost import XGBRegressor\n\n\ntoy_data = r.toy_data.copy()\nfeature_names = [\"age\", \"sexm1\", \"bmi\", \"hf\", \"bnp\", \"lvef\"]\n\nX = toy_data.loc[:, feature_names].astype(float)\nY = toy_data[\"bin_outcome\"].astype(int)\nT = toy_data[\"ca\"].astype(int)\n\n# treatment と outcome の4群がおおむね保たれるように分割する\nstrata = T.astype(str) + \"_\" + Y.astype(str)\nX_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(\n    X, Y, T,\n    test_size=0.2,\n    random_state=123,\n    stratify=strata,\n)\n\nxgb_binary_params = {\n    \"objective\": \"binary:logistic\",\n    \"eval_metric\": \"logloss\",\n    \"n_estimators\": 300,\n    \"learning_rate\": 0.05,\n    \"max_depth\": 3,\n    \"min_child_weight\": 10,\n    \"subsample\": 0.8,\n    \"colsample_bytree\": 0.8,\n    \"reg_lambda\": 1.0,\n    \"random_state\": 123,\n    \"n_jobs\": -1,\n}\n\n# objective=\"binary:logistic\" では predict() が P(Y=1 | X, T) を返す\noutcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\ns_learner = SLearner(overall_model=outcome_model)\ns_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.metalearners._metalearners.SLearner object at 0x789a3df830b0&gt;\n\n# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)\ns_cate_rd = np.asarray(\n    s_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ns_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": s_cate_rd,\n})\n\nprint(s_effect_df.head())\n\n     id   cate_rd\n0   844 -0.158507\n1  2962 -0.089761\n2   591  0.018237\n3  1071 -0.051064\n4  1280  0.004456\n\nprint(f\"ATE in test set (risk difference): {s_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.047\n\n\n\n\n\nfrom econml.metalearners import TLearner\n\nt_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# T=0 と T=1 で別々の outcome model を学習する\nt_learner = TLearner(models=t_outcome_model)\nt_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.metalearners._metalearners.TLearner object at 0x789a3dface60&gt;\n\nt_cate_rd = np.asarray(\n    t_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nt_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": t_cate_rd,\n})\n\nprint(t_effect_df.head())\n\n     id   cate_rd\n0   844 -0.366874\n1  2962 -0.060812\n2   591  0.017260\n3  1071  0.279686\n4  1280  0.013552\n\nprint(f\"ATE in test set (risk difference): {t_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.048\n\n\n\n\n\nfrom econml.metalearners import XLearner\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nx_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# imputed treatment effect（連続値）を学習するための回帰モデル\nx_cate_model = HistGradientBoostingRegressor(\n    learning_rate=0.05,\n    max_iter=200,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\n# P(T=1 | X) を学習するモデル\nx_propensity_model = HistGradientBoostingClassifier(\n    learning_rate=0.05,\n    max_iter=150,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\nx_learner = XLearner(\n    models=x_outcome_model,\n    cate_models=x_cate_model,\n    propensity_model=x_propensity_model,\n)\nx_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.metalearners._metalearners.XLearner object at 0x7899fcdf7620&gt;\n\nx_cate_rd = np.asarray(\n    x_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nx_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": x_cate_rd,\n})\n\nprint(x_effect_df.head())\n\n     id   cate_rd\n0   844 -0.345360\n1  2962 -0.137958\n2   591  0.059569\n3  1071  0.145946\n4  1280 -0.041390\n\nprint(f\"ATE in test set (risk difference): {x_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.042\n\n\n\n\n\nfrom econml.dr import DRLearner\n\ndr_learner = DRLearner(\n    model_propensity=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_regression=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    min_propensity=0.01,\n    cv=5,\n    random_state=123,\n)\n\n# nuisance modelはcv=5でcross-fittingされる\ndr_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.dr._drlearner.DRLearner object at 0x7899f852ffe0&gt;\n\ndr_cate_rd = np.asarray(\n    dr_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ndr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": dr_cate_rd,\n})\n\nprint(dr_effect_df.head())\n\n     id   cate_rd\n0   844 -0.341204\n1  2962  0.146619\n2   591  0.182929\n3  1071 -0.003371\n4  1280  0.055323\n\nprint(f\"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.023\n\n\n\n\n\nfrom econml.dml import NonParamDML\n\nr_learner = NonParamDML(\n    model_y=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_t=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    discrete_treatment=True,\n    cv=5,\n    random_state=123,\n)\n\n# NonParamDML implements the R-learner residual-on-residual objective.\nr_learner.fit(Y_train, T_train, X=X_train)\n\n&lt;econml.dml.dml.NonParamDML object at 0x7899f8d45250&gt;\n\nr_cate_rd = np.asarray(\n    r_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": r_cate_rd,\n})\n\nprint(r_effect_df.head())\n\n     id   cate_rd\n0   844 -0.393445\n1  2962  0.030638\n2   591 -0.025004\n3  1071  0.078752\n4  1280  0.056749\n\nprint(f\"ATE in test set (risk difference): {r_cate_rd.mean():.3f}\")\n\nATE in test set (risk difference): -0.032\n\n\n\n\n\n\n      learner  ate_rd  cate_sd\n0   S-learner  -0.047    0.090\n1   T-learner  -0.048    0.150\n2   X-learner  -0.042    0.145\n3   R-learner  -0.032    0.213\n4  DR-learner  -0.023    0.275"
+    "text": "Meta-learners\n\nS-learnerT-learnerX-learnerDR-learnerR-learnerMeta-learnerのまとめ\n\n\n\nimport numpy as np\nimport pandas as pd\nfrom econml.metalearners import SLearner\nfrom sklearn.ensemble import HistGradientBoostingClassifier\nfrom sklearn.model_selection import train_test_split\nfrom xgboost import XGBRegressor\n\n\ntoy_data = r.toy_data.copy()\nfeature_names = [\"age\", \"sexm1\", \"bmi\", \"hf\", \"bnp\", \"lvef\"]\n\nX = toy_data.loc[:, feature_names].astype(float)\nY = toy_data[\"bin_outcome\"].astype(int)\nT = toy_data[\"ca\"].astype(int)\n\n# treatment と outcome の4群がおおむね保たれるように分割する\nstrata = T.astype(str) + \"_\" + Y.astype(str)\nX_train, X_test, Y_train, Y_test, T_train, T_test = train_test_split(\n    X, Y, T,\n    test_size=0.2,\n    random_state=123,\n    stratify=strata,\n)\n\nxgb_binary_params = {\n    \"objective\": \"binary:logistic\",\n    \"eval_metric\": \"logloss\",\n    \"n_estimators\": 300,\n    \"learning_rate\": 0.05,\n    \"max_depth\": 3,\n    \"min_child_weight\": 10,\n    \"subsample\": 0.8,\n    \"colsample_bytree\": 0.8,\n    \"reg_lambda\": 1.0,\n    \"random_state\": 123,\n    \"n_jobs\": -1,\n}\n\n# objective=\"binary:logistic\" では predict() が P(Y=1 | X, T) を返す\noutcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\ns_learner = SLearner(overall_model=outcome_model)\ns_learner.fit(Y_train, T_train, X=X_train)\n\n# 各人の CATE = P(Y=1|do(T=1), X) - P(Y=1|do(T=0), X)\ns_cate_rd = np.asarray(\n    s_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ns_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": s_cate_rd,\n})\n\nprint(s_effect_df.head())\nprint(f\"ATE in test set (risk difference): {s_cate_rd.mean():.3f}\")\n\n\n\n    id      cate_rd\n1  844 -0.158507407\n2 2962 -0.089760900\n3  591  0.018236868\n4 1071 -0.051064193\n5 1280  0.004456153\n6 2984  0.007386910\nATE in test set (risk difference): -0.047\n\n\n\n\n\nfrom econml.metalearners import TLearner\n\nt_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# T=0 と T=1 で別々の outcome model を学習する\nt_learner = TLearner(models=t_outcome_model)\nt_learner.fit(Y_train, T_train, X=X_train)\n\nt_cate_rd = np.asarray(\n    t_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nt_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": t_cate_rd,\n})\n\nprint(t_effect_df.head())\nprint(f\"ATE in test set (risk difference): {t_cate_rd.mean():.3f}\")\n\n\n\n      id      cate_rd\n601  844 -0.366873562\n602 2962 -0.060811996\n603  591  0.017260257\n604 1071  0.279686093\n605 1280  0.013552464\n606 2984 -0.004789183\nATE in test set (risk difference): -0.048\n\n\n\n\n\nfrom econml.metalearners import XLearner\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nx_outcome_model = XGBRegressor(\n    **xgb_binary_params,\n)\n\n# imputed treatment effect（連続値）を学習するための回帰モデル\nx_cate_model = HistGradientBoostingRegressor(\n    learning_rate=0.05,\n    max_iter=200,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\n# P(T=1 | X) を学習するモデル\nx_propensity_model = HistGradientBoostingClassifier(\n    learning_rate=0.05,\n    max_iter=150,\n    max_leaf_nodes=15,\n    min_samples_leaf=30,\n    l2_regularization=1.0,\n    random_state=123,\n)\n\nx_learner = XLearner(\n    models=x_outcome_model,\n    cate_models=x_cate_model,\n    propensity_model=x_propensity_model,\n)\nx_learner.fit(Y_train, T_train, X=X_train)\n\nx_cate_rd = np.asarray(\n    x_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nx_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": x_cate_rd,\n})\n\nprint(x_effect_df.head())\nprint(f\"ATE in test set (risk difference): {x_cate_rd.mean():.3f}\")\n\n\n\n       id       cate_rd\n1201  844 -0.3453601779\n1202 2962 -0.1379575937\n1203  591  0.0595690955\n1204 1071  0.1459459263\n1205 1280 -0.0413900195\n1206 2984  0.0002099974\nATE in test set (risk difference): -0.042\n\n\n\n\n\nfrom econml.dr import DRLearner\n\ndr_learner = DRLearner(\n    model_propensity=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_regression=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    min_propensity=0.01,\n    cv=5,\n    random_state=123,\n)\n\n# nuisance modelはcv=5でcross-fittingされる\ndr_learner.fit(Y_train, T_train, X=X_train)\n\ndr_cate_rd = np.asarray(\n    dr_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\ndr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": dr_cate_rd,\n})\n\nprint(dr_effect_df.head())\nprint(f\"ATE in test set (risk difference): {dr_cate_rd.mean():.3f}\")\n\n\n\n       id      cate_rd\n2401  844 -0.341203781\n2402 2962  0.146618699\n2403  591  0.182928592\n2404 1071 -0.003370782\n2405 1280  0.055323033\n2406 2984  0.168132478\nATE in test set (risk difference): -0.023\n\n\n\n\n\nfrom econml.dml import NonParamDML\n\nr_learner = NonParamDML(\n    model_y=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_t=HistGradientBoostingClassifier(\n        learning_rate=0.05,\n        max_iter=150,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    model_final=HistGradientBoostingRegressor(\n        learning_rate=0.05,\n        max_iter=200,\n        max_leaf_nodes=15,\n        min_samples_leaf=30,\n        l2_regularization=1.0,\n        random_state=123,\n    ),\n    discrete_outcome=True,\n    discrete_treatment=True,\n    cv=5,\n    random_state=123,\n)\n\n# NonParamDML implements the R-learner residual-on-residual objective.\nr_learner.fit(Y_train, T_train, X=X_train)\n\nr_cate_rd = np.asarray(\n    r_learner.effect(X_test, T0=0, T1=1)\n).reshape(-1)\n\nr_effect_df = pd.DataFrame({\n    \"id\": toy_data.loc[X_test.index, \"id\"].to_numpy(),\n    \"cate_rd\": r_cate_rd,\n})\n\nprint(r_effect_df.head())\nprint(f\"ATE in test set (risk difference): {r_cate_rd.mean():.3f}\")\n\n\n\n       id      cate_rd\n1801  844 -0.393444797\n1802 2962  0.030637595\n1803  591 -0.025004028\n1804 1071  0.078752496\n1805 1280  0.056748913\n1806 2984 -0.008724799\nATE in test set (risk difference): -0.032\n\n\n\n\n\n\n\n\n\nlearner\nate_rd\ncate_sd\n\n\n\n\nDR-learner\n-0.023\n0.275\n\n\nR-learner\n-0.032\n0.213\n\n\nS-learner\n-0.047\n0.090\n\n\nT-learner\n-0.048\n0.150\n\n\nX-learner\n-0.042\n0.145"
   },
   {
     "objectID": "statistics/mlcausal/index.html#external-validation-cohort",
     "href": "statistics/mlcausal/index.html#external-validation-cohort",
     "title": "機械学習を用いた因果推論",
     "section": "External validation cohort",
-    "text": "External validation cohort\n\n\n# A tibble: 2 × 5\n  cohort                  n mean_age mean_bmi female_fraction\n  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;\n1 Development          3000     61.2     22.0           0.399\n2 External validation  1000     63.2     20.0           0.45 \n\n\n# A tibble: 1 × 4\n  contrast                  age_difference bmi_difference female_fraction_diff…¹\n  &lt;chr&gt;                              &lt;dbl&gt;          &lt;dbl&gt;                  &lt;dbl&gt;\n1 External validation - De…           1.99          -2.00                  0.051\n# ℹ abbreviated name: ¹​female_fraction_difference\n\n\n\n\n\n\n\n\nMean\nSD\nIQR\nRange\nSkewness\nKurtosis\nn\nn_Missing\n\n\n\n\n-0.05\n0.11\n0.11\n(-0.52, 0.30)\n-0.80\n0.81\n3000\n0\n\n\n\n\n\n\n\n\n開発コホートとは独立に \\(n=1000\\) を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。\nATEは0.05, ITEは今回は有意ではない"
+    "text": "External validation cohort\n\n\n# A tibble: 2 × 5\n  cohort                  n mean_age mean_bmi female_fraction\n  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;\n1 Development          3000     61.2     22.0           0.399\n2 External validation  1000     63.2     20.0           0.45 \n\n\n# A tibble: 1 × 4\n  contrast                  age_difference bmi_difference female_fraction_diff…¹\n  &lt;chr&gt;                              &lt;dbl&gt;          &lt;dbl&gt;                  &lt;dbl&gt;\n1 External validation - De…           1.99          -2.00                  0.051\n# ℹ abbreviated name: ¹​female_fraction_difference\n\n\n\n\n\nn\nRisk Difference [95%CI]\n\n\n\n\n1000\n-0.050 [-0.057 - -0.043]\n\n\n\n\n\n\n開発コホートとは独立に \\(n=1000\\) を生成し、平均年齢を約2歳高く、平均BMIを約2低く、女性割合を約5 percentage points高くしたcase-mix shiftを与える。\nATE（risk difference）は−0.05で、95%信頼区間は0を跨がない"
   },
   {
     "objectID": "statistics/mlcausal/index.html#c-for-benefit外部検証",
@@ -5042,51 +5042,51 @@
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#acid-base-map",
     "href": "medicine/blood_gas_analysis_mi/index.html#acid-base-map",
-    "title": "動脈血液ガス分析の基礎と概念",
-    "section": "Acid–Base Disorders",
-    "text": "Acid–Base Disorders\n\n\n\n\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; MA[\"Metabolic Acidosis\"]\n    ABG --&gt; MK[\"Metabolic Alkalosis\"]\n    ABG --&gt; RA[\"Respiratory Acidosis\"]\n    ABG --&gt; RK[\"Respiratory Alkalosis\"]\n\n    MA --&gt; AG[\"High Anion Gap\"]\n    MA --&gt; NAG[\"Normal Anion Gap\"]\n\n    click AG \"#/ag-acidosis\"\n    click NAG \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "酸塩基平衡のマインドマップ",
+    "text": "酸塩基平衡のマインドマップ\n\n\n\n\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; MA[\"代謝性アシドーシス\"]\n    ABG --&gt; MK[\"代謝性アルカローシス\"]\n    ABG --&gt; RA[\"呼吸性アシドーシス\"]\n    ABG --&gt; RK[\"呼吸性アルカローシス\"]\n    \n    MA --&gt; Albcorrect[\"Alb補正\"]\n    Albcorrect --&gt; NAG[\"Anion Gap正常代謝性アシドーシス\"]\n    Albcorrect --&gt; AG[\"Anion Gap開大性代謝性アシドーシス\"]\n    AG --&gt; HCO3[\"補正HCO3-を計算する\"]\n    HCO3 --&gt; osmgap[\"(必要があれば)浸透圧ギャップで毒物の検索\"]\n    NAG --&gt; urineag[\"尿中AGを計算\"]\n\n    click AG \"#/ag-acidosis\"\n    click NAG \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#ag-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#ag-acidosis",
-    "title": "動脈血液ガス分析の基礎と概念",
-    "section": "High Anion Gap Metabolic Acidosis",
-    "text": "High Anion Gap Metabolic Acidosis\nAnion gap\n\\[\nAG = Na^+ - (Cl^- + HCO_3^-)\n\\]\n\nLactic acidosis\nKetoacidosis\nRenal failure\nToxins\n\n← Acid–Base Map"
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "High Anion Gap 代謝性 アシドーシス",
+    "text": "High Anion Gap 代謝性 アシドーシス\n\nAG開大性代謝性アシドーシスの鑑別(Mehta et al. 2008)\n\n\n\n\n\n\nGOLDMARK\nKUSSMAUL\n\n\n\n\nGlycols(Ethylene and propylene)\nKetoacidosis\n\n\nOxoproline\nUremia\n\n\nL-lactate\nSalicylate poisoning\n\n\nD-lactate\nMethanol\n\n\nMethanol\nAldehyde\n\n\nAspirin\nLactic acidosis\n\n\nRenal failure\nEthylene glycol\n\n\nKetoacidosis\n\n\n\n\nAnion gap\n\\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\\]\n\n通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)\nAnion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質\n\n正確にはUnmeasured anion(測定されない分の陰イオン)\n\n未測定陰イオン - 未測定陽イオン = AG\nAG開大の真に意味する事は？\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#nag-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#nag-acidosis",
-    "title": "動脈血液ガス分析の基礎と概念",
-    "section": "Normal Anion Gap Metabolic Acidosis",
-    "text": "Normal Anion Gap Metabolic Acidosis\nDifferential diagnosis\n\nGI bicarbonate loss\nRenal tubular acidosis\nSaline administration\n\n← Acid–Base Map"
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Normal Anion Gap 代謝性 アシドーシス",
+    "text": "Normal Anion Gap 代謝性 アシドーシス\n\n「測定されるAnionの異常」\n\n具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)\n\n腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける\n\n\\[Urinari AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\\]\n\n腎臓が原因でなければ、尿中のNH4+が増加→Urine AGは負の値となる\n血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い\n\nそのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低地\n\n実際は実臨床で覚える鑑別は2種類\n\n下痢(腸液のHCO3-の排泄による代謝性Acidosis)\nRenal tubular アシドーシス\n\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
-    "title": "動脈血液ガス分析の基礎と概念",
-    "section": "Metabolic Alkalosis",
-    "text": "Metabolic Alkalosis\nThink about urine chloride\n\nChloride responsive\nChloride resistant\n\n← Acid–Base Map"
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "代謝性 アルカローシス",
+    "text": "代謝性 アルカローシス\nThink about urine chloride\n\nChloride responsive\nChloride resistant\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
-    "title": "動脈血液ガス分析の基礎と概念",
-    "section": "Respiratory Acidosis",
-    "text": "Respiratory Acidosis\nHypoventilation\n\nCNS depression\nNeuromuscular disease\nAirway / pulmonary disease\n\n← Acid–Base Map"
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "呼吸性 アシドーシス",
+    "text": "呼吸性 アシドーシス\nHypoventilation\n\nCNS depression\nNeuromuscular disease\nAirway / pulmonary disease\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
-    "title": "動脈血液ガス分析の基礎と概念",
-    "section": "Respiratory Alkalosis",
-    "text": "Respiratory Alkalosis\nHyperventilation\n\nHypoxemia\nSepsis\nPregnancy\nCNS disorders\n\n← Acid–Base Map"
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "呼吸性 アルカローシス",
+    "text": "呼吸性 アルカローシス\nHyperventilation\n\nHypoxemia\nSepsis\nPregnancy\nCNS disorders\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#references",
     "href": "medicine/blood_gas_analysis_mi/index.html#references",
-    "title": "動脈血液ガス分析の基礎と概念",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "References",
-    "text": "References"
+    "text": "References\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892."
   },
   {
     "objectID": "statistics/mlcausal/index.html#hteを見つける意義",
@@ -5275,7 +5275,7 @@
     "href": "statistics/mlcausal/index.html#grfの評価",
     "title": "機械学習を用いた因果推論",
     "section": "grfの評価",
-    "text": "grfの評価\n\nCalibration ~ Best linear predictionGRFのRATE：AUTOC / QINIDiscrimination ~ C for benefitCalibration ~ GATE\n\n\n\n\n\nBest linear fit using forest predictions (on held-out data)\nas well as the mean forest prediction as regressors, along\nwith one-sided heteroskedasticity-robust (HC3) SEs:\n\n                               Estimate Std. Error t value    Pr(&gt;t)    \nmean.forest.prediction          0.99135    0.24186  4.0989 2.130e-05 ***\ndifferential.forest.prediction  1.04334    0.14507  7.1919 4.017e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\n\n\nmetric\nestimate\nse\nlower\nupper\n\n\n\n\nAUTOC\n0.102\n0.023\n0.056\n0.147\n\n\nQINI\n0.031\n0.007\n0.017\n0.045\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nc_for_benefit\nlower_95\nupper_95\n\n\n\n\n0.588\n0.529\n0.645"
+    "text": "grfの評価\n\nCalibration ~ Best linear predictionGRFのRATE：AUTOC / QINIDiscrimination ~ C for benefitCalibration ~ GATE\n\n\n\n\n                               Estimate Std. Error  t value       Pr(&gt;t)\nmean.forest.prediction         0.991347  0.2418556 4.098921 2.130477e-05\ndifferential.forest.prediction 1.043339  0.1450710 7.191920 4.016528e-13\nattr(,\"class\")\n[1] \"coeftest\"\nattr(,\"method\")\n[1] \"Best linear fit using forest predictions (on held-out data)\\nas well as the mean forest prediction as regressors, along\\nwith one-sided heteroskedasticity-robust (HC3) SEs\"\nattr(,\"df\")\n[1] 2998\nattr(,\"nobs\")\n[1] 3000\nattr(,\"logLik\")\n'log Lik.' -525.3803 (df=3)\n\n\n\n\n\n\n\n\n\nmetric\nestimate\nse\nlower\nupper\n\n\n\n\nAUTOC\n0.102\n0.023\n0.056\n0.147\n\n\nQINI\n0.031\n0.007\n0.017\n0.045\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nc_for_benefit\nlower_95\nupper_95\n\n\n\n\n0.588\n0.529\n0.645"
   },
   {
     "objectID": "statistics/mlcausal/index.html#calibration-best-linear-prediction",
@@ -5311,5 +5311,89 @@
     "title": "機械学習を用いた因果推論",
     "section": "GRFモデルの解釈",
     "text": "GRFモデルの解釈\n\nPDPGlobal SHAPSurrogate treePolicy tree"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#take-home-message",
+    "href": "medicine/blood_gas_analysis_mi/index.html#take-home-message",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Take home message",
+    "text": "Take home message\n\n血液ガスは「今の状態(acidemia/alkalemia)」と「ベクトル(alkalosis/acidosis)」を区別する\n\n見た目が正常でも、何が起きているかは分からないと考える\n\n「もしも、目に見えるその異常がなかったらどういうガスになる？」というルール = 神様ルール/玉ねぎの皮むきルール\n特に代謝性の代償を考えるときはTime courseをしっかり考える"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#血液ガスでわかること",
+    "href": "medicine/blood_gas_analysis_mi/index.html#血液ガスでわかること",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "血液ガスでわかること",
+    "text": "血液ガスでわかること\n\n主に以下の2つが分かる\n\n酸素化と換気(呼吸の評価)\n酸塩基平衡\n\n実はCPAの時にほぼほぼ全ての4H4Tを推測可能"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#動脈血液ガス-vs.-静脈血液ガス",
+    "href": "medicine/blood_gas_analysis_mi/index.html#動脈血液ガス-vs.-静脈血液ガス",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "動脈血液ガス vs. 静脈血液ガス",
+    "text": "動脈血液ガス vs. 静脈血液ガス\n\n基本的には、pHとHCO3-は信じてよい\nO2は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#酸塩基平衡の考え方",
+    "href": "medicine/blood_gas_analysis_mi/index.html#酸塩基平衡の考え方",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "酸塩基平衡の考え方",
+    "text": "酸塩基平衡の考え方\n\npHの実際の値がAcidemia/Alkalemia\nそこに持っていく力(ベクトル)がAcidosis/Alkalosis\n\n呼吸性/代謝性に分かれる\n\n明らかな時もあるが、打ち消しあって目に見えないこともある"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#例えば",
+    "href": "medicine/blood_gas_analysis_mi/index.html#例えば",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "例えば",
+    "text": "例えば\n\npH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？\n答え1:\n\nまったく問題がない健常人のA gas\n\n答え2:\n\n呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas …\n\n答え4:\n\n呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#どうやって区別する",
+    "href": "medicine/blood_gas_analysis_mi/index.html#どうやって区別する",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "どうやって区別する？",
+    "text": "どうやって区別する？\n\n明らかな異常がある場合、「それがなかったら……」という風に考える ::: {style=“color: red; font-size: 1.2em;”}\n目の前の、酸塩基の異常を魔法で消し去ったらどうなる？ :::\n代表的なのが\n\n代償\nAlb補正\n補正HCO3-\n\nまずは、AG開大代謝性Acidosisで考えてみましょう"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#agの真に意味すること",
+    "href": "medicine/blood_gas_analysis_mi/index.html#agの真に意味すること",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "AGの真に意味すること",
+    "text": "AGの真に意味すること\n\n\nUnmeasured anionの増加あるいはUnmeasured cationの減少により\n\n例えばγｸﾞﾛﾌﾞﾘﾝが増加する病態(MMなど)でもAGは偽性に正常化する(実際はほぼないが)\nただし、Unmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない\n\nUnmeasured anionって何ですか？"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#unmeasured-anionとは",
+    "href": "medicine/blood_gas_analysis_mi/index.html#unmeasured-anionとは",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Unmeasured anionとは",
+    "text": "Unmeasured anionとは\n\nAGの寄与因子(Marino 2026)\n\n\n\n\n\n\n測定されていない陰イオン\n測定されていない陽イオン\n\n\n\n\n\nAlb(15 mEq/L)\n有機酸(5 mEq/L)\nリン酸塩(2 mEq/L)\n硫酸塩(1 mEq/L)\n\n= 23 mEq/L\n\nCa(5 mEq/L)\nK(4.5 mEq/L)\nMg (1.5 mEq/L)\n\n= 11 mEq/L\n\n\n\nICU bookのTableを入れる\n\nUAのほとんどはAlbでできている\nそのため、低Alb血症の時に補正が必要"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#低alb血症の補正の考え方",
+    "href": "medicine/blood_gas_analysis_mi/index.html#低alb血症の補正の考え方",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "低Alb血症の補正の考え方",
+    "text": "低Alb血症の補正の考え方\n\nAlb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」\nそうすると、AGはどうなる？ → UAが増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#補正hco3-の考え方",
+    "href": "medicine/blood_gas_analysis_mi/index.html#補正hco3-の考え方",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "補正HCO3-の考え方",
+    "text": "補正HCO3-の考え方\n\nAG開大している = 異常物質(UA)が増えている = 代謝性Acidosisが起きている = HCO3-はUAの分見た目上減っている\nAGが開大していたら、HCO3-やCO2が正常でも少なくとも1種類の異常(AG開大性代謝性Acidosis)が起きている！\nなら、このUAを消したらどうなる？\nAGのGapの分が減ると、その分HCO3-が増加する\n補正HCO3- = (AG - 12) + HCO3-\n\n22 mEq/L以下でAG非開大性代謝性Aidosisの合併、26 mEq/L以上で代謝性Alkalosisの合併"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#浸透圧gap",
+    "href": "medicine/blood_gas_analysis_mi/index.html#浸透圧gap",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "浸透圧Gap",
+    "text": "浸透圧Gap\n\n「AG開大しているのにLactateやケトン体が陰性」の時に毒物の存在を疑うきっかけとなる指標\n\\[Osm_{gap} = Serum_{osm} - 2 * [Na] + BUN/2.8 + Glu/18 \\]\n10-15 mOsm/L以上の場合に毒物の存在を疑う\nケトン体の場合はどれくらいがDisproportionalかは分からないのが難点・・・・・・"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#ここまでのまとめ",
+    "href": "medicine/blood_gas_analysis_mi/index.html#ここまでのまとめ",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "ここまでのまとめ",
+    "text": "ここまでのまとめ\n\nAGとはUA - UCであり、UAのメインの成分はAlb\n\n\n\nAGが開大していたら、絶対にAG開大性代謝性Acidosisはある\n\nAGの開大は常に探したほうが良い\n\n「もしもこの患者に低Albがなかったら？」→補正AG\n「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-"
   }
 ]

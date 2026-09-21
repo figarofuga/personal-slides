@@ -3,168 +3,6 @@ ml_feature_names <- function() {
   c("age", "sexm1", "bmi", "hf", "bnp", "lvef")
 }
 
-# 傾向スコアで 5 層に分け、治療群を対象とする ATT の比較集団を作る。
-make_subclassification_fit <- function(lalonde_data) {
-  MatchIt::matchit(
-    treat ~ age + educ + nodegree + married + re74 + re75,
-    data = lalonde_data,
-    method = "subclass",
-    subclass = 5,
-    estimand = "ATT"
-  )
-}
-
-# 治療と共変量の交互作用を許した回帰から、治療群で平均した効果を求める。
-make_subclassification_result <- function(subclassification_fit) {
-  matched_data <- MatchIt::match_data(subclassification_fit)
-
-  fit <- stats::lm(
-    re78 ~ treat * (age + educ + nodegree + married + re74 + re75),
-    data = matched_data
-  )
-
-  marginaleffects::avg_comparisons(
-    fit,
-    variables = "treat",
-    vcov = "HC3",
-    newdata = dplyr::filter(matched_data, treat == 1)
-  )
-}
-
-# 各治療例に近い傾向スコアの対照例を対応させる。
-make_nearest_matching_fit <- function(lalonde_data) {
-  MatchIt::matchit(
-    treat ~ age + educ + race + nodegree + married + re74 + re75,
-    data = lalonde_data,
-    method = "nearest",
-    estimand = "ATT"
-  )
-}
-
-make_matching_result <- function(nearest_matching_fit) {
-  # 最近傍マッチングで得た重みを回帰に使い、マッチ集合内の相関を
-  # subclass によるクラスタ頑健分散で考慮する。
-  matched_data <- MatchIt::match_data(nearest_matching_fit)
-
-  fit <- stats::lm(
-    re78 ~ treat * (age + educ + nodegree + married + re74 + re75),
-    data = matched_data,
-    weights = weights
-  )
-
-  marginaleffects::avg_comparisons(
-    fit,
-    variables = "treat",
-    vcov = ~subclass,
-    newdata = dplyr::filter(matched_data, treat == 1)
-  )
-}
-
-# 傾向スコアの重みを推定し、その推定を考慮した回帰から治療群での平均効果を求める。
-make_weighting_result <- function(lalonde_data) {
-  weighting_fit <- WeightIt::weightit(
-    treat ~ age + educ + race + nodegree + married + re74 + re75,
-    data = lalonde_data,
-    method = "glm"
-  )
-
-  outcome_fit <- WeightIt::lm_weightit(
-    re78 ~ treat * (age + educ + race + married + nodegree + re74 + re75),
-    data = lalonde_data,
-    weightit = weighting_fit
-  )
-
-  marginaleffects::avg_comparisons(
-    outcome_fit,
-    variables = "treat",
-    newdata = dplyr::filter(lalonde_data, treat == 1)
-  )
-}
-
-# アウトカム回帰と傾向スコアを組み合わせ、5 分割の cross-fitting で ATE を推定する。
-make_aipw_result <- function(lalonde_data) {
-  covariates <- lalonde_data |>
-    dplyr::select(age, educ, race, married, nodegree, re74, re75)
-
-  set.seed(123)
-  fit <- AIPW::AIPW$new(
-    Y = lalonde_data$re78,
-    A = lalonde_data$treat,
-    W = covariates,
-    Q.SL.library = "SL.glm",
-    g.SL.library = "SL.glm",
-    k_split = 5L,
-    verbose = FALSE
-  )
-  fit$fit()
-  fit$summary()
-
-  result <- fit$result["Mean Difference", ]
-
-  tibble::tibble(
-    method = "AIPW",
-    estimate = unname(result["Estimate"]),
-    conf_low = unname(result["95% LCL"]),
-    conf_high = unname(result["95% UCL"])
-  )
-}
-
-# アウトカムの初期予測を傾向スコアで更新し、ATE と信頼区間を取り出す。
-make_tmle_result <- function(lalonde_data) {
-  covariates <- lalonde_data |>
-    dplyr::select(age, educ, race, married, nodegree, re74, re75)
-
-  set.seed(123)
-  fit <- tmle::tmle(
-    Y = lalonde_data$re78,
-    A = lalonde_data$treat,
-    W = covariates,
-    Q.SL.library = "SL.glm",
-    g.SL.library = "SL.glm",
-    family = "gaussian",
-    verbose = FALSE
-  )
-
-  tibble::tibble(
-    method = "TMLE",
-    estimate = fit$estimates$ATE$psi,
-    conf_low = fit$estimates$ATE$CI[1],
-    conf_high = fit$estimates$ATE$CI[2]
-  )
-}
-
-# 共変量で説明される成分を取り除き、残差同士の回帰で治療効果を示す教材例。
-make_orthogonalization_result <- function(lalonde_data) {
-  outcome_fit <- stats::glm(
-    re78 ~ age + educ + race + married + nodegree + re74 + re75,
-    data = lalonde_data,
-    family = stats::gaussian()
-  )
-  treatment_fit <- stats::glm(
-    treat ~ age + educ + race + married + nodegree + re74 + re75,
-    data = lalonde_data,
-    family = stats::binomial()
-  )
-  residual_data <- lalonde_data |>
-    dplyr::mutate(
-      y_resid = stats::residuals(outcome_fit, type = "response"),
-      a_resid = treat - stats::fitted(treatment_fit)
-    )
-  orthogonal_fit <- stats::glm(
-    y_resid ~ 0 + a_resid,
-    data = residual_data,
-    family = stats::gaussian()
-  )
-  coefficient <- summary(orthogonal_fit)$coefficients["a_resid", ]
-
-  tibble::tibble(
-    method = "Orthogonalization",
-    estimate = unname(coefficient["Estimate"]),
-    conf_low = estimate - 1.96 * unname(coefficient["Std. Error"]),
-    conf_high = estimate + 1.96 * unname(coefficient["Std. Error"])
-  )
-}
-
 # シミュレーションで既知の個体別リスク差を平均し、標本内のばらつきも要約する。
 make_ate_rd_summary <- function(full_toy_data) {
   full_toy_data |>
@@ -242,39 +80,32 @@ fit_causal_forest_bin <- function(policy_features, toy_data) {
   )
 }
 
-# 学習データに対する OOB 予測を ID に対応付ける。入力データの行順を維持する。
-make_causal_forest_predictions <- function(causal_forest_bin, toy_data) {
-  tibble::tibble(
-    id = toy_data$id,
-    cate_rd = as.numeric(stats::predict(causal_forest_bin)$predictions)
+# 学習データの診断表示に使う値を一度だけ計算する。
+make_grf_diagnostics <- function(causal_forest_bin, toy_data) {
+  tau_hat <- as.numeric(stats::predict(causal_forest_bin)$predictions)
+  propensity_score <- as.numeric(causal_forest_bin$W.hat)
+
+  stopifnot(
+    length(tau_hat) == nrow(toy_data),
+    length(propensity_score) == nrow(toy_data)
   )
+
+  toy_data |>
+    dplyr::mutate(
+      tau_hat = tau_hat,
+      tau_hat_rev = -tau_hat,
+      pscore = propensity_score,
+      ipw = dplyr::if_else(
+        ca == 1,
+        1 / propensity_score,
+        1 / (1 - propensity_score)
+      )
+    ) |>
+    tibble::as_tibble()
 }
 
-# 各治療選択の価値を評価するための二重頑健スコアを取り出す。
-make_causal_forest_dr_scores <- function(causal_forest_bin) {
-  policytree::double_robust_scores(causal_forest_bin)
-}
-
-# 背景集団を基準に、イベントリスク差の予測への各共変量の寄与を説明する。
-make_causal_forest_shap <- function(causal_forest_bin, policy_features) {
-  prediction_function <- function(object, newdata) {
-    stats::predict(
-      object,
-      newdata = as.matrix(newdata)
-    )$predictions
-  }
-
-  set.seed(42)
-  background_features <- dplyr::slice_sample(policy_features, n = 50)
-  explained_features <- dplyr::slice_sample(policy_features, n = 200)
-
-  kernelshap::kernelshap(
-    object = causal_forest_bin,
-    X = explained_features,
-    bg_X = background_features,
-    pred_fun = prediction_function
-  ) |>
-    shapviz::shapviz()
+make_causal_forest_calibration <- function(causal_forest_bin) {
+  grf::test_calibration(causal_forest_bin)
 }
 
 # 予測 CATE を深さ 3 の木で近似し、効果の異質性を読み取りやすくする。
@@ -284,12 +115,14 @@ make_causal_forest_surrogate_tree <- function(
 ) {
   interpretation_data <- toy_data |>
     dplyr::mutate(
-      tau_hat = stats::predict(causal_forest_bin)$predictions
+      predicted_benefit = -as.numeric(
+        stats::predict(causal_forest_bin)$predictions
+      )
     ) |>
     tibble::as_tibble()
 
   partykit::ctree(
-    tau_hat ~ age + sexm1 + bmi + hf + bnp + lvef,
+    predicted_benefit ~ age + sexm1 + bmi + hf + bnp + lvef,
     data = interpretation_data,
     control = partykit::ctree_control(maxdepth = 3)
   )
@@ -306,125 +139,14 @@ fit_causal_forest_policy <- function(policy_features, toy_data) {
   )
 }
 
-# 非発生確率を効用とした、治療選択ごとの二重頑健スコアを得る。
-make_policy_scores <- function(causal_forest_policy) {
-  policytree::double_robust_scores(causal_forest_policy)
-}
-
 # 期待効用が高くなる治療選択を、深さ 2 の簡潔なルールとして学習する。
-fit_policy_tree <- function(policy_features, policy_scores) {
+fit_policy_tree <- function(causal_forest_policy, policy_features) {
+  policy_scores <- policytree::double_robust_scores(causal_forest_policy)
+
   policytree::policy_tree(
     policy_features,
     policy_scores,
     depth = 2
-  )
-}
-
-# OOB CATE による順位付けを AUTOC と QINI で評価する。符号はイベントリスク差のまま。
-make_rate_results <- function(causal_forest_bin) {
-  cate_predictions <- stats::predict(causal_forest_bin)$predictions
-
-  list(
-    autoc = grf::rank_average_treatment_effect(
-      causal_forest_bin,
-      cate_predictions,
-      target = "AUTOC"
-    ),
-    qini = grf::rank_average_treatment_effect(
-      causal_forest_bin,
-      cate_predictions,
-      target = "QINI"
-    )
-  )
-}
-
-make_grf_validation <- function(
-  causal_forest_bin,
-  rate_results,
-  n_groups = 5L
-) {
-  cate_predictions <- as.numeric(
-    stats::predict(causal_forest_bin)$predictions
-  )
-  dr_scores <- as.numeric(grf::get_scores(causal_forest_bin))
-  calibration_test <- grf::test_calibration(causal_forest_bin)
-
-  # OOB（各個体を学習に使わなかった木）の予測で、小さい CATE から群分けする。
-  # ceiling による従来の境界を保つ。ntile() は端数の配分が異なるため使わない。
-  gate_data <- tibble::tibble(
-    cate_predictions = cate_predictions,
-    dr_scores = dr_scores
-  ) |>
-    dplyr::mutate(
-      group = pmin(
-        n_groups,
-        ceiling(dplyr::row_number(cate_predictions) / dplyr::n() * n_groups)
-      ),
-      # 個体数より群数が多い場合も、空の群を結果に残す。
-      group = factor(group, levels = seq_len(n_groups))
-    ) |>
-    dplyr::group_by(group, .drop = FALSE) |>
-    dplyr::summarise(
-      n = dplyr::n(),
-      predicted_gate = mean(cate_predictions),
-      gate = mean(dr_scores),
-      gate_se = stats::sd(dr_scores) / sqrt(dplyr::n()),
-      .groups = "drop"
-    ) |>
-    dplyr::mutate(group = as.integer(group))
-
-  # 群の大きさで誤差を重み付けし、全員に平均効果を予測する基準と比較する。
-  group_probability <- gate_data$n / sum(gate_data$n)
-  calibration_error <- sum(
-    abs(gate_data$gate - gate_data$predicted_gate) * group_probability
-  )
-  overall_error <- sum(
-    abs(gate_data$gate - mean(dr_scores)) * group_probability
-  )
-  calibration_r2 <- if (overall_error > 0) {
-    1 - calibration_error / overall_error
-  } else {
-    NA_real_
-  }
-
-  calibration_rows <- tibble::tibble(
-    metric = c(
-      "Mean forest calibration",
-      "Differential forest calibration"
-    ),
-    estimate = calibration_test[, "Estimate"],
-    std_error = calibration_test[, "Std. Error"],
-    p_value = calibration_test[, "Pr(>t)"]
-  )
-  discrimination_rows <- tibble::tibble(
-    metric = c("AUTOC", "QINI"),
-    estimate = c(
-      rate_results$autoc$estimate,
-      rate_results$qini$estimate
-    ),
-    std_error = c(
-      rate_results$autoc$std.err,
-      rate_results$qini$std.err
-    ),
-    p_value = stats::pnorm(
-      estimate / std_error,
-      lower.tail = FALSE
-    )
-  )
-
-  list(
-    gates = gate_data,
-    summary = dplyr::bind_rows(
-      calibration_rows,
-      tibble::tibble(
-        metric = "Grouped calibration R2",
-        estimate = calibration_r2,
-        std_error = NA_real_,
-        p_value = NA_real_
-      ),
-      discrimination_rows
-    ),
-    calibration_test = calibration_test
   )
 }
 
@@ -441,6 +163,247 @@ fit_external_evaluation_forest <- function(
     honesty = TRUE,
     seed = 43
   )
+}
+
+# 開発コホートで固定したforestを外部コホートへ適用する。
+make_external_causal_forest_predictions <- function(
+  causal_forest_bin,
+  test_policy_features,
+  test_toy_data
+) {
+  cate_rd <- as.numeric(
+    stats::predict(
+      causal_forest_bin,
+      newdata = as.matrix(test_policy_features)
+    )$predictions
+  )
+
+  stopifnot(length(cate_rd) == nrow(test_toy_data))
+
+  tibble::tibble(
+    id = test_toy_data$id,
+    cate_rd = cate_rd,
+    predicted_benefit = -cate_rd
+  )
+}
+
+# 固定予測による順位付けを、外部コホートのDR scoreで評価する。
+make_external_rate_results <- function(
+  external_evaluation_forest,
+  external_causal_forest_predictions,
+  n_bootstrap = 500L
+) {
+  priorities <- external_causal_forest_predictions$predicted_benefit
+  fractions <- seq(0.1, 1, by = 0.1)
+
+  set.seed(123)
+  autoc <- grf::rank_average_treatment_effect(
+    external_evaluation_forest,
+    priorities = priorities,
+    target = "AUTOC",
+    q = fractions,
+    R = n_bootstrap
+  )
+  set.seed(123)
+  qini <- grf::rank_average_treatment_effect(
+    external_evaluation_forest,
+    priorities = priorities,
+    target = "QINI",
+    q = fractions,
+    R = n_bootstrap
+  )
+
+  summary <- tibble::tibble(
+    metric = c("AUTOC", "QINI"),
+    estimate = c(autoc$estimate, qini$estimate),
+    se = c(autoc$std.err, qini$std.err)
+  ) |>
+    dplyr::mutate(
+      lower = estimate - 1.96 * se,
+      upper = estimate + 1.96 * se
+    )
+
+  # grf::plot() displays TOC for both targets. Construct Qini explicitly.
+  toc <- autoc$TOC |>
+    dplyr::filter(priority == dplyr::first(priority))
+  curves <- dplyr::bind_rows(
+    dplyr::transmute(
+      toc,
+      q,
+      curve = "TOC",
+      value = estimate,
+      se = std.err
+    ),
+    dplyr::transmute(
+      toc,
+      q,
+      curve = "Qini",
+      value = q * estimate,
+      se = q * std.err
+    )
+  )
+
+  list(autoc = autoc, qini = qini, summary = summary, curves = curves)
+}
+
+c_for_benefit <- function(observed_benefit, predicted_benefit) {
+  stopifnot(
+    length(observed_benefit) == length(predicted_benefit),
+    length(observed_benefit) >= 2L,
+    all(is.finite(observed_benefit)),
+    all(is.finite(predicted_benefit))
+  )
+
+  observed_levels <- sort(unique(observed_benefit))
+  if (length(observed_levels) < 2L) {
+    return(NA_real_)
+  }
+
+  total_score <- 0
+  number_of_comparisons <- 0
+
+  for (higher_level in observed_levels[-1]) {
+    predictions_in_higher_group <- predicted_benefit[
+      observed_benefit == higher_level
+    ]
+    predictions_in_lower_groups <- predicted_benefit[
+      observed_benefit < higher_level
+    ]
+
+    score_for_each_pair <- vapply(
+      predictions_in_higher_group,
+      function(higher_prediction) {
+        sum(higher_prediction > predictions_in_lower_groups) +
+          0.5 * sum(higher_prediction == predictions_in_lower_groups)
+      },
+      numeric(1)
+    )
+
+    total_score <- total_score + sum(score_for_each_pair)
+    number_of_comparisons <- number_of_comparisons +
+      length(predictions_in_higher_group) *
+        length(predictions_in_lower_groups)
+  }
+
+  total_score / number_of_comparisons
+}
+
+# 予測利益で治療例と対照例を対応させ、matched pair単位でbootstrapする。
+make_external_c_for_benefit <- function(
+  test_toy_data,
+  external_causal_forest_predictions,
+  n_bootstrap = 500L
+) {
+  cfb_data <- test_toy_data |>
+    dplyr::left_join(
+      dplyr::select(
+        external_causal_forest_predictions,
+        id,
+        predicted_benefit
+      ),
+      by = "id"
+    )
+  stopifnot(!anyNA(cfb_data$predicted_benefit))
+
+  matching_estimand <- if (
+    sum(cfb_data$ca == 1) <= sum(cfb_data$ca == 0)
+  ) {
+    "ATT"
+  } else {
+    "ATC"
+  }
+
+  set.seed(42)
+  matching_fit <- MatchIt::matchit(
+    ca ~ predicted_benefit,
+    data = cfb_data,
+    method = "nearest",
+    distance = "mahalanobis",
+    estimand = matching_estimand,
+    ratio = 1,
+    replace = FALSE,
+    m.order = "closest"
+  )
+
+  pairs <- MatchIt::match_data(matching_fit) |>
+    dplyr::group_by(subclass) |>
+    dplyr::filter(dplyr::n() == 2L, dplyr::n_distinct(ca) == 2L) |>
+    dplyr::summarise(
+      treated_id = id[ca == 1][1],
+      control_id = id[ca == 0][1],
+      observed_benefit =
+        bin_outcome[ca == 0][1] - bin_outcome[ca == 1][1],
+      predicted_benefit = mean(predicted_benefit),
+      .groups = "drop"
+    )
+
+  bootstrap_statistic <- function(data, indices) {
+    sampled_pairs <- data[indices, , drop = FALSE]
+    c_for_benefit(
+      sampled_pairs$observed_benefit,
+      sampled_pairs$predicted_benefit
+    )
+  }
+
+  set.seed(123)
+  bootstrap <- boot::boot(
+    data = pairs,
+    statistic = bootstrap_statistic,
+    R = n_bootstrap
+  )
+  confidence_interval <- boot::boot.ci(
+    bootstrap,
+    conf = 0.95,
+    type = "bca"
+  )$bca[4:5]
+
+  list(
+    pairs = pairs,
+    summary = tibble::tibble(
+      c_for_benefit = as.numeric(bootstrap$t0),
+      lower_95 = unname(confidence_interval[1]),
+      upper_95 = unname(confidence_interval[2])
+    )
+  )
+}
+
+# GATEの境界は開発コホートだけで定め、外部コホートのDR scoreで評価する。
+make_external_grf_gates <- function(
+  causal_forest_bin,
+  external_evaluation_forest,
+  external_causal_forest_predictions,
+  n_groups = 5L
+) {
+  predicted_benefit <-
+    external_causal_forest_predictions$predicted_benefit
+  dr_benefit <- as.numeric(grf::get_scores(external_evaluation_forest))
+  stopifnot(length(predicted_benefit) == length(dr_benefit))
+
+  development_benefit <- -as.numeric(
+    stats::predict(causal_forest_bin)$predictions
+  )
+  gate_breaks <- c(
+    -Inf,
+    unique(as.numeric(stats::quantile(
+      development_benefit,
+      probs = seq_len(n_groups - 1L) / n_groups
+    ))),
+    Inf
+  )
+
+  tibble::tibble(
+    group = cut(predicted_benefit, breaks = gate_breaks, labels = FALSE),
+    predicted_benefit = predicted_benefit,
+    dr_benefit = dr_benefit
+  ) |>
+    dplyr::group_by(group) |>
+    dplyr::summarise(
+      n = dplyr::n(),
+      predicted_gate = mean(predicted_benefit),
+      gate = mean(dr_benefit),
+      gate_se = stats::sd(dr_benefit) / sqrt(n),
+      .groups = "drop"
+    )
 }
 
 # 計算量を抑えつつ再現可能にするため、PDP・SHAP の対象と背景集団を固定する。
