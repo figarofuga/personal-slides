@@ -194,15 +194,21 @@ library(modeldata)
 library(yardstick)
 library(dplyr)
 library(ggplot2)
+library(gt)
 
 ```
 
 
 ```{r}
+#|label: prediction-model-image
 
 modeldata::two_class_example |> 
   dplyr::select(Class1, predicted, truth) |> 
-  head()
+  head() |> 
+  knitr::kable(
+    align = 'c',
+    col.names = c("Probability of Class 1", "Predicted by model", "Truth")
+  )
 
 ```
 
@@ -211,7 +217,7 @@ modeldata::two_class_example |>
   - 回帰モデル：連続値（BNP値、e'、PCWPなど）を直接予測する
   - 分類モデル：0/1（生死、出血の有無など）を予測する
 - 実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する
-- 任意のカットオフ（通常0.5）で0か1に丸め込んでいる
+- 任意のカットオフ（通常0.5）で0か1に丸め込んでいる(上ではClass)
 
 # 分類の評価：DiscriminationとCalibrationって何？
 
@@ -657,15 +663,33 @@ head(modeldata::two_class_example)
 :::
 
 ::: {.column width="45%"}
+
 ```{r}
 library(modeldata)
 library(yardstick)
+library(tidyverse)
 
 yardstick::conf_mat(
   modeldata::two_class_example, 
   truth = truth, 
   estimate = predicted
-)
+) |> pluck("table") |>
+  as.data.frame.matrix() |>
+  tibble::rownames_to_column("Truth") |>
+  gt(rowname_col = "Truth") |>
+  tab_stubhead(label = "Truth") |>
+  tab_spanner(
+    label = "Predicted",
+    columns = c("Class1", "Class2")
+  ) |>
+  cols_align(
+    align = "center",
+    columns = c("Class1", "Class2")
+  ) |>
+  tab_options(
+    table.font.size = px(30),
+    data_row.padding = px(10)
+  )
 
 ```
 :::
@@ -789,8 +813,8 @@ $$
 - 国試でやった感度・特異度・尤度比等
 - 一番使われるのはAccuracy
 - Fβ score（F1, F0.5, F2など）で、偽陰性・偽陽性の何を重視するかで選択が変わる
-  - βに大きな数字を入れると感度を重視
-  - βに小さな数字を入れるとPPVを重視
+  - βに大きな数字を入れるとRule outを重視(感度が高くなる)
+  - βに小さな数字を入れるとRule inを重視(特異度が高くなる)
 - 偽陰性を極力避けたいとき
   - 一般人口への癌やHIVのscreeningなど
   - F2などが良い
@@ -816,11 +840,17 @@ input_tbl <- modeldata::two_class_example |>
     truth
   ) 
 
-roc_tbl <- input_tbl |>
-  yardstick::roc_curve(
-    truth = truth,
-    prob_Class1
+roc_tbl <- yardstick::roc_curve(
+  modeldata::two_class_example,
+  truth = truth,
+  Class1
   )
+
+pr_tbl <- yardstick::pr_curve(
+  modeldata::two_class_example, 
+  truth, 
+  Class1
+) 
 
 auc_value <- input_tbl |>
   yardstick::roc_auc(
@@ -834,12 +864,12 @@ auc_value <- input_tbl |>
 :::: {.columns .tibble-flow .roc-flow}
 ::: {.column}
 
-### 1. 予測結果
+### 1. 予測結果を<br>昇順で並べる
 
 ```{r}
 #| echo: false
 
-input_tbl |> 
+dplyr::arrange(input_tbl, prob_Class1) |> 
   dplyr::slice_head(n = 6) |>
   knitr::kable(
     format = "html",
@@ -887,7 +917,7 @@ input_tbl |>
   knitr::kable(
     format = "html",
     align = "cccc",
-    col.names = c("予測確率", "実際のアウトカム", "閾値:1.8e-07", "閾値2:4.5e-06")
+    col.names = c("予測確率", "実際のアウトカム", "閾値:2.0e-07", "閾値2:4.50e-06")
   )
 
 ```
@@ -905,7 +935,7 @@ input_tbl |>
 
 ::: {.column .fragment fragment-index="4"}
 
-### 3. 感度・特異度
+### 3. 閾値毎の感度・特異度
 
 ```{r}
 #| echo: false
@@ -929,11 +959,14 @@ roc_tbl |>
 ## リスク毎の評価
 
 ```{r}
-library(modeldata)
 
-head(modeldata::two_class_example) |> 
-  dplyr::select(Class1, predicted, truth) |> 
-  dplyr::rename(`probability of Class1` = Class1)
+library(dplyr)
+
+dplyr::left_join(
+  roc_tbl, pr_tbl, by = ".threshold"
+) |> 
+  head() |> 
+  knitr::kable()
 
 ```
 
@@ -998,19 +1031,21 @@ yardstick::pr_auc(
 
 [@Alba2017-gh]
 
-- 極端に偏ったデータでは混同行列関連は役に立たない
+- Truthが偏ったデータでは混同行列関連は役に立たない
 - 特にAccuracyは一番ダメ
   - 全部0の予測でも90%超えてしまう
 - PRAUC等が役に立つが、数字だけでの評価は困難
   - PR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)
-- **AUROCは数字で大体の印象が分かるのが強み**
+- 不均衡データではAUROCは差を見つけにくいが、[**AUROCは数字で大体の印象が分かる**]{style="color: red; font-size: 1.1em;"}のが強みだと思う
 
 
 ## 結局どうすればいいの？
 
 - 均衡がとれているデータの場合
   - 根拠がある場合
-    - 妥当な感度、特異度の値が分かっている
+    - 例えばPEの許容される見逃し率は2%[@Creager2026-or]
+    - 胸痛の評価ToolでのMACEの許容率は1%未満[@Than2013-zz]
+  - 妥当な感度、特異度の値が分かっている
     - カットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載
     - AUROCはあった方が良い
   - 根拠がない場合
@@ -1042,6 +1077,8 @@ yardstick::pr_auc(
 library(dplyr)
 library(yardstick)
 library(modeldata)
+library(tidyr)
+library(ggplot2)
 
 input_tbl <- modeldata::two_class_example |>
   transmute(
@@ -1061,12 +1098,27 @@ summarised_tbl <- input_tbl |>
   )
 
 
+calib_dat <- tidyr::pivot_longer(
+  summarised_tbl,
+  cols = c("event_proportion", "mean_probability")
+) 
+  
+
+barplot <- ggplot2::ggplot(
+  data = calib_dat, 
+  mapping = aes(x = class, y = value, colour = name, fill = name)) + 
+  geom_col(position = position_dodge2()) + 
+  theme_bw()
+
+barplot
+
 ```
+
 
 :::: {.columns .tibble-flow .roc-flow}
 ::: {.column}
 
-### 1. 予測結果を予測確率に従って並べ直す
+### 1. 予測結果を<br>昇順で並べる
 
 ```{r}
 #| echo: false
@@ -1101,7 +1153,7 @@ input_tbl |>
 
 ::: {.column .fragment fragment-index="2"}
 
-### 2. Class毎の予測確率と実際のイベント発症確率
+### 2. Class毎の予測確率の平均と<br>実際のイベント発症率を計算する
 
 ```{r}
 #| echo: false
@@ -1117,126 +1169,49 @@ summarised_tbl |>
 ```
 
 :::
-
-::: {.column .fragment fragment-index="3"}
-
-<div class="flow-operation">
-  <div class="flow-arrow">&rarr;</div>
-  <div class="flow-caption">可視化</div>
-</div>
-
-:::
-
-::: {.column .fragment fragment-index="4"}
-
-### 3. Visualization
-
-```{r}
-#| echo: false
-
-library(tidyr)
-library(ggplot2)
-library(patchwork)
-
-calib_dat <- tidyr::pivot_longer(
-  summarised_tbl,
-  cols = c("event_proportion", "mean_probability")
-) 
-  
-lineplot <- ggplot2::ggplot(
-  data = calib_dat, 
-  mapping = aes(x = class, y = value, colour = name)) + 
-  geom_line() + 
-  theme_bw() + 
-  theme(legend.position = "none")
-
-barplot <- ggplot2::ggplot(
-  data = calib_dat, 
-  mapping = aes(x = class, y = value, colour = name, fill = name)) + 
-  geom_col(position = position_dodge2()) + 
-  theme_bw()
-
-lineplot + barplot + plot_layout(guides = "collect")
-
-```
-
-:::
 ::::
 
-- 感度と1-特異度で点を結ぶとROC曲線
-- PrecisionとRecallで点を結ぶとPR曲線
 
-<!-- Todo: 変更 -->
+## Calibration～Hsomerr-Lemeshow検定
 
-:::: columns
-::: {.column width="50%"}
-- 1. 予測確率を並べる
-- 2. 予測確率で群分けする
-- 3. 各群の予測確率をまとめる
-- 4. 各群の実測イベント率をまとめる
-:::
-
-::: {.column width="50%"}
 
 ```{r}
 library(modeldata)
 library(dplyr)
 library(ggplot2)
 
-modeldata::two_class_example |> 
-  dplyr::arrange(Class1) |> 
-  dplyr::mutate(
-    category = ggplot2::cut_number(Class1, 10, labels = FALSE)
-  ) |> 
+modeldata::two_class_example |>
+  mutate(
+    group = ntile(Class1, 10),
+    y = as.integer(truth == "Class1")
+  ) |>
+  dplyr::group_by(group) |>
   dplyr::summarise(
-    mean_incidence = mean(truth == "Class1"), 
-    mean_prob = mean(Class1),
-    .by = category
-  ) |> 
-  tidyr::pivot_longer(cols = c(mean_incidence, mean_prob)) |> 
-  ggplot2::ggplot(aes(x = category, y = value)) + 
-  geom_col(aes(fill = name), position = position_dodge2()) + 
-  theme_bw()
-
+    n = n(),
+    # Expected
+    mean_prob_Class1 = mean(Class1),
+    # Observed
+    truth_Class1 = sum(y),
+    truth_Class2 = sum(1 - y)
+  )  |>
+  dplyr::mutate(
+    chisq = purrr::pmap_dbl(
+      list(truth_Class1, truth_Class2, mean_prob_Class1), 
+      \(x1, x0, p){
+        stats::chisq.test(
+      x = c(x1, x0),
+      p = c(p, 1 - p)
+    )$statistic
+      }
+  )) |>
+  knitr::kable()
 
 ```
 
-:::
-
-::::
-
-## Calibrationの細かい方法
-
-:::: columns
-::: {.column width="58%"}
-- 3と4を棒グラフや線グラフでまとめる
-  - Calibration plot
-- 3'と4'でχ2検定を行う
-  - Hosmer-Lemeshow検定
-:::
-
-::: {.column width="42%"}
-
-```{r}
-library(modeldata)
-library(dplyr)
-library(ggplot2)
-
-modeldata::two_class_example |> 
-  dplyr::arrange(Class1) |> 
-  dplyr::mutate(
-    category = ggplot2::cut_number(Class1, 10, labels = FALSE)
-  ) |> 
-  dplyr::summarise(
-    mean_incidence = mean(truth == "Class1"), 
-    mean_prob = mean(Class1),
-    .by = category
-  ) 
-
-```
-
-:::
-::::
+- 10群に分けて、各々で平均確率と実際のOutcomeを並べる
+- 各グループ毎にX^2検定を行って、すべての統計量を足し算
+- P > 0.05でモデルの当てはまりが良いとされる
+- 一つの数値としては良いが、Low risk/High risk群でどうBiasがあるかは分からない
 
 ## Brier Score
 
@@ -1261,13 +1236,20 @@ modeldata::two_class_example |>
     Class1, predicted, truth
       ) |> 
   dplyr::mutate(
+    Class1 = round(Class1, 3), 
     truth_num = dplyr::if_else(
       truth == "Class1", 1, 0
     ), 
-    diff_squared = (truth_num - Class1)^2
+    diff_squared = purrr::map2_chr(truth_num,Class1, \(x, y){
+      paste0("(", x, "-", y, ")^2 = ", round((x-y)^2, 3))
+    })
   ) |> 
   dplyr::rename(
-    `Probability of Class1` = Class1
+    `Probability of Class1` = Class1, 
+    `True label` = truth_num
+  ) |> 
+  dplyr::select(
+    - truth
   ) |> 
   head() |> 
   knitr::kable(
@@ -1277,7 +1259,7 @@ modeldata::two_class_example |>
 
 ```
 
-![](images/slide20_image01.png){fig-alt="Brier scoreの式" width="100%"}
+- Class1を予測したら1, Class2を予測したら0
 
 
 :::
@@ -1291,29 +1273,16 @@ modeldata::two_class_example |>
 
 ## モデルの比較
 
-:::: columns
-::: {.column width="58%"}
-- AU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている
+![](images/slide22_image01.png){fig-alt="AUROCの限界" width="100%"}
+[@Cook2007-fs]
+
+- AUROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている
 - よくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？
   - NRI / IDI
 
-:::
-
-::: {.column width="42%"}
-![](images/slide22_image01.png){fig-alt="AUROCの限界" width="100%"}
-
-[@Cook2007-fs]
-
-:::
-::::
-
-## Epidemiology 2014;25:114-121
-
-![](images/slide23_image01.png){fig-alt="Epidemiology 2014の図" width="74%"}
-
 ## NRI（Net Reclassification Index）
 
-<!-- TODO: 元スライドの番号付き図解は画像中心に簡略化。 -->
+![](images/slide24_image01.png){fig-alt="NRIの図解" width="88%"}[@Alba2017-gh]
 
 - 古いモデルから新しいモデルでの分類によってどのように変化したかを示す
 - 実は複数の種類がある
@@ -1321,13 +1290,12 @@ modeldata::two_class_example |>
   - Category-based NRI
   - Continuous NRI
 
-![](images/slide24_image01.png){fig-alt="NRIの図解" width="88%"}
 
-::: {.reference}
-JAMA. 2017 Oct 10;318(14):1377-84.
-:::
+## Category-based NRI
 
-## cNRI
+<!-- Todo: ここから作る -->
+
+## continuous NRI
 
 :::: columns
 ::: {.column width="60%"}

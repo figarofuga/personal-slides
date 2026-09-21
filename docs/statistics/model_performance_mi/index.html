@@ -339,14 +339,48 @@ blockquote {
 <section id="分類モデルとは-1" class="slide level2">
 <h2>分類モデルとは？</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>       Class1 predicted  truth
-1 0.003589243    Class2 Class2
-2 0.678621054    Class1 Class1
-3 0.110893522    Class2 Class2
-4 0.735161703    Class1 Class1
-5 0.016239960    Class2 Class2
-6 0.999275071    Class1 Class1</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Probability of Class 1</th>
+<th style="text-align: center;">Predicted by model</th>
+<th style="text-align: center;">Truth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.0035892</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.6786211</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.1108935</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.7351617</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.0162400</td>
+<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.9992751</td>
+<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">Class1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <ul>
@@ -356,7 +390,7 @@ blockquote {
 <li>分類モデル：0/1（生死、出血の有無など）を予測する</li>
 </ul></li>
 <li>実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する</li>
-<li>任意のカットオフ（通常0.5）で0か1に丸め込んでいる</li>
+<li>任意のカットオフ（通常0.5）で0か1に丸め込んでいる(上ではClass)</li>
 </ul>
 </section></section>
 <section>
@@ -442,11 +476,490 @@ blockquote {
 </div>
 </div><div class="column" style="width:45%;">
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>          Truth
-Prediction Class1 Class2
-    Class1    227     50
-    Class2     31    192</code></pre>
+<div class="cell-output-display">
+<div id="tfownzwbhb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tfownzwbhb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tfownzwbhb thead, #tfownzwbhb tbody, #tfownzwbhb tfoot, #tfownzwbhb tr, #tfownzwbhb td, #tfownzwbhb th {
+  border-style: none;
+}
+
+#tfownzwbhb p {
+  margin: 0;
+  padding: 0;
+}
+
+#tfownzwbhb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tfownzwbhb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tfownzwbhb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tfownzwbhb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tfownzwbhb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tfownzwbhb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tfownzwbhb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tfownzwbhb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tfownzwbhb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tfownzwbhb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tfownzwbhb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tfownzwbhb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tfownzwbhb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tfownzwbhb .gt_row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tfownzwbhb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tfownzwbhb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tfownzwbhb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tfownzwbhb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tfownzwbhb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tfownzwbhb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tfownzwbhb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tfownzwbhb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tfownzwbhb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tfownzwbhb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tfownzwbhb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tfownzwbhb .gt_left {
+  text-align: left;
+}
+
+#tfownzwbhb .gt_center {
+  text-align: center;
+}
+
+#tfownzwbhb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tfownzwbhb .gt_font_normal {
+  font-weight: normal;
+}
+
+#tfownzwbhb .gt_font_bold {
+  font-weight: bold;
+}
+
+#tfownzwbhb .gt_font_italic {
+  font-style: italic;
+}
+
+#tfownzwbhb .gt_super {
+  font-size: 65%;
+}
+
+#tfownzwbhb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tfownzwbhb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tfownzwbhb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tfownzwbhb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tfownzwbhb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tfownzwbhb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tfownzwbhb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tfownzwbhb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tfownzwbhb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Truth</th>
+<th colspan="2" id="Predicted" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+Predicted
+</div></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="Class1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Class1</th>
+<th id="Class2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Class2</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">Class1</th>
+<td class="gt_row gt_center" headers="stub_1_1 Class1">227</td>
+<td class="gt_row gt_center" headers="stub_1_1 Class2">50</td>
+</tr>
+<tr class="even">
+<th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">Class2</th>
+<td class="gt_row gt_center" headers="stub_1_2 Class1">31</td>
+<td class="gt_row gt_center" headers="stub_1_2 Class2">192</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </div></div>
@@ -500,8 +1013,8 @@ F_{\beta} &amp;=
 <li>一番使われるのはAccuracy</li>
 <li>Fβ score（F1, F0.5, F2など）で、偽陰性・偽陽性の何を重視するかで選択が変わる
 <ul>
-<li>βに大きな数字を入れると感度を重視</li>
-<li>βに小さな数字を入れるとPPVを重視</li>
+<li>βに大きな数字を入れるとRule outを重視(感度が高くなる)</li>
+<li>βに小さな数字を入れるとRule inを重視(特異度が高くなる)</li>
 </ul></li>
 <li>偽陰性を極力避けたいとき
 <ul>
@@ -520,7 +1033,7 @@ F_{\beta} &amp;=
 <h2>ROC指標ができるまで</h2>
 <div class="columns tibble-flow roc-flow">
 <div class="column">
-<h3 id="予測結果">1. 予測結果</h3>
+<h3 id="予測結果を予測確率で並べる">1. 予測結果を予測確率で並べる</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -532,28 +1045,28 @@ F_{\beta} &amp;=
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">0.0035892</td>
+<td style="text-align: center;">2.00e-07</td>
 <td style="text-align: center;">Class2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.6786211</td>
-<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">4.50e-06</td>
+<td style="text-align: center;">Class2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.1108935</td>
+<td style="text-align: center;">5.80e-06</td>
 <td style="text-align: center;">Class2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.7351617</td>
-<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">5.90e-06</td>
+<td style="text-align: center;">Class2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.0162400</td>
+<td style="text-align: center;">1.22e-05</td>
 <td style="text-align: center;">Class2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.9992751</td>
-<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">1.40e-05</td>
+<td style="text-align: center;">Class2</td>
 </tr>
 </tbody>
 </table>

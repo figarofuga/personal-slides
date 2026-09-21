@@ -108,7 +108,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "update Agas"
+git commit -m "update Model performance"
 git push
 
 ```
@@ -122,3 +122,14 @@ TODO: PROのordinalの図のFactorを直す
 
 - Medicine: HF in elderly, Rickettsia, Eosinophilia, hypokalemia, treatment of acute severe hyponatremia, Whipple disease, thrombophlic test for VTE, and blood gas analysis.
 - Stats: Clustering, DAG, Model performance, visualizations, Advanced survival analysis including time-varying cox, splines, propensity score analysis, and multiple imputations
+
+忘れがちな書き方
+``` md
+[**Calibration plot**]{style="color: red; font-size: 1.1em;"}
+
+::: {style="color: red; font-size: 1.2em;"}
+- **目の前の、酸塩基の異常を魔法で消し去ったらどうなる？** 
+:::
+
+
+```
