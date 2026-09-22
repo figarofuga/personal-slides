@@ -1033,7 +1033,7 @@ F_{\beta} &amp;=
 <h2>ROC指標ができるまで</h2>
 <div class="columns tibble-flow roc-flow">
 <div class="column">
-<h3 id="予測結果を予測確率で並べる">1. 予測結果を予測確率で並べる</h3>
+<h3 id="予測結果を-昇順で並べる">1. 予測結果を<br>昇順で並べる</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1090,8 +1090,8 @@ F_{\beta} &amp;=
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">実際のアウトカム</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">閾値:1.8e-07</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">閾値2:4.5e-06</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値:2.0e-07</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値2:4.50e-06</th>
 </tr>
 </thead>
 <tbody>
@@ -1145,7 +1145,7 @@ F_{\beta} &amp;=
 </div>
 </div>
 </div><div class="column fragment" data-fragment-index="4">
-<h3 id="感度特異度">3. 感度・特異度</h3>
+<h3 id="閾値毎の感度特異度">3. 閾値毎の感度・特異度</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1205,14 +1205,62 @@ F_{\beta} &amp;=
 <section id="リスク毎の評価" class="slide level2">
 <h2>リスク毎の評価</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  probability of Class1 predicted  truth
-1           0.003589243    Class2 Class2
-2           0.678621054    Class1 Class1
-3           0.110893522    Class2 Class2
-4           0.735161703    Class1 Class1
-5           0.016239960    Class2 Class2
-6           0.999275071    Class1 Class1</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">.threshold</th>
+<th style="text-align: right;">specificity</th>
+<th style="text-align: right;">sensitivity</th>
+<th style="text-align: right;">recall</th>
+<th style="text-align: right;">precision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-Inf</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.00e-07</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5160000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.50e-06</td>
+<td style="text-align: right;">0.0041322</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5170341</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.80e-06</td>
+<td style="text-align: right;">0.0082645</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5180723</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5.90e-06</td>
+<td style="text-align: right;">0.0123967</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5191147</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.22e-05</td>
+<td style="text-align: right;">0.0165289</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5201613</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="columns">
@@ -1276,7 +1324,7 @@ F_{\beta} &amp;=
 </table>
 <p><span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></p>
 <ul>
-<li>極端に偏ったデータでは混同行列関連は役に立たない</li>
+<li>Truthが偏ったデータでは混同行列関連は役に立たない</li>
 <li>特にAccuracyは一番ダメ
 <ul>
 <li>全部0の予測でも90%超えてしまう</li>
@@ -1285,7 +1333,7 @@ F_{\beta} &amp;=
 <ul>
 <li>PR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)</li>
 </ul></li>
-<li><strong>AUROCは数字で大体の印象が分かるのが強み</strong></li>
+<li>不均衡データではAUROCは差を見つけにくいが、<span style="color: red; font-size: 1.1em;"><strong>AUROCは数字で大体の印象が分かる</strong></span>のが強みだと思う</li>
 </ul>
 </section>
 <section id="結局どうすればいいの" class="slide level2">
@@ -1295,7 +1343,11 @@ F_{\beta} &amp;=
 <ul>
 <li>根拠がある場合
 <ul>
-<li>妥当な感度、特異度の値が分かっている</li>
+<li>例えばPEの許容される見逃し率は2%<span class="citation" data-cites="Creager2026-or">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Creager et al. 2026</a>)</span></li>
+<li>胸痛の評価ToolでのMACEの許容率は1%未満<span class="citation" data-cites="Than2013-zz">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Than et al. 2013</a>)</span></li>
+</ul></li>
+<li>妥当な感度、特異度の値が分かっている
+<ul>
 <li>カットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載</li>
 <li>AUROCはあった方が良い</li>
 </ul></li>
@@ -1330,11 +1382,11 @@ F_{\beta} &amp;=
 <li>分類数には要注意</li>
 </ul>
 </section>
-<section id="calibration-plotの作り方" class="slide level2 scrollable">
+<section id="calibration-plotの作り方" class="slide level2">
 <h2>Calibration Plotの作り方</h2>
 <div class="columns tibble-flow roc-flow">
 <div class="column">
-<h3 id="予測結果を予測確率に従って並べ直す">1. 予測結果を予測確率に従って並べ直す</h3>
+<h3 id="予測結果を-昇順で並べる-1">1. 予測結果を<br>昇順で並べる</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1433,7 +1485,7 @@ F_{\beta} &amp;=
 </div>
 </div>
 </div><div class="column fragment" data-fragment-index="2">
-<h3 id="class毎の予測確率と実際のイベント発症確率">2. Class毎の予測確率と実際のイベント発症確率</h3>
+<h3 id="class毎の予測確率の平均と-実際のイベント発症率を計算する">2. Class毎の予測確率の平均と<br>実際のイベント発症率を計算する</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1499,91 +1551,114 @@ F_{\beta} &amp;=
 </table>
 </div>
 </div>
-</div><div class="column fragment" data-fragment-index="3">
-<div class="flow-operation">
-<div class="flow-arrow">
-→
-</div>
-<div class="flow-caption">
-可視化
-</div>
-</div>
-</div><div class="column fragment" data-fragment-index="4">
-<h3 id="visualization">3. Visualization</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-<ul>
-<li>感度と1-特異度で点を結ぶとROC曲線</li>
-<li>PrecisionとRecallで点を結ぶとPR曲線</li>
-</ul>
-<!-- Todo: 変更 -->
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><ol type="1">
-<li>予測確率を並べる</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>予測確率で群分けする</li>
-</ol></li>
-<li><ol start="3" type="1">
-<li>各群の予測確率をまとめる</li>
-</ol></li>
-<li><ol start="4" type="1">
-<li>各群の実測イベント率をまとめる</li>
-</ol></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
 </div></div>
 </section>
-<section id="calibrationの細かい方法" class="slide level2">
-<h2>Calibrationの細かい方法</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
-<ul>
-<li>3と4を棒グラフや線グラフでまとめる
-<ul>
-<li>Calibration plot</li>
-</ul></li>
-<li>3’と4’でχ2検定を行う
-<ul>
-<li>Hosmer-Lemeshow検定</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:42%;">
+<section id="calibrationhsomerr-lemeshow検定" class="slide level2">
+<h2>Calibration～Hsomerr-Lemeshow検定</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   category mean_incidence    mean_prob
-1         1           0.00 0.0006263551
-2         2           0.02 0.0122139744
-3         3           0.14 0.0776815639
-4         4           0.26 0.2125326425
-5         5           0.38 0.4978345764
-6         6           0.56 0.7620908836
-7         7           0.86 0.9134009246
-8         8           0.98 0.9778960779
-9         9           0.96 0.9938732087
-10       10           1.00 0.9992471669</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">group</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">mean_prob_Class1</th>
+<th style="text-align: right;">truth_Class1</th>
+<th style="text-align: right;">truth_Class2</th>
+<th style="text-align: right;">chisq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.0006264</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.0313374</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.0122140</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0.2512359</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.0776816</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">2.7102181</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.2125326</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0.6731346</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.4978346</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">2.7770496</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.7620909</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">11.2627800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.9134009</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1.8025730</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.9778961</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0102392</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.9938732</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9.4214688</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.9992472</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0376700</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</div></div>
+<ul>
+<li>10群に分けて、各々で平均確率と実際のOutcomeを並べる</li>
+<li>各グループ毎にX^2検定を行って、すべての統計量を足し算</li>
+<li>P &gt; 0.05でモデルの当てはまりが良いとされる</li>
+<li>一つの数値としては良いが、Low risk/High risk群でどうBiasがあるかは分からない</li>
+</ul>
 </section>
 <section id="brier-score" class="slide level2">
 <h2>Brier Score</h2>
@@ -1603,59 +1678,54 @@ F_{\beta} &amp;=
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">Probability of Class1</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">predicted</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">truth</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">truth_num</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">True label</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">diff_squared</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">0.0035892</td>
-<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">0.004</td>
 <td style="text-align: center;">Class2</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">0.0000129</td>
+<td style="text-align: center;">(0-0.004)^2 = 0</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.6786211</td>
-<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">0.679</td>
 <td style="text-align: center;">Class1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1032844</td>
+<td style="text-align: center;">(1-0.679)^2 = 0.103</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.1108935</td>
-<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">0.111</td>
 <td style="text-align: center;">Class2</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">0.0122974</td>
+<td style="text-align: center;">(0-0.111)^2 = 0.012</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.7351617</td>
-<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">0.735</td>
 <td style="text-align: center;">Class1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.0701393</td>
+<td style="text-align: center;">(1-0.735)^2 = 0.07</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.0162400</td>
-<td style="text-align: center;">Class2</td>
+<td style="text-align: center;">0.016</td>
 <td style="text-align: center;">Class2</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">0.0002637</td>
+<td style="text-align: center;">(0-0.016)^2 = 0</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.9992751</td>
-<td style="text-align: center;">Class1</td>
+<td style="text-align: center;">0.999</td>
 <td style="text-align: center;">Class1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.0000005</td>
+<td style="text-align: center;">(1-0.999)^2 = 0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p><img data-src="images/slide20_image01.png" style="width:100.0%" alt="Brier scoreの式"></p>
+<ul>
+<li>Class1を予測したら1, Class2を予測したら0</li>
+</ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="images/slide20_image02.png" style="width:82.0%" alt="Brier scoreの図"></p>
 </div></div>
@@ -1667,27 +1737,18 @@ F_{\beta} &amp;=
 </section>
 <section id="モデルの比較" class="slide level2">
 <h2>モデルの比較</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
+<p><img data-src="images/slide22_image01.png" style="width:100.0%" alt="AUROCの限界"> <span class="citation" data-cites="Cook2007-fs">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
 <ul>
-<li>AU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている</li>
+<li>AUROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている</li>
 <li>よくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？
 <ul>
 <li>NRI / IDI</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide22_image01.png" style="width:100.0%" alt="AUROCの限界"></p>
-<p><span class="citation" data-cites="Cook2007-fs">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
-</div></div>
-</section>
-<section id="epidemiology-201425114-121" class="slide level2">
-<h2>Epidemiology 2014;25:114-121</h2>
-<p><img data-src="images/slide23_image01.png" style="width:74.0%" alt="Epidemiology 2014の図"></p>
 </section>
 <section id="nrinet-reclassification-index" class="slide level2">
 <h2>NRI（Net Reclassification Index）</h2>
-<!-- TODO: 元スライドの番号付き図解は画像中心に簡略化。 -->
+<p><img data-src="images/slide24_image01.png" style="width:88.0%" alt="NRIの図解"><span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></p>
 <ul>
 <li>古いモデルから新しいモデルでの分類によってどのように変化したかを示す</li>
 <li>実は複数の種類がある</li>
@@ -1697,13 +1758,13 @@ F_{\beta} &amp;=
 <li>Continuous NRI</li>
 </ul></li>
 </ul>
-<p><img data-src="images/slide24_image01.png" style="width:88.0%" alt="NRIの図解"></p>
-<div class="reference">
-<p>JAMA. 2017 Oct 10;318(14):1377-84.</p>
-</div>
 </section>
-<section id="cnri" class="slide level2">
-<h2>cNRI</h2>
+<section id="category-based-nri" class="slide level2">
+<h2>Category-based NRI</h2>
+<!-- Todo: ここから作る -->
+</section>
+<section id="continuous-nri" class="slide level2">
+<h2>continuous NRI</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -2065,6 +2126,12 @@ Alba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. <span>“Discr
 </div>
 <div id="ref-Cook2007-fs" class="csl-entry" role="listitem">
 Cook, Nancy R. 2007. <span>“Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.”</span> <em>Circulation</em> 115 (7): 928–35. <a href="https://doi.org/10.1161/CIRCULATIONAHA.106.672402">https://doi.org/10.1161/CIRCULATIONAHA.106.672402</a>.
+</div>
+<div id="ref-Creager2026-or" class="csl-entry" role="listitem">
+Creager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. <span>“2026 <span>AHA</span>/<span>ACC</span>/<span>ACCP</span>/<span>ACEP</span>/<span>CHEST</span>/<span>SCAI</span>/<span>SHM</span>/<span>SIR</span>/<span>SVM</span>/<span>SVN</span> Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.”</span> <em>Journal of the American College of Cardiology</em> 87 (13): 1626–710. <a href="https://doi.org/10.1016/j.jacc.2025.11.005">https://doi.org/10.1016/j.jacc.2025.11.005</a>.
+</div>
+<div id="ref-Than2013-zz" class="csl-entry" role="listitem">
+Than, Martin, Mel Herbert, Dylan Flaws, et al. 2013. <span>“What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.”</span> <em>International Journal of Cardiology</em> 166 (3): 752–54. <a href="https://doi.org/10.1016/j.ijcard.2012.09.171">https://doi.org/10.1016/j.ijcard.2012.09.171</a>.
 </div>
 </div>
 </section></section>

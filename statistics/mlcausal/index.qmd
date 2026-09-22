@@ -540,12 +540,24 @@ $$
 
 ## 代表的な機械学習
 
+<style>
+.reveal img.ml-model-figure {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center bottom;
+  margin: 0 auto;
+}
+</style>
+
 ::::: columns
 ::: {.column width="45%"}
-![Tree-based models](images/treebased_model.png)
+![Tree-based models](images/treebased_model.png){.ml-model-figure}
 
 - これはRandom forest
 - 小さい木のモデルを並列ではなく直列にするとXGBoostなど
+
 :::
 
 ::: {.column width="3%"}
@@ -553,7 +565,7 @@ $$
 :::
 
 ::: {.column width="52%"}
-![Neural network models](images/neuralnetwork.png)
+![Neural network models](images/neuralnetwork.png){.ml-model-figure}
 
 - 沢山のLogistic回帰を重ねたようなもの
 :::

@@ -368,7 +368,12 @@ ordinal_dat <- tibble::tribble(
     "Normal", 20, 
     "Bad", 30, 
     "Very bad", 7
-)
+) |> 
+    dplyr::mutate(
+        class = forcats::fct_relevel(
+            class, c("Very bad", "Bad", "Normal", "Good", "Very good")
+        )
+    )
 
 ggbarplot(
     data = ordinal_dat, 

@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n23.64031\n\n\n2\n21.42640\n\n\n3\n18.56646\n\n\n4\n22.28176\n\n\n5\n20.59339\n\n\n6\n19.59469\n\n\n7\n23.21476\n\n\n8\n17.16928\n\n\n9\n23.07659\n\n\n10\n18.88663\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n20.32771\n\n\n2\n20.64792\n\n\n3\n18.12348\n\n\n4\n22.17837\n\n\n5\n20.05369\n\n\n6\n23.02784\n\n\n7\n22.60557\n\n\n8\n23.01164\n\n\n9\n23.67152\n\n\n10\n18.77655\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n72.13029\n175.8176\n\n\n\n2\n71.96518\n189.9568\n\n\n\n3\n73.02304\n197.4708\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n79.00191\n181.7712\n\n\n\n2\n74.88985\n192.5949\n\n\n\n3\n73.79278\n187.8621\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -1726,14 +1726,14 @@
     "href": "statistics/index.html",
     "title": "統計学",
     "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です"
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
   },
   {
     "objectID": "statistics/index.html#スライド一覧",
     "href": "statistics/index.html#スライド一覧",
     "title": "統計学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です"
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
   },
   {
     "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
@@ -2139,7 +2139,7 @@
     "href": "statistics/mlcausal/index.html#代表的な機械学習",
     "title": "機械学習を用いた因果推論",
     "section": "代表的な機械学習",
-    "text": "代表的な機械学習\n\n\n\n\n\nTree-based models\n\n\n\nこれはRandom forest\n小さい木のモデルを並列ではなく直列にするとXGBoostなど\n\n\n\n\n\n\n\nNeural network models\n\n\n\n沢山のLogistic回帰を重ねたようなもの"
+    "text": "代表的な機械学習\n\n\n\n\n\n\nTree-based models\n\n\n\nこれはRandom forest\n小さい木のモデルを並列ではなく直列にするとXGBoostなど\n\n\n\n\n\n\n\nNeural network models\n\n\n\n沢山のLogistic回帰を重ねたようなもの"
   },
   {
     "objectID": "statistics/mlcausal/index.html#機械学習の強みと弱み",
@@ -2223,7 +2223,7 @@
     "href": "statistics/mlcausal/index.html#causal-forestの原理",
     "title": "機械学習を用いた因果推論",
     "section": "Causal forestの原理",
-    "text": "Causal forestの原理\n\nHonestyの原理\nHTE専用の機械学習\n基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)\n\n正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰\n\nOverfittingを防ぐために”Honest”を用いる\n\n分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める"
+    "text": "Causal forestの原理\n\nHonestyの原理\nHTE専用の機械学習\n基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)\n\n正確にはOrthogonalization → 治療効果の差が出るようなSpliting → 似たようなLeafで重みづけをして回帰\n\n\n\nOutcomeを予測しているregression forest()\n治療を予測しているPropensity scoreのregression forest()\n治療効果に最も差が出るように分割ルールを変更しているITEを測定する大本のregression forest\n3の重み付けを利用したlinear regression回帰 の4つのモデルを使っている\n\n\n3の時に、Overfittingを防ぐために”Honest”を用いる\n\n分割する部位はサンプルで決定、選択されていない残りのSampleで治療効果を決める"
   },
   {
     "objectID": "statistics/mlcausal/index.html#causal-forestの強み",
@@ -2846,7 +2846,7 @@
     "href": "statistics/model_performance_mi/index.html#リスク毎の評価",
     "title": "分類モデルの評価について",
     "section": "リスク毎の評価",
-    "text": "リスク毎の評価\n\n\n  probability of Class1 predicted  truth\n1           0.003589243    Class2 Class2\n2           0.678621054    Class1 Class1\n3           0.110893522    Class2 Class2\n4           0.735161703    Class1 Class1\n5           0.016239960    Class2 Class2\n6           0.999275071    Class1 Class1\n\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc binary         0.939\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 pr_auc  binary         0.946"
+    "text": "リスク毎の評価\n\n\n\n\n\n.threshold\nspecificity\nsensitivity\nrecall\nprecision\n\n\n\n\n-Inf\n0.0000000\n1\nNA\nNA\n\n\n2.00e-07\n0.0000000\n1\n1\n0.5160000\n\n\n4.50e-06\n0.0041322\n1\n1\n0.5170341\n\n\n5.80e-06\n0.0082645\n1\n1\n0.5180723\n\n\n5.90e-06\n0.0123967\n1\n1\n0.5191147\n\n\n1.22e-05\n0.0165289\n1\n1\n0.5201613\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc binary         0.939\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 pr_auc  binary         0.946"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#注意点",
@@ -2860,7 +2860,7 @@
     "href": "statistics/model_performance_mi/index.html#結局どうすればいいの",
     "title": "分類モデルの評価について",
     "section": "結局どうすればいいの？",
-    "text": "結局どうすればいいの？\n\n均衡がとれているデータの場合\n\n根拠がある場合\n\n妥当な感度、特異度の値が分かっている\nカットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載\nAUROCはあった方が良い\n\n根拠がない場合\n\nYouden indexやFβ scoreをカットオフとしてAccuracy等を評価\nAUROCは必須\n\n\n不均衡データの場合\n\nあまり決まっていない\nAUPRCはどこかに記載した方が無難、個人的には不均衡でもAUROCをメイン解析にしても良いと思う\nYouden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する"
+    "text": "結局どうすればいいの？\n\n均衡がとれているデータの場合\n\n根拠がある場合\n\n例えばPEの許容される見逃し率は2%(Creager et al. 2026)\n胸痛の評価ToolでのMACEの許容率は1%未満(Than et al. 2013)\n\n妥当な感度、特異度の値が分かっている\n\nカットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載\nAUROCはあった方が良い\n\n根拠がない場合\n\nYouden indexやFβ scoreをカットオフとしてAccuracy等を評価\nAUROCは必須\n\n\n不均衡データの場合\n\nあまり決まっていない\nAUPRCはどこかに記載した方が無難、個人的には不均衡でもAUROCをメイン解析にしても良いと思う\nYouden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#calibrationの評価について",
@@ -2874,7 +2874,7 @@
     "href": "statistics/model_performance_mi/index.html#calibration-plotの作り方",
     "title": "分類モデルの評価について",
     "section": "Calibration Plotの作り方",
-    "text": "Calibration Plotの作り方\n\n\n1. 予測結果を予測確率に従って並べ直す\n\n\n\n\n\n予測確率\n実測値\n予測確率カテゴリ\n\n\n\n\n2.00e-07\nClass2\n1\n\n\n4.50e-06\nClass2\n1\n\n\n5.80e-06\nClass2\n1\n\n\n5.90e-06\nClass2\n1\n\n\n1.22e-05\nClass2\n1\n\n\n1.40e-05\nClass2\n1\n\n\n\n\n\n\n\n\n予測確率\n実測値\n予測確率カテゴリ\n\n\n\n\n0.9999054\nClass1\n10\n\n\n0.9999103\nClass1\n10\n\n\n0.9999104\nClass1\n10\n\n\n0.9999209\nClass1\n10\n\n\n0.9999720\nClass1\n10\n\n\n0.9999965\nClass1\n10\n\n\n\n\n\n\n\n\n→\n\n\n同じClassでの平均発症予測確率と実際の発症率を比べる\n\n\n\n2. Class毎の予測確率と実際のイベント発症確率\n\n\n\n\n\nカテゴリ\n予測発症率の平均\n実際の発症率\n\n\n\n\n1\n0.00\n0.0006264\n\n\n2\n0.02\n0.0122140\n\n\n3\n0.14\n0.0776816\n\n\n4\n0.26\n0.2125326\n\n\n5\n0.38\n0.4978346\n\n\n6\n0.56\n0.7620909\n\n\n7\n0.86\n0.9134009\n\n\n8\n0.98\n0.9778961\n\n\n9\n0.96\n0.9938732\n\n\n10\n1.00\n0.9992472\n\n\n\n\n\n\n\n\n→\n\n\n可視化\n\n\n\n3. Visualization\n\n\n\n\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\nPrecisionとRecallで点を結ぶとPR曲線\n\n\n\n\n\n\n予測確率を並べる\n\n\n予測確率で群分けする\n\n\n各群の予測確率をまとめる\n\n\n各群の実測イベント率をまとめる"
+    "text": "Calibration Plotの作り方\n\n\n1. 予測結果を昇順で並べる\n\n\n\n\n\n予測確率\n実測値\n予測確率カテゴリ\n\n\n\n\n2.00e-07\nClass2\n1\n\n\n4.50e-06\nClass2\n1\n\n\n5.80e-06\nClass2\n1\n\n\n5.90e-06\nClass2\n1\n\n\n1.22e-05\nClass2\n1\n\n\n1.40e-05\nClass2\n1\n\n\n\n\n\n\n\n\n予測確率\n実測値\n予測確率カテゴリ\n\n\n\n\n0.9999054\nClass1\n10\n\n\n0.9999103\nClass1\n10\n\n\n0.9999104\nClass1\n10\n\n\n0.9999209\nClass1\n10\n\n\n0.9999720\nClass1\n10\n\n\n0.9999965\nClass1\n10\n\n\n\n\n\n\n\n\n→\n\n\n同じClassでの平均発症予測確率と実際の発症率を比べる\n\n\n\n2. Class毎の予測確率の平均と実際のイベント発症率を計算する\n\n\n\n\n\nカテゴリ\n予測発症率の平均\n実際の発症率\n\n\n\n\n1\n0.00\n0.0006264\n\n\n2\n0.02\n0.0122140\n\n\n3\n0.14\n0.0776816\n\n\n4\n0.26\n0.2125326\n\n\n5\n0.38\n0.4978346\n\n\n6\n0.56\n0.7620909\n\n\n7\n0.86\n0.9134009\n\n\n8\n0.98\n0.9778961\n\n\n9\n0.96\n0.9938732\n\n\n10\n1.00\n0.9992472"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#calibrationの細かい方法",
@@ -2888,7 +2888,7 @@
     "href": "statistics/model_performance_mi/index.html#brier-score",
     "title": "分類モデルの評価について",
     "section": "Brier Score",
-    "text": "Brier Score\n\\[\n\\text{Brier Score}\n=\n\\frac{1}{N}\n\\sum_{i=1}^{N}\n\\left(\\hat{p}_i - y_i\\right)^2\n\\]\n\n\n\n\n\n\n\nProbability of Class1\npredicted\ntruth\ntruth_num\ndiff_squared\n\n\n\n\n0.0035892\nClass2\nClass2\n0\n0.0000129\n\n\n0.6786211\nClass1\nClass1\n1\n0.1032844\n\n\n0.1108935\nClass2\nClass2\n0\n0.0122974\n\n\n0.7351617\nClass1\nClass1\n1\n0.0701393\n\n\n0.0162400\nClass2\nClass2\n0\n0.0002637\n\n\n0.9992751\nClass1\nClass1\n1\n0.0000005"
+    "text": "Brier Score\n\\[\n\\text{Brier Score}\n=\n\\frac{1}{N}\n\\sum_{i=1}^{N}\n\\left(\\hat{p}_i - y_i\\right)^2\n\\]\n\n\n\n\n\n\n\nProbability of Class1\npredicted\nTrue label\ndiff_squared\n\n\n\n\n0.004\nClass2\n0\n(0-0.004)^2 = 0\n\n\n0.679\nClass1\n1\n(1-0.679)^2 = 0.103\n\n\n0.111\nClass2\n0\n(0-0.111)^2 = 0.012\n\n\n0.735\nClass1\n1\n(1-0.735)^2 = 0.07\n\n\n0.016\nClass2\n0\n(0-0.016)^2 = 0\n\n\n0.999\nClass1\n1\n(1-0.999)^2 = 0\n\n\n\n\n\n\nClass1を予測したら1, Class2を予測したら0"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#agenda-3",
@@ -2902,7 +2902,7 @@
     "href": "statistics/model_performance_mi/index.html#モデルの比較",
     "title": "分類モデルの評価について",
     "section": "モデルの比較",
-    "text": "モデルの比較\n\n\n\nAU-ROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている\nよくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？\n\nNRI / IDI\n\n\n\n\n(Cook 2007)"
+    "text": "モデルの比較\n (Cook 2007)\n\nAUROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている\nよくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？\n\nNRI / IDI"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#epidemiology-201425114-121",
@@ -2916,7 +2916,7 @@
     "href": "statistics/model_performance_mi/index.html#nrinet-reclassification-index",
     "title": "分類モデルの評価について",
     "section": "NRI（Net Reclassification Index）",
-    "text": "NRI（Net Reclassification Index）\n\n\n古いモデルから新しいモデルでの分類によってどのように変化したかを示す\n実は複数の種類がある\n大きく分けて以下に分けられる\n\nCategory-based NRI\nContinuous NRI\n\n\n\n\nJAMA. 2017 Oct 10;318(14):1377-84."
+    "text": "NRI（Net Reclassification Index）\n(Alba et al. 2017)\n\n古いモデルから新しいモデルでの分類によってどのように変化したかを示す\n実は複数の種類がある\n大きく分けて以下に分けられる\n\nCategory-based NRI\nContinuous NRI"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#cnri",
@@ -3042,7 +3042,7 @@
     "href": "statistics/model_performance_mi/index.html#bland-altman分析",
     "title": "分類モデルの評価について",
     "section": "Bland-Altman分析",
-    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941.\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402."
+    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941.\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402.\n\n\nCreager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. “2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.” Journal of the American College of Cardiology 87 (13): 1626–710. https://doi.org/10.1016/j.jacc.2025.11.005.\n\n\nThan, Martin, Mel Herbert, Dylan Flaws, et al. 2013. “What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.” International Journal of Cardiology 166 (3): 752–54. https://doi.org/10.1016/j.ijcard.2012.09.171."
   },
   {
     "objectID": "statistics/visualization_mi/index.html#可視化事始め",
@@ -4358,14 +4358,14 @@
     "href": "statistics/model_performance_mi/index.html#roc指標ができるまで",
     "title": "分類モデルの評価について",
     "section": "ROC指標ができるまで",
-    "text": "ROC指標ができるまで\n\n\n1. 予測結果を予測確率で並べる\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n2.00e-07\nClass2\n\n\n4.50e-06\nClass2\n\n\n5.80e-06\nClass2\n\n\n5.90e-06\nClass2\n\n\n1.22e-05\nClass2\n\n\n1.40e-05\nClass2\n\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n2. 閾値ごとでの予測\n\n\n\n\n\n予測確率\n実際のアウトカム\n閾値:1.8e-07\n閾値2:4.5e-06\n\n\n\n\n1.79e-07\nClass2\nClass2\nClass2\n\n\n4.50e-06\nClass2\nClass1\nClass2\n\n\n5.81e-06\nClass2\nClass1\nClass1\n\n\n5.92e-06\nClass2\nClass1\nClass1\n\n\n1.22e-05\nClass2\nClass1\nClass1\n\n\n1.40e-05\nClass2\nClass1\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n3. 感度・特異度\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n-Inf\n0.0000000\n1\n\n\n2.00e-07\n0.0000000\n1\n\n\n4.50e-06\n0.0041322\n1\n\n\n5.80e-06\n0.0082645\n1\n\n\n5.90e-06\n0.0123967\n1\n\n\n1.22e-05\n0.0165289\n1\n\n\n1.40e-05\n0.0206612\n1\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\nPrecisionとRecallで点を結ぶとPR曲線"
+    "text": "ROC指標ができるまで\n\n\n1. 予測結果を昇順で並べる\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n2.00e-07\nClass2\n\n\n4.50e-06\nClass2\n\n\n5.80e-06\nClass2\n\n\n5.90e-06\nClass2\n\n\n1.22e-05\nClass2\n\n\n1.40e-05\nClass2\n\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n2. 閾値ごとでの予測\n\n\n\n\n\n予測確率\n実際のアウトカム\n閾値:2.0e-07\n閾値2:4.50e-06\n\n\n\n\n1.79e-07\nClass2\nClass2\nClass2\n\n\n4.50e-06\nClass2\nClass1\nClass2\n\n\n5.81e-06\nClass2\nClass1\nClass1\n\n\n5.92e-06\nClass2\nClass1\nClass1\n\n\n1.22e-05\nClass2\nClass1\nClass1\n\n\n1.40e-05\nClass2\nClass1\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n3. 閾値毎の感度・特異度\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n-Inf\n0.0000000\n1\n\n\n2.00e-07\n0.0000000\n1\n\n\n4.50e-06\n0.0041322\n1\n\n\n5.80e-06\n0.0082645\n1\n\n\n5.90e-06\n0.0123967\n1\n\n\n1.22e-05\n0.0165289\n1\n\n\n1.40e-05\n0.0206612\n1\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\nPrecisionとRecallで点を結ぶとPR曲線"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#confusion-matrix-baseの評価の注意点",
     "href": "statistics/model_performance_mi/index.html#confusion-matrix-baseの評価の注意点",
     "title": "分類モデルの評価について",
     "section": "Confusion matrix baseの評価の注意点",
-    "text": "Confusion matrix baseの評価の注意点\n\n\n\nAUROCの値\n意味\n\n\n\n\n0.5-0.6\npoor\n\n\n0.6-0.75\npossible helpful\n\n\n0.75-\nclearly useful\n\n\n\n(Alba et al. 2017)\n\n極端に偏ったデータでは混同行列関連は役に立たない\n特にAccuracyは一番ダメ\n\n全部0の予測でも90%超えてしまう\n\nPRAUC等が役に立つが、数字だけでの評価は困難\n\nPR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)\n\nAUROCは数字で大体の印象が分かるのが強み"
+    "text": "Confusion matrix baseの評価の注意点\n\n\n\nAUROCの値\n意味\n\n\n\n\n0.5-0.6\npoor\n\n\n0.6-0.75\npossible helpful\n\n\n0.75-\nclearly useful\n\n\n\n(Alba et al. 2017)\n\nTruthが偏ったデータでは混同行列関連は役に立たない\n特にAccuracyは一番ダメ\n\n全部0の予測でも90%超えてしまう\n\nPRAUC等が役に立つが、数字だけでの評価は困難\n\nPR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)\n\n不均衡データではAUROCは差を見つけにくいが、AUROCは数字で大体の印象が分かるのが強みだと思う"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#混同行列関連の指標について",
@@ -5051,7 +5051,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#ag-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "High Anion Gap 代謝性 アシドーシス",
-    "text": "High Anion Gap 代謝性 アシドーシス\n\nAG開大性代謝性アシドーシスの鑑別(Mehta et al. 2008)\n\n\n\n\n\n\nGOLDMARK\nKUSSMAUL\n\n\n\n\nGlycols(Ethylene and propylene)\nKetoacidosis\n\n\nOxoproline\nUremia\n\n\nL-lactate\nSalicylate poisoning\n\n\nD-lactate\nMethanol\n\n\nMethanol\nAldehyde\n\n\nAspirin\nLactic acidosis\n\n\nRenal failure\nEthylene glycol\n\n\nKetoacidosis\n\n\n\n\nAnion gap\n\\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\\]\n\n通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)\nAnion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質\n\n正確にはUnmeasured anion(測定されない分の陰イオン)\n\n未測定陰イオン - 未測定陽イオン = AG\nAG開大の真に意味する事は？\n\n← Acid–Base Map"
+    "text": "High Anion Gap 代謝性 アシドーシス\n\nAG開大性代謝性アシドーシスの鑑別(Mehta et al. 2008)\n\n\n\n\n\n\nGOLDMARK\nKUSSMAUL\n\n\n\n\nGlycols(Ethylene and propylene)\nKetoacidosis\n\n\nOxoproline\nUremia\n\n\nL-lactate\nSalicylate poisoning\n\n\nD-lactate\nMethanol\n\n\nMethanol\nAldehyde\n\n\nAspirin\nLactic acidosis\n\n\nRenal failure\nEthylene glycol\n\n\nKetoacidosis\n\n\n\n\nAnion gap\n\\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\\]\n\n通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)\nAnion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質\n\n正確にはUnmeasured anion(測定されない分の陰イオン)\n\n未測定陰イオン - 未測定陽イオン = AG\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#nag-acidosis",
@@ -5331,7 +5331,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#動脈血液ガス-vs.-静脈血液ガス",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "動脈血液ガス vs. 静脈血液ガス",
-    "text": "動脈血液ガス vs. 静脈血液ガス\n\n基本的には、pHとHCO3-は信じてよい\nO2は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
+    "text": "動脈血液ガス vs. 静脈血液ガス\n\n\n\n項目\n静脈血 − 動脈血\n\n\n\n\npH\n0.033 [0.027–0.039] 低い\n\n\npCO₂\n4.41 [2.55–6.27] mmHg 高い\n\n\nHCO₃⁻\n1.03 [0.56–1.50] mmHg 高い\n\n\n乳酸値\n2.3 [1.4–3.2] mg/dL 高い\n\n\n\nEur J Emerg Med. 2014 Apr;21(2):81–8\n\n基本的には、pHとHCO3-は信じてよい\nO2は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#酸塩基平衡の考え方",
@@ -5352,7 +5352,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#どうやって区別する",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "どうやって区別する？",
-    "text": "どうやって区別する？\n\n明らかな異常がある場合、「それがなかったら……」という風に考える ::: {style=“color: red; font-size: 1.2em;”}\n目の前の、酸塩基の異常を魔法で消し去ったらどうなる？ :::\n代表的なのが\n\n代償\nAlb補正\n補正HCO3-\n\nまずは、AG開大代謝性Acidosisで考えてみましょう"
+    "text": "どうやって区別する？\n\n明らかな異常がある場合、「それがなかったら……」という風に考える\n\n\n\n目の前の、酸塩基の異常を魔法で消し去ったらどうなる？\n\n\n\n代表的なのが\n\n代償\nAlb補正\n補正HCO3-\n\nまずは、AG開大代謝性Acidosisで考えてみましょう"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#agの真に意味すること",
@@ -5366,7 +5366,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#unmeasured-anionとは",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "Unmeasured anionとは",
-    "text": "Unmeasured anionとは\n\nAGの寄与因子(Marino 2026)\n\n\n\n\n\n\n測定されていない陰イオン\n測定されていない陽イオン\n\n\n\n\n\nAlb(15 mEq/L)\n有機酸(5 mEq/L)\nリン酸塩(2 mEq/L)\n硫酸塩(1 mEq/L)\n\n= 23 mEq/L\n\nCa(5 mEq/L)\nK(4.5 mEq/L)\nMg (1.5 mEq/L)\n\n= 11 mEq/L\n\n\n\nICU bookのTableを入れる\n\nUAのほとんどはAlbでできている\nそのため、低Alb血症の時に補正が必要"
+    "text": "Unmeasured anionとは\n\nAGの寄与因子(Marino 2026)\n\n\n\n\n\n\n測定されていない陰イオン\n測定されていない陽イオン\n\n\n\n\n\nAlb(15 mEq/L)\n有機酸(5 mEq/L)\nリン酸塩(2 mEq/L)\n硫酸塩(1 mEq/L)\n\n= 23 mEq/L\n\nCa(5 mEq/L)\nK(4.5 mEq/L)\nMg (1.5 mEq/L)\n\n= 11 mEq/L\n\n\n\n\nUAのほとんどはAlbでできている\nそのため、低Alb血症の時に補正が必要"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#低alb血症の補正の考え方",
@@ -5395,5 +5395,306 @@
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "ここまでのまとめ",
     "text": "ここまでのまとめ\n\nAGとはUA - UCであり、UAのメインの成分はAlb\n\n\n\nAGが開大していたら、絶対にAG開大性代謝性Acidosisはある\n\nAGの開大は常に探したほうが良い\n\n「もしもこの患者に低Albがなかったら？」→補正AG\n「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#酸塩基の代償範囲",
+    "href": "medicine/blood_gas_analysis_mi/index.html#酸塩基の代償範囲",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "酸塩基の代償範囲",
+    "text": "酸塩基の代償範囲\n\n\n\n\n\n\n\n\n\n\n1次性病態\n1次性変化\n代償性変化\n代償性変化の範囲\n代償の限界値\n\n\n\n\n代謝性アシドーシス\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\(\\Delta\\mathrm{pCO_2}=1.2\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\\(\\mathrm{pCO_2}=1.5\\times[\\mathrm{HCO_3^-}]+8\\pm2\\)\n\\(\\mathrm{pCO_2}:15 mmHg\\)\n\n\n代謝性アルカローシス\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\(\\Delta\\mathrm{pCO_2}=0.7\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\n\\(\\mathrm{pCO_2}:60mmHg\\)\n\n\n呼吸性アシドーシス\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.35\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:42mEq/L\\)\n\n\n呼吸性アルカローシス\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.40\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:12 mEq/L\\)"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#anion-gapが変化する要因",
+    "href": "medicine/blood_gas_analysis_mi/index.html#anion-gapが変化する要因",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Anion gapが変化する要因",
+    "text": "Anion gapが変化する要因\n\n\n\n\n\n\n\n\n\nAG上昇：原因\nAG上昇：例\nAG低下：原因\nAG低下：例\n\n\n\n\nUCの減少\n\n低γグロブリン血症\n低K、Ca、Mg血症\n\nUCの増加\n\n高γグロブリン血症(多発性骨髄腫、膠原病)\n高K、Ca、Mg血症\nリチウム中毒\n\n\n\nUAの増加\n\n乳酸アシドーシス\nケトアシドーシス\n尿毒症、高P血症\nHHS\n横紋筋融解症\nペニシリン系抗菌薬\nトルエン、サリチル酸\n\nUAの減少\n\n低アルブミン血症\n\n\n\n\n\nAG開大の真に意味する事は？"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#心不全パンデミック",
+    "href": "medicine/elder_hf_mi/index.html#心不全パンデミック",
+    "title": "高齢者の心不全管理",
+    "section": "心不全パンデミック",
+    "text": "心不全パンデミック"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢と心不全の関係",
+    "href": "medicine/elder_hf_mi/index.html#高齢と心不全の関係",
+    "title": "高齢者の心不全管理",
+    "section": "高齢と心不全の関係",
+    "text": "高齢と心不全の関係"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#phaseを意識した心不全管理",
+    "href": "medicine/elder_hf_mi/index.html#phaseを意識した心不全管理",
+    "title": "高齢者の心不全管理",
+    "section": "Phaseを意識した心不全管理",
+    "text": "Phaseを意識した心不全管理"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#hfref-1-gbmt",
+    "href": "medicine/elder_hf_mi/index.html#hfref-1-gbmt",
+    "title": "高齢者の心不全管理",
+    "section": "HFrEF-1 ~GBMT",
+    "text": "HFrEF-1 ~GBMT"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#hfref-2-beyond-gbmt",
+    "href": "medicine/elder_hf_mi/index.html#hfref-2-beyond-gbmt",
+    "title": "高齢者の心不全管理",
+    "section": "HFrEF-2 ~Beyond GBMT",
+    "text": "HFrEF-2 ~Beyond GBMT"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#hfpef-1-gbmt",
+    "href": "medicine/elder_hf_mi/index.html#hfpef-1-gbmt",
+    "title": "高齢者の心不全管理",
+    "section": "HFpEF-1 ~ GBMT",
+    "text": "HFpEF-1 ~ GBMT"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#mechanical-intervention",
+    "href": "medicine/elder_hf_mi/index.html#mechanical-intervention",
+    "title": "高齢者の心不全管理",
+    "section": "Mechanical intervention",
+    "text": "Mechanical intervention"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#超急性期nppvニトロ-nsteacs-dc",
+    "href": "medicine/elder_hf_mi/index.html#超急性期nppvニトロ-nsteacs-dc",
+    "title": "高齢者の心不全管理",
+    "section": "超急性期～NPPV+ニトロ, NSTEACS, DC",
+    "text": "超急性期～NPPV+ニトロ, NSTEACS, DC\nNPPVの代わりにHFNCは？"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#急性期心不全",
+    "href": "medicine/elder_hf_mi/index.html#急性期心不全",
+    "title": "高齢者の心不全管理",
+    "section": "急性期心不全",
+    "text": "急性期心不全\nNohria stevenson 利尿薬はしっかり使うべき？ Baはどうする？"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#慢性心不全の管理",
+    "href": "medicine/elder_hf_mi/index.html#慢性心不全の管理",
+    "title": "高齢者の心不全管理",
+    "section": "慢性心不全の管理",
+    "text": "慢性心不全の管理"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者心不全のgbmtの是非",
+    "href": "medicine/elder_hf_mi/index.html#高齢者心不全のgbmtの是非",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者心不全のGBMTの是非？",
+    "text": "高齢者心不全のGBMTの是非？\n\nGBMTはAKI, 高K血症, 徐脈, 低血圧などの有害事象がある\n実際にFrailな高齢者においては薬のAdverse eventsは多い印象がある"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#gbmtの高齢者のevidence",
+    "href": "medicine/elder_hf_mi/index.html#gbmtの高齢者のevidence",
+    "title": "高齢者の心不全管理",
+    "section": "GBMTの高齢者のEvidence",
+    "text": "GBMTの高齢者のEvidence"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者hfrefの管理",
+    "href": "medicine/elder_hf_mi/index.html#高齢者hfrefの管理",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者HFrEFの管理",
+    "text": "高齢者HFrEFの管理\nGBMTの効果 Underutilization"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者hfpefの管理",
+    "href": "medicine/elder_hf_mi/index.html#高齢者hfpefの管理",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者HFpEFの管理",
+    "text": "高齢者HFpEFの管理\nFinerenoneの効果？ GLP1-RA？"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#食事について",
+    "href": "medicine/elder_hf_mi/index.html#食事について",
+    "title": "高齢者の心不全管理",
+    "section": "食事について",
+    "text": "食事について\nmalnutritionの問題"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢心不全患者へのリハビリ",
+    "href": "medicine/elder_hf_mi/index.html#高齢心不全患者へのリハビリ",
+    "title": "高齢者の心不全管理",
+    "section": "高齢心不全患者へのリハビリ",
+    "text": "高齢心不全患者へのリハビリ"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#acpの確立",
+    "href": "medicine/elder_hf_mi/index.html#acpの確立",
+    "title": "高齢者の心不全管理",
+    "section": "ACPの確立",
+    "text": "ACPの確立"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#references",
+    "href": "medicine/elder_hf_mi/index.html#references",
+    "title": "高齢者の心不全管理",
+    "section": "References",
+    "text": "References\n\n\nSato, Naoki, Suguru Okami, Kanae Yoshikawa-Ryan, et al. 2026. “Pharmacological Treatments and Clinical Events in Newly Diagnosed Heart Failure Patients Stratified by Ejection Fraction in Japan.” Scientific Reports 16 (1). https://doi.org/10.1038/s41598-026-58004-0."
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の特徴",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦の特徴",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦の特徴",
+    "text": "妊婦の特徴\n\n若年女性が多い\n\nいわゆる高齢者がかかる疾患にはかからない\n\n妊娠により、種々の変化が起こる\n\n身体所見(特に腹痛で)が大きく変わる\nVital signや採血結果の正常値が変わる\n\n一方で、造影剤や放射線などの検査の限界が多い\nさらに使える薬剤も限定される → (少なくとも自分は)苦手意識がある"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠の時期による影響",
+    "text": "妊娠の時期による影響\n\n\n\n\n\n\n\n\n系統\n項目\n変化\n\n\n\n\n循環\n末梢血管抵抗\n↓\n\n\n\n血圧\n16〜24週 ↓，その後 →〜↗\n\n\n\n循環血液量\n↑ 40〜50%\n\n\n腎機能\n血清クレアチニン\n↓（正常平均 0.5 mg/dL, 上限 0.7 mg/dL）\n\n\n血液関連\nHct/Hgb\n↓（35%未満）/ ↓（～10.5 g/dL）\n\n\n\n白血球数\n↑（〜15,000，特に分娩時 ↑）\n\n\n\n血小板数\n↓\n\n\n\n凝固能\n↑\n\n\n呼吸機能\n\n生理的過換気\n\n\n糖代謝\n生理的インスリン抵抗性\n↑\n\n\n甲状腺機能\n妊娠初期：hCGの影響\n↗\n\n\n\n妊娠中期〜後期\n↘\n\n\n腸管機能\n\n↓\n\n\n\n妊娠による影響"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠による変化-vital-sign",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠による変化-vital-sign",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠による変化 ～ Vital sign",
+    "text": "妊娠による変化 ～ Vital sign"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠による変化-身体所見",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠による変化-身体所見",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠による変化 ～ 身体所見",
+    "text": "妊娠による変化 ～ 身体所見"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠による変化-採血結果",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠による変化-採血結果",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠による変化 ～ 採血結果",
+    "text": "妊娠による変化 ～ 採血結果"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#放射線検査による被曝量",
+    "href": "medicine/pregnancy_er_mi/index.html#放射線検査による被曝量",
+    "title": "妊娠患者をERで診たとき",
+    "section": "放射線検査による被曝量",
+    "text": "放射線検査による被曝量\n\n\n\n\n\n\n\n\n\n検査方法\n部位\n平均被ばく線量（mGy）\n最大被ばく線量（mGy）\n\n\n\n\n単純撮影\n頭部\n0.01以下\n0.01以下\n\n\n\n胸部\n0.01以下\n0.01以下\n\n\n\n腹部\n1.4\n4.2\n\n\n\n腰椎\n1.7\n10\n\n\n\n骨盤部\n1.1\n4\n\n\nCT検査\n頭部\n0.005以下\n0.005以下\n\n\n\n胸部\n0.06\n0.96\n\n\n\n腹部\n8\n49\n\n\n\n腰椎\n2.4\n8.6\n\n\n\n骨盤部\n25\n79"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響放射線",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響放射線",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠の時期による影響～放射線",
+    "text": "妊娠の時期による影響～放射線"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への検査ｘ線",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査ｘ線",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦への検査～Ｘ線",
+    "text": "妊婦への検査～Ｘ線"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への検査ct検査",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査ct検査",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦への検査～CT検査",
+    "text": "妊婦への検査～CT検査\nどうやってもダメ？"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への検査mri検査",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査mri検査",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦への検査～MRI検査",
+    "text": "妊婦への検査～MRI検査"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響薬剤の影響",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響薬剤の影響",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠の時期による影響～薬剤の影響",
+    "text": "妊娠の時期による影響～薬剤の影響\n妊娠初期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nカルバマゼピン\nテグレトール，他\n催奇形性\n\n\nシクロホスファミド\nエンドキサン\n催奇形性\n\n\nダナゾール\nボンゾール，他\n催奇形性：女児外性器の男性化\n\n\nチアマゾール\nメルカゾール\n催奇形性：MMI奇形症候群\n\n\nバルプロ酸ナトリウム\nデパケン、セレニカR，他\n催奇形性：二分脊椎、胎児バルプロ酸症候群\n\n\nビタミンA（大量）\nチョコラA，他\n催奇形性\n\n\nフェニトイン\nアレビアチン、ヒダントール，他\n催奇形性：胎児ヒダントイン症候群\n\n\nフェノバルビタール\nフェノバール，他\n催奇形性：口唇・口蓋裂，他\n\n\nミコフェノール酸モフェチル\nセルセプト\n催奇形性：外耳・顔面奇形、口唇・口蓋裂、遠位四肢・心臓・食道・腎臓の奇形，他／流産\n\n\nミソプロストール\nサイトテック\nメビウス症候群、四肢切断、子宮収縮、流産\n\n\nメトトレキサート\nリウマトレックス，他\n催奇形性：メトトレキサート胎芽病\n\n\nワルファリンカリウム（クマリン系抗凝血薬）\nワーファリン，他\n催奇形性：ワルファリン胎芽病、点状軟骨異栄養症、中枢神経異常\n\n\n\n妊娠中・後期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nアミノグリコシド系抗結核薬\nカナマイシン注、ストレプトマイシン注\n胎児毒性：非可逆的第VIII脳神経障害、先天性聴力障害\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）\nカプトプリル、レニベース，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nアンジオテンシンII受容体拮抗薬（ARB）\nニューロタン、バルサルタン，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nテトラサイクリン系抗菌薬\nアクロマイシン、レダマイシン、ミノマイシン，他\n胎児毒性：歯牙の着色、エナメル質形成不全\n\n\nミソプロストール\nサイトテック\n子宮収縮、流早産\n\n\n\n妊娠後期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nアミノグリコシド系抗結核薬\nカナマイシン注、ストレプトマイシン注\n胎児毒性：非可逆的第VIII脳神経障害、先天性聴力障害\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）\nカプトプリル、レニベース，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nアンジオテンシンII受容体拮抗薬（ARB）\nニューロタン、バルサルタン，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nテトラサイクリン系抗菌薬\nアクロマイシン、レダマイシン、ミノマイシン，他\n胎児毒性：歯牙の着色、エナメル質形成不全\n\n\nミソプロストール\nサイトテック\n子宮収縮、流早産\n\n\n非ステロイド系抗炎症薬（NSAIDs）（インドメタシン、ジクロフェナクナトリウム，他）\nインダシン、ボルタレン，他\n胎児毒性：動脈管収縮、胎児循環遷延、羊水過少、新生児壊死性腸炎\n\n\n\nTimingでダメな薬"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#どの薬が使える",
+    "href": "medicine/pregnancy_er_mi/index.html#どの薬が使える",
+    "title": "妊娠患者をERで診たとき",
+    "section": "どの薬が使える？",
+    "text": "どの薬が使える？\n\n\n\n\n\n\n\n\n分類\n薬剤系統\n妊娠中の使用に関して\n\n\n\n\n主な抗菌薬\nペニシリン系/セフェム系\n個々の薬剤についての情報は限られているが、妊娠初期の使用により先天異常発生リスクは上昇しないと考えられる。\n\n\n\nアミノグリコシド系\nゲンタマイシンやストレプトマイシンでは妊娠初期の使用により先天異常発生リスクは大きく上昇しないと報告されている。妊娠期の使用により、聴覚障害の影響が報告されている。\n\n\n\nマクロライド系\nアジスロマイシン、エリスロマイシン、クラリスロマイシンでは妊娠初期の使用により先天異常の発生リスクは大きく上昇しないと報告されている。エリスロマイシンの新生児への直接投与により幽門狭窄の報告があるが、妊娠中の使用による影響についてはいくつかの報告で否定されている。\n\n\n\nテトラサイクリン系\nテトラサイクリンでは、妊娠初期の使用により先天異常発生リスクは大きく上昇しないと報告されている。歯牙の石灰化が始まる時期（妊娠4〜5カ月以降）の使用では歯牙の着色が起こる可能性がある。\n\n\n\nニューキノロン系\nキノロン系薬剤の妊娠初期の使用により先天異常発生リスクは大きく上昇しないと報告されている。\n\n\n主な解熱鎮痛薬\nアセトアミノフェン\n妊娠初期の使用により先天異常発生リスクは大きく上昇しないと報告されている。\n\n\n\nNSAIDs\n妊娠初期の使用により先天異常発生リスクは大きく上昇しないと報告されている。妊娠後期の使用により胎児の動脈管の早期閉鎖が起こり、出生後に遷延性肺高血圧症や動脈管開存症が起こる可能性がある。\n\n\n\n抗菌薬と解熱剤"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#無症候性膿尿細菌尿",
+    "href": "medicine/pregnancy_er_mi/index.html#無症候性膿尿細菌尿",
+    "title": "妊娠患者をERで診たとき",
+    "section": "無症候性膿尿/細菌尿",
+    "text": "無症候性膿尿/細菌尿"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#腹痛の部位",
+    "href": "medicine/pregnancy_er_mi/index.html#腹痛の部位",
+    "title": "妊娠患者をERで診たとき",
+    "section": "腹痛の部位",
+    "text": "腹痛の部位"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#急性腹症の患者",
+    "href": "medicine/pregnancy_er_mi/index.html#急性腹症の患者",
+    "title": "妊娠患者をERで診たとき",
+    "section": "急性腹症の患者",
+    "text": "急性腹症の患者"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#気管支喘息の患者",
+    "href": "medicine/pregnancy_er_mi/index.html#気管支喘息の患者",
+    "title": "妊娠患者をERで診たとき",
+    "section": "気管支喘息の患者",
+    "text": "気管支喘息の患者"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#発熱で検査をしたら膿尿があった患者",
+    "href": "medicine/pregnancy_er_mi/index.html#発熱で検査をしたら膿尿があった患者",
+    "title": "妊娠患者をERで診たとき",
+    "section": "発熱で検査をしたら膿尿があった患者",
+    "text": "発熱で検査をしたら膿尿があった患者"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#thank-you-for-your-listening",
+    "href": "medicine/pregnancy_er_mi/index.html#thank-you-for-your-listening",
+    "title": "妊娠患者をERで診たとき",
+    "section": "Thank you for your listening!!",
+    "text": "Thank you for your listening!!"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#reference",
+    "href": "medicine/pregnancy_er_mi/index.html#reference",
+    "title": "妊娠患者をERで診たとき",
+    "section": "Reference",
+    "text": "Reference"
+  },
+  {
+    "objectID": "statistics/DAG_variable_selection_mi/index.html#dagの基本",
+    "href": "statistics/DAG_variable_selection_mi/index.html#dagの基本",
+    "title": "モデルに入れる因子の選択",
+    "section": "DAGの基本",
+    "text": "DAGの基本\n\n\n交絡因子は介入とOutcome両方に関連する上流の因子(介入 &lt;- 交絡 -&gt; アウトカム)\n中間因子は介入とOutcomeの間にある因子(介入 -&gt; 中間 -&gt; アウトカム)\nColiderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -&gt; Colider &lt;- アウトカム)\n基本は交絡因子のみ補正が必要\n\n中間因子を補正すると治療効果が薄まる\nColiderを補正してしまうと逆にバイアスが出てくる\n\n分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール[@Iwanami-2016-sy]"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#calibrationhsomerr-lemeshow検定",
+    "href": "statistics/model_performance_mi/index.html#calibrationhsomerr-lemeshow検定",
+    "title": "分類モデルの評価について",
+    "section": "Calibration～Hsomerr-Lemeshow検定",
+    "text": "Calibration～Hsomerr-Lemeshow検定\n\n\n\n\n\ngroup\nn\nmean_prob_Class1\ntruth_Class1\ntruth_Class2\nchisq\n\n\n\n\n1\n50\n0.0006264\n0\n50\n0.0313374\n\n\n2\n50\n0.0122140\n1\n49\n0.2512359\n\n\n3\n50\n0.0776816\n7\n43\n2.7102181\n\n\n4\n50\n0.2125326\n13\n37\n0.6731346\n\n\n5\n50\n0.4978346\n19\n31\n2.7770496\n\n\n6\n50\n0.7620909\n28\n22\n11.2627800\n\n\n7\n50\n0.9134009\n43\n7\n1.8025730\n\n\n8\n50\n0.9778961\n49\n1\n0.0102392\n\n\n9\n50\n0.9938732\n48\n2\n9.4214688\n\n\n10\n50\n0.9992472\n50\n0\n0.0376700\n\n\n\n\n\n\n10群に分けて、各々で平均確率と実際のOutcomeを並べる\n各グループ毎にX^2検定を行って、すべての統計量を足し算\nP &gt; 0.05でモデルの当てはまりが良いとされる\n一つの数値としては良いが、Low risk/High risk群でどうBiasがあるかは分からない"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#category-based-nri",
+    "href": "statistics/model_performance_mi/index.html#category-based-nri",
+    "title": "分類モデルの評価について",
+    "section": "Category-based NRI",
+    "text": "Category-based NRI"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#continuous-nri",
+    "href": "statistics/model_performance_mi/index.html#continuous-nri",
+    "title": "分類モデルの評価について",
+    "section": "continuous NRI",
+    "text": "continuous NRI\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい\n\nPr(higher | event) - Pr(lower | event)\n+ Pr(lower | nonevent) - Pr(higher | nonevent)\n\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす\n\n\n\n\n\n(15 - 3) / 18 + (46 - 12) / 58 = 1.25"
   }
 ]

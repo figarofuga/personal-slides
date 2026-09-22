@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja"><head>
+<html lang="en"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -9,9 +9,9 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
-  <meta name="author" content="新美 望">
-  <meta name="dcterms.date" content="2026-08-23">
-  <title>My personal slides – モデルに入れる因子の選択</title>
+  <meta name="author" content="Nozomi Niimi">
+  <meta name="dcterms.date" content="2026-09-14">
+  <title>My personal slides – 高齢者の心不全管理</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,8 +32,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -49,6 +68,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -127,508 +147,152 @@
   </style>
 </head>
 <body class="quarto-light">
+<script src="mathjax-config.js"></script>
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">モデルに入れる因子の選択</h1>
-  <p class="subtitle">DAGの基礎</p>
+  <h1 class="title">高齢者の心不全管理</h1>
+  <p class="subtitle">現代のGeneralistの必須Skill</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-新美 望 
+Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
+<div class="quarto-title-author-email">
+<a href="mailto:figarofuga@gmail.com">figarofuga@gmail.com</a>
 </div>
+        <p class="quarto-title-affiliation">
+            東京医療センター総合内科
+          </p>
+    </div>
 </div>
 
-  <p class="date">2026-08-23</p>
+  <p class="date">2026-09-14</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/高齢者と心不全の関係" id="/toc-高齢者と心不全の関係">高齢者と心不全の関係</a></li>
+<li><a href="#/現代の心不全管理-at-glance" id="/toc-現代の心不全管理-at-glance">現代の心不全管理 at glance</a></li>
+<li><a href="#/高齢者における心不全の各フェーズの動き方" id="/toc-高齢者における心不全の各フェーズの動き方">高齢者における心不全の各フェーズの動き方</a></li>
+</ul>
+</nav>
 </section>
 <section class="slide level2">
 
 <style>
-.reveal .reference {
-  color: #666;
-  font-size: 0.55em;
-  margin-top: 0.6em;
-  text-align: right;
-}
-.reveal .small {
-  font-size: 0.76em;
+.reveal .big-message {
+  font-size: 1.35em;
+  text-align: center;
 }
 .reveal .columns {
   gap: 1rem;
 }
 .reveal img {
-  max-height: 64vh;
-  object-fit: contain;
-}
-blockquote {
-  font-size: 0.82em;
+  max-height: 68vh;
 }
 </style>
 </section>
-<section id="可視化事始め" class="slide level2">
-<h2>可視化事始め</h2>
-<p>そのフィギュア、必要ですか？<br>
-2021/3/5 ＠Keio University<br>
-新美 望</p>
-</section>
-<section id="take-home-message" class="slide level2">
-<h2>Take Home Message</h2>
+<section>
+<section id="高齢者と心不全の関係" class="title-slide slide level1 center">
+<h1>高齢者と心不全の関係</h1>
+<p><img data-src="images/hf_age_trend.png"> <span class="citation" data-cites="Kanaoka2024-yc">(<a href="#/references" role="doc-biblioref" onclick=""><strong>Kanaoka2024-yc?</strong></a>)</span></p>
 <ul>
-<li>まず、最初に何を見せたいのかを3つから考える
+<li>加齢は心不全発症の大きなRisk</li>
+<li>現代の日本は高齢社会であり心不全患者は著名に増えている
 <ul>
-<li>分布</li>
-<li>関係</li>
-<li>差・比率</li>
+<li>心不全Pandemic<span class="citation" data-cites="Shimokawa2015-zw">(<a href="#/references" role="doc-biblioref" onclick=""><strong>Shimokawa2015-zw?</strong></a>)</span></li>
 </ul></li>
-<li>差・比率を見せる時は極力長さで表す
-<ul>
-<li>面積は使わない</li>
-</ul></li>
-<li>最もシンプルな図を実現する
-<ul>
-<li>データ・インク比率が良いもの</li>
-</ul></li>
-<li>Nや分布にも配慮する
-<ul>
-<li>連続値に棒グラフは避ける</li>
-</ul></li>
-<li>色覚多様性にも配慮した色を使う</li>
+<li>日本のDPCデータでは2016-2024年の新規心不全患者の平均年齢81±12歳<span class="citation" data-cites="Sato2026-wu">(<a href="#/references" role="doc-biblioref" onclick="">Sato et al. 2026</a>)</span></li>
 </ul>
 </section>
-<section id="what-is-this" class="slide level2">
-<h2>What Is This？</h2>
+<section id="心不全パンデミック" class="slide level2">
+<h2>心不全パンデミック</h2>
+</section>
+<section id="高齢と心不全の関係" class="slide level2">
+<h2>高齢と心不全の関係</h2>
+</section></section>
+<section>
+<section id="現代の心不全管理-at-glance" class="title-slide slide level1 center">
+<h1>現代の心不全管理 at glance</h1>
 
-<img data-src="images/slide03_image01.png" style="width:48.0%" alt="What is this" class="r-stretch"></section>
-<section id="画像例" class="slide level2">
-<h2>画像例</h2>
-<!-- TODO: 元スライドは画像のみ。配置は簡略化。 -->
-<div class="columns">
-<div class="column" style="width:58%;">
-<p><img data-src="images/slide04_image01.png" style="width:78.0%" alt="画像例1"></p>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide04_image02.png" style="width:90.0%" alt="画像例2"></p>
-</div></div>
 </section>
-<section id="visualization" class="slide level2">
-<h2>Visualization</h2>
-<ul>
-<li>Tableと異なり、Figureにすることで情報量は格段に上がる</li>
-<li>一方で、適切なFigureを描かないと見にくいばかりか、misleadingにもなりうる</li>
-<li>内科の問診のように、基礎中の基礎だけど重要極まりない工程</li>
-<li>Visualizationって誰かに習ったっけ？</li>
-</ul>
+<section id="phaseを意識した心不全管理" class="slide level2">
+<h2>Phaseを意識した心不全管理</h2>
 </section>
-<section id="今日の内容" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
+<section id="hfref-1-gbmt" class="slide level2">
+<h2>HFrEF-1 ~GBMT</h2>
 </section>
-<section id="今日の内容-1" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
+<section id="hfref-2-beyond-gbmt" class="slide level2">
+<h2>HFrEF-2 ~Beyond GBMT</h2>
 </section>
-<section id="dagの基本" class="slide level2">
-<h2>DAGの基本</h2>
+<section id="hfpef-1-gbmt" class="slide level2">
+<h2>HFpEF-1 ~ GBMT</h2>
+</section>
+<section id="mechanical-intervention" class="slide level2">
+<h2>Mechanical intervention</h2>
+</section></section>
+<section>
+<section id="高齢者における心不全の各フェーズの動き方" class="title-slide slide level1 center">
+<h1>高齢者における心不全の各フェーズの動き方</h1>
 
-<img data-src="index_files/figure-revealjs/DAG-1.png" width="960" class="r-stretch"><ul>
-<li>交絡因子は介入とOutcome両方に関連する上流の因子(介入 &lt;- 交絡 -&gt; アウトカム)</li>
-<li>中間因子は介入とOutcomeの間にある因子(介入 -&gt; 中間 -&gt; アウトカム)</li>
-<li>Coliderは介入とOutcomeの両方に関連するOutcomeより下流の因子(介入 -&gt; Colider &lt;- アウトカム)</li>
-<li>基本は交絡因子のみ補正が必要
+</section>
+<section id="超急性期nppvニトロ-nsteacs-dc" class="slide level2">
+<h2>超急性期～NPPV+ニトロ, NSTEACS, DC</h2>
+<p>NPPVの代わりにHFNCは？</p>
+</section>
+<section id="急性期心不全" class="slide level2">
+<h2>急性期心不全</h2>
+<p>Nohria stevenson 利尿薬はしっかり使うべき？ Baはどうする？</p>
+</section>
+<section id="慢性心不全の管理" class="slide level2">
+<h2>慢性心不全の管理</h2>
+</section>
+<section id="高齢者心不全のgbmtの是非" class="slide level2">
+<h2>高齢者心不全のGBMTの是非？</h2>
 <ul>
-<li>中間因子を補正すると治療効果が薄まる</li>
-<li>Coliderを補正してしまうと逆にバイアスが出てくる</li>
-</ul></li>
-<li>分かりやすいのは「その因子に絵の具を落としたら、介入とアウトカムの両方に色がつくなら補正する」というルール<span class="citation" data-cites="Iwanami-2016-sy">[@Iwanami-2016-sy]</span></li>
+<li>GBMTはAKI, 高K血症, 徐脈, 低血圧などの有害事象がある</li>
+<li>実際にFrailな高齢者においては薬のAdverse eventsは多い印象がある</li>
 </ul>
 </section>
-<section id="よいfigureの条件" class="slide level2">
-<h2>よいFigureの条件</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
-<blockquote>
-<p>優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。</p>
-</blockquote>
-<div class="reference">
-<p>Tufte, 1983, p.&nbsp;51</p>
+<section id="gbmtの高齢者のevidence" class="slide level2">
+<h2>GBMTの高齢者のEvidence</h2>
+<!-- Tableで書く-->
+</section>
+<section id="高齢者hfrefの管理" class="slide level2">
+<h2>高齢者HFrEFの管理</h2>
+<p>GBMTの効果 Underutilization</p>
+</section>
+<section id="高齢者hfpefの管理" class="slide level2">
+<h2>高齢者HFpEFの管理</h2>
+<p>Finerenoneの効果？ GLP1-RA？</p>
+</section>
+<section id="食事について" class="slide level2">
+<h2>食事について</h2>
+<p>malnutritionの問題</p>
+</section>
+<section id="高齢心不全患者へのリハビリ" class="slide level2">
+<h2>高齢心不全患者へのリハビリ</h2>
+</section>
+<section id="acpの確立" class="slide level2">
+<h2>ACPの確立</h2>
+</section>
+<section id="references" class="slide level2 scrollable smaller">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Sato2026-wu" class="csl-entry" role="listitem">
+Sato, Naoki, Suguru Okami, Kanae Yoshikawa-Ryan, et al. 2026. <span>“Pharmacological Treatments and Clinical Events in Newly Diagnosed Heart Failure Patients Stratified by Ejection Fraction in Japan.”</span> <em>Scientific Reports</em> 16 (1). <a href="https://doi.org/10.1038/s41598-026-58004-0">https://doi.org/10.1038/s41598-026-58004-0</a>.
 </div>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide08_image01.jpg" style="width:60.0%" alt="Edward Tufte"></p>
-<p>Edward Tufte</p>
-</div></div>
-</section>
-<section id="非常に良いfigureの見本" class="slide level2">
-<h2>非常に良いFigureの見本</h2>
-<!-- TODO: 元スライドの見本図と小画像の配置を簡略化。 -->
-<div class="columns">
-<div class="column" style="width:72%;">
-<p><img data-src="images/slide09_image01.jpg" style="width:100.0%" alt="非常に良いFigureの見本"></p>
-</div><div class="column" style="width:28%;">
-<ul>
-<li>？？？</li>
-</ul>
-<p><img data-src="images/slide09_image02.png" style="width:90.0%" alt="補助画像"></p>
-</div></div>
-</section>
-<section id="よいfigureの条件-1" class="slide level2">
-<h2>よいFigureの条件</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
-<blockquote>
-<p>優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。</p>
-</blockquote>
-<ul>
-<li>データ・インク比を最大化する</li>
-</ul>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide10_image01.jpg" style="width:60.0%" alt="Edward Tufte"></p>
-<p>Edward Tufte</p>
-</div></div>
-</section>
-<section id="今日の内容-2" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
-</section>
-<section id="インクデータ比の法則" class="slide level2">
-<h2>インク・データ比の法則</h2>
-<div class="columns">
-<div class="column" style="width:52%;">
-<ul>
-<li>そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件</li>
-<li>簡単にいうと「シンプル イズ ベスト」</li>
-</ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide12_image01.png" style="width:66.0%" alt="インク・データ比の例1"></p>
-<p><img data-src="images/slide12_image02.png" style="width:92.0%" alt="インク・データ比の例2"></p>
-</div></div>
-</section>
-<section id="今日の内容-3" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-<li>Take home message</li>
-</ul>
-</section>
-<section id="見せたいものって" class="slide level2">
-<h2>見せたいものって？</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<ul>
-<li>見せたいものは大体この3種類に大別
-<ul>
-<li>関係性</li>
-<li>分布</li>
-<li>比率・差</li>
-</ul></li>
-<li>この6種類が基本
-<ul>
-<li>散布図</li>
-<li>ヒストグラム</li>
-<li>折れ線グラフ</li>
-<li>箱ひげ図</li>
-<li>ドットチャート</li>
-<li>棒グラフ</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide14_image01.jpg" style="width:100.0%" alt="見せたいものと図の種類"></p>
-</div></div>
-</section>
-<section id="人間の得意苦手分野" class="slide level2">
-<h2>人間の得意・苦手分野</h2>
-
-<img data-src="images/slide15_image01.jpg" style="width:72.0%" alt="人間の得意・苦手分野" class="r-stretch"></section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:42%;">
-<ul>
-<li>青が感染症</li>
-<li>赤が戦場での負傷</li>
-<li>黒がその他</li>
-<li>どちらが分かりやすいですか？</li>
-</ul>
-</div><div class="column" style="width:58%;">
-<p><img data-src="images/slide16_image01.jpg" style="width:80.0%" alt="Example 元図"></p>
-<p><img data-src="images/slide16_image02.png" style="width:48.0%" alt="Example 図1"> <img data-src="images/slide16_image03.png" style="width:48.0%" alt="Example 図2"></p>
-</div></div>
-</section>
-<section id="空白スライド" class="slide level2">
-<h2>空白スライド</h2>
-<!-- TODO: 元スライド17は空白。必要なら削除する。 -->
-</section>
-<section id="今日の内容-4" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
-</section>
-<section id="nへの意識" class="slide level2">
-<h2>Nへの意識</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li>連続値の平均や中央値を比較する時には分布も非常に重要</li>
-<li>分布を見る時にはバイオリンプロットもよい</li>
-<li>サンプルサイズの大きさで、使う図表を分けるべき</li>
-<li>一つの目安として <code>n &lt; 30</code> ではドットチャートを併用する</li>
-</ul>
-</div><div class="column" style="width:52%;">
-<p><img data-src="images/slide19_image01.png" style="width:88.0%" alt="バイオリンプロット"></p>
-<p><img data-src="images/slide19_image02.png" style="width:88.0%" alt="ドットチャート"></p>
-</div></div>
-</section>
-<section id="whats-this" class="slide level2">
-<h2>What’s This？</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<ul>
-<li>STEMI患者のPCI後のCKの値の平均</li>
-<li>STEMI患者のPCI後のCKの値の中央値</li>
-<li>???</li>
-</ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide20_image01.png" style="width:48.0%" alt="CK平均の図"> <img data-src="images/slide20_image02.png" style="width:48.0%" alt="CK中央値の図"></p>
-</div></div>
-</section>
-<section id="whats-this-1" class="slide level2">
-<h2>What’s This？</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<ul>
-<li>STEMI患者のPCI後のCKの値の平均</li>
-<li>STEMI患者のPCI後のCKの値の中央値</li>
-<li>???</li>
-<li>???</li>
-</ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide21_image01.png" style="width:48.0%" alt="CK平均の図2"> <img data-src="images/slide21_image02.png" style="width:48.0%" alt="CK中央値の図2"></p>
-</div></div>
-</section>
-<section id="thats-it" class="slide level2">
-<h2>That’s It!!</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<ul>
-<li>STEMI患者のPCI後のCKの値の平均</li>
-<li>STEMI患者のPCI後のCKの値の中央値</li>
-<li>!!!!</li>
-</ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide22_image01.png" style="width:48.0%" alt="CK平均の図3"> <img data-src="images/slide22_image02.png" style="width:48.0%" alt="CK中央値の図3"></p>
-</div></div>
-</section>
-<section id="nへの意識-1" class="slide level2">
-<h2>Nへの意識</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li>何かの比較の時には必ず分布も考慮する</li>
-<li>箱ひげ図やバイオリンプロットは非常に見やすい</li>
-<li>一方で、Nが小さいときにはその意味も変わる</li>
-<li>Nが少ないときはそのデータも入れた方が良い</li>
-</ul>
-</div><div class="column" style="width:52%;">
-<p><img data-src="images/slide23_image01.png" style="width:78.0%" alt="Nへの意識"></p>
-</div></div>
-</section>
-<section id="nへの意識と見やすさの両立" class="slide level2">
-<h2>Nへの意識と見やすさの両立</h2>
-<ul>
-<li>ドットチャートに要約（平均・中央値）を追加する</li>
-<li>ドットを出来るだけ薄くする</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/slide24_image01.png" style="width:86.0%" alt="ドットチャートと要約1"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/slide24_image02.png" style="width:86.0%" alt="ドットチャートと要約2"></p>
-</div></div>
-</section>
-<section id="まとめ" class="slide level2">
-<h2>まとめ</h2>
-
-<img data-src="images/slide25_image01.png" style="width:78.0%" alt="まとめ図" class="r-stretch"></section>
-<section id="今日の内容-5" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
-</section>
-<section id="次元プロットって" class="slide level2">
-<h2>3次元プロットって？</h2>
-<div class="columns">
-<div class="column" style="width:42%;">
-<ul>
-<li>基本的にはmisleading</li>
-<li>使わなくて済むなら絶対に使わない</li>
-<li>一番ダメなのが3次元円グラフ</li>
-<li>青と紫どちらが大きいですか？</li>
-</ul>
-</div><div class="column" style="width:58%;">
-<p><img data-src="images/slide27_image01.jpg" style="width:48.0%" alt="3次元円グラフ1"> <img data-src="images/slide27_image02.jpg" style="width:48.0%" alt="3次元円グラフ2"></p>
-</div></div>
-</section>
-<section id="どちらが見やすい" class="slide level2">
-<h2>どちらが見やすい？</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<p><img data-src="images/slide28_image01.png" style="width:86.0%" alt="3次元プロット例"></p>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide28_image02.png" style="width:100.0%" alt="2次元プロット例"></p>
-</div></div>
-</section>
-<section id="今日の内容-6" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：ゲシュタルトと色使いについて</li>
-</ul>
-</section>
-<section id="ゲシュタルトとは" class="slide level2">
-<h2>ゲシュタルトとは</h2>
-<div class="columns">
-<div class="column" style="width:34%;">
-<ul>
-<li>近接の法則</li>
-<li>類同の法則</li>
-<li>囲みの法則</li>
-<li>閉合の法則</li>
-<li>連続の法則</li>
-<li>接合の法則</li>
-</ul>
-</div><div class="column" style="width:66%;">
-<p><img data-src="images/slide30_image01.jpg" style="width:100.0%" alt="ゲシュタルトの法則"></p>
-</div></div>
-</section>
-<section id="推奨はしないけど" class="slide level2">
-<h2>推奨はしないけど</h2>
-
-<img data-src="images/slide31_image01.png" style="width:82.0%" alt="推奨はしないけど" class="r-stretch"></section>
-<section id="色使いについて" class="slide level2">
-<h2>色使いについて</h2>
-<div class="columns">
-<div class="column" style="width:42%;">
-<ul>
-<li>色覚異常は思っている以上にコモン</li>
-<li>カラーユニバーサルデザイン</li>
-</ul>
-</div><div class="column" style="width:58%;">
-<p><img data-src="images/slide32_image01.png" style="width:48.0%" alt="色使いについて1"></p>
-<p><img data-src="images/slide32_image02.png" style="width:90.0%" alt="色使いについて2"></p>
-</div></div>
-</section>
-<section id="カラーユニバーサルデザイン" class="slide level2">
-<h2>カラーユニバーサルデザイン</h2>
-<ul>
-<li>具体的な色彩の選び方は以下を参照</li>
-<li><a href="https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf" class="uri">https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf</a></li>
-</ul>
-
-<img data-src="images/slide33_image01.png" style="width:72.0%" alt="カラーユニバーサルデザイン" class="r-stretch"></section>
-<section id="aha-figure-guidelines" class="slide level2">
-<h2>AHA Figure Guidelines</h2>
-<p><a href="https://www.ahajournals.org/figure-guidelines" class="uri">https://www.ahajournals.org/figure-guidelines</a></p>
-
-<img data-src="images/slide34_image01.png" style="width:76.0%" alt="AHA figure guidelines" class="r-stretch"></section>
-<section id="take-home-message-1" class="slide level2">
-<h2>Take Home Message</h2>
-<ul>
-<li>まず、最初に何を見せたいのかを3つから考える
-<ul>
-<li>分布</li>
-<li>関係</li>
-<li>差・比率</li>
-</ul></li>
-<li>差・比率を見せる時は極力長さで表す
-<ul>
-<li>面積は使わない</li>
-</ul></li>
-<li>最もシンプルな図を実現する
-<ul>
-<li>データ・インク比率が良いもの</li>
-</ul></li>
-<li>Nや分布にも配慮する
-<ul>
-<li>連続値に棒グラフは避ける</li>
-</ul></li>
-<li>色覚多様性にも配慮した色を使う</li>
-</ul>
-</section>
-<section id="reference" class="slide level2">
-<h2>Reference</h2>
-<ul>
-<li>Reveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency.
-<ul>
-<li>Circulation. 2019;140(18):1506-1518.</li>
-</ul></li>
-<li>Graphics and statistics for cardiology: Comparing categorical and continuous variables.
-<ul>
-<li>Heart. 2016;102(5):349-355.</li>
-</ul></li>
-<li>永田ゆかり（2020）『データ視覚化のデザイン』SBクリエイティブ株式会社</li>
-<li>キーラン・ヒーリー（2021）『実践Data Scienceシリーズ データ分析のためのデータ可視化入門』KS情報科学専門書</li>
-<li><a href="https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html" class="uri">https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html</a></li>
-<li><a href="https://socviz.co/lookatdata.html" class="uri">https://socviz.co/lookatdata.html</a></li>
-<li><a href="https://seaborn.pydata.org/tutorial/function_overview.html" class="uri">https://seaborn.pydata.org/tutorial/function_overview.html</a></li>
-</ul>
-</section>
-<section id="ご静聴ありがとうございました" class="slide level2">
-<h2>ご静聴ありがとうございました</h2>
-</section>
-<section id="補足画像" class="slide level2">
-<h2>補足画像</h2>
-<!-- TODO: 元スライド38は画像のみ。必要ならReferenceまたはAppendixへ移動する。 -->
+</div>
 
 
-
-<img data-src="images/slide38_image01.png" style="width:76.0%" alt="補足画像" class="r-stretch"></section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a></p>
 </div>
 </div></div>
 
@@ -660,6 +324,7 @@ blockquote {
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': true,
  
@@ -786,7 +451,7 @@ blockquote {
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -814,7 +479,7 @@ blockquote {
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -900,12 +565,12 @@ blockquote {
           // flash "checked"
           button.classList.add('code-copy-button-checked');
           var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "コピーしました");
+          button.setAttribute("title", "Copied!");
           let tooltip;
           if (window.bootstrap) {
             button.setAttribute("data-bs-toggle", "tooltip");
             button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "コピーしました");
+            button.setAttribute("data-bs-title", "Copied!");
             tooltip = new bootstrap.Tooltip(button, 
               { trigger: "manual", 
                 customClass: "code-copy-button-tooltip",

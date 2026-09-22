@@ -115,8 +115,8 @@ git push
 
 The rendered site is written to `docs/` for GitHub Pages.
 
-TODO: complete mlcausal, sepsis hydration.
-TODO: PROのordinalの図のFactorを直す
+TODO: HF elderly, blood gas, pregnancy in ER, sepsis hydration.
+TODO: repair model performance
 
 ## Plans
 
