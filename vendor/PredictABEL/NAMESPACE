@@ -1,0 +1,18 @@
+# Default NAMESPACE created by R
+# Remove the previous line if you edit this file
+
+# Export all names
+exportPattern(".")
+
+# Import all packages listed as Imports or Depends
+import(
+  Hmisc,
+  ROCR,
+  PBSmodelling,
+grDevices,
+stats,
+utils
+)
+    importFrom("graphics", "abline", "barplot", "boxplot", "legend",
+               "lines", "mtext", "par", "title")
+importFrom("methods", "is")
