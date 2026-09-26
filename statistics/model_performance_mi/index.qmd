@@ -1293,7 +1293,7 @@ modeldata::two_class_example |>
 
 ## Category-based NRI
 
-<!-- Todo: ここから作る -->
+![](images/categoricalNRI.drawio.svg)
 
 ## continuous NRI
 

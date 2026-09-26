@@ -105,7 +105,13 @@ knitr:
 | **呼吸性アルカローシス** | $\mathrm{pCO_2}\downarrow$     | $[\mathrm{HCO_3^-}]\downarrow$ | 慢性期<br>$\Delta[\mathrm{HCO_3^-}]=0.40\times\Delta\mathrm{pCO_2}\pm3$                                            | $[\mathrm{HCO_3^-}]:12 mEq/L$ |
 +--------------------------+--------------------------------+--------------------------------+--------------------------------------------------------------------------------------------------------------------+-------------------------------+
 
-## 酸塩基平衡のマインドマップ {#acid-base-map}
+- 代償反応が十分であれば、高度の酸塩基平衡異常は起こらない
+  - pH << 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併
+  - pH >> 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併
+- とは言え、Septic shockとか著名なDKAなら単独でも起こりうる
+
+## 酸塩基平衡のマインドマップ(厳密には少し違うけど) {#acid-base-map}
+
 
 ```{mermaid}
 %%| fig-width: 10
@@ -114,17 +120,60 @@ knitr:
 flowchart TD
     ABG["Acid–Base Disorders"]
 
-    ABG --> MA["代謝性アシドーシス"]
-    ABG --> MK["代謝性アルカローシス"]
-    ABG --> RA["呼吸性アシドーシス"]
-    ABG --> RK["呼吸性アルカローシス"]
-    
-    MA --> Albcorrect["Alb補正"]
-    Albcorrect --> NAG["Anion Gap正常代謝性アシドーシス"]
-    Albcorrect --> AG["Anion Gap開大性代謝性アシドーシス"]
+    ABG --> AlbCorrectAG["Alb補正の上でのAG計算"]
+
+    AlbCorrectAG --> AlbCorrectAGPosi["AG \> 12"]
+    AlbCorrectAG --> AlbCorrectAGNega["AG \< 12"]
+
+    AlbCorrectAGPosi --> AG["Anion Gap開大性代謝性アシドーシス"]
     AG --> HCO3["補正HCO3-を計算する"]
-    HCO3 --> osmgap["(必要があれば)浸透圧ギャップで毒物の検索"]
-    NAG --> urineag["尿中AGを計算"]
+    HCO3 --> HCO3Acid["補正HCO3- \< 22"]
+    HCO3 --> HCO3Alka["補正HCO3- \> 26"]
+
+    HCO3Acid --> AGNAG["AG開大性代謝性アシドーシス+AG非開大性代謝性アシドーシス"]
+    HCO3Alka --> AGAlka["AG開大性代謝性アシドーシス+代謝性アルカローシス"]
+
+
+    AlbCorrectAGNega --> PrimaryEval["HCO3-/PaCO2でPrimaryの変化を評価"]
+    PrimaryEval --> NAG["Anion Gap非開大性代謝性アシドーシス"]
+    PrimaryEval --> MK["代謝性アルカローシス"]
+    PrimaryEval --> RA["呼吸性アシドーシス"]
+    PrimaryEval --> RK["呼吸性アルカローシス"]
+    
+
+    click AG "#/ag-acidosis"
+    click NAG "#/nag-acidosis"
+    click MK "#/metabolic-alkalosis"
+    click RA "#/respiratory-acidosis"
+    click RK "#/respiratory-alkalosis"
+```
+
+
+```{mermaid}
+%%| fig-width: 10
+%%| fig-height: 6
+
+flowchart TD
+
+    MA["代謝性アシドーシス"]
+    
+    MA --> AlbCorrectAG["Alb補正の上でのAG計算"]
+    AlbCorrectAG --> NAG["Anion Gap非開大性代謝性アシドーシス"]
+    AlbCorrectAG --> AG["Anion Gap開大性代謝性アシドーシス"]
+    %% AG --> HCO3["補正HCO3-を計算する"]
+    AG --> DKAetc["高度腎不全 <br> DKA <br> 乳酸Acidosis"]
+
+
+    AG --> OsmGap["浸透圧ギャップを計算"]
+    OsmGap --> OsmGapPosi["Osm Gap> 10-15 <br> 毒性アルコール中毒\(メタノール・エチレングリコールなど\)"]
+
+    NAG --> UrineAG["尿中AGを計算"]
+    UrineAG --> UrineAGPosi["尿中AG >0"]
+    UrineAG --> UrineAGNega["尿中AG <<0"]
+    UrineAGNega --> UrineAGNegadisease["下痢 <br> 回腸導管 <br> 胆膵管ドレナージ"]
+    UrineAGPosi --> UrineOsmGap["尿中浸透圧ギャップ"]
+    UrineOsmGap --> UrineOsmGapPosi["尿浸透圧ギャップ\>100 <br> トルエン中毒 <br> DKA回復期"]
+    UrineOsmGap --> UrineOsmGapNega["尿浸透圧ギャップ\<\<100 <br> 保存期CKD <br> 尿細管Acidosis"]
 
     click AG "#/ag-acidosis"
     click NAG "#/nag-acidosis"
@@ -308,8 +357,6 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
 
 - AGとはUA - UCであり、UAのメインの成分はAlb
 
-<!-- -->
-
 - AGが開大していたら、**絶対に**AG開大性代謝性Acidosisはある
 
   - AGの開大は常に探したほうが良い
@@ -324,7 +371,7 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
   - 具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)
 - 腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける
 
-$$Urinari AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$$
+$尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 
 - 腎臓が**原因でなければ**、尿中のNH4+が増加→Urine AGは負の値となる
 
@@ -344,22 +391,28 @@ $$Urinari AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$$
 
 ## 代謝性 アルカローシス {#metabolic-alkalosis}
 
-### Think about urine chloride
-
+- 正直あまり問題にならない事が多い
 - Chloride responsive
 - Chloride resistant
 
 [← Acid–Base Map](#/acid-base-map)
 
+## 代謝性アルカローシスの原因
+
+- 大体脱水
+
+
+
 ------------------------------------------------------------------------
 
 ## 呼吸性 アシドーシス {#respiratory-acidosis}
 
-### Hypoventilation
 
-- CNS depression
-- Neuromuscular disease
-- Airway / pulmonary disease
+- いわゆる肺胞低換気 = II型呼吸不全
+- 物理的に肺胞に空気が入らない状態
+- 解剖学的に上から考えるのが良い
+  - 中枢神経()
+
 
 [← Acid–Base Map](#/acid-base-map)
 

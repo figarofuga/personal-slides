@@ -801,6 +801,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/r-inum-1.0_5-r45hc72bb7e_3.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-irdisplay-1.1-r45hd8ed1ab_4.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-iterators-1.0.14-r45hc72bb7e_4.conda
+      - conda: https://prefix.dev/conda-forge/noarch/r-janitor-2.2.1-r45hc72bb7e_1.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-jose-2.0.0-r45hc72bb7e_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-jquerylib-0.1.4-r45hc72bb7e_4.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-juicyjuice-0.1.0-r45hc72bb7e_3.conda
@@ -899,6 +900,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/r-shinystan-2.6.0-r45hc72bb7e_4.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-shinythemes-1.2.0-r45hc72bb7e_4.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-skimr-2.2.2-r45hc72bb7e_0.conda
+      - conda: https://prefix.dev/conda-forge/noarch/r-snakecase-0.11.1-r45hc72bb7e_2.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-snowflakeauth-0.2.2-r45hc72bb7e_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-splitfngr-0.1.2-r45hc72bb7e_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/r-squarem-2026.1-r45hc72bb7e_0.conda
@@ -15663,6 +15665,28 @@ packages:
   run_exports: {}
   size: 350171
   timestamp: 1757459846270
+- conda: https://prefix.dev/conda-forge/noarch/r-janitor-2.2.1-r45hc72bb7e_1.conda
+  sha256: 8692c49201c11e18ec7fc9fdaaddaeb4d2f4620c5fbfcf9590824a04b66bc92b
+  md5: b3e0c8b03d918892932d808ced90d115
+  depends:
+  - r-base >=4.5,<4.6.0a0
+  - r-dplyr >=1.0.0
+  - r-hms
+  - r-lifecycle
+  - r-lubridate
+  - r-magrittr
+  - r-purrr
+  - r-rlang
+  - r-snakecase >=0.9.2
+  - r-stringi
+  - r-stringr
+  - r-tidyr >=0.7.0
+  - r-tidyselect >=1.0.0
+  license: MIT
+  license_family: MIT
+  run_exports: {}
+  size: 281016
+  timestamp: 1757580285286
 - conda: https://prefix.dev/conda-forge/noarch/r-jose-2.0.0-r45hc72bb7e_0.conda
   sha256: abb2cd923ed271df8774e696f2e455f8c641532cc984fd770b87852a0017d7ab
   md5: 7113381f500ebcc8a33b61101817d120
@@ -17215,6 +17239,18 @@ packages:
   run_exports: {}
   size: 1012794
   timestamp: 1768067199373
+- conda: https://prefix.dev/conda-forge/noarch/r-snakecase-0.11.1-r45hc72bb7e_2.conda
+  sha256: 8fcc72e4d8887a8db74784accf60829379f9e0a9c5b6ec70fdf6cc77aacd0bc6
+  md5: 69eb0ec86cce0a7706f56e582e353ad6
+  depends:
+  - r-base >=4.5,<4.6.0a0
+  - r-stringi
+  - r-stringr
+  license: GPL-3.0-only
+  license_family: GPL3
+  run_exports: {}
+  size: 179282
+  timestamp: 1757557935518
 - conda: https://prefix.dev/conda-forge/noarch/r-snowflakeauth-0.2.2-r45hc72bb7e_0.conda
   sha256: c2beeab7a52ee1f6c55b96df5caca3b36afce1887025b1d5d94b1aae34a819a3
   md5: 1d38994c8bfe421d621d9b3705c37b58

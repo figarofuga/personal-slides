@@ -51,6 +51,8 @@ pixi add パッケージ名
 direnv reload
 ```
 
+## To add R packages that is not on CRAN
+
 If R packages were not registered in conda-forge, then run this script
 
 ```bash
@@ -78,7 +80,7 @@ Afterward, run these script to save vendor/ to github
 
 ```bash
 git add pixi.toml pixi.lock vendor/
-git commit -m "remove Vendor packages for Pixi"
+git commit -m "Add PredictABEL package"
 
 ```
 
@@ -90,11 +92,15 @@ pixi install
 direnv reload
 ```
 
+## To remove unnescessary build cache
+
 To remove the local build cache manually, run:
 
 ```bash
 pixi clean --build
 ```
+
+## After making slides
 
 Preview or render the site with:
 
@@ -108,7 +114,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "upload mlcausal"
+git commit -m "update blood gas analysis"
 git push
 
 ```
