@@ -1295,6 +1295,13 @@ modeldata::two_class_example |>
 
 ![](images/categoricalNRI.drawio.svg)
 
+- イベントがあった患者とイベントがなかった患者で分けて、各々の群を新旧のモデルで分類する
+  - 分け方は何群でも良いが3群が多い
+- イベントあり群では旧モデルよりもRiskを高く分類したらPositive、Riskを低く分類したらNegative
+- イベントなし群では逆
+- 差し引きして、最終的なモデルの良さを数値で表す
+- 実臨床に沿っているのが利点だが、一方で分類の仕方が恣意的になる
+
 ## continuous NRI
 
 :::: columns

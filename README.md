@@ -114,7 +114,7 @@ pixi run render medicine/antithrombotic_etc/index.qmd
 
 git add .
 # git commit -m "Update rendered slides"
-git commit -m "update blood gas analysis"
+git commit -m "update elder hf analysis"
 git push
 
 ```

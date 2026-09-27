@@ -5415,14 +5415,14 @@
     "href": "medicine/elder_hf_mi/index.html#心不全パンデミック",
     "title": "高齢者の心不全管理",
     "section": "心不全パンデミック",
-    "text": "心不全パンデミック"
+    "text": "心不全パンデミック\n\n心不全の原因について確認"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#高齢と心不全の関係",
     "href": "medicine/elder_hf_mi/index.html#高齢と心不全の関係",
     "title": "高齢者の心不全管理",
     "section": "高齢と心不全の関係",
-    "text": "高齢と心不全の関係"
+    "text": "高齢と心不全の関係\n\nFrailは心不全全体で40-80%がある\n\nHFpEFだと90%、HFrEFだと30-60% (Talha et al. 2023)"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#phaseを意識した心不全管理",
@@ -5436,7 +5436,7 @@
     "href": "medicine/elder_hf_mi/index.html#hfref-1-gbmt",
     "title": "高齢者の心不全管理",
     "section": "HFrEF-1 ~GBMT",
-    "text": "HFrEF-1 ~GBMT"
+    "text": "HFrEF-1 ~GBMT\nMatsumoto S, McMurray JJV, Nasu T, et al. Relevant adverse events and drug discontinuation of Sacubitril/valsartan in a real-world Japanese cohort: REVIEW-HF registry. J Cardiol. Published online November 22, 2023. doi:10.1016/j.jjcc.2023.11.005"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#hfref-2-beyond-gbmt",
@@ -5492,7 +5492,7 @@
     "href": "medicine/elder_hf_mi/index.html#gbmtの高齢者のevidence",
     "title": "高齢者の心不全管理",
     "section": "GBMTの高齢者のEvidence",
-    "text": "GBMTの高齢者のEvidence"
+    "text": "GBMTの高齢者のEvidence\n\n\n\n\n\n\n\n\n\n\n薬剤クラス\n薬剤名\n主要試験\n若年者 vs 高齢者における有効性\n\n\n\n\nACE阻害薬（ACEi）\nEnalapril\nSOLVDCONSENSUS\n全死亡 / 心不全入院（HHF）&lt;60歳：HR 0.71（95% CI 0.59–0.86）≥60歳：HR 0.79（95% CI 0.66–0.95）\n\n\nβ遮断薬（BB）\nCarvedilolMetoprololBisoprolol\nUS CarvedilolCOPERNICUSMERIT-HFCIBIS\n心血管死 / 心不全入院（HHF）Q1（50歳）：HR 0.66（95% CI 0.56–0.77）Q2（60歳）：HR 0.78（95% CI 0.68–0.89）Q3（68歳）：HR 0.72（95% CI 0.62–0.82）Q4（75歳）：HR 0.89（95% CI 0.78–1.02）\n\n\nアンジオテンシン受容体–ネプリライシン阻害薬（ARNI）\nSacubitril/valsartan\nPARADIGM-HF\n心血管死 / 心不全入院（HHF）&lt;55歳：HR 0.78（95% CI 0.64–0.96）≥75歳：HR 0.86（95% CI 0.72–1.04）\n\n\nミネラルコルチコイド受容体拮抗薬（MRA）\nSpironolactoneEplerenoneFinerenone\nRALES, TOPCATEMPHASIS-HFFINEARTS\n心血管死 / 心不全入院（HHF）RALES / EMPHASIS-HF&lt;75歳：HR 0.66（95% CI 0.58–0.74）≥75歳：HR 0.66（95% CI 0.53–0.82）TOPCAT / FINEARTS&lt;75歳：HR 0.84（95% CI 0.75–0.95）≥75歳：HR 0.89（95% CI 0.78–1.02）\n\n\nSGLT2阻害薬（SGLT2i）\nDapagliflozinEmpagliflozin\nDAPA-HFDELIVEREMPEROR-ReducedEMPEROR-Preserved\n心血管死 / 心不全入院（HHF）&lt;65歳：HR 0.79（95% CI 0.70–0.87）≥65歳：HR 0.77（95% CI 0.71–0.83）\n\n\n\n\n(Boer et al. 2026)"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#高齢者hfrefの管理",
@@ -5534,7 +5534,7 @@
     "href": "medicine/elder_hf_mi/index.html#references",
     "title": "高齢者の心不全管理",
     "section": "References",
-    "text": "References\n\n\nSato, Naoki, Suguru Okami, Kanae Yoshikawa-Ryan, et al. 2026. “Pharmacological Treatments and Clinical Events in Newly Diagnosed Heart Failure Patients Stratified by Ejection Fraction in Japan.” Scientific Reports 16 (1). https://doi.org/10.1038/s41598-026-58004-0."
+    "text": "References\n\n\nBoer, Rudolf A de, Mahmoud Abdellatif, Johann Bauersachs, and Veronique L Roger. 2026. “Heart Failure in the Elderly: Epidemiology, Mechanisms, and Management.” European Heart Journal 47 (24): 3052–64. https://doi.org/10.1093/eurheartj/ehag110.\n\n\nSato, Naoki, Suguru Okami, Kanae Yoshikawa-Ryan, et al. 2026. “Pharmacological Treatments and Clinical Events in Newly Diagnosed Heart Failure Patients Stratified by Ejection Fraction in Japan.” Scientific Reports 16 (1). https://doi.org/10.1038/s41598-026-58004-0.\n\n\nTalha, Khawaja M, Ambarish Pandey, Marat Fudim, Javed Butler, Stefan D Anker, and Muhammad Shahzeb Khan. 2023. “Frailty and Heart Failure: State-of-the-Art Review.” Journal of Cachexia, Sarcopenia and Muscle 14 (5): 1959–72. https://doi.org/10.1002/jcsm.13306."
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の特徴",
@@ -5696,5 +5696,12 @@
     "title": "分類モデルの評価について",
     "section": "continuous NRI",
     "text": "continuous NRI\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい\n\nPr(higher | event) - Pr(lower | event)\n+ Pr(lower | nonevent) - Pr(higher | nonevent)\n\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす\n\n\n\n\n\n(15 - 3) / 18 + (46 - 12) / 58 = 1.25"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#薬の安全性",
+    "href": "medicine/elder_hf_mi/index.html#薬の安全性",
+    "title": "高齢者の心不全管理",
+    "section": "薬の安全性",
+    "text": "薬の安全性\n\n\n\n\n\n\n\n\n\n薬剤クラス\n薬剤名\n主要試験\n若年者 vs 高齢者における安全性\n\n\n\n\nACE阻害薬（ACEi）\nEnalapril\nSOLVDCONSENSUS\n年齢別の安全性は報告されていない\n\n\nβ遮断薬（BB）\nCarvedilolMetoprololBisoprolol\nUS CarvedilolCOPERNICUSMERIT-HFCIBIS\n試験治療の中止率Q1（50歳）：Placebo 14.5%、BB 12.1%Q2（60歳）：Placebo 14.6%、BB 12.7%Q3（68歳）：Placebo 16.1%、BB 14.6%Q4（75歳）：Placebo 15.6%、BB 14.4%\n\n\nアンジオテンシン受容体–ネプリライシン阻害薬（ARNI）ACE阻害薬\nSacubitril/valsartanEnalapril\nPARADIGM-HF\n有害事象による試験薬中止&lt;55歳：Sacubitril/valsartan 14例（1.7%）、Enalapril 16例（2.0%）≥75歳：Sacubitril/valsartan 22例（2.8%）、Enalapril 35例（4.5%）\n\n\nミネラルコルチコイド受容体拮抗薬（MRA）\nSpironolactoneEplerenoneFinerenone\nRALES, TOPCATEMPHASIS-HFFINEARTS\n年齢別の安全性は報告されていない\n\n\nSGLT2阻害薬（SGLT2i）\nDapagliflozinEmpagliflozin\nDAPA-HFDELIVEREMPEROR-ReducedEMPEROR-Preserved\n年齢別の安全性は報告されていない\n\n\n\n(Boer et al. 2026)"
   }
 ]
