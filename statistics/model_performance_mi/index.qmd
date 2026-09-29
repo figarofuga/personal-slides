@@ -1304,12 +1304,66 @@ modeldata::two_class_example |>
 
 ## continuous NRI
 
-:::: columns
-::: {.column width="60%"}
+```{r}
+library(PredictABEL)
+library(survival)
+library(dplyr)
+
+cnri_dat <- dplyr::mutate(
+  pbc, 
+  bin_status = dplyr::if_else(status == 0, 0, 1)
+) |> 
+  tidyr::drop_na()
+
+model_simple <- glm(bin_status ~ trt + age + sex + ascites + hepato + spiders + edema, data = cnri_dat, family = binomial())
+
+model_complex <- glm(bin_status ~ trt + age + sex + ascites + hepato + spiders + edema + bili + chol + albumin + copper + alk.phos + ast + trig + platelet + protime, data = cnri_dat, family = binomial())
+
+cnri_dat2 <- cnri_dat |> 
+  dplyr::mutate(
+    simple_pred = predict(model_simple, type = "response"), 
+    complex_pred = predict(model_complex, type = "response")
+  ) |> 
+  dplyr::select(bin_status, simple_pred, complex_pred)
+
+
+knitr::kable(head(cnri_dat2))
+
+PredictABEL::reclassification(data = cnri_dat2, cOutcome = 1, predrisk1 = cnri_dat2$simple_pred, predrisk2 = cnri_dat2$complex_pred, cutoff = c(0, 0.3, 0.6, 1))
+
+```
+
+```{r}
+
+cnri_dat2 |> 
+  dplyr::summarise(
+    n = n(),
+    # `new > old` = sum(complex_pred > simple_pred), 
+    `Prob(new > old)` = mean(complex_pred > simple_pred),
+    # `old >= new` = sum(complex_pred <= simple_pred),
+    `Prob(old >= new)` = mean(complex_pred <= simple_pred), 
+    .by = bin_status
+  ) |> 
+  knitr::kable()
+
+0.6589 - 0.3411 + 0.7823 - 0.2177
+
+```
+
 - Continuous NRI：全てのカットオフでのNRIの平均
 - 次の形の方が分かりやすい
-  - `Pr(higher | event) - Pr(lower | event)`
-  - `+ Pr(lower | nonevent) - Pr(higher | nonevent)`
+$$
+\mathrm{NRI}_{\mathrm{continuous}}
+=
+\Pr(\text{higher} \mid \text{event})
+-
+\Pr(\text{lower} \mid \text{event})
++
+\Pr(\text{lower} \mid \text{nonevent})
+-
+\Pr(\text{higher} \mid \text{nonevent})
+$$
+
 - メリット
   - 恣意的ではなくなる
   - 元のAUROCに関連なく改善度合いが分かる
@@ -1319,16 +1373,6 @@ modeldata::two_class_example |>
   - Miscalibrationの影響を強く受ける
   - イベントの大小関係しか見ないため、意味がない差も拾ってしまう
   - 例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす
-:::
-
-::: {.column width="40%"}
-![](images/slide25_image01.png){fig-alt="cNRIの表" width="75%"}
-
-![](images/slide25_image02.png){fig-alt="cNRIの式" width="95%"}
-
-`(15 - 3) / 18 + (46 - 12) / 58 = 1.25`
-:::
-::::
 
 ## NRIの使い方、注意点
 
@@ -1346,22 +1390,47 @@ Ann Intern Med. 2014;160:122-131.
 
 ## IDI（Integrated Discrimination Improvement）
 
-:::: columns
-::: {.column width="60%"}
-- cNRIに各々の予測値の重みづけをしたもの
-- 次の差をとったもの
-  - Eventあり群の新/旧モデルの平均予測値の差
-  - Eventなし群の新/旧モデルの平均予測値の差
-- Calibrationの要素が入っているが、やはり臨床的な差は見つけにくい
-- `(0.856 - 0.772) - (0.463 - 0.734) = 0.355`
-:::
+```{r}
+cnri_dat2 |> 
+  dplyr::summarise(
+    # `new > old` = sum(complex_pred > simple_pred), 
+    mean_simple_pred = mean(simple_pred),
+    # `old >= new` = sum(complex_pred <= simple_pred),
+    mean_complex_pred = mean(complex_pred),
+    .by = bin_status
+  ) 
 
-::: {.column width="40%"}
-![](images/slide27_image01.png){fig-alt="IDIの表" width="76%"}
+0.676 - 0.580 - (0.284 - 0.369)
 
-![](images/slide27_image02.png){fig-alt="IDIの式" width="90%"}
-:::
-::::
+```
+
+$$
+\mathrm{IDI}
+=
+\left(
+\bar{p}_{\mathrm{new,event}}
+-
+\bar{p}_{\mathrm{old,event}}
+\right)
+-
+\left(
+\bar{p}_{\mathrm{new,non-event}}
+-
+\bar{p}_{\mathrm{old,non-event}}
+\right)
+$$
+
+$$
+\boxed{
+\mathrm{IDI}
+=
+\text{event群における予測確率の平均上昇}
+-
+\text{non-event群における予測確率の平均上昇}
+}
+$$
+
+
 
 ## Decision Curve Analysis
 
