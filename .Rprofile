@@ -24,19 +24,5 @@ local({
   }
 })
 
-## VS Codeのみ
-if (
-  interactive() &&
-  identical(Sys.getenv("TERM_PROGRAM"), "vscode")
-) {
-
-  vscode_init <- file.path(
-    Sys.getenv("HOME"),
-    ".vscode-R",
-    "init.R"
-  )
-
-  if (file.exists(vscode_init)) {
-    source(vscode_init)
-  }
-}
+## vscode-R 3.x loads its own profile and connects via sess.
+## Do not source the removed ~/.vscode-R/init.R script here.
