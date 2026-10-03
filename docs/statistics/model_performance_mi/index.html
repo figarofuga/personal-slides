@@ -1761,26 +1761,146 @@ F_{\beta} &amp;=
 </section>
 <section id="category-based-nri" class="slide level2">
 <h2>Category-based NRI</h2>
-<!-- Todo: ここから作る -->
+<p><img data-src="images/categoricalNRI.drawio.svg"></p>
+<ul>
+<li>イベントがあった患者とイベントがなかった患者で分けて、各々の群を新旧のモデルで分類する
+<ul>
+<li>分け方は何群でも良いが3群が多い</li>
+</ul></li>
+<li>イベントあり群では旧モデルよりもRiskを高く分類したらPositive、Riskを低く分類したらNegative</li>
+<li>イベントなし群では逆</li>
+<li>差し引きして、最終的なモデルの良さを数値で表す</li>
+<li>実臨床に沿っているのが利点だが、一方で分類の仕方が恣意的になる</li>
+</ul>
 </section>
 <section id="continuous-nri" class="slide level2">
 <h2>continuous NRI</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">bin_status</th>
+<th style="text-align: right;">simple_pred</th>
+<th style="text-align: right;">complex_pred</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.9831682</td>
+<td style="text-align: right;">0.9960985</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.6226083</td>
+<td style="text-align: right;">0.6099328</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.7451466</td>
+<td style="text-align: right;">0.7292784</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.7828269</td>
+<td style="text-align: right;">0.6291928</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5681130</td>
+<td style="text-align: right;">0.4233752</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.4439187</td>
+<td style="text-align: right;">0.1625034</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> _________________________________________
+ 
+     Reclassification table    
+ _________________________________________
+
+ Outcome: absent 
+  
+             Updated Model
+Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
+    [0,0.3)        68         6       1               9
+    [0.3,0.6)      32        14       9              75
+    [0.6,1]         1         8       8              53
+
+ 
+ Outcome: present 
+  
+             Updated Model
+Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
+    [0,0.3)         8         7       4              58
+    [0.3,0.6)       8        21      26              62
+    [0.6,1]         0         3      52               5
+
+ 
+ Combined Data 
+  
+             Updated Model
+Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
+    [0,0.3)        76        13       5              19
+    [0.3,0.6)      40        35      35              68
+    [0.6,1]         1        11      60              17
+ _________________________________________
+
+ NRI(Categorical) [95% CI]: 0.3716 [ 0.2329 - 0.5104 ] ; p-value: 0 
+ NRI(Continuous) [95% CI]: 0.8825 [ 0.6713 - 1.0936 ] ; p-value: 0 
+ IDI [95% CI]: 0.1816 [ 0.137 - 0.2263 ] ; p-value: 0 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">bin_status</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">Prob(new &gt; old)</th>
+<th style="text-align: right;">Prob(old &gt;= new)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">0.6589147</td>
+<td style="text-align: right;">0.3410853</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">0.2176871</td>
+<td style="text-align: right;">0.7823129</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8824</code></pre>
+</div>
+</div>
 <ul>
-<li>Continuous NRI：全てのカットオフでのNRIの平均</li>
-<li>次の形の方が分かりやすい
-<ul>
-<li><code>Pr(higher | event) - Pr(lower | event)</code></li>
-<li><code>+ Pr(lower | nonevent) - Pr(higher | nonevent)</code></li>
-</ul></li>
-<li>メリット
+<li><p>Continuous NRI：全てのカットオフでのNRIの平均</p></li>
+<li><p>次の形の方が分かりやすい $$ _{} = ( )</p></li>
+<li><p>( )</p></li>
+<li><p>( )</p></li>
+<li><p>( ) $$</p></li>
+<li><p>メリット</p>
 <ul>
 <li>恣意的ではなくなる</li>
 <li>元のAUROCに関連なく改善度合いが分かる</li>
 <li>新規に加えたマーカーの影響を評価可能</li>
 </ul></li>
-<li>注意点
+<li><p>注意点</p>
 <ul>
 <li>弱いマーカーでもポジティブになりやすい</li>
 <li>Miscalibrationの影響を強く受ける</li>
@@ -1788,11 +1908,6 @@ F_{\beta} &amp;=
 <li>例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="images/slide25_image01.png" style="width:75.0%" alt="cNRIの表"></p>
-<p><img data-src="images/slide25_image02.png" style="width:95.0%" alt="cNRIの式"></p>
-<p><code>(15 - 3) / 18 + (46 - 12) / 58 = 1.25</code></p>
-</div></div>
 </section>
 <section id="nriの使い方注意点" class="slide level2">
 <h2>NRIの使い方、注意点</h2>
@@ -1817,57 +1932,150 @@ F_{\beta} &amp;=
 </section>
 <section id="idiintegrated-discrimination-improvement" class="slide level2">
 <h2>IDI（Integrated Discrimination Improvement）</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li>cNRIに各々の予測値の重みづけをしたもの</li>
-<li>次の差をとったもの
-<ul>
-<li>Eventあり群の新/旧モデルの平均予測値の差</li>
-<li>Eventなし群の新/旧モデルの平均予測値の差</li>
-</ul></li>
-<li>Calibrationの要素が入っているが、やはり臨床的な差は見つけにくい</li>
-<li><code>(0.856 - 0.772) - (0.463 - 0.734) = 0.355</code></li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="images/slide27_image01.png" style="width:76.0%" alt="IDIの表"></p>
-<p><img data-src="images/slide27_image02.png" style="width:90.0%" alt="IDIの式"></p>
-</div></div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  bin_status mean_simple_pred mean_complex_pred
+1          1        0.5795059         0.6762434
+2          0        0.3690050         0.2841129</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.181</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\mathrm{IDI}
+=
+\left(
+\bar{p}_{\mathrm{new,event}}
+-
+\bar{p}_{\mathrm{old,event}}
+\right)
+-
+\left(
+\bar{p}_{\mathrm{new,non-event}}
+-
+\bar{p}_{\mathrm{old,non-event}}
+\right)
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\mathrm{IDI}
+=
+\text{event群における予測確率の平均上昇}
+-
+\text{non-event群における予測確率の平均上昇}
+}
+\]</span></p>
 </section>
 <section id="decision-curve-analysis" class="slide level2">
 <h2>Decision Curve Analysis</h2>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <ul>
 <li>NRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている
 <ul>
 <li>現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある</li>
 <li>例：ICUの心電図モニター vs.&nbsp;HFrEFの心臓生検</li>
 </ul></li>
-<li>重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという</li>
+<li>重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという<span class="citation" data-cites="Vickers2016-vz">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Vickers et al. 2016</a>)</span></li>
 </ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><code>P(t) = 0.1</code></li>
-<li><code>NB = 252 / 500 - 110 / 500 * (0.1 / 0.9) = 0.480</code></li>
-</ul>
-<p><img data-src="images/slide28_image01.png" style="width:95.0%" alt="DCA計算例1"></p>
-<p><img data-src="images/slide28_image02.png" style="width:72.0%" alt="DCA計算例2"></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><code>P(t) = 0.5</code></li>
-<li><code>NB = 227 / 500 - 50 / 500 * (0.5 / 0.5) = 0.354</code></li>
-</ul>
-<p><img data-src="images/slide28_image03.png" style="width:95.0%" alt="DCA計算例3"></p>
-<p><img data-src="images/slide28_image04.png" style="width:72.0%" alt="DCA計算例4"></p>
-</div></div>
-<div class="reference">
-<p>BMJ. 2016;352:i6.</p>
-</div>
 </section>
-<section id="ベースラインのリスク" class="slide level2">
-<h2>ベースラインのリスク</h2>
-<div class="columns">
-<div class="column" style="width:52%;">
+<section id="decision-curve-analysis-net-benefitの概念" class="slide level2">
+<h2>Decision curve analysis ~ Net benefitの概念</h2>
+<p>閾値確率(Threshold Probability)を (p_t) としたとき、モデルのNet benefitは次式で定義される。</p>
+<p><span class="math display">\[
+\operatorname{NB}(p_t)
+=
+\frac{\operatorname{TP}(p_t)}{N}
+-
+\frac{\operatorname{FP}(p_t)}{N}
+\left(
+\frac{p_t}{1-p_t}
+\right)
+\]</span></p>
+<p>ここで、</p>
+<ul>
+<li>(N)：対象者数</li>
+<li>((p_t))：閾値確率 (p_t) で治療対象とされた真陽性者数</li>
+<li>((p_t))：閾値確率 (p_t) で治療対象とされた偽陽性者数</li>
+<li>()：偽陽性による不利益を真陽性による利益に換算する重み</li>
+</ul>
+<p>である。</p>
+</section>
+<section id="net-beneiftとthreshold-probabilityの関係" class="slide level2">
+<h2>Net beneiftとThreshold probabilityの関係</h2>
+<ul>
+<li>Threshold probability毎に真陽性に対する許容される偽陽性の割合を示す</li>
+<li>例えば、SIHDを予測するmodelでThreshold probabilityを15%として、その15%を超えたときにCAGをするとする</li>
+<li>Threshold probability = 15%の時、Oddsは0.85/0.15 = 5.67
+<ul>
+<li>一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断</li>
+</ul></li>
+<li>その後の検査の種類によって、あるいは疾患の重篤さや患者の年齢などによってThresholdは変わる
+<ul>
+<li>脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)</li>
+<li>DCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)</li>
+</ul></li>
+</ul>
+</section>
+<section id="decision-curve-analysisの見方" class="slide level2">
+<h2>Decision curve analysisの見方</h2>
+<ul>
+<li>比較するモデルのほかに、Default strategyとして以下の曲線も描く
+<ul>
+<li>誰も治療しない戦略（treat none）</li>
+<li>全員治療する戦略(treat all)</li>
+</ul></li>
+<li>Treat noneのNet benefitは、TPもFPも0のため常に0</li>
+<li>Treat allのNet benefitは</li>
+</ul>
+<p><span class="math display">\[
+\operatorname{NB}_{\mathrm{all}}(p_t)
+=
+有病率
+-
+(1-有病率)
+\left(
+\frac{p_t}{1-p_t}
+\right)
+\]</span></p>
+<p>となる。</p>
+<ul>
+<li>臨床的に意味のあるThreshold probabilityの範囲で各々のDecision curveを比較してより右上にあるモデルが良いモデル</li>
+<li>実際は、2値モデル(モデルがHigh riskとしたら治療)などのルールを入れても良い</li>
+</ul>
+</section>
+<section id="decision-curveの見方" class="slide level2">
+<h2>Decision curveの見方</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
 <li>Default strategy</li>
 <li>患者を陽性（生検適応）と判断する確率：<code>P(t)</code></li>
@@ -1875,9 +2083,6 @@ F_{\beta} &amp;=
 <li>Treat allとTreat noneよりは常に高くないといけない</li>
 <li>左端のベースラインのリスクの高低も必ず評価する</li>
 </ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide29_image01.png" style="width:100.0%" alt="Decision curveとベースラインリスク"></p>
-</div></div>
 </section>
 <section id="dcanbの解釈" class="slide level2">
 <h2>DCA、NBの解釈</h2>
@@ -1897,30 +2102,25 @@ F_{\beta} &amp;=
 </section>
 <section id="decision-curveの読み方作り方" class="slide level2 scrollable">
 <h2>Decision Curveの読み方・作り方</h2>
-<ul>
-<li><ol type="1">
-<li>重要な事は、<code>P(t)</code> のレンジを現実的な範囲で決める事</li>
+<ol type="1">
+<li>重要な事は、<code>P(t)</code> のレンジを臨床的に意味のある範囲で決める事</li>
 </ol>
 <ul>
-<li>下限と上限</li>
 <li>モデルから逆に <code>P(t)</code> を決めてはいけない</li>
-</ul></li>
-<li><ol start="2" type="1">
+</ul>
+<ol start="2" type="1">
 <li>有病率（<code>P(t) = 0</code> の時のNB）の値も確認</li>
-</ol></li>
-<li><ol start="3" type="1">
 <li>興味があるレンジでどのような動態かを確認する</li>
 </ol>
 <ul>
 <li>Calibrationが悪いとTreat allやTreat noneよりも悪くなりうる</li>
 <li>その場合はそれ以上の比較はしない</li>
-</ul></li>
-<li><ol start="4" type="1">
+</ul>
+<ol start="4" type="1">
 <li>新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する</li>
 </ol>
 <ul>
 <li>必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価</li>
-</ul></li>
 </ul>
 </section>
 <section id="結局どうすればいいの-1" class="slide level2">
@@ -2132,6 +2332,9 @@ Creager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. <span>“2026 <span>A
 </div>
 <div id="ref-Than2013-zz" class="csl-entry" role="listitem">
 Than, Martin, Mel Herbert, Dylan Flaws, et al. 2013. <span>“What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.”</span> <em>International Journal of Cardiology</em> 166 (3): 752–54. <a href="https://doi.org/10.1016/j.ijcard.2012.09.171">https://doi.org/10.1016/j.ijcard.2012.09.171</a>.
+</div>
+<div id="ref-Vickers2016-vz" class="csl-entry" role="listitem">
+Vickers, Andrew J, Ben Van Calster, and Ewout W Steyerberg. 2016. <span>“Net Benefit Approaches to the Evaluation of Prediction Models, Molecular Markers, and Diagnostic Tests.”</span> <em>BMJ (Clinical Research Ed.)</em> 352 (January): i6. <a href="https://doi.org/10.1136/bmj.i6">https://doi.org/10.1136/bmj.i6</a>.
 </div>
 </div>
 </section></section>

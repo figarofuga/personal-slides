@@ -27,7 +27,7 @@ execute:
   error: false
   warning: false
   echo: false
-  cache: false
+  cache: true
 knitr: 
   opts_chunk: 
     dev: svglite
@@ -1434,50 +1434,115 @@ $$
 
 ## Decision Curve Analysis
 
+```{r}
+library(dcurves)
+
+dca_fig <- dcurves::dca(bin_status ~ simple_pred + complex_pred, data = cnri_dat2, 
+  thresholds = seq(0, 0.35, by = 0.05),
+  label = list(simple_pred = "Simple model", complex_pred = "Complex model")
+  ) |> 
+  plot(smooth = FALSE)
+
+```
+
+:::{.fragment}
+```{r}
+dca_fig
+```
+:::
+
+:::{.fragment}
+```{r}
+dca_fig + 
+  annotate(
+    "label", 
+    x = 0.4, 
+    y = 0.0, 
+    label = "Net benefit"
+  )
+```
+:::
+
+
 - NRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている
   - 現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある
   - 例：ICUの心電図モニター vs. HFrEFの心臓生検
-- 重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという
+- 重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという[@Vickers2016-vz]
 
-:::: columns
-::: {.column width="50%"}
-- `P(t) = 0.1`
-- `NB = 252 / 500 - 110 / 500 * (0.1 / 0.9) = 0.480`
+## Decision curve analysis ~ Net benefitの概念
 
-![](images/slide28_image01.png){fig-alt="DCA計算例1" width="95%"}
+閾値確率(Threshold Probability)を \(p_t\) としたとき、モデルのNet benefitは次式で定義される。
 
-![](images/slide28_image02.png){fig-alt="DCA計算例2" width="72%"}
-:::
+$$
+\operatorname{NB}(p_t)
+=
+\frac{\operatorname{TP}(p_t)}{N}
+-
+\frac{\operatorname{FP}(p_t)}{N}
+\left(
+\frac{p_t}{1-p_t}
+\right)
+$$
 
-::: {.column width="50%"}
-- `P(t) = 0.5`
-- `NB = 227 / 500 - 50 / 500 * (0.5 / 0.5) = 0.354`
+ここで、
 
-![](images/slide28_image03.png){fig-alt="DCA計算例3" width="95%"}
+- \(N\)：対象者数
+- \(\operatorname{TP}(p_t)\)：閾値確率 \(p_t\) で治療対象とされた真陽性者数
+- \(\operatorname{FP}(p_t)\)：閾値確率 \(p_t\) で治療対象とされた偽陽性者数
+- \(\dfrac{p_t}{1-p_t}\)：偽陽性による不利益を真陽性による利益に換算する重み
 
-![](images/slide28_image04.png){fig-alt="DCA計算例4" width="72%"}
-:::
-::::
+である。
 
-::: {.reference}
-BMJ. 2016;352:i6.
-:::
+## Net beneiftとThreshold probabilityの関係
 
-## ベースラインのリスク
+- Threshold probability毎に真陽性に対する許容される偽陽性の割合を示す
+- 例えば、SIHDを予測するmodelでThreshold probabilityを15%として、その15%を超えたときにCAGをするとする
+- Threshold probability = 15%の時、Oddsは0.85/0.15 = 5.67
+  - 一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断
+- その後の検査の種類によって、あるいは疾患の重篤さや患者の年齢などによってThresholdは変わる
+  - 脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)
+  - DCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)
 
-:::: columns
-::: {.column width="52%"}
+## Decision curve analysisの見方
+
+- 比較するモデルのほかに、Default strategyとして以下の曲線も描く
+  - 誰も治療しない戦略（treat none）
+  - 全員治療する戦略(treat all)
+- Treat noneのNet benefitは、TPもFPも0のため常に0
+- Treat allのNet benefitは
+
+$$
+\operatorname{NB}_{\mathrm{all}}(p_t)
+=
+有病率
+-
+(1-有病率)
+\left(
+\frac{p_t}{1-p_t}
+\right)
+$$
+
+となる。
+
+- 臨床的に意味のあるThreshold probabilityの範囲で各々のDecision curveを比較してより右上にあるモデルが良いモデル
+- 実際は、2値モデル(モデルがHigh riskとしたら治療)などのルールを入れても良い
+
+## Decision curveの見方
+
+```{r}
+library(ggforce)
+
+dca_fig + 
+  geom_circle(aes(x0 = 0, y0 = mean(cnri_dat2$bin_status), r = 0.02), color = "red", linetype = "dashed", inherit.aes = TRUE) 
+
+```
+
 - Default strategy
 - 患者を陽性（生検適応）と判断する確率：`P(t)`
 - Net benefitの値のところで最も上のstrategyがより良いモデル
 - Treat allとTreat noneよりは常に高くないといけない
 - 左端のベースラインのリスクの高低も必ず評価する
-:::
 
-::: {.column width="48%"}
-![](images/slide29_image01.png){fig-alt="Decision curveとベースラインリスク" width="100%"}
-:::
-::::
 
 ## DCA、NBの解釈
 
@@ -1491,14 +1556,13 @@ BMJ. 2016;352:i6.
 
 ## Decision Curveの読み方・作り方
 
-- 1. 重要な事は、`P(t)` のレンジを現実的な範囲で決める事
-  - 下限と上限
+1. 重要な事は、`P(t)` のレンジを臨床的に意味のある範囲で決める事
   - モデルから逆に `P(t)` を決めてはいけない
-- 2. 有病率（`P(t) = 0` の時のNB）の値も確認
-- 3. 興味があるレンジでどのような動態かを確認する
+2. 有病率（`P(t) = 0` の時のNB）の値も確認
+3. 興味があるレンジでどのような動態かを確認する
   - Calibrationが悪いとTreat allやTreat noneよりも悪くなりうる
   - その場合はそれ以上の比較はしない
-- 4. 新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する
+4. 新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する
   - 必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価
 
 ## 結局どうすればいいの？

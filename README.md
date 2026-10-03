@@ -174,7 +174,7 @@ git commit -m "Rパッケージを追加・更新"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "学習ノートを更新"
+git commit -m "update model performance slides"
 git push
 ```
 

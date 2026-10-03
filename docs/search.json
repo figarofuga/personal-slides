@@ -2937,14 +2937,14 @@
     "href": "statistics/model_performance_mi/index.html#idiintegrated-discrimination-improvement",
     "title": "分類モデルの評価について",
     "section": "IDI（Integrated Discrimination Improvement）",
-    "text": "IDI（Integrated Discrimination Improvement）\n\n\n\ncNRIに各々の予測値の重みづけをしたもの\n次の差をとったもの\n\nEventあり群の新/旧モデルの平均予測値の差\nEventなし群の新/旧モデルの平均予測値の差\n\nCalibrationの要素が入っているが、やはり臨床的な差は見つけにくい\n(0.856 - 0.772) - (0.463 - 0.734) = 0.355"
+    "text": "IDI（Integrated Discrimination Improvement）\n\n\n  bin_status mean_simple_pred mean_complex_pred\n1          1        0.5795059         0.6762434\n2          0        0.3690050         0.2841129\n\n\n[1] 0.181\n\n\n\\[\n\\mathrm{IDI}\n=\n\\left(\n\\bar{p}_{\\mathrm{new,event}}\n-\n\\bar{p}_{\\mathrm{old,event}}\n\\right)\n-\n\\left(\n\\bar{p}_{\\mathrm{new,non-event}}\n-\n\\bar{p}_{\\mathrm{old,non-event}}\n\\right)\n\\]\n\\[\n\\boxed{\n\\mathrm{IDI}\n=\n\\text{event群における予測確率の平均上昇}\n-\n\\text{non-event群における予測確率の平均上昇}\n}\n\\]"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysis",
     "href": "statistics/model_performance_mi/index.html#decision-curve-analysis",
     "title": "分類モデルの評価について",
     "section": "Decision Curve Analysis",
-    "text": "Decision Curve Analysis\n\nNRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている\n\n現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある\n例：ICUの心電図モニター vs. HFrEFの心臓生検\n\n重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという\n\n\n\n\nP(t) = 0.1\nNB = 252 / 500 - 110 / 500 * (0.1 / 0.9) = 0.480\n\n\n\n\n\nP(t) = 0.5\nNB = 227 / 500 - 50 / 500 * (0.5 / 0.5) = 0.354\n\n\n\n\n\nBMJ. 2016;352:i6."
+    "text": "Decision Curve Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている\n\n現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある\n例：ICUの心電図モニター vs. HFrEFの心臓生検\n\n重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという(Vickers et al. 2016)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#ベースラインのリスク",
@@ -2965,7 +2965,7 @@
     "href": "statistics/model_performance_mi/index.html#decision-curveの読み方作り方",
     "title": "分類モデルの評価について",
     "section": "Decision Curveの読み方・作り方",
-    "text": "Decision Curveの読み方・作り方\n\n\n重要な事は、P(t) のレンジを現実的な範囲で決める事\n\n\n下限と上限\nモデルから逆に P(t) を決めてはいけない\n\n\n有病率（P(t) = 0 の時のNB）の値も確認\n\n\n興味があるレンジでどのような動態かを確認する\n\n\nCalibrationが悪いとTreat allやTreat noneよりも悪くなりうる\nその場合はそれ以上の比較はしない\n\n\n新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する\n\n\n必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価"
+    "text": "Decision Curveの読み方・作り方\n\n重要な事は、P(t) のレンジを臨床的に意味のある範囲で決める事\n\n\nモデルから逆に P(t) を決めてはいけない\n\n\n有病率（P(t) = 0 の時のNB）の値も確認\n興味があるレンジでどのような動態かを確認する\n\n\nCalibrationが悪いとTreat allやTreat noneよりも悪くなりうる\nその場合はそれ以上の比較はしない\n\n\n新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する\n\n\n必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#結局どうすればいいの-1",
@@ -3042,7 +3042,7 @@
     "href": "statistics/model_performance_mi/index.html#bland-altman分析",
     "title": "分類モデルの評価について",
     "section": "Bland-Altman分析",
-    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941.\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402.\n\n\nCreager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. “2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.” Journal of the American College of Cardiology 87 (13): 1626–710. https://doi.org/10.1016/j.jacc.2025.11.005.\n\n\nThan, Martin, Mel Herbert, Dylan Flaws, et al. 2013. “What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.” International Journal of Cardiology 166 (3): 752–54. https://doi.org/10.1016/j.ijcard.2012.09.171."
+    "text": "Bland-Altman分析\n\n\n\n平均を中心に全てのX軸で均等に分布している事を確認する\n\n\n \n\n\nJ Am Coll Cardiol. 2020 Aug 25;76(8):930-941.\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402.\n\n\nCreager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. “2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.” Journal of the American College of Cardiology 87 (13): 1626–710. https://doi.org/10.1016/j.jacc.2025.11.005.\n\n\nThan, Martin, Mel Herbert, Dylan Flaws, et al. 2013. “What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.” International Journal of Cardiology 166 (3): 752–54. https://doi.org/10.1016/j.ijcard.2012.09.171.\n\n\nVickers, Andrew J, Ben Van Calster, and Ewout W Steyerberg. 2016. “Net Benefit Approaches to the Evaluation of Prediction Models, Molecular Markers, and Diagnostic Tests.” BMJ (Clinical Research Ed.) 352 (January): i6. https://doi.org/10.1136/bmj.i6."
   },
   {
     "objectID": "statistics/visualization_mi/index.html#可視化事始め",
@@ -5688,14 +5688,14 @@
     "href": "statistics/model_performance_mi/index.html#category-based-nri",
     "title": "分類モデルの評価について",
     "section": "Category-based NRI",
-    "text": "Category-based NRI"
+    "text": "Category-based NRI\n\n\nイベントがあった患者とイベントがなかった患者で分けて、各々の群を新旧のモデルで分類する\n\n分け方は何群でも良いが3群が多い\n\nイベントあり群では旧モデルよりもRiskを高く分類したらPositive、Riskを低く分類したらNegative\nイベントなし群では逆\n差し引きして、最終的なモデルの良さを数値で表す\n実臨床に沿っているのが利点だが、一方で分類の仕方が恣意的になる"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#continuous-nri",
     "href": "statistics/model_performance_mi/index.html#continuous-nri",
     "title": "分類モデルの評価について",
     "section": "continuous NRI",
-    "text": "continuous NRI\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい\n\nPr(higher | event) - Pr(lower | event)\n+ Pr(lower | nonevent) - Pr(higher | nonevent)\n\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす\n\n\n\n\n\n(15 - 3) / 18 + (46 - 12) / 58 = 1.25"
+    "text": "continuous NRI\n\n\n\n\n\nbin_status\nsimple_pred\ncomplex_pred\n\n\n\n\n1\n0.9831682\n0.9960985\n\n\n0\n0.6226083\n0.6099328\n\n\n1\n0.7451466\n0.7292784\n\n\n1\n0.7828269\n0.6291928\n\n\n1\n0.5681130\n0.4233752\n\n\n0\n0.4439187\n0.1625034\n\n\n\n\n\n _________________________________________\n \n     Reclassification table    \n _________________________________________\n\n Outcome: absent \n  \n             Updated Model\nInitial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified\n    [0,0.3)        68         6       1               9\n    [0.3,0.6)      32        14       9              75\n    [0.6,1]         1         8       8              53\n\n \n Outcome: present \n  \n             Updated Model\nInitial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified\n    [0,0.3)         8         7       4              58\n    [0.3,0.6)       8        21      26              62\n    [0.6,1]         0         3      52               5\n\n \n Combined Data \n  \n             Updated Model\nInitial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified\n    [0,0.3)        76        13       5              19\n    [0.3,0.6)      40        35      35              68\n    [0.6,1]         1        11      60              17\n _________________________________________\n\n NRI(Categorical) [95% CI]: 0.3716 [ 0.2329 - 0.5104 ] ; p-value: 0 \n NRI(Continuous) [95% CI]: 0.8825 [ 0.6713 - 1.0936 ] ; p-value: 0 \n IDI [95% CI]: 0.1816 [ 0.137 - 0.2263 ] ; p-value: 0 \n\n\n\n\n\n\n\nbin_status\nn\nProb(new &gt; old)\nProb(old &gt;= new)\n\n\n\n\n1\n129\n0.6589147\n0.3410853\n\n\n0\n147\n0.2176871\n0.7823129\n\n\n\n\n\n[1] 0.8824\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい $$ _{} = ( )\n( )\n( )\n( ) $$\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#薬の安全性",
@@ -5703,5 +5703,33 @@
     "title": "高齢者の心不全管理",
     "section": "薬の安全性",
     "text": "薬の安全性\n\n\n\n\n\n\n\n\n\n薬剤クラス\n薬剤名\n主要試験\n若年者 vs 高齢者における安全性\n\n\n\n\nACE阻害薬（ACEi）\nEnalapril\nSOLVDCONSENSUS\n年齢別の安全性は報告されていない\n\n\nβ遮断薬（BB）\nCarvedilolMetoprololBisoprolol\nUS CarvedilolCOPERNICUSMERIT-HFCIBIS\n試験治療の中止率Q1（50歳）：Placebo 14.5%、BB 12.1%Q2（60歳）：Placebo 14.6%、BB 12.7%Q3（68歳）：Placebo 16.1%、BB 14.6%Q4（75歳）：Placebo 15.6%、BB 14.4%\n\n\nアンジオテンシン受容体–ネプリライシン阻害薬（ARNI）ACE阻害薬\nSacubitril/valsartanEnalapril\nPARADIGM-HF\n有害事象による試験薬中止&lt;55歳：Sacubitril/valsartan 14例（1.7%）、Enalapril 16例（2.0%）≥75歳：Sacubitril/valsartan 22例（2.8%）、Enalapril 35例（4.5%）\n\n\nミネラルコルチコイド受容体拮抗薬（MRA）\nSpironolactoneEplerenoneFinerenone\nRALES, TOPCATEMPHASIS-HFFINEARTS\n年齢別の安全性は報告されていない\n\n\nSGLT2阻害薬（SGLT2i）\nDapagliflozinEmpagliflozin\nDAPA-HFDELIVEREMPEROR-ReducedEMPEROR-Preserved\n年齢別の安全性は報告されていない\n\n\n\n(Boer et al. 2026)"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysis-net-benefitの概念",
+    "href": "statistics/model_performance_mi/index.html#decision-curve-analysis-net-benefitの概念",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysis ~ Net benefitの概念",
+    "text": "Decision curve analysis ~ Net benefitの概念\n閾値確率(Threshold Probability)を (p_t) としたとき、モデルのNet benefitは次式で定義される。\n\\[\n\\operatorname{NB}(p_t)\n=\n\\frac{\\operatorname{TP}(p_t)}{N}\n-\n\\frac{\\operatorname{FP}(p_t)}{N}\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\nここで、\n\n(N)：対象者数\n((p_t))：閾値確率 (p_t) で治療対象とされた真陽性者数\n((p_t))：閾値確率 (p_t) で治療対象とされた偽陽性者数\n()：偽陽性による不利益を真陽性による利益に換算する重み\n\nである。"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#net-beneiftとthreshold-probabilityの関係",
+    "href": "statistics/model_performance_mi/index.html#net-beneiftとthreshold-probabilityの関係",
+    "title": "分類モデルの評価について",
+    "section": "Net beneiftとThreshold probabilityの関係",
+    "text": "Net beneiftとThreshold probabilityの関係\n\nThreshold probability毎に真陽性に対する許容される偽陽性の割合を示す\n例えば、SIHDを予測するmodelでThreshold probabilityを15%として、その15%を超えたときにCAGをするとする\nThreshold probability = 15%の時、Oddsは0.85/0.15 = 5.67\n\n一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断\n\nその後の検査の種類によって、あるいは疾患の重篤さや患者の年齢などによってThresholdは変わる\n\n脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)\nDCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysisの見方",
+    "href": "statistics/model_performance_mi/index.html#decision-curve-analysisの見方",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysisの見方",
+    "text": "Decision curve analysisの見方\n\n比較するモデルのほかに、Default strategyとして以下の曲線も描く\n\n誰も治療しない戦略（treat none）\n全員治療する戦略(treat all)\n\nTreat noneのNet benefitは、TPもFPも0のため常に0\nTreat allのNet benefitは\n\n\\[\n\\operatorname{NB}_{\\mathrm{all}}(p_t)\n=\n有病率\n-\n(1-有病率)\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\nとなる。\n\n臨床的に意味のあるThreshold probabilityの範囲で各々のDecision curveを比較してより右上にあるモデルが良いモデル\n実際は、2値モデル(モデルがHigh riskとしたら治療)などのルールを入れても良い"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curveの見方",
+    "href": "statistics/model_performance_mi/index.html#decision-curveの見方",
+    "title": "分類モデルの評価について",
+    "section": "Decision curveの見方",
+    "text": "Decision curveの見方\n\n\n\n\n\n\n\n\n\n\nDefault strategy\n患者を陽性（生検適応）と判断する確率：P(t)\nNet benefitの値のところで最も上のstrategyがより良いモデル\nTreat allとTreat noneよりは常に高くないといけない\n左端のベースラインのリスクの高低も必ず評価する"
   }
 ]
