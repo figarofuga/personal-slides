@@ -116,7 +116,7 @@ pixi run --as-is preview
 pixi run --as-is render
 
 # 1つのファイルだけ生成
-pixi run --as-is quarto render statistics/mlcausal/index.qmd --no-clean
+pixi run --as-is quarto render statistics/model_performance/index.qmd --no-clean
 pixi run --as-is quarto render medicine/antithrombotic_etc/index.qmd --no-clean
 ```
 

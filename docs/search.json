@@ -5892,5 +5892,250 @@
     "title": "リケッチア症",
     "section": "参考資料",
     "text": "参考資料\n\nCDC: Clinical Overview of Scrub Typhus\nCDC Yellow Book: Rickettsial Diseases\nSando E, Suzuki M, Katoh S, et al. Distinguishing Japanese spotted fever and scrub typhus, central Japan, 2004–2015. Emerg Infect Dis. 2018;24(9):1633–1641. doi:10.3201/eid2409.171436\n元ノート記載：国立感染症研究所／JIHS 日本紅斑熱資料\n元ノート記載：国立感染症研究所／JIHS ツツガムシ病資料\n\n\n\n\n\n\n\n\n編集メモ\n\n\nOneNoteから本文201項目・画像27点を抽出し、表記を整え、スライド単位に再構成した。医学的内容は発表・診療で使う前に、最新の国内指針と施設の検査・治療手順で最終確認する。"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#ダニエル書第五章",
+    "href": "statistics/model_performance/index.html#ダニエル書第五章",
+    "title": "分類モデルの評価について",
+    "section": "ダニエル書第五章",
+    "text": "ダニエル書第五章\n\nそのしるされた文字はこうです。メネ、メネ、テケル、ウパルシン。その事の解き明かしはこうです、メネは神があなたの治世を数えて、これをその終りに至らせたことをいうのです。テケルは、あなたがはかりで量られて、その量の足りないことがあらわれたことをいうのです。ウパルシンは、あなたの国が分かたれて、メデアとペルシャの人々に与えられることをいうのです。"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#take-home-message",
+    "href": "statistics/model_performance/index.html#take-home-message",
+    "title": "分類モデルの評価について",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\n分類モデルの場合は弁別能と較正能を別個に評価しよう！\n\n弁別能：AUROC\n較正能：Calibration plotを用いる\n分類モデルの場合はクラスの偏りに要注意！\n\nモデルの比較にNRI, Decision-curve analysisも使おう！"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#分類モデルとは-1",
+    "href": "statistics/model_performance/index.html#分類モデルとは-1",
+    "title": "分類モデルの評価について",
+    "section": "分類モデルとは？",
+    "text": "分類モデルとは？\n\n\n\n\n\nProbability of Class 1\nPredicted by model\nTruth\n\n\n\n\n0.0035892\nClass2\nClass2\n\n\n0.6786211\nClass1\nClass1\n\n\n0.1108935\nClass2\nClass2\n\n\n0.7351617\nClass1\nClass1\n\n\n0.0162400\nClass2\nClass2\n\n\n0.9992751\nClass1\nClass1\n\n\n\n\n\n\nいわゆるモデルは大きく分けて回帰モデルと分類モデルに分けられる\n\n回帰モデル：連続値（BNP値、e’、PCWPなど）を直接予測する\n分類モデル：0/1（生死、出血の有無など）を予測する\n\n実際の分類モデルは 0.4, 0.357 などイベントが起きる確率を計算する\n任意のカットオフ（通常0.5）で0か1に丸め込んでいる(上ではClass)"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#分類の評価discriminationとcalibration",
+    "href": "statistics/model_performance/index.html#分類の評価discriminationとcalibration",
+    "title": "分類モデルの評価について",
+    "section": "分類の評価：DiscriminationとCalibration",
+    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination(弁別能)とCalibration(較正能)を別個に評価する\nDiscrimination\n\n0/1の正確性: 実際にこの患者がHigh riskかどうかの評価\n言い換えると、患者をRiskの順番に並び替える能力\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目 -&gt; Calibrationはしばしば忘れ去られている (Alba et al. 2017)"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#例",
+    "href": "statistics/model_performance/index.html#例",
+    "title": "分類モデルの評価について",
+    "section": "例",
+    "text": "例\n\nDiscrimination\n\n「ERで胸痛を訴えているこの患者がMIかどうか？」\nそもそも、これが当たらないとどうしようもない\n\nCalibration\n\n「このNSTEACSの患者にPCIをしたときに透析になってしまう確率は？」\n20%を超えるようなら今日はカテなしで、明日以降前負荷をかけた上でCAGをするか再検討しよう\n0/1だけでなく、実際の数字が重要"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#discriminationとcalibration",
+    "href": "statistics/model_performance/index.html#discriminationとcalibration",
+    "title": "分類モデルの評価について",
+    "section": "DiscriminationとCalibration",
+    "text": "DiscriminationとCalibration\n\n\n\n\n\n\n\n\n\n\nDiscriminationとCalibrationはトレードオフ\nさらに、アウトカムの発症率やリスクの分布にも影響を受ける\n\n完璧なDiscrimination & poor calibration\n\n完ぺきなCalibrationで完ぺきなDiscriminationをするためにはかなり無理がある分布でないと達成できない\n\n(Cook 2007)"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#discriminationの評価について",
+    "href": "statistics/model_performance/index.html#discriminationの評価について",
+    "title": "分類モデルの評価について",
+    "section": "Discriminationの評価について",
+    "text": "Discriminationの評価について\n\n\n\n\n\n\n\ntruth\nClass1\nClass2\npredicted\n\n\n\n\nClass2\n0.0035892\n0.9964108\nClass2\n\n\nClass1\n0.6786211\n0.3213789\nClass1\n\n\nClass2\n0.1108935\n0.8891065\nClass2\n\n\nClass1\n0.7351617\n0.2648383\nClass1\n\n\nClass2\n0.0162400\n0.9837600\nClass2\n\n\nClass1\n0.9992751\n0.0007249\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n予測と現実の0/1の組み合わせを2×2にまとめる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTruth\n\nPredicted\n\n\n\nClass1\nClass2\n\n\n\n\nClass1\n227\n50\n\n\nClass2\n31\n192\n\n\n\n\n\n\n\n\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#混同行列関連",
+    "href": "statistics/model_performance/index.html#混同行列関連",
+    "title": "分類モデルの評価について",
+    "section": "混同行列関連",
+    "text": "混同行列関連\n\n\n\n\n\n\n\n\n\n\n\n\n\\[\n\\begin{aligned}\n\\text{Accuracy} &= \\frac{TP + TN}{TP + TN + FP + FN} \\\\[6pt]\n\\text{Recall / Sensitivity} &= \\frac{TP}{TP + FN} \\\\[6pt]\n\\text{Specificity} &= \\frac{TN}{TN + FP} \\\\[6pt]\n\\text{Precision} &= \\frac{TP}{TP + FP} \\\\[6pt]\nF_1\\text{-Score} &= 2 \\times\n\\frac{\\text{Precision} \\times \\text{Recall}}\n{\\text{Precision} + \\text{Recall}} \\\\[6pt]\nF_{\\beta} &=\n\\frac{(1 + \\beta^2)\\cdot TP}\n{(1 + \\beta^2)\\cdot TP + \\beta^2\\cdot FN + FP}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#混同行列関連の指標について",
+    "href": "statistics/model_performance/index.html#混同行列関連の指標について",
+    "title": "分類モデルの評価について",
+    "section": "混同行列関連の指標について",
+    "text": "混同行列関連の指標について\n\n\n\n国試でやった感度・特異度・尤度比等\n一番使われるのはAccuracy\nFβ score（F1, F0.5, F2など）で、偽陰性・偽陽性の何を重視するかで選択が変わる\n\nβに大きな数字を入れるとRule outを重視(感度が高くなる)\nβに小さな数字を入れるとRule inを重視(特異度が高くなる)\n\n偽陰性を極力避けたいとき\n\n一般人口への癌やHIVのscreeningなど\nF2などが良い\n\n偽陽性を極力避けたいとき\n\nHFrEFで心筋生検をすべきかどうか、など\nF0.5などが良い"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#roc指標ができるまで",
+    "href": "statistics/model_performance/index.html#roc指標ができるまで",
+    "title": "分類モデルの評価について",
+    "section": "ROC指標ができるまで",
+    "text": "ROC指標ができるまで\n\n\n1. 予測結果を昇順で並べる\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n2.00e-07\nClass2\n\n\n4.50e-06\nClass2\n\n\n5.80e-06\nClass2\n\n\n5.90e-06\nClass2\n\n\n1.22e-05\nClass2\n\n\n1.40e-05\nClass2\n\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n2. 閾値ごとでの予測\n\n\n\n\n\n予測確率\n実際のアウトカム\n閾値:2.0e-07での予測\n閾値2:4.50e-06での予測\n\n\n\n\n1.79e-07\nClass2\nClass2\nClass2\n\n\n4.50e-06\nClass2\nClass1\nClass2\n\n\n5.81e-06\nClass2\nClass1\nClass1\n\n\n5.92e-06\nClass2\nClass1\nClass1\n\n\n1.22e-05\nClass2\nClass1\nClass1\n\n\n1.40e-05\nClass2\nClass1\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n3. 閾値毎の感度・特異度\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n-Inf\n0.0000000\n1\n\n\n2.00e-07\n0.0000000\n1\n\n\n4.50e-06\n0.0041322\n1\n\n\n5.80e-06\n0.0082645\n1\n\n\n5.90e-06\n0.0123967\n1\n\n\n1.22e-05\n0.0165289\n1\n\n\n1.40e-05\n0.0206612\n1"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#リスク毎の評価",
+    "href": "statistics/model_performance/index.html#リスク毎の評価",
+    "title": "分類モデルの評価について",
+    "section": "リスク毎の評価",
+    "text": "リスク毎の評価\n\n\n\n\n\n.threshold\nspecificity\nsensitivity\nrecall\nprecision\n\n\n\n\n-Inf\n0.0000000\n1\nNA\nNA\n\n\n2.00e-07\n0.0000000\n1\n1\n0.5160000\n\n\n4.50e-06\n0.0041322\n1\n1\n0.5170341\n\n\n5.80e-06\n0.0082645\n1\n1\n0.5180723\n\n\n5.90e-06\n0.0123967\n1\n1\n0.5191147\n\n\n1.22e-05\n0.0165289\n1\n1\n0.5201613\n\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc binary         0.939\n\n\n\n\nPrecisionとRecallで点を結ぶとPR曲線\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 pr_auc  binary         0.946"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#confusion-matrix-baseの評価の注意点",
+    "href": "statistics/model_performance/index.html#confusion-matrix-baseの評価の注意点",
+    "title": "分類モデルの評価について",
+    "section": "Confusion matrix baseの評価の注意点",
+    "text": "Confusion matrix baseの評価の注意点\n\n\n\nAUROCの値\n意味\n\n\n\n\n0.5-0.6\npoor\n\n\n0.6-0.75\npossible helpful\n\n\n0.75-\nclearly useful\n\n\n\n(Alba et al. 2017)\n\nTruthが偏ったデータでは混同行列関連は役に立たない\n特にAccuracyは一番ダメ\n\n全部0の予測でも90%超えてしまう\n\nPRAUC等が役に立つが、数字だけでの評価は困難\n\nPR curveは、より不均衡なデータでモデルの差をちゃんと見つけやすい(AUROCだと差が出にくい)\n\n不均衡データではAUROCは差を見つけにくいが、AUROCは数字で大体の印象が分かるのが強みだと思う"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#結局どうすればいいの",
+    "href": "statistics/model_performance/index.html#結局どうすればいいの",
+    "title": "分類モデルの評価について",
+    "section": "結局どうすればいいの？",
+    "text": "結局どうすればいいの？\n\n均衡がとれているデータの場合\n\n根拠がある場合\n\n例えばPEの許容される見逃し率は2%(Creager et al. 2026)\n胸痛の評価ToolでのMACEの許容率は1%未満(Than et al. 2013)\n\n妥当な感度、特異度の値が分かっている\n\nカットオフをこちらで決めてAccuracy、感度/特異度やF1 valueを記載\nAUROCはあった方が良い\n\n根拠がない場合\n\nYouden indexやFβ scoreをカットオフとしてAccuracy等を評価\nAUROCは必須\n\n\n不均衡データの場合\n\nあまり決まっていない\nAUPRCはどこかに記載した方が無難、個人的には不均衡でもAUROCをメイン解析にしても良いと思う\nYouden indexやFβ scoreなどを用いて、意味があるカットオフを作ってからNNT等を評価する"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#calibrationの評価について",
+    "href": "statistics/model_performance/index.html#calibrationの評価について",
+    "title": "分類モデルの評価について",
+    "section": "Calibrationの評価について",
+    "text": "Calibrationの評価について\n\n全体像を示すもの\n\nCalibration plot\n\n一つの数字で表すもの\n\nRecalibration parameters: Calibration plotの傾きと切片を記述\nHosmer-Lemeshow: 予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する\nBrier score: 実際のイベントと予測確率の差を二乗和にして平均を取った値\n\nCalibration plotが、どこの予測能が悪いかもわかるため最も良い評価(Alba et al. 2017)\n分類数には要注意"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#calibration-plotの作り方",
+    "href": "statistics/model_performance/index.html#calibration-plotの作り方",
+    "title": "分類モデルの評価について",
+    "section": "Calibration Plotの作り方",
+    "text": "Calibration Plotの作り方\n\n\n1. 予測確率で昇順に並べ、10群に分ける\n\n\n\n\n\n予測確率\n実測値\n群\n\n\n\n\n2.00e-07\nClass2\n1\n\n\n4.50e-06\nClass2\n1\n\n\n5.80e-06\nClass2\n1\n\n\n5.90e-06\nClass2\n1\n\n\n1.22e-05\nClass2\n1\n\n\n1.40e-05\nClass2\n1\n\n\n\n\n\n\n\n\n予測確率\n実測値\n群\n\n\n\n\n0.9999054\nClass1\n10\n\n\n0.9999103\nClass1\n10\n\n\n0.9999104\nClass1\n10\n\n\n0.9999209\nClass1\n10\n\n\n0.9999720\nClass1\n10\n\n\n0.9999965\nClass1\n10\n\n\n\n\n\n\n\n\n→\n\n\n群ごとに平均を計算\n\n\n\n2. 群ごとの平均予測確率と実際の発症率\n\n\n\n\n\n群\n平均予測確率\n実際の発症率\n\n\n\n\n1\n0.00\n0.001\n\n\n2\n0.02\n0.012\n\n\n3\n0.14\n0.078\n\n\n4\n0.26\n0.213\n\n\n5\n0.38\n0.498\n\n\n6\n0.56\n0.762\n\n\n7\n0.86\n0.913\n\n\n8\n0.98\n0.978\n\n\n9\n0.96\n0.994\n\n\n10\n1.00\n0.999\n\n\n\n\n\n\n\n3. 平均予測確率（X軸）と実際の発症率（Y軸）をプロット"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#calibrationhsomerr-lemeshow検定",
+    "href": "statistics/model_performance/index.html#calibrationhsomerr-lemeshow検定",
+    "title": "分類モデルの評価について",
+    "section": "Calibration～Hsomerr-Lemeshow検定",
+    "text": "Calibration～Hsomerr-Lemeshow検定\n\n\n\n\n\ngroup\nn\nmean_prob_Class1\ntruth_Class1\ntruth_Class2\nchisq\n\n\n\n\n1\n50\n0.0006264\n0\n50\n0.0313374\n\n\n2\n50\n0.0122140\n1\n49\n0.2512359\n\n\n3\n50\n0.0776816\n7\n43\n2.7102181\n\n\n4\n50\n0.2125326\n13\n37\n0.6731346\n\n\n5\n50\n0.4978346\n19\n31\n2.7770496\n\n\n6\n50\n0.7620909\n28\n22\n11.2627800\n\n\n7\n50\n0.9134009\n43\n7\n1.8025730\n\n\n8\n50\n0.9778961\n49\n1\n0.0102392\n\n\n9\n50\n0.9938732\n48\n2\n9.4214688\n\n\n10\n50\n0.9992472\n50\n0\n0.0376700\n\n\n\n\n\n\n10群に分けて、各々で平均確率と実際のOutcomeを並べる\n各グループ毎にX^2検定を行って、すべての統計量を足し算\nP &gt; 0.05でモデルの当てはまりが良いとされる\n一つの数値としては良いが、Low risk/High risk群でどうBiasがあるかは分からない"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#brier-score",
+    "href": "statistics/model_performance/index.html#brier-score",
+    "title": "分類モデルの評価について",
+    "section": "Brier Score",
+    "text": "Brier Score\n\\[\n\\text{Brier Score}\n=\n\\frac{1}{N}\n\\sum_{i=1}^{N}\n\\left(\\hat{p}_i - y_i\\right)^2\n\\]\n\n\n\n\n\n\n\nProbability of Class1\npredicted\nTrue label\ndiff_squared\n\n\n\n\n0.004\nClass2\n0\n(0-0.004)2 = 0\n\n\n0.679\nClass1\n1\n(1-0.679)2 = 0.103\n\n\n0.111\nClass2\n0\n(0-0.111)2 = 0.012\n\n\n0.735\nClass1\n1\n(1-0.735)2 = 0.07\n\n\n0.016\nClass2\n0\n(0-0.016)2 = 0\n\n\n0.999\nClass1\n1\n(1-0.999)2 = 0\n\n\n\n\n\n\n実際のアウトカムがClass 1なら1, Class2だったら0とする\n各々の予測確率(連続値)と上記のアウトカムの差の二乗を足し算する\n連続値のモデルのMSEのイメージ"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#モデルの比較",
+    "href": "statistics/model_performance/index.html#モデルの比較",
+    "title": "分類モデルの評価について",
+    "section": "モデルの比較",
+    "text": "モデルの比較\n (Cook 2007)\n\nAUROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている\nよくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？\n\nNRI / IDI"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#nrinet-reclassification-index",
+    "href": "statistics/model_performance/index.html#nrinet-reclassification-index",
+    "title": "分類モデルの評価について",
+    "section": "NRI（Net Reclassification Index）",
+    "text": "NRI（Net Reclassification Index）\n\n古いモデルから新しいモデルでの分類によってどのように変化したかを示す(Alba et al. 2017)\nShift tableと似ているがちょっと違う\n実は複数の種類がある\n大きく分けて以下に分けられる\n\nCategory-based NRI\nContinuous NRI"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#category-based-nri",
+    "href": "statistics/model_performance/index.html#category-based-nri",
+    "title": "分類モデルの評価について",
+    "section": "Category-based NRI",
+    "text": "Category-based NRI\n\n\nイベントがあった患者とイベントがなかった患者で分けて、各々の群を新旧のモデルで分類する\n\n分け方は何群でも良いが3群が多い\n\nイベントあり群では旧モデルよりもRiskを高く分類したらPositive、Riskを低く分類したらNegative\nイベントなし群では逆\n差し引きして、最終的なモデルの良さを数値で表す\n実臨床に沿っているのが利点だが、一方で分類の仕方が恣意的になる"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#continuous-nri",
+    "href": "statistics/model_performance/index.html#continuous-nri",
+    "title": "分類モデルの評価について",
+    "section": "continuous NRI",
+    "text": "continuous NRI\n\n\n1. 新旧モデルの予測確率\n\n\n\n\n\nbin_status\nsimple_pred\ncomplex_pred\n\n\n\n\n1\n0.9831682\n0.9960985\n\n\n0\n0.6226083\n0.6099328\n\n\n1\n0.7451466\n0.7292784\n\n\n1\n0.7828269\n0.6291928\n\n\n1\n0.5681130\n0.4233752\n\n\n0\n0.4439187\n0.1625034\n\n\n\n\n\n\n\n→\n\n\n新旧の確率を比較し、イベントの有無ごとに上昇・非上昇の割合を計算\n\n\n2. イベントの有無ごとに集計\n\n\n\n\n\nbin_status\nn\nProb(new &gt; old)\nProb(old &gt;= new)\n\n\n\n\n1\n129\n0.6589147\n0.3410853\n\n\n0\n147\n0.2176871\n0.7823129\n\n\n\n\n\n\n\n\n[1] 0.8824\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい\n\n\\[\n\\mathrm{NRI}_{\\mathrm{continuous}}\n=\n\\Pr(\\text{higher} \\mid \\text{event})\n-\n\\Pr(\\text{lower} \\mid \\text{event})\n+\n\\Pr(\\text{lower} \\mid \\text{nonevent})\n-\n\\Pr(\\text{higher} \\mid \\text{nonevent})\n\\]\n\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#nriの使い方注意点",
+    "href": "statistics/model_performance/index.html#nriの使い方注意点",
+    "title": "分類モデルの評価について",
+    "section": "NRIの使い方、注意点",
+    "text": "NRIの使い方、注意点\n\nEvent NRI、Non-event NRIを各々提示する\n\n可能であれば、臨床的に意味があるカットオフでのCategory-based NRIが望ましい\n\nNRI単独で評価はせず、補助的に用いる\n\nAUROC等と一緒に\nCalibrationがもともと悪いデータだと、意味がなくても有意に改善する可能性がある\n\n最も良い使い方\n\n全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価(Leening et al. 2014)"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#idiintegrated-discrimination-improvement",
+    "href": "statistics/model_performance/index.html#idiintegrated-discrimination-improvement",
+    "title": "分類モデルの評価について",
+    "section": "IDI（Integrated Discrimination Improvement）",
+    "text": "IDI（Integrated Discrimination Improvement）\n\n\n\n\n\n\n\n\n\n\nOutcome\nsimple modelでのeventの平均予測確率\ncomplex modelでのeventの平均予測確率\n\n\n\n\n1\n0.5795059\n0.6762434\n\n\n0\n0.3690050\n0.2841129\n\n\n\n\n\n[1] 0.181\n\n\n\\[\n\\boxed{\n\\mathrm{IDI}\n=\n\\text{event群における予測確率の平均上昇}\n-\n\\text{non-event群における予測確率の平均上昇}\n}\n\\]\n\nEvent群におけるモデル予測の平均の差と非イベント群の負のモデル予測の平均の差をとったもの\nCalibration的な意味合いもある\nNRI, IDIを2値分類で使うならRだとPredictABEL packageが使いやすい"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#decision-curve-analysis",
+    "href": "statistics/model_performance/index.html#decision-curve-analysis",
+    "title": "分類モデルの評価について",
+    "section": "Decision Curve Analysis",
+    "text": "Decision Curve Analysis\n\nNRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている\n\n現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある\n例：失神患者の心電図モニター vs. HFrEFの心臓生検\n\n重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという(Vickers et al. 2016)"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#decision-curve-analysis-net-benefitの概念",
+    "href": "statistics/model_performance/index.html#decision-curve-analysis-net-benefitの概念",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysis ~ Net benefitの概念",
+    "text": "Decision curve analysis ~ Net benefitの概念\n\n真陽性のメリットと偽陽性によるデメリットの引き算を以下のように定義する\n\n\\[\n\\operatorname{NB}(p_t)\n=\n\\frac{\\operatorname{TP}(p_t)}{N}\n-\n\\frac{\\operatorname{FP}(p_t)}{N}\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\n\n\\(N\\)：患者全体の数\n\\(\\operatorname{TP}(p_t)\\)：閾値確率 \\(p_t\\) で検査陽性とされた中での真陽性者数\n\\(\\operatorname{FP}(p_t)\\)：閾値確率 \\(p_t\\) で検査陽性とされた中での偽陽性者数\n\\(\\dfrac{p_t}{1-p_t}\\)：偽陽性による不利益を真陽性による利益に換算する重み\nModelの予測においてX軸に陽性とする閾値(Threshold)、このNet benefitをY軸に描くのがDecision curve analysisである"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#net-beneiftとthresholdの関係",
+    "href": "statistics/model_performance/index.html#net-beneiftとthresholdの関係",
+    "title": "分類モデルの評価について",
+    "section": "Net beneiftとThresholdの関係",
+    "text": "Net beneiftとThresholdの関係\n\nNet benefitはThreshold毎に真陽性に対する許容される偽陽性の割合を示す\n例えば、SIHDを予測するmodelでThresholdを15%として、その15%を超えたときにCAGをするとする\nThreshold = 15%の時、Oddsは0.85/0.15 = 5.67(Vertosick and Vickers 2022)\n\n一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断\n\n元疾患の重篤さや、検査後の動き、患者の年齢などによってThresholdは変わる\n\n脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)\nDCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#decision-curve-analysisのcurve①",
+    "href": "statistics/model_performance/index.html#decision-curve-analysisのcurve①",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysisのCurve①",
+    "text": "Decision curve analysisのCurve①\n\n\n\n\n\n\n\n\n\n\n\n\nThreshold\nn\nTrue positive\nFalse positive\nNet benefit\n\n\n\n\n0.00\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0 / (1 - 0) = 0.467\n\n\n0.05\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.05 / (1 - 0.05) = 0.439\n\n\n0.10\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.1 / (1 - 0.1) = 0.408\n\n\n0.15\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.15 / (1 - 0.15) = 0.373\n\n\n0.20\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.2 / (1 - 0.2) = 0.334\n\n\n0.25\n276\n112 / 276 = 0.406\n84 / 276 = 0.304\n0.406 - 0.304 * 0.25 / (1 - 0.25) = 0.304\n\n\n0.30\n276\n110 / 276 = 0.399\n72 / 276 = 0.261\n0.399 - 0.261 * 0.3 / (1 - 0.3) = 0.287\n\n\n0.35\n276\n110 / 276 = 0.399\n66 / 276 = 0.239\n0.399 - 0.239 * 0.35 / (1 - 0.35) = 0.27\n\n\n\n\n\n\nThresholdを0.01や0.05刻みで並べる\n各々のThresholdで何人がTrue positive/False positiveになるか計算\nNet benefitの式にあてて計算する\n\n\n式の定義からたとえ、閾値の変化の結果、真陽性や偽陽性の人数が変わらなくてもNet benefitは変化する"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#decision-curve-analysisのcurve②",
+    "href": "statistics/model_performance/index.html#decision-curve-analysisのcurve②",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysisのCurve②",
+    "text": "Decision curve analysisのCurve②\n\n比較するモデルのほかに、Default strategyとして以下の曲線も描く\n\n誰も治療しない戦略（treat none）\n全員治療する戦略(treat all)\n\nTreat noneのNet benefitは、TPもFPも0のため常に0\nTreat allのNet benefitは\n\n\\[\n\\operatorname{NB}_{\\mathrm{all}}(p_t)\n=\n有病率\n-\n(1-有病率)\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\nとなる。"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#decision-curveの見方",
+    "href": "statistics/model_performance/index.html#decision-curveの見方",
+    "title": "分類モデルの評価について",
+    "section": "Decision curveの見方",
+    "text": "Decision curveの見方\n\n\n\n\n\n\n\n\n\n\nDefault strategy\n患者を陽性（生検適応）と判断する確率：P(t)\nNet benefitの値のところで最も上のstrategyがより良いモデル\nTreat allとTreat noneよりは常に高くないといけない\n左端のベースラインのリスクの高低も必ず評価する"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#dcanbの解釈",
+    "href": "statistics/model_performance/index.html#dcanbの解釈",
+    "title": "分類モデルの評価について",
+    "section": "DCA、NBの解釈",
+    "text": "DCA、NBの解釈\n\n高価な検査、侵襲的な検査、面倒な検査の場合\n\nΔNBの逆数がNNTと同じような役割を果たす（test tradeoff）\n\n例\n\n心Sarcoidosisの診断にPETを加えたモデルがある\nP(t) が10%の時の ΔNB が0.001\n10%以上で陽性とする基準でNNS 1000\n言い換えると、111回やると1回の偽陽性を避けられる"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#nbの解釈例",
+    "href": "statistics/model_performance/index.html#nbの解釈例",
+    "title": "分類モデルの評価について",
+    "section": "NBの解釈例",
+    "text": "NBの解釈例\n\n以下にDCAの解釈の例を示す。\n\n実線（）：treat all\n点線（）：treat none\n破線（）：モデル\n一点鎖線（）：比較モデル\n\n臨床的に意味がある閾値が20%(妥当な範囲が10-30%)と考えている\n\n\nCase 1Case 2Case 3Case 4Case 5\n\n\n\n\nモデルの線は20%を超えないとTreat allより高くない\n患者によっては、10-15%でも治療を選択する\n実質的にモデルは価値がない(Treat allで良い)\nモデルのCalibrationが悪く、Riskを過小評価している\n\n\n\n\n\nこのモデルはAUROCは高い\nしかし、有病率が高すぎる(60%)\nそのため、Treat allよりもモデルが良いレンジはReasonableな10-30%よりも高い\n結果的には、このモデルも価値がない\n\n\n\n\n\n13%を超えた後はTreat allよりも良いNet benefitを示している\n\n13%以下の時はTreat allと同じ性能\n\nもしも、このモデルが13%以下を出す事が多くなければ悪くないモデル\n\n\n\n\n\n2つのModelは両者とも、Treat all/noneよりも良いNBを示している\n一方で、このModelは13%くらいのところで交差しており、どちらがより良いかは示せない\n\n\n\n\n\nモデルは非常によく、AUROCは0.75。また、比較モデルはさらに良くAUROC 0.8だった\nしかしながら、比較モデルはCalibrationが悪くRiskをUnderestimateしている\n\nThreshold rangeの中ではAUROC 0.75のModelの方が常に良いNBを示している\nAUROC 0.8の比較モデルはTreat allよりも悪く有害な可能性すらある"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#decision-curve-analysisのfigureの作り方",
+    "href": "statistics/model_performance/index.html#decision-curve-analysisのfigureの作り方",
+    "title": "分類モデルの評価について",
+    "section": "Decision Curve analysisのFigureの作り方",
+    "text": "Decision Curve analysisのFigureの作り方\n\n重要な事は、P(t) のレンジを臨床的に意味のある範囲で決める\nモデルから逆に P(t) を決めてはいけない\n有病率（P(t) = 0 の時のNB）の値も確認\n興味があるレンジでどのような動態かを確認する\nCalibrationが悪いとTreat allやTreat noneよりも悪くなりうる\nその場合はそれ以上の比較はしない\n新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する\n必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#結局どうすればいいの-1",
+    "href": "statistics/model_performance/index.html#結局どうすればいいの-1",
+    "title": "分類モデルの評価について",
+    "section": "結局どうすればいいの？",
+    "text": "結局どうすればいいの？\n\nモデルを単に評価するだけなら不要\nベースのモデルに対してどの程度変化したかを記述したい\n元のモデルに対して何かのマーカー（BNP等）を追加したときに、その改善を言いたい\n\ncNRI\n\n臨床的な有用性を強く主張したい\n\n適切なカットオフを自分で決める\nCategory-based NRIをevent/non-eventで記述する\nDecision curve analysisを用いる"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#take-home-message-1",
+    "href": "statistics/model_performance/index.html#take-home-message-1",
+    "title": "分類モデルの評価について",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\n分類モデルの場合は弁別能と較正能を別個に評価しよう！\n\n弁別能：AUROC\n較正能：Calibration plotを用いる\n分類モデルの場合はクラスの偏りに要注意！\n\nモデルの比較にNRI, Decision-curve analysisも使おう！"
+  },
+  {
+    "objectID": "statistics/model_performance/index.html#references",
+    "href": "statistics/model_performance/index.html#references",
+    "title": "分類モデルの評価について",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402.\n\n\nCreager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. “2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.” Journal of the American College of Cardiology 87 (13): 1626–710. https://doi.org/10.1016/j.jacc.2025.11.005.\n\n\nLeening, Maarten J G, Moniek M Vedder, Jacqueline C M Witteman, Michael J Pencina, and Ewout W Steyerberg. 2014. “Net Reclassification Improvement: Computation, Interpretation, and Controversies: A Literature Review and Clinician’s Guide: A Literature Review and Clinician’s Guide.” Annals of Internal Medicine 160 (2): 122–31. https://doi.org/10.7326/M13-1522.\n\n\nThan, Martin, Mel Herbert, Dylan Flaws, et al. 2013. “What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.” International Journal of Cardiology 166 (3): 752–54. https://doi.org/10.1016/j.ijcard.2012.09.171.\n\n\nVertosick, Emily, and Andrew Vickers. 2022. “Decision Curve Analysis for Quantifying the Additional Benefit of a New Marker.” April 11. https://www.fharrell.com/post/addmarkerdca/.\n\n\nVickers, Andrew J, Ben Van Calster, and Ewout W Steyerberg. 2016. “Net Benefit Approaches to the Evaluation of Prediction Models, Molecular Markers, and Diagnostic Tests.” BMJ (Clinical Research Ed.) 352 (January): i6. https://doi.org/10.1136/bmj.i6."
   }
 ]
