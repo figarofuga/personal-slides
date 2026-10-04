@@ -21,21 +21,87 @@
 
 ## 初回セットアップ
 
-VS Code／Positronでこのフォルダーを開きます。Dev ContainerやGitHub Codespacesも利用できます。
-環境の自動インストールは行わないため、手動でセットアップしてください。
+ローカルのVS Code Dev ContainersとGitHub Codespacesで、同じ
+`.devcontainer/devcontainer.json`・Dockerfile・セットアップスクリプトを使用します。
+PCごとのパスやローカルイメージ名を設定する必要はありません。
+再構築に使う`vendor/`・`pixi.toml`・`pixi.lock`は、同じGitリビジョンから取得してください。
+対応環境はLinux x86_64（`linux-64`）です。
+コンテナのビルドと起動には`linux/amd64`を指定しています。
+Apple SiliconなどARMのPCではDockerのエミュレーションを使うため、特に初回ビルドが遅くなります。
 
-Dev Containerで初めて使う場合は、マウントされた`.pixi`への書き込み権限を設定します。
+### 新しいPCでローカル開発
+
+1. Dockerを用意します。WindowsではDocker DesktopのLinux containersと
+   WSL 2を使い、Settings → Resources → WSL Integrationで使用するUbuntuを有効にします。
+2. VS Code・Dev Containers拡張機能・Gitを用意します。WindowsのWSLから開く場合は
+   WSL拡張機能も入れます。
+3. このリポジトリをcloneし、プロジェクト直下をVS Codeで開きます。
+   WindowsではWSL内のLinuxファイルシステムにcloneすると、vendorのビルドが速くなります。
+4. 「Dev Containers: Reopen in Container」を実行します。
+   Dockerfileのビルド、Pixi環境のインストール、動作確認が自動で実行されます。
+
+cloneとVS Code起動の例（WindowsではWSLのターミナルで実行）：
 
 ```bash
-sudo chown -R "$(id -u):$(id -g)" .pixi
+git clone https://github.com/figarofuga/personal-slides.git
+cd personal-slides
+code .
 ```
 
-続いて、`pixi.lock`に記録された環境をインストールします。
+ホスト側にR・Python・Quarto・Pixiを個別にインストールする必要はありません。
+初回はパッケージのダウンロードとvendorのビルドに時間がかかります。
+メモリ16 GB・Dockerの空き容量64 GB以上を目安にしてください。
+
+このPCでWSLCから切り替える場合は、VS Codeユーザー設定の
+`dev.containers.dockerPath`を`docker`に戻します（今回変更済み）。
+Docker Desktopを起動し、WSL統合を有効にしてから、WSL側で
+`docker version`のClientとServerの両方が表示されることを確認してください。
+WSLCのイメージや環境ボリュームはDockerと共有されないため、Docker側で環境を構築します。
+以前のDockerコンテナがある場合は「Dev Containers: Rebuild Container」で
+今回のDockerfileと設定を反映してください。
+
+### GitHub Codespacesで開発
+
+1. `.devcontainer/`・`.vscode/settings.json`・`vendor/`・`pixi.toml`・`pixi.lock`・
+   `scripts/`・`README.md`の変更を
+   同じGitリビジョンにcommit・pushします。`.pixi`やビルド済みバイナリのコピーは不要です。
+2. GitHubでリポジトリの「Code → Codespaces → Create codespace」を選びます。
+3. 初回セットアップの完了を待ち、ブラウザーまたはVS Codeから開発します。
+   ローカルと同じ`pixi run --as-is ...`コマンドを使えます。
+
+別PCから同じCodespaceに接続すれば、そのクラウド環境を継続して使えます。
+ローカルとCodespacesのソース変更はGitのcommit・push・pullで同期します。
+環境の定義を変更した場合は「Dev Containers: Rebuild Container」または
+「Codespaces: Rebuild Container」で再構築できます。
+
+[Dev Containersの公式手順](https://code.visualstudio.com/docs/devcontainers/create-dev-container)・
+[Codespacesの公式手順](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers)
+
+Dev ContainerではPixi **0.81.0**を使います。初回作成時に
+`.devcontainer/setup.sh`が`.pixi`の権限を設定し、`pixi install --locked`で
+環境をインストールして、vendorのRパッケージ・Python・Quartoの起動を確認します。
+`r-gam`が必要とするOpenBLASもPixiの依存関係に含め、ホストのシステムライブラリに
+依存せず読み込めるようにしています。
+再構築にはネットワーク接続と、ロックに記録された配布パッケージが必要です。
+通常のコンテナ起動では自動インストールを行わず、既存の永続ボリュームを使用します。
+
+既存コンテナでセットアップを再実行する場合は、次を使います。
+
+```bash
+bash .devcontainer/setup.sh
+```
+
+Dev Containerを使わない場合も、Pixi 0.81.0を使って次を実行します。
 Gitから取得した変更で`pixi.lock`が更新された場合も、このコマンドを使います。
 
 ```bash
 env -u PIXI_NO_INSTALL -u PIXI_FROZEN pixi install --locked
 ```
+
+`--locked`は、ソース・設定とロックが一致しない場合に停止します。
+再構築時に`--frozen`で不一致を無視したり、通常の`pixi install`で
+新しいバージョンを解決したりしないでください。vendorのビルドツールも
+バージョンを固定しています。更新時は設定とロックを一緒に更新・保存します。
 
 direnvを使っている場合は、その後に`direnv reload`を実行します。
 使っていなければターミナルを開き直してください。起動中のRセッションも再起動します。

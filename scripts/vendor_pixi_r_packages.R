@@ -669,7 +669,7 @@ write_child_pixi_toml <- function(
   r_base_spec = ">=4.5,<4.6",
   conda_channel = "https://prefix.dev/conda-forge",
   backend_channel = "https://prefix.dev/pixi-build-backends",
-  backend_version = "*"
+  backend_version = "==0.1.7.20260909.0823.9daa178"
 ) {
   conda_name <- r_package_to_conda_name(package)
 
@@ -916,7 +916,7 @@ vendor_pixi_r_packages <- function(
   r_base_spec = ">=4.5,<4.6",
   conda_channel = "https://prefix.dev/conda-forge",
   backend_channel = "https://prefix.dev/pixi-build-backends",
-  backend_version = "*",
+  backend_version = "==0.1.7.20260909.0823.9daa178",
   strict_pure_r = TRUE,
   check_dependencies = TRUE,
   update_parent = TRUE,

@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n20.32771\n\n\n2\n20.64792\n\n\n3\n18.12348\n\n\n4\n22.17837\n\n\n5\n20.05369\n\n\n6\n23.02784\n\n\n7\n22.60557\n\n\n8\n23.01164\n\n\n9\n23.67152\n\n\n10\n18.77655\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n23.77088\n\n\n2\n22.42867\n\n\n3\n20.75505\n\n\n4\n19.22720\n\n\n5\n21.29554\n\n\n6\n20.95797\n\n\n7\n19.39676\n\n\n8\n22.72304\n\n\n9\n17.05442\n\n\n10\n21.77989\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n79.00191\n181.7712\n\n\n\n2\n74.88985\n192.5949\n\n\n\n3\n73.79278\n187.8621\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.15951\n203.7234\n\n\n\n2\n74.93242\n208.4789\n\n\n\n3\n70.84873\n203.8744\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -2804,14 +2804,14 @@
     "href": "statistics/model_performance_mi/index.html#分類の評価discriminationとcalibration",
     "title": "分類モデルの評価について",
     "section": "分類の評価：DiscriminationとCalibration",
-    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination(弁別能)とCalibration(較正能)を別個に評価する\nDiscrimination\n\n0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目 -&gt; Calibrationはしばしば忘れ去られている (Alba et al. 2017)"
+    "text": "分類の評価：DiscriminationとCalibration\n\n分類モデルの評価では、Discrimination(弁別能)とCalibration(較正能)を別個に評価する\nDiscrimination\n\n0/1の正確性: 実際にこの患者がHigh riskかどうかの評価\n言い換えると、患者をRiskの順番に並び替える能力\n\nCalibration\n\nその患者のリスクの絶対値の評価\n\nまずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目 -&gt; Calibrationはしばしば忘れ去られている (Alba et al. 2017)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#例",
     "href": "statistics/model_performance_mi/index.html#例",
     "title": "分類モデルの評価について",
     "section": "例",
-    "text": "例\n\nDiscrimination\n\n「ERで胸痛を訴えているこの患者がMIかどうか？」\nそもそも、これが当たらないとどうしようもない\n\nCalibration\n\n「この患者にPCIをしたときに透析になってしまう確率は？」\n20%を超えるようならカテなしで様子をみよう\n0/1だけでなく、実際の数字が重要"
+    "text": "例\n\nDiscrimination\n\n「ERで胸痛を訴えているこの患者がMIかどうか？」\nそもそも、これが当たらないとどうしようもない\n\nCalibration\n\n「このNSTEACSの患者にPCIをしたときに透析になってしまう確率は？」\n20%を超えるようなら今日はカテなしで、明日以降前負荷をかけた上でCAGをするか再検討しよう\n0/1だけでなく、実際の数字が重要"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#discriminationとcalibration",
@@ -2825,7 +2825,7 @@
     "href": "statistics/model_performance_mi/index.html#discriminationの評価について",
     "title": "分類モデルの評価について",
     "section": "Discriminationの評価について",
-    "text": "Discriminationの評価について\n\n\n\n\n   truth      Class1       Class2 predicted\n1 Class2 0.003589243 0.9964107574    Class2\n2 Class1 0.678621054 0.3213789460    Class1\n3 Class2 0.110893522 0.8891064779    Class2\n4 Class1 0.735161703 0.2648382969    Class1\n5 Class2 0.016239960 0.9837600397    Class2\n6 Class1 0.999275071 0.0007249286    Class1\n\n\n\n\n\n→\n\n\n予測と現実の0/1の組み合わせを2×2にまとめる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTruth\n\nPredicted\n\n\n\nClass1\nClass2\n\n\n\n\nClass1\n227\n50\n\n\nClass2\n31\n192\n\n\n\n\n\n\n\n\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
+    "text": "Discriminationの評価について\n\n\n\n\n\n\n\ntruth\nClass1\nClass2\npredicted\n\n\n\n\nClass2\n0.0035892\n0.9964108\nClass2\n\n\nClass1\n0.6786211\n0.3213789\nClass1\n\n\nClass2\n0.1108935\n0.8891065\nClass2\n\n\nClass1\n0.7351617\n0.2648383\nClass1\n\n\nClass2\n0.0162400\n0.9837600\nClass2\n\n\nClass1\n0.9992751\n0.0007249\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n予測と現実の0/1の組み合わせを2×2にまとめる\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTruth\n\nPredicted\n\n\n\nClass1\nClass2\n\n\n\n\nClass1\n227\n50\n\n\nClass2\n31\n192\n\n\n\n\n\n\n\n\n\n0/1の評価（混同行列からの計算）\n\nAccuracy、感度、特異度、Fβ scoreなど\n\nリスク毎の感度・特異度などを評価したもの\n\nROC、PR curve"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#混同行列関連",
@@ -2846,7 +2846,7 @@
     "href": "statistics/model_performance_mi/index.html#リスク毎の評価",
     "title": "分類モデルの評価について",
     "section": "リスク毎の評価",
-    "text": "リスク毎の評価\n\n\n\n\n\n.threshold\nspecificity\nsensitivity\nrecall\nprecision\n\n\n\n\n-Inf\n0.0000000\n1\nNA\nNA\n\n\n2.00e-07\n0.0000000\n1\n1\n0.5160000\n\n\n4.50e-06\n0.0041322\n1\n1\n0.5170341\n\n\n5.80e-06\n0.0082645\n1\n1\n0.5180723\n\n\n5.90e-06\n0.0123967\n1\n1\n0.5191147\n\n\n1.22e-05\n0.0165289\n1\n1\n0.5201613\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc binary         0.939\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 pr_auc  binary         0.946"
+    "text": "リスク毎の評価\n\n\n\n\n\n.threshold\nspecificity\nsensitivity\nrecall\nprecision\n\n\n\n\n-Inf\n0.0000000\n1\nNA\nNA\n\n\n2.00e-07\n0.0000000\n1\n1\n0.5160000\n\n\n4.50e-06\n0.0041322\n1\n1\n0.5170341\n\n\n5.80e-06\n0.0082645\n1\n1\n0.5180723\n\n\n5.90e-06\n0.0123967\n1\n1\n0.5191147\n\n\n1.22e-05\n0.0165289\n1\n1\n0.5201613\n\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc binary         0.939\n\n\n\n\nPrecisionとRecallで点を結ぶとPR曲線\n\n\n\n\n\n\n\n\n\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 pr_auc  binary         0.946"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#注意点",
@@ -2874,7 +2874,7 @@
     "href": "statistics/model_performance_mi/index.html#calibration-plotの作り方",
     "title": "分類モデルの評価について",
     "section": "Calibration Plotの作り方",
-    "text": "Calibration Plotの作り方\n\n\n1. 予測結果を昇順で並べる\n\n\n\n\n\n予測確率\n実測値\n予測確率カテゴリ\n\n\n\n\n2.00e-07\nClass2\n1\n\n\n4.50e-06\nClass2\n1\n\n\n5.80e-06\nClass2\n1\n\n\n5.90e-06\nClass2\n1\n\n\n1.22e-05\nClass2\n1\n\n\n1.40e-05\nClass2\n1\n\n\n\n\n\n\n\n\n予測確率\n実測値\n予測確率カテゴリ\n\n\n\n\n0.9999054\nClass1\n10\n\n\n0.9999103\nClass1\n10\n\n\n0.9999104\nClass1\n10\n\n\n0.9999209\nClass1\n10\n\n\n0.9999720\nClass1\n10\n\n\n0.9999965\nClass1\n10\n\n\n\n\n\n\n\n\n→\n\n\n同じClassでの平均発症予測確率と実際の発症率を比べる\n\n\n\n2. Class毎の予測確率の平均と実際のイベント発症率を計算する\n\n\n\n\n\nカテゴリ\n予測発症率の平均\n実際の発症率\n\n\n\n\n1\n0.00\n0.0006264\n\n\n2\n0.02\n0.0122140\n\n\n3\n0.14\n0.0776816\n\n\n4\n0.26\n0.2125326\n\n\n5\n0.38\n0.4978346\n\n\n6\n0.56\n0.7620909\n\n\n7\n0.86\n0.9134009\n\n\n8\n0.98\n0.9778961\n\n\n9\n0.96\n0.9938732\n\n\n10\n1.00\n0.9992472"
+    "text": "Calibration Plotの作り方\n\n\n1. 予測確率で昇順に並べ、10群に分ける\n\n\n\n\n\n予測確率\n実測値\n群\n\n\n\n\n2.00e-07\nClass2\n1\n\n\n4.50e-06\nClass2\n1\n\n\n5.80e-06\nClass2\n1\n\n\n5.90e-06\nClass2\n1\n\n\n1.22e-05\nClass2\n1\n\n\n1.40e-05\nClass2\n1\n\n\n\n\n\n\n\n\n予測確率\n実測値\n群\n\n\n\n\n0.9999054\nClass1\n10\n\n\n0.9999103\nClass1\n10\n\n\n0.9999104\nClass1\n10\n\n\n0.9999209\nClass1\n10\n\n\n0.9999720\nClass1\n10\n\n\n0.9999965\nClass1\n10\n\n\n\n\n\n\n\n\n→\n\n\n群ごとに平均を計算\n\n\n\n2. 群ごとの平均予測確率と実際の発症率\n\n\n\n\n\n群\n平均予測確率\n実際の発症率\n\n\n\n\n1\n0.00\n0.001\n\n\n2\n0.02\n0.012\n\n\n3\n0.14\n0.078\n\n\n4\n0.26\n0.213\n\n\n5\n0.38\n0.498\n\n\n6\n0.56\n0.762\n\n\n7\n0.86\n0.913\n\n\n8\n0.98\n0.978\n\n\n9\n0.96\n0.994\n\n\n10\n1.00\n0.999\n\n\n\n\n\n\n\n3. 平均予測確率（X軸）と実際の発症率（Y軸）をプロット"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#calibrationの細かい方法",
@@ -2888,7 +2888,7 @@
     "href": "statistics/model_performance_mi/index.html#brier-score",
     "title": "分類モデルの評価について",
     "section": "Brier Score",
-    "text": "Brier Score\n\\[\n\\text{Brier Score}\n=\n\\frac{1}{N}\n\\sum_{i=1}^{N}\n\\left(\\hat{p}_i - y_i\\right)^2\n\\]\n\n\n\n\n\n\n\nProbability of Class1\npredicted\nTrue label\ndiff_squared\n\n\n\n\n0.004\nClass2\n0\n(0-0.004)^2 = 0\n\n\n0.679\nClass1\n1\n(1-0.679)^2 = 0.103\n\n\n0.111\nClass2\n0\n(0-0.111)^2 = 0.012\n\n\n0.735\nClass1\n1\n(1-0.735)^2 = 0.07\n\n\n0.016\nClass2\n0\n(0-0.016)^2 = 0\n\n\n0.999\nClass1\n1\n(1-0.999)^2 = 0\n\n\n\n\n\n\nClass1を予測したら1, Class2を予測したら0"
+    "text": "Brier Score\n\\[\n\\text{Brier Score}\n=\n\\frac{1}{N}\n\\sum_{i=1}^{N}\n\\left(\\hat{p}_i - y_i\\right)^2\n\\]\n\n\n\n\n\n\n\nProbability of Class1\npredicted\nTrue label\ndiff_squared\n\n\n\n\n0.004\nClass2\n0\n(0-0.004)2 = 0\n\n\n0.679\nClass1\n1\n(1-0.679)2 = 0.103\n\n\n0.111\nClass2\n0\n(0-0.111)2 = 0.012\n\n\n0.735\nClass1\n1\n(1-0.735)2 = 0.07\n\n\n0.016\nClass2\n0\n(0-0.016)2 = 0\n\n\n0.999\nClass1\n1\n(1-0.999)2 = 0\n\n\n\n\n\n\n実際のアウトカムがClass 1なら1, Class2だったら0とする\n各々の予測確率(連続値)と上記のアウトカムの差の二乗を足し算する\n連続値のモデルのMSEのイメージ"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#agenda-3",
@@ -2916,7 +2916,7 @@
     "href": "statistics/model_performance_mi/index.html#nrinet-reclassification-index",
     "title": "分類モデルの評価について",
     "section": "NRI（Net Reclassification Index）",
-    "text": "NRI（Net Reclassification Index）\n(Alba et al. 2017)\n\n古いモデルから新しいモデルでの分類によってどのように変化したかを示す\n実は複数の種類がある\n大きく分けて以下に分けられる\n\nCategory-based NRI\nContinuous NRI"
+    "text": "NRI（Net Reclassification Index）\n\n古いモデルから新しいモデルでの分類によってどのように変化したかを示す(Alba et al. 2017)\nShift tableと似ているがちょっと違う\n実は複数の種類がある\n大きく分けて以下に分けられる\n\nCategory-based NRI\nContinuous NRI"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#cnri",
@@ -2930,21 +2930,21 @@
     "href": "statistics/model_performance_mi/index.html#nriの使い方注意点",
     "title": "分類モデルの評価について",
     "section": "NRIの使い方、注意点",
-    "text": "NRIの使い方、注意点\n\nEvent NRI、Non-event NRIを各々提示する\n\n可能であれば、臨床的に意味があるカットオフでのCategory-based NRIが望ましい\n\nNRI単独で評価はせず、補助的に用いる\n\nAUROC等と一緒に\nCalibrationがもともと悪いデータだと、意味がなくても有意に改善する可能性がある\n\n最も良い使い方\n\n全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価\n\n\n\nAnn Intern Med. 2014;160:122-131."
+    "text": "NRIの使い方、注意点\n\nEvent NRI、Non-event NRIを各々提示する\n\n可能であれば、臨床的に意味があるカットオフでのCategory-based NRIが望ましい\n\nNRI単独で評価はせず、補助的に用いる\n\nAUROC等と一緒に\nCalibrationがもともと悪いデータだと、意味がなくても有意に改善する可能性がある\n\n最も良い使い方\n\n全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価(Leening et al. 2014)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#idiintegrated-discrimination-improvement",
     "href": "statistics/model_performance_mi/index.html#idiintegrated-discrimination-improvement",
     "title": "分類モデルの評価について",
     "section": "IDI（Integrated Discrimination Improvement）",
-    "text": "IDI（Integrated Discrimination Improvement）\n\n\n  bin_status mean_simple_pred mean_complex_pred\n1          1        0.5795059         0.6762434\n2          0        0.3690050         0.2841129\n\n\n[1] 0.181\n\n\n\\[\n\\mathrm{IDI}\n=\n\\left(\n\\bar{p}_{\\mathrm{new,event}}\n-\n\\bar{p}_{\\mathrm{old,event}}\n\\right)\n-\n\\left(\n\\bar{p}_{\\mathrm{new,non-event}}\n-\n\\bar{p}_{\\mathrm{old,non-event}}\n\\right)\n\\]\n\\[\n\\boxed{\n\\mathrm{IDI}\n=\n\\text{event群における予測確率の平均上昇}\n-\n\\text{non-event群における予測確率の平均上昇}\n}\n\\]"
+    "text": "IDI（Integrated Discrimination Improvement）\n\n\n\n\n\n\n\n\n\n\nOutcome\nsimple modelでのeventの平均予測確率\ncomplex modelでのeventの平均予測確率\n\n\n\n\n1\n0.5795059\n0.6762434\n\n\n0\n0.3690050\n0.2841129\n\n\n\n\n\n[1] 0.181\n\n\n\\[\n\\boxed{\n\\mathrm{IDI}\n=\n\\text{event群における予測確率の平均上昇}\n-\n\\text{non-event群における予測確率の平均上昇}\n}\n\\]\n\nEvent群におけるモデル予測の平均の差と非イベント群の負のモデル予測の平均の差をとったもの\nCalibration的な意味合いもある\nNRI, IDIを2値分類で使うならRだとPredictABEL packageが使いやすい"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysis",
     "href": "statistics/model_performance_mi/index.html#decision-curve-analysis",
     "title": "分類モデルの評価について",
     "section": "Decision Curve Analysis",
-    "text": "Decision Curve Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている\n\n現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある\n例：ICUの心電図モニター vs. HFrEFの心臓生検\n\n重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという(Vickers et al. 2016)"
+    "text": "Decision Curve Analysis\n\nNRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている\n\n現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある\n例：失神患者の心電図モニター vs. HFrEFの心臓生検\n\n重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという(Vickers et al. 2016)"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#ベースラインのリスク",
@@ -4358,7 +4358,7 @@
     "href": "statistics/model_performance_mi/index.html#roc指標ができるまで",
     "title": "分類モデルの評価について",
     "section": "ROC指標ができるまで",
-    "text": "ROC指標ができるまで\n\n\n1. 予測結果を昇順で並べる\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n2.00e-07\nClass2\n\n\n4.50e-06\nClass2\n\n\n5.80e-06\nClass2\n\n\n5.90e-06\nClass2\n\n\n1.22e-05\nClass2\n\n\n1.40e-05\nClass2\n\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n2. 閾値ごとでの予測\n\n\n\n\n\n予測確率\n実際のアウトカム\n閾値:2.0e-07\n閾値2:4.50e-06\n\n\n\n\n1.79e-07\nClass2\nClass2\nClass2\n\n\n4.50e-06\nClass2\nClass1\nClass2\n\n\n5.81e-06\nClass2\nClass1\nClass1\n\n\n5.92e-06\nClass2\nClass1\nClass1\n\n\n1.22e-05\nClass2\nClass1\nClass1\n\n\n1.40e-05\nClass2\nClass1\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n3. 閾値毎の感度・特異度\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n-Inf\n0.0000000\n1\n\n\n2.00e-07\n0.0000000\n1\n\n\n4.50e-06\n0.0041322\n1\n\n\n5.80e-06\n0.0082645\n1\n\n\n5.90e-06\n0.0123967\n1\n\n\n1.22e-05\n0.0165289\n1\n\n\n1.40e-05\n0.0206612\n1\n\n\n\n\n\n\n\n感度と1-特異度で点を結ぶとROC曲線\nPrecisionとRecallで点を結ぶとPR曲線"
+    "text": "ROC指標ができるまで\n\n\n1. 予測結果を昇順で並べる\n\n\n\n\n\n予測確率\n実測値\n\n\n\n\n2.00e-07\nClass2\n\n\n4.50e-06\nClass2\n\n\n5.80e-06\nClass2\n\n\n5.90e-06\nClass2\n\n\n1.22e-05\nClass2\n\n\n1.40e-05\nClass2\n\n\n\n\n\n\n\n\n→\n\n\n閾値を動かしながら予測値を作る\n\n\n\n2. 閾値ごとでの予測\n\n\n\n\n\n予測確率\n実際のアウトカム\n閾値:2.0e-07での予測\n閾値2:4.50e-06での予測\n\n\n\n\n1.79e-07\nClass2\nClass2\nClass2\n\n\n4.50e-06\nClass2\nClass1\nClass2\n\n\n5.81e-06\nClass2\nClass1\nClass1\n\n\n5.92e-06\nClass2\nClass1\nClass1\n\n\n1.22e-05\nClass2\nClass1\nClass1\n\n\n1.40e-05\nClass2\nClass1\nClass1\n\n\n\n\n\n\n\n\n→\n\n\n各々の閾値での予測のClassから感度・特異度を計算\n\n\n\n3. 閾値毎の感度・特異度\n\n\n\n\n\n閾値\n特異度\n感度\n\n\n\n\n-Inf\n0.0000000\n1\n\n\n2.00e-07\n0.0000000\n1\n\n\n4.50e-06\n0.0041322\n1\n\n\n5.80e-06\n0.0082645\n1\n\n\n5.90e-06\n0.0123967\n1\n\n\n1.22e-05\n0.0165289\n1\n\n\n1.40e-05\n0.0206612\n1"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#confusion-matrix-baseの評価の注意点",
@@ -4659,7 +4659,7 @@
     "href": "statistics/mlcausal/index.html#生存分析について",
     "title": "機械学習を用いた因果推論",
     "section": "生存分析について",
-    "text": "生存分析について\n\neconmlではまだ実装されていない\nmeta learnerで無理やりやるなら、pseudopopulation(Jackknife法を使って、打ち切りデータを最後まで観察できたものとする)で予測させるなど\ncausal forestではnaturalに実装されている\n論文にはBalanced Individual Treatment Effect in Survival Data (BITES)なども紹介されている(Möller et al. 2026)"
+    "text": "生存分析について\n\neconmlではまだ実装されていない\nmeta learnerで無理やりやるなら\n\nIPCWで打ち切りを予測\nIPW\nある時間での生存確率の差をOutcomeとしたmodel model  の3つのmodelを使って行う(CRANにはないがsurvlearners package(Xu et al. 2023))\n\ncausal forestではnaturalに実装されている\n論文にはBalanced Individual Treatment Effect in Survival Data (BITES)なども紹介されている(Möller et al. 2026)"
   },
   {
     "objectID": "statistics/mlcausal/index.html#モデルの評価の仕方の概論",
@@ -4771,7 +4771,7 @@
     "href": "statistics/mlcausal/index.html#references",
     "title": "機械学習を用いた因果推論",
     "section": "References",
-    "text": "References\n\n\nBuell, Kevin G, Alexandra B Spicer, Jonathan D Casey, et al. 2024. “Individualized Treatment Effects of Oxygen Targets in Mechanically Ventilated Critically Ill Adults.” The Journal of the American Medical Association 331 (14): 1195–204. https://doi.org/10.1001/jama.2024.2933.\n\n\nCollins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. “TRIPOD+AI Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.” BMJ 385 (April): e078378. https://doi.org/10.1136/bmj-2023-078378.\n\n\nDesai, Rishi J, Robert J Glynn, Scott D Solomon, Brian Claggett, Shirley V Wang, and Muthiah Vaduganathan. 2024. “Individualized Treatment Effect Prediction with Machine Learning - Salient Considerations.” NEJM Evidence 3 (4): EVIDoa2300041. https://doi.org/10.1056/EVIDoa2300041.\n\n\nFeuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. “Causal Machine Learning for Predicting Treatment Outcomes.” Nature Medicine 30 (4): 958–68. https://doi.org/10.1038/s41591-024-02902-1.\n\n\nGRF Development Team. n.d. “Qini Curves: Automatic Cost-Benefit Analysis.” Accessed September 19, 2026. https://grf-labs.github.io/grf/articles/maq.html.\n\n\nInoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. “Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.” Journal of Clinical Epidemiology 176 (111538): 111538. https://doi.org/10.1016/j.jclinepi.2024.111538.\n\n\nInoue, Kosuke, Susan Athey, Katherine Baicker, and Yusuke Tsugawa. 2024. “Heterogeneous Effects of Medicaid Coverage on Cardiovascular Risk Factors: Secondary Analysis of Randomized Controlled Trial.” BMJ (Clinical Research Ed.) 386 (September): e079377. https://doi.org/10.1136/bmj-2024-079377.\n\n\nInoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. “Machine-Learning-Based High-Benefit Approach Versus Conventional High-Risk Approach in Blood Pressure Management.” International Journal of Epidemiology 52 (4): 1243–56. https://doi.org/10.1093/ije/dyad037.\n\n\nInoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. “Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the MESA Study.” Circulation 147 (2): 132–41. https://doi.org/10.1161/CIRCULATIONAHA.122.062626.\n\n\nKhera, Rohan, Evangelos K Oikonomou, Girish N Nadkarni, et al. 2024. “Transforming Cardiovascular Care with Artificial Intelligence: From Discovery to Practice: JACC State-of-the-Art Review.” Journal of the American College of Cardiology 84 (1): 97–114. https://doi.org/10.1016/j.jacc.2024.05.003.\n\n\nKomura, Toshiaki, Falco J Bargagli-Stoffi, Onyebuchi A Arah, and Kosuke Inoue. 2026. “Estimating and Discovering Heterogeneous Treatment Effects Using Machine Learning in Epidemiological Studies: A Practical Guide.” International Journal of Epidemiology 55 (3). https://doi.org/10.1093/ije/dyag092.\n\n\nLee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. “Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.” Journal of the American Heart Association 13 (19): e034862. https://doi.org/10.1161/JAHA.124.034862.\n\n\nLittle, Roderick J, and Roger J Lewis. 2021. “Estimands, Estimators, and Estimates.” JAMA: The Journal of the American Medical Association 326 (10): 967–68. https://doi.org/10.1001/jama.2021.2886.\n\n\nMöller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. “Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.” Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research 29 (5): 905–13. https://doi.org/10.1016/j.jval.2026.01.013.\n\n\nNgufor, Che, Nan Zhang, Holly K Van Houten, et al. 2025. “Causal Machine Learning for Left Atrial Appendage Occlusion in Patients with Atrial Fibrillation.” JACC. Clinical Electrophysiology 11 (5): 977–86. https://doi.org/10.1016/j.jacep.2024.12.013.\n\n\nPathak, Suraj, Florence Y Lai, Joanne Miksza, et al. 2023. “Surgical or Percutaneous Coronary Revascularization for Heart Failure: An in Silico Model Using Routinely Collected Health Data to Emulate a Clinical Trial.” European Heart Journal 44 (5): 351–64. https://doi.org/10.1093/eurheartj/ehac670.\n\n\nPirracchio, Romain, Alan Hubbard, Charles L Sprung, Sylvie Chevret, Djillali Annane, and Rapid Recognition of Corticosteroid Resistant or Sensitive Sepsis (RECORDS) Collaborators. 2020. “Assessment of Machine Learning to Estimate the Individual Treatment Effect of Corticosteroids in Septic Shock.” JAMA Network Open 3 (12): e2029050. https://doi.org/10.1001/jamanetworkopen.2020.29050.\n\n\nScarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and Aaron Baum. 2019. “Assessment of Risk of Harm Associated with Intensive Blood Pressure Management Among Patients with Hypertension Who Smoke: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial.” JAMA Network Open 2 (3): e190005. https://doi.org/10.1001/jamanetworkopen.2019.0005.\n\n\nSegal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. “Assessing Heterogeneity of Treatment Effect in Real-World Data.” Annals of Internal Medicine 176 (4): 536–44. https://doi.org/10.7326/M22-1510.\n\n\nShiba, Koichiro, and Kosuke Inoue. 2024. “Harnessing Causal Forests for Epidemiologic Research: Key Considerations.” American Journal of Epidemiology 193 (6): 813–18. https://doi.org/10.1093/aje/kwae003.\n\n\nThomas, Laine E, Fan Li, and Michael J Pencina. 2020. “Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.” The Journal of the American Medical Association 323 (23): 2417–18. https://doi.org/10.1001/jama.2020.7819."
+    "text": "References\n\n\nBuell, Kevin G, Alexandra B Spicer, Jonathan D Casey, et al. 2024. “Individualized Treatment Effects of Oxygen Targets in Mechanically Ventilated Critically Ill Adults.” The Journal of the American Medical Association 331 (14): 1195–204. https://doi.org/10.1001/jama.2024.2933.\n\n\nCollins, Gary S, Karel G M Moons, Paula Dhiman, et al. 2024. “TRIPOD+AI Statement: Updated Guidance for Reporting Clinical Prediction Models That Use Regression or Machine Learning Methods.” BMJ 385 (April): e078378. https://doi.org/10.1136/bmj-2023-078378.\n\n\nDesai, Rishi J, Robert J Glynn, Scott D Solomon, Brian Claggett, Shirley V Wang, and Muthiah Vaduganathan. 2024. “Individualized Treatment Effect Prediction with Machine Learning - Salient Considerations.” NEJM Evidence 3 (4): EVIDoa2300041. https://doi.org/10.1056/EVIDoa2300041.\n\n\nFeuerriegel, Stefan, Dennis Frauen, Valentyn Melnychuk, et al. 2024. “Causal Machine Learning for Predicting Treatment Outcomes.” Nature Medicine 30 (4): 958–68. https://doi.org/10.1038/s41591-024-02902-1.\n\n\nGRF Development Team. n.d. “Qini Curves: Automatic Cost-Benefit Analysis.” Accessed September 19, 2026. https://grf-labs.github.io/grf/articles/maq.html.\n\n\nInoue, Kosuke, Motohiko Adomi, Orestis Efthimiou, et al. 2024. “Machine Learning Approaches to Evaluate Heterogeneous Treatment Effects in Randomized Controlled Trials: A Scoping Review.” Journal of Clinical Epidemiology 176 (111538): 111538. https://doi.org/10.1016/j.jclinepi.2024.111538.\n\n\nInoue, Kosuke, Susan Athey, Katherine Baicker, and Yusuke Tsugawa. 2024. “Heterogeneous Effects of Medicaid Coverage on Cardiovascular Risk Factors: Secondary Analysis of Randomized Controlled Trial.” BMJ (Clinical Research Ed.) 386 (September): e079377. https://doi.org/10.1136/bmj-2024-079377.\n\n\nInoue, Kosuke, Susan Athey, and Yusuke Tsugawa. 2023. “Machine-Learning-Based High-Benefit Approach Versus Conventional High-Risk Approach in Blood Pressure Management.” International Journal of Epidemiology 52 (4): 1243–56. https://doi.org/10.1093/ije/dyad037.\n\n\nInoue, Kosuke, Teresa E Seeman, Tamara Horwich, Matthew J Budoff, and Karol E Watson. 2023. “Heterogeneity in the Association Between the Presence of Coronary Artery Calcium and Cardiovascular Events: A Machine-Learning Approach in the MESA Study.” Circulation 147 (2): 132–41. https://doi.org/10.1161/CIRCULATIONAHA.122.062626.\n\n\nKhera, Rohan, Evangelos K Oikonomou, Girish N Nadkarni, et al. 2024. “Transforming Cardiovascular Care with Artificial Intelligence: From Discovery to Practice: JACC State-of-the-Art Review.” Journal of the American College of Cardiology 84 (1): 97–114. https://doi.org/10.1016/j.jacc.2024.05.003.\n\n\nKomura, Toshiaki, Falco J Bargagli-Stoffi, Onyebuchi A Arah, and Kosuke Inoue. 2026. “Estimating and Discovering Heterogeneous Treatment Effects Using Machine Learning in Epidemiological Studies: A Practical Guide.” International Journal of Epidemiology 55 (3). https://doi.org/10.1093/ije/dyag092.\n\n\nLee, Seung-Jun, Jaehyeong Cho, Jihye Shin, et al. 2024. “Predicting Individual Treatment Effects to Determine Duration of Dual Antiplatelet Therapy After Stent Implantation.” Journal of the American Heart Association 13 (19): e034862. https://doi.org/10.1161/JAHA.124.034862.\n\n\nLittle, Roderick J, and Roger J Lewis. 2021. “Estimands, Estimators, and Estimates.” JAMA: The Journal of the American Medical Association 326 (10): 967–68. https://doi.org/10.1001/jama.2021.2886.\n\n\nMöller, Michael, Eva-Maria Wild, Winnie Tan, and Jonas Schreyögg. 2026. “Estimating Heterogeneous Treatment Effects with Real-World Health Data: A Scoping Review of Machine Learning Methods.” Value in Health: The Journal of the International Society for Pharmacoeconomics and Outcomes Research 29 (5): 905–13. https://doi.org/10.1016/j.jval.2026.01.013.\n\n\nNgufor, Che, Nan Zhang, Holly K Van Houten, et al. 2025. “Causal Machine Learning for Left Atrial Appendage Occlusion in Patients with Atrial Fibrillation.” JACC. Clinical Electrophysiology 11 (5): 977–86. https://doi.org/10.1016/j.jacep.2024.12.013.\n\n\nPathak, Suraj, Florence Y Lai, Joanne Miksza, et al. 2023. “Surgical or Percutaneous Coronary Revascularization for Heart Failure: An in Silico Model Using Routinely Collected Health Data to Emulate a Clinical Trial.” European Heart Journal 44 (5): 351–64. https://doi.org/10.1093/eurheartj/ehac670.\n\n\nPirracchio, Romain, Alan Hubbard, Charles L Sprung, Sylvie Chevret, Djillali Annane, and Rapid Recognition of Corticosteroid Resistant or Sensitive Sepsis (RECORDS) Collaborators. 2020. “Assessment of Machine Learning to Estimate the Individual Treatment Effect of Corticosteroids in Septic Shock.” JAMA Network Open 3 (12): e2029050. https://doi.org/10.1001/jamanetworkopen.2020.29050.\n\n\nScarpa, Joseph, Emilie Bruzelius, Patrick Doupe, Matthew Le, James Faghmous, and Aaron Baum. 2019. “Assessment of Risk of Harm Associated with Intensive Blood Pressure Management Among Patients with Hypertension Who Smoke: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial: A Secondary Analysis of the Systolic Blood Pressure Intervention Trial.” JAMA Network Open 2 (3): e190005. https://doi.org/10.1001/jamanetworkopen.2019.0005.\n\n\nSegal, Jodi B, Ravi Varadhan, Rolf H H Groenwold, et al. 2023. “Assessing Heterogeneity of Treatment Effect in Real-World Data.” Annals of Internal Medicine 176 (4): 536–44. https://doi.org/10.7326/M22-1510.\n\n\nShiba, Koichiro, and Kosuke Inoue. 2024. “Harnessing Causal Forests for Epidemiologic Research: Key Considerations.” American Journal of Epidemiology 193 (6): 813–18. https://doi.org/10.1093/aje/kwae003.\n\n\nThomas, Laine E, Fan Li, and Michael J Pencina. 2020. “Overlap Weighting: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial: A Propensity Score Method That Mimics Attributes of a Randomized Clinical Trial.” The Journal of the American Medical Association 323 (23): 2417–18. https://doi.org/10.1001/jama.2020.7819.\n\n\nXu, Yizhe, Nikolaos Ignatiadis, Erik Sverdrup, Scott Fleming, Stefan Wager, and Nigam Shah. 2023. Survlearners: Survival Metalearners."
   },
   {
     "objectID": "statistics/mlcausal/index.html#estimandの重要性",
@@ -5043,8 +5043,8 @@
     "objectID": "medicine/blood_gas_analysis_mi/index.html#acid-base-map",
     "href": "medicine/blood_gas_analysis_mi/index.html#acid-base-map",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
-    "section": "酸塩基平衡のマインドマップ",
-    "text": "酸塩基平衡のマインドマップ\n\n\n\n\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; MA[\"代謝性アシドーシス\"]\n    ABG --&gt; MK[\"代謝性アルカローシス\"]\n    ABG --&gt; RA[\"呼吸性アシドーシス\"]\n    ABG --&gt; RK[\"呼吸性アルカローシス\"]\n    \n    MA --&gt; Albcorrect[\"Alb補正\"]\n    Albcorrect --&gt; NAG[\"Anion Gap正常代謝性アシドーシス\"]\n    Albcorrect --&gt; AG[\"Anion Gap開大性代謝性アシドーシス\"]\n    AG --&gt; HCO3[\"補正HCO3-を計算する\"]\n    HCO3 --&gt; osmgap[\"(必要があれば)浸透圧ギャップで毒物の検索\"]\n    NAG --&gt; urineag[\"尿中AGを計算\"]\n\n    click AG \"#/ag-acidosis\"\n    click NAG \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
+    "section": "酸塩基平衡のマインドマップ(厳密には少し違うけど)",
+    "text": "酸塩基平衡のマインドマップ(厳密には少し違うけど)\n\n\n\n\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; AlbCorrectAG[\"Alb補正の上でのAG計算\"]\n\n    AlbCorrectAG --&gt; AlbCorrectAGPosi[\"AG \\&gt; 12\"]\n    AlbCorrectAG --&gt; AlbCorrectAGNega[\"AG \\&lt; 12\"]\n\n    AlbCorrectAGPosi --&gt; AG[\"Anion Gap開大性代謝性アシドーシス\"]\n    AG --&gt; HCO3[\"補正HCO3-を計算する\"]\n    HCO3 --&gt; HCO3Acid[\"補正HCO3- \\&lt; 22\"]\n    HCO3 --&gt; HCO3Alka[\"補正HCO3- \\&gt; 26\"]\n\n    HCO3Acid --&gt; AGNAG[\"AG開大性代謝性アシドーシス+AG非開大性代謝性アシドーシス\"]\n    HCO3Alka --&gt; AGAlka[\"AG開大性代謝性アシドーシス+代謝性アルカローシス\"]\n\n    AlbCorrectAGNega --&gt; PrimaryEval[\"HCO3-/PaCO2でPrimaryの変化を評価\"]\n    PrimaryEval --&gt; NAG[\"Anion Gap非開大性代謝性アシドーシス\"]\n    PrimaryEval --&gt; MK[\"代謝性アルカローシス\"]\n    PrimaryEval --&gt; RA[\"呼吸性アシドーシス\"]\n    PrimaryEval --&gt; RK[\"呼吸性アルカローシス\"]\n    \n\n    click AG \"#/ag-acidosis\"\n    click NAG \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\"\n\n\n\n\n\n\n\n\n\n\n\nflowchart TD\n\n    MA[\"代謝性アシドーシス\"]\n    \n    MA --&gt; AlbCorrectAG[\"Alb補正の上でのAG計算\"]\n    AlbCorrectAG --&gt; NAG[\"Anion Gap非開大性代謝性アシドーシス\"]\n    AlbCorrectAG --&gt; AG[\"Anion Gap開大性代謝性アシドーシス\"]\n    %% AG --&gt; HCO3[\"補正HCO3-を計算する\"]\n    AG --&gt; DKAetc[\"高度腎不全 &lt;br&gt; DKA &lt;br&gt; 乳酸Acidosis\"]\n\n    AG --&gt; OsmGap[\"浸透圧ギャップを計算\"]\n    OsmGap --&gt; OsmGapPosi[\"Osm Gap&gt; 10-15 &lt;br&gt; 毒性アルコール中毒\\(メタノール・エチレングリコールなど\\)\"]\n\n    NAG --&gt; UrineAG[\"尿中AGを計算\"]\n    UrineAG --&gt; UrineAGPosi[\"尿中AG &gt;0\"]\n    UrineAG --&gt; UrineAGNega[\"尿中AG &lt;&lt;0\"]\n    UrineAGNega --&gt; UrineAGNegadisease[\"下痢 &lt;br&gt; 回腸導管 &lt;br&gt; 胆膵管ドレナージ\"]\n    UrineAGPosi --&gt; UrineOsmGap[\"尿中浸透圧ギャップ\"]\n    UrineOsmGap --&gt; UrineOsmGapPosi[\"尿浸透圧ギャップ\\&gt;100 &lt;br&gt; トルエン中毒 &lt;br&gt; DKA回復期\"]\n    UrineOsmGap --&gt; UrineOsmGapNega[\"尿浸透圧ギャップ\\&lt;\\&lt;100 &lt;br&gt; 保存期CKD &lt;br&gt; 尿細管Acidosis\"]\n\n    click AG \"#/ag-acidosis\"\n    click NAG \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#ag-acidosis",
@@ -5058,21 +5058,21 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#nag-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "Normal Anion Gap 代謝性 アシドーシス",
-    "text": "Normal Anion Gap 代謝性 アシドーシス\n\n「測定されるAnionの異常」\n\n具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)\n\n腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける\n\n\\[Urinari AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\\]\n\n腎臓が原因でなければ、尿中のNH4+が増加→Urine AGは負の値となる\n血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い\n\nそのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低地\n\n実際は実臨床で覚える鑑別は2種類\n\n下痢(腸液のHCO3-の排泄による代謝性Acidosis)\nRenal tubular アシドーシス\n\n\n← Acid–Base Map"
+    "text": "Normal Anion Gap 代謝性 アシドーシス\n\n「測定されるAnionの異常」\n\n具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)\n\n腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける\n\n\\(尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\\)\n\n腎臓が原因でなければ、尿中のNH4+が増加→Urine AGは負の値となる\n血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い\n\nそのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低地\n\n実際は実臨床で覚える鑑別は2種類\n\n下痢(腸液のHCO3-の排泄による代謝性Acidosis)\nRenal tubular アシドーシス\n\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "代謝性 アルカローシス",
-    "text": "代謝性 アルカローシス\nThink about urine chloride\n\nChloride responsive\nChloride resistant\n\n← Acid–Base Map"
+    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い\nChloride responsive\nChloride resistant\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "呼吸性 アシドーシス",
-    "text": "呼吸性 アシドーシス\nHypoventilation\n\nCNS depression\nNeuromuscular disease\nAirway / pulmonary disease\n\n← Acid–Base Map"
+    "text": "呼吸性 アシドーシス\n\nいわゆる肺胞低換気 = II型呼吸不全\n物理的に肺胞に空気が入らない状態\n解剖学的に上から考えるのが良い\n\n中枢神経()\n\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
@@ -5394,14 +5394,14 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#ここまでのまとめ",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "ここまでのまとめ",
-    "text": "ここまでのまとめ\n\nAGとはUA - UCであり、UAのメインの成分はAlb\n\n\n\nAGが開大していたら、絶対にAG開大性代謝性Acidosisはある\n\nAGの開大は常に探したほうが良い\n\n「もしもこの患者に低Albがなかったら？」→補正AG\n「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-"
+    "text": "ここまでのまとめ\n\nAGとはUA - UCであり、UAのメインの成分はAlb\nAGが開大していたら、絶対にAG開大性代謝性Acidosisはある\n\nAGの開大は常に探したほうが良い\n\n「もしもこの患者に低Albがなかったら？」→補正AG\n「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#酸塩基の代償範囲",
     "href": "medicine/blood_gas_analysis_mi/index.html#酸塩基の代償範囲",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "酸塩基の代償範囲",
-    "text": "酸塩基の代償範囲\n\n\n\n\n\n\n\n\n\n\n1次性病態\n1次性変化\n代償性変化\n代償性変化の範囲\n代償の限界値\n\n\n\n\n代謝性アシドーシス\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\(\\Delta\\mathrm{pCO_2}=1.2\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\\(\\mathrm{pCO_2}=1.5\\times[\\mathrm{HCO_3^-}]+8\\pm2\\)\n\\(\\mathrm{pCO_2}:15 mmHg\\)\n\n\n代謝性アルカローシス\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\(\\Delta\\mathrm{pCO_2}=0.7\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\n\\(\\mathrm{pCO_2}:60mmHg\\)\n\n\n呼吸性アシドーシス\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.35\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:42mEq/L\\)\n\n\n呼吸性アルカローシス\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.40\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:12 mEq/L\\)"
+    "text": "酸塩基の代償範囲\n\n\n\n\n\n\n\n\n\n\n1次性病態\n1次性変化\n代償性変化\n代償性変化の範囲\n代償の限界値\n\n\n\n\n代謝性アシドーシス\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\(\\Delta\\mathrm{pCO_2}=1.2\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\\(\\mathrm{pCO_2}=1.5\\times[\\mathrm{HCO_3^-}]+8\\pm2\\)\n\\(\\mathrm{pCO_2}:15 mmHg\\)\n\n\n代謝性アルカローシス\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\(\\Delta\\mathrm{pCO_2}=0.7\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\n\\(\\mathrm{pCO_2}:60mmHg\\)\n\n\n呼吸性アシドーシス\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.35\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:42mEq/L\\)\n\n\n呼吸性アルカローシス\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.40\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:12 mEq/L\\)\n\n\n\n\n代償反応が十分であれば、高度の酸塩基平衡異常は起こらない\n\npH &lt;&lt; 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併\npH &gt;&gt; 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併\n\nとは言え、Septic shockとか著名なDKAなら単独でも起こりうる"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#anion-gapが変化する要因",
@@ -5695,7 +5695,7 @@
     "href": "statistics/model_performance_mi/index.html#continuous-nri",
     "title": "分類モデルの評価について",
     "section": "continuous NRI",
-    "text": "continuous NRI\n\n\n\n\n\nbin_status\nsimple_pred\ncomplex_pred\n\n\n\n\n1\n0.9831682\n0.9960985\n\n\n0\n0.6226083\n0.6099328\n\n\n1\n0.7451466\n0.7292784\n\n\n1\n0.7828269\n0.6291928\n\n\n1\n0.5681130\n0.4233752\n\n\n0\n0.4439187\n0.1625034\n\n\n\n\n\n _________________________________________\n \n     Reclassification table    \n _________________________________________\n\n Outcome: absent \n  \n             Updated Model\nInitial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified\n    [0,0.3)        68         6       1               9\n    [0.3,0.6)      32        14       9              75\n    [0.6,1]         1         8       8              53\n\n \n Outcome: present \n  \n             Updated Model\nInitial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified\n    [0,0.3)         8         7       4              58\n    [0.3,0.6)       8        21      26              62\n    [0.6,1]         0         3      52               5\n\n \n Combined Data \n  \n             Updated Model\nInitial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified\n    [0,0.3)        76        13       5              19\n    [0.3,0.6)      40        35      35              68\n    [0.6,1]         1        11      60              17\n _________________________________________\n\n NRI(Categorical) [95% CI]: 0.3716 [ 0.2329 - 0.5104 ] ; p-value: 0 \n NRI(Continuous) [95% CI]: 0.8825 [ 0.6713 - 1.0936 ] ; p-value: 0 \n IDI [95% CI]: 0.1816 [ 0.137 - 0.2263 ] ; p-value: 0 \n\n\n\n\n\n\n\nbin_status\nn\nProb(new &gt; old)\nProb(old &gt;= new)\n\n\n\n\n1\n129\n0.6589147\n0.3410853\n\n\n0\n147\n0.2176871\n0.7823129\n\n\n\n\n\n[1] 0.8824\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい $$ _{} = ( )\n( )\n( )\n( ) $$\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす"
+    "text": "continuous NRI\n\n\n1. 新旧モデルの予測確率\n\n\n\n\n\nbin_status\nsimple_pred\ncomplex_pred\n\n\n\n\n1\n0.9831682\n0.9960985\n\n\n0\n0.6226083\n0.6099328\n\n\n1\n0.7451466\n0.7292784\n\n\n1\n0.7828269\n0.6291928\n\n\n1\n0.5681130\n0.4233752\n\n\n0\n0.4439187\n0.1625034\n\n\n\n\n\n\n\n→\n\n\n新旧の確率を比較し、イベントの有無ごとに上昇・非上昇の割合を計算\n\n\n2. イベントの有無ごとに集計\n\n\n\n\n\nbin_status\nn\nProb(new &gt; old)\nProb(old &gt;= new)\n\n\n\n\n1\n129\n0.6589147\n0.3410853\n\n\n0\n147\n0.2176871\n0.7823129\n\n\n\n\n\n\n\n\n[1] 0.8824\n\n\n\nContinuous NRI：全てのカットオフでのNRIの平均\n次の形の方が分かりやすい\n\n\\[\n\\mathrm{NRI}_{\\mathrm{continuous}}\n=\n\\Pr(\\text{higher} \\mid \\text{event})\n-\n\\Pr(\\text{lower} \\mid \\text{event})\n+\n\\Pr(\\text{lower} \\mid \\text{nonevent})\n-\n\\Pr(\\text{higher} \\mid \\text{nonevent})\n\\]\n\nメリット\n\n恣意的ではなくなる\n元のAUROCに関連なく改善度合いが分かる\n新規に加えたマーカーの影響を評価可能\n\n注意点\n\n弱いマーカーでもポジティブになりやすい\nMiscalibrationの影響を強く受ける\nイベントの大小関係しか見ないため、意味がない差も拾ってしまう\n例：Old modelの予測確率が0.98、New modelが0.99でも改善とみなす"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#薬の安全性",
@@ -5709,7 +5709,7 @@
     "href": "statistics/model_performance_mi/index.html#decision-curve-analysis-net-benefitの概念",
     "title": "分類モデルの評価について",
     "section": "Decision curve analysis ~ Net benefitの概念",
-    "text": "Decision curve analysis ~ Net benefitの概念\n閾値確率(Threshold Probability)を (p_t) としたとき、モデルのNet benefitは次式で定義される。\n\\[\n\\operatorname{NB}(p_t)\n=\n\\frac{\\operatorname{TP}(p_t)}{N}\n-\n\\frac{\\operatorname{FP}(p_t)}{N}\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\nここで、\n\n(N)：対象者数\n((p_t))：閾値確率 (p_t) で治療対象とされた真陽性者数\n((p_t))：閾値確率 (p_t) で治療対象とされた偽陽性者数\n()：偽陽性による不利益を真陽性による利益に換算する重み\n\nである。"
+    "text": "Decision curve analysis ~ Net benefitの概念\n\n真陽性のメリットと偽陽性によるデメリットの引き算を以下のように定義する\n\n\\[\n\\operatorname{NB}(p_t)\n=\n\\frac{\\operatorname{TP}(p_t)}{N}\n-\n\\frac{\\operatorname{FP}(p_t)}{N}\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\n\n\\(N\\)：患者全体の数\n\\(\\operatorname{TP}(p_t)\\)：閾値確率 \\(p_t\\) で検査陽性とされた中での真陽性者数\n\\(\\operatorname{FP}(p_t)\\)：閾値確率 \\(p_t\\) で検査陽性とされた中での偽陽性者数\n\\(\\dfrac{p_t}{1-p_t}\\)：偽陽性による不利益を真陽性による利益に換算する重み\nModelの予測においてX軸に陽性とする閾値(Threshold)、このNet benefitをY軸に描くのがDecision curve analysisである"
   },
   {
     "objectID": "statistics/model_performance_mi/index.html#net-beneiftとthreshold-probabilityの関係",
@@ -5731,5 +5731,166 @@
     "title": "分類モデルの評価について",
     "section": "Decision curveの見方",
     "text": "Decision curveの見方\n\n\n\n\n\n\n\n\n\n\nDefault strategy\n患者を陽性（生検適応）と判断する確率：P(t)\nNet benefitの値のところで最も上のstrategyがより良いモデル\nTreat allとTreat noneよりは常に高くないといけない\n左端のベースラインのリスクの高低も必ず評価する"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#net-beneiftとthresholdの関係",
+    "href": "statistics/model_performance_mi/index.html#net-beneiftとthresholdの関係",
+    "title": "分類モデルの評価について",
+    "section": "Net beneiftとThresholdの関係",
+    "text": "Net beneiftとThresholdの関係\n\nNet benefitはThreshold毎に真陽性に対する許容される偽陽性の割合を示す\n例えば、SIHDを予測するmodelでThresholdを15%として、その15%を超えたときにCAGをするとする\nThreshold = 15%の時、Oddsは0.85/0.15 = 5.67(Vertosick and Vickers 2022)\n\n一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断\n\n元疾患の重篤さや、検査後の動き、患者の年齢などによってThresholdは変わる\n\n脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)\nDCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysisのcurve①",
+    "href": "statistics/model_performance_mi/index.html#decision-curve-analysisのcurve①",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysisのCurve①",
+    "text": "Decision curve analysisのCurve①\n\n\n\n\n\n\n\n\n\n\n\n\nThreshold\nn\nTrue positive\nFalse positive\nNet benefit\n\n\n\n\n0.00\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0 / (1 - 0) = 0.467\n\n\n0.05\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.05 / (1 - 0.05) = 0.439\n\n\n0.10\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.1 / (1 - 0.1) = 0.408\n\n\n0.15\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.15 / (1 - 0.15) = 0.373\n\n\n0.20\n276\n129 / 276 = 0.467\n147 / 276 = 0.533\n0.467 - 0.533 * 0.2 / (1 - 0.2) = 0.334\n\n\n0.25\n276\n112 / 276 = 0.406\n84 / 276 = 0.304\n0.406 - 0.304 * 0.25 / (1 - 0.25) = 0.304\n\n\n0.30\n276\n110 / 276 = 0.399\n72 / 276 = 0.261\n0.399 - 0.261 * 0.3 / (1 - 0.3) = 0.287\n\n\n0.35\n276\n110 / 276 = 0.399\n66 / 276 = 0.239\n0.399 - 0.239 * 0.35 / (1 - 0.35) = 0.27\n\n\n\n\n\n\nThresholdを0.01や0.05刻みで並べる\n各々のThresholdで何人がTrue positive/False positiveになるか計算\nNet benefitの式にあてて計算する\n\n\n式の定義からたとえ、閾値の変化の結果、真陽性や偽陽性の人数が変わらなくてもNet benefitは変化する"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysisのcurve②",
+    "href": "statistics/model_performance_mi/index.html#decision-curve-analysisのcurve②",
+    "title": "分類モデルの評価について",
+    "section": "Decision curve analysisのCurve②",
+    "text": "Decision curve analysisのCurve②\n\n比較するモデルのほかに、Default strategyとして以下の曲線も描く\n\n誰も治療しない戦略（treat none）\n全員治療する戦略(treat all)\n\nTreat noneのNet benefitは、TPもFPも0のため常に0\nTreat allのNet benefitは\n\n\\[\n\\operatorname{NB}_{\\mathrm{all}}(p_t)\n=\n有病率\n-\n(1-有病率)\n\\left(\n\\frac{p_t}{1-p_t}\n\\right)\n\\]\nとなる。"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#nbの解釈例",
+    "href": "statistics/model_performance_mi/index.html#nbの解釈例",
+    "title": "分類モデルの評価について",
+    "section": "NBの解釈例",
+    "text": "NBの解釈例\n\n以下にDCAの解釈の例を示す。\n\n実線（）：treat all\n点線（）：treat none\n破線（）：モデル\n一点鎖線（）：比較モデル\n\n臨床的に意味がある閾値が20%(妥当な範囲が10-30%)と考えている\n\n\nCase 1Case 2Case 3Case 4Case 5\n\n\n\n\nモデルの線は20%を超えないとTreat allより高くない\n患者によっては、10-15%でも治療を選択する\n実質的にモデルは価値がない(Treat allで良い)\nモデルのCalibrationが悪く、Riskを過小評価している\n\n\n\n\n\nこのモデルはAUROCは高い\nしかし、有病率が高すぎる(60%)\nそのため、Treat allよりもモデルが良いレンジはReasonableな10-30%よりも高い\n結果的には、このモデルも価値がない\n\n\n\n\n\n13%を超えた後はTreat allよりも良いNet benefitを示している\n\n13%以下の時はTreat allと同じ性能\n\nもしも、このモデルが13%以下を出す事が多くなければ悪くないモデル\n\n\n\n\n\n2つのModelは両者とも、Treat all/noneよりも良いNBを示している\n一方で、このModelは13%くらいのところで交差しており、どちらがより良いかは示せない\n\n\n\n\n\nモデルは非常によく、AUROCは0.75。また、比較モデルはさらに良くAUROC 0.8だった\nしかしながら、比較モデルはCalibrationが悪くRiskをUnderestimateしている\n\nThreshold rangeの中ではAUROC 0.75のModelの方が常に良いNBを示している\nAUROC 0.8の比較モデルはTreat allよりも悪く有害な可能性すらある"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#decision-curve-analysisのfigureの作り方",
+    "href": "statistics/model_performance_mi/index.html#decision-curve-analysisのfigureの作り方",
+    "title": "分類モデルの評価について",
+    "section": "Decision Curve analysisのFigureの作り方",
+    "text": "Decision Curve analysisのFigureの作り方\n\n重要な事は、P(t) のレンジを臨床的に意味のある範囲で決める\nモデルから逆に P(t) を決めてはいけない\n有病率（P(t) = 0 の時のNB）の値も確認\n興味があるレンジでどのような動態かを確認する\nCalibrationが悪いとTreat allやTreat noneよりも悪くなりうる\nその場合はそれ以上の比較はしない\n新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する\n必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価"
+  },
+  {
+    "objectID": "statistics/model_performance_mi/index.html#references",
+    "href": "statistics/model_performance_mi/index.html#references",
+    "title": "分類モデルの評価について",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402.\n\n\nCreager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. “2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.” Journal of the American College of Cardiology 87 (13): 1626–710. https://doi.org/10.1016/j.jacc.2025.11.005.\n\n\nLeening, Maarten J G, Moniek M Vedder, Jacqueline C M Witteman, Michael J Pencina, and Ewout W Steyerberg. 2014. “Net Reclassification Improvement: Computation, Interpretation, and Controversies: A Literature Review and Clinician’s Guide: A Literature Review and Clinician’s Guide.” Annals of Internal Medicine 160 (2): 122–31. https://doi.org/10.7326/M13-1522.\n\n\nThan, Martin, Mel Herbert, Dylan Flaws, et al. 2013. “What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.” International Journal of Cardiology 166 (3): 752–54. https://doi.org/10.1016/j.ijcard.2012.09.171.\n\n\nVertosick, Emily, and Andrew Vickers. 2022. “Decision Curve Analysis for Quantifying the Additional Benefit of a New Marker.” April 11. https://www.fharrell.com/post/addmarkerdca/.\n\n\nVickers, Andrew J, Ben Van Calster, and Ewout W Steyerberg. 2016. “Net Benefit Approaches to the Evaluation of Prediction Models, Molecular Markers, and Diagnostic Tests.” BMJ (Clinical Research Ed.) 352 (January): i6. https://doi.org/10.1136/bmj.i6."
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因",
+    "href": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "代謝性アルカローシスの原因",
+    "text": "代謝性アルカローシスの原因\n\n大体脱水"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#take-home-messages",
+    "href": "medicine/rickettsia_mi/index.html#take-home-messages",
+    "title": "リケッチア症",
+    "section": "Take-home messages",
+    "text": "Take-home messages\n\n\n発熱・皮疹・刺し口（痂皮）を見たら、曝露地域・季節・野外活動を確認する。\n刺し口は本人が気づいていないことが多い。全身を系統的に診察する。\n疑えば検体を確保し、検査結果を待たず治療を開始する。\n\n\n\nこの資料は元のOneNoteをスライド向けに再構成した教育用ドラフト。投与量・期間は患者背景、重症度、最新の国内指針、施設基準に照らして確認する。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#疑ったときの流れ",
+    "href": "medicine/rickettsia_mi/index.html#疑ったときの流れ",
+    "title": "リケッチア症",
+    "section": "疑ったときの流れ",
+    "text": "疑ったときの流れ\n\n\n発熱と皮疹だけでなく、皮疹を自覚していない患者がいる点を強調する。刺し口検索、検体採取、治療開始を並行して進める。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#リケッチア症の位置づけ",
+    "href": "medicine/rickettsia_mi/index.html#リケッチア症の位置づけ",
+    "title": "リケッチア症",
+    "section": "リケッチア症の位置づけ",
+    "text": "リケッチア症の位置づけ\n\n\n\n\n日本で重要な2疾患\n\nツツガムシ病\nOrientia tsutsugamushi\n日本紅斑熱\nRickettsia japonica\n\nいずれも節足動物媒介性で、急性発熱・皮疹・刺し口を手掛かりに診断する。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#まず比較する",
+    "href": "medicine/rickettsia_mi/index.html#まず比較する",
+    "title": "リケッチア症",
+    "section": "まず比較する",
+    "text": "まず比較する\n\n\n\n\n日本紅斑熱\nツツガムシ病\n\n\n\n\n病原体\nR. japonica\nO. tsutsugamushi\n\n\nベクター\nマダニ\nツツガムシ幼虫\n\n\n潜伏期間の目安\n2–10日\n5–14日\n\n\n季節性\n主に春〜秋\n地域により春・秋〜初冬\n\n\n皮疹の傾向\n四肢、手掌・足底、紫斑化\n体幹優位の斑状〜斑丘疹\n\n\n刺し口\n比較的小さく周囲発赤\n黒色痂皮が目立つことがある\n\n\nリンパ節\n目立たないことが多い\n腫大することがある\n\n\n\n\n傾向には個人差があり、単一所見だけでは区別できない。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#疫学届出数の推移",
+    "href": "medicine/rickettsia_mi/index.html#疫学届出数の推移",
+    "title": "リケッチア症",
+    "section": "疫学：届出数の推移",
+    "text": "疫学：届出数の推移\n\n\n日本紅斑熱\n\n\nツツガムシ病\n\n\n\n画像は元ノートに埋め込まれた集計図（2026年3月21日現在の暫定データと記載）。発表前に最新値を確認する。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#地域と季節を聞く",
+    "href": "medicine/rickettsia_mi/index.html#地域と季節を聞く",
+    "title": "リケッチア症",
+    "section": "地域と季節を聞く",
+    "text": "地域と季節を聞く\n\n\n\n\n\n北海道以外からの報告が多い\nツツガムシ病は全国でみられ、地域ごとに好発時期が異なる\n春〜初夏：東北・北陸などで注意\n秋〜初冬：関東〜九州を中心に注意\n日本紅斑熱は主に春〜秋\n\n\n\n\n\n\n\n\n病歴で聞くこと\n\n\n居住地だけでなく、旅行先、農作業、草むら、山林、庭仕事まで確認する。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#臨床像三徴を軸に考える",
+    "href": "medicine/rickettsia_mi/index.html#臨床像三徴を軸に考える",
+    "title": "リケッチア症",
+    "section": "臨床像：三徴を軸に考える",
+    "text": "臨床像：三徴を軸に考える\n\n\n三徴\n\n発熱\n皮疹\n刺し口（痂皮）\n\n共通する症状・所見\n\n頭痛、倦怠感、筋痛\n血小板減少\n肝逸脱酵素上昇\n低Na血症、炎症反応上昇\n\n\n\n\n\n\n\n\n\n見逃しやすい理由\n\n\n\n症状は非特異的\n虫に刺された自覚がないことが多い\n皮疹・刺し口を本人が認識していないことがある\n刺し口が下着に隠れる柔らかい部位にあることが多い\n\n\n\n\n\n診察者が探しにいく病気と捉える。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#皮疹典型像だけを期待しない",
+    "href": "medicine/rickettsia_mi/index.html#皮疹典型像だけを期待しない",
+    "title": "リケッチア症",
+    "section": "皮疹：典型像だけを期待しない",
+    "text": "皮疹：典型像だけを期待しない\n\n\n元画像の出典表記：Sando et al. Emerg Infect Dis. 2018;24(9):1633–1641。臨床写真を含む。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#刺し口全身を診る",
+    "href": "medicine/rickettsia_mi/index.html#刺し口全身を診る",
+    "title": "リケッチア症",
+    "section": "刺し口：全身を診る",
+    "text": "刺し口：全身を診る\n\n\n\n\n観察のポイント\n\n潰瘍上の黒色痂皮\n周囲の発赤\n落屑を伴うことがある\n腋窩、鼠径、頸部、乳房下、陰部なども確認\n痛み・痒みが乏しく見逃されることがある"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#検体治療前に確保治療は遅らせない",
+    "href": "medicine/rickettsia_mi/index.html#検体治療前に確保治療は遅らせない",
+    "title": "リケッチア症",
+    "section": "検体：治療前に確保、治療は遅らせない",
+    "text": "検体：治療前に確保、治療は遅らせない\n\n\n依頼する検体\n\n刺し口：痂皮、スワブまたは生検（検査室の手順に従う）\n全血：PCR用\n血清：急性期＋回復期のペア血清\n\n一般検査\n\n血小板減少\nAST/ALT、LDH上昇\n低Na血症\nCRP上昇\n腎機能障害は重症度の手掛かり\n\n\n\n\n\n刺し口由来検体は早期診断に有用。採取方法と提出先は最寄りの保健所・地方衛生研究所へ確認する。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#血清学的検査の読み方",
+    "href": "medicine/rickettsia_mi/index.html#血清学的検査の読み方",
+    "title": "リケッチア症",
+    "section": "血清学的検査の読み方",
+    "text": "血清学的検査の読み方\n\n\n\n急性期単回検体の陰性だけでは除外できない\n急性期と回復期のペア血清で評価する\n一般に4倍以上の抗体価上昇が診断の根拠になる\n血清型間の交差反応に注意する\n標準的な検査対象外の血清型では感度に限界がある"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#治療疑った時点で開始",
+    "href": "medicine/rickettsia_mi/index.html#治療疑った時点で開始",
+    "title": "リケッチア症",
+    "section": "治療：疑った時点で開始",
+    "text": "治療：疑った時点で開始\n\n\n\n\n\n\n\n\n\n\n\n原則\n\n\n検査結果を待って抗菌薬開始を遅らせない。\n\n\n\n\n\nドキシサイクリンが中心\n成人の代表例：100 mg、1日2回、経口または静注\n解熱後かつ臨床的に安定してから少なくとも3日間継続し、総治療期間は患者背景・重症度・国内指針で調整\n妊娠、小児、重症例、薬剤アレルギーでは専門家に相談\n\n\n元ノート本文にあった「IM」は、埋め込み画像および公的資料に合わせて「IV」に修正した。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#両疾患の違いまとめ",
+    "href": "medicine/rickettsia_mi/index.html#両疾患の違いまとめ",
+    "title": "リケッチア症",
+    "section": "両疾患の違い：まとめ",
+    "text": "両疾患の違い：まとめ\n\n\nこの比較は典型像の傾向。重なりが大きいため、疫学・身体所見・PCR・ペア血清を組み合わせて判断する。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#検査所見からの比較",
+    "href": "medicine/rickettsia_mi/index.html#検査所見からの比較",
+    "title": "リケッチア症",
+    "section": "検査所見からの比較",
+    "text": "検査所見からの比較\n\n\n\n\n\n\n\n元画像の出典表記：Sando et al. Emerg Infect Dis. 2018;24(9):1633–1641。個々の所見は診断を確定するものではない。"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#予防",
+    "href": "medicine/rickettsia_mi/index.html#予防",
+    "title": "リケッチア症",
+    "section": "予防",
+    "text": "予防\n\n\n\n\n\n肌の露出を減らす\n忌避剤を製品表示どおり使用する\n草むらでの長時間の滞在や直接接触を避ける\n帰宅後は衣類を処理し、入浴して全身を確認する\n罹患後も再感染の可能性がある"
+  },
+  {
+    "objectID": "medicine/rickettsia_mi/index.html#参考資料",
+    "href": "medicine/rickettsia_mi/index.html#参考資料",
+    "title": "リケッチア症",
+    "section": "参考資料",
+    "text": "参考資料\n\nCDC: Clinical Overview of Scrub Typhus\nCDC Yellow Book: Rickettsial Diseases\nSando E, Suzuki M, Katoh S, et al. Distinguishing Japanese spotted fever and scrub typhus, central Japan, 2004–2015. Emerg Infect Dis. 2018;24(9):1633–1641. doi:10.3201/eid2409.171436\n元ノート記載：国立感染症研究所／JIHS 日本紅斑熱資料\n元ノート記載：国立感染症研究所／JIHS ツツガムシ病資料\n\n\n\n\n\n\n\n\n編集メモ\n\n\nOneNoteから本文201項目・画像27点を抽出し、表記を整え、スライド単位に再構成した。医学的内容は発表・診療で使う前に、最新の国内指針と施設の検査・治療手順で最終確認する。"
   }
 ]

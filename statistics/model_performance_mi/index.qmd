@@ -168,6 +168,110 @@ blockquote {
   font-size: 0.78em;
   text-align: center;
 }
+
+/* Calibration: keep the two tables above a full-width plot row. */
+.reveal .calibration-slide h2 {
+  margin-bottom: 0.35em;
+}
+
+.reveal .calibration-flow {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 0.3fr minmax(0, 1.25fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.reveal .slides .calibration-flow > .column {
+  min-width: 0;
+  width: 100% !important;
+}
+
+.reveal .slides section.calibration-slide h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0 0 0.3em;
+  text-align: center;
+  font-style: normal;
+}
+
+.reveal .calibration-flow table {
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.15;
+  margin: 0.3em auto;
+}
+
+.reveal .calibration-flow table th,
+.reveal .calibration-flow table td {
+  padding: 0.15em 0.3em;
+}
+
+.reveal .calibration-flow .flow-arrow {
+  font-size: 2.5rem;
+}
+
+.reveal .calibration-flow .flow-caption {
+  font-size: 0.44em;
+}
+
+.reveal .calibration-plot {
+  margin-top: 0.35em;
+  text-align: center;
+}
+
+.reveal .slides section.calibration-slide .calibration-plot p,
+.reveal .slides section.calibration-slide .calibration-plot figure {
+  margin: 0;
+}
+
+.reveal .calibration-plot img {
+  max-height: 220px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.reveal .calibration-slide .cell,
+.reveal .calibration-slide .cell-output-display {
+  margin: 0;
+}
+
+.reveal .cnri-flow {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 0.45fr minmax(0, 1.15fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.reveal .slides .cnri-flow > .column {
+  min-width: 0;
+  width: 100% !important;
+}
+
+.reveal .slides .cnri-flow h3 {
+  font-size: 17px;
+  font-style: normal;
+  text-align: center;
+  margin: 0 0 0.4em;
+}
+
+.reveal .cnri-flow table {
+  width: 100%;
+  font-size: 13px;
+}
+
+.reveal .cnri-flow table th,
+.reveal .cnri-flow table td {
+  padding: 0.2em 0.3em;
+}
+
+.reveal .cnri-flow .flow-arrow {
+  font-size: 2.5rem;
+}
+
+.reveal .cnri-flow .flow-caption {
+  font-size: 14px;
+}
 </style>
 ```
 
@@ -225,7 +329,8 @@ modeldata::two_class_example |>
 
 - 分類モデルの評価では、[**Discrimination(弁別能)**]{style="color: red;"}と[**Calibration(較正能)**]{style="color: red;"}を別個に評価する
 - Discrimination
-  - 0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価
+  - 0/1の正確性: 実際にこの患者がHigh riskかどうかの評価
+  - 言い換えると、患者をRiskの順番に並び替える能力
 - Calibration
   - その患者のリスクの絶対値の評価
 - まずはDiscrimination > Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -> Calibrationはしばしば忘れ去られている
@@ -238,13 +343,15 @@ modeldata::two_class_example |>
   - 「ERで胸痛を訴えているこの患者がMIかどうか？」
   - そもそも、これが当たらないとどうしようもない
 - Calibration
-  - 「この患者にPCIをしたときに透析になってしまう確率は？」
-  - 20%を超えるようならカテなしで様子をみよう
+  - 「このNSTEACSの患者にPCIをしたときに透析になってしまう確率は？」
+  - 20%を超えるようなら今日はカテなしで、明日以降前負荷をかけた上でCAGをするか再検討しよう
   - 0/1だけでなく、実際の数字が重要
 
 ## DiscriminationとCalibration
 
 ```{r}
+#| label: perfect-calibration-discrimination
+ 
 # ============================================================
 # Cook 2007 Figure 2 reproduction
 # Perfect calibration under different true-risk distributions
@@ -650,7 +757,7 @@ final_plot
 ::: {.column width="45%"}
 ```{r}
 library(modeldata)
-head(modeldata::two_class_example)
+knitr::kable(head(modeldata::two_class_example))
 ```
 :::
 
@@ -665,6 +772,8 @@ head(modeldata::two_class_example)
 ::: {.column width="45%"}
 
 ```{r}
+#| label: confusion-matrix
+
 library(modeldata)
 library(yardstick)
 library(tidyverse)
@@ -708,6 +817,7 @@ yardstick::conf_mat(
 ::: {.column width="50%"}
 
 ```{r}
+#| label: confusion-matrix-detail
 #| fig-width: 6
 #| fig-height: 5.4
 #| out-width: 65%
@@ -828,6 +938,7 @@ $$
 ## ROC指標ができるまで
 
 ```{r}
+#| label: roc-setup
 #| include: false
 
 library(dplyr)
@@ -867,6 +978,7 @@ auc_value <- input_tbl |>
 ### 1. 予測結果を<br>昇順で並べる
 
 ```{r}
+#| label: input-tbl-arrnged
 #| echo: false
 
 dplyr::arrange(input_tbl, prob_Class1) |> 
@@ -894,6 +1006,7 @@ dplyr::arrange(input_tbl, prob_Class1) |>
 ### 2. 閾値ごとでの予測
 
 ```{r}
+#| label: input-tbl-arrnged2
 #| echo: false
 
 input_tbl |>
@@ -917,7 +1030,7 @@ input_tbl |>
   knitr::kable(
     format = "html",
     align = "cccc",
-    col.names = c("予測確率", "実際のアウトカム", "閾値:2.0e-07", "閾値2:4.50e-06")
+    col.names = c("予測確率", "実際のアウトカム", "閾値:2.0e-07での予測", "閾値2:4.50e-06での予測")
   )
 
 ```
@@ -938,6 +1051,7 @@ input_tbl |>
 ### 3. 閾値毎の感度・特異度
 
 ```{r}
+#| label: roc-tbl
 #| echo: false
 
 roc_tbl |>
@@ -952,13 +1066,11 @@ roc_tbl |>
 :::
 ::::
 
-- 感度と1-特異度で点を結ぶとROC曲線
-- PrecisionとRecallで点を結ぶとPR曲線
-
 
 ## リスク毎の評価
 
 ```{r}
+#| label: roc-pr-tbl
 
 library(dplyr)
 
@@ -970,11 +1082,14 @@ dplyr::left_join(
 
 ```
 
-
 :::: columns
 ::: {.column width="50%"}
 
+- 感度と1-特異度で点を結ぶとROC曲線
+
 ```{r}
+#| label: roc-curve
+ 
 library(modeldata)
 library(yardstick)
 library(ggplot2)
@@ -998,7 +1113,10 @@ yardstick::roc_auc(
 
 ::: {.column width="50%"}
 
+- PrecisionとRecallで点を結ぶとPR曲線
+
 ```{r}
+#| label: pr-curve
 library(modeldata)
 library(yardstick)
 library(ggplot2)
@@ -1068,10 +1186,11 @@ yardstick::pr_auc(
 - 分類数には要注意
 
 
-## Calibration Plotの作り方
+## Calibration Plotの作り方 {.calibration-slide}
 
 
 ```{r}
+#| label: calibration-prep
 #| include: false
 
 library(dplyr)
@@ -1080,7 +1199,7 @@ library(modeldata)
 library(tidyr)
 library(ggplot2)
 
-input_tbl <- modeldata::two_class_example |>
+calib_input_tbl <- modeldata::two_class_example |>
   transmute(
     prob_Class1 = Class1,
     truth
@@ -1088,9 +1207,9 @@ input_tbl <- modeldata::two_class_example |>
   dplyr::arrange(prob_Class1) |> 
   dplyr::mutate(
     class = ggplot2::cut_number(prob_Class1, n  = 10, labels = FALSE)
-    )　
+    )
 
-summarised_tbl <- input_tbl |>
+calib_summarised_tbl <- calib_input_tbl |>
   dplyr::summarise(
     event_proportion = mean(truth == "Class1"),
     mean_probability = mean(prob_Class1), 
@@ -1099,7 +1218,7 @@ summarised_tbl <- input_tbl |>
 
 
 calib_dat <- tidyr::pivot_longer(
-  summarised_tbl,
+  calib_summarised_tbl,
   cols = c("event_proportion", "mean_probability")
 ) 
   
@@ -1115,28 +1234,29 @@ barplot
 ```
 
 
-:::: {.columns .tibble-flow .roc-flow}
+:::: {.columns .tibble-flow .calibration-flow}
 ::: {.column}
 
-### 1. 予測結果を<br>昇順で並べる
+### 1. 予測確率で昇順に並べ、10群に分ける
 
 ```{r}
+#| label: arranged-calib-tbl
 #| echo: false
 
-input_tbl |>  
+calib_input_tbl |>  
   dplyr::slice_head(n = 6) |>
   knitr::kable(
     format = "html",
     align = "cc",
-    col.names = c("予測確率", "実測値", "予測確率カテゴリ")
+    col.names = c("予測確率", "実測値", "群")
   )
 
-input_tbl |> 
+calib_input_tbl |> 
   dplyr::slice_tail(n = 6) |>
   knitr::kable(
     format = "html",
     align = "cc",
-    col.names = c("予測確率", "実測値", "予測確率カテゴリ")
+    col.names = c("予測確率", "実測値", "群")
   )
 ```
 
@@ -1146,36 +1266,60 @@ input_tbl |>
 
 <div class="flow-operation">
   <div class="flow-arrow">&rarr;</div>
-  <div class="flow-caption">同じClassでの平均発症予測確率と<br>実際の発症率を比べる</div>
+  <div class="flow-caption">群ごとに<br>平均を計算</div>
 </div>
 
 :::
 
 ::: {.column .fragment fragment-index="2"}
 
-### 2. Class毎の予測確率の平均と<br>実際のイベント発症率を計算する
+### 2. 群ごとの平均予測確率と実際の発症率
 
 ```{r}
+#| label: summarised-calib-tbl
 #| echo: false
 
-summarised_tbl |>
+calib_summarised_tbl |>
   knitr::kable(
     format = "html",
-    align = "cc",
-    col.names = c("カテゴリ", "予測発症率の平均", "実際の発症率")
+    align = "ccc",
+    digits = 3,
+    col.names = c("群", "平均予測確率", "実際の発症率")
   )
-
 
 ```
 
 :::
 ::::
 
+::: {.calibration-plot .fragment fragment-index="2"}
+
+### 3. 平均予測確率（X軸）と実際の発症率（Y軸）をプロット
+
+```{r}
+#| label: calibration-plot
+#| echo: false
+#| fig-width: 4.8
+#| fig-height: 2.55
+#| fig-align: center
+library(ggplot2)
+
+ggplot(calib_summarised_tbl, aes(x = mean_probability, y = event_proportion)) + 
+  geom_line() + 
+  geom_point() + 
+  geom_abline(intercept = 0, slope = 1, lty = 2) + 
+  theme_bw()
+
+```
+
+:::
+
 
 ## Calibration～Hsomerr-Lemeshow検定
 
 
 ```{r}
+#| label: hl-test
 library(modeldata)
 library(dplyr)
 library(ggplot2)
@@ -1227,6 +1371,7 @@ $$
 ::: {.column width="50%"}
 
 ```{r}
+#| label: brier-score
 library(modeldata)
 library(dplyr)
 library(ggplot2)
@@ -1241,7 +1386,7 @@ modeldata::two_class_example |>
       truth == "Class1", 1, 0
     ), 
     diff_squared = purrr::map2_chr(truth_num,Class1, \(x, y){
-      paste0("(", x, "-", y, ")^2 = ", round((x-y)^2, 3))
+      paste0("(", x, "-", y, ")<sup>2</sup> = ", round((x-y)^2, 3))
     })
   ) |> 
   dplyr::rename(
@@ -1254,18 +1399,21 @@ modeldata::two_class_example |>
   head() |> 
   knitr::kable(
     format = "html",
+    escape = FALSE,
     align = "ccccc"
   )
 
 ```
 
-- Class1を予測したら1, Class2を予測したら0
+- 実際のアウトカムがClass 1なら1, Class2だったら0とする
+- 各々の予測確率(連続値)と上記のアウトカムの差の二乗を足し算する
+- 連続値のモデルのMSEのイメージ
 
 
 :::
 
 ::: {.column width="50%"}
-![](images/slide20_image02.png){fig-alt="Brier scoreの図" width="82%"}
+![](images/brier_image.png){fig-alt="Brier scoreの図" width="82%"}
 :::
 ::::
 
@@ -1273,7 +1421,7 @@ modeldata::two_class_example |>
 
 ## モデルの比較
 
-![](images/slide22_image01.png){fig-alt="AUROCの限界" width="100%"}
+![](images/model_compare.png){fig-alt="AUROCの限界" width="100%"}
 [@Cook2007-fs]
 
 - AUROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている
@@ -1282,9 +1430,8 @@ modeldata::two_class_example |>
 
 ## NRI（Net Reclassification Index）
 
-![](images/slide24_image01.png){fig-alt="NRIの図解" width="88%"}[@Alba2017-gh]
-
-- 古いモデルから新しいモデルでの分類によってどのように変化したかを示す
+- 古いモデルから新しいモデルでの分類によってどのように変化したかを示す[@Alba2017-gh]
+- Shift tableと似ているがちょっと違う
 - 実は複数の種類がある
 - 大きく分けて以下に分けられる
   - Category-based NRI
@@ -1305,6 +1452,8 @@ modeldata::two_class_example |>
 ## continuous NRI
 
 ```{r}
+#| label: nri-prep
+#| include: false
 library(PredictABEL)
 library(survival)
 library(dplyr)
@@ -1327,13 +1476,28 @@ cnri_dat2 <- cnri_dat |>
   dplyr::select(bin_status, simple_pred, complex_pred)
 
 
-knitr::kable(head(cnri_dat2))
-
-PredictABEL::reclassification(data = cnri_dat2, cOutcome = 1, predrisk1 = cnri_dat2$simple_pred, predrisk2 = cnri_dat2$complex_pred, cutoff = c(0, 0.3, 0.6, 1))
+# PredictABEL::reclassification(data = cnri_dat2, cOutcome = 1, predrisk1 = cnri_dat2$simple_pred, predrisk2 = cnri_dat2$complex_pred, cutoff = c(0, 0.3, 0.6, 1))
 
 ```
 
+:::: {.columns .tibble-flow .cnri-flow}
+::: {.column}
+### 1. 新旧モデルの予測確率
+
 ```{r}
+knitr::kable(head(cnri_dat2))
+```
+
+:::
+::: {.column .flow-operation}
+<div class="flow-arrow">&rarr;</div>
+<div class="flow-caption">新旧の確率を比較し、<br>イベントの有無ごとに<br>上昇・非上昇の割合を計算</div>
+:::
+::: {.column}
+### 2. イベントの有無ごとに集計
+
+```{r}
+#| label: cont-nri-prep
 
 cnri_dat2 |> 
   dplyr::summarise(
@@ -1346,12 +1510,19 @@ cnri_dat2 |>
   ) |> 
   knitr::kable()
 
+```
+
+:::
+::::
+
+```{r}
 0.6589 - 0.3411 + 0.7823 - 0.2177
 
 ```
 
 - Continuous NRI：全てのカットオフでのNRIの平均
 - 次の形の方が分かりやすい
+
 $$
 \mathrm{NRI}_{\mathrm{continuous}}
 =
@@ -1382,15 +1553,13 @@ $$
   - AUROC等と一緒に
   - Calibrationがもともと悪いデータだと、意味がなくても有意に改善する可能性がある
 - 最も良い使い方
-  - 全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価
+  - 全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価[@Leening2014-bl]
 
-::: {.reference}
-Ann Intern Med. 2014;160:122-131.
-:::
 
 ## IDI（Integrated Discrimination Improvement）
 
 ```{r}
+#| label: idi
 cnri_dat2 |> 
   dplyr::summarise(
     # `new > old` = sum(complex_pred > simple_pred), 
@@ -1398,27 +1567,15 @@ cnri_dat2 |>
     # `old >= new` = sum(complex_pred <= simple_pred),
     mean_complex_pred = mean(complex_pred),
     .by = bin_status
-  ) 
+  ) |> 
+  knitr::kable(
+    col.names = c("Outcome", "simple modelでのeventの平均予測確率", "complex modelでのeventの平均予測確率")
+  )
 
 0.676 - 0.580 - (0.284 - 0.369)
 
 ```
 
-$$
-\mathrm{IDI}
-=
-\left(
-\bar{p}_{\mathrm{new,event}}
--
-\bar{p}_{\mathrm{old,event}}
-\right)
--
-\left(
-\bar{p}_{\mathrm{new,non-event}}
--
-\bar{p}_{\mathrm{old,non-event}}
-\right)
-$$
 
 $$
 \boxed{
@@ -1430,12 +1587,47 @@ $$
 }
 $$
 
-
+- Event群におけるモデル予測の平均の差と非イベント群の負のモデル予測の平均の差をとったもの
+- Calibration的な意味合いもある
+- NRI, IDIを2値分類で使うならRだと`PredictABEL` packageが使いやすい
 
 ## Decision Curve Analysis
 
 ```{r}
+#| label: dca-prep
+
 library(dcurves)
+library(dplyr)
+library(tidyr)
+
+dca_dat <- tibble::tibble(threshold = seq(0, 0.95, by = 0.05)) |> 
+  tidyr::crossing(
+  dplyr::select(cnri_dat2, -complex_pred)
+) |> 
+  dplyr::mutate(
+    test_positive = simple_pred >= threshold, 
+    test_negative = simple_pred < threshold
+  ) |> 
+  dplyr::summarise(
+    n = n(), 
+    test_pos = sum(test_positive == 1),
+    test_neg = sum(test_negative == 1),
+    TP = sum(test_positive == 1 & bin_status == 1), 
+    TP_rate = TP / n,
+    FP = sum(test_positive == 1 & bin_status == 0), 
+    FP_rate = FP /n,
+    .by = threshold
+  ) |>
+  dplyr::arrange(threshold) |>
+  dplyr::mutate(
+    True_positive = paste0(TP, " / ", n, " = ", round(TP_rate, 3)),
+    False_positive = paste0(FP, " / ", n, " = ", round(FP_rate, 3)),
+    net_benefit = paste0(
+      round(TP_rate, 3), " - ", round(FP_rate, 3), " * ", threshold, " / ", "(1 - ", threshold, ") = ", round(
+      TP_rate - FP_rate * threshold / (1 - threshold), 3))
+  ) |> 
+  dplyr::select(threshold, n, True_positive, False_positive, net_benefit)
+
 
 dca_fig <- dcurves::dca(bin_status ~ simple_pred + complex_pred, data = cnri_dat2, 
   thresholds = seq(0, 0.35, by = 0.05),
@@ -1445,33 +1637,15 @@ dca_fig <- dcurves::dca(bin_status ~ simple_pred + complex_pred, data = cnri_dat
 
 ```
 
-:::{.fragment}
-```{r}
-dca_fig
-```
-:::
-
-:::{.fragment}
-```{r}
-dca_fig + 
-  annotate(
-    "label", 
-    x = 0.4, 
-    y = 0.0, 
-    label = "Net benefit"
-  )
-```
-:::
-
 
 - NRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている
   - 現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある
-  - 例：ICUの心電図モニター vs. HFrEFの心臓生検
+  - 例：失神患者の心電図モニター vs. HFrEFの心臓生検
 - 重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという[@Vickers2016-vz]
 
 ## Decision curve analysis ~ Net benefitの概念
 
-閾値確率(Threshold Probability)を \(p_t\) としたとき、モデルのNet benefitは次式で定義される。
+- 真陽性のメリットと偽陽性によるデメリットの引き算を以下のように定義する
 
 $$
 \operatorname{NB}(p_t)
@@ -1484,26 +1658,39 @@ $$
 \right)
 $$
 
-ここで、
+  - $N$：患者全体の数
+  - $\operatorname{TP}(p_t)$：閾値確率 $p_t$ で検査陽性とされた中での真陽性者数
+  - $\operatorname{FP}(p_t)$：閾値確率 $p_t$ で検査陽性とされた中での偽陽性者数
+  - $\dfrac{p_t}{1-p_t}$：偽陽性による不利益を真陽性による利益に換算する重み
 
-- \(N\)：対象者数
-- \(\operatorname{TP}(p_t)\)：閾値確率 \(p_t\) で治療対象とされた真陽性者数
-- \(\operatorname{FP}(p_t)\)：閾値確率 \(p_t\) で治療対象とされた偽陽性者数
-- \(\dfrac{p_t}{1-p_t}\)：偽陽性による不利益を真陽性による利益に換算する重み
+- Modelの予測においてX軸に陽性とする閾値(Threshold)、このNet benefitをY軸に描くのがDecision curve analysisである
 
-である。
 
-## Net beneiftとThreshold probabilityの関係
+## Net beneiftとThresholdの関係
 
-- Threshold probability毎に真陽性に対する許容される偽陽性の割合を示す
-- 例えば、SIHDを予測するmodelでThreshold probabilityを15%として、その15%を超えたときにCAGをするとする
-- Threshold probability = 15%の時、Oddsは0.85/0.15 = 5.67
+- Net benefitはThreshold毎に真陽性に対する許容される偽陽性の割合を示す
+- 例えば、SIHDを予測するmodelでThresholdを15%として、その15%を超えたときにCAGをするとする
+- Threshold = 15%の時、Oddsは0.85/0.15 = 5.67[@Vertosick2022DCA]
   - 一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断
-- その後の検査の種類によって、あるいは疾患の重篤さや患者の年齢などによってThresholdは変わる
+- 元疾患の重篤さや、検査後の動き、患者の年齢などによってThresholdは変わる
   - 脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)
   - DCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)
 
-## Decision curve analysisの見方
+## Decision curve analysisのCurve①
+```{r}
+#| label: dca-tbl
+
+knitr::kable(head(dca_dat, 8), 
+  col.names = c("Threshold", "n", "True positive", "False positive", "Net benefit"))
+
+```
+
+1. Thresholdを0.01や0.05刻みで並べる
+2. 各々のThresholdで何人がTrue positive/False positiveになるか計算
+3. Net benefitの式にあてて計算する
+  - 式の定義からたとえ、閾値の変化の結果、真陽性や偽陽性の人数が変わらなくてもNet benefitは変化する
+
+## Decision curve analysisのCurve②
 
 - 比較するモデルのほかに、Default strategyとして以下の曲線も描く
   - 誰も治療しない戦略（treat none）
@@ -1524,12 +1711,11 @@ $$
 
 となる。
 
-- 臨床的に意味のあるThreshold probabilityの範囲で各々のDecision curveを比較してより右上にあるモデルが良いモデル
-- 実際は、2値モデル(モデルがHigh riskとしたら治療)などのルールを入れても良い
-
 ## Decision curveの見方
 
 ```{r}
+#| label: dca-curve
+
 library(ggforce)
 
 dca_fig + 
@@ -1543,7 +1729,6 @@ dca_fig +
 - Treat allとTreat noneよりは常に高くないといけない
 - 左端のベースラインのリスクの高低も必ず評価する
 
-
 ## DCA、NBの解釈
 
 - 高価な検査、侵襲的な検査、面倒な検査の場合
@@ -1554,16 +1739,72 @@ dca_fig +
   - 10%以上で陽性とする基準でNNS 1000
   - 言い換えると、111回やると1回の偽陽性を避けられる
 
-## Decision Curveの読み方・作り方
+## NBの解釈例
 
-1. 重要な事は、`P(t)` のレンジを臨床的に意味のある範囲で決める事
-  - モデルから逆に `P(t)` を決めてはいけない
+- 以下にDCAの解釈の例を示す。
+  - 実線（<span style="display:inline-block;width:3em;border-top:2px solid;vertical-align:middle;"></span>）：treat all
+  - 点線（<span style="display:inline-block;width:3em;border-top:2px dotted;vertical-align:middle;"></span>）：treat none
+  - 破線（<span style="display:inline-block;width:3em;border-top:2px dashed;vertical-align:middle;"></span>）：モデル
+  - 一点鎖線（<svg width="48" height="12" style="vertical-align:middle;"><line x1="0" y1="6" x2="48" y2="6" stroke="currentColor" stroke-width="2" stroke-dasharray="8 3 2 3"/></svg>）：比較モデル
+- 臨床的に意味がある閾値が20%(妥当な範囲が10-30%)と考えている
+
+::: {.panel-tabset}
+
+## Case 1
+
+![](images/dca_case1.png){fig-alt="NBの解釈例1のグラフ" width="100%"}
+
+- モデルの線は20%を超えないとTreat allより高くない
+- 患者によっては、10-15%でも治療を選択する
+- 実質的にモデルは価値がない(Treat allで良い)
+- モデルのCalibrationが悪く、Riskを過小評価している
+
+## Case 2
+
+![](images/dca_case2.png){fig-alt="NBの解釈例2のグラフ" width="100%"}
+
+- このモデルはAUROCは高い
+- しかし、有病率が高すぎる(60%)
+- そのため、Treat allよりもモデルが良いレンジはReasonableな10-30%よりも高い
+- 結果的には、このモデルも価値がない
+
+## Case 3
+
+![](images/dca_case3.png){fig-alt="NBの解釈例3のグラフ" width="100%"}
+
+- 13%を超えた後はTreat allよりも良いNet benefitを示している
+  - 13%以下の時はTreat allと同じ性能
+- もしも、このモデルが13%以下を出す事が多くなければ悪くないモデル
+
+## Case 4
+
+![](images/dca_case4.png){fig-alt="NBの解釈例4のグラフ" width="100%"}
+
+- 2つのModelは両者とも、Treat all/noneよりも良いNBを示している
+- 一方で、このModelは13%くらいのところで交差しており、どちらがより良いかは示せない
+
+## Case 5
+
+![](images/dca_case5.png){fig-alt="NBの解釈例5のグラフ" width="100%"}
+
+- モデルは非常によく、AUROCは0.75。また、比較モデルはさらに良くAUROC 0.8だった
+- しかしながら、比較モデルはCalibrationが悪くRiskをUnderestimateしている
+  - Threshold rangeの中ではAUROC 0.75のModelの方が常に良いNBを示している
+  - AUROC 0.8の比較モデルはTreat allよりも悪く有害な可能性すらある
+
+:::
+
+
+## Decision Curve analysisのFigureの作り方
+
+1. 重要な事は、`P(t)` のレンジを臨床的に意味のある範囲で決める
+  1. モデルから逆に `P(t)` を決めてはいけない
 2. 有病率（`P(t) = 0` の時のNB）の値も確認
 3. 興味があるレンジでどのような動態かを確認する
-  - Calibrationが悪いとTreat allやTreat noneよりも悪くなりうる
-  - その場合はそれ以上の比較はしない
+  3. Calibrationが悪いとTreat allやTreat noneよりも悪くなりうる
+  3. その場合はそれ以上の比較はしない
 4. 新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する
-  - 必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価
+  4. 必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価
 
 ## 結局どうすればいいの？
 
@@ -1576,41 +1817,6 @@ dca_fig +
   - Category-based NRIをevent/non-eventで記述する
   - Decision curve analysisを用いる
 
-## NBの解釈例：1
-
-<!-- TODO: 元スライドの矢印・注釈配置は簡略化。 -->
-
-:::: columns
-::: {.column width="55%"}
-- 意味がある閾値が10-30%と考えている場合
-- 15%くらいでTreat allより良い
-  - 患者のリスクを勘案した上で、有用な可能性あり
-- 良いモデルだが、ベースのリスクが高すぎる
-  - モデルは使いにくい
-- 20%を超えないとTreat allよりも良い結果が出ない
-  - Miscalibration
-:::
-
-::: {.column width="45%"}
-![](images/slide33_image01.png){fig-alt="NBの解釈例1のグラフ" width="100%"}
-
-![](images/slide33_image02.png){fig-alt="NBの解釈例1の注釈" width="70%"}
-:::
-::::
-
-## NBの解釈例：2
-
-:::: columns
-::: {.column width="55%"}
-- 15%でモデル1と2が交差する
-- 勝者なく明らかな優位性は不明
-:::
-
-::: {.column width="45%"}
-![](images/slide34_image01.png){fig-alt="NBの解釈例2" width="74%"}
-:::
-::::
-
 ## Take Home Message
 
 - 分類モデルの場合は弁別能と較正能を別個に評価しよう！
@@ -1619,112 +1825,8 @@ dca_fig +
   - 分類モデルの場合はクラスの偏りに要注意！
 - モデルの比較にNRI, Decision-curve analysisも使おう！
 
-## 参考文献
-
-- 『イベント予測モデルの評価指標』
-  - <https://www.jstage.jst.go.jp/article/jjb/41/1/41_1/_pdf>
-- Net Reclassification Improvement: Computation, Interpretation, and Controversies.
-  - Ann Intern Med. 2014;160:122-131.
-- Net benefit approaches to the evaluation of prediction models, molecular markers, and diagnostic tests.
-  - BMJ. 2016;352:i6.
-- Van Calster B, Wynants L, Verbeek JFM, Verbakel JY, Christodoulou E, Vickers AJ, et al.
-  - Reporting and interpreting decision curve analysis: A guide for investigators.
-  - Eur Urol. 2018;74:796-804.
-- Steyerberg EW, Vickers AJ, Cook NR, Gerds T, Gonen M, Obuchowski N, et al.
-  - Assessing the performance of prediction models: a framework for traditional and novel measures.
-  - Epidemiology. 2010;21:128-138.
-
-## AIC/BIC
-
-- `Ln(L)`：モデルの対数尤度（見た目の似方）
-- `P`：モデルの中の変数の数
-- AICとBICは基本的には似たものをみており、複数のモデルの比較に用いる
-- 小さい方が良い値
-- モデルの数が非常に多ければBICの方が良い
-- 基本的にはAICを使えばよさそう
-  - BICの方が罰則が多く、単純すぎるモデルを選ぶ傾向があるため
-- どちらかというと変数選択で使う事が多い
-  - Backward elimination
-
-![](images/slide37_image01.png){fig-alt="AIC/BICの式" width="36%"}
-
-## 連続値の評価について
-
-:::: columns
-::: {.column width="58%"}
-- 連続値
-  - 決定係数（R2）
-  - 平均二乗誤差関連（MAE、MSE、RMSE）
-- R2（R squared）
-  - データの分散のうち、どの程度が説明可能だったかの指標
-  - 線形モデルにおいては相関係数の二乗になる
-  - 非線形モデルでは解釈できない
-:::
-
-::: {.column width="42%"}
-![](images/slide38_image01.png){fig-alt="R2の図" width="76%"}
-
-![](images/slide38_image02.png){fig-alt="R2の式" width="70%"}
-:::
-::::
-
-## 平均二乗誤差関連
-
-:::: columns
-::: {.column width="50%"}
-- 直観的に理解しやすい
-- 平均絶対誤差（MAE）
-- 平均二乗誤差（MSE）
-- 二乗平均平方根誤差（RMSE）
-:::
-
-::: {.column width="50%"}
-![](images/slide39_image01.png){fig-alt="平均二乗誤差関連の図" width="92%"}
-
-![](images/slide39_image02.png){fig-alt="MAEの式" width="58%"}
-
-![](images/slide39_image03.png){fig-alt="MSEの式" width="58%"}
-
-![](images/slide39_image04.png){fig-alt="RMSEの式" width="58%"}
-:::
-::::
-
-## RMSEは正確性を診ており、R2はバラツキの大きさを診ている
-
-![](images/slide40_image01.png){fig-alt="RMSEとR2の違い" width="76%"}
-
-## 何を使えばいいの？
-
-- 常に、RMSEを使えば無難
-- RMSEのメリット・デメリット
-  - 分かりやすい
-  - 臨床的に意味のある誤差かの判断は必要
-  - BNPの誤差30は問題ないが、E/e'の誤差8は大問題
-  - 極端な外れ値があると使えない
-  - 生の散布図やBland-Altman分析を使う
-- R2のメリット・デメリット
-  - R2は値のスケールやデータセットのnの数に影響されない
-  - 異なる指標を比べるのに良い
-  - 非線形モデルで使えない
-  - 説明変数を多くすればするほど、意味がなくても見た目上よくなってしまう
-  - あまりにも合っていないモデルを作ると負にもなりうる
-- 使い分け
-  - 予測を目的とする機械学習的なものならRMSE
-  - 因果を目的とする、何が原因かを評価するならR2
-
-## Bland-Altman分析
-
-:::: columns
-::: {.column width="46%"}
-- 平均を中心に全てのX軸で均等に分布している事を確認する
-:::
-
-::: {.column width="54%"}
-![](images/slide42_image01.png){fig-alt="Bland-Altman分析1" width="48%"}
-![](images/slide42_image02.png){fig-alt="Bland-Altman分析2" width="48%"}
-:::
-::::
+## References
 
 ::: {.reference}
-J Am Coll Cardiol. 2020 Aug 25;76(8):930-941.
+
 :::

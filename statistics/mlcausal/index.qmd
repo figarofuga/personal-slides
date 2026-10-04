@@ -1349,7 +1349,12 @@ $$
 ## 生存分析について
 
 - econmlではまだ実装されていない
-- meta learnerで無理やりやるなら、pseudopopulation(Jackknife法を使って、打ち切りデータを最後まで観察できたものとする)で予測させるなど
+- meta learnerで無理やりやるなら
+  1. IPCWで打ち切りを予測
+  2. IPW
+  3. ある時間での生存確率の差をOutcomeとしたmodel model
+  <br>
+  の3つのmodelを使って行う(CRANにはないが`survlearners` package[@survlearners_manual])
 - causal forestではnaturalに実装されている
 - 論文にはBalanced Individual Treatment Effect in Survival Data (BITES)なども紹介されている[@Moller2026-xi]
 

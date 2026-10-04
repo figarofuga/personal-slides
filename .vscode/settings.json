@@ -1,10 +1,5 @@
 {
     "positron.r.interpreters.pixiDiscovery": false,
-    "positron.r.customBinaries": [
-        "/home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/R"
-    ],
-    "positron.r.interpreters.default": "/home/figarofuga/analysis/pixi-test/.pixi/envs/default/bin/R",
-
     "files.exclude": {
         "**/.pixi": true
     },
@@ -28,6 +23,7 @@
         "**/index_cache"
     ],
     "python.analysis.indexing": false,
+    "python.defaultInterpreterPath": "${workspaceFolder}/.pixi/envs/default/bin/python",
     "terminal.integrated.env.linux": {
         "PIXI_NO_INSTALL": "true",
         "PIXI_FROZEN": "true"

@@ -311,6 +311,110 @@ blockquote {
   font-size: 0.78em;
   text-align: center;
 }
+
+/* Calibration: keep the two tables above a full-width plot row. */
+.reveal .calibration-slide h2 {
+  margin-bottom: 0.35em;
+}
+
+.reveal .calibration-flow {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 0.3fr minmax(0, 1.25fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.reveal .slides .calibration-flow > .column {
+  min-width: 0;
+  width: 100% !important;
+}
+
+.reveal .slides section.calibration-slide h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0 0 0.3em;
+  text-align: center;
+  font-style: normal;
+}
+
+.reveal .calibration-flow table {
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.15;
+  margin: 0.3em auto;
+}
+
+.reveal .calibration-flow table th,
+.reveal .calibration-flow table td {
+  padding: 0.15em 0.3em;
+}
+
+.reveal .calibration-flow .flow-arrow {
+  font-size: 2.5rem;
+}
+
+.reveal .calibration-flow .flow-caption {
+  font-size: 0.44em;
+}
+
+.reveal .calibration-plot {
+  margin-top: 0.35em;
+  text-align: center;
+}
+
+.reveal .slides section.calibration-slide .calibration-plot p,
+.reveal .slides section.calibration-slide .calibration-plot figure {
+  margin: 0;
+}
+
+.reveal .calibration-plot img {
+  max-height: 220px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.reveal .calibration-slide .cell,
+.reveal .calibration-slide .cell-output-display {
+  margin: 0;
+}
+
+.reveal .cnri-flow {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 0.45fr minmax(0, 1.15fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.reveal .slides .cnri-flow > .column {
+  min-width: 0;
+  width: 100% !important;
+}
+
+.reveal .slides .cnri-flow h3 {
+  font-size: 17px;
+  font-style: normal;
+  text-align: center;
+  margin: 0 0 0.4em;
+}
+
+.reveal .cnri-flow table {
+  width: 100%;
+  font-size: 13px;
+}
+
+.reveal .cnri-flow table th,
+.reveal .cnri-flow table td {
+  padding: 0.2em 0.3em;
+}
+
+.reveal .cnri-flow .flow-arrow {
+  font-size: 2.5rem;
+}
+
+.reveal .cnri-flow .flow-caption {
+  font-size: 14px;
+}
 </style>
 </section>
 <section id="ダニエル書第五章" class="slide level2">
@@ -404,13 +508,14 @@ blockquote {
 <li>分類モデルの評価では、<span style="color: red;"><strong>Discrimination(弁別能)</strong></span>と<span style="color: red;"><strong>Calibration(較正能)</strong></span>を別個に評価する</li>
 <li>Discrimination
 <ul>
-<li>0/1の正確性: 実際にこの患者の予測が当たるかどうかの評価</li>
+<li>0/1の正確性: 実際にこの患者がHigh riskかどうかの評価</li>
+<li>言い換えると、患者をRiskの順番に並び替える能力</li>
 </ul></li>
 <li>Calibration
 <ul>
 <li>その患者のリスクの絶対値の評価</li>
 </ul></li>
-<li>まずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -&gt; Calibrationはしばしば忘れ去られている <span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
+<li>まずはDiscrimination &gt; Calibrationだが、特に実臨床ではCalibrationも重要な評価項目<br> -&gt; Calibrationはしばしば忘れ去られている <span class="citation" data-cites="Alba2017-gh">(<a href="#/references" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
 </ul>
 </section>
 <section id="例" class="slide level2">
@@ -423,8 +528,8 @@ blockquote {
 </ul></li>
 <li>Calibration
 <ul>
-<li>「この患者にPCIをしたときに透析になってしまう確率は？」</li>
-<li>20%を超えるようならカテなしで様子をみよう</li>
+<li>「このNSTEACSの患者にPCIをしたときに透析になってしまう確率は？」</li>
+<li>20%を超えるようなら今日はカテなしで、明日以降前負荷をかけた上でCAGをするか再検討しよう</li>
 <li>0/1だけでなく、実際の数字が重要</li>
 </ul></li>
 </ul>
@@ -435,7 +540,7 @@ blockquote {
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/perfect-calibration-discrimination-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -448,21 +553,62 @@ blockquote {
 </ul></li>
 <li>完ぺきなCalibrationで完ぺきなDiscriminationをするためにはかなり無理がある分布でないと達成できない</li>
 </ul>
-<p><span class="citation" data-cites="Cook2007-fs">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
+<p><span class="citation" data-cites="Cook2007-fs">(<a href="#/references" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
 </section>
 <section id="discriminationの評価について" class="slide level2">
 <h2>Discriminationの評価について</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   truth      Class1       Class2 predicted
-1 Class2 0.003589243 0.9964107574    Class2
-2 Class1 0.678621054 0.3213789460    Class1
-3 Class2 0.110893522 0.8891064779    Class2
-4 Class1 0.735161703 0.2648382969    Class1
-5 Class2 0.016239960 0.9837600397    Class2
-6 Class1 0.999275071 0.0007249286    Class1</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">truth</th>
+<th style="text-align: right;">Class1</th>
+<th style="text-align: right;">Class2</th>
+<th style="text-align: left;">predicted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Class2</td>
+<td style="text-align: right;">0.0035892</td>
+<td style="text-align: right;">0.9964108</td>
+<td style="text-align: left;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Class1</td>
+<td style="text-align: right;">0.6786211</td>
+<td style="text-align: right;">0.3213789</td>
+<td style="text-align: left;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Class2</td>
+<td style="text-align: right;">0.1108935</td>
+<td style="text-align: right;">0.8891065</td>
+<td style="text-align: left;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Class1</td>
+<td style="text-align: right;">0.7351617</td>
+<td style="text-align: right;">0.2648383</td>
+<td style="text-align: left;">Class1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Class2</td>
+<td style="text-align: right;">0.0162400</td>
+<td style="text-align: right;">0.9837600</td>
+<td style="text-align: left;">Class2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Class1</td>
+<td style="text-align: right;">0.9992751</td>
+<td style="text-align: right;">0.0007249</td>
+<td style="text-align: left;">Class1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -982,7 +1128,7 @@ Predicted
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+<p><img data-src="index_files/figure-revealjs/confusion-matrix-detail-1.svg" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
 </figure>
 </div>
 </div>
@@ -1090,8 +1236,8 @@ F_{\beta} &amp;=
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">実際のアウトカム</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">閾値:2.0e-07</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">閾値2:4.50e-06</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値:2.0e-07での予測</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">閾値2:4.50e-06での予測</th>
 </tr>
 </thead>
 <tbody>
@@ -1197,10 +1343,6 @@ F_{\beta} &amp;=
 </div>
 </div>
 </div></div>
-<ul>
-<li>感度と1-特異度で点を結ぶとROC曲線</li>
-<li>PrecisionとRecallで点を結ぶとPR曲線</li>
-</ul>
 </section>
 <section id="リスク毎の評価" class="slide level2">
 <h2>リスク毎の評価</h2>
@@ -1265,11 +1407,14 @@ F_{\beta} &amp;=
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
+<ul>
+<li>感度と1-特異度で点を結ぶとROC曲線</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1281,11 +1426,14 @@ F_{\beta} &amp;=
 </div>
 </div>
 </div><div class="column" style="width:50%;">
+<ul>
+<li>PrecisionとRecallで点を結ぶとPR曲線</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1322,7 +1470,7 @@ F_{\beta} &amp;=
 </tr>
 </tbody>
 </table>
-<p><span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></p>
+<p><span class="citation" data-cites="Alba2017-gh">(<a href="#/references" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></p>
 <ul>
 <li>Truthが偏ったデータでは混同行列関連は役に立たない</li>
 <li>特にAccuracyは一番ダメ
@@ -1343,8 +1491,8 @@ F_{\beta} &amp;=
 <ul>
 <li>根拠がある場合
 <ul>
-<li>例えばPEの許容される見逃し率は2%<span class="citation" data-cites="Creager2026-or">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Creager et al. 2026</a>)</span></li>
-<li>胸痛の評価ToolでのMACEの許容率は1%未満<span class="citation" data-cites="Than2013-zz">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Than et al. 2013</a>)</span></li>
+<li>例えばPEの許容される見逃し率は2%<span class="citation" data-cites="Creager2026-or">(<a href="#/references" role="doc-biblioref" onclick="">Creager et al. 2026</a>)</span></li>
+<li>胸痛の評価ToolでのMACEの許容率は1%未満<span class="citation" data-cites="Than2013-zz">(<a href="#/references" role="doc-biblioref" onclick="">Than et al. 2013</a>)</span></li>
 </ul></li>
 <li>妥当な感度、特異度の値が分かっている
 <ul>
@@ -1378,15 +1526,15 @@ F_{\beta} &amp;=
 <li>Hosmer-Lemeshow: 予測確率からn個の群分けを行い、その中での期待される発生件数と実際の発生件数をχ2検定で評価する</li>
 <li>Brier score: 実際のイベントと予測確率の差を二乗和にして平均を取った値</li>
 </ul></li>
-<li><span style="color: red; font-size: 1.1em;"><strong>Calibration plot</strong></span>が、どこの予測能が悪いかもわかるため最も良い評価<span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
+<li><span style="color: red; font-size: 1.1em;"><strong>Calibration plot</strong></span>が、どこの予測能が悪いかもわかるため最も良い評価<span class="citation" data-cites="Alba2017-gh">(<a href="#/references" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
 <li>分類数には要注意</li>
 </ul>
 </section>
-<section id="calibration-plotの作り方" class="slide level2">
+<section id="calibration-plotの作り方" class="slide level2 calibration-slide">
 <h2>Calibration Plotの作り方</h2>
-<div class="columns tibble-flow roc-flow">
+<div class="columns tibble-flow calibration-flow">
 <div class="column">
-<h3 id="予測結果を-昇順で並べる-1">1. 予測結果を<br>昇順で並べる</h3>
+<h3 id="予測確率で昇順に並べ10群に分ける">1. 予測確率で昇順に並べ、10群に分ける</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1394,7 +1542,7 @@ F_{\beta} &amp;=
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">実測値</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率カテゴリ</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">群</th>
 </tr>
 </thead>
 <tbody>
@@ -1437,7 +1585,7 @@ F_{\beta} &amp;=
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">予測確率</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">実測値</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">予測確率カテゴリ</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">群</th>
 </tr>
 </thead>
 <tbody>
@@ -1481,18 +1629,18 @@ F_{\beta} &amp;=
 →
 </div>
 <div class="flow-caption">
-同じClassでの平均発症予測確率と<br>実際の発症率を比べる
+群ごとに<br>平均を計算
 </div>
 </div>
 </div><div class="column fragment" data-fragment-index="2">
-<h3 id="class毎の予測確率の平均と-実際のイベント発症率を計算する">2. Class毎の予測確率の平均と<br>実際のイベント発症率を計算する</h3>
+<h3 id="群ごとの平均予測確率と実際の発症率">2. 群ごとの平均予測確率と実際の発症率</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: center;" data-quarto-table-cell-role="th">カテゴリ</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">予測発症率の平均</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">群</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">平均予測確率</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">実際の発症率</th>
 </tr>
 </thead>
@@ -1500,58 +1648,70 @@ F_{\beta} &amp;=
 <tr class="odd">
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">0.00</td>
-<td style="text-align: center;">0.0006264</td>
+<td style="text-align: center;">0.001</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">0.02</td>
-<td style="text-align: center;">0.0122140</td>
+<td style="text-align: center;">0.012</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">0.14</td>
-<td style="text-align: center;">0.0776816</td>
+<td style="text-align: center;">0.078</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">0.26</td>
-<td style="text-align: center;">0.2125326</td>
+<td style="text-align: center;">0.213</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">0.38</td>
-<td style="text-align: center;">0.4978346</td>
+<td style="text-align: center;">0.498</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">6</td>
 <td style="text-align: center;">0.56</td>
-<td style="text-align: center;">0.7620909</td>
+<td style="text-align: center;">0.762</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">7</td>
 <td style="text-align: center;">0.86</td>
-<td style="text-align: center;">0.9134009</td>
+<td style="text-align: center;">0.913</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">8</td>
 <td style="text-align: center;">0.98</td>
-<td style="text-align: center;">0.9778961</td>
+<td style="text-align: center;">0.978</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">9</td>
 <td style="text-align: center;">0.96</td>
-<td style="text-align: center;">0.9938732</td>
+<td style="text-align: center;">0.994</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">10</td>
 <td style="text-align: center;">1.00</td>
-<td style="text-align: center;">0.9992472</td>
+<td style="text-align: center;">0.999</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div></div>
+<div class="calibration-plot fragment" data-fragment-index="2">
+<h3 id="平均予測確率x軸と実際の発症率y軸をプロット">3. 平均予測確率（X軸）と実際の発症率（Y軸）をプロット</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" class="quarto-figure quarto-figure-center" width="460"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="calibrationhsomerr-lemeshow検定" class="slide level2">
 <h2>Calibration～Hsomerr-Lemeshow検定</h2>
@@ -1687,47 +1847,49 @@ F_{\beta} &amp;=
 <td style="text-align: center;">0.004</td>
 <td style="text-align: center;">Class2</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">(0-0.004)^2 = 0</td>
+<td style="text-align: center;">(0-0.004)<sup>2</sup> = 0</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">0.679</td>
 <td style="text-align: center;">Class1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">(1-0.679)^2 = 0.103</td>
+<td style="text-align: center;">(1-0.679)<sup>2</sup> = 0.103</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">0.111</td>
 <td style="text-align: center;">Class2</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">(0-0.111)^2 = 0.012</td>
+<td style="text-align: center;">(0-0.111)<sup>2</sup> = 0.012</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">0.735</td>
 <td style="text-align: center;">Class1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">(1-0.735)^2 = 0.07</td>
+<td style="text-align: center;">(1-0.735)<sup>2</sup> = 0.07</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">0.016</td>
 <td style="text-align: center;">Class2</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">(0-0.016)^2 = 0</td>
+<td style="text-align: center;">(0-0.016)<sup>2</sup> = 0</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">0.999</td>
 <td style="text-align: center;">Class1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">(1-0.999)^2 = 0</td>
+<td style="text-align: center;">(1-0.999)<sup>2</sup> = 0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <ul>
-<li>Class1を予測したら1, Class2を予測したら0</li>
+<li>実際のアウトカムがClass 1なら1, Class2だったら0とする</li>
+<li>各々の予測確率(連続値)と上記のアウトカムの差の二乗を足し算する</li>
+<li>連続値のモデルのMSEのイメージ</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/slide20_image02.png" style="width:82.0%" alt="Brier scoreの図"></p>
+<p><img data-src="images/brier_image.png" style="width:82.0%" alt="Brier scoreの図"></p>
 </div></div>
 </section></section>
 <section>
@@ -1737,7 +1899,7 @@ F_{\beta} &amp;=
 </section>
 <section id="モデルの比較" class="slide level2">
 <h2>モデルの比較</h2>
-<p><img data-src="images/slide22_image01.png" style="width:100.0%" alt="AUROCの限界"> <span class="citation" data-cites="Cook2007-fs">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
+<p><img data-src="images/model_compare.png" style="width:100.0%" alt="AUROCの限界"> <span class="citation" data-cites="Cook2007-fs">(<a href="#/references" role="doc-biblioref" onclick="">Cook 2007</a>)</span></p>
 <ul>
 <li>AUROCでは、有用なマーカーを追加しても元のモデルの性能によっては追加による性能の改善を捉えられない事が知られている</li>
 <li>よくあるシチュエーションとしてベースのモデルに何かの変数を追加したときにモデルが良くなるか？
@@ -1748,9 +1910,9 @@ F_{\beta} &amp;=
 </section>
 <section id="nrinet-reclassification-index" class="slide level2">
 <h2>NRI（Net Reclassification Index）</h2>
-<p><img data-src="images/slide24_image01.png" style="width:88.0%" alt="NRIの図解"><span class="citation" data-cites="Alba2017-gh">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></p>
 <ul>
-<li>古いモデルから新しいモデルでの分類によってどのように変化したかを示す</li>
+<li>古いモデルから新しいモデルでの分類によってどのように変化したかを示す<span class="citation" data-cites="Alba2017-gh">(<a href="#/references" role="doc-biblioref" onclick="">Alba et al. 2017</a>)</span></li>
+<li>Shift tableと似ているがちょっと違う</li>
 <li>実は複数の種類がある</li>
 <li>大きく分けて以下に分けられる
 <ul>
@@ -1775,6 +1937,9 @@ F_{\beta} &amp;=
 </section>
 <section id="continuous-nri" class="slide level2">
 <h2>continuous NRI</h2>
+<div class="columns tibble-flow cnri-flow">
+<div class="column">
+<h3 id="新旧モデルの予測確率">1. 新旧モデルの予測確率</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1819,44 +1984,16 @@ F_{\beta} &amp;=
 </tbody>
 </table>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code> _________________________________________
- 
-     Reclassification table    
- _________________________________________
-
- Outcome: absent 
-  
-             Updated Model
-Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
-    [0,0.3)        68         6       1               9
-    [0.3,0.6)      32        14       9              75
-    [0.6,1]         1         8       8              53
-
- 
- Outcome: present 
-  
-             Updated Model
-Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
-    [0,0.3)         8         7       4              58
-    [0.3,0.6)       8        21      26              62
-    [0.6,1]         0         3      52               5
-
- 
- Combined Data 
-  
-             Updated Model
-Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
-    [0,0.3)        76        13       5              19
-    [0.3,0.6)      40        35      35              68
-    [0.6,1]         1        11      60              17
- _________________________________________
-
- NRI(Categorical) [95% CI]: 0.3716 [ 0.2329 - 0.5104 ] ; p-value: 0 
- NRI(Continuous) [95% CI]: 0.8825 [ 0.6713 - 1.0936 ] ; p-value: 0 
- IDI [95% CI]: 0.1816 [ 0.137 - 0.2263 ] ; p-value: 0 </code></pre>
 </div>
+</div><div class="column flow-operation">
+<div class="flow-arrow">
+→
 </div>
+<div class="flow-caption">
+新旧の確率を比較し、<br>イベントの有無ごとに<br>上昇・非上昇の割合を計算
+</div>
+</div><div class="column">
+<h3 id="イベントの有無ごとに集計">2. イベントの有無ごとに集計</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1884,23 +2021,36 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 </tbody>
 </table>
 </div>
+</div>
+</div></div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8824</code></pre>
 </div>
 </div>
 <ul>
-<li><p>Continuous NRI：全てのカットオフでのNRIの平均</p></li>
-<li><p>次の形の方が分かりやすい $$ _{} = ( )</p></li>
-<li><p>( )</p></li>
-<li><p>( )</p></li>
-<li><p>( ) $$</p></li>
-<li><p>メリット</p>
+<li>Continuous NRI：全てのカットオフでのNRIの平均</li>
+<li>次の形の方が分かりやすい</li>
+</ul>
+<p><span class="math display">\[
+\mathrm{NRI}_{\mathrm{continuous}}
+=
+\Pr(\text{higher} \mid \text{event})
+-
+\Pr(\text{lower} \mid \text{event})
++
+\Pr(\text{lower} \mid \text{nonevent})
+-
+\Pr(\text{higher} \mid \text{nonevent})
+\]</span></p>
+<ul>
+<li>メリット
 <ul>
 <li>恣意的ではなくなる</li>
 <li>元のAUROCに関連なく改善度合いが分かる</li>
 <li>新規に加えたマーカーの影響を評価可能</li>
 </ul></li>
-<li><p>注意点</p>
+<li>注意点
 <ul>
 <li>弱いマーカーでもポジティブになりやすい</li>
 <li>Miscalibrationの影響を強く受ける</li>
@@ -1923,40 +2073,45 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 </ul></li>
 <li>最も良い使い方
 <ul>
-<li>全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価</li>
+<li>全く関係のないモデル同士ではなく、古いモデルに新たなマーカーを追加した後のモデル評価<span class="citation" data-cites="Leening2014-bl">(<a href="#/references" role="doc-biblioref" onclick="">Leening et al. 2014</a>)</span></li>
 </ul></li>
 </ul>
-<div class="reference">
-<p>Ann Intern Med. 2014;160:122-131.</p>
-</div>
 </section>
 <section id="idiintegrated-discrimination-improvement" class="slide level2">
 <h2>IDI（Integrated Discrimination Improvement）</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  bin_status mean_simple_pred mean_complex_pred
-1          1        0.5795059         0.6762434
-2          0        0.3690050         0.2841129</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 44%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Outcome</th>
+<th style="text-align: right;">simple modelでのeventの平均予測確率</th>
+<th style="text-align: right;">complex modelでのeventの平均予測確率</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5795059</td>
+<td style="text-align: right;">0.6762434</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.3690050</td>
+<td style="text-align: right;">0.2841129</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.181</code></pre>
 </div>
 </div>
-<p><span class="math display">\[
-\mathrm{IDI}
-=
-\left(
-\bar{p}_{\mathrm{new,event}}
--
-\bar{p}_{\mathrm{old,event}}
-\right)
--
-\left(
-\bar{p}_{\mathrm{new,non-event}}
--
-\bar{p}_{\mathrm{old,non-event}}
-\right)
-\]</span></p>
 <p><span class="math display">\[
 \boxed{
 \mathrm{IDI}
@@ -1966,43 +2121,28 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 \text{non-event群における予測確率の平均上昇}
 }
 \]</span></p>
+<ul>
+<li>Event群におけるモデル予測の平均の差と非イベント群の負のモデル予測の平均の差をとったもの</li>
+<li>Calibration的な意味合いもある</li>
+<li>NRI, IDIを2値分類で使うならRだと<code>PredictABEL</code> packageが使いやすい</li>
+</ul>
 </section>
 <section id="decision-curve-analysis" class="slide level2">
 <h2>Decision Curve Analysis</h2>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
 <ul>
 <li>NRI/IDIは偽陽性と偽陰性を同じ重みづけで扱っている
 <ul>
 <li>現実には偽陽性が望ましくない時と偽陰性が望ましくない時がある</li>
-<li>例：ICUの心電図モニター vs.&nbsp;HFrEFの心臓生検</li>
+<li>例：失神患者の心電図モニター vs.&nbsp;HFrEFの心臓生検</li>
 </ul></li>
-<li>重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという<span class="citation" data-cites="Vickers2016-vz">(<a href="#/bland-altman分析" role="doc-biblioref" onclick="">Vickers et al. 2016</a>)</span></li>
+<li>重みづけをした上でのNet benefitを確率毎に記述したグラフをDecision curveという<span class="citation" data-cites="Vickers2016-vz">(<a href="#/references" role="doc-biblioref" onclick="">Vickers et al. 2016</a>)</span></li>
 </ul>
 </section>
 <section id="decision-curve-analysis-net-benefitの概念" class="slide level2">
 <h2>Decision curve analysis ~ Net benefitの概念</h2>
-<p>閾値確率(Threshold Probability)を (p_t) としたとき、モデルのNet benefitは次式で定義される。</p>
+<ul>
+<li>真陽性のメリットと偽陽性によるデメリットの引き算を以下のように定義する</li>
+</ul>
 <p><span class="math display">\[
 \operatorname{NB}(p_t)
 =
@@ -2013,33 +2153,123 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 \frac{p_t}{1-p_t}
 \right)
 \]</span></p>
-<p>ここで、</p>
 <ul>
-<li>(N)：対象者数</li>
-<li>((p_t))：閾値確率 (p_t) で治療対象とされた真陽性者数</li>
-<li>((p_t))：閾値確率 (p_t) で治療対象とされた偽陽性者数</li>
-<li>()：偽陽性による不利益を真陽性による利益に換算する重み</li>
+<li><p><span class="math inline">\(N\)</span>：患者全体の数</p></li>
+<li><p><span class="math inline">\(\operatorname{TP}(p_t)\)</span>：閾値確率 <span class="math inline">\(p_t\)</span> で検査陽性とされた中での真陽性者数</p></li>
+<li><p><span class="math inline">\(\operatorname{FP}(p_t)\)</span>：閾値確率 <span class="math inline">\(p_t\)</span> で検査陽性とされた中での偽陽性者数</p></li>
+<li><p><span class="math inline">\(\dfrac{p_t}{1-p_t}\)</span>：偽陽性による不利益を真陽性による利益に換算する重み</p></li>
+<li><p>Modelの予測においてX軸に陽性とする閾値(Threshold)、このNet benefitをY軸に描くのがDecision curve analysisである</p></li>
 </ul>
-<p>である。</p>
 </section>
-<section id="net-beneiftとthreshold-probabilityの関係" class="slide level2">
-<h2>Net beneiftとThreshold probabilityの関係</h2>
+<section id="net-beneiftとthresholdの関係" class="slide level2">
+<h2>Net beneiftとThresholdの関係</h2>
 <ul>
-<li>Threshold probability毎に真陽性に対する許容される偽陽性の割合を示す</li>
-<li>例えば、SIHDを予測するmodelでThreshold probabilityを15%として、その15%を超えたときにCAGをするとする</li>
-<li>Threshold probability = 15%の時、Oddsは0.85/0.15 = 5.67
+<li>Net benefitはThreshold毎に真陽性に対する許容される偽陽性の割合を示す</li>
+<li>例えば、SIHDを予測するmodelでThresholdを15%として、その15%を超えたときにCAGをするとする</li>
+<li>Threshold = 15%の時、Oddsは0.85/0.15 = 5.67<span class="citation" data-cites="Vertosick2022DCA">(<a href="#/references" role="doc-biblioref" onclick="">Vertosick and Vickers 2022</a>)</span>
 <ul>
 <li>一人の見逃し(False negative)は無駄なカテーテル検査(False positive)6人分と同じ重みという判断</li>
 </ul></li>
-<li>その後の検査の種類によって、あるいは疾患の重篤さや患者の年齢などによってThresholdは変わる
+<li>元疾患の重篤さや、検査後の動き、患者の年齢などによってThresholdは変わる
 <ul>
 <li>脳梗塞患者のAF疑い → HolterならThresholdはかなり、下がる(閾値1%で99人分など)</li>
 <li>DCM疑い患者 → 心筋生検ならThresholdは上がる(閾値50%で1人分など)</li>
 </ul></li>
 </ul>
 </section>
-<section id="decision-curve-analysisの見方" class="slide level2">
-<h2>Decision curve analysisの見方</h2>
+<section id="decision-curve-analysisのcurve①" class="slide level2 scrollable">
+<h2>Decision curve analysisのCurve①</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 4%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Threshold</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: left;">True positive</th>
+<th style="text-align: left;">False positive</th>
+<th style="text-align: left;">Net benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">129 / 276 = 0.467</td>
+<td style="text-align: left;">147 / 276 = 0.533</td>
+<td style="text-align: left;">0.467 - 0.533 * 0 / (1 - 0) = 0.467</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">129 / 276 = 0.467</td>
+<td style="text-align: left;">147 / 276 = 0.533</td>
+<td style="text-align: left;">0.467 - 0.533 * 0.05 / (1 - 0.05) = 0.439</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">129 / 276 = 0.467</td>
+<td style="text-align: left;">147 / 276 = 0.533</td>
+<td style="text-align: left;">0.467 - 0.533 * 0.1 / (1 - 0.1) = 0.408</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">129 / 276 = 0.467</td>
+<td style="text-align: left;">147 / 276 = 0.533</td>
+<td style="text-align: left;">0.467 - 0.533 * 0.15 / (1 - 0.15) = 0.373</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">129 / 276 = 0.467</td>
+<td style="text-align: left;">147 / 276 = 0.533</td>
+<td style="text-align: left;">0.467 - 0.533 * 0.2 / (1 - 0.2) = 0.334</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">112 / 276 = 0.406</td>
+<td style="text-align: left;">84 / 276 = 0.304</td>
+<td style="text-align: left;">0.406 - 0.304 * 0.25 / (1 - 0.25) = 0.304</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">110 / 276 = 0.399</td>
+<td style="text-align: left;">72 / 276 = 0.261</td>
+<td style="text-align: left;">0.399 - 0.261 * 0.3 / (1 - 0.3) = 0.287</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">110 / 276 = 0.399</td>
+<td style="text-align: left;">66 / 276 = 0.239</td>
+<td style="text-align: left;">0.399 - 0.239 * 0.35 / (1 - 0.35) = 0.27</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ol type="1">
+<li>Thresholdを0.01や0.05刻みで並べる</li>
+<li>各々のThresholdで何人がTrue positive/False positiveになるか計算</li>
+<li>Net benefitの式にあてて計算する</li>
+</ol>
+<ul>
+<li>式の定義からたとえ、閾値の変化の結果、真陽性や偽陽性の人数が変わらなくてもNet benefitは変化する</li>
+</ul>
+</section>
+<section id="decision-curve-analysisのcurve②" class="slide level2">
+<h2>Decision curve analysisのCurve②</h2>
 <ul>
 <li>比較するモデルのほかに、Default strategyとして以下の曲線も描く
 <ul>
@@ -2060,10 +2290,6 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 \right)
 \]</span></p>
 <p>となる。</p>
-<ul>
-<li>臨床的に意味のあるThreshold probabilityの範囲で各々のDecision curveを比較してより右上にあるモデルが良いモデル</li>
-<li>実際は、2値モデル(モデルがHigh riskとしたら治療)などのルールを入れても良い</li>
-</ul>
 </section>
 <section id="decision-curveの見方" class="slide level2">
 <h2>Decision curveの見方</h2>
@@ -2071,7 +2297,7 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2100,28 +2326,82 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 </ul></li>
 </ul>
 </section>
-<section id="decision-curveの読み方作り方" class="slide level2 scrollable">
-<h2>Decision Curveの読み方・作り方</h2>
-<ol type="1">
-<li>重要な事は、<code>P(t)</code> のレンジを臨床的に意味のある範囲で決める事</li>
-</ol>
+<section id="nbの解釈例" class="slide level2">
+<h2>NBの解釈例</h2>
 <ul>
-<li>モデルから逆に <code>P(t)</code> を決めてはいけない</li>
+<li>以下にDCAの解釈の例を示す。
+<ul>
+<li>実線（<span style="display:inline-block;width:3em;border-top:2px solid;vertical-align:middle;"></span>）：treat all</li>
+<li>点線（<span style="display:inline-block;width:3em;border-top:2px dotted;vertical-align:middle;"></span>）：treat none</li>
+<li>破線（<span style="display:inline-block;width:3em;border-top:2px dashed;vertical-align:middle;"></span>）：モデル</li>
+<li>一点鎖線（<svg width="48" height="12" style="vertical-align:middle;"><line x1="0" y1="6" x2="48" y2="6" stroke="currentColor" stroke-width="2" stroke-dasharray="8 3 2 3"></line></svg>）：比較モデル</li>
+</ul></li>
+<li>臨床的に意味がある閾値が20%(妥当な範囲が10-30%)と考えている</li>
 </ul>
-<ol start="2" type="1">
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Case 1</a></li><li><a href="#tabset-1-2">Case 2</a></li><li><a href="#tabset-1-3">Case 3</a></li><li><a href="#tabset-1-4">Case 4</a></li><li><a href="#tabset-1-5">Case 5</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><img data-src="images/dca_case1.png" style="width:100.0%" alt="NBの解釈例1のグラフ"></p>
+<ul>
+<li>モデルの線は20%を超えないとTreat allより高くない</li>
+<li>患者によっては、10-15%でも治療を選択する</li>
+<li>実質的にモデルは価値がない(Treat allで良い)</li>
+<li>モデルのCalibrationが悪く、Riskを過小評価している</li>
+</ul>
+</div>
+<div id="tabset-1-2">
+<p><img data-src="images/dca_case2.png" style="width:100.0%" alt="NBの解釈例2のグラフ"></p>
+<ul>
+<li>このモデルはAUROCは高い</li>
+<li>しかし、有病率が高すぎる(60%)</li>
+<li>そのため、Treat allよりもモデルが良いレンジはReasonableな10-30%よりも高い</li>
+<li>結果的には、このモデルも価値がない</li>
+</ul>
+</div>
+<div id="tabset-1-3">
+<p><img data-src="images/dca_case3.png" style="width:100.0%" alt="NBの解釈例3のグラフ"></p>
+<ul>
+<li>13%を超えた後はTreat allよりも良いNet benefitを示している
+<ul>
+<li>13%以下の時はTreat allと同じ性能</li>
+</ul></li>
+<li>もしも、このモデルが13%以下を出す事が多くなければ悪くないモデル</li>
+</ul>
+</div>
+<div id="tabset-1-4">
+<p><img data-src="images/dca_case4.png" style="width:100.0%" alt="NBの解釈例4のグラフ"></p>
+<ul>
+<li>2つのModelは両者とも、Treat all/noneよりも良いNBを示している</li>
+<li>一方で、このModelは13%くらいのところで交差しており、どちらがより良いかは示せない</li>
+</ul>
+</div>
+<div id="tabset-1-5">
+<p><img data-src="images/dca_case5.png" style="width:100.0%" alt="NBの解釈例5のグラフ"></p>
+<ul>
+<li>モデルは非常によく、AUROCは0.75。また、比較モデルはさらに良くAUROC 0.8だった</li>
+<li>しかしながら、比較モデルはCalibrationが悪くRiskをUnderestimateしている
+<ul>
+<li>Threshold rangeの中ではAUROC 0.75のModelの方が常に良いNBを示している</li>
+<li>AUROC 0.8の比較モデルはTreat allよりも悪く有害な可能性すらある</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="decision-curve-analysisのfigureの作り方" class="slide level2 scrollable">
+<h2>Decision Curve analysisのFigureの作り方</h2>
+<ol type="1">
+<li>重要な事は、<code>P(t)</code> のレンジを臨床的に意味のある範囲で決める</li>
+<li>モデルから逆に <code>P(t)</code> を決めてはいけない</li>
 <li>有病率（<code>P(t) = 0</code> の時のNB）の値も確認</li>
 <li>興味があるレンジでどのような動態かを確認する</li>
-</ol>
-<ul>
 <li>Calibrationが悪いとTreat allやTreat noneよりも悪くなりうる</li>
 <li>その場合はそれ以上の比較はしない</li>
-</ul>
-<ol start="4" type="1">
 <li>新しいモデルの費用や侵襲性、疾患の重要性などを勘案してNBの差を評価する</li>
-</ol>
-<ul>
 <li>必要時、NBの逆数やoddsとの差を取ってtest tradeoffを評価</li>
-</ul>
+</ol>
 </section>
 <section id="結局どうすればいいの-1" class="slide level2">
 <h2>結局どうすればいいの？</h2>
@@ -2140,43 +2420,6 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 </ul></li>
 </ul>
 </section>
-<section id="nbの解釈例1" class="slide level2">
-<h2>NBの解釈例：1</h2>
-<!-- TODO: 元スライドの矢印・注釈配置は簡略化。 -->
-<div class="columns">
-<div class="column" style="width:55%;">
-<ul>
-<li>意味がある閾値が10-30%と考えている場合</li>
-<li>15%くらいでTreat allより良い
-<ul>
-<li>患者のリスクを勘案した上で、有用な可能性あり</li>
-</ul></li>
-<li>良いモデルだが、ベースのリスクが高すぎる
-<ul>
-<li>モデルは使いにくい</li>
-</ul></li>
-<li>20%を超えないとTreat allよりも良い結果が出ない
-<ul>
-<li>Miscalibration</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:45%;">
-<p><img data-src="images/slide33_image01.png" style="width:100.0%" alt="NBの解釈例1のグラフ"></p>
-<p><img data-src="images/slide33_image02.png" style="width:70.0%" alt="NBの解釈例1の注釈"></p>
-</div></div>
-</section>
-<section id="nbの解釈例2" class="slide level2">
-<h2>NBの解釈例：2</h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<ul>
-<li>15%でモデル1と2が交差する</li>
-<li>勝者なく明らかな優位性は不明</li>
-</ul>
-</div><div class="column" style="width:45%;">
-<p><img data-src="images/slide34_image01.png" style="width:74.0%" alt="NBの解釈例2"></p>
-</div></div>
-</section>
 <section id="take-home-message-1" class="slide level2">
 <h2>Take Home Message</h2>
 <ul>
@@ -2189,134 +2432,10 @@ Initial Model [0,0.3) [0.3,0.6) [0.6,1]  % reclassified
 <li>モデルの比較にNRI, Decision-curve analysisも使おう！</li>
 </ul>
 </section>
-<section id="参考文献" class="slide level2">
-<h2>参考文献</h2>
-<ul>
-<li>『イベント予測モデルの評価指標』
-<ul>
-<li><a href="https://www.jstage.jst.go.jp/article/jjb/41/1/41_1/_pdf" class="uri">https://www.jstage.jst.go.jp/article/jjb/41/1/41_1/_pdf</a></li>
-</ul></li>
-<li>Net Reclassification Improvement: Computation, Interpretation, and Controversies.
-<ul>
-<li>Ann Intern Med. 2014;160:122-131.</li>
-</ul></li>
-<li>Net benefit approaches to the evaluation of prediction models, molecular markers, and diagnostic tests.
-<ul>
-<li>BMJ. 2016;352:i6.</li>
-</ul></li>
-<li>Van Calster B, Wynants L, Verbeek JFM, Verbakel JY, Christodoulou E, Vickers AJ, et al.
-<ul>
-<li>Reporting and interpreting decision curve analysis: A guide for investigators.</li>
-<li>Eur Urol. 2018;74:796-804.</li>
-</ul></li>
-<li>Steyerberg EW, Vickers AJ, Cook NR, Gerds T, Gonen M, Obuchowski N, et al.
-<ul>
-<li>Assessing the performance of prediction models: a framework for traditional and novel measures.</li>
-<li>Epidemiology. 2010;21:128-138.</li>
-</ul></li>
-</ul>
-</section>
-<section id="aicbic" class="slide level2">
-<h2>AIC/BIC</h2>
-<ul>
-<li><code>Ln(L)</code>：モデルの対数尤度（見た目の似方）</li>
-<li><code>P</code>：モデルの中の変数の数</li>
-<li>AICとBICは基本的には似たものをみており、複数のモデルの比較に用いる</li>
-<li>小さい方が良い値</li>
-<li>モデルの数が非常に多ければBICの方が良い</li>
-<li>基本的にはAICを使えばよさそう
-<ul>
-<li>BICの方が罰則が多く、単純すぎるモデルを選ぶ傾向があるため</li>
-</ul></li>
-<li>どちらかというと変数選択で使う事が多い
-<ul>
-<li>Backward elimination</li>
-</ul></li>
-</ul>
-<p><img data-src="images/slide37_image01.png" style="width:36.0%" alt="AIC/BICの式"></p>
-</section>
-<section id="連続値の評価について" class="slide level2">
-<h2>連続値の評価について</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
-<ul>
-<li>連続値
-<ul>
-<li>決定係数（R2）</li>
-<li>平均二乗誤差関連（MAE、MSE、RMSE）</li>
-</ul></li>
-<li>R2（R squared）
-<ul>
-<li>データの分散のうち、どの程度が説明可能だったかの指標</li>
-<li>線形モデルにおいては相関係数の二乗になる</li>
-<li>非線形モデルでは解釈できない</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide38_image01.png" style="width:76.0%" alt="R2の図"></p>
-<p><img data-src="images/slide38_image02.png" style="width:70.0%" alt="R2の式"></p>
-</div></div>
-</section>
-<section id="平均二乗誤差関連" class="slide level2">
-<h2>平均二乗誤差関連</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>直観的に理解しやすい</li>
-<li>平均絶対誤差（MAE）</li>
-<li>平均二乗誤差（MSE）</li>
-<li>二乗平均平方根誤差（RMSE）</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/slide39_image01.png" style="width:92.0%" alt="平均二乗誤差関連の図"></p>
-<p><img data-src="images/slide39_image02.png" style="width:58.0%" alt="MAEの式"></p>
-<p><img data-src="images/slide39_image03.png" style="width:58.0%" alt="MSEの式"></p>
-<p><img data-src="images/slide39_image04.png" style="width:58.0%" alt="RMSEの式"></p>
-</div></div>
-</section>
-<section id="rmseは正確性を診ておりr2はバラツキの大きさを診ている" class="slide level2">
-<h2>RMSEは正確性を診ており、R2はバラツキの大きさを診ている</h2>
-<p><img data-src="images/slide40_image01.png" style="width:76.0%" alt="RMSEとR2の違い"></p>
-</section>
-<section id="何を使えばいいの" class="slide level2">
-<h2>何を使えばいいの？</h2>
-<ul>
-<li>常に、RMSEを使えば無難</li>
-<li>RMSEのメリット・デメリット
-<ul>
-<li>分かりやすい</li>
-<li>臨床的に意味のある誤差かの判断は必要</li>
-<li>BNPの誤差30は問題ないが、E/e’の誤差8は大問題</li>
-<li>極端な外れ値があると使えない</li>
-<li>生の散布図やBland-Altman分析を使う</li>
-</ul></li>
-<li>R2のメリット・デメリット
-<ul>
-<li>R2は値のスケールやデータセットのnの数に影響されない</li>
-<li>異なる指標を比べるのに良い</li>
-<li>非線形モデルで使えない</li>
-<li>説明変数を多くすればするほど、意味がなくても見た目上よくなってしまう</li>
-<li>あまりにも合っていないモデルを作ると負にもなりうる</li>
-</ul></li>
-<li>使い分け
-<ul>
-<li>予測を目的とする機械学習的なものならRMSE</li>
-<li>因果を目的とする、何が原因かを評価するならR2</li>
-</ul></li>
-</ul>
-</section>
-<section id="bland-altman分析" class="slide level2 smaller scrollable">
-<h2>Bland-Altman分析</h2>
-<div class="columns">
-<div class="column" style="width:46%;">
-<ul>
-<li>平均を中心に全てのX軸で均等に分布している事を確認する</li>
-</ul>
-</div><div class="column" style="width:54%;">
-<p><img data-src="images/slide42_image01.png" style="width:48.0%" alt="Bland-Altman分析1"> <img data-src="images/slide42_image02.png" style="width:48.0%" alt="Bland-Altman分析2"></p>
-</div></div>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 <div class="reference">
-<p>J Am Coll Cardiol. 2020 Aug 25;76(8):930-941.</p>
+
 </div>
 
 
@@ -2330,8 +2449,14 @@ Cook, Nancy R. 2007. <span>“Use and Misuse of the Receiver Operating Character
 <div id="ref-Creager2026-or" class="csl-entry" role="listitem">
 Creager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. <span>“2026 <span>AHA</span>/<span>ACC</span>/<span>ACCP</span>/<span>ACEP</span>/<span>CHEST</span>/<span>SCAI</span>/<span>SHM</span>/<span>SIR</span>/<span>SVM</span>/<span>SVN</span> Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.”</span> <em>Journal of the American College of Cardiology</em> 87 (13): 1626–710. <a href="https://doi.org/10.1016/j.jacc.2025.11.005">https://doi.org/10.1016/j.jacc.2025.11.005</a>.
 </div>
+<div id="ref-Leening2014-bl" class="csl-entry" role="listitem">
+Leening, Maarten J G, Moniek M Vedder, Jacqueline C M Witteman, Michael J Pencina, and Ewout W Steyerberg. 2014. <span>“Net Reclassification Improvement: Computation, Interpretation, and Controversies: A Literature Review and Clinician’s Guide: A Literature Review and Clinician’s Guide.”</span> <em>Annals of Internal Medicine</em> 160 (2): 122–31. <a href="https://doi.org/10.7326/M13-1522">https://doi.org/10.7326/M13-1522</a>.
+</div>
 <div id="ref-Than2013-zz" class="csl-entry" role="listitem">
 Than, Martin, Mel Herbert, Dylan Flaws, et al. 2013. <span>“What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.”</span> <em>International Journal of Cardiology</em> 166 (3): 752–54. <a href="https://doi.org/10.1016/j.ijcard.2012.09.171">https://doi.org/10.1016/j.ijcard.2012.09.171</a>.
+</div>
+<div id="ref-Vertosick2022DCA" class="csl-entry" role="listitem">
+Vertosick, Emily, and Andrew Vickers. 2022. <span>“Decision Curve Analysis for Quantifying the Additional Benefit of a New Marker.”</span> April 11. <a href="https://www.fharrell.com/post/addmarkerdca/">https://www.fharrell.com/post/addmarkerdca/</a>.
 </div>
 <div id="ref-Vickers2016-vz" class="csl-entry" role="listitem">
 Vickers, Andrew J, Ben Van Calster, and Ewout W Steyerberg. 2016. <span>“Net Benefit Approaches to the Evaluation of Prediction Models, Molecular Markers, and Diagnostic Tests.”</span> <em>BMJ (Clinical Research Ed.)</em> 352 (January): i6. <a href="https://doi.org/10.1136/bmj.i6">https://doi.org/10.1136/bmj.i6</a>.

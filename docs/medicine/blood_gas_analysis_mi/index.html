@@ -321,9 +321,17 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </tr>
 </tbody>
 </table>
+<ul>
+<li>代償反応が十分であれば、高度の酸塩基平衡異常は起こらない
+<ul>
+<li>pH &lt;&lt; 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併</li>
+<li>pH &gt;&gt; 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併</li>
+</ul></li>
+<li>とは言え、Septic shockとか著名なDKAなら単独でも起こりうる</li>
+</ul>
 </section>
 <section id="acid-base-map" class="slide level2">
-<h2>酸塩基平衡のマインドマップ</h2>
+<h2>酸塩基平衡のマインドマップ(厳密には少し違うけど)</h2>
 <div class="cell" data-reveal="true" data-fig-width="10" data-fig-height="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -332,17 +340,62 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <pre class="mermaid mermaid-js">flowchart TD
     ABG["Acid–Base Disorders"]
 
-    ABG --&gt; MA["代謝性アシドーシス"]
-    ABG --&gt; MK["代謝性アルカローシス"]
-    ABG --&gt; RA["呼吸性アシドーシス"]
-    ABG --&gt; RK["呼吸性アルカローシス"]
-    
-    MA --&gt; Albcorrect["Alb補正"]
-    Albcorrect --&gt; NAG["Anion Gap正常代謝性アシドーシス"]
-    Albcorrect --&gt; AG["Anion Gap開大性代謝性アシドーシス"]
+    ABG --&gt; AlbCorrectAG["Alb補正の上でのAG計算"]
+
+    AlbCorrectAG --&gt; AlbCorrectAGPosi["AG \&gt; 12"]
+    AlbCorrectAG --&gt; AlbCorrectAGNega["AG \&lt; 12"]
+
+    AlbCorrectAGPosi --&gt; AG["Anion Gap開大性代謝性アシドーシス"]
     AG --&gt; HCO3["補正HCO3-を計算する"]
-    HCO3 --&gt; osmgap["(必要があれば)浸透圧ギャップで毒物の検索"]
-    NAG --&gt; urineag["尿中AGを計算"]
+    HCO3 --&gt; HCO3Acid["補正HCO3- \&lt; 22"]
+    HCO3 --&gt; HCO3Alka["補正HCO3- \&gt; 26"]
+
+    HCO3Acid --&gt; AGNAG["AG開大性代謝性アシドーシス+AG非開大性代謝性アシドーシス"]
+    HCO3Alka --&gt; AGAlka["AG開大性代謝性アシドーシス+代謝性アルカローシス"]
+
+    AlbCorrectAGNega --&gt; PrimaryEval["HCO3-/PaCO2でPrimaryの変化を評価"]
+    PrimaryEval --&gt; NAG["Anion Gap非開大性代謝性アシドーシス"]
+    PrimaryEval --&gt; MK["代謝性アルカローシス"]
+    PrimaryEval --&gt; RA["呼吸性アシドーシス"]
+    PrimaryEval --&gt; RK["呼吸性アルカローシス"]
+    
+
+    click AG "#/ag-acidosis"
+    click NAG "#/nag-acidosis"
+    click MK "#/metabolic-alkalosis"
+    click RA "#/respiratory-acidosis"
+    click RK "#/respiratory-alkalosis"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-reveal="true" data-fig-width="10" data-fig-height="6" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+
+    MA["代謝性アシドーシス"]
+    
+    MA --&gt; AlbCorrectAG["Alb補正の上でのAG計算"]
+    AlbCorrectAG --&gt; NAG["Anion Gap非開大性代謝性アシドーシス"]
+    AlbCorrectAG --&gt; AG["Anion Gap開大性代謝性アシドーシス"]
+    %% AG --&gt; HCO3["補正HCO3-を計算する"]
+    AG --&gt; DKAetc["高度腎不全 &lt;br&gt; DKA &lt;br&gt; 乳酸Acidosis"]
+
+    AG --&gt; OsmGap["浸透圧ギャップを計算"]
+    OsmGap --&gt; OsmGapPosi["Osm Gap&gt; 10-15 &lt;br&gt; 毒性アルコール中毒\(メタノール・エチレングリコールなど\)"]
+
+    NAG --&gt; UrineAG["尿中AGを計算"]
+    UrineAG --&gt; UrineAGPosi["尿中AG &gt;0"]
+    UrineAG --&gt; UrineAGNega["尿中AG &lt;&lt;0"]
+    UrineAGNega --&gt; UrineAGNegadisease["下痢 &lt;br&gt; 回腸導管 &lt;br&gt; 胆膵管ドレナージ"]
+    UrineAGPosi --&gt; UrineOsmGap["尿中浸透圧ギャップ"]
+    UrineOsmGap --&gt; UrineOsmGapPosi["尿浸透圧ギャップ\&gt;100 &lt;br&gt; トルエン中毒 &lt;br&gt; DKA回復期"]
+    UrineOsmGap --&gt; UrineOsmGapNega["尿浸透圧ギャップ\&lt;\&lt;100 &lt;br&gt; 保存期CKD &lt;br&gt; 尿細管Acidosis"]
 
     click AG "#/ag-acidosis"
     click NAG "#/nag-acidosis"
@@ -602,10 +655,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <section id="ここまでのまとめ" class="slide level2">
 <h2>ここまでのまとめ</h2>
 <ul>
-<li>AGとはUA - UCであり、UAのメインの成分はAlb</li>
-</ul>
-<!-- -->
-<ul>
+<li><p>AGとはUA - UCであり、UAのメインの成分はAlb</p></li>
 <li><p>AGが開大していたら、<strong>絶対に</strong>AG開大性代謝性Acidosisはある</p>
 <ul>
 <li>AGの開大は常に探したほうが良い</li>
@@ -623,7 +673,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </ul></li>
 <li>腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける</li>
 </ul>
-<p><span class="math display">\[Urinari AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\]</span></p>
+<p><span class="math inline">\(尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\)</span></p>
 <ul>
 <li><p>腎臓が<strong>原因でなければ</strong>、尿中のNH4+が増加→Urine AGは負の値となる</p></li>
 <li><p>血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い</p>
@@ -640,20 +690,28 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </section>
 <section id="metabolic-alkalosis" class="slide level2">
 <h2>代謝性 アルカローシス</h2>
-<h3 id="think-about-urine-chloride">Think about urine chloride</h3>
 <ul>
+<li>正直あまり問題にならない事が多い</li>
 <li>Chloride responsive</li>
 <li>Chloride resistant</li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
+<section id="代謝性アルカローシスの原因" class="slide level2">
+<h2>代謝性アルカローシスの原因</h2>
+<ul>
+<li>大体脱水</li>
+</ul>
+</section>
 <section id="respiratory-acidosis" class="slide level2">
 <h2>呼吸性 アシドーシス</h2>
-<h3 id="hypoventilation">Hypoventilation</h3>
 <ul>
-<li>CNS depression</li>
-<li>Neuromuscular disease</li>
-<li>Airway / pulmonary disease</li>
+<li>いわゆる肺胞低換気 = II型呼吸不全</li>
+<li>物理的に肺胞に空気が入らない状態</li>
+<li>解剖学的に上から考えるのが良い
+<ul>
+<li>中枢神経()</li>
+</ul></li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
