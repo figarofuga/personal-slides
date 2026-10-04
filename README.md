@@ -240,7 +240,7 @@ git commit -m "Rパッケージを追加・更新"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "update model performance slides"
+git commit -m "complete model performance slides"
 git push
 ```
 

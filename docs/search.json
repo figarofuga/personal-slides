@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n23.77088\n\n\n2\n22.42867\n\n\n3\n20.75505\n\n\n4\n19.22720\n\n\n5\n21.29554\n\n\n6\n20.95797\n\n\n7\n19.39676\n\n\n8\n22.72304\n\n\n9\n17.05442\n\n\n10\n21.77989\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.12514\n\n\n2\n18.57248\n\n\n3\n24.11026\n\n\n4\n18.76358\n\n\n5\n17.65561\n\n\n6\n18.49785\n\n\n7\n22.69731\n\n\n8\n21.77142\n\n\n9\n24.66225\n\n\n10\n20.96956\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.15951\n203.7234\n\n\n\n2\n74.93242\n208.4789\n\n\n\n3\n70.84873\n203.8744\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n77.51593\n172.0476\n\n\n\n2\n73.09705\n190.9596\n\n\n\n3\n74.32044\n172.3531\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -1726,14 +1726,14 @@
     "href": "statistics/index.html",
     "title": "統計学",
     "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\nmodel performance入門\n予測モデルの評価方法です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
   },
   {
     "objectID": "statistics/index.html#スライド一覧",
     "href": "statistics/index.html#スライド一覧",
     "title": "統計学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\nmodel performance入門\n予測モデルの評価方法です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
   },
   {
     "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
