@@ -4,6 +4,7 @@ ARG PIXI_VERSION=v0.81.0
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        direnv \
         fontconfig \
         fonts-ipaexfont \
         fonts-noto-cjk \
@@ -26,4 +27,5 @@ RUN test "$(uname -m)" = "x86_64" \
 USER vscode
 WORKDIR /home/vscode
 
-RUN echo 'eval "$(pixi completion -s bash)"' >> /home/vscode/.bashrc
+RUN echo 'eval "$(pixi completion -s bash)"' >> /home/vscode/.bashrc \
+    && echo 'eval "$(direnv hook bash)"' >> /home/vscode/.bashrc
