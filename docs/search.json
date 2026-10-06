@@ -711,14 +711,14 @@
     "href": "medicine/antithrombotic_etc/index.html#いつ抗凝固を開始するの",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "いつ抗凝固を開始するの？",
-    "text": "いつ抗凝固を開始するの？\n\n心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い\n\n古い研究では最初の48時間で4.8%が再発し、抗凝固されないと10日で13%が全身性の塞栓症を発症していた(Kleindorfer ほか 2021年; Hart ほか 1983年)\n\n一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い\nそのため、早期の抗凝固による予防 vs. 出血のRiskのせめぎあいがあった\n心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで\n\n予後改善なし\n出血のみ増加(Wang ほか 2021年)\n\n結局、なんとなく弱めにHeparinを開始したりバイアスピリンを早期に導入していた\n\n超急性期は脳塞栓症であってもバイアスピリンはわずかに予後改善(NNT 140程度)があった(Chen ほか 2000年)"
+    "text": "いつ抗凝固を開始するの？\n\n心原性脳塞栓患者は、基本的に脳梗塞発症早期が最も再発Riskが高い\n\n古い研究では最初の48時間で4.8%が再発し、抗凝固されないと10日で13%が全身性の塞栓症を発症していた4,5\n\n一方で、脳梗塞範囲が広いため、壊死部位からの出血のRiskも高い\nそのため、早期の抗凝固による予防 vs. 出血のRiskのせめぎあいがあった\n心原性脳塞栓症患者ではHeparinの24時間以内の早期投与のSystematic reviewで\n\n予後改善なし\n出血のみ増加6\n\n結局、なんとなく弱めにHeparinを開始したりバイアスピリンを早期に導入していた\n\n超急性期は脳塞栓症であってもバイアスピリンはわずかに予後改善(NNT 140程度)があった7"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#doac時代",
     "href": "medicine/antithrombotic_etc/index.html#doac時代",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "DOAC時代",
-    "text": "DOAC時代\n\nDOACはWFに比べて明らかに脳出血を減らし、さらに調整が容易\n脳塞栓に対して、DOACなら早期導入でよいのではないか？という推定あり\n4つのRCTがあり、それをまとめると(Dehbi ほか 2025年)\n\n早期導入により30日以内の脳梗塞の再発はわずかに減らす(1.68% vs. 2.55%)\n早期導入により症候性の脳出血のRiskは変わらない(0.37% vs. 0.36%)\nただし、早期導入は4日以内のようなやや曖昧な感じ"
+    "text": "DOAC時代\n\nDOACはWFに比べて明らかに脳出血を減らし、さらに調整が容易\n脳塞栓に対して、DOACなら早期導入でよいのではないか？という推定あり\n4つのRCTがあり、それをまとめると8\n\n早期導入により30日以内の脳梗塞の再発はわずかに減らす(1.68% vs. 2.55%)\n早期導入により症候性の脳出血のRiskは変わらない(0.37% vs. 0.36%)\nただし、早期導入は4日以内のようなやや曖昧な感じ"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#脳梗塞診療で悩ましいとき",
@@ -795,7 +795,7 @@
     "href": "medicine/antithrombotic_etc/index.html#reference",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "Reference",
-    "text": "Reference\n\n\nAbdel-Qadir, Husam, Madison Gunn, Jiming Fang, ほか. 2025年. 「Risk for Stroke After Newly Diagnosed Atrial Fibrillation During Hospitalization for Other Primary Diagnoses: A Retrospective Cohort Study」. Annals of Internal Medicine 178 (6): 765–74. https://doi.org/10.7326/ANNALS-24-01967.\n\n\nChen, Zhengming, Peter Sandercock, Hongchao Pan, ほか. 2000年. 「Indications for early aspirin use in acute ischemic stroke: A combined analysis of 40 000 randomized patients from the Chinese Acute Stroke Trial and the International Stroke Trial」. Stroke; a Journal of Cerebral Circulation 31 (6): 1240–49. https://doi.org/10.1161/01.str.31.6.1240.\n\n\nChyou, Janice Y, Ebrahim Barkoudah, Jonathan W Dukes, ほか. 2023年. 「Atrial fibrillation occurring during acute hospitalization: A scientific statement from the American heart association」. Circulation 147 (15): e676–98. https://doi.org/10.1161/CIR.0000000000001133.\n\n\nDehbi, Hakim-Moulay, Urs Fischer, Signild Åsberg, ほか. 2025年. 「Collaboration on the optimal timing of anticoagulation after ischaemic stroke and atrial fibrillation: a systematic review and prospective individual participant data meta-analysis of randomised controlled trials (CATALYST)」. Lancet 406 (10498): 43–51. https://doi.org/10.1016/S0140-6736(25)00439-8.\n\n\nHart, R G, B M Coull, と D Hart. 1983年. 「Early recurrent embolism associated with nonvalvular atrial fibrillation: a retrospective study」. Stroke; a Journal of Cerebral Circulation 14 (5): 688–93. https://doi.org/10.1161/01.str.14.5.688.\n\n\nIp, Yiu Ming Bonaventure, Kui Kai Lau, Ho Ko, ほか. 2023年. 「Association of alternative anticoagulation strategies and outcomes in patients with ischemic stroke while taking a direct oral anticoagulant」. Neurology 101 (4): e358–69. https://doi.org/10.1212/WNL.0000000000207422.\n\n\nJohnston, S Claiborne, Jordan J Elm, J Donald Easton, ほか. 2019年. 「Time Course for Benefit and Risk of Clopidogrel and Aspirin After Acute Transient Ischemic Attack and Minor Ischemic Stroke: A Secondary Analysis from the POINT Randomized Trial」. Circulation 140 (8): 658–64. https://doi.org/10.1161/CIRCULATIONAHA.119.040713.\n\n\nKleindorfer, Dawn O, Amytis Towfighi, Seemant Chaturvedi, ほか. 2021年. 「2021 guideline for the prevention of stroke in patients with stroke and transient ischemic attack: A guideline from the American heart association/American stroke association」. Stroke; a Journal of Cerebral Circulation 52 (7): e364–467. https://doi.org/10.1161/STR.0000000000000375.\n\n\nKlijn, Catharina Jm, Maurizio Paciaroni, Eivind Berge, ほか. 2019年. 「Antithrombotic treatment for secondary prevention of stroke and other thromboembolic events in patients with stroke or transient ischemic attack and non-valvular atrial fibrillation: A European Stroke Organisation guideline」. European Stroke Journal 4 (3): 198–223. https://doi.org/10.1177/2396987319841187.\n\n\nMohr, J P, J L Thompson, R M Lazar, ほか. 2001年. 「A comparison of warfarin and aspirin for the prevention of recurrent ischemic stroke」. The New England Journal of Medicine 345 (20): 1444–51. https://doi.org/10.1056/NEJMoa011258.\n\n\nMorimoto, Takeshi, Kazutaka Uchida, Fumihiro Sakakibara, Norito Kinjo, と Shinichiro Ueda. 2021年. 「Effect of concomitant antiplatelet therapy on ischemic and hemorrhagic events in patients taking oral anticoagulants for nonvalvular atrial fibrillation in daily clinical practice」. Pharmacoepidemiology and Drug Safety 30 (10): 1321–31. https://doi.org/10.1002/pds.5228.\n\n\nPrabhakaran, Shyam, Nestor R Gonzalez, Kori S Zachrison, ほか. 2026年. 「2026 guideline for the Early Management of Patients With acute ischemic stroke: A guideline from the American heart association/American stroke association」. Stroke; a Journal of Cerebral Circulation, no. STR.0000000000000513 (1月). https://doi.org/10.1161/STR.0000000000000513.\n\n\nQuon, Michael J, Hassan Behlouli, と Louise Pilote. 2018年. 「Anticoagulant use and risk of ischemic stroke and bleeding in patients with secondary atrial fibrillation associated with acute coronary syndromes, acute pulmonary disease, or sepsis」. JACC. Clinical Electrophysiology 4 (3): 386–93. https://doi.org/10.1016/j.jacep.2017.08.003.\n\n\nRohner, Roman, Markus Kneihsl, Martina B Goeldlin, ほか. 2024年. 「Early Versus Late Initiation of Direct Oral Anticoagulants after ischemic stroke in people with atrial fibrillation and hemorrhagic transformation: Prespecified subanalysis of the randomized controlled ELAN trial」. Circulation 150 (1): 19–29. https://doi.org/10.1161/CIRCULATIONAHA.124.069324.\n\n\nRomoli, Michele, Maurizio Paciaroni, Nicola Marrone, ほか. 2025年. 「Anticoagulation strategies following breakthrough ischemic stroke while on direct anticoagulants: A meta-analysis: A meta-analysis」. Neurology 105 (4): e213964. https://doi.org/10.1212/WNL.0000000000213964.\n\n\nSchachter, Michael E, Huyen A Tran, と Sonia S Anand. 2008年. 「Oral anticoagulants and non-cardioembolic stroke prevention」. Vascular Medicine 13 (1): 55–62. https://doi.org/10.1177/1358863X07086191.\n\n\nSeiffge, David J, Virginia Cancelloni, Lorenz Räber, ほか. 2024年. 「Secondary stroke prevention in people with atrial fibrillation: treatments and trials」. Lancet Neurology 23 (4): 404–17. https://doi.org/10.1016/S1474-4422(24)00037-1.\n\n\nUrban, Philip, Roxana Mehran, Roisin Colleran, ほか. 2019年. 「Defining High Bleeding Risk in Patients Undergoing Percutaneous Coronary Intervention: A Consensus Document From the Academic Research Consortium for High Bleeding Risk」. Circulation 140 (3): 240–61. https://doi.org/10.1161/CIRCULATIONAHA.119.040167.\n\n\nVan Gelder, Isabelle C, Michiel Rienstra, Karina V Bunting, ほか. 2024年. 「2024 ESC Guidelines for the management of atrial fibrillation developed in collaboration with the European Association for Cardio-Thoracic Surgery (EACTS)」. European Heart Journal 45 (36): 3314–414. https://doi.org/10.1093/eurheartj/ehae176.\n\n\nWalkey, Allan J, Emily K Quinn, Michael R Winter, David D McManus, と Emelia J Benjamin. 2016年. 「Practice patterns and outcomes associated with use of anticoagulation among patients with atrial fibrillation during sepsis」. JAMA Cardiology 1 (6): 682–90. https://doi.org/10.1001/jamacardio.2016.2181.\n\n\nWang, Xia, Menglu Ouyang, Jie Yang, Lili Song, Min Yang, と Craig S Anderson. 2021年. 「Anticoagulants for acute ischaemic stroke」. Cochrane Database of Systematic Reviews 10 (12): CD000024. https://doi.org/10.1002/14651858.CD000024.pub5.\n\n\nWerring, David J, Hakim-Moulay Dehbi, Norin Ahmed, ほか. 2024年. 「Optimal timing of anticoagulation after acute ischaemic stroke with atrial fibrillation (OPTIMAS): a multicentre, blinded-endpoint, phase 4, randomised controlled trial」. Lancet 404 (10464): S0140-6736(24)02197-4. https://doi.org/10.1016/S0140-6736(24)02197-4.\n\n\nWriting Committee Members, José A Joglar, Mina K Chung, ほか. 2024年. 「2023 ACC/AHA/ACCP/HRS guideline for the Diagnosis and Management of atrial fibrillation: A report of the American college of cardiology/American heart association joint committee on clinical practice guidelines」. Journal of the American College of Cardiology 83 (1): 109–279. https://doi.org/10.1016/j.jacc.2023.08.017."
+    "text": "Reference\n\n\n1. Prabhakaran S, Gonzalez NR, Zachrison KS, ほか. 2026 guideline for the Early Management of Patients With acute ischemic stroke: A guideline from the American heart association/American stroke association. Stroke; a Journal of Cerebral Circulation. 2026年;(STR.0000000000000513). doi:10.1161/STR.0000000000000513\n\n\n2. Johnston SC, Elm JJ, Easton JD, ほか. Time Course for Benefit and Risk of Clopidogrel and Aspirin After Acute Transient Ischemic Attack and Minor Ischemic Stroke: A Secondary Analysis from the POINT Randomized Trial. Circulation. 2019年;140(8):658–664. doi:10.1161/CIRCULATIONAHA.119.040713\n\n\n3. Urban P, Mehran R, Colleran R, ほか. Defining High Bleeding Risk in Patients Undergoing Percutaneous Coronary Intervention: A Consensus Document From the Academic Research Consortium for High Bleeding Risk. Circulation. 2019年;140(3):240–261. doi:10.1161/CIRCULATIONAHA.119.040167\n\n\n4. Kleindorfer DO, Towfighi A, Chaturvedi S, ほか. 2021 guideline for the prevention of stroke in patients with stroke and transient ischemic attack: A guideline from the American heart association/American stroke association. Stroke; a Journal of Cerebral Circulation. 2021年;52(7):e364–e467. doi:10.1161/STR.0000000000000375\n\n\n5. Hart RG, Coull BM, Hart D. Early recurrent embolism associated with nonvalvular atrial fibrillation: a retrospective study. Stroke; a Journal of Cerebral Circulation. 1983年;14(5):688–693. doi:10.1161/01.str.14.5.688\n\n\n6. Wang X, Ouyang M, Yang J, Song L, Yang M, Anderson CS. Anticoagulants for acute ischaemic stroke. Cochrane Database of Systematic Reviews. 2021年;10(12):CD000024. doi:10.1002/14651858.CD000024.pub5\n\n\n7. Chen Z, Sandercock P, Pan H, ほか. Indications for early aspirin use in acute ischemic stroke: A combined analysis of 40 000 randomized patients from the Chinese Acute Stroke Trial and the International Stroke Trial. Stroke; a Journal of Cerebral Circulation. 2000年;31(6):1240–1249. doi:10.1161/01.str.31.6.1240\n\n\n8. Dehbi HM, Fischer U, Åsberg S, ほか. Collaboration on the optimal timing of anticoagulation after ischaemic stroke and atrial fibrillation: a systematic review and prospective individual participant data meta-analysis of randomised controlled trials (CATALYST). Lancet. 2025年;406(10498):43–51. doi:10.1016/S0140-6736(25)00439-8\n\n\n9. Werring DJ, Dehbi HM, Ahmed N, ほか. Optimal timing of anticoagulation after acute ischaemic stroke with atrial fibrillation (OPTIMAS): a multicentre, blinded-endpoint, phase 4, randomised controlled trial. Lancet. 2024年;404(10464):S0140-6736(24)02197-4. doi:10.1016/S0140-6736(24)02197-4\n\n\n10. Rohner R, Kneihsl M, Goeldlin MB, ほか. Early Versus Late Initiation of Direct Oral Anticoagulants after ischemic stroke in people with atrial fibrillation and hemorrhagic transformation: Prespecified subanalysis of the randomized controlled ELAN trial. Circulation. 2024年;150(1):19–29. doi:10.1161/CIRCULATIONAHA.124.069324\n\n\n11. Seiffge DJ, Cancelloni V, Räber L, ほか. Secondary stroke prevention in people with atrial fibrillation: treatments and trials. Lancet Neurology. 2024年;23(4):404–417. doi:10.1016/S1474-4422(24)00037-1\n\n\n12. Ip YMB, Lau KK, Ko H, ほか. Association of alternative anticoagulation strategies and outcomes in patients with ischemic stroke while taking a direct oral anticoagulant. Neurology. 2023年;101(4):e358–e369. doi:10.1212/WNL.0000000000207422\n\n\n13. Romoli M, Paciaroni M, Marrone N, ほか. Anticoagulation strategies following breakthrough ischemic stroke while on direct anticoagulants: A meta-analysis: A meta-analysis. Neurology. 2025年;105(4):e213964. doi:10.1212/WNL.0000000000213964\n\n\n14. Mohr JP, Thompson JL, Lazar RM, ほか. A comparison of warfarin and aspirin for the prevention of recurrent ischemic stroke. The New England Journal of Medicine. 2001年;345(20):1444–1451. doi:10.1056/NEJMoa011258\n\n\n15. Schachter ME, Tran HA, Anand SS. Oral anticoagulants and non-cardioembolic stroke prevention. Vascular Medicine. 2008年;13(1):55–62. doi:10.1177/1358863X07086191\n\n\n16. Klijn CJ, Paciaroni M, Berge E, ほか. Antithrombotic treatment for secondary prevention of stroke and other thromboembolic events in patients with stroke or transient ischemic attack and non-valvular atrial fibrillation: A European Stroke Organisation guideline. European Stroke Journal. 2019年;4(3):198–223. doi:10.1177/2396987319841187\n\n\n17. Morimoto T, Uchida K, Sakakibara F, Kinjo N, Ueda S. Effect of concomitant antiplatelet therapy on ischemic and hemorrhagic events in patients taking oral anticoagulants for nonvalvular atrial fibrillation in daily clinical practice. Pharmacoepidemiology and Drug Safety. 2021年;30(10):1321–1331. doi:10.1002/pds.5228\n\n\n18. Van Gelder IC, Rienstra M, Bunting KV, ほか. 2024 ESC Guidelines for the management of atrial fibrillation developed in collaboration with the European Association for Cardio-Thoracic Surgery (EACTS). European Heart Journal. 2024年;45(36):3314–3414. doi:10.1093/eurheartj/ehae176\n\n\n19. Writing Committee Members, Joglar JA, Chung MK, ほか. 2023 ACC/AHA/ACCP/HRS guideline for the Diagnosis and Management of atrial fibrillation: A report of the American college of cardiology/American heart association joint committee on clinical practice guidelines. Journal of the American College of Cardiology. 2024年;83(1):109–279. doi:10.1016/j.jacc.2023.08.017\n\n\n20. Chyou JY, Barkoudah E, Dukes JW, ほか. Atrial fibrillation occurring during acute hospitalization: A scientific statement from the American heart association. Circulation. 2023年;147(15):e676–e698. doi:10.1161/CIR.0000000000001133\n\n\n21. Abdel-Qadir H, Gunn M, Fang J, ほか. Risk for Stroke After Newly Diagnosed Atrial Fibrillation During Hospitalization for Other Primary Diagnoses: A Retrospective Cohort Study. Annals of Internal Medicine. 2025年;178(6):765–774. doi:10.7326/ANNALS-24-01967\n\n\n22. Walkey AJ, Quinn EK, Winter MR, McManus DD, Benjamin EJ. Practice patterns and outcomes associated with use of anticoagulation among patients with atrial fibrillation during sepsis. JAMA Cardiology. 2016年;1(6):682–690. doi:10.1001/jamacardio.2016.2181\n\n\n23. Quon MJ, Behlouli H, Pilote L. Anticoagulant use and risk of ischemic stroke and bleeding in patients with secondary atrial fibrillation associated with acute coronary syndromes, acute pulmonary disease, or sepsis. JACC Clinical Electrophysiology. 2018年;4(3):386–393. doi:10.1016/j.jacep.2017.08.003\n\n\n24. Al-Shahi Salman R, Dennis MS, Sandercock PAG, ほか. Effects of antiplatelet therapy after stroke due to intracerebral haemorrhage (RESTART): a randomised, open-label trial. The Lancet. 2019年;393(10191):2613–2623. doi:10.1016/S0140-6736(19)30840-210.21203/rs.2.14988/v2\n\n\n25. Al-Shahi Salman R, Stephen J, Tierney JF, ほか. Effects of oral anticoagulation in people with atrial fibrillation after spontaneous intracranial haemorrhage (COCROACH): prospective, individual participant data meta-analysis of randomised trials. Lancet Neurology. 2023年;22(12):1140–1149. doi:10.1016/S1474-4422(23)00315-0\n\n\n26. Veltkamp R, Korompoki E, Harvey KH, ほか. Direct oral anticoagulants versus no anticoagulation for the prevention of stroke in survivors of intracerebral haemorrhage with atrial fibrillation (PRESTIGE-AF): a multicentre, open-label, randomised, phase 3 trial. Lancet. 2025年;405(10482):927–936. doi:10.1016/S0140-6736(25)00333-2\n\n\n27. Kumbhani DJ, Armbruster AL, Cheng RK, ほか. Direct Oral Anticoagulants in Primary and Secondary Prevention of Thrombotic Events: 2026 ACC Scientific Statement. JACC. 2026年;88(11):1255–1283. doi:10.1016/j.jacc.2026.05.033"
   },
   {
     "objectID": "medicine/hypoglycemia/index.html#agenda",
@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n22.12514\n\n\n2\n18.57248\n\n\n3\n24.11026\n\n\n4\n18.76358\n\n\n5\n17.65561\n\n\n6\n18.49785\n\n\n7\n22.69731\n\n\n8\n21.77142\n\n\n9\n24.66225\n\n\n10\n20.96956\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n17.89044\n\n\n2\n20.84026\n\n\n3\n20.87779\n\n\n4\n19.39117\n\n\n5\n21.46051\n\n\n6\n20.76997\n\n\n7\n21.10142\n\n\n8\n22.68309\n\n\n9\n23.27028\n\n\n10\n19.90354\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n77.51593\n172.0476\n\n\n\n2\n73.09705\n190.9596\n\n\n\n3\n74.32044\n172.3531\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n73.52780\n197.5424\n\n\n\n2\n76.89268\n184.3674\n\n\n\n3\n69.74719\n186.3847\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -4197,14 +4197,14 @@
     "href": "medicine/antithrombotic_etc/index.html#いつだれにdaptをするの",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "いつ、だれにDAPTをするの？",
-    "text": "いつ、だれにDAPTをするの？\n\n基本は「発症早期」の「非心原性」のHigh risk TIAまたは軽症脳梗塞\n\nTIAとしてはABCD2 4点以上で脳梗塞としてはNIHSS 5点以下\n\n本来なら、3日以上前でNIHSS 10点はDAPTの適応外だが・・・・・・\nしかし、10点でも、脳梗塞の再発Riskは高いので、DAPTは十分検討\n出血Riskで考える\n\n\n\n\n\n\n\n\n\n\n\nTrial名\nInclusion\n発症からの時間\n介入\nNNT\n\n\n\n\nCHANCE\nABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞\n24hr\nASA+CLOを21日\n28\n\n\nPOINT\nABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞\n12hr\nASA+CLOを90日\n67\n\n\nTHALES\nABCD2≧6のTIAあるいはNIHSS≦5の脳梗塞\n24hr\nASA+CLOを30日\n91\n\n\nCHANCE2\nABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞かつCYP2C19のloss-of-function allele\n24hr\nASA+Ticagrelorを21日\n63\n\n\nINSPIRES\nABCD2≧4のTIAあるいはNIHSS≦5の脳梗塞かつアテローム性を疑う\n72hr\nASA+CLOを21日\n53\n\n\n\n(Prabhakaran ほか 2026年)"
+    "text": "いつ、だれにDAPTをするの？\n\n基本は「発症早期」の「非心原性」のHigh risk TIAまたは軽症脳梗塞\n\nTIAとしてはABCD2 4点以上で脳梗塞としてはNIHSS 5点以下\n\n本来なら、3日以上前でNIHSS 10点はDAPTの適応外だが・・・・・・\nしかし、10点でも、脳梗塞の再発Riskは高いので、DAPTは十分検討\n出血Riskで考える\n\n\n\n\n\n\n\n\n\n\n\nTrial名\nInclusion\n発症からの時間\n介入\nNNT\n\n\n\n\nCHANCE\nABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞\n24hr\nASA+CLOを21日\n28\n\n\nPOINT\nABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞\n12hr\nASA+CLOを90日\n67\n\n\nTHALES\nABCD2≧6のTIAあるいはNIHSS≦5の脳梗塞\n24hr\nASA+CLOを30日\n91\n\n\nCHANCE2\nABCD2≧4のTIAあるいはNIHSS≦3の脳梗塞かつCYP2C19のloss-of-function allele\n24hr\nASA+Ticagrelorを21日\n63\n\n\nINSPIRES\nABCD2≧4のTIAあるいはNIHSS≦5の脳梗塞かつアテローム性を疑う\n72hr\nASA+CLOを21日\n53\n\n\n\n1"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#daptの出血riskとbenefit",
     "href": "medicine/antithrombotic_etc/index.html#daptの出血riskとbenefit",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "DAPTの出血RiskとBenefit",
-    "text": "DAPTの出血RiskとBenefit\n\n(Johnston ほか 2019年)\n\nDAPTのRCTのmeta analysisだと、出血に関しては大体最初の週に0.3%, その後は週に0.05%程度の出血Risk\n\n特に最初の1wkより前だと脳梗塞の予防効果のBenefitは大きそうに見えるが3wks後だと出血のRiskがBenefitを上回る\n\n今回の場合は発症しばらく経過しているがDAPT導入は十分検討できる\n裏を返すと、出血Riskが高い場合は行わないかも\n\n高齢者、CKD、貧血、NSAIDs使用など(Urban ほか 2019年)"
+    "text": "DAPTの出血RiskとBenefit\n\n2\n\nDAPTのRCTのmeta analysisだと、出血に関しては大体最初の週に0.3%, その後は週に0.05%程度の出血Risk\n\n特に最初の1wkより前だと脳梗塞の予防効果のBenefitは大きそうに見えるが3wks後だと出血のRiskがBenefitを上回る\n\n今回の場合は発症しばらく経過しているがDAPT導入は十分検討できる\n裏を返すと、出血Riskが高い場合は行わないかも\n\n高齢者、CKD、貧血、NSAIDs使用など3"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#症例-2",
@@ -4232,7 +4232,7 @@
     "href": "medicine/antithrombotic_etc/index.html#脳梗塞の出血転化について",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "脳梗塞の出血転化について",
-    "text": "脳梗塞の出血転化について\n\nDOACの早期導入で有名なRCTのOPTIMAS trialだと軽度の出血性脳梗塞例も入っている(Werring ほか 2024年)\n\n出血部位が脳梗塞部位全体の30%未満かつ、圧排がない(Heidelberg criteriaの2未満)\n\n全体としてはEarly vs. Late (4日以内 vs. 7日以降)で安全性に差はなし\n\nただし、まだ出血性脳梗塞患者のPrespecifiedのサブ解析は現時点(2026/7/26)では存在しない\n\n一方で、ELAN trialのサブ解析では、安全性の差はないが90日での機能予後が悪い可能性がある(Rohner ほか 2024年)\n個人的には出血が広がらないことを同日～翌日まで確認して早期導入がよい(できれば4日以内)\n当然、神経学的に悪化がなく、脳ヘルニアなどがないことが大前提"
+    "text": "脳梗塞の出血転化について\n\nDOACの早期導入で有名なRCTのOPTIMAS trialだと軽度の出血性脳梗塞例も入っている9\n\n出血部位が脳梗塞部位全体の30%未満かつ、圧排がない(Heidelberg criteriaの2未満)\n\n全体としてはEarly vs. Late (4日以内 vs. 7日以降)で安全性に差はなし\n\nただし、まだ出血性脳梗塞患者のPrespecifiedのサブ解析は現時点(2026/7/26)では存在しない\n\n一方で、ELAN trialのサブ解析では、安全性の差はないが90日での機能予後が悪い可能性がある10\n個人的には出血が広がらないことを同日～翌日まで確認して早期導入がよい(できれば4日以内)\n当然、神経学的に悪化がなく、脳ヘルニアなどがないことが大前提"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#症例4",
@@ -4246,21 +4246,21 @@
     "href": "medicine/antithrombotic_etc/index.html#doac内服中の脳梗塞",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "DOAC内服中の脳梗塞",
-    "text": "DOAC内服中の脳梗塞\n\nAF患者へのDOACは脳梗塞Riskを約1/3に低下させる\n裏を返すと1/3程度の脳梗塞Riskは残る(年率1-2%程度)(Seiffge ほか 2024年)\nこの時は何故再発したか？をカテゴライズする\n\nAF非由来の脳梗塞(アテローム性脳梗塞、Lacunarなど)\n内服失敗(Adherence不良、薬剤相互作用、Underdoseなど)\n適切な治療にも関わらず再発をした\n\n上記2つの場合は各々対応\n\nただし、抗血小板薬+抗凝固は基本行わず、DlpやHTNに対応する"
+    "text": "DOAC内服中の脳梗塞\n\nAF患者へのDOACは脳梗塞Riskを約1/3に低下させる\n裏を返すと1/3程度の脳梗塞Riskは残る(年率1-2%程度)11\nこの時は何故再発したか？をカテゴライズする\n\nAF非由来の脳梗塞(アテローム性脳梗塞、Lacunarなど)\n内服失敗(Adherence不良、薬剤相互作用、Underdoseなど)\n適切な治療にも関わらず再発をした\n\n上記2つの場合は各々対応\n\nただし、抗血小板薬+抗凝固は基本行わず、DlpやHTNに対応する"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#適切なdoac内服中の心原性脳塞栓症再発",
     "href": "medicine/antithrombotic_etc/index.html#適切なdoac内服中の心原性脳塞栓症再発",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "適切なDOAC内服中の心原性脳塞栓症再発",
-    "text": "適切なDOAC内服中の心原性脳塞栓症再発\n\nこの時にどうすべきかは悩ましい\n\nWFに変更\n同じDOACを継続\nDOACの種類を変更\n\n特に、Dabigatran 150mg 2T2Xを考慮(RE-LYで唯一WFに予防効果で勝っている)(Seiffge ほか 2024年)\n\nASAを併用　　　　など"
+    "text": "適切なDOAC内服中の心原性脳塞栓症再発\n\nこの時にどうすべきかは悩ましい\n\nWFに変更\n同じDOACを継続\nDOACの種類を変更\n\n特に、Dabigatran 150mg 2T2Xを考慮(RE-LYで唯一WFに予防効果で勝っている)11\n\nASAを併用　　　　など"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#今までわかっている事",
     "href": "medicine/antithrombotic_etc/index.html#今までわかっている事",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "今までわかっている事",
-    "text": "今までわかっている事\n\nAFでDOAC内服中の脳梗塞再発患者へのRCTは存在しない\n観察研究では、同じ種類のDOACを継続することがその後のRiskが最も低く出血合併症が低かった(Ip ほか 2023年)\n少なくともWFの切り替えやASAの併用は出血Riskが高く、推奨されない(Romoli ほか 2025年)\nただし、いずれにせよ観察研究なので絶対に正しいわけではない\n個人的には元気な患者の場合は循環器内科に左心耳閉鎖術を相談することも検討する"
+    "text": "今までわかっている事\n\nAFでDOAC内服中の脳梗塞再発患者へのRCTは存在しない\n観察研究では、同じ種類のDOACを継続することがその後のRiskが最も低く出血合併症が低かった12\n少なくともWFの切り替えやASAの併用は出血Riskが高く、推奨されない13\nただし、いずれにせよ観察研究なので絶対に正しいわけではない\n個人的には元気な患者の場合は循環器内科に左心耳閉鎖術を相談することも検討する"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#症例5",
@@ -4274,28 +4274,28 @@
     "href": "medicine/antithrombotic_etc/index.html#非心原性脳梗塞の抗血小板薬の治療効果",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "非心原性脳梗塞の抗血小板薬の治療効果",
-    "text": "非心原性脳梗塞の抗血小板薬の治療効果\n\nWARSS trialではWFは非心原性脳梗塞患者に対してASAと同等の予防効果を認めた(Mohr ほか 2001年; Schachter ほか 2008年)\n\n死亡または脳梗塞はWFでやや多いが17.8% vs. 16%で有意差なし\n出血はMinorな出血で20.8% vs. 12.9%でWFで有意に多い"
+    "text": "非心原性脳梗塞の抗血小板薬の治療効果\n\nWARSS trialではWFは非心原性脳梗塞患者に対してASAと同等の予防効果を認めた14,15\n\n死亡または脳梗塞はWFでやや多いが17.8% vs. 16%で有意差なし\n出血はMinorな出血で20.8% vs. 12.9%でWFで有意に多い"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#心原性脳梗塞の抗凝固の治療効果",
     "href": "medicine/antithrombotic_etc/index.html#心原性脳梗塞の抗凝固の治療効果",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "心原性脳梗塞の抗凝固の治療効果",
-    "text": "心原性脳梗塞の抗凝固の治療効果\n\nEAFT trialではAF+脳塞栓症の患者に対してPlaceboに比べて再発を1/3まで減らす(OR 0.34, 95% CI 0.20–0.56)(Klijn ほか 2019年)"
+    "text": "心原性脳梗塞の抗凝固の治療効果\n\nEAFT trialではAF+脳塞栓症の患者に対してPlaceboに比べて再発を1/3まで減らす(OR 0.34, 95% CI 0.20–0.56)16"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#心原性脳梗塞への抗血小板薬の予防効果",
     "href": "medicine/antithrombotic_etc/index.html#心原性脳梗塞への抗血小板薬の予防効果",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "心原性脳梗塞への抗血小板薬の予防効果",
-    "text": "心原性脳梗塞への抗血小板薬の予防効果\n\n複数のRCTのSystematic reviewだと約15%低下はしていたが統計学的に有意ではなかった(Klijn ほか 2019年)"
+    "text": "心原性脳梗塞への抗血小板薬の予防効果\n\n複数のRCTのSystematic reviewだと約15%低下はしていたが統計学的に有意ではなかった16"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#抗血小板と抗凝固の併用の出血risk",
     "href": "medicine/antithrombotic_etc/index.html#抗血小板と抗凝固の併用の出血risk",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "抗血小板と抗凝固の併用の出血Risk",
-    "text": "抗血小板と抗凝固の併用の出血Risk\n\n(Morimoto ほか 2021年)\n\nReal worldの抗血小板薬 vs. 抗血小板薬+OACのデータ\n\n1年で3.1% vs. 1.9%\n4年で9.6% vs. 7.0%"
+    "text": "抗血小板と抗凝固の併用の出血Risk\n\n17\n\nReal worldの抗血小板薬 vs. 抗血小板薬+OACのデータ\n\n1年で3.1% vs. 1.9%\n4年で9.6% vs. 7.0%"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#アテローム性脳梗塞afの唯一のrct",
@@ -4309,7 +4309,7 @@
     "href": "medicine/antithrombotic_etc/index.html#結果",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "結果",
-    "text": "結果\n\n\n\n\n\n\n\n\n\nOutcome\n抗血小板薬 + 抗凝固 (発症率)\n抗凝固 単剤 (発症率)\nHR (95% CI), p値\n\n\n\n\n2年以内の虚血イベント1 + 有意な出血\n17.8% (11.0–24.0%)\n19.6% (12.7–26.0%)\n0.91 (0.53–1.55), p = 0.64\n\n\n虚血イベント\n11.1%\n14.2%\n0.76 (0.39–1.48), p = 0.41\n\n\n有意な出血\n9.4%\n5.6%\n1.63 (0.68–3.94), p = 0.27\n\n\n全出血イベント\n19.5%\n8.6%\n2.42 (1.23–4.76), p = 0.008\n\n\n\n虚血イベント: 心血管死亡+脳梗塞+MI+全身性塞栓症+血行再建"
+    "text": "結果\n\n\n\n\n\n\n\n\n\nOutcome\n抗血小板薬 + 抗凝固 (発症率)\n抗凝固 単剤 (発症率)\nHR (95% CI), p値\n\n\n\n\n2年以内の虚血イベント1 + 有意な出血\n17.8% (11.0–24.0%)\n19.6% (12.7–26.0%)\n0.91 (0.53–1.55), p = 0.64\n\n\n虚血イベント\n11.1%\n14.2%\n0.76 (0.39–1.48), p = 0.41\n\n\n有意な出血\n9.4%\n5.6%\n1.63 (0.68–3.94), p = 0.27\n\n\n全出血イベント\n19.5%\n8.6%\n2.42 (1.23–4.76), p = 0.008"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#ただし",
@@ -4330,14 +4330,14 @@
     "href": "medicine/antithrombotic_etc/index.html#secondary-symptomatic-afの治療は",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "Secondary (symptomatic) AFの治療は？",
-    "text": "Secondary (symptomatic) AFの治療は？\n\n明らかに原因があるAFで原因が除去された後には不要とされることが多い\n一方で、AFはなりやすさの素因(Substrate)があるので、“AFになりやすい患者”という考え方もできる\n\nこの後に永続的AFになるかも\n\nこの時のAFに対して抗凝固を導入するかは決まっていない\n\nESC guidelineではIIaだがsepsisの時は利益は分からないと明言を避けている(Van Gelder ほか 2024年)\nAHA guidelineではIIb(Writing Committee Members ほか 2024年)"
+    "text": "Secondary (symptomatic) AFの治療は？\n\n明らかに原因があるAFで原因が除去された後には不要とされることが多い\n一方で、AFはなりやすさの素因(Substrate)があるので、“AFになりやすい患者”という考え方もできる\n\nこの後に永続的AFになるかも\n\nこの時のAFに対して抗凝固を導入するかは決まっていない\n\nESC guidelineではIIaだがsepsisの時は利益は分からないと明言を避けている18\nAHA guidelineではIIb19"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#今わかっていること",
     "href": "medicine/antithrombotic_etc/index.html#今わかっていること",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
     "section": "今わかっていること",
-    "text": "今わかっていること\n\nSepsisによるAFはcommonであり重症度が高いと発症しやすい\n\nsepsisだけだと8-10%だが、Septic shockだと23-44%が発症(Chyou ほか 2023年)\n\n二次性AFの患者は1年間追うと1/3が再発し、5年追うと約1/2が再発する(Writing Committee Members ほか 2024年)\n二次性AF患者は、その後を追うと死亡率が高く、脳梗塞の発症率も高い\nただし、二次性のAFは、一次性のAFに比べて脳梗塞Riskは低い\n\nCHADS2-VAで1-4点だと1%程度、5-点で2%程度(Abdel-Qadir ほか 2025年)\n\n特にSepsisの場合はCHADS2-VAScは塞栓症のRiskとして使えず、観察研究ではあるが抗凝固と脳梗塞との関連は示されなかった (Walkey ほか 2016年; Quon ほか 2018年)"
+    "text": "今わかっていること\n\nSepsisによるAFはcommonであり重症度が高いと発症しやすい\n\nsepsisだけだと8-10%だが、Septic shockだと23-44%が発症20\n\n二次性AFの患者は1年間追うと1/3が再発し、5年追うと約1/2が再発する19\n二次性AF患者は、その後を追うと死亡率が高く、脳梗塞の発症率も高い\nただし、二次性のAFは、一次性のAFに比べて脳梗塞Riskは低い\n\nCHADS2-VAで1-4点だと1%程度、5-点で2%程度21\n\n特にSepsisの場合はCHADS2-VAScは塞栓症のRiskとして使えず、観察研究ではあるが抗凝固と脳梗塞との関連は示されなかった22,23"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#どうするか",
@@ -6137,5 +6137,47 @@
     "title": "分類モデルの評価について",
     "section": "References",
     "text": "References\n\n\n\n\n\n\n\nAlba, Ana Carolina, Thomas Agoritsas, Michael Walsh, et al. 2017. “Discrimination and Calibration of Clinical Prediction Models: Users’ Guides to the Medical Literature: Users’ Guides to the Medical Literature.” The Journal of the American Medical Association 318 (14): 1377–84. https://doi.org/10.1001/jama.2017.12126.\n\n\nCook, Nancy R. 2007. “Use and Misuse of the Receiver Operating Characteristic Curve in Risk Prediction.” Circulation 115 (7): 928–35. https://doi.org/10.1161/CIRCULATIONAHA.106.672402.\n\n\nCreager, Mark A, Geoffrey D Barnes, Jay Giri, et al. 2026. “2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.” Journal of the American College of Cardiology 87 (13): 1626–710. https://doi.org/10.1016/j.jacc.2025.11.005.\n\n\nLeening, Maarten J G, Moniek M Vedder, Jacqueline C M Witteman, Michael J Pencina, and Ewout W Steyerberg. 2014. “Net Reclassification Improvement: Computation, Interpretation, and Controversies: A Literature Review and Clinician’s Guide: A Literature Review and Clinician’s Guide.” Annals of Internal Medicine 160 (2): 122–31. https://doi.org/10.7326/M13-1522.\n\n\nThan, Martin, Mel Herbert, Dylan Flaws, et al. 2013. “What Is an Acceptable Risk of Major Adverse Cardiac Event in Chest Pain Patients Soon After Discharge from the Emergency Department?: A Clinical Survey.” International Journal of Cardiology 166 (3): 752–54. https://doi.org/10.1016/j.ijcard.2012.09.171.\n\n\nVertosick, Emily, and Andrew Vickers. 2022. “Decision Curve Analysis for Quantifying the Additional Benefit of a New Marker.” April 11. https://www.fharrell.com/post/addmarkerdca/.\n\n\nVickers, Andrew J, Ben Van Calster, and Ewout W Steyerberg. 2016. “Net Benefit Approaches to the Evaluation of Prediction Models, Molecular Markers, and Diagnostic Tests.” BMJ (Clinical Research Ed.) 352 (January): i6. https://doi.org/10.1136/bmj.i6."
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#症例7",
+    "href": "medicine/antithrombotic_etc/index.html#症例7",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "症例7",
+    "text": "症例7\n\n79歳女性、AF、CHADS2 3点でRivaroxabanを内服中\n頭痛で来院し、被殻に110.5cm程度のわずかな出血\n軽度の麻痺はあるが安定している\n抗凝固薬は再開する？"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#抗血栓療法中の脳出血後の対応",
+    "href": "medicine/antithrombotic_etc/index.html#抗血栓療法中の脳出血後の対応",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "抗血栓療法中の脳出血後の対応",
+    "text": "抗血栓療法中の脳出血後の対応\n\nASA内服中の脳出血の場合はRESTART trialがありある程度の結果が分かっている24\n\n2年間のf/uで症候性脳出血の発症に差はなし(なぜか4% vs. 9%、HR 0.51[0.26-1.03]と再開群の方がやや少ない傾向)\nASCVD eventも差はなし(15% vs. 14%)\n\n一方で、抗凝固内服中の脳出血患者のEvidenceは複雑"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#抗凝固内服中の脳出血患者のdoac再開について",
+    "href": "medicine/antithrombotic_etc/index.html#抗凝固内服中の脳出血患者のdoac再開について",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "抗凝固内服中の脳出血患者のDOAC再開について",
+    "text": "抗凝固内服中の脳出血患者のDOAC再開について\n\n\n\n\n\n\n\n\nアウトカム\n経口抗凝固薬を開始(n = 212)\n経口抗凝固薬を回避(n = 200)\n\n\n\n\n主要アウトカム\n\n\n\n\n脳梗塞または心血管死\n29 (14%)\n43 (22%)\n\n\n副次アウトカム\n\n\n\n\n虚血性MACE(脳梗塞+全身性塞栓症+PE+MI)\n9 (4%)\n38 (19%)\n\n\n└ 脳梗塞\n9 (4%)\n31 (16%)\n\n\n出血イベント\n15 (7%)\n9 (5%)\n\n\n└ 頭蓋内出血\n12 (6%)\n5 (3%)\n\n\n全死亡\n38 (18%)\n29 (15%)\n\n\n1年後の死亡+要介護（mRS 3–6）\n78 (53%)\n74 (51%)\n\n\n\n\n3RCT(APACHE-AF、NASPAF-ICH、SoSTART)のMeta analysis\n\n2-6年のfollow-up、約8割の患者が75歳以上\n40%以上がCHA2DS2-VASc 5点以上25\n\n塞栓イベントを減らすことは可能だが、代わりに出血eventは増える\n全死亡は変化なし"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#直近のrctでは",
+    "href": "medicine/antithrombotic_etc/index.html#直近のrctでは",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "直近のRCTでは",
+    "text": "直近のRCTでは\n26\n\nPRESTIGE-AF trial(n = 319)\n\nfollow upの中央値は1.4年、脳出血からRandom化は中央値で7週間\n平均年齢は49歳、CHA2DS2VASc　4[3-6]\n\n結果は同じで出血は増えるが塞栓症は減る\n\n全死亡は6.67/100人年 vs. 8.60/100人年\n頭蓋内出血は6.25/100人年 vs. 0.82/100人年\nstroke + 全身性塞栓は 5.83/100人年 vs. 11.06/100人年"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#結局のところ",
+    "href": "medicine/antithrombotic_etc/index.html#結局のところ",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "結局のところ",
+    "text": "結局のところ\n\n出血のRiskと塞栓症の鬩ぎあいとなって、死亡は変わらない\nCHADS2やHASBLEDで相談\n予後が長ければICの上で再開を推奨\nJACCのStatementでは4-8wks後での再開が推奨されてはいるが、大体入院中に再開している27"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#footnotes",
+    "href": "medicine/antithrombotic_etc/index.html#footnotes",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "脚注",
+    "text": "脚注\n\n\n虚血イベント: 心血管死亡+脳梗塞+MI+全身性塞栓症+血行再建"
   }
 ]
