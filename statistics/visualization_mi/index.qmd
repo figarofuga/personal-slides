@@ -37,12 +37,6 @@ blockquote {
 </style>
 ```
 
-## 可視化事始め
-
-そのフィギュア、必要ですか？  
-2021/3/5 ＠Keio University  
-新美 望
-
 ## Take Home Message
 
 - まず、最初に何を見せたいのかを3つから考える
@@ -58,6 +52,35 @@ blockquote {
 - 色覚多様性にも配慮した色を使う
 
 ## What Is This？
+
+```{r}
+#| label: anscombes
+
+library(tidyverse)
+library(ggpubr)
+
+anscombe_long <- tidyr::pivot_longer(
+  anscombe,
+  cols = everything(),
+  names_to = c(".value", "set"),
+  names_pattern = "([xy])(\\d+)",
+  names_transform = list(set = as.integer)
+) 
+
+anscombe_fig <- ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set") + 
+  ylim(c(0, 15)) + 
+  theme_bw()
+
+anscombe_fig
+
+ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add = "reg.line") +
+  ylim(c(0, 15)) + 
+  ggpubr::stat_regline_equation(label.x = 5, label.y = 15) +
+  ggpubr::stat_cor(label.x = 5, label.y = 13.5) + 
+  theme_bw()
+
+```
+
 
 ![](images/slide03_image01.png){fig-alt="What is this" width="48%"}
 
