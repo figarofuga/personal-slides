@@ -226,7 +226,10 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>酸素化と換気(呼吸の評価)</li>
 <li><span style="color: red;font-size: 1.2em;"><strong>酸塩基平衡</strong></span></li>
 </ul></li>
-<li>実はCPAの時にほぼほぼ全ての4H4Tを推測可能</li>
+<li>実はCPAの時に検索する原疾患の4H4Tのうち4Hのかなりを推測可能
+<ul>
+<li>低血糖、低/高K血症、Acidosis、低酸素血症</li>
+</ul></li>
 </ul>
 </section>
 <section id="動脈血液ガス-vs.-静脈血液ガス" class="slide level2">
@@ -259,8 +262,8 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </table>
 <p><em>Eur J Emerg Med. 2014 Apr;21(2):81–8</em></p>
 <ul>
-<li>基本的には、pHとHCO3-は信じてよい</li>
-<li>O2は信じちゃダメ</li>
+<li>基本的には、pHと<span class="math inline">\(HCO3^-\)</span>は信じてよい</li>
+<li><span class="math inline">\(PaO_2\)</span>は信じちゃダメ</li>
 <li>過去にはCO2-は変換式があるといわれたが微妙かも</li>
 <li>「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断</li>
 <li>DKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている</li>
@@ -331,7 +334,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </ul>
 </section>
 <section id="acid-base-map" class="slide level2">
-<h2>酸塩基平衡のマインドマップ(厳密には少し違うけど)</h2>
+<h2>酸塩基平衡のざっくりとした(厳密には少し違うけど)</h2>
 <div class="cell" data-reveal="true" data-fig-width="10" data-fig-height="6" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -340,65 +343,21 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <pre class="mermaid mermaid-js">flowchart TD
     ABG["Acid–Base Disorders"]
 
-    ABG --&gt; AlbCorrectAG["Alb補正の上でのAG計算"]
+    ABG --&gt; MA["代謝性アシドーシス"]
+    ABG --&gt; MK["代謝性アルカローシス"]
+    ABG --&gt; RA["呼吸性アシドーシス"]
+    ABG --&gt; RK["呼吸性アルカローシス "]
 
-    AlbCorrectAG --&gt; AlbCorrectAGPosi["AG \&gt; 12"]
-    AlbCorrectAG --&gt; AlbCorrectAGNega["AG \&lt; 12"]
+    MA --&gt; AGMA["Anion Gap開大"]
+    MA --&gt; NAGMA["Anion Gap正常範囲"]
 
-    AlbCorrectAGPosi --&gt; AG["Anion Gap開大性代謝性アシドーシス"]
-    AG --&gt; HCO3["補正HCO3-を計算する"]
-    HCO3 --&gt; HCO3Acid["補正HCO3- \&lt; 22"]
-    HCO3 --&gt; HCO3Alka["補正HCO3- \&gt; 26"]
+    AGMA --&gt; GOLDMARK["ケトン/乳酸/腎不全を検索"]
+    GOLDMARK --&gt; poison["浸透圧Gapから毒物を検索"]
 
-    HCO3Acid --&gt; AGNAG["AG開大性代謝性アシドーシス+AG非開大性代謝性アシドーシス"]
-    HCO3Alka --&gt; AGAlka["AG開大性代謝性アシドーシス+代謝性アルカローシス"]
+    NAGMA --&gt; UAG["尿AGを計算/病歴から下痢を除外"]
 
-    AlbCorrectAGNega --&gt; PrimaryEval["HCO3-/PaCO2でPrimaryの変化を評価"]
-    PrimaryEval --&gt; NAG["Anion Gap非開大性代謝性アシドーシス"]
-    PrimaryEval --&gt; MK["代謝性アルカローシス"]
-    PrimaryEval --&gt; RA["呼吸性アシドーシス"]
-    PrimaryEval --&gt; RK["呼吸性アルカローシス"]
-    
-
-    click AG "#/ag-acidosis"
-    click NAG "#/nag-acidosis"
-    click MK "#/metabolic-alkalosis"
-    click RA "#/respiratory-acidosis"
-    click RK "#/respiratory-alkalosis"
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<div class="cell" data-reveal="true" data-fig-width="10" data-fig-height="6" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-
-    MA["代謝性アシドーシス"]
-    
-    MA --&gt; AlbCorrectAG["Alb補正の上でのAG計算"]
-    AlbCorrectAG --&gt; NAG["Anion Gap非開大性代謝性アシドーシス"]
-    AlbCorrectAG --&gt; AG["Anion Gap開大性代謝性アシドーシス"]
-    %% AG --&gt; HCO3["補正HCO3-を計算する"]
-    AG --&gt; DKAetc["高度腎不全 &lt;br&gt; DKA &lt;br&gt; 乳酸Acidosis"]
-
-    AG --&gt; OsmGap["浸透圧ギャップを計算"]
-    OsmGap --&gt; OsmGapPosi["Osm Gap&gt; 10-15 &lt;br&gt; 毒性アルコール中毒\(メタノール・エチレングリコールなど\)"]
-
-    NAG --&gt; UrineAG["尿中AGを計算"]
-    UrineAG --&gt; UrineAGPosi["尿中AG &gt;0"]
-    UrineAG --&gt; UrineAGNega["尿中AG &lt;&lt;0"]
-    UrineAGNega --&gt; UrineAGNegadisease["下痢 &lt;br&gt; 回腸導管 &lt;br&gt; 胆膵管ドレナージ"]
-    UrineAGPosi --&gt; UrineOsmGap["尿中浸透圧ギャップ"]
-    UrineOsmGap --&gt; UrineOsmGapPosi["尿浸透圧ギャップ\&gt;100 &lt;br&gt; トルエン中毒 &lt;br&gt; DKA回復期"]
-    UrineOsmGap --&gt; UrineOsmGapNega["尿浸透圧ギャップ\&lt;\&lt;100 &lt;br&gt; 保存期CKD &lt;br&gt; 尿細管Acidosis"]
-
-    click AG "#/ag-acidosis"
-    click NAG "#/nag-acidosis"
+    click AGMA "#/ag-acidosis"
+    click NAGMA "#/nag-acidosis"
     click MK "#/metabolic-alkalosis"
     click RA "#/respiratory-acidosis"
     click RK "#/respiratory-alkalosis"
@@ -579,7 +538,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li><p>Unmeasured anionの増加あるいはUnmeasured cationの減少により</p>
 <ul>
 <li><p>例えばγｸﾞﾛﾌﾞﾘﾝが増加する病態(MMなど)でもAGは偽性に正常化する(実際はほぼないが)</p></li>
-<li><p>ただし、Unmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない</p></li>
+<li><p>Unmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない</p></li>
 </ul></li>
 <li><p>Unmeasured anionって何ですか？</p></li>
 </ul>
@@ -683,10 +642,24 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li><p>実際は実臨床で覚える鑑別は2種類</p>
 <ul>
 <li><p>下痢(腸液のHCO3-の排泄による代謝性Acidosis)</p></li>
-<li><p>Renal tubular アシドーシス</p></li>
+<li><p><span style="color: red; font-size: 1.1em;"><strong>尿細管Acidosis</strong></span></p></li>
 </ul></li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
+</section>
+<section id="尿細管acidosis" class="slide level2">
+<h2>尿細管Acidosis</h2>
+<ul>
+<li>4種類に分かれるが、実際は3種類のみ</li>
+<li>遠位尿細管で起こるI型RTA</li>
+<li>近位尿細管で起こるII型RTA</li>
+<li>Aldosterone内服した状態のIII型RTA</li>
+<li>まずは薬 → 膠原病という風に考える</li>
+</ul>
+</section>
+<section id="尿細管acidosis-1" class="slide level2">
+<h2>尿細管Acidosis</h2>
+<!-- Todo: 教科書を確認 -->
 </section>
 <section id="metabolic-alkalosis" class="slide level2">
 <h2>代謝性 アルカローシス</h2>
@@ -695,6 +668,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>Chloride responsive</li>
 <li>Chloride resistant</li>
 </ul>
+<!-- Todo: 教科書を確認 -->
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
 <section id="代謝性アルカローシスの原因" class="slide level2">
@@ -708,16 +682,22 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <ul>
 <li>いわゆる肺胞低換気 = II型呼吸不全</li>
 <li>物理的に肺胞に空気が入らない状態</li>
-<li>解剖学的に上から考えるのが良い
+<li>解剖学的に考えるのが良い
 <ul>
-<li>中枢神経()</li>
+<li>脳: 重度の意識障害の他に、CO2 Narcosis</li>
+<li>中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も</li>
+<li>上気道: Stridorが出る疾患、簡単に言うと窒息</li>
+<li>下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど</li>
 </ul></li>
+<li>HCO3-が代償していたら慢性的なものを疑う</li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
 </section>
 <section id="respiratory-alkalosis" class="slide level2">
 <h2>呼吸性 アルカローシス</h2>
-<h3 id="hyperventilation">Hyperventilation</h3>
+</section>
+<section id="hyperventilation" class="slide level2">
+<h2>Hyperventilation</h2>
 <ul>
 <li>Hypoxemia</li>
 <li>Sepsis</li>
@@ -725,6 +705,41 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>CNS disorders</li>
 </ul>
 <p><a href="#//acid-base-map">← Acid–Base Map</a></p>
+</section>
+<section id="re-mindmap" class="slide level2">
+<h2>Re mindmap</h2>
+<div class="cell" data-reveal="true" data-fig-width="10" data-fig-height="6" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    ABG["Acid–Base Disorders"]
+
+    ABG --&gt; AlbCorrectAG["Alb補正の上でのAG計算"]
+
+    AlbCorrectAG --&gt; AlbCorrectAGPosi["AG \&gt; 12"]
+    AlbCorrectAG --&gt; AlbCorrectAGNega["AG \&lt; 12"]
+
+    AlbCorrectAGPosi --&gt; AG["AG開大性代謝性Acidosis"]
+    AG --&gt; HCO3["補正HCO3-を計算する"]
+    HCO3 --&gt; HCO3eval["AG開大性代謝性Acidosisや代謝性アルカローシスの合併を計算"]
+
+    
+
+    HCO3eval --&gt; Othereval["その他の一次性のAcidosis/Alkalosisを評価"]
+
+    AlbCorrectAGNega --&gt; Othereval["その他の一次性のAcidosis/Alkalosisを評価"]
+
+    Othereval --&gt; Secondaryeval["代償変化を評価し隠れたAcidosis/Alkalosisを評価"]
+
+    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>

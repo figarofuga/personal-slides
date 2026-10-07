@@ -70,7 +70,8 @@ knitr:
 - 主に以下の2つが分かる
   - 酸素化と換気(呼吸の評価)
   - [**酸塩基平衡**]{style="color: red;font-size: 1.2em;"}
-- 実はCPAの時にほぼほぼ全ての4H4Tを推測可能
+- 実はCPAの時に検索する原疾患の4H4Tのうち4Hのかなりを推測可能
+  - 低血糖、低/高K血症、Acidosis、低酸素血症
 
 ## 動脈血液ガス vs. 静脈血液ガス
 
@@ -83,8 +84,8 @@ knitr:
 
 *Eur J Emerg Med. 2014 Apr;21(2):81–8*
 
-- 基本的には、pHとHCO3-は信じてよい
-- O2は信じちゃダメ
+- 基本的には、pHと$HCO3^-$は信じてよい
+- $PaO_2$は信じちゃダメ
 - 過去にはCO2-は変換式があるといわれたが微妙かも
 - 「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断
 - DKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている
@@ -110,7 +111,7 @@ knitr:
   - pH >> 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併
 - とは言え、Septic shockとか著名なDKAなら単独でも起こりうる
 
-## 酸塩基平衡のマインドマップ(厳密には少し違うけど) {#acid-base-map}
+## 酸塩基平衡のざっくりとした(厳密には少し違うけど) {#acid-base-map}
 
 
 ```{mermaid}
@@ -120,67 +121,23 @@ knitr:
 flowchart TD
     ABG["Acid–Base Disorders"]
 
-    ABG --> AlbCorrectAG["Alb補正の上でのAG計算"]
+    ABG --> MA["代謝性アシドーシス"]
+    ABG --> MK["代謝性アルカローシス"]
+    ABG --> RA["呼吸性アシドーシス"]
+    ABG --> RK["呼吸性アルカローシス "]
 
-    AlbCorrectAG --> AlbCorrectAGPosi["AG \> 12"]
-    AlbCorrectAG --> AlbCorrectAGNega["AG \< 12"]
-
-    AlbCorrectAGPosi --> AG["Anion Gap開大性代謝性アシドーシス"]
-    AG --> HCO3["補正HCO3-を計算する"]
-    HCO3 --> HCO3Acid["補正HCO3- \< 22"]
-    HCO3 --> HCO3Alka["補正HCO3- \> 26"]
-
-    HCO3Acid --> AGNAG["AG開大性代謝性アシドーシス+AG非開大性代謝性アシドーシス"]
-    HCO3Alka --> AGAlka["AG開大性代謝性アシドーシス+代謝性アルカローシス"]
+    MA --> AGMA["AG開大性代謝性アシドーシス"]
+    MA --> NAGMA["AG非開大性代謝性アシドーシス"]
 
 
-    AlbCorrectAGNega --> PrimaryEval["HCO3-/PaCO2でPrimaryの変化を評価"]
-    PrimaryEval --> NAG["Anion Gap非開大性代謝性アシドーシス"]
-    PrimaryEval --> MK["代謝性アルカローシス"]
-    PrimaryEval --> RA["呼吸性アシドーシス"]
-    PrimaryEval --> RK["呼吸性アルカローシス"]
-    
 
-    click AG "#/ag-acidosis"
-    click NAG "#/nag-acidosis"
+    click AGMA "#/ag-acidosis"
+    click NAGMA "#/nag-acidosis"
     click MK "#/metabolic-alkalosis"
     click RA "#/respiratory-acidosis"
     click RK "#/respiratory-alkalosis"
 ```
 
-
-```{mermaid}
-%%| fig-width: 10
-%%| fig-height: 6
-
-flowchart TD
-
-    MA["代謝性アシドーシス"]
-    
-    MA --> AlbCorrectAG["Alb補正の上でのAG計算"]
-    AlbCorrectAG --> NAG["Anion Gap非開大性代謝性アシドーシス"]
-    AlbCorrectAG --> AG["Anion Gap開大性代謝性アシドーシス"]
-    %% AG --> HCO3["補正HCO3-を計算する"]
-    AG --> DKAetc["高度腎不全 <br> DKA <br> 乳酸Acidosis"]
-
-
-    AG --> OsmGap["浸透圧ギャップを計算"]
-    OsmGap --> OsmGapPosi["Osm Gap> 10-15 <br> 毒性アルコール中毒\(メタノール・エチレングリコールなど\)"]
-
-    NAG --> UrineAG["尿中AGを計算"]
-    UrineAG --> UrineAGPosi["尿中AG >0"]
-    UrineAG --> UrineAGNega["尿中AG <<0"]
-    UrineAGNega --> UrineAGNegadisease["下痢 <br> 回腸導管 <br> 胆膵管ドレナージ"]
-    UrineAGPosi --> UrineOsmGap["尿中浸透圧ギャップ"]
-    UrineOsmGap --> UrineOsmGapPosi["尿浸透圧ギャップ\>100 <br> トルエン中毒 <br> DKA回復期"]
-    UrineOsmGap --> UrineOsmGapNega["尿浸透圧ギャップ\<\<100 <br> 保存期CKD <br> 尿細管Acidosis"]
-
-    click AG "#/ag-acidosis"
-    click NAG "#/nag-acidosis"
-    click MK "#/metabolic-alkalosis"
-    click RA "#/respiratory-acidosis"
-    click RK "#/respiratory-alkalosis"
-```
 
 ------------------------------------------------------------------------
 
@@ -192,6 +149,8 @@ flowchart TD
 - 明らかな時もあるが、打ち消しあって目に見えないこともある
 
 ## 例えば
+
+<!-- Todo: 困惑している人の絵を入れる -->
 
 - pH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？
 - 答え1:
@@ -217,7 +176,7 @@ flowchart TD
 
 - まずは、AG開大代謝性Acidosisで考えてみましょう
 
-## High Anion Gap 代謝性 アシドーシス {#ag-acidosis}
+## AG開大性代謝性 アシドーシス {#ag-acidosis}
 
 +--------------------------------------+-------------------------------+
 | GOLDMARK                             | KUSSMAUL                      |
@@ -290,11 +249,8 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
 ![](images/anion_gap_image.drawio.svg){fig-align="center"}
 
 - Unmeasured anionの増加あるいはUnmeasured cationの減少により
-
   - 例えばγｸﾞﾛﾌﾞﾘﾝが増加する病態(MMなど)でもAGは偽性に正常化する(実際はほぼないが)
-
-  - ただし、Unmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない
-
+  - Unmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない
 - Unmeasured anionって何ですか？
 
 ## Unmeasured anionとは
@@ -383,9 +339,21 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 
   - 下痢(腸液のHCO3-の排泄による代謝性Acidosis)
 
-  - Renal tubular アシドーシス
+  - [**尿細管Acidosis**]{style="color: red; font-size: 1.1em;"}
 
 [← Acid–Base Map](#/acid-base-map)
+
+## 尿細管Acidosis
+
+- 4種類に分かれるが、実際は3種類のみ
+- 遠位尿細管で起こるI型RTA
+- 近位尿細管で起こるII型RTA
+- Aldosterone内服した状態のIII型RTA
+- まずは薬 → 膠原病という風に考える
+
+## 尿細管Acidosis
+
+<!-- Todo: 教科書を確認 -->
 
 ------------------------------------------------------------------------
 
@@ -394,6 +362,8 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 - 正直あまり問題にならない事が多い
 - Chloride responsive
 - Chloride resistant
+
+<!-- Todo: 教科書を確認 -->
 
 [← Acid–Base Map](#/acid-base-map)
 
@@ -410,8 +380,12 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 
 - いわゆる肺胞低換気 = II型呼吸不全
 - 物理的に肺胞に空気が入らない状態
-- 解剖学的に上から考えるのが良い
-  - 中枢神経()
+- 解剖学的に考えるのが良い
+  - 脳: 重度の意識障害の他に、CO2 Narcosis
+  - 中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も
+  - 上気道: Stridorが出る疾患、簡単に言うと窒息
+  - 下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど
+- HCO3-が代償していたら慢性的なものを疑う
 
 
 [← Acid–Base Map](#/acid-base-map)
@@ -420,7 +394,7 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 
 ## 呼吸性 アルカローシス {#respiratory-alkalosis}
 
-### Hyperventilation
+## Hyperventilation
 
 - Hypoxemia
 - Sepsis
@@ -428,6 +402,37 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 - CNS disorders
 
 [← Acid–Base Map](#/acid-base-map)
+
+## Re mindmap
+
+```{mermaid}
+%%| fig-width: 10
+%%| fig-height: 6
+
+flowchart TD
+    ABG["Acid–Base Disorders"]
+
+    ABG --> AlbCorrectAG["Alb補正の上でのAG計算"]
+
+    AlbCorrectAG --> AlbCorrectAGPosi["AG \> 12"]
+    AlbCorrectAG --> AlbCorrectAGNega["AG \< 12"]
+
+    AlbCorrectAGPosi --> AG["AG開大性代謝性Acidosis"]
+    AG --> HCO3["補正HCO3-を計算する"]
+    HCO3 --> HCO3eval["AG開大性代謝性Acidosisや代謝性アルカローシスの合併を計算"]
+
+    
+
+    HCO3eval --> Othereval["その他の一次性のAcidosis/Alkalosisを評価"]
+
+    AlbCorrectAGNega --> Othereval["その他の一次性のAcidosis/Alkalosisを評価"]
+
+    Othereval --> Secondaryeval["代償変化を評価し隠れたAcidosis/Alkalosisを評価"]
+
+
+    
+```
+
 
 ## References {.scrollable}
 
