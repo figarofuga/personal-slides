@@ -4189,8 +4189,8 @@
     "objectID": "medicine/antithrombotic_etc/index.html#症例-1",
     "href": "medicine/antithrombotic_etc/index.html#症例-1",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
-    "section": "症例 1",
-    "text": "症例 1\n\n64歳男性、DM, HTN, Dlp背景\n5日前発症のアテローム性脳梗塞を発症\nNIHSSは10点\n初期治療は？"
+    "section": "症例2",
+    "text": "症例2\n\n82歳女性、HTN, CKD背景\n3日前発症の左MCA領域の脳塞栓症を発症、来院時のECGでAFを認める\nNIHSSは16点\n初期治療は？いつ導入する？"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#いつだれにdaptをするの",
@@ -4210,8 +4210,8 @@
     "objectID": "medicine/antithrombotic_etc/index.html#症例-2",
     "href": "medicine/antithrombotic_etc/index.html#症例-2",
     "title": "脳梗塞予防の抗血栓薬のエトセトラ",
-    "section": "症例 2",
-    "text": "症例 2\n\n82歳女性、HTN, CKD背景\n3日前発症の左MCA領域の脳塞栓症を発症、来院時のECGでAFを認める\nNIHSSは16点\n初期治療は？いつ導入する？"
+    "section": "症例3",
+    "text": "症例3\n\n症例2の患者を24時間後の頭部CTで左MCAに出血性梗塞を認めた\n元々脳委縮は大きく、脳ヘルニア兆候やMidline shiftはなし\n抗凝固はどうする？"
   },
   {
     "objectID": "medicine/antithrombotic_etc/index.html#今回の場合",
@@ -6207,5 +6207,40 @@
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "Re mindmap",
     "text": "Re mindmap\n\n\n\n\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; AlbCorrectAG[\"Alb補正の上でのAG計算\"]\n\n    AlbCorrectAG --&gt; AlbCorrectAGPosi[\"AG \\&gt; 12\"]\n    AlbCorrectAG --&gt; AlbCorrectAGNega[\"AG \\&lt; 12\"]\n\n    AlbCorrectAGPosi --&gt; AG[\"AG開大性代謝性Acidosis\"]\n    AG --&gt; HCO3[\"補正HCO3-を計算する\"]\n    HCO3 --&gt; HCO3eval[\"AG開大性代謝性Acidosisや代謝性アルカローシスの合併を計算\"]\n\n    \n\n    HCO3eval --&gt; Othereval[\"その他の一次性のAcidosis/Alkalosisを評価\"]\n\n    AlbCorrectAGNega --&gt; Othereval[\"その他の一次性のAcidosis/Alkalosisを評価\"]\n\n    Othereval --&gt; Secondaryeval[\"代償変化を評価し隠れたAcidosis/Alkalosisを評価\"]"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#症例",
+    "href": "medicine/antithrombotic_etc/index.html#症例",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "症例1",
+    "text": "症例1\n\n64歳男性、DM, HTN, Dlp背景\n5日前発症のアテローム性脳梗塞を発症\nNIHSSは10点\n初期治療は？"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#症例-3",
+    "href": "medicine/antithrombotic_etc/index.html#症例-3",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "症例4",
+    "text": "症例4\n\n78歳男性、元々CHADS2 3点で心房細動でEdoxaban 30mgを内服中\n1日前発症の脳塞栓症あり、NIHSSは3点程度で軽症\n頸動脈エコーでプラークはなし\nさて、どうする？"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#症例-4",
+    "href": "medicine/antithrombotic_etc/index.html#症例-4",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "症例5",
+    "text": "症例5\n\n82歳男性、元々HTN, DM, Dlpで10年前にアテローム性脳梗塞既往\n動悸で初診外来を受診、新規の心房細動が判明\nどうする？"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#症例-5",
+    "href": "medicine/antithrombotic_etc/index.html#症例-5",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "症例6",
+    "text": "症例6\n\n76歳女性、腎盂腎炎で入院\n入院日にHR 120の心房細動発症\n高血圧、糖尿病既往あり\n抗凝固薬の適応は？"
+  },
+  {
+    "objectID": "medicine/antithrombotic_etc/index.html#症例-6",
+    "href": "medicine/antithrombotic_etc/index.html#症例-6",
+    "title": "脳梗塞予防の抗血栓薬のエトセトラ",
+    "section": "症例7",
+    "text": "症例7\n\n79歳女性、AF、CHADS2 3点でRivaroxabanを内服中\n頭痛で来院し、被殻に110.5cm程度のわずかな出血\n軽度の麻痺はあるが安定している\n抗凝固薬は再開する？"
   }
 ]

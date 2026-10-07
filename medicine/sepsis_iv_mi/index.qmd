@@ -42,8 +42,6 @@ bibliography: references.bib
 - 月見だ！
 - 敗血症だ！！[^world-sepsis-day]
 
-<!-- TODO: 元スライドの3分割レイアウトを必要に応じて再現する。 -->
-
 [^world-sepsis-day]: 9月13日は世界敗血症デー。
 
 ## という事で
@@ -123,9 +121,18 @@ bibliography: references.bib
     - シンプルにMAP目標を下げる
     - MAP以外の指標を用いる
 
-## CENSER trial
+## 早期の昇圧薬の使用
 
-<!-- TODO: figures/censor_km.png は0バイトのため、元のKaplan-Meier図を復元してここへ配置する。 -->
+- SOAP2 trialの結果からNADが基本(DOAは不整脈が優位に多かった)[@De-Backer2010-tq]
+- どうしてもだめなら、次はVasopressin
+- NAD→Vasopressinのタイミングは？
+<!-- Todo: 調べる -->
+- Vasopressinを使うタイミングなら一度救急科転科が良いと思う。
+
+
+## 早期のNAD使用～CENSER trial
+
+![](figures/censer_km.png)
 
 - **P**: 敗血症による低血圧患者（n = 310）
 - **I**: 早期ノルアドレナリン併用群（n = 155）
@@ -147,8 +154,13 @@ bibliography: references.bib
 - **I**: 低血圧許容群（MAP 60--65 mmHg、n = 1,291）
 - **C**: 通常治療群（MAP >65 mmHg、n = 1,307）
 - **O**: 90日死亡に差なし（41.0% vs. 43.8%）[@Lamontagne2020-os]
+- 実際は以下のパラメーター
+  - median MAP 66.7 vs. 72.6 mmHg
+  - MAP <65 mmHgの時間 12 vs. 6時間
 
-<!-- TODO: 元スライドの補足（median MAP 66.7 vs. 72.6 mmHg、MAP <65 mmHgの時間 12 vs. 6時間）を発表者ノート等に追加する。 -->
+## 今のガイドライン
+
+- 2026年のSSCGではMAP 60 mmHgに変わっている
 
 ## MAP以外の指標を用いる
 
@@ -172,8 +184,6 @@ bibliography: references.bib
 
 ## ANDROMEDA-SHOCK trial
 
-![](figures/andromeda_protocol.png){fig-alt="ANDROMEDA-SHOCK trialの治療プロトコル" height="28%"}
-
 ![](figures/andromeda_km.png){fig-alt="ANDROMEDA-SHOCK trialのKaplan-Meier曲線" height="25%"}
 
 - **P**: 20 mL/kg以上の初期輸液に反応しない敗血症性ショック患者（n = 424）
@@ -181,7 +191,12 @@ bibliography: references.bib
 - **C**: Lactate guided therapy（2時間ごとに乳酸値を確認）
 - **O**: 28日死亡に差なし（CRT群 34.9% vs. Lactate群 43.4%）[@Hernandez2018-ks; @Hernandez2019-rg]
 
-<!-- TODO: 元スライドの横並びレイアウトが必要なら、Quarto columns を追加する。 -->
+
+## ANDROMEDA-SHOCK trialのプロトコル
+
+![](figures/andromeda_protocol.png){fig-alt="ANDROMEDA-SHOCK trialの治療プロトコル" height="28%"}
+
+<!-- - Todo: 少し読み込む -->
 
 ## 小括
 
