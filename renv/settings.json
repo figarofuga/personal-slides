@@ -1,4 +1,5 @@
 {
+  "bioconductor.enabled": true,
   "bioconductor.version": null,
   "external.libraries": [],
   "ignored.packages": [],
@@ -14,7 +15,7 @@
   "snapshot.dev": false,
   "snapshot.type": "all",
   "use.cache": true,
-  "vcs.ignore.cellar": false,
+  "vcs.ignore.cellar": true,
   "vcs.ignore.library": true,
   "vcs.ignore.local": true,
   "vcs.manage.ignores": true

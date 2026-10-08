@@ -6,6 +6,9 @@ lock <- renv::lockfile_read("renv.lock")
 if (as.character(getRversion()) != lock$R$Version) {
   stop("R version differs from renv.lock; restore pixi.lock first.")
 }
+# rmsb's configure script uses rstantools without declaring that dependency.
+# Restore it first so a fresh library regenerates compatible Stan C++ code.
+renv::restore(packages = "rstantools", prompt = FALSE)
 renv::restore(prompt = FALSE)
 status <- IRkernel::installspec(
   user = FALSE,

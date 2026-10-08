@@ -14388,8 +14388,8 @@
     },
     "rmsb": {
       "Package": "rmsb",
-      "Version": "1.1-2.9000",
-      "Source": "Cellar",
+      "Version": "1.1-2",
+      "Source": "Repository",
       "Title": "Bayesian Regression Modeling Strategies",
       "Date": "2025-04-13",
       "Authors@R": "c(person(given = \"Frank\", family = \"Harrell\", role = c(\"aut\", \"cre\"), email = \"fh@fharrell.com\", comment = c(ORCID = \"0000-0002-8271-5493\")), person(given = \"Ben\", family = \"Goodrich\", role = \"ctb\", email = \"benjamin.goodrich@columbia.edu\", comment = \"contributed Stan code\"), person(given = \"Ben\", family = \"Bolker\", role = \"ctb\", comment = \"wrote original code that is folded into the pdensityContour function\"), person(given = \"Doug\", family = \"Bates\", role = \"ctb\", comment = \"write original code for highest posterior density interval that is folded into the HPDint function\"))",
@@ -14434,7 +14434,7 @@
       "NeedsCompilation": "yes",
       "Author": "Frank Harrell [aut, cre] (<https://orcid.org/0000-0002-8271-5493>), Ben Goodrich [ctb] (contributed Stan code), Ben Bolker [ctb] (wrote original code that is folded into the pdensityContour function), Doug Bates [ctb] (write original code for highest posterior density interval that is folded into the HPDint function)",
       "Maintainer": "Frank Harrell <fh@fharrell.com>",
-      "RemoteType": "cellar"
+      "Repository": "https://cloud.r-project.org/src/contrib"
     },
     "rootSolve": {
       "Package": "rootSolve",

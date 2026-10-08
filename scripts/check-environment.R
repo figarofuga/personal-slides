@@ -44,7 +44,16 @@ rstanarm_fit <- rstanarm::stan_glm(
   iter = 100, warmup = 50, refresh = 0
 )
 stopifnot(all(is.finite(as.matrix(rstanarm_fit))))
+# Verify rmsb's regenerated model where the main and partial-PO widths differ.
+rmsb_data <- transform(mtcars, outcome = ordered(rep(1:4, length.out = nrow(mtcars))))
+rmsb_fit <- rmsb::blrm(
+  outcome ~ mpg + wt, ppo = ~ mpg, cppo = function(y) as.numeric(y),
+  iprior = 2, priorsdppo = 1, data = rmsb_data, backend = "rstan",
+  seed = 20261008, chains = 1, iter = 100, warmup = 50,
+  method = "sampling", loo = FALSE, refresh = 0
+)
+stopifnot(all(is.finite(coef(rmsb_fit))))
 unlink(model_dir, recursive = TRUE)
-cat("R packages, Python bridge, CmdStan, RStan and rstanarm sampling: OK\n")
+cat("R packages, Python bridge, CmdStan, RStan, rstanarm and rmsb sampling: OK\n")
 status <- system2("bash", "scripts/check-quarto.sh")
 stopifnot(status == 0)
