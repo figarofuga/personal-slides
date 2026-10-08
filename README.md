@@ -134,6 +134,6 @@ git commit -m "Update analysis environment"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "Update all components"
+git commit -m "Antithrombotic drugs slides update"
 git push
 ```

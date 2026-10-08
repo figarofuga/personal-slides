@@ -76,7 +76,7 @@ filters:
 
 ## DAPTの出血RiskとBenefit
 
-![](images/dapt_bleedingrisk.png)
+![](images/dapt_bleedingrisk.png){.nostretch width="100%" style="height: auto; max-height: none; max-width: 100%;"}
 
 [@Johnston2019-ca]
 
@@ -204,7 +204,7 @@ filters:
 
 ## 抗血小板と抗凝固の併用の出血Risk
 
-![](images/asa_anticoag_bleeding.png)
+![](images/asa_anticoag_bleeding.png){.nostretch width="100%" style="height: auto; max-height: none; max-width: 100%;"}
 
 [@Morimoto2021-bu]
 
@@ -214,7 +214,7 @@ filters:
 
 ## アテローム性脳梗塞+AFの唯一のRCT
 
-![](images/asa_anticoag_rct.png)
+![](images/asa_anticoag_rct.png){.nostretch width="100%" style="height: auto; max-height: none; max-width: 100%;"}
 
 - 日本のRCT(ATIS-NVAF trial)
   - P: AF + ASCVD risk因子があり最近(発症 8-360日)TIA/Strokeを発症した患者(n = 316)
