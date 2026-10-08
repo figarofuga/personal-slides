@@ -1,20 +1,25 @@
 {
     "positron.r.interpreters.pixiDiscovery": false,
     "files.exclude": {
-        "**/.pixi": true
+        "**/.pixi": true,
+        "**/renv/library/**": true,
+        "**/renv/staging/**": true
     },
-
     "files.watcherExclude": {
         "**/.pixi/**": true,
         "**/.quarto/**": true,
         "**/docs/**": true,
-        "**/index_cache/**": true
+        "**/index_cache/**": true,
+        "**/renv/library/**": true,
+        "**/renv/staging/**": true
     },
     "search.exclude": {
         "**/.pixi/**": true,
         "**/.quarto/**": true,
         "**/docs/**": true,
-        "**/index_cache/**": true
+        "**/index_cache/**": true,
+        "**/renv/library/**": true,
+        "**/renv/staging/**": true
     },
     "python.analysis.exclude": [
         ".pixi",
@@ -30,16 +35,16 @@
     },
     "python.pyrefly.disableTypeErrors": true,
     "quarto.cells.diagnostics.enabled": false,
-
     "r.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/R",
     "r.consolePath": "${workspaceFolder}/scripts/arf-pixi.sh",
-    "r.consoleArgs": ["--no-save", "--no-restore"],
+    "r.consoleArgs": [
+        "--no-save",
+        "--no-restore"
+    ],
     "r.sessionWatcher": true,
     "r.plot.backend": "httpgd",
     "r.lsp.diagnostics": false,
     "r.bracketedPaste": true,
-
-
-    "positron.r.diagnostics.enable": false, 
+    "positron.r.diagnostics.enable": false,
     "quarto.symbols.showCodeCellsInOutline": false
 }

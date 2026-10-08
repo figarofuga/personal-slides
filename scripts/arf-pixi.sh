@@ -6,7 +6,6 @@ cd "$project_root"
 
 export R_HOME="$project_root/.pixi/envs/default/lib/R"
 export ARF_R_HOME="$R_HOME"
-export R_LIBS_USER="$R_HOME/library"
 
 pixi_executable="${PIXI_EXE:-}"
 if [[ -z "$pixi_executable" ]]; then

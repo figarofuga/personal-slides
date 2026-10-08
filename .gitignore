@@ -21,11 +21,10 @@ __pycache__/
 /test.py
 /scripts copy/
 
-# Compiled outputs produced while building vendored R packages
-/vendor/**/src/*.o
-/vendor/**/src/*.so
-/vendor/**/src/*.a
-/vendor/**/src/*.dll
-/vendor/**/src/*.dylib
+# renv installs and temporary build outputs
+/renv/library/
+/renv/staging/
+/renv/lock/
+/renv/local/
 
 .DS_Store

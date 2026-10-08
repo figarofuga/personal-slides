@@ -9,8 +9,8 @@ if [[ "$(uname -s)" != "Linux" || "$(uname -m)" != "x86_64" ]]; then
   exit 1
 fi
 
-if [[ ! -f pixi.toml || ! -f pixi.lock ]]; then
-  echo "Restore pixi.toml, pixi.lock, and vendor/ from the same revision." >&2
+if [[ ! -f pixi.toml || ! -f pixi.lock || ! -f renv.lock || ! -f renv/activate.R ]]; then
+  echo "Restore pixi.toml, pixi.lock, renv.lock, and renv/ from the same revision." >&2
   exit 1
 fi
 
@@ -22,14 +22,8 @@ fi
 # Fail on a stale lock; never resolve newer versions during setup.
 env -u PIXI_NO_INSTALL -u PIXI_FROZEN pixi install --locked
 
-# Check the installed runtimes and every vendored R package.
-pixi run --as-is Rscript -e '
-  descriptions <- Sys.glob("vendor/*/DESCRIPTION")
-  packages <- vapply(descriptions, function(path) read.dcf(path)[1, "Package"], character(1))
-  for (package in packages) {
-    loadNamespace(package)
-    cat(package, as.character(packageVersion(package)), "OK\n")
-  }
-'
+# Restore the R library from its lock, then verify both layers together.
+pixi run --as-is restore
+pixi run --as-is check
 pixi run --as-is python -c 'import numpy, pandas, scipy; print("Python scientific packages: OK")'
 pixi run --as-is quarto --version
