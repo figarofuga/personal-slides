@@ -68,35 +68,24 @@ anscombe_long <- tidyr::pivot_longer(
 ) 
 
 anscombe_fig <- ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set") + 
-  ylim(c(0, 15)) + 
+  ylim(c(0, 16)) + 
   theme_bw()
 
 anscombe_fig
 
 ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add = "reg.line") +
-  ylim(c(0, 15)) + 
-  ggpubr::stat_regline_equation(label.x = 5, label.y = 15) +
-  ggpubr::stat_cor(label.x = 5, label.y = 13.5) + 
+  ylim(c(0, 17)) + 
+  ggpubr::stat_regline_equation(label.x = 5, label.y = 16) +
+  ggpubr::stat_cor(label.x = 5, label.y = 14, digits = 2, p.accuracy = 0.01) + 
   theme_bw()
 
 ```
 
-
-![](images/slide03_image01.png){fig-alt="What is this" width="48%"}
-
-## 画像例
-
-<!-- TODO: 元スライドは画像のみ。配置は簡略化。 -->
-
-:::: columns
-::: {.column width="58%"}
-![](images/slide04_image01.png){fig-alt="画像例1" width="78%"}
-:::
-
-::: {.column width="42%"}
-![](images/slide04_image02.png){fig-alt="画像例2" width="90%"}
-:::
-::::
+- Anscombe's Quartet
+  - 上記、相関係数と回帰直線に加えて・・・・・・
+  - Xの平均 9, 分散 11
+  - yの平均 7.50, 分散 4.1
+- でも全く違う形
 
 ## Visualization
 
@@ -126,6 +115,14 @@ ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add 
 ## よいFigureの条件
 
 :::: columns
+
+::: {.column width="42%"}
+![](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
+
+Edward Tufte
+
+:::
+
 ::: {.column width="58%"}
 > 優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。
 
@@ -133,29 +130,15 @@ ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add 
 Tufte, 1983, p. 51
 :::
 :::
-
-::: {.column width="42%"}
-![](images/slide08_image01.jpg){fig-alt="Edward Tufte" width="60%"}
-
-Edward Tufte
-:::
 ::::
 
 ## 非常に良いFigureの見本
 
-<!-- TODO: 元スライドの見本図と小画像の配置を簡略化。 -->
 
-:::: columns
-::: {.column width="72%"}
-![](images/slide09_image01.jpg){fig-alt="非常に良いFigureの見本" width="100%"}
-:::
 
-::: {.column width="28%"}
+![](images/good_figure_example.png){fig-alt="非常に良いFigureの見本" width="100%"}
+
 - ？？？
-
-![](images/slide09_image02.png){fig-alt="補助画像" width="90%"}
-:::
-::::
 
 ## よいFigureの条件
 
@@ -167,7 +150,7 @@ Edward Tufte
 :::
 
 ::: {.column width="42%"}
-![](images/slide10_image01.jpg){fig-alt="Edward Tufte" width="60%"}
+![](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
 
 Edward Tufte
 :::
@@ -191,9 +174,41 @@ Edward Tufte
 :::
 
 ::: {.column width="48%"}
-![](images/slide12_image01.png){fig-alt="インク・データ比の例1" width="66%"}
+![](images/minimalist_figure.png){fig-alt="インク・データ比の例1" width="66%"}
+[@Weissgerber2019-ho]
 
-![](images/slide12_image02.png){fig-alt="インク・データ比の例2" width="92%"}
+```{r}
+#| label: bad-ink-data-ratio
+
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(grid)
+
+base_irisplot <- dplyr::summarise(iris, Sepal_Width = mean(Sepal.Width), .by = Species) |> 
+  ggplot() + 
+  geom_col(aes(x = Species, y = Sepal_Width, fill = Species)) + 
+  theme_bw()
+
+g_circle <- circleGrob(
+  x = 0.92, y = 0.52, r = 0.12,
+  gp = gpar(col = "red", fill = NA, lwd = 3)
+)
+
+g_arrow <- segmentsGrob(
+  x0 = 0.8, y0 = 1.0,
+  x1 = 0.7, y1 = 0.85,
+  arrow = arrow(length = unit(0.15, "inches")),
+  gp = gpar(col = "red", lwd = 2)
+)
+
+ggdraw(base_irisplot) +
+  draw_grob(g_circle, x = 0, y = 0, width = 1, height = 1) + 
+  draw_grob(g_arrow,  0, 0, 1, 1)
+
+
+```
+
 :::
 ::::
 
