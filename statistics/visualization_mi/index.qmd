@@ -213,15 +213,6 @@ ggdraw(base_irisplot) +
 :::
 ::::
 
-## 今日の内容
-
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：Gestaltと色使いについて
-- Take home message
 
 ## 見せたいものって？
 
@@ -264,9 +255,19 @@ ggdraw(base_irisplot) +
 ```{r}
 library(Rdatasets)
 library(marginaleffects)
+library(lubridate)
+library(dplyr)
 
-nightingale <- marginaleffects::get_dataset("Nightingale")
+nightingale <- marginaleffects::get_dataset("Nightingale") |> 
+  dplyr::mutate(Date = lubridate::ymd(Date))
 
+tidyr::pivot_longer(
+  nightingale, 
+  cols = c("Disease.rate", "Wounds.rate", "Other.rate")
+  ) |> 
+    ggplot() + 
+    geom_line(aes(x = Date, y = value, color = name)) + 
+    theme_bw()
 
 ```
 

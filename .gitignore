@@ -16,6 +16,7 @@ __pycache__/
 
 # Local migration and smoke-test artifacts
 /pixi-install.log
+/.devcontainer/setup.log
 /support*.csv
 /test.R
 /test.py

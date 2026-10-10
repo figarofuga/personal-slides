@@ -23,20 +23,36 @@ WindowsではDocker DesktopのWSL統合を有効にし、WSLのLinuxファイル
 
 Codespacesでは、環境定義をcommit・pushした後、GitHubの
 **Code → Codespaces → Create codespace** を選びます。
-ローカルと同じ`.devcontainer/setup.sh`が次を自動実行します。
+ローカルと同じ`.devcontainer/setup.sh --base-only`が
+`pixi install --locked`で固定された基盤を自動復元します。
+エディターはこの処理の完了を待たずに開きます。
+ターミナルで `tail -f .devcontainer/setup.log` を実行すると進捗を確認できます。
+ログに `Pixi base ready.` が出た後、ターミナルで次を実行してください。
 
-1. `pixi install --locked`で固定された基盤を復元。
-2. `renv::restore()`で固定されたRパッケージをソースから復元。
-3. Jupyterにrenv環境のRカーネルを登録。
-4. Rパッケージ、Python連携、CmdStanのコンパイルとサンプリングを確認。
+```bash
+bash .devcontainer/setup.sh
+```
+
+このコマンドでRパッケージをソースから復元し、JupyterのRカーネルを登録して、
+Pythonパッケージの読み込みとQuartoのバージョンを確認します。
+Rを使う分析・renderは復元完了後に実行してください。
+Stanのコンパイル・サンプリングを含む詳細な検証は、復元後に
+`pixi run --as-is check`で実行します。復元から詳細な検証までまとめて実行する場合は
+`bash .devcontainer/setup.sh --check`を使います。
 
 初回は多数のRパッケージをコンパイルするため、環境によって数時間かかります。
+重いR復元と詳細な検証をCodespacesの自動初期化から分離しているため、
+その進捗や失敗を開いたターミナルで確認できます。
 復元全体が途中で打ち切られないよう、renvのインストール制限時間を24時間に設定しています。
 Stan関連のコンパイル時のメモリ使用量を抑えるため、パッケージとC++ファイルはそれぞれ1つずつビルドします。
 CPU 4コア、メモリ16 GB、空き容量64 GBを目安にしてください。
 `.pixi`の永続ボリュームにrenvのビルド済みキャッシュも保存し、再構築時に再利用します。
 新しいPCや新しいCodespaceにはそのキャッシュがない前提です。
 復元にはネットワークと、ロックに記録された配布元へのアクセスが必要です。
+各実行の出力と処理段階は`.devcontainer/setup.log`に追記されます。
+失敗した場合はログ末尾を確認し、原因を解消してから同じコマンドを再実行してください。
+インストール済みのパッケージとキャッシュは再利用されます。
+ログはGit管理対象外です。Dockerのビルド自体が失敗した場合は、Codespacesの作成ログを確認します。
 
 対応環境は`linux-64`です。Apple SiliconではLinux amd64のエミュレーションとなり、
 特にコンパイルに時間がかかります。Windows/macOSのネイティブRはこの構成の対象外です。
