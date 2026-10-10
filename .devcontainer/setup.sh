@@ -19,6 +19,17 @@ if [[ ! -w .pixi ]]; then
   sudo chown "$(id -u):$(id -g)" .pixi
 fi
 
+# Keep extracted packages and environments on the same filesystem. The default
+# cache in /home/vscode cannot be hard-linked into the .pixi Docker volume and
+# causes a second copy of every package during installation in Codespaces.
+export PIXI_CACHE_DIR="$project_root/.pixi/pixi-cache"
+export TMPDIR="$project_root/.pixi/tmp"
+mkdir -p "$PIXI_CACHE_DIR" "$TMPDIR"
+
+echo "Storage available for Pixi packages and R builds:"
+df -h .pixi
+df -i .pixi
+
 # Fail on a stale lock; never resolve newer versions during setup.
 env -u PIXI_NO_INSTALL -u PIXI_FROZEN pixi install --locked
 
