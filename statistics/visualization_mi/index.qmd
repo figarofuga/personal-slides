@@ -190,12 +190,13 @@ base_irisplot <- dplyr::summarise(iris, Sepal_Width = mean(Sepal.Width), .by = S
   geom_col(aes(x = Species, y = Sepal_Width, fill = Species)) + 
   theme_bw()
 
-g_circle <- circleGrob(
-  x = 0.92, y = 0.52, r = 0.12,
+g_circle <- grid::roundrectGrob(
+  x = 0.85, y = 0.55, width = 0.2, height = 0.32, 
+  r = unit(0.02, "snpc"),
   gp = gpar(col = "red", fill = NA, lwd = 3)
 )
 
-g_arrow <- segmentsGrob(
+g_arrow <- grid::segmentsGrob(
   x0 = 0.8, y0 = 1.0,
   x1 = 0.7, y1 = 0.85,
   arrow = arrow(length = unit(0.15, "inches")),
