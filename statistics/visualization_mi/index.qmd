@@ -260,6 +260,17 @@ ggdraw(base_irisplot) +
 :::
 
 ::: {.column width="58%"}
+
+```{r}
+library(Rdatasets)
+library(marginaleffects)
+
+nightingale <- marginaleffects::get_dataset("Nightingale")
+
+
+```
+
+
 ![](images/slide16_image01.jpg){fig-alt="Example 元図" width="80%"}
 
 ![](images/slide16_image02.png){fig-alt="Example 図1" width="48%"}
