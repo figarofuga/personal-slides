@@ -27,8 +27,6 @@ seaborn = ">=0.13.2,<0.14"
 xgboost = ">=3.4.1,<4"
 lightgbm = ">=4.7.0,<5"
 econml = ">=0.17.0,<0.18"
-causal-learn = ">=0.1.4.7,<0.2"
-causalml = ">=0.15.4,<0.16"
 scikit-survival = ">=0.28.0,<0.29"
 
 # R runtime; every additional R package is managed by renv.
@@ -46,8 +44,6 @@ jupyter_client = ">=8.10.0,<9"
 cmdstan = ">=2.39.0,<3"
 
 quarto = ">=1.9.38,<2"
-
-doubleml = ">=0.11.4,<0.12"
 
 conda = ">=26.7.2,<27"
 pymc = ">=5.28.5,<6"
