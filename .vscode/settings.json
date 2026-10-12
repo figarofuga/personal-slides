@@ -29,6 +29,7 @@
     ],
     "python.analysis.indexing": false,
     "python.defaultInterpreterPath": "${workspaceFolder}/.pixi/envs/default/bin/python",
+    "terminal.integrated.stickyScroll.enabled": false,
     "terminal.integrated.env.linux": {
         "PIXI_NO_INSTALL": "true",
         "PIXI_FROZEN": "true"
