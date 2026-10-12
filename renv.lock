@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cloud.r-project.org"
+        "URL": "https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/latest"
       }
     ]
   },
@@ -14464,7 +14464,7 @@
       "NeedsCompilation": "yes",
       "Author": "Frank Harrell [aut, cre] (<https://orcid.org/0000-0002-8271-5493>), Ben Goodrich [ctb] (contributed Stan code), Ben Bolker [ctb] (wrote original code that is folded into the pdensityContour function), Doug Bates [ctb] (write original code for highest posterior density interval that is folded into the HPDint function)",
       "Maintainer": "Frank Harrell <fh@fharrell.com>",
-      "Repository": "https://cloud.r-project.org/src/contrib"
+      "Repository": "CRAN"
     },
     "rootSolve": {
       "Package": "rootSolve",
@@ -14722,7 +14722,7 @@
     "rstan": {
       "Package": "rstan",
       "Version": "2.32.7",
-      "Source": "Repository",
+      "Source": "URL",
       "Type": "Package",
       "Title": "R Interface to Stan",
       "Authors@R": "c(person(\"Jiqiang\", \"Guo\", email = \"guojq28@gmail.com\", role = \"aut\"), person(\"Jonah\", \"Gabry\", email = \"jsg2201@columbia.edu\", role = \"aut\"), person(\"Ben\", \"Goodrich\", email = \"benjamin.goodrich@columbia.edu\", role = c(\"cre\", \"aut\")), person(\"Andrew\", \"Johnson\", email = \"andrew.johnson@arjohnsonau.com\", role = \"aut\"), person(\"Sebastian\", \"Weber\", email = \"sdw.post@waebers.de\", role = \"aut\"), person(\"Hamada S.\", \"Badr\", role = c(\"aut\"), email = \"badr@jhu.edu\", comment = c(ORCID = \"0000-0002-9808-2344\")), person(\"Daniel\", \"Lee\", role = \"ctb\"), person(\"Krzysztof\", \"Sakrejda\", role = \"ctb\"), person(\"Modrak\", \"Martin\", role = \"ctb\"), person(\"Trustees of\", \"Columbia University\", role = \"cph\"), person(\"Oleg\", \"Sklyar\", role = \"cph\", comment = \"R/cxxfunplus.R\"), person(\"The R\", \"Core Team\", role = \"cph\", comment = \"R/pairs.R, R/dynGet.R\"), person(\"Jens\", \"Oehlschlaegel-Akiyoshi\", role = \"cph\", comment = \"R/pairs.R\"), person(\"John\", \"Maddock\", role = \"cph\", comment = \"gamma.hpp\"), person(\"Paul\", \"Bristow\", role = \"cph\", comment = \"gamma.hpp\"), person(\"Nikhar\", \"Agrawal\", role = \"cph\", comment = \"gamma.hpp\"), person(\"Christopher\", \"Kormanyos\", role = \"cph\", comment = \"gamma.hpp\"), person(\"Bronder\", \"Steve\", role = \"ctb\"))",
@@ -14775,12 +14775,14 @@
       "Config/testthat/edition": "3",
       "Author": "Jiqiang Guo [aut], Jonah Gabry [aut], Ben Goodrich [cre, aut], Andrew Johnson [aut], Sebastian Weber [aut], Hamada S. Badr [aut] (<https://orcid.org/0000-0002-9808-2344>), Daniel Lee [ctb], Krzysztof Sakrejda [ctb], Modrak Martin [ctb], Trustees of Columbia University [cph], Oleg Sklyar [cph] (R/cxxfunplus.R), The R Core Team [cph] (R/pairs.R, R/dynGet.R), Jens Oehlschlaegel-Akiyoshi [cph] (R/pairs.R), John Maddock [cph] (gamma.hpp), Paul Bristow [cph] (gamma.hpp), Nikhar Agrawal [cph] (gamma.hpp), Christopher Kormanyos [cph] (gamma.hpp), Bronder Steve [ctb]",
       "Maintainer": "Ben Goodrich <benjamin.goodrich@columbia.edu>",
-      "Repository": "CRAN"
+      "Repository": "RSPM",
+      "RemoteType": "url",
+      "RemoteUrl": "https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/2026-07-01/src/contrib/rstan_2.32.7.tar.gz"
     },
     "rstanarm": {
       "Package": "rstanarm",
       "Version": "2.32.2",
-      "Source": "Repository",
+      "Source": "URL",
       "Type": "Package",
       "Title": "Bayesian Applied Regression Modeling via Stan",
       "Date": "2025-09-29",
@@ -14846,7 +14848,9 @@
       "RoxygenNote": "7.3.3",
       "Author": "Jonah Gabry [aut], Imad Ali [ctb], Sam Brilleman [ctb], Jacqueline Buros Novik [ctb] (R/stan_jm.R), AstraZeneca [ctb] (R/stan_jm.R), Trustees of Columbia University [cph], Simon Wood [cph] (R/stan_gamm4.R), R Core Deveopment Team [cph] (R/stan_aov.R), Douglas Bates [cph] (R/pp_data.R), Martin Maechler [cph] (R/pp_data.R), Ben Bolker [cph] (R/pp_data.R), Steve Walker [cph] (R/pp_data.R), Brian Ripley [cph] (R/stan_aov.R, R/stan_polr.R), William Venables [cph] (R/stan_polr.R), Paul-Christian Burkner [cph] (R/misc.R), Ben Goodrich [cre, aut]",
       "Maintainer": "Ben Goodrich <benjamin.goodrich@columbia.edu>",
-      "Repository": "CRAN"
+      "Repository": "RSPM",
+      "RemoteType": "url",
+      "RemoteUrl": "https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/2026-07-01/src/contrib/rstanarm_2.32.2.tar.gz"
     },
     "rstantools": {
       "Package": "rstantools",

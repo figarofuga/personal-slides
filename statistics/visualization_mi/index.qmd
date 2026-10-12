@@ -232,13 +232,15 @@ ggdraw(base_irisplot) +
 :::
 
 ::: {.column width="56%"}
-![](images/slide14_image01.jpg){fig-alt="見せたいものと図の種類" width="100%"}
+![](images/basic_visualization.png){fig-alt="見せたいものと図の種類" width="100%"}
 :::
 ::::
 
 ## 人間の得意・苦手分野
 
-![](images/slide15_image01.jpg){fig-alt="人間の得意・苦手分野" width="72%"}
+![](images/human_error.png){fig-alt="Example 元図" width="80%"}
+
+[@kiranhiri2021-fw]
 
 ## Example
 
@@ -257,6 +259,7 @@ library(Rdatasets)
 library(marginaleffects)
 library(lubridate)
 library(dplyr)
+library(ggplot2)
 
 nightingale <- marginaleffects::get_dataset("Nightingale") |> 
   dplyr::mutate(Date = lubridate::ymd(Date))
@@ -272,10 +275,8 @@ tidyr::pivot_longer(
 ```
 
 
-![](images/slide16_image01.jpg){fig-alt="Example 元図" width="80%"}
 
-![](images/slide16_image02.png){fig-alt="Example 図1" width="48%"}
-![](images/slide16_image03.png){fig-alt="Example 図2" width="48%"}
+
 :::
 ::::
 

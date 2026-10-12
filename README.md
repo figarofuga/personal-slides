@@ -13,6 +13,8 @@
 `pixi.toml`・`pixi.lock`・`renv.lock`・`.Rprofile`・`renv/activate.R`・
 `renv/settings.json`・`scripts/`・`.devcontainer/`を同じGitリビジョンで保存します。
 インストール済みの`.pixi/`と`renv/library/`はGitに含めません。
+P3M版のRライブラリは`.pixi/renv-library-p3m/`に保存します。
+以前のCRANソース版の`renv/library/`と`.pixi/renv-cache/`はそのまま残ります。
 
 ## 新しいPC・GitHub Codespaces
 
@@ -33,20 +35,23 @@ Codespacesでは、環境定義をcommit・pushした後、GitHubの
 bash .devcontainer/setup.sh
 ```
 
-このコマンドでRパッケージをソースから復元し、JupyterのRカーネルを登録して、
+このコマンドでRパッケージをP3Mのportableバイナリを優先して復元し、JupyterのRカーネルを登録して、
 Pythonパッケージの読み込みとQuartoのバージョンを確認します。
 Rを使う分析・renderは復元完了後に実行してください。
 Stanのコンパイル・サンプリングを含む詳細な検証は、復元後に
 `pixi run --as-is check`で実行します。復元から詳細な検証までまとめて実行する場合は
 `bash .devcontainer/setup.sh --check`を使います。
 
-初回は多数のRパッケージをコンパイルするため、環境によって数時間かかります。
+通常のCRANパッケージはコンパイル済みのバイナリを使います。
+ただし、バイナリが提供されない`rmsb`とGitHub由来のパッケージはソースから復元するため、
+初回は引き続き時間がかかります。特に`rmsb`のStanモデルのコンパイルは重い処理です。
+起動用の`renv`もbootstrap時にはソース版を使いますが、C++モデルのコンパイルはありません。
 重いR復元と詳細な検証をCodespacesの自動初期化から分離しているため、
 その進捗や失敗を開いたターミナルで確認できます。
 復元全体が途中で打ち切られないよう、renvのインストール制限時間を24時間に設定しています。
 Stan関連のコンパイル時のメモリ使用量を抑えるため、パッケージとC++ファイルはそれぞれ1つずつビルドします。
 CPU 4コア、メモリ16 GB、空き容量64 GBを目安にしてください。
-`.pixi`の永続ボリュームにrenvのビルド済みキャッシュも保存し、再構築時に再利用します。
+`.pixi`の永続ボリュームにRライブラリと`.pixi/renv-cache-p3m/`のキャッシュを保存し、再構築時に再利用します。
 新しいPCや新しいCodespaceにはそのキャッシュがない前提です。
 復元にはネットワークと、ロックに記録された配布元へのアクセスが必要です。
 各実行の出力と処理段階は`.devcontainer/setup.log`に追記されます。
@@ -230,7 +235,9 @@ renv::restore()
 ここではRから直接`renv::restore()`を実行します。
 
 例えば4.5系から4.6系へ変更すると、renvは新しいR用のライブラリとキャッシュを使います。
-この構成ではソースから必要なパッケージをビルドするため、復元に数時間かかることがあります。
+P3Mの対象Rバージョン用バイナリを利用します。バイナリがないパッケージはソースからビルドするため、
+復元に時間がかかることがあります。Rのメジャー・マイナーバージョンを変える場合は、
+P3Mでのバイナリ提供とStan関連の互換性も改めて検証してください。
 4.5.3から別の4.5.xへ変更する場合は同じライブラリを使うので、
 新しい環境で作り直すため、続けて次を実行してください。
 
@@ -296,8 +303,21 @@ R本体の更新は上の「R本体のバージョンをPixiで更新する」�
 ## パッケージの取得元
 
 通常のCRANパッケージは`renv.lock`に記録したバージョンから復元します。
+取得先はPosit Public Package Manager（P3M）の`manylinux_2_28` portableバイナリです。
+R本体・Python・コンパイラ・外部ライブラリは従来どおりPixiのconda-forgeで管理します。
+`pkgType = "both"`でバイナリを優先し、提供されない場合はソース版にフォールバックします。
+従来のCRANソース版の環境と混ぜないよう、P3M用のライブラリ・キャッシュ・
+ダウンロード先を`.pixi/`内の専用ディレクトリに分けています。
+
+`rstan`と`rstanarm`のみ、`renv.lock`の`RemoteUrl`で2026-07-01のスナップショットの配布URLに固定します。
+最新のP3Mバイナリでは、ロック中の`RcppParallel 5.1.11-2`との間にTBBのシンボル不整合があり、
+`rstan`を読み込めません。この2個のパッケージは、同じバージョンの互換性のあるバイナリを使います。
+バージョンを更新するときは、この取得元とStanの動作確認も見直してください。
+
 GitHub由来の`cmdstanr`と`sess`はcommitを固定しています。
-rmsbも通常のCRAN版を使い、独自ソースやパッチは保存しません。
+`rmsb`も通常のCRAN版を使い、独自ソースやパッチは保存しません。
+現在の固定版にはP3Mのバイナリがなく、ソースからビルドします。
+[P3M移行の検証結果](.devcontainer/p3m-validation.md)に、互換性の確認内容と実行手順を記録しています。
 復元スクリプトは先に`rstantools`を復元し、rmsbのインストール時に
 現在のStan環境に合うC++コードを自動生成できるようにしています。
 
@@ -315,6 +335,6 @@ git commit -m "Update analysis environment"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "Update visualization slides"
+git commit -m "Update R package installation methods"
 git push
 ```

@@ -16,7 +16,8 @@ execute:
 ---
 
 ```{r}
-stopifnot(grepl("renv/library", find.package("ggplot2"), fixed = TRUE))
+stopifnot(normalizePath(find.package("ggplot2")) ==
+          normalizePath(file.path(renv::paths$library(), "ggplot2")))
 library(ggplot2)
 ggplot(mtcars, aes(wt, mpg)) + geom_point()
 ```
