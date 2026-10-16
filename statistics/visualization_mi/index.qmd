@@ -124,11 +124,8 @@ Edward Tufte
 :::
 
 ::: {.column width="58%"}
-> 優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。
-
-::: {.reference}
-Tufte, 1983, p. 51
-:::
+> すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. ...(中略)... よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. 
+[@kiranhiri2021-fw]
 :::
 ::::
 
@@ -150,9 +147,8 @@ Tufte, 1983, p. 51
 :::
 
 ::: {.column width="42%"}
-![](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
+![Edward Tufte](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
 
-Edward Tufte
 :::
 ::::
 
@@ -234,6 +230,8 @@ ggdraw(base_irisplot) +
 ::: {.column width="56%"}
 ![](images/basic_visualization.png){fig-alt="見せたいものと図の種類" width="100%"}
 :::
+[@waskom_seaborn_function_overview]
+
 ::::
 
 ## 人間の得意・苦手分野
@@ -244,15 +242,20 @@ ggdraw(base_irisplot) +
 
 ## Example
 
-:::: columns
-::: {.column width="42%"}
 - 青が感染症
 - 赤が戦場での負傷
 - 黒がその他
 - どちらが分かりやすいですか？
+
+
+:::: columns
+::: {.column width="50%"}
+
+![ナイチンゲールの元図](images/nightingale_fig.png)
+
 :::
 
-::: {.column width="58%"}
+::: {.column width="50%"}
 
 ```{r}
 library(Rdatasets)
@@ -274,15 +277,8 @@ tidyr::pivot_longer(
 
 ```
 
-
-
-
 :::
 ::::
-
-## 空白スライド
-
-<!-- TODO: 元スライド17は空白。必要なら削除する。 -->
 
 ## 今日の内容
 
@@ -295,66 +291,151 @@ tidyr::pivot_longer(
 
 ## Nへの意識
 
-:::: columns
-::: {.column width="48%"}
 - 連続値の平均や中央値を比較する時には分布も非常に重要
 - 分布を見る時にはバイオリンプロットもよい
 - サンプルサイズの大きさで、使う図表を分けるべき
 - 一つの目安として `n < 30` ではドットチャートを併用する
+
+:::: columns
+::: {.column width="50%"}
+
+```{r}
+library(ggpubr)
+
+ggpubr::ggviolin(
+  data = ToothGrowth, 
+  x = "dose", 
+  y = "len"
+  )
+
+```
+
 :::
 
-::: {.column width="52%"}
-![](images/slide19_image01.png){fig-alt="バイオリンプロット" width="88%"}
+::: {.column width="50%"}
 
-![](images/slide19_image02.png){fig-alt="ドットチャート" width="88%"}
+```{r}
+library(ggpubr)
+
+ggpubr::ggdotplot(
+  data = ToothGrowth, 
+  x = "dose", 
+  y = "len", 
+  fill = "supp"
+  )
+
+```
+
 :::
 ::::
 
 ## What’s This？
 
-:::: columns
-::: {.column width="44%"}
 - STEMI患者のPCI後のCKの値の平均
 - STEMI患者のPCI後のCKの値の中央値
 - ???
-:::
 
-::: {.column width="56%"}
-![](images/slide20_image01.png){fig-alt="CK平均の図" width="48%"}
-![](images/slide20_image02.png){fig-alt="CK中央値の図" width="48%"}
-:::
-::::
+
+```{r}
+set.seed(20261016)
+
+male <- c(
+  800, 850, 1250, 1300, 1350,
+  1650, 1700, 1750, 2100, 2750, 2800, 3050, 3100, 3150, 3200,
+  3350, 3400, 4150, 5050, 5500, 5550, 5600, 6200, 6250, 6300,6500
+)
+
+female <- c(
+  5, 100, 30, 100, 220, 350, 380, 400, 450, 600, 650, 700, 1000, 12000
+)
+
+# 元の形を保ちながら、少しランダムな変動を加える
+male <- round(male * exp(rnorm(length(male), sd = 0.025)))
+female <- round(female * exp(rnorm(length(female), sd = 0.025)))
+
+dat <- data.frame(
+  sex = factor(
+    rep(c("Male", "Female"), c(length(male), length(female))),
+    levels = c("Male", "Female")
+  ),
+  ck_peak = c(male, female)
+)
+
+
+library(ggpubr)
+library(dplyr)
+library(patchwork)
+
+
+mean_bar_simple <- dplyr::summarise(
+  dat, 
+  ck_peak = mean(ck_peak), 
+  .by = sex
+) |> 
+  ggpubr::ggbarplot(
+    x = "sex", 
+    y = "ck_peak"
+)
+
+
+
+median_bar_simple <- dplyr::summarise(
+  dat, 
+  ck_peak = median(ck_peak), 
+  .by = sex
+) |> 
+  ggpubr::ggbarplot(
+    x = "sex", 
+    y = "ck_peak"
+)
+
+mean_bar_simple + median_bar_simple
+
+```
+
 
 ## What’s This？
 
-:::: columns
-::: {.column width="44%"}
-- STEMI患者のPCI後のCKの値の平均
-- STEMI患者のPCI後のCKの値の中央値
-- ???
-- ???
-:::
+```{r}
+library(ggpubr)
+library(patchwork)
 
-::: {.column width="56%"}
-![](images/slide21_image01.png){fig-alt="CK平均の図2" width="48%"}
-![](images/slide21_image02.png){fig-alt="CK中央値の図2" width="48%"}
-:::
-::::
+mean_bar <- ggbarplot(dat,
+  x = "sex", y = "ck_peak",
+  add = "mean_se"
+)
+
+median_bar <- ggbarplot(dat,
+  x = "sex", y = "ck_peak",
+  add = "median_q1q3"
+)
+
+mean_bar + median_bar
+
+```
+
 
 ## That’s It!!
 
-:::: columns
-::: {.column width="44%"}
-- STEMI患者のPCI後のCKの値の平均
-- STEMI患者のPCI後のCKの値の中央値
-- !!!!
-:::
 
-::: {.column width="56%"}
-![](images/slide22_image01.png){fig-alt="CK平均の図3" width="48%"}
-![](images/slide22_image02.png){fig-alt="CK中央値の図3" width="48%"}
-:::
-::::
+```{r}
+library(ggpubr)
+library(patchwork)
+
+violin <- ggviolin(dat,
+  x = "sex", y = "ck_peak",
+  add = "mean_se"
+)
+
+dot <- ggdotplot(dat,
+  x = "sex", y = "ck_peak",
+  add = "mean_se"
+)
+
+violin + dot
+
+```
+
 
 ## Nへの意識
 

@@ -58,6 +58,7 @@ bibliography: references.bib
 - 現代の日本は高齢社会であり心不全患者は著名に増えている
   - 心不全Pandemic[@Shimokawa2015-zw]
 - 日本のDPCデータでは2016-2024年の新規心不全患者の平均年齢81±12歳[@Sato2026-wu]
+- 2025年度に総合内科で入院した心不全患者の年齢は85.7±9.6歳(未公開データ)
 
 ## 心不全パンデミック
 
@@ -73,35 +74,41 @@ bibliography: references.bib
 
 ## Phaseを意識した心不全管理
 
-## HFrEF-1 \~GBMT
+- 超急性期: 分秒での判断
+  - NPPV、DOB、緊急カテなどの判断
+- 時間レベルの判断
+  - 利尿薬投与、Vitalの安定
+- 数日での判断
+  - Volume status、GBMT導入開始
+<!-- Todo: Shiraishi et alの論文などで確認 -->
 
+- 綜合内科では主に時間レベル～数日レベルの判断が必要
 
-    Matsumoto S, McMurray JJV, Nasu T, et al. Relevant adverse events and drug discontinuation of Sacubitril/valsartan in a real-world Japanese cohort: REVIEW-HF registry. J Cardiol. Published online November 22, 2023. doi:10.1016/j.jjcc.2023.11.005
-  
+## 高齢者における急性心不全管理
 
+- 原因検索
+- 何が多い？
+- 調べる
 
-## HFrEF-2 \~Beyond GBMT
+## 高齢心不全におけるNPPV、Inotropeなど
 
-## HFpEF-1 \~ GBMT
+- 高齢者における治療の記述統計を調べる(Circ QOで良いか？)
+- おそらくは行われないという文脈になる
 
-## Mechanical intervention
+## 高齢心不全の利尿薬
 
-# 高齢者における心不全の各フェーズの動き方
+- 高齢心不全患者への利尿薬反応性のDataがあるか調べる
 
-## 超急性期～NPPV+ニトロ, NSTEACS, DC
+## 高齢心不全の利尿薬のRisk
 
-NPPVの代わりにHFNCは？
-
-## 急性期心不全
-
-Nohria stevenson 利尿薬はしっかり使うべき？ Baはどうする？
-
-## 慢性心不全の管理
+- Crの変動が多いことを調べる
+- 予後との関連は薄い
 
 ## 高齢者心不全のGBMTの是非？
 
 - GBMTはAKI, 高K血症, 徐脈, 低血圧などの有害事象がある
 - 実際にFrailな高齢者においては薬のAdverse eventsは多い印象がある
+
 
 ## GBMTの高齢者のEvidence
 
@@ -132,6 +139,21 @@ Nohria stevenson 利尿薬はしっかり使うべき？ Baはどうする？
 | SGLT2阻害薬（SGLT2i） | Dapagliflozin<br>Empagliflozin | DAPA-HF<br>DELIVER<br>EMPEROR-Reduced<br>EMPEROR-Preserved | 年齢別の安全性は報告されていない |
 
 [@de-Boer2026-jh]
+
+## HFrEF-1 \~GBMT
+
+
+    Matsumoto S, McMurray JJV, Nasu T, et al. Relevant adverse events and drug discontinuation of Sacubitril/valsartan in a real-world Japanese cohort: REVIEW-HF registry. J Cardiol. Published online November 22, 2023. doi:10.1016/j.jjcc.2023.11.005
+  
+## HFrEF-2 \~Beyond GBMT
+
+## HFpEF-1 \~ GBMT
+
+
+
+## 慢性心不全の管理
+
+
 
 ## 高齢者HFrEFの管理
 

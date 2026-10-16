@@ -674,7 +674,14 @@ $$
 
 ## Causal forestの原理
 
-![Honestyの原理](images/honesty.png)
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img src="images/honesty.png" class="nostretch" alt="Honestyの原理" style="width: 100%; height: auto; max-height: none; max-width: 100%;"></p>
+<figcaption>Honestyの原理</figcaption>
+</figure>
+</div>
+```
 
 - HTE専用の機械学習
 - 基本はRandom forestだが、「治療効果の差が最も出やすいよう」に決定木を分割(して局所で重みづけした回帰)

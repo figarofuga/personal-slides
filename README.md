@@ -335,6 +335,6 @@ git commit -m "Update analysis environment"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "Update R package installation methods"
+git commit -m "Update visualization slides"
 git push
 ```
