@@ -18,9 +18,12 @@ P3M版のRライブラリは`.pixi/renv-library-p3m/`に保存します。
 
 ## 新しいPC・GitHub Codespaces
 
-ローカルではDocker、VS Code、Dev Containers拡張機能、Gitを用意し、
-このリポジトリをcloneして **Dev Containers: Reopen in Container** を実行します。
-WindowsではDocker DesktopのWSL統合を有効にし、WSLのLinuxファイルシステム内にcloneしてください。
+WindowsではWSL Container（`wslc.exe`）、VS Code、WSL・Dev Containers拡張機能、Gitを使います。
+VS Codeのユーザー設定で`dev.containers.dockerPath`を`wslc.exe`にし、
+WSLのLinuxファイルシステム内にcloneして **Dev Containers: Reopen in Container** を実行します。
+Docker Desktopは不要です。新しいPCでの準備と検証範囲は
+[wslcの手順](.devcontainer/README.md)を参照してください。
+Linux/macOSではDocker互換の実行基盤を用意して同じDev Container定義を使います。
 ホストにR・Python・Quartoを個別に入れる必要はありません。
 
 Codespacesでは、環境定義をcommit・pushした後、GitHubの

@@ -3098,7 +3098,7 @@
     "href": "statistics/visualization_mi/index.html#よいfigureの条件",
     "title": "可視化事始め",
     "section": "よいFigureの条件",
-    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nTufte, 1983, p. 51"
+    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\nすばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. …(中略)… よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. (キーラン・ヒーリー 2021年)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#非常に良いfigureの見本",
@@ -3112,7 +3112,7 @@
     "href": "statistics/visualization_mi/index.html#よいfigureの条件-1",
     "title": "可視化事始め",
     "section": "よいFigureの条件",
-    "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nデータ・インク比を最大化する\n\n\n\nEdward Tufte"
+    "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nデータ・インク比を最大化する\n\n\n\n\n\nEdward Tufte"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#今日の内容-2",
@@ -3126,7 +3126,7 @@
     "href": "statistics/visualization_mi/index.html#インクデータ比の法則",
     "title": "可視化事始め",
     "section": "インク・データ比の法則",
-    "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」\n\n\n [@Weissgerber2019-ho]"
+    "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」\n\n\n (Weissgerber ほか 2019年)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#今日の内容-3",
@@ -3140,21 +3140,21 @@
     "href": "statistics/visualization_mi/index.html#見せたいものって",
     "title": "可視化事始め",
     "section": "見せたいものって？",
-    "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ"
+    "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ\n\n\n\n\n(Waskom, 日付なし)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#人間の得意苦手分野",
     "href": "statistics/visualization_mi/index.html#人間の得意苦手分野",
     "title": "可視化事始め",
     "section": "人間の得意・苦手分野",
-    "text": "人間の得意・苦手分野\n\n[@kiranhiri2021-fw]"
+    "text": "人間の得意・苦手分野\n\n(キーラン・ヒーリー 2021年)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#example",
     "href": "statistics/visualization_mi/index.html#example",
     "title": "可視化事始め",
     "section": "Example",
-    "text": "Example\n\n\n\n青が感染症\n赤が戦場での負傷\n黒がその他\nどちらが分かりやすいですか？"
+    "text": "Example\n\n青が感染症\n赤が戦場での負傷\n黒がその他\nどちらが分かりやすいですか？\n\n\n\n\n\n\nナイチンゲールの元図"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#空白スライド",
@@ -3175,28 +3175,28 @@
     "href": "statistics/visualization_mi/index.html#nへの意識",
     "title": "可視化事始め",
     "section": "Nへの意識",
-    "text": "Nへの意識\n\n\n\n連続値の平均や中央値を比較する時には分布も非常に重要\n分布を見る時にはバイオリンプロットもよい\nサンプルサイズの大きさで、使う図表を分けるべき\n一つの目安として n &lt; 30 ではドットチャートを併用する"
+    "text": "Nへの意識\n\n連続値の平均や中央値を比較する時には分布も非常に重要\n分布を見る時にはバイオリンプロットもよい\nサンプルサイズの大きさで、使う図表を分けるべき\n一つの目安として n &lt; 30 ではドットチャートを併用する"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#whats-this",
     "href": "statistics/visualization_mi/index.html#whats-this",
     "title": "可視化事始め",
     "section": "What’s This？",
-    "text": "What’s This？\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???"
+    "text": "What’s This？\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#whats-this-1",
     "href": "statistics/visualization_mi/index.html#whats-this-1",
     "title": "可視化事始め",
     "section": "What’s This？",
-    "text": "What’s This？\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???\n???"
+    "text": "What’s This？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#thats-it",
     "href": "statistics/visualization_mi/index.html#thats-it",
     "title": "可視化事始め",
     "section": "That’s It!!",
-    "text": "That’s It!!\n\n\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n!!!!"
+    "text": "That’s It!!"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#nへの意識-1",
@@ -3308,7 +3308,7 @@
     "href": "statistics/visualization_mi/index.html#補足画像",
     "title": "可視化事始め",
     "section": "補足画像",
-    "text": "補足画像"
+    "text": "補足画像\n\n\n\n\nWe used R v. 4.5.3 (R Core Team 2026年) and the following R packages: cowplot v. 1.2.0 (Wilke 2025年), ggpubr v. 1.0.0 (Kassambara 2026年), here v. 1.0.2 (Müller 2025年), marginaleffects v. 1.0.0 (Arel-Bundock ほか 2024年), patchwork v. 1.3.2 (Pedersen 2025年), Rdatasets v. 0.0.1 (Arel-Bundock 2025年), rmarkdown v. 2.32 (Xie ほか 2018年, 2020年; Allaire ほか 2026年), tidyverse v. 2.0.0 (Wickham ほか 2019年).\n\n\n\n\n\n\nキーラン・ヒーリー. 2021年. データ分析のためのデータ可視化入門. 実践Data Scienceシリーズ. 講談社.\n\n\nAllaire, JJ, Yihui Xie, Christophe Dervieux, ほか. 2026年. rmarkdown: Dynamic Documents for R. https://github.com/rstudio/rmarkdown.\n\n\nArel-Bundock, Vincent. 2025年. Rdatasets: Access Datasets from the Rdatasets Archive. https://vincentarelbundock.github.io/Rdatasetspkg/.\n\n\nArel-Bundock, Vincent, Noah Greifer, と Andrew Heiss. 2024年. 「How to Interpret Statistical Models Using marginaleffects for R and Python」. Journal of Statistical Software 111 (9): 1–32. https://doi.org/10.18637/jss.v111.i09.\n\n\nKassambara, Alboukadel. 2026年. ggpubr: 「ggplot2」 Based Publication Ready Plots. https://CRAN.R-project.org/package=ggpubr.\n\n\nMüller, Kirill. 2025年. here: A Simpler Way to Find Your Files. https://here.r-lib.org/.\n\n\nPedersen, Thomas Lin. 2025年. patchwork: The Composer of Plots. https://patchwork.data-imaginist.com.\n\n\nR Core Team. 2026年. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing. https://www.R-project.org/.\n\n\nWaskom, Michael. 日付なし. Overview of seaborn Plotting Functions. Https://seaborn.pydata.org/tutorial/function_overview.html.\n\n\nWeissgerber, Tracey L, Stacey J Winham, Ethan P Heinzen, ほか. 2019年. 「Reveal, don’t conceal: Transforming data visualization to improve transparency: Transforming data visualization to improve transparency」. Circulation 140 (18): 1506–18. https://doi.org/10.1161/CIRCULATIONAHA.118.037777.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, ほか. 2019年. 「Welcome to the tidyverse」. Journal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nWilke, Claus O. 2025年. cowplot: Streamlined Plot Theme and Plot Annotations for 「ggplot2」. https://wilkelab.org/cowplot/.\n\n\nXie, Yihui, J. J. Allaire, と Garrett Grolemund. 2018年. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-book/.\n\n\nXie, Yihui, Christophe Dervieux, と Emily Riederer. 2020年. R Markdown Cookbook. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-cookbook/."
   },
   {
     "objectID": "medicine/antithrombotic_etc_mi/index.html#本スライドの目的",

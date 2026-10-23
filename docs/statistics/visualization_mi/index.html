@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
-  <meta name="author" content="新美 望">
+  <meta name="author" content="Nozomi Niimi">
   <meta name="dcterms.date" content="2021-03-05">
   <title>My personal slides – 可視化事始め</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,8 +32,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -49,6 +68,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -127,6 +147,7 @@
   </style>
 </head>
 <body class="quarto-light">
+<script src="mathjax-config.js"></script>
   <div class="reveal">
     <div class="slides">
 
@@ -137,9 +158,15 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-新美 望 
+Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
+<div class="quarto-title-author-email">
+<a href="mailto:figarofuga@gmail.com">figarofuga@gmail.com</a>
 </div>
+        <p class="quarto-title-affiliation">
+            東京医療センター総合内科
+          </p>
+    </div>
 </div>
 
   <p class="date">2021-03-05</p>
@@ -198,14 +225,14 @@ blockquote {
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/anscombes-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/anscombes-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/anscombes-2.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/anscombes-2.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -259,11 +286,8 @@ blockquote {
 <p>Edward Tufte</p>
 </div><div class="column" style="width:58%;">
 <blockquote>
-<p>優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。</p>
+<p>すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. …(中略)… よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. <span class="citation" data-cites="kiranhiri2021-fw">(<a href="#/補足画像" role="doc-biblioref" onclick="">キーラン・ヒーリー 2021年</a>)</span></p>
 </blockquote>
-<div class="reference">
-<p>Tufte, 1983, p.&nbsp;51</p>
-</div>
 </div></div>
 </section>
 <section id="非常に良いfigureの見本" class="slide level2">
@@ -284,8 +308,12 @@ blockquote {
 <li>データ・インク比を最大化する</li>
 </ul>
 </div><div class="column" style="width:42%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
 <p><img data-src="images/edward_tufte.png" style="width:60.0%" alt="Edward Tufte"></p>
-<p>Edward Tufte</p>
+<figcaption>Edward Tufte</figcaption>
+</figure>
+</div>
 </div></div>
 </section>
 <section id="今日の内容-2" class="slide level2">
@@ -308,12 +336,12 @@ blockquote {
 <li>簡単にいうと「シンプル イズ ベスト」</li>
 </ul>
 </div><div class="column" style="width:48%;">
-<p><img data-src="images/minimalist_figure.png" style="width:66.0%" alt="インク・データ比の例1"> <span class="citation" data-cites="Weissgerber2019-ho">[@Weissgerber2019-ho]</span></p>
+<p><img data-src="images/minimalist_figure.png" style="width:66.0%" alt="インク・データ比の例1"> <span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/補足画像" role="doc-biblioref" onclick="">Weissgerber ほか 2019年</a>)</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/bad-ink-data-ratio-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/bad-ink-data-ratio-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -343,38 +371,41 @@ blockquote {
 </ul>
 </div><div class="column" style="width:56%;">
 <p><img data-src="images/basic_visualization.png" style="width:100.0%" alt="見せたいものと図の種類"></p>
-</div></div>
+</div><p><span class="citation" data-cites="waskom_seaborn_function_overview">(<a href="#/補足画像" role="doc-biblioref" onclick="">Waskom, 日付なし</a>)</span></p>
+</div>
 </section>
 <section id="人間の得意苦手分野" class="slide level2">
 <h2>人間の得意・苦手分野</h2>
 
-<img data-src="images/human_error.png" style="width:80.0%" alt="Example 元図" class="r-stretch"><p><span class="citation" data-cites="kiranhiri2021-fw">[@kiranhiri2021-fw]</span></p>
+<img data-src="images/human_error.png" style="width:80.0%" alt="Example 元図" class="r-stretch"><p><span class="citation" data-cites="kiranhiri2021-fw">(<a href="#/補足画像" role="doc-biblioref" onclick="">キーラン・ヒーリー 2021年</a>)</span></p>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:42%;">
 <ul>
 <li>青が感染症</li>
 <li>赤が戦場での負傷</li>
 <li>黒がその他</li>
 <li>どちらが分かりやすいですか？</li>
 </ul>
-</div><div class="column" style="width:58%;">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/nightingale_fig.png"></p>
+<figcaption>ナイチンゲールの元図</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
-</section>
-<section id="空白スライド" class="slide level2">
-<h2>空白スライド</h2>
-<!-- TODO: 元スライド17は空白。必要なら削除する。 -->
 </section>
 <section id="今日の内容-3" class="slide level2">
 <h2>今日の内容</h2>
@@ -389,59 +420,52 @@ blockquote {
 </section>
 <section id="nへの意識" class="slide level2">
 <h2>Nへの意識</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
 <ul>
 <li>連続値の平均や中央値を比較する時には分布も非常に重要</li>
 <li>分布を見る時にはバイオリンプロットもよい</li>
 <li>サンプルサイズの大きさで、使う図表を分けるべき</li>
 <li>一つの目安として <code>n &lt; 30</code> ではドットチャートを併用する</li>
 </ul>
-</div><div class="column" style="width:52%;">
-<p><img data-src="images/slide19_image01.png" style="width:88.0%" alt="バイオリンプロット"></p>
-<p><img data-src="images/slide19_image02.png" style="width:88.0%" alt="ドットチャート"></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="whats-this" class="slide level2">
 <h2>What’s This？</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
 <ul>
 <li>STEMI患者のPCI後のCKの値の平均</li>
 <li>STEMI患者のPCI後のCKの値の中央値</li>
 <li>???</li>
 </ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide20_image01.png" style="width:48.0%" alt="CK平均の図"> <img data-src="images/slide20_image02.png" style="width:48.0%" alt="CK中央値の図"></p>
-</div></div>
-</section>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960" class="r-stretch"></section>
 <section id="whats-this-1" class="slide level2">
 <h2>What’s This？</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<ul>
-<li>STEMI患者のPCI後のCKの値の平均</li>
-<li>STEMI患者のPCI後のCKの値の中央値</li>
-<li>???</li>
-<li>???</li>
-</ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide21_image01.png" style="width:48.0%" alt="CK平均の図2"> <img data-src="images/slide21_image02.png" style="width:48.0%" alt="CK中央値の図2"></p>
-</div></div>
-</section>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" width="960" class="r-stretch"></section>
 <section id="thats-it" class="slide level2">
 <h2>That’s It!!</h2>
-<div class="columns">
-<div class="column" style="width:44%;">
-<ul>
-<li>STEMI患者のPCI後のCKの値の平均</li>
-<li>STEMI患者のPCI後のCKの値の中央値</li>
-<li>!!!!</li>
-</ul>
-</div><div class="column" style="width:56%;">
-<p><img data-src="images/slide22_image01.png" style="width:48.0%" alt="CK平均の図3"> <img data-src="images/slide22_image02.png" style="width:48.0%" alt="CK中央値の図3"></p>
-</div></div>
-</section>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.svg" width="960" class="r-stretch"></section>
 <section id="nへの意識-1" class="slide level2">
 <h2>Nへの意識</h2>
 <div class="columns">
@@ -452,9 +476,16 @@ blockquote {
 <li>一方で、Nが小さいときにはその意味も変わる</li>
 <li>Nが少ないときはそのデータも入れた方が良い</li>
 </ul>
-</div><div class="column" style="width:52%;">
-<p><img data-src="images/slide23_image01.png" style="width:78.0%" alt="Nへの意識"></p>
-</div></div>
+</div><div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="nへの意識と見やすさの両立" class="slide level2">
 <h2>Nへの意識と見やすさの両立</h2>
@@ -609,17 +640,66 @@ blockquote {
 <section id="ご静聴ありがとうございました" class="slide level2">
 <h2>ご静聴ありがとうございました</h2>
 </section>
-<section id="補足画像" class="slide level2">
+<section id="補足画像" class="slide level2 smaller scrollable">
 <h2>補足画像</h2>
 <!-- TODO: 元スライド38は画像のみ。必要ならReferenceまたはAppendixへ移動する。 -->
 
+<img data-src="images/slide38_image01.png" style="width:76.0%" alt="補足画像" class="r-stretch"><div class="cell">
+<div class="cell-output-display">
+<p>We used R v. 4.5.3 <span class="citation" data-cites="base">(<a href="#/補足画像" role="doc-biblioref" onclick="">R Core Team 2026年</a>)</span> and the following R packages: cowplot v. 1.2.0 <span class="citation" data-cites="cowplot">(<a href="#/補足画像" role="doc-biblioref" onclick="">Wilke 2025年</a>)</span>, ggpubr v. 1.0.0 <span class="citation" data-cites="ggpubr">(<a href="#/補足画像" role="doc-biblioref" onclick="">Kassambara 2026年</a>)</span>, here v. 1.0.2 <span class="citation" data-cites="here">(<a href="#/補足画像" role="doc-biblioref" onclick="">Müller 2025年</a>)</span>, marginaleffects v. 1.0.0 <span class="citation" data-cites="marginaleffects">(<a href="#/補足画像" role="doc-biblioref" onclick="">Arel-Bundock ほか 2024年</a>)</span>, patchwork v. 1.3.2 <span class="citation" data-cites="patchwork">(<a href="#/補足画像" role="doc-biblioref" onclick="">Pedersen 2025年</a>)</span>, Rdatasets v. 0.0.1 <span class="citation" data-cites="Rdatasets">(<a href="#/補足画像" role="doc-biblioref" onclick="">Arel-Bundock 2025年</a>)</span>, rmarkdown v. 2.32 <span class="citation" data-cites="rmarkdown2018 rmarkdown2020 rmarkdown2026">(<a href="#/補足画像" role="doc-biblioref" onclick="">Xie ほか 2018年</a>, <a href="#/補足画像" role="doc-biblioref" onclick="">2020年</a>; <a href="#/補足画像" role="doc-biblioref" onclick="">Allaire ほか 2026年</a>)</span>, tidyverse v. 2.0.0 <span class="citation" data-cites="tidyverse">(<a href="#/補足画像" role="doc-biblioref" onclick="">Wickham ほか 2019年</a>)</span>.</p>
+</div>
+</div>
 
 
-<img data-src="images/slide38_image01.png" style="width:76.0%" alt="補足画像" class="r-stretch"></section>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-kiranhiri2021-fw" class="csl-entry" role="listitem">
+キーラン・ヒーリー. 2021年. <em>データ分析のためのデータ可視化入門</em>. 実践Data Scienceシリーズ. 講談社.
+</div>
+<div id="ref-rmarkdown2026" class="csl-entry" role="listitem">
+Allaire, JJ, Yihui Xie, Christophe Dervieux, ほか. 2026年. <em><span>rmarkdown</span>: Dynamic Documents for R</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
+</div>
+<div id="ref-Rdatasets" class="csl-entry" role="listitem">
+Arel-Bundock, Vincent. 2025年. <em><span>Rdatasets</span>: Access Datasets from the Rdatasets Archive</em>. <a href="https://vincentarelbundock.github.io/Rdatasetspkg/">https://vincentarelbundock.github.io/Rdatasetspkg/</a>.
+</div>
+<div id="ref-marginaleffects" class="csl-entry" role="listitem">
+Arel-Bundock, Vincent, Noah Greifer, と Andrew Heiss. 2024年. <span>「How to Interpret Statistical Models Using <span>marginaleffects</span> for <span>R</span> and <span>Python</span>」</span>. <em>Journal of Statistical Software</em> 111 (9): 1–32. <a href="https://doi.org/10.18637/jss.v111.i09">https://doi.org/10.18637/jss.v111.i09</a>.
+</div>
+<div id="ref-ggpubr" class="csl-entry" role="listitem">
+Kassambara, Alboukadel. 2026年. <em><span>ggpubr</span>: <span>「<span>ggplot2</span>」</span> Based Publication Ready Plots</em>. <a href="https://CRAN.R-project.org/package=ggpubr">https://CRAN.R-project.org/package=ggpubr</a>.
+</div>
+<div id="ref-here" class="csl-entry" role="listitem">
+Müller, Kirill. 2025年. <em><span>here</span>: A Simpler Way to Find Your Files</em>. <a href="https://here.r-lib.org/">https://here.r-lib.org/</a>.
+</div>
+<div id="ref-patchwork" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin. 2025年. <em><span>patchwork</span>: The Composer of Plots</em>. <a href="https://patchwork.data-imaginist.com">https://patchwork.data-imaginist.com</a>.
+</div>
+<div id="ref-base" class="csl-entry" role="listitem">
+R Core Team. 2026年. <em><span>R</span>: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-waskom_seaborn_function_overview" class="csl-entry" role="listitem">
+Waskom, Michael. 日付なし. <em>Overview of <span>seaborn</span> Plotting Functions</em>. <a href="https://seaborn.pydata.org/tutorial/function_overview.html" class="uri">Https://seaborn.pydata.org/tutorial/function_overview.html</a>.
+</div>
+<div id="ref-Weissgerber2019-ho" class="csl-entry" role="listitem">
+Weissgerber, Tracey L, Stacey J Winham, Ethan P Heinzen, ほか. 2019年. <span>「Reveal, don’t conceal: Transforming data visualization to improve transparency: Transforming data visualization to improve transparency」</span>. <em>Circulation</em> 140 (18): 1506–18. <a href="https://doi.org/10.1161/CIRCULATIONAHA.118.037777">https://doi.org/10.1161/CIRCULATIONAHA.118.037777</a>.
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, ほか. 2019年. <span>「Welcome to the <span>tidyverse</span>」</span>. <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div id="ref-cowplot" class="csl-entry" role="listitem">
+Wilke, Claus O. 2025年. <em><span>cowplot</span>: Streamlined Plot Theme and Plot Annotations for <span>「<span>ggplot2</span>」</span></em>. <a href="https://wilkelab.org/cowplot/">https://wilkelab.org/cowplot/</a>.
+</div>
+<div id="ref-rmarkdown2018" class="csl-entry" role="listitem">
+Xie, Yihui, J. J. Allaire, と Garrett Grolemund. 2018年. <em>R Markdown: The Definitive Guide</em>. Chapman; Hall/CRC. <a href="https://pkg.yihui.org/rmarkdown-book/">https://pkg.yihui.org/rmarkdown-book/</a>.
+</div>
+<div id="ref-rmarkdown2020" class="csl-entry" role="listitem">
+Xie, Yihui, Christophe Dervieux, と Emily Riederer. 2020年. <em>R Markdown Cookbook</em>. Chapman; Hall/CRC. <a href="https://pkg.yihui.org/rmarkdown-cookbook/">https://pkg.yihui.org/rmarkdown-cookbook/</a>.
+</div>
+</div>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a></p>
 </div>
 </div></div>
 
@@ -651,6 +731,7 @@ blockquote {
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': true,
  
@@ -777,7 +858,7 @@ blockquote {
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -805,7 +886,7 @@ blockquote {
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

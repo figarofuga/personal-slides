@@ -1,16 +1,40 @@
 ---
 title: "可視化事始め"
 subtitle: "そのフィギュア、必要ですか？"
-author: "新美 望"
 date: "2021/3/5"
-lang: ja
 format:
-  revealjs:
-    theme: simple
-    slide-number: true
-    incremental: false
+  clean-revealjs:
+    toc: true
+    toc-depth: 1
+    slide-level: 2
+    theme: default
+    scrollable: true
     smaller: true
-    title-slide: false
+    transition: slide
+    incremental: false
+    pdf-separate-fragments: false
+    pdf-max-pages-per-slide: 3
+    slide-number: true
+    footer: '<a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a>'
+author:
+  - name: Nozomi Niimi
+    orcid: 0000-0002-6909-0740
+    email: figarofuga@gmail.com
+    affiliations: 東京医療センター総合内科
+date-format: "YYYY-MM-DD"
+engine: knitr
+execute: 
+  error: false
+  warning: false
+  echo: false
+  cache: false
+knitr: 
+  opts_chunk: 
+    dev: svglite
+    fig-format: svg
+bibliography: 
+  - references.bib
+  - grateful-refs.bib
 ---
 
 ```{=html}
@@ -36,6 +60,17 @@ blockquote {
 }
 </style>
 ```
+
+```{r}
+#| label: set-up
+library(grateful)
+library(tidyverse)
+library(ggpubr)
+library(patchwork)
+library(ggpie)
+
+```
+
 
 ## Take Home Message
 
@@ -187,7 +222,7 @@ base_irisplot <- dplyr::summarise(iris, Sepal_Width = mean(Sepal.Width), .by = S
   theme_bw()
 
 g_circle <- grid::roundrectGrob(
-  x = 0.85, y = 0.55, width = 0.2, height = 0.32, 
+  x = 0.9125, y = 0.5, width = 0.17, height = 0.3, 
   r = unit(0.02, "snpc"),
   gp = gpar(col = "red", fill = NA, lwd = 3)
 )
@@ -337,21 +372,18 @@ ggpubr::ggdotplot(
 
 
 ```{r}
-set.seed(20261016)
 
-male <- c(
-  800, 850, 1250, 1300, 1350,
-  1650, 1700, 1750, 2100, 2750, 2800, 3050, 3100, 3150, 3200,
-  3350, 3400, 4150, 5050, 5500, 5550, 5600, 6200, 6250, 6300,6500
+set.seed(42)
+
+male <- rnorm(70, mean = 4000, sd = 500)
+female <- rlnorm(
+  50,
+  meanlog = log(2500) - 0.5 * 1^2,
+  sdlog   = 1
 )
 
-female <- c(
-  5, 100, 30, 100, 220, 350, 380, 400, 450, 600, 650, 700, 1000, 12000
-)
+female <- female[female > 4000 | female < 2000]
 
-# 元の形を保ちながら、少しランダムな変動を加える
-male <- round(male * exp(rnorm(length(male), sd = 0.025)))
-female <- round(female * exp(rnorm(length(female), sd = 0.025)))
 
 dat <- data.frame(
   sex = factor(
@@ -421,18 +453,13 @@ mean_bar + median_bar
 ```{r}
 library(ggpubr)
 library(patchwork)
+library(ggrain)
+library(ggdist)
 
-violin <- ggviolin(dat,
-  x = "sex", y = "ck_peak",
-  add = "mean_se"
-)
-
-dot <- ggdotplot(dat,
-  x = "sex", y = "ck_peak",
-  add = "mean_se"
-)
-
-violin + dot
+ggplot(dat, aes(x = sex, y = ck_peak), alpha = 0.7) +
+  stat_dotsinterval(side = "bottom", scale = 0.7, slab_linewidth = NA) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_bw()
 
 ```
 
@@ -447,29 +474,59 @@ violin + dot
 - Nが少ないときはそのデータも入れた方が良い
 :::
 
-::: {.column width="52%"}
-![](images/slide23_image01.png){fig-alt="Nへの意識" width="78%"}
-:::
+```{r}
+
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+set.seed(42)
+
+panels <- c("n = 100", "n = 20", "n = 5")
+
+population <- tibble::tibble(
+  x = " ",
+  data = rnorm(500, mean = 10, sd = 2)
+)
+
+sample <- tibble::tibble(
+  population = panels, 
+  n = c(100, 20, 5)
+) |> 
+dplyr::mutate(
+  data = purrr::map(n, \(x)rnorm(x, mean = 10, sd = 2))
+) |> 
+tidyr::unnest_longer(data)
+
+violin <- ggpubr::ggviolin(
+  data = population, 
+  x = "x", y = "data"
+)
+
+dotplot <- ggpubr::ggdotplot(
+  data = sample, 
+  x = "population", y = "data") 
+
+violin + dotplot +  plot_layout(widths = c(1, 3))
+
+```
+
+
 ::::
 
 ## Nへの意識と見やすさの両立
 
+![](images/effective_method.png){fig-alt="ドットチャートと要約1""}
+
 - ドットチャートに要約（平均・中央値）を追加する
-- ドットを出来るだけ薄くする
+- ドットを出来るだけ薄くする[@Weissgerber2019-ho]
 
-:::: columns
-::: {.column width="50%"}
-![](images/slide24_image01.png){fig-alt="ドットチャートと要約1" width="86%"}
-:::
-
-::: {.column width="50%"}
-![](images/slide24_image02.png){fig-alt="ドットチャートと要約2" width="86%"}
-:::
-::::
 
 ## まとめ
 
-![](images/slide25_image01.png){fig-alt="まとめ図" width="78%"}
+![](images/figure_spp_table.png){fig-alt="まとめ図"}
+
+[@Weissgerber2019-ho]
 
 ## 今日の内容
 
@@ -482,13 +539,57 @@ violin + dot
 
 ## 3次元プロットって？
 
-:::: columns
-::: {.column width="42%"}
+
+```{r}
+
+library(ggpie)
+
+three_d_data <- tibble::tibble(
+  age = c("10s", "20s", "30s", "40s", "50s", "60s", "70s", "80s"), 
+  count = c(13, 10, 13, 20, 13, 30, 13, 40)
+)
+
+ggpie3D(
+  data = three_d_data, group_key = "age"
+)
+
+```
+
 - 基本的にはmisleading
 - 使わなくて済むなら絶対に使わない
 - 一番ダメなのが3次元円グラフ
-- 青と紫どちらが大きいですか？
-:::
+  - 4つの"13"は同じ大きさに見えますか？
+  - 13に挟まれた数値はどれが一番大きく見えますか？
+
+```{r}
+
+library(tidyverse)
+library(ggcube)
+
+# サンプルデータでの3D棒グラフ作成例
+
+df_3d <- tidyr::crossing(
+  tibble(
+    x = c("A", "B", "C"), 
+    x_val = c(0.5, 1, 1.5)
+    ), 
+  tibble(
+    y = c("X", "Y", "Z"), 
+    y_val = c(2, 4, 6)
+    )) |> 
+  dplyr::mutate(
+    mean = x_val * y_val,
+    z = rnorm(9, mean = mean, sd = 0.5)
+  )
+
+ggplot(df_3d, aes(x = x, y = y, z = z, fill = z)) +
+  geom_bar_3d() +
+  coord_3d() + 
+  theme_bw()
+
+
+```
+
 
 ::: {.column width="58%"}
 ![](images/slide27_image01.jpg){fig-alt="3次元円グラフ1" width="48%"}
@@ -599,3 +700,7 @@ violin + dot
 <!-- TODO: 元スライド38は画像のみ。必要ならReferenceまたはAppendixへ移動する。 -->
 
 ![](images/slide38_image01.png){fig-alt="補足画像" width="76%"}
+
+```{r}
+grateful::cite_packages(output = "paragraph", out.dir = here::here("statistics", "visualization_mi"), pkgs = here::here("statistics", "visualization_mi", "index.qmd"), out.format = "html")
+```

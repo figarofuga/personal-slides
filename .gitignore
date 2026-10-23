@@ -29,3 +29,5 @@ __pycache__/
 /renv/local/
 
 .DS_Store
+
+.vdoc.*
