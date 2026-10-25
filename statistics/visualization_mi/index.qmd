@@ -561,10 +561,14 @@ ggpie3D(
   - 4つの"13"は同じ大きさに見えますか？
   - 13に挟まれた数値はどれが一番大きく見えますか？
 
+
+## どちらが見やすい？
+
 ```{r}
 
 library(tidyverse)
 library(ggcube)
+library(patchwork)
 
 # サンプルデータでの3D棒グラフ作成例
 
@@ -574,7 +578,7 @@ df_3d <- tidyr::crossing(
     x_val = c(0.5, 1, 1.5)
     ), 
   tibble(
-    y = c("X", "Y", "Z"), 
+    y = c("P", "Q", "R"), 
     y_val = c(2, 4, 6)
     )) |> 
   dplyr::mutate(
@@ -582,32 +586,20 @@ df_3d <- tidyr::crossing(
     z = rnorm(9, mean = mean, sd = 0.5)
   )
 
-ggplot(df_3d, aes(x = x, y = y, z = z, fill = z)) +
+plot_3d <- ggplot(df_3d, aes(x = x, y = y, z = z)) +
   geom_bar_3d() +
   coord_3d() + 
   theme_bw()
 
+plot_2d <- ggplot(df_3d) + 
+  geom_col(aes(x = x, y = z)) + 
+  facet_wrap(~y) + 
+  theme_bw()
+
+plot_3d + plot_2d
 
 ```
 
-
-::: {.column width="58%"}
-![](images/slide27_image01.jpg){fig-alt="3次元円グラフ1" width="48%"}
-![](images/slide27_image02.jpg){fig-alt="3次元円グラフ2" width="48%"}
-:::
-::::
-
-## どちらが見やすい？
-
-:::: columns
-::: {.column width="44%"}
-![](images/slide28_image01.png){fig-alt="3次元プロット例" width="86%"}
-:::
-
-::: {.column width="56%"}
-![](images/slide28_image02.png){fig-alt="2次元プロット例" width="100%"}
-:::
-::::
 
 ## 今日の内容
 

@@ -2,8 +2,10 @@
   "name": "personal-slides-analysis",
   "build": {
     "dockerfile": "Dockerfile",
-    "context": "."
+    "context": ".",
+    "options": ["--platform=linux/amd64"]
   },
+  "runArgs": ["--platform=linux/amd64"],
 
   "hostRequirements": {
     "cpus": 4,
@@ -12,7 +14,6 @@
   },
 
   "remoteUser": "vscode",
-  "updateRemoteUserUID": false,
   "postCreateCommand": "bash .devcontainer/setup.sh --base-only",
   "waitFor": "updateContentCommand",
 

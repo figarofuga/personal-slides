@@ -18,16 +18,20 @@ P3M版のRライブラリは`.pixi/renv-library-p3m/`に保存します。
 
 ## 新しいPC・GitHub Codespaces
 
-WindowsではWSL Container（`wslc.exe`）、VS Code、WSL・Dev Containers拡張機能、Gitを使います。
-VS Codeのユーザー設定で`dev.containers.dockerPath`を`wslc.exe`にし、
-WSLのLinuxファイルシステム内にcloneして **Dev Containers: Reopen in Container** を実行します。
-Docker Desktopは不要です。新しいPCでの準備と検証範囲は
-[wslcの手順](.devcontainer/README.md)を参照してください。
-Linux/macOSではDocker互換の実行基盤を用意して同じDev Container定義を使います。
+WindowsではDocker Desktop、WSL2、Git、Windows版VS Code、WSL・Dev Containers拡張機能を使います。
+Docker Desktopを起動し、**Settings → Resources → WSL Integration**で使うディストリビューションを有効にします。
+VS Codeのユーザー設定に`dev.containers.dockerPath`がある場合は、値を`docker`に戻してください。
+WSLのLinuxファイルシステム内にcloneし、`code .`で開いて
+**Dev Containers: Reopen in Container** を実行します。
+新しいPCでの準備・既存環境の更新・移行時の手順は
+[Docker Desktop・Codespacesの手順](.devcontainer/README.md)を参照してください。
+LinuxではDocker Engine、macOSではDocker Desktopを用意して同じDev Container定義を使います。
 ホストにR・Python・Quartoを個別に入れる必要はありません。
 
 Codespacesでは、環境定義をcommit・pushした後、GitHubの
 **Code → Codespaces → Create codespace** を選びます。
+`hostRequirements`で最低4コア・メモリ16 GB・ストレージ32 GBを指定しています。
+ローカルと同じ環境定義を使い、iPadや他のPCからブラウザで開発できます。
 ローカルと同じ`.devcontainer/setup.sh --base-only`が
 `pixi install --locked`で固定された基盤を自動復元します。
 エディターはこの処理の完了を待たずに開きます。
@@ -60,7 +64,8 @@ CPU 4コア、メモリ16 GB、空き容量64 GBを目安にしてください�
 各実行の出力と処理段階は`.devcontainer/setup.log`に追記されます。
 失敗した場合はログ末尾を確認し、原因を解消してから同じコマンドを再実行してください。
 インストール済みのパッケージとキャッシュは再利用されます。
-ログはGit管理対象外です。Dockerのビルド自体が失敗した場合は、Codespacesの作成ログを確認します。
+ログはGit管理対象外です。Dockerのビルド自体が失敗した場合は、ローカルではDev Containersのログ、
+Codespacesでは作成ログを確認します。
 
 対応環境は`linux-64`です。Apple SiliconではLinux amd64のエミュレーションとなり、
 特にコンパイルに時間がかかります。Windows/macOSのネイティブRはこの構成の対象外です。
@@ -312,7 +317,7 @@ R本体・Python・コンパイラ・外部ライブラリは従来どおりPixi
 従来のCRANソース版の環境と混ぜないよう、P3M用のライブラリ・キャッシュ・
 ダウンロード先を`.pixi/`内の専用ディレクトリに分けています。
 
-`rstan`と`rstanarm`のみ、`renv.lock`の`RemoteUrl`で2026-07-01のスナップショットの配布URLに固定します。
+`rstan`と`rstanarm`は、`renv.lock`の`RemoteUrl`で2026-07-01のスナップショットの配布URLに固定します。
 最新のP3Mバイナリでは、ロック中の`RcppParallel 5.1.11-2`との間にTBBのシンボル不整合があり、
 `rstan`を読み込めません。この2個のパッケージは、同じバージョンの互換性のあるバイナリを使います。
 バージョンを更新するときは、この取得元とStanの動作確認も見直してください。
@@ -338,6 +343,6 @@ git commit -m "Update analysis environment"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "Update visualization slides"
+git commit -m "using Docker project"
 git push
 ```

@@ -1,36 +1,44 @@
-# WSL Container（wslc）とCodespaces
+# Docker Desktop・Codespacesでの開発
 
-ローカルではWindows標準のWSL Container（`wslc.exe`）を使います。
-Docker Desktopのインストールや起動は不要です。
-CodespacesではGitHub側のコンテナ基盤で、同じDockerfile・Pixi・renvの定義を使います。
+ローカルではDocker DesktopのWSL2バックエンドでDev Containerを使います。
+GitHub Codespacesでも同じDockerfile・Pixi・renvの環境定義を使い、
+iPadや他のPCからブラウザで開発できます。
+R・Python・Quarto・CmdStan・コンパイラはコンテナ内で復元します。
+
+環境定義は2026-10-17の`3316c2c`を基準とし、R 4.5.3と454個のRパッケージを使います。
+`restore-renv.R`などの復元・検証スクリプトはこの時点から使われているため維持し、
+参照されていなかった`radian-pixi.sh`は削除しています。
 
 ## 新しいWindows PCでの準備
 
-Windows x64、WSL2、Git、Windows版VS Code、WSL拡張、Dev Containers拡張を用意します。
-検証に使った版はWSL / wslc 3.0.3.0、Dev Containers 0.470.0です。
-PowerShellでバージョンを確認できます。
+Windows x64、WSL2のLinuxディストリビューション（例：Ubuntu）、Git、Docker Desktop、
+Windows版VS Code、WSL拡張、Dev Containers拡張を用意します。
 
-```powershell
-wsl --version
-wslc version
-```
+1. Docker Desktopを起動し、**Use WSL 2 based engine**を有効にします。
+   既定で有効になっている環境では、この項目は表示されない場合があります。
+2. **Settings → Resources → WSL Integration**で使うディストリビューションを有効にします。
+3. WSLのターミナルで`docker version`を実行し、ClientとServerの情報が出ることを確認します。
 
-Windows版VS Codeの **Preferences: Open User Settings (JSON)** で次を設定します。
-すでに`dev.containers.dockerPath`がある場合は、その値を置き換えます。
+詳細は[Docker DesktopのWSL2バックエンド](https://docs.docker.com/desktop/features/wsl/)を参照してください。
+
+VS Codeの **Preferences: Open User Settings (JSON)** で、
+既存の`dev.containers.dockerPath`がある場合は、その値を`docker`に戻します。
+既存のほかの設定は残してください。
 
 ```json
 {
-  "dev.containers.dockerPath": "wslc.exe"
+  "dev.containers.dockerPath": "docker"
 }
 ```
 
-これはVS Codeのユーザー設定で、ほかのプロジェクトにも適用されます。
-`.devcontainer/devcontainer.json`やリポジトリの`.vscode/settings.json`では設定できません。
-WSL内からも実行できるよう、拡張子を含む`wslc.exe`を指定します。
+これはVS Codeのユーザー設定で、Gitでは配布されません。
+新しいPCでも、明示的に設定している場合は値を確認してください。
 
-WSLのターミナルでリポジトリを取得し、VS Codeで開きます。
+WSLのLinuxファイルシステム内（`/home/<user>/`以下）でリポジトリを取得します。
 
 ```bash
+mkdir -p ~/analysis
+cd ~/analysis
 git clone https://github.com/figarofuga/personal-slides.git
 cd personal-slides
 code .
@@ -38,78 +46,116 @@ code .
 
 コマンドパレットから **Dev Containers: Reopen in Container** を実行します。
 Dockerfileのビルド後、`pixi install --locked`が自動実行されます。
-エディターは復元完了前に開くため、ターミナルで進捗を確認してください。
+エディターはPixiの復元完了前に開くため、コンテナ内のターミナルで進捗を確認してください。
 
 ```bash
 tail -f .devcontainer/setup.log
 ```
 
-`Pixi base ready.` が出たら`Ctrl+C`でログ表示を終了し、Rパッケージを復元します。
+`Pixi base ready.`が出たら`Ctrl+C`でログ表示を終了し、Rパッケージを復元します。
 
 ```bash
 bash .devcontainer/setup.sh
 ```
 
-R・Stan・Quartoの統合検証も行う場合は、上のコマンドに`--check`を付けます。
-初回は依存パッケージのダウンロードとインストールが必要です。
+`Setup completed.`まで確認してからRやQuartoを使います。
+初回はダウンロードとソースビルドが必要なため、時間がかかります。
 Gitで配布されるのは環境定義であり、インストール済みの環境ではありません。
 
-`pixi.toml`・`pixi.lock`・`renv.lock`・`.Rprofile`・`renv/`・`scripts/`も
-`.devcontainer/`と同じリビジョンで取得してください。
-環境定義を`git pull`した後はセットアップを再実行し、Dockerfileや
-`devcontainer.json`が変わった場合は **Dev Containers: Rebuild Container** を実行します。
+## 既存のPCで環境定義を更新する
 
-## wslc用の互換設定
+自分の作業をcommitなどで保存してから、リポジトリ直下で更新します。
 
-- wslc 3.0.3では`build`・`run`の`--platform`引数が使えません。
-  Linux amd64の指定はDockerfileの`FROM --platform=linux/amd64`に置いています。
-- WSL側のDev Containers CLIはUID調整用ビルドにも`--platform`を追加します。
-  そのため`updateRemoteUserUID: false`とし、イメージの`vscode`ユーザーを使います。
-  ホストとコンテナのUID/GIDが1000の環境で、作業フォルダーへの読み書きを確認しています。
-  異なるUID/GIDのホストでの利用は今回未検証です。
-- `.pixi`は名前付きボリュームに置き、コンテナ再作成時にも環境を再利用します。
-  同じフォルダー名の別チェックアウトは同じボリューム名になるため、
-  異なる環境を並行して使う場合はチェックアウトのフォルダー名も分けてください。
+```bash
+git pull --ff-only
+```
 
-リソースの目安は4コア・メモリ16 GB・空き容量64 GBです。
-wslcのメモリなどは`wslc settings`で開く
-`%LOCALAPPDATA%\wslc\settings.yaml`で設定します。
-Docker Desktopや`.wslconfig`のリソース設定はwslcには適用されません。
+Dockerfileや`devcontainer.json`が変わった場合は、
+**Dev Containers: Rebuild Container**でコンテナを再構築します。
+コンテナ外から再構築する場合は **Dev Containers: Rebuild and Reopen in Container** を使います。
+Pixiの初期化が終わってから、コンテナ内で次を実行してください。
+
+```bash
+bash .devcontainer/setup.sh
+```
+
+復元後は起動中のRを再起動します。direnvを使っている場合は`direnv reload`も実行します。
+`pixi.toml`・`pixi.lock`・`renv.lock`・`.Rprofile`・`renv/`・`scripts/`・
+`.devcontainer/`を同じGitリビジョンで取得してください。
+
+## 以前の構成からDocker Desktopへ切り替える場合
+
+VS Codeのユーザー設定を上記の`docker`に戻し、WSL側でプロジェクトを開き直して、
+**Dev Containers: Rebuild and Reopen in Container** を実行します。
+コンテナ定義はDockerの`--platform=linux/amd64`を使い、Linux x86_64環境を作ります。
+UID/GIDはDev Containersの標準の自動調整を使います。
+
+Docker Desktopのイメージ・ボリュームは、以前のコンテナ実行基盤とは別に管理されます。
+Docker側に既存の環境ボリュームがなければ、上記の初回復元を行ってください。
 
 ## GitHub Codespaces・iPad
 
-環境定義をcommit・pushした後、GitHubの
-**Code → Codespaces → Create codespace** から作成します。
-4コア・16 GB以上のマシンを選びます。
-初期化ログの`Pixi base ready.`を確認した後、ローカルと同じく
-`bash .devcontainer/setup.sh`でRパッケージを復元してください。
+使用する環境定義をcommit・pushした後、GitHubの
+**Code → Codespaces → Create codespace** から対象ブランチのCodespaceを作成します。
+`devcontainer.json`の`hostRequirements`は、最低4コア・メモリ16 GB・ストレージ32 GBです。
+作成画面では、この条件を満たすマシンを選びます。
+実際の復元には空き容量64 GBを目安にしてください。
+
+ローカルと同じく、初期化ログの`Pixi base ready.`を確認してから、
+Codespace内のターミナルでRパッケージを復元します。
+
+```bash
+bash .devcontainer/setup.sh
+```
 
 iPadや他のPCからは、そのCodespaceをブラウザで開きます。
-ビルド・計算はGitHub側で実行されます。
-Codespacesには`wslc.exe`やWindowsのVS Codeユーザー設定は不要です。
+ビルドと計算はGitHub側で実行されるため、アクセスする端末にDocker Desktopは不要です。
+環境定義を更新した既存のCodespaceでは **Codespaces: Rebuild Container** を実行し、
+Pixiの初期化後にセットアップを再実行します。
 
-## 今回の検証範囲
+設定の詳細：[Codespacesの最低マシンスペック](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/configuring-dev-containers/setting-a-minimum-specification-for-codespace-machines)、
+[Codespaceの再構築](https://docs.github.com/en/codespaces/developing-in-a-codespace/rebuilding-the-container-in-a-codespace)。
 
-2026-10-22（JST）、元の作業環境とは別の一時コピーと空の名前付きボリュームで検証しました。
+## キャッシュ・リソース・復元時の確認
 
-| 確認 | 結果 |
-| --- | --- |
-| wslcでDockerfileをビルド | 成功 |
-| Windows側のDev Containers CLIから起動・初期化 | 成功 |
-| WSL側のDev Containers CLIから起動 | UID自動調整を無効にして成功 |
-| WSL内の作業フォルダーと`.pixi`ボリュームの読み書き | 成功 |
-| 空の環境への`pixi install --locked` | 成功。518パッケージ、約11分 |
-| R 4.5.3の起動・簡単な計算 | 成功（`--vanilla`で確認） |
-| NumPy・pandas・SciPyの読み込み | 成功 |
-| Quarto 1.9.38の起動 | 成功 |
-| 日本語フォント・ロケール | 成功 |
-| R追加パッケージ全体の復元・Stan・Quartoレンダリング | 今回は未実施 |
-| Codespaces実機・iPadでの操作 | 今回は未実施 |
+`.pixi`は`${localWorkspaceFolderBasename}-pixi`という名前のボリュームに保存します。
+ローカルではフォルダー名が`pixi-test`なら`pixi-test-pixi`です。
+ボリュームを残した通常の再構築では、Pixi環境・Rライブラリ・renvキャッシュを再利用します。
+新しいPCや新しいCodespaceには、そのキャッシュがない前提で復元してください。
+同じ名前のフォルダーを同じDocker環境で複数使うとボリューム名が重なるため、
+異なる環境を並行して使う場合はフォルダー名も分けます。
+CodespacesのFull Rebuildなどでボリュームが失われた場合も、環境の再インストールが必要です。
 
-所要時間は今回の測定値で、PC・ネットワークによって変わります。
-R追加パッケージの既存WSL検証については[p3m-validation.md](p3m-validation.md)を参照してください。
-その結果は今回のwslc上での全パッケージ検証を意味しません。
+リソースの目安は4コア・メモリ16 GB・空き容量64 GBです。
+ローカルではDocker DesktopとWSL2側で利用可能なリソースを確保します。
+`hostRequirements`だけでDockerに割り当てるCPUやメモリが増えるわけではありません。
+対応環境は`linux-64`です。Apple Siliconではamd64のエミュレーションを使います。
 
-参考：[WSL Container](https://learn.microsoft.com/en-us/windows/wsl/wsl-container)、
-[Dev Containersとの連携](https://devblogs.microsoft.com/commandline/wsl-container-is-now-available-for-public-preview/#vs-code-dev-containers)、
-[wslcのリソース設定](https://learn.microsoft.com/en-us/windows/wsl/wsl-container-settings)。
+Rパッケージの取得先は`.Rprofile`のP3M portableバイナリのURLを使います。
+ライブラリ・キャッシュ・ダウンロード先は`.pixi/`内のP3M専用ディレクトリです。
+プラットフォームごとのサブディレクトリは、この構成のrenvが自動で選びます。
+詳細は[ルートREADMEのパッケージ取得元](../README.md#パッケージの取得元)を参照してください。
+
+R・Python・Stan・Quartoを含む統合検証は、復元後に次を実行します。
+
+```bash
+pixi run --as-is check
+```
+
+復元から統合検証までまとめて行う場合は`bash .devcontainer/setup.sh --check`を使います。
+進捗と失敗時の出力は`.devcontainer/setup.log`に追記されます。
+Dockerのビルド段階で失敗した場合は、ローカルではDev Containersのログ、
+Codespacesでは作成ログを確認してください。
+
+## 検証の記録
+
+[P3M移行の検証結果](p3m-validation.md)に、2026-10-12のWSL2環境での
+R・Python・Stan・Quartoの検証を記録しています。
+2026-10-25には、移行前のwslc環境で全458パッケージのバージョン・
+ライブラリの参照先・名前空間の読み込みと、SVG/PNG描画・QuartoのR/Python実行を確認しました。
+その結果は、Docker Desktopに戻した構成やCodespacesでの動作確認を意味しません。
+現在のロックは10月17日の454パッケージに戻しており、上記458パッケージのロックとは異なります。
+10月17日の設定へ戻した後、WSL2側の既存ライブラリをロックに揃え、
+`renv::status()`の整合性と`jsonlite 2.0.0`の読み込みを確認しました。
+VS Code R拡張の関数一覧取得処理（`getAliases.R`）も正常終了しています。
+Docker Desktopでの再ビルド、Codespaces実機、iPadでの操作は今回は実施していません。

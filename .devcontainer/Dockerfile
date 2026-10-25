@@ -1,5 +1,4 @@
-# The Pixi lock targets linux-64. wslc does not accept the CLI --platform flag.
-FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:jammy
+FROM mcr.microsoft.com/devcontainers/base:jammy
 
 ARG PIXI_VERSION=v0.81.0
 
