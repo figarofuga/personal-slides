@@ -163,6 +163,36 @@ GBMTの効果 Underutilization
 
 Finerenoneの効果？ GLP1-RA？
 
+## 高齢者心不全の心不全治療を頑張る意義？
+
+- 高齢者心不全の予後は間違いなく悪い
+  - 死亡は・・・
+  - 心不全再入院は・・・
+<!-- Todo: 調べる -->
+- 一方で、死亡の中身は大分異なる
+
+## 高齢者心不全の死亡原因
+
+- WET-HFだと高齢者は非心血管死亡が多い
+Nakamaru, Ryo, Yasuyuki Shiraishi, Alexander T. Sandhu, et al. 2023. “Cardiovascular vs. Non-Cardiovascular Deaths after Heart Failure Hospitalization in Young, Older, and Very Old Patients.” ESC Heart Failure 10 (1): 673–84.
+Takabayashi, Kensuke, Shouji Kitaguchi, Takashi Yamamoto, et al. 2021. “Mode of Death in Elderly and Super-Elderly Patients with Acute Heart Failure: Insights from Japanese Heart Failure Registry.” Clinical Cardiology 44 (6): 848–56.
+Takabayashi, Kensuke, Shouji Kitaguchi, Takashi Yamamoto, et al. 2021. “Mode of Death in Elderly and Super-Elderly Patients with Acute Heart Failure: Insights from Japanese Heart Failure Registry.” Clinical Cardiology 44 (6): 848–56.
+  -　特にFrailだとそれが多くなる 
+Ohashi, Koichi, Yuya Matsue, Daichi Maeda, et al. 2024. “Impact of Multidomain Frailty on the Mode of Death in Older Patients with Heart Failure: A Cohort Study.” Circulation. Cardiovascular Quality and Outcomes 17 (5): e010416.
+  - そこまで死亡をガリガリ下げるために頑張るか？
+
+## 高齢者心不全にとって重要なこと？
+
+- 心血管死亡減少も重要だが
+- 心不全入院を減らすこと
+- QOLを良くする治療
+
+## QOLを改善する薬
+
+- ARNI
+- SGLT2i
+
+
 ## 食事について
 
 malnutritionの問題
