@@ -2,7 +2,7 @@
 name = "personal-slides"
 channels = ["https://prefix.dev/conda-forge"]
 platforms = ["linux-64"]
-requires-pixi = "==0.81.0"
+requires-pixi = ">=0.81.0,<0.84.0"
 
 [tasks]
 preview = "quarto preview"

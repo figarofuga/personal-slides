@@ -343,6 +343,6 @@ git commit -m "Update analysis environment"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "using Docker project"
+git commit -m "update visualization slides"
 git push
 ```

@@ -3098,7 +3098,7 @@
     "href": "statistics/visualization_mi/index.html#よいfigureの条件",
     "title": "可視化事始め",
     "section": "よいFigureの条件",
-    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\nすばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. …(中略)… よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. (キーラン・ヒーリー 2021年)"
+    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\nすばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. …(中略)… よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. (キーラン・ヒーリー 2021)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#非常に良いfigureの見本",
@@ -3126,7 +3126,7 @@
     "href": "statistics/visualization_mi/index.html#インクデータ比の法則",
     "title": "可視化事始め",
     "section": "インク・データ比の法則",
-    "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」\n\n\n (Weissgerber ほか 2019年)"
+    "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」\n\n\n (Weissgerber et al. 2019)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#今日の内容-3",
@@ -3140,14 +3140,14 @@
     "href": "statistics/visualization_mi/index.html#見せたいものって",
     "title": "可視化事始め",
     "section": "見せたいものって？",
-    "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ\n\n\n\n\n(Waskom, 日付なし)"
+    "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ\n\n\n\n\n(Waskom, n.d.)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#人間の得意苦手分野",
     "href": "statistics/visualization_mi/index.html#人間の得意苦手分野",
     "title": "可視化事始め",
     "section": "人間の得意・苦手分野",
-    "text": "人間の得意・苦手分野\n\n(キーラン・ヒーリー 2021年)"
+    "text": "人間の得意・苦手分野\n\n(キーラン・ヒーリー 2021)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#example",
@@ -3210,14 +3210,14 @@
     "href": "statistics/visualization_mi/index.html#nへの意識と見やすさの両立",
     "title": "可視化事始め",
     "section": "Nへの意識と見やすさの両立",
-    "text": "Nへの意識と見やすさの両立\n\nドットチャートに要約（平均・中央値）を追加する\nドットを出来るだけ薄くする"
+    "text": "Nへの意識と見やすさの両立\n{fig-alt=“ドットチャートと要約1”“}\n\nドットチャートに要約（平均・中央値）を追加する\nドットを出来るだけ薄くする(Weissgerber et al. 2019)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#まとめ",
     "href": "statistics/visualization_mi/index.html#まとめ",
     "title": "可視化事始め",
     "section": "まとめ",
-    "text": "まとめ"
+    "text": "まとめ\n\n(Weissgerber et al. 2019)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#今日の内容-5",
@@ -3231,7 +3231,7 @@
     "href": "statistics/visualization_mi/index.html#次元プロットって",
     "title": "可視化事始め",
     "section": "3次元プロットって？",
-    "text": "3次元プロットって？\n\n\n\n基本的にはmisleading\n使わなくて済むなら絶対に使わない\n一番ダメなのが3次元円グラフ\n青と紫どちらが大きいですか？"
+    "text": "3次元プロットって？\n\n\n基本的にはmisleading\n使わなくて済むなら絶対に使わない\n一番ダメなのが3次元円グラフ\n\n4つの”13”は同じ大きさに見えますか？\n13に挟まれた数値はどれが一番大きく見えますか？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#どちらが見やすい",
@@ -3252,21 +3252,21 @@
     "href": "statistics/visualization_mi/index.html#ゲシュタルトとは",
     "title": "可視化事始め",
     "section": "ゲシュタルトとは",
-    "text": "ゲシュタルトとは\n\n\n\n近接の法則\n類同の法則\n囲みの法則\n閉合の法則\n連続の法則\n接合の法則"
+    "text": "ゲシュタルトとは\n\n\n少ない視覚的情報から要素間の関係性を推論すること\n主に以下の法則が存在する\n\n近接性(Proximity):空間的に近いものは互いに関連しているように見える\n類似性(Similarity):見た目が似ているものは関係しているように見える\n接続性(Coneetction):視覚的に結び付けられているもの同士は関係を持っているように見える\n連続性(Continuity):一部が隠されているオブジェクトは親和性のある形に補完される\n閉鎖性(Closure):不完全な形は完全なものとして知覚される\n共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#推奨はしないけど",
     "href": "statistics/visualization_mi/index.html#推奨はしないけど",
     "title": "可視化事始め",
     "section": "推奨はしないけど",
-    "text": "推奨はしないけど"
+    "text": "推奨はしないけど\n\n\n右の方が、まだ視線を誘導できる"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#色使いについて",
     "href": "statistics/visualization_mi/index.html#色使いについて",
     "title": "可視化事始め",
     "section": "色使いについて",
-    "text": "色使いについて\n\n\n\n色覚異常は思っている以上にコモン\nカラーユニバーサルデザイン"
+    "text": "色使いについて\n\nいわゆる色覚異常は一般人口で約3%おり非常にCommon(Jeong et al. 2025)\n\n男性により多い\n\n読者・査読者にもいるかも知れないので色使いは皆に優しい方が良い"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#カラーユニバーサルデザイン",
@@ -3294,7 +3294,7 @@
     "href": "statistics/visualization_mi/index.html#reference",
     "title": "可視化事始め",
     "section": "Reference",
-    "text": "Reference\n\nReveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency.\n\nCirculation. 2019;140(18):1506-1518.\n\nGraphics and statistics for cardiology: Comparing categorical and continuous variables.\n\nHeart. 2016;102(5):349-355.\n\n永田ゆかり（2020）『データ視覚化のデザイン』SBクリエイティブ株式会社\nキーラン・ヒーリー（2021）『実践Data Scienceシリーズ データ分析のためのデータ可視化入門』KS情報科学専門書\nhttps://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html\nhttps://socviz.co/lookatdata.html\nhttps://seaborn.pydata.org/tutorial/function_overview.html"
+    "text": "Reference\n\n\nWe used R v. 4.5.3 (R Core Team 2026) and the following R packages: cowplot v. 1.2.0 (Wilke 2025), ggcube v. 0.3.0 (Kling 2026), ggdist v. 3.3.3 (Kay 2024, 2025), ggpubr v. 1.0.0 (Kassambara 2026), here v. 1.0.2 (Müller 2025), marginaleffects v. 1.0.0 (Arel-Bundock et al. 2024), patchwork v. 1.3.2 (Pedersen 2025), plotrix v. 3.8.14 (J 2006), RColorBrewer v. 1.1.3 (Neuwirth 2022), Rdatasets v. 0.0.1 (Arel-Bundock 2025), rmarkdown v. 2.32 (Xie et al. 2018, 2020; Allaire et al. 2026), tidyverse v. 2.0.0 (Wickham et al. 2019), viridisLite v. 0.4.3 (Garnier et al. 2026).\n\n\n\n\nAllaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026. rmarkdown: Dynamic Documents for r. https://github.com/rstudio/rmarkdown.\n\n\nArel-Bundock, Vincent. 2025. Rdatasets: Access Datasets from the Rdatasets Archive. https://vincentarelbundock.github.io/Rdatasetspkg/.\n\n\nArel-Bundock, Vincent, Noah Greifer, and Andrew Heiss. 2024. “How to Interpret Statistical Models Using marginaleffects for R and Python.” Journal of Statistical Software 111 (9): 1–32. https://doi.org/10.18637/jss.v111.i09.\n\n\nGarnier, Simon, Ross, et al. 2026. viridis(Lite) - Colorblind-Friendly Color Maps for r. https://doi.org/10.5281/zenodo.4678326.\n\n\nJ, Lemon. 2006. “Plotrix: A Package in the Red Light District of r.” R-News 6 (4): 8–12.\n\n\nJeong, Yi Deun, Jaehyeong Cho, Yejun Son, et al. 2025. “Global Prevalence of Congenital Color Vision Deficiency Among Children and Adolescents, 1932-2022.” Ophthalmology 132 (12): 1431–44. https://doi.org/10.1016/j.ophtha.2025.07.031.\n\n\nKassambara, Alboukadel. 2026. ggpubr: “ggplot2” Based Publication Ready Plots. https://CRAN.R-project.org/package=ggpubr.\n\n\nKay, Matthew. 2024. “ggdist: Visualizations of Distributions and Uncertainty in the Grammar of Graphics.” IEEE Transactions on Visualization and Computer Graphics 30 (1): 414–24. https://doi.org/10.1109/TVCG.2023.3327195.\n\n\nKay, Matthew. 2025. ggdist: Visualizations of Distributions and Uncertainty. https://doi.org/10.5281/zenodo.3879620.\n\n\nKling, Matthew. 2026. ggcube: 3D Plotting with “ggplot2”. https://github.com/matthewkling/ggcube.\n\n\nMüller, Kirill. 2025. here: A Simpler Way to Find Your Files. https://here.r-lib.org/.\n\n\nNeuwirth, Erich. 2022. RColorBrewer: ColorBrewer Palettes.\n\n\nPedersen, Thomas Lin. 2025. patchwork: The Composer of Plots. https://patchwork.data-imaginist.com.\n\n\nR Core Team. 2026. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing. https://www.R-project.org/.\n\n\nTalbot, Justin, Vidya Setlur, and Anushka Anand. 2014. “Four Experiments on the Perception of Bar Charts.” IEEE Transactions on Visualization and Computer Graphics 20 (12): 2152–60. https://doi.org/10.1109/TVCG.2014.2346320.\n\n\nWaskom, Michael. n.d. Overview of seaborn Plotting Functions. Https://seaborn.pydata.org/tutorial/function_overview.html.\n\n\nWeissgerber, Tracey L, Stacey J Winham, Ethan P Heinzen, et al. 2019. “Reveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency: Transforming Data Visualization to Improve Transparency.” Circulation 140 (18): 1506–18. https://doi.org/10.1161/CIRCULATIONAHA.118.037777.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to the tidyverse.” Journal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nWilke, Claus O. 2025. cowplot: Streamlined Plot Theme and Plot Annotations for “ggplot2”. https://wilkelab.org/cowplot/.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-book/.\n\n\nXie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. R Markdown Cookbook. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-cookbook/.\n\n\nキーラン・ヒーリー. 2021. データ分析のためのデータ可視化入門. 実践Data Scienceシリーズ. 講談社."
   },
   {
     "objectID": "statistics/visualization_mi/index.html#ご静聴ありがとうございました",
@@ -3308,7 +3308,7 @@
     "href": "statistics/visualization_mi/index.html#補足画像",
     "title": "可視化事始め",
     "section": "補足画像",
-    "text": "補足画像\n\n\n\n\nWe used R v. 4.5.3 (R Core Team 2026年) and the following R packages: cowplot v. 1.2.0 (Wilke 2025年), ggpubr v. 1.0.0 (Kassambara 2026年), here v. 1.0.2 (Müller 2025年), marginaleffects v. 1.0.0 (Arel-Bundock ほか 2024年), patchwork v. 1.3.2 (Pedersen 2025年), Rdatasets v. 0.0.1 (Arel-Bundock 2025年), rmarkdown v. 2.32 (Xie ほか 2018年, 2020年; Allaire ほか 2026年), tidyverse v. 2.0.0 (Wickham ほか 2019年).\n\n\n\n\n\n\nキーラン・ヒーリー. 2021年. データ分析のためのデータ可視化入門. 実践Data Scienceシリーズ. 講談社.\n\n\nAllaire, JJ, Yihui Xie, Christophe Dervieux, ほか. 2026年. rmarkdown: Dynamic Documents for R. https://github.com/rstudio/rmarkdown.\n\n\nArel-Bundock, Vincent. 2025年. Rdatasets: Access Datasets from the Rdatasets Archive. https://vincentarelbundock.github.io/Rdatasetspkg/.\n\n\nArel-Bundock, Vincent, Noah Greifer, と Andrew Heiss. 2024年. 「How to Interpret Statistical Models Using marginaleffects for R and Python」. Journal of Statistical Software 111 (9): 1–32. https://doi.org/10.18637/jss.v111.i09.\n\n\nKassambara, Alboukadel. 2026年. ggpubr: 「ggplot2」 Based Publication Ready Plots. https://CRAN.R-project.org/package=ggpubr.\n\n\nMüller, Kirill. 2025年. here: A Simpler Way to Find Your Files. https://here.r-lib.org/.\n\n\nPedersen, Thomas Lin. 2025年. patchwork: The Composer of Plots. https://patchwork.data-imaginist.com.\n\n\nR Core Team. 2026年. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing. https://www.R-project.org/.\n\n\nWaskom, Michael. 日付なし. Overview of seaborn Plotting Functions. Https://seaborn.pydata.org/tutorial/function_overview.html.\n\n\nWeissgerber, Tracey L, Stacey J Winham, Ethan P Heinzen, ほか. 2019年. 「Reveal, don’t conceal: Transforming data visualization to improve transparency: Transforming data visualization to improve transparency」. Circulation 140 (18): 1506–18. https://doi.org/10.1161/CIRCULATIONAHA.118.037777.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, ほか. 2019年. 「Welcome to the tidyverse」. Journal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nWilke, Claus O. 2025年. cowplot: Streamlined Plot Theme and Plot Annotations for 「ggplot2」. https://wilkelab.org/cowplot/.\n\n\nXie, Yihui, J. J. Allaire, と Garrett Grolemund. 2018年. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-book/.\n\n\nXie, Yihui, Christophe Dervieux, と Emily Riederer. 2020年. R Markdown Cookbook. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-cookbook/."
+    "text": "補足画像"
   },
   {
     "objectID": "medicine/antithrombotic_etc_mi/index.html#本スライドの目的",
@@ -5051,21 +5051,21 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#ag-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "AG開大性代謝性 アシドーシス",
-    "text": "AG開大性代謝性 アシドーシス\n\nAG開大性代謝性アシドーシスの鑑別(Mehta et al. 2008)\n\n\n\n\n\n\nGOLDMARK\nKUSSMAUL\n\n\n\n\nGlycols(Ethylene and propylene)\nKetoacidosis\n\n\nOxoproline\nUremia\n\n\nL-lactate\nSalicylate poisoning\n\n\nD-lactate\nMethanol\n\n\nMethanol\nAldehyde\n\n\nAspirin\nLactic acidosis\n\n\nRenal failure\nEthylene glycol\n\n\nKetoacidosis\n\n\n\n\nAnion gap\n\\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\\]\n\n通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)\nAnion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質\n\n正確にはUnmeasured anion(測定されない分の陰イオン)\n\n未測定陰イオン - 未測定陽イオン = AG\n\n← Acid–Base Map"
+    "text": "AG開大性代謝性 アシドーシス\n\n\n\n\n\n\n\n\nGOLDMARK\nKUSSMAUL\n\n\n\n\nGlycols(Ethylene and propylene)\nKetoacidosis\n\n\nOxoproline\nUremia\n\n\nL-lactate\nSalicylate poisoning\n\n\nD-lactate\nMethanol\n\n\nMethanol\nAldehyde\n\n\nAspirin\nLactic acidosis\n\n\nRenal failure\nEthylene glycol\n\n\nKetoacidosis\n\n\n\n\n\n: AG開大性代謝性アシドーシスの鑑別(Mehta et al. 2008)\n\\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\\]\n\n通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)\nAnion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質\n\n正確にはUnmeasured anion(測定されない分の陰イオン)\n\n未測定陰イオン - 未測定陽イオン = AG\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#nag-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#nag-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "Normal Anion Gap 代謝性 アシドーシス",
-    "text": "Normal Anion Gap 代謝性 アシドーシス\n\n「測定されるAnionの異常」\n\n具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)\n\n腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける\n\n\\(尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\\)\n\n腎臓が原因でなければ、尿中のNH4+が増加→Urine AGは負の値となる\n血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い\n\nそのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低地\n\n実際は実臨床で覚える鑑別は2種類\n\n下痢(腸液のHCO3-の排泄による代謝性Acidosis)\n尿細管Acidosis\n\n\n← Acid–Base Map"
+    "text": "Normal Anion Gap 代謝性 アシドーシス\n\n「測定されるAnionの異常」\n\n具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)\n\n腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける\n\n\\(尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\\)\n\n腎臓が原因でなければ、尿中のNH4+が増加→Urine AGは負の値となる\n血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い\n\nそのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低値\n\n実際は実臨床で覚える鑑別は2種類\n\n下痢(腸液のHCO3-の排泄による代謝性Acidosis)\n尿細管Acidosis\n\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "代謝性 アルカローシス",
-    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い\nChloride responsive\nChloride resistant\n\n\n← Acid–Base Map"
+    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い\n一応、発生因子と維持因子を分けて考える必要がある\n発生因子\n\nCl-塩の喪失: 下痢、嘔吐、利尿薬、MRA亢進(しばしば脱水)\nKの欠乏\n塩基負荷: 重曹、グルコン酸塩、クエン酸など\n\n維持因子\n\n発生因子の持続\nHCO3-濾過の低下: 脱水によるRAA系の亢進\nHCO3-再吸収の増加"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
@@ -5086,7 +5086,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#references",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "References",
-    "text": "References\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892."
+    "text": "References\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
   },
   {
     "objectID": "statistics/mlcausal/index.html#hteを見つける意義",
@@ -5331,7 +5331,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#動脈血液ガス-vs.-静脈血液ガス",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "動脈血液ガス vs. 静脈血液ガス",
-    "text": "動脈血液ガス vs. 静脈血液ガス\n\n\n\n項目\n静脈血 − 動脈血\n\n\n\n\npH\n0.033 [0.027–0.039] 低い\n\n\npCO₂\n4.41 [2.55–6.27] mmHg 高い\n\n\nHCO₃⁻\n1.03 [0.56–1.50] mmHg 高い\n\n\n乳酸値\n2.3 [1.4–3.2] mg/dL 高い\n\n\n\nEur J Emerg Med. 2014 Apr;21(2):81–8\n\n基本的には、pHと\\(HCO3^-\\)は信じてよい\n\\(PaO_2\\)は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
+    "text": "動脈血液ガス vs. 静脈血液ガス\n\n\n\n\n項目\n静脈血 − 動脈血\n\n\n\n\npH\n0.033 [0.027–0.039] 低い\n\n\npCO₂\n4.41 [2.55–6.27] mmHg 高い\n\n\nHCO₃⁻\n1.03 [0.56–1.50] mmHg 高い\n\n\n乳酸値\n2.3 [1.4–3.2] mg/dL 高い\n\n\n\n\nEur J Emerg Med. 2014 Apr;21(2):81–8\n\n基本的には、pHと\\(HCO3^-\\)は信じてよい\n\\(PaO_2\\)は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#酸塩基平衡の考え方",
@@ -5345,7 +5345,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#例えば",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "例えば",
-    "text": "例えば\n\n\npH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？\n答え1:\n\nまったく問題がない健常人のA gas\n\n答え2:\n\n呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas …\n\n答え4:\n\n呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas"
+    "text": "例えば\n\npH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？\n答え1:\n\nまったく問題がない健常人のA gas\n\n答え2:\n\n呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas …\n\n答え4:\n\n呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#どうやって区別する",
@@ -5359,7 +5359,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#agの真に意味すること",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "AGの真に意味すること",
-    "text": "AGの真に意味すること\n\n\nUnmeasured anionの増加あるいはUnmeasured cationの減少により\n\n例えばγｸﾞﾛﾌﾞﾘﾝが増加する病態(MMなど)でもAGは偽性に正常化する(実際はほぼないが)\nUnmeasured cationの減少によるAG開大性代謝性アシドーシスもほぼない\n\nUnmeasured anionって何ですか？"
+    "text": "AGの真に意味すること\n\n\nUnmeasured anion(UA)の増加あるいはUnmeasured cation(UC)の減少\n\nUCの減少によるAG開大性代謝性アシドーシスほぼ起こらない\n\nそのため、基本はUAの増加によるもの\nUAって何ですか？"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#unmeasured-anionとは",
@@ -5373,7 +5373,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#低alb血症の補正の考え方",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "低Alb血症の補正の考え方",
-    "text": "低Alb血症の補正の考え方\n\nAlb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」\nそうすると、AGはどうなる？ → UAが増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5"
+    "text": "低Alb血症の補正の考え方\n\n\nAlb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」\nそうすると、AGはどうなる？ → UAが増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#補正hco3-の考え方",
@@ -5401,7 +5401,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#酸塩基の代償範囲",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "酸塩基の代償範囲",
-    "text": "酸塩基の代償範囲\n\n\n\n\n\n\n\n\n\n\n1次性病態\n1次性変化\n代償性変化\n代償性変化の範囲\n代償の限界値\n\n\n\n\n代謝性アシドーシス\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\(\\Delta\\mathrm{pCO_2}=1.2\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\\(\\mathrm{pCO_2}=1.5\\times[\\mathrm{HCO_3^-}]+8\\pm2\\)\n\\(\\mathrm{pCO_2}:15 mmHg\\)\n\n\n代謝性アルカローシス\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\(\\Delta\\mathrm{pCO_2}=0.7\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\n\\(\\mathrm{pCO_2}:60mmHg\\)\n\n\n呼吸性アシドーシス\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.35\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:42mEq/L\\)\n\n\n呼吸性アルカローシス\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.40\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:12 mEq/L\\)\n\n\n\n\n代償反応が十分であれば、高度の酸塩基平衡異常は起こらない\n\npH &lt;&lt; 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併\npH &gt;&gt; 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併\n\nとは言え、Septic shockとか著名なDKAなら単独でも起こりうる"
+    "text": "酸塩基の代償範囲\n\n\n\n\n\n\n\n\n\n\n\n1次性病態\n1次性変化\n代償性変化\n代償性変化の範囲\n代償の限界値\n\n\n\n\n代謝性アシドーシス\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\(\\Delta\\mathrm{pCO_2}=1.2\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\\(\\mathrm{pCO_2}=1.5\\times[\\mathrm{HCO_3^-}]+8\\pm2\\)\n\\(\\mathrm{pCO_2}:15 mmHg\\)\n\n\n代謝性アルカローシス\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\(\\Delta\\mathrm{pCO_2}=0.7\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\n\\(\\mathrm{pCO_2}:60mmHg\\)\n\n\n呼吸性アシドーシス\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.35\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:42mEq/L\\)\n\n\n呼吸性アルカローシス\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.40\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:12 mEq/L\\)\n\n\n\n\n\n代償反応が十分であれば、高度の酸塩基平衡異常は起こらない\n\npH &lt;&lt; 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併\npH &gt;&gt; 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併\n\nとは言え、Septic shockとか著名なDKAなら単独でも起こりうる"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#anion-gapが変化する要因",
@@ -5779,7 +5779,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "代謝性アルカローシスの原因",
-    "text": "代謝性アルカローシスの原因\n\n大体脱水"
+    "text": "代謝性アルカローシスの原因\n\n大きく分けて以下の3つ\n\nアルカリの負荷: 薬剤性\n酸の喪失(H, Cl): 腎臓 vs. 腎臓外でのCl\n\n腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)\n\n脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など\n\n\n(髙岸 2024) - 原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認 - それで分からない時は尿中Clを計測する - 尿中Cl &lt; 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢 - 尿中Cl &gt; 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/rickettsia_mi/index.html#take-home-messages",
@@ -6192,7 +6192,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#尿細管acidosis-1",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "尿細管Acidosis",
-    "text": "尿細管Acidosis"
+    "text": "尿細管Acidosis\n\nI型RTAの方が遠位のため代償が聞かず尿のpHが高い(アルカリ)\n\nI型RTAでは尿pH&gt;5.5, 尿中Na &gt; 25\n\nII型RTAは近位尿細管の再吸収が聞かないため、色んなものが抜ける"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#hyperventilation",
@@ -6319,5 +6319,89 @@
     "title": "敗血症における輸液療法今昔",
     "section": "ANDROMEDA-SHOCK trialのプロトコル",
     "text": "ANDROMEDA-SHOCK trialのプロトコル"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#stacked-barとaligned-barについて",
+    "href": "statistics/visualization_mi/index.html#stacked-barとaligned-barについて",
+    "title": "可視化事始め",
+    "section": "Stacked-barとaligned barについて",
+    "text": "Stacked-barとaligned barについて\n\n縦に重ねた棒グラフと横に重ねた棒グラフ\nどちらが良いですか？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#棒グラフが見せたいもの",
+    "href": "statistics/visualization_mi/index.html#棒グラフが見せたいもの",
+    "title": "可視化事始め",
+    "section": "棒グラフが見せたいもの",
+    "text": "棒グラフが見せたいもの\n\n棒グラフは横に並べて長さで差や比率を示すもの\n途中でBreakしている棒グラフは決して使ってはいけない\nそういう意味で、積み重ねの棒グラフは一番下がそろっていないので×\n事実、長さを間違える人が多い事が知られている(Talbot et al. 2014)"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#stacked-bar-and-algined-bar-graph",
+    "href": "statistics/visualization_mi/index.html#stacked-bar-and-algined-bar-graph",
+    "title": "可視化事始め",
+    "section": "Stacked bar and algined bar graph",
+    "text": "Stacked bar and algined bar graph\n\n\nどっちが見やすい？"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#各journalのvisualizationの推奨",
+    "href": "statistics/visualization_mi/index.html#各journalのvisualizationの推奨",
+    "title": "可視化事始め",
+    "section": "各JournalのVisualizationの推奨",
+    "text": "各JournalのVisualizationの推奨\n\n\n\nJournal\n明示的に避けるもの\nContinuous dataの推奨\nnに関する記載\n\n\n\n\nJAMA1\nPie chart、3D graph、stacked bar chartを避ける。Bar graphは原則としてfrequency data（number、percentage、rate）のみに使用する。\nMeanやORなどのsummary estimateはbarではなくdata marker + error barで表示する。OR、RR、HRなどは実値をlog scale上にplotする。\n原則としてNo. (%)で表示。n &lt; 100ではpercentageに小数を付けない。小標本ではnumerator/denominatorの併記を重視。\n\n\nAnnals of Internal Medicine (AIM)2\nPie chart、3-dimensional graphicを避ける。Variabilityを十分に示さない単純なbar plotを避ける。\nContinuous dataではvariabilityを示す。推定値の不確実性は可能であればSEよりconfidence intervalを用いる。\nn &lt; 200ではpercentageは整数、n ≥ 200では小数1桁を基本とする。\n\n\nNEJM3\n公開Author Guidelineでは、pie chart、3D graph、dynamite plotについての一律の明示的禁止は確認できない。\nStatistical estimateにはeffect estimate + SEまたはCIを提示する。重要なsubgroup analysisにはforest plotを推奨。\nFigure typeをnで切り替える明示的な基準はない。数値のprecisionはsample sizeに見合ったものとする。\n\n\nThe BMJ4\nHistogram等はsimple 2-dimensional formatとし、background gridを避ける。3D表示を積極的に用いることは推奨されない。\nGraph、scattergram、histogramを用いる場合には、必要に応じてunderlying numerical dataも提出する。Tableの方が明瞭であればtableが優先されることがある。\nPlot typeをsample sizeで切り替える明示的な基準はない。\n\n\nThe Lancet5\n3D graphは可能であれば1つ以上の2D graphへ変換する。\n明瞭な2D presentationを基本とし、axis、line、symbol、colour contrastを適切に設定する。\nPlot typeをsample sizeで切り替える明示的な基準はない。\n\n\nJACC6\nBar graphはcounts/proportions以外では避ける。特にcontinuous dataをbarのみで要約することを避ける。\nContinuous data、特にsmall sample sizeではdot plot / scatter plot等でfull data distributionを示す。\nSmall sampleでは個々のdata pointやfull distributionを示すことを推奨。具体的なnのcutoffは規定されていない。\n\n\nEuropean Heart Journal (EHJ)7\nMisleadingなaxis truncationや、小さな差を視覚的に誇張する表示を避ける。公開EHJ guidelineではdynamite plot、pie chart、3D graphの一律禁止は明示されていない。\n大きなtableより、key messageを明瞭に示せる場合はgraphical presentationを推奨。Kaplan–Meier curveではnumber at riskの表示を推奨。\nFigure legend等にnumber of animals / cells / observationsを明示する。Plot typeをnで切り替える明示的なcutoffはない。\n\n\nCirculation / AHA Journals8\nBar graphはcounts/proportions以外では避ける。Continuous dataをbarだけで要約しない。\nContinuous data、特にsmall nではdot plot / scatter plotでfull distributionを表示する。Dense dataではviolin plot等も使用可能。可能な場合はindividual data pointsを示す。\n各groupのnをfigure/tableに明示する。Small nではraw dataを重視するが、dot/box/violinを切り替える一律のn cutoffは規定されていない。\n\n\n\nJAMA. Instructions for Authors. https://jamanetwork.com/journals/jama/pages/instructions-for-authorsAnnals of Internal Medicine. Statistical Guidance. https://www.acpjournals.org/journal/aim/authors/statistical-guidanceNew England Journal of Medicine. Author Center: New Manuscripts. https://www.nejm.org/author-center/new-manuscriptsBMJ Author Hub. Formatting your paper. https://authors.bmj.com/writing-and-formatting/formatting-your-paper/; The BMJ. House Style. https://www.bmj.com/about-bmj/resources-authors/house-styleThe Lancet. Artwork Guidelines. https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdfJournal of the American College of Cardiology. Publication Ethics / Data Visualization Guidelines. https://www.jacc.org/author-center/publication-ethicsEuropean Heart Journal. Statistical Guidelines. https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_; General Instructions. https://academic.oup.com/eurheartj/pages/General_InstructionsAmerican Heart Association Journals. Figure Guidelines. https://www.ahajournals.org/figure-guidelines; Statistical Reporting Recommendations. https://www.ahajournals.org/statistical-recommendations; Circulation. Manuscript Preparation. https://www.ahajournals.org/circ/manuscript-preparation"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#type-i-rtadistal",
+    "href": "medicine/blood_gas_analysis_mi/index.html#type-i-rtadistal",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Type I RTA(distal)",
+    "text": "Type I RTA(distal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\nPrimary\n家族性\n\n\n薬剤\nAmphotericin B, Lithium, Ibuprofen\n\n\n自己免疫性疾患\nSJD, AIH/PBC, SLE, RA, Hashimoto thyroiditis, PAN, Cryoglobulinemia\n\n\n高Ca尿症状となる疾患\n副甲状腺機能亢進症, FHH, Vitamin D中毒, Sarcoidosis\n\n\n腎疾患\n尿閉解除後, AIN\n\n\n\nUptoDate “Etiology and diagnosis of distal(type 1) and proximal (type2) renal tubular acidosis”\n\n尿路結石や腎へのCa沈着が多い"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#type-ii-rtaproximal",
+    "href": "medicine/blood_gas_analysis_mi/index.html#type-ii-rtaproximal",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Type II RTA(proximal)",
+    "text": "Type II RTA(proximal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\n家族性\nFanconi症候群\n\n\n薬剤\nTenofovir等の抗ウィルス薬, Acetazolamide, Topiramate, Aminoglycoside, プラチナ系抗癌剤, Valproate\n\n\n自己免疫性疾患\nSJD(通常はType I)\n\n\nM蛋白血症\nAmyloidosis、MM/軽鎖病\n\n\n重金属\n鉛, Cadmium, 水銀, 銅\n\n\nその他\nVitamin D欠乏\n\n\n\nDynamed\n\n尿路結石や腎へのCa沈着は多くない"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#type-iv-rta",
+    "href": "medicine/blood_gas_analysis_mi/index.html#type-iv-rta",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Type IV RTA",
+    "text": "Type IV RTA\n\n最も多いのは保存期CKD\nその他だと糖尿病性腎症による低レニン高アルドステロン症や間質性腎炎が多い\n\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\n家族性\n\n\n\n薬剤\nACEi/ARB/MRA, NSAIDs, MRA, BB, Calcineurin阻害薬, Heparin\n\n\nMineralcorticoid欠乏症\nAddison病、DM、AIDS、TIN、IgM monoclonal gammopathy\n\n\nMineralcorticoid耐性\nAmyloidosis、糖尿病性腎症, Lupus腎症"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#rtaの比較",
+    "href": "medicine/blood_gas_analysis_mi/index.html#rtaの比較",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "RTAの比較",
+    "text": "RTAの比較"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#尿細管性アシドーシスの類型の特徴と鑑別点",
+    "href": "medicine/blood_gas_analysis_mi/index.html#尿細管性アシドーシスの類型の特徴と鑑別点",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "尿細管性アシドーシスの類型の特徴と鑑別点",
+    "text": "尿細管性アシドーシスの類型の特徴と鑑別点\n\n\n\n\n\n\n\n\n\n\n近位 RTA\n遠位 RTA\nType 4 RTA\n\n\n\n\n病態\n近位尿細管でのHCO₃⁻ 再吸収障害\n遠位・集合管での尿酸性化障害\nアルドステロン作用障害\n\n\n成人での主要な原因疾患\nFanconi 症候群パラプロテイン血症（LCPT など）\nSjögren 症候群関節リウマチ、SLE原発性胆汁性肝硬変\n保存期 CKD、糖尿病、SLE\n\n\n原因となる主要な薬剤\nアセタゾラミドプラチナ系抗癌薬イホスファミドアミノグリコシドバルプロ酸・ゾニサミド重金属（鉛・カドミウム）\nST 合剤・ペンタミジンアムホテリシン Bリチウムトピラマート（トルエン1）\nカルシニューリン阻害薬RAAS 阻害薬ヘパリン・ナファモスタット\n\n\n成人での主要な症候（遺伝性以外）\nFanconi 症候群（尿糖・低尿酸血症・尿細管障害）\n腎石灰化・腎尿路結石高 Ca 尿症・低クエン酸尿症\n特異的なものはなし\n\n\n腎石灰化・結石\n時々リン酸 Ca 結石\n多いリン酸 Ca 結石\nしばしばシュウ酸 Ca 結石 ＞ 尿酸結石\n\n\n血清 K 値\n低値\n低値\n高値\n\n\n血清 HCO₃⁻ 値\n15 mEq/L 未満は稀\n15 mEq/L 未満となりうる\n大抵 ＞15 mEq/L\n\n\n尿 pH\n高度アシデミアで低値（&lt;6）を取りうる\n常に高値（≥6.5）\n大抵低値（&lt;6.0）\n\n\n尿 AG\n腎障害が軽度であれば負\n正\n正\n\n\nアシデミア是正に必要な HCO₃⁻ 量\n10〜15 mEq/kg/日（多量に必要）\n1〜2 mEq/kg/日\n1 mEq/kg/日\n\n\n成人での薬物治療\n症状や合併症なければ必ずしも必要なし\n急性期：KCl にて低 K を先に是正後、アルカリ投与慢性期：クエン酸 K\n重曹フロリネフ（0.1〜0.2 mg/日）\n\n\n食事指導（慢性期）\nアルカリ食（野菜・果物）\n結石予防（塩分・シュウ酸・果糖・動物蛋白制限）\nK 制限\n\n\n\nトルエンは dRTA と同様の臨床所見を呈するが、尿酸性化障害とは別機序で生じる。"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因-1",
+    "href": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因-1",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "代謝性アルカローシスの原因",
+    "text": "代謝性アルカローシスの原因\n\n大体脱水"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#rで使えるカラーパレット",
+    "href": "statistics/visualization_mi/index.html#rで使えるカラーパレット",
+    "title": "可視化事始め",
+    "section": "Rで使えるカラーパレット",
+    "text": "Rで使えるカラーパレット"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#おすすめ",
+    "href": "statistics/visualization_mi/index.html#おすすめ",
+    "title": "可視化事始め",
+    "section": "おすすめ",
+    "text": "おすすめ\n\nカテゴリー変数はOkabe-Ito\n連続値はViridisがおすすめ！\n正負を強調する時はDiverginc HCLが良い"
   }
 ]

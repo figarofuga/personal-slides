@@ -43,7 +43,7 @@
         "--no-restore"
     ],
     "r.sessionWatcher": true,
-    "r.plot.backend": "httpgd",
+    "r.plot.backend": "standard",
     "r.lsp.diagnostics": false,
     "r.bracketedPaste": true,
     "positron.r.diagnostics.enable": false,

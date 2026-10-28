@@ -380,7 +380,7 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 | 腎疾患               | 尿閉解除後, AIN                                                         |
 +----------------------+-------------------------------------------------------------------------+
 
-UptoDate "Etiology and diagnosis of distal(type 1) and proximal (type2) renal tubular acidosis"
+[@emmett2025rta]
 
 - 尿路結石や腎へのCa沈着が多い
 
@@ -396,7 +396,7 @@ UptoDate "Etiology and diagnosis of distal(type 1) and proximal (type2) renal tu
 | 重金属 | 鉛, Cadmium, 水銀, 銅 |
 | その他 | Vitamin D欠乏 |
 
-Dynamed
+[@dynamed2026rta]
 
 - 尿路結石や腎へのCa沈着は多くない
 
@@ -442,29 +442,39 @@ Dynamed
 ## 代謝性 アルカローシス {#metabolic-alkalosis}
 
 - 正直あまり問題にならない事が多い
+- 一応、発生因子と維持因子を分けて考える必要がある
+  - 発生因子
+    - Cl-塩の喪失: 下痢、嘔吐、利尿薬、MRA亢進(しばしば脱水)
+    - Kの欠乏
+    - 塩基負荷: 重曹、グルコン酸塩、クエン酸など
+  - 維持因子
+    - 発生因子の持続
+    - HCO3-濾過の低下: 脱水によるRAA系の亢進
+    - HCO3-再吸収の増加
+
+## 代謝性アルカローシスの原因の大雑把な考えと検索
+
 - 大きく分けて以下の3つ
   - アルカリの負荷: 薬剤性
   - 酸の喪失(H, Cl): 腎臓 vs. 腎臓外でのCl
     - 腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)
   - 脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など
 
-by 内科診断学フローチャート
-- 原因検索はまずは尿中Clをみる
-  - 尿中Cl \< 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失
-  - 尿中Cl > 20-40 mEq/Lの場合は腎臓からのCl喪失: RAA系の亢進、Steroid、利尿薬、低Mg血症など
-    - 尿中Kでさらに原因を検索する
+[@takagishi2024flowchart]
+- 原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認
+- それで分からない時は**尿中Cl**を計測する
+  - 尿中Cl \< 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢
+  - 尿中Cl > 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など
 
 
 [← Acid–Base Map](#/acid-base-map)
 
-## 代謝性アルカローシスの原因
-
-- 大体脱水
 
 ------------------------------------------------------------------------
 
 ## 呼吸性 アシドーシス {#respiratory-acidosis}
 
+<!-- Todo: 確認 -->
 - いわゆる肺胞低換気 = II型呼吸不全
 - 物理的に肺胞に空気が入らない状態
 - 解剖学的に考えるのが良い
@@ -478,14 +488,13 @@ by 内科診断学フローチャート
 
 ------------------------------------------------------------------------
 
-## 呼吸性 アルカローシス {#respiratory-alkalosis}
+## 呼吸性アルカローシス {#respiratory-alkalosis}
 
-## Hyperventilation
-
-- Hypoxemia
-- Sepsis
-- Pregnancy
-- CNS disorders
+<!-- Todo: 確認 -->
+- 過換気が原因
+- 正直、一番多いのは肺炎とか心不全とかの全身状態悪化に伴う過換気
+- 後は代謝性Acidosis(特にDKA)に対する代償
+  - Kussmaul呼吸
 
 [← Acid–Base Map](#/acid-base-map)
 

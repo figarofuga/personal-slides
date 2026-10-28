@@ -67,7 +67,7 @@ library(grateful)
 library(tidyverse)
 library(ggpubr)
 library(patchwork)
-library(ggpie)
+library(plotrix)
 
 ```
 
@@ -453,13 +453,24 @@ mean_bar + median_bar
 ```{r}
 library(ggpubr)
 library(patchwork)
-library(ggrain)
 library(ggdist)
 
-ggplot(dat, aes(x = sex, y = ck_peak), alpha = 0.7) +
-  stat_dotsinterval(side = "bottom", scale = 0.7, slab_linewidth = NA) +
+all_plot <- ggplot(dat, aes(x = sex, y = ck_peak)) +
+  stat_dotsinterval(side = "bottom", scale = 0.7, slab_linewidth = NA) + 
   scale_fill_brewer(palette = "Set2") +
   theme_bw()
+
+male_plot <- ggplot(dplyr::filter(dat, sex == "Male"), aes(x = sex, y = ck_peak)) +
+  stat_dotsinterval(side = "bottom", scale = 0.3, slab_linewidth = NA) + 
+  scale_fill_brewer(palette = "Set2") +
+  theme_bw()
+
+female_plot <- ggplot(dplyr::filter(dat, sex == "Female"), aes(x = sex, y = ck_peak)) +
+  stat_dotsinterval(side = "bottom", scale = 0.3, slab_linewidth = NA) + 
+  scale_fill_brewer(palette = "Set2") +
+  theme_bw()
+
+all_plot + male_plot + female_plot
 
 ```
 
@@ -613,63 +624,187 @@ plot_3d + plot_2d
 ```
 
 
-## 今日の内容
+## Stacked-barとaligned barについて
 
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：ゲシュタルトと色使いについて
+- 縦に重ねた棒グラフと横に重ねた棒グラフ
+- どちらが良いですか？
+
+## 棒グラフが見せたいもの
+
+- 棒グラフは横に並べて長さで差や比率を示すもの
+- 途中でBreakしている棒グラフは決して使ってはいけない
+- そういう意味で、積み重ねの棒グラフは一番下がそろっていないので×
+- 事実、長さを間違える人が多い事が知られている[@Talbot2014-bo]
+
+## Stacked bar and algined bar graph
+
+```{r}
+library(patchwork)
+
+stacked_bar <- ggplot(df_3d) + 
+  geom_col(aes(x = x, y = z, fill = y), position = "stack") + 
+  theme_bw()
+
+dodged_bar <- ggplot(df_3d) + 
+  geom_col(aes(x = x, y = z, fill = y), position = position_dodge2()) + 
+  theme_bw()
+
+stacked_bar + dodged_bar + plot_layout(guides = "collect")
+
+```
+
+- どっちが見やすい？
 
 ## ゲシュタルトとは
 
-:::: columns
-::: {.column width="34%"}
-- 近接の法則
-- 類同の法則
-- 囲みの法則
-- 閉合の法則
-- 連続の法則
-- 接合の法則
-:::
+![](images/Gestalt.png){fig-alt="ゲシュタルトの法則" width="100%"}
 
-::: {.column width="66%"}
-![](images/slide30_image01.jpg){fig-alt="ゲシュタルトの法則" width="100%"}
-:::
-::::
+
+- 少ない視覚的情報から要素間の関係性を推論すること
+- 主に以下の法則が存在する
+  - 近接性(Proximity):空間的に近いものは互いに関連しているように見える
+  - 類似性(Similarity):見た目が似ているものは関係しているように見える
+  - 接続性(Coneetction):視覚的に結び付けられているもの同士は関係を持っているように見える
+  - 連続性(Continuity):一部が隠されているオブジェクトは親和性のある形に補完される
+  - 閉鎖性(Closure):不完全な形は完全なものとして知覚される
+  - 共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される
+
 
 ## 推奨はしないけど
 
-![](images/slide31_image01.png){fig-alt="推奨はしないけど" width="82%"}
+```{r}
+
+
+no_gestalt_fig <- ggplot(df_3d, aes(x = x, y = y, z = z)) +
+  geom_bar_3d(colour = "black") +
+  coord_3d() + 
+  theme_bw()
+
+
+gestalt_fig <- ggplot(df_3d, aes(x = x, y = y, z = z, fill = y)) +
+  geom_bar_3d(colour = "black") +
+  coord_3d() + 
+  theme_bw()
+
+no_gestalt_fig + gestalt_fig + plot_layout(guides = "collect")
+
+```
+
+- 右の方が、まだ視線を誘導できる
 
 ## 色使いについて
 
-:::: columns
-::: {.column width="42%"}
-- 色覚異常は思っている以上にコモン
-- カラーユニバーサルデザイン
-:::
+- いわゆる色覚異常は一般人口で約3%おり非常にCommon[@Jeong2025-bw]
+  - 男性により多い
+- 読者・査読者にもいるかも知れないので色使いは皆に優しい方が良い
 
-::: {.column width="58%"}
-![](images/slide32_image01.png){fig-alt="色使いについて1" width="48%"}
-
-![](images/slide32_image02.png){fig-alt="色使いについて2" width="90%"}
-:::
-::::
 
 ## カラーユニバーサルデザイン
 
 - 具体的な色彩の選び方は以下を参照
 - <https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf>
 
-![](images/slide33_image01.png){fig-alt="カラーユニバーサルデザイン" width="72%"}
 
-## AHA Figure Guidelines
 
-<https://www.ahajournals.org/figure-guidelines>
+## Rで使えるカラーパレット
 
-![](images/slide34_image01.png){fig-alt="AHA figure guidelines" width="76%"}
+```{r}
+
+# install.packages("RColorBrewer")
+library(RColorBrewer)
+
+# 色覚多様性に配慮したパレットを表示
+display.brewer.all(colorblindFriendly = TRUE)
+
+```
+
+## おすすめ
+
+- カテゴリー変数はOkabe-Ito
+- 連続値はViridisがおすすめ！
+- 正負を強調する時はDiverginc HCLが良い
+
+```{r}
+library(viridisLite)
+
+# Palettes
+palettes <- list(
+  "Okabe-Ito" = palette.colors(
+    palette = "Okabe-Ito"
+  ),
+  "Viridis" = viridisLite::viridis(8),
+  "Diverging HCL" = hcl.colors(
+    9,
+    palette = "Blue-Red 3"
+  )
+)
+
+# Paletteを描画する関数
+show_palette <- function(cols, main = "") {
+  n <- length(cols)
+
+  plot(
+    NA,
+    xlim = c(0.5, n + 0.5),
+    ylim = c(0, 1),
+    axes = FALSE,
+    xlab = "",
+    ylab = "",
+    main = main
+  )
+
+  rect(
+    xleft   = seq_len(n) - 0.5,
+    ybottom = 0,
+    xright  = seq_len(n) + 0.5,
+    ytop    = 1,
+    col     = cols,
+    border  = NA
+  )
+}
+
+# 3つを縦に並べて表示
+op <- par(
+  mfrow = c(3, 1),
+  mar = c(1, 3, 2, 1)
+)
+
+for (nm in names(palettes)) {
+  show_palette(palettes[[nm]], nm)
+}
+
+par(op)
+
+```
+
+## 各JournalのVisualizationの推奨
+
+| Journal | 明示的に避けるもの | Continuous dataの推奨 | nに関する記載 |
+|---|---|---|---|
+| **JAMA**[^JAMA] | **Pie chart、3D graph、stacked bar chart**を避ける。Bar graphは原則としてfrequency data（number、percentage、rate）のみに使用する。 | MeanやORなどのsummary estimateはbarではなく**data marker + error bar**で表示する。OR、RR、HRなどは実値を**log scale**上にplotする。 | 原則として`No. (%)`で表示。**n < 100ではpercentageに小数を付けない**。小標本ではnumerator/denominatorの併記を重視。 |
+| **Annals of Internal Medicine (AIM)**[^AIM] | **Pie chart、3-dimensional graphic**を避ける。Variabilityを十分に示さない単純なbar plotを避ける。 | Continuous dataではvariabilityを示す。推定値の不確実性は可能であれば**SEよりconfidence interval**を用いる。 | **n < 200ではpercentageは整数**、**n ≥ 200では小数1桁**を基本とする。 |
+| **NEJM**[^NEJM] | 公開Author Guidelineでは、pie chart、3D graph、dynamite plotについての一律の明示的禁止は確認できない。 | Statistical estimateには**effect estimate + SEまたはCI**を提示する。重要なsubgroup analysisには**forest plot**を推奨。 | Figure typeをnで切り替える明示的な基準はない。数値のprecisionはsample sizeに見合ったものとする。 |
+| **The BMJ**[^BMJ] | Histogram等は**simple 2-dimensional format**とし、background gridを避ける。3D表示を積極的に用いることは推奨されない。 | Graph、scattergram、histogramを用いる場合には、必要に応じて**underlying numerical data**も提出する。Tableの方が明瞭であればtableが優先されることがある。 | Plot typeをsample sizeで切り替える明示的な基準はない。 |
+| **The Lancet**[^Lancet] | **3D graphは可能であれば1つ以上の2D graphへ変換**する。 | 明瞭な**2D presentation**を基本とし、axis、line、symbol、colour contrastを適切に設定する。 | Plot typeをsample sizeで切り替える明示的な基準はない。 |
+| **JACC**[^JACC] | **Bar graphはcounts/proportions以外では避ける**。特にcontinuous dataをbarのみで要約することを避ける。 | Continuous data、特に**small sample sizeではdot plot / scatter plot等でfull data distributionを示す**。 | Small sampleでは個々のdata pointやfull distributionを示すことを推奨。具体的なnのcutoffは規定されていない。 |
+| **European Heart Journal (EHJ)**[^EHJ] | Misleadingなaxis truncationや、小さな差を視覚的に誇張する表示を避ける。公開EHJ guidelineではdynamite plot、pie chart、3D graphの一律禁止は明示されていない。 | 大きなtableより、key messageを明瞭に示せる場合は**graphical presentation**を推奨。Kaplan–Meier curveではnumber at riskの表示を推奨。 | Figure legend等に**number of animals / cells / observations**を明示する。Plot typeをnで切り替える明示的なcutoffはない。 |
+| **Circulation / AHA Journals**[^AHA] | **Bar graphはcounts/proportions以外では避ける**。Continuous dataをbarだけで要約しない。 | Continuous data、特に**small nではdot plot / scatter plotでfull distributionを表示**する。Dense dataではviolin plot等も使用可能。可能な場合はindividual data pointsを示す。 | **各groupのnをfigure/tableに明示**する。Small nではraw dataを重視するが、dot/box/violinを切り替える一律のn cutoffは規定されていない。 |
+
+[^JAMA]: JAMA. *Instructions for Authors*. <https://jamanetwork.com/journals/jama/pages/instructions-for-authors>
+
+[^AIM]: Annals of Internal Medicine. *Statistical Guidance*. <https://www.acpjournals.org/journal/aim/authors/statistical-guidance>
+
+[^NEJM]: New England Journal of Medicine. *Author Center: New Manuscripts*. <https://www.nejm.org/author-center/new-manuscripts>
+
+[^BMJ]: BMJ Author Hub. *Formatting your paper*. <https://authors.bmj.com/writing-and-formatting/formatting-your-paper/>; The BMJ. *House Style*. <https://www.bmj.com/about-bmj/resources-authors/house-style>
+
+[^Lancet]: The Lancet. *Artwork Guidelines*. <https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf>
+
+[^JACC]: Journal of the American College of Cardiology. *Publication Ethics / Data Visualization Guidelines*. <https://www.jacc.org/author-center/publication-ethics>
+
+[^EHJ]: European Heart Journal. *Statistical Guidelines*. <https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_>; *General Instructions*. <https://academic.oup.com/eurheartj/pages/General_Instructions>
+
+[^AHA]: American Heart Association Journals. *Figure Guidelines*. <https://www.ahajournals.org/figure-guidelines>; *Statistical Reporting Recommendations*. <https://www.ahajournals.org/statistical-recommendations>; Circulation. *Manuscript Preparation*. <https://www.ahajournals.org/circ/manuscript-preparation>
 
 ## Take Home Message
 
@@ -687,24 +822,14 @@ plot_3d + plot_2d
 
 ## Reference
 
-- Reveal, Don't Conceal: Transforming Data Visualization to Improve Transparency.
-  - Circulation. 2019;140(18):1506-1518.
-- Graphics and statistics for cardiology: Comparing categorical and continuous variables.
-  - Heart. 2016;102(5):349-355.
-- 永田ゆかり（2020）『データ視覚化のデザイン』SBクリエイティブ株式会社
-- キーラン・ヒーリー（2021）『実践Data Scienceシリーズ データ分析のためのデータ可視化入門』KS情報科学専門書
-- <https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.5.0/3-viz.html>
-- <https://socviz.co/lookatdata.html>
-- <https://seaborn.pydata.org/tutorial/function_overview.html>
-
-## ご静聴ありがとうございました
-
-## 補足画像
-
-<!-- TODO: 元スライド38は画像のみ。必要ならReferenceまたはAppendixへ移動する。 -->
-
-![](images/slide38_image01.png){fig-alt="補足画像" width="76%"}
-
 ```{r}
 grateful::cite_packages(output = "paragraph", out.dir = here::here("statistics", "visualization_mi"), pkgs = here::here("statistics", "visualization_mi", "index.qmd"), out.format = "html")
 ```
+
+::: {#refs}
+:::
+
+
+## ご静聴ありがとうございました
+
+
