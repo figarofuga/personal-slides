@@ -806,6 +806,9 @@ par(op)
 
 [^AHA]: American Heart Association Journals. *Figure Guidelines*. <https://www.ahajournals.org/figure-guidelines>; *Statistical Reporting Recommendations*. <https://www.ahajournals.org/statistical-recommendations>; Circulation. *Manuscript Preparation*. <https://www.ahajournals.org/circ/manuscript-preparation>
 
+
+<!-- Todo: 各々チェックする -->
+
 ## Take Home Message
 
 - まず、最初に何を見せたいのかを3つから考える
