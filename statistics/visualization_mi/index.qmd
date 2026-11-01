@@ -639,7 +639,25 @@ plot_3d + plot_2d
 ## Stacked bar and algined bar graph
 
 ```{r}
+library(ggplot2)
+library(tibble)
+library(dplyr)
+library(tidyr)
 library(patchwork)
+
+df_3d <- tidyr::crossing(
+  tibble(
+    x = c("A", "B", "C"), 
+    x_val = c(0.5, 1, 1.5)
+    ), 
+  tibble(
+    y = c("P", "Q", "R"), 
+    y_val = c(2, 4, 6)
+    )) |> 
+  dplyr::mutate(
+    mean = x_val * y_val,
+    z = rnorm(9, mean = mean, sd = 0.5)
+  )
 
 stacked_bar <- ggplot(df_3d) + 
   geom_col(aes(x = x, y = z, fill = y), position = "stack") + 
@@ -654,6 +672,7 @@ stacked_bar + dodged_bar + plot_layout(guides = "collect")
 ```
 
 - どっちが見やすい？
+- 例えば、AのQの値とBのPの値は？
 
 ## ゲシュタルトとは
 
@@ -668,7 +687,7 @@ stacked_bar + dodged_bar + plot_layout(guides = "collect")
   - 連続性(Continuity):一部が隠されているオブジェクトは親和性のある形に補完される
   - 閉鎖性(Closure):不完全な形は完全なものとして知覚される
   - 共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される
-
+- ただし、別データを線で結んではいけない
 
 ## 推奨はしないけど
 
