@@ -549,6 +549,7 @@ blockquote {
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="960" class="r-stretch"><ul>
 <li>どっちが見やすい？</li>
+<li>例えば、AのQの値とBのPの値は？</li>
 </ul>
 </section>
 <section id="ゲシュタルトとは" class="slide level2">
@@ -565,6 +566,7 @@ blockquote {
 <li>閉鎖性(Closure):不完全な形は完全なものとして知覚される</li>
 <li>共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される</li>
 </ul></li>
+<li>ただし、別データを線で結んではいけない</li>
 </ul>
 </section>
 <section id="推奨はしないけど" class="slide level2">
@@ -584,14 +586,20 @@ blockquote {
 <li>読者・査読者にもいるかも知れないので色使いは皆に優しい方が良い</li>
 </ul>
 </section>
-<section id="カラーユニバーサルデザイン" class="slide level2">
+<section id="カラーユニバーサルデザイン" class="slide level2 scrollable">
 <h2>カラーユニバーサルデザイン</h2>
-<ul>
-<li>具体的な色彩の選び方は以下を参照</li>
-<li><a href="https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf" class="uri">https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf</a></li>
-</ul>
 
-<img data-src="images/slide33_image01.png" style="width:72.0%" alt="カラーユニバーサルデザイン" class="r-stretch"></section>
+<img data-src="images/different_color.png" class="r-stretch"><ul>
+<li>この組み合わせは避ける</li>
+<li>以下のルールは有用
+<ol type="1">
+<li>赤を使うときは赤橙やオレンジを使う</li>
+<li>黄色、黄緑、明るい緑は同時に使わない</li>
+<li>赤<sub>緑(暖色系)と緑</sub>青(寒色系)のそれぞれの側から交互に選ぶ</li>
+</ol></li>
+<li>具体的な色彩の選び方は以下を参照<span class="citation" data-cites="tokyo_color_universal_design_2011">(<a href="#/reference" role="doc-biblioref" onclick="">東京都福祉保健局生活福祉部地域福祉推進課 2011</a>)</span></li>
+</ul>
+</section>
 <section id="rで使えるカラーパレット" class="slide level2">
 <h2>Rで使えるカラーパレット</h2>
 
@@ -612,61 +620,49 @@ blockquote {
 <tr class="header">
 <th>Journal</th>
 <th>明示的に避けるもの</th>
-<th>Continuous dataの推奨</th>
-<th>nに関する記載</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>JAMA</strong><sup>1</sup></td>
-<td><strong>Pie chart、3D graph、stacked bar chart</strong>を避ける。Bar graphは原則としてfrequency data（number、percentage、rate）のみに使用する。</td>
-<td>MeanやORなどのsummary estimateはbarではなく<strong>data marker + error bar</strong>で表示する。OR、RR、HRなどは実値を<strong>log scale</strong>上にplotする。</td>
-<td>原則として<code>No. (%)</code>で表示。<strong>n &lt; 100ではpercentageに小数を付けない</strong>。小標本ではnumerator/denominatorの併記を重視。</td>
+<td><strong>Pie chart、3D graph、stacked bar chart</strong>を避ける。Bar graphは原則として頻度（number、percentage、rate）のみに使用する。</td>
 </tr>
 <tr class="even">
-<td><strong>Annals of Internal Medicine (AIM)</strong><sup>2</sup></td>
-<td><strong>Pie chart、3-dimensional graphic</strong>を避ける。Variabilityを十分に示さない単純なbar plotを避ける。</td>
-<td>Continuous dataではvariabilityを示す。推定値の不確実性は可能であれば<strong>SEよりconfidence interval</strong>を用いる。</td>
-<td><strong>n &lt; 200ではpercentageは整数</strong>、<strong>n ≥ 200では小数1桁</strong>を基本とする。</td>
+<td><strong>Annals of Internal Medicine</strong><sup>2</sup></td>
+<td><strong>Pie chart、3D graphic</strong>を避ける。不確実性を示せない単なるBar plotは避ける</td>
 </tr>
 <tr class="odd">
 <td><strong>NEJM</strong><sup>3</sup></td>
-<td>公開Author Guidelineでは、pie chart、3D graph、dynamite plotについての一律の明示的禁止は確認できない。</td>
-<td>Statistical estimateには<strong>effect estimate + SEまたはCI</strong>を提示する。重要なsubgroup analysisには<strong>forest plot</strong>を推奨。</td>
-<td>Figure typeをnで切り替える明示的な基準はない。数値のprecisionはsample sizeに見合ったものとする。</td>
+<td>禁止事項の記載はないが、Common figure typeの中にPie chartはなし</td>
 </tr>
 <tr class="even">
 <td><strong>The BMJ</strong><sup>4</sup></td>
-<td>Histogram等は<strong>simple 2-dimensional format</strong>とし、background gridを避ける。3D表示を積極的に用いることは推奨されない。</td>
-<td>Graph、scattergram、histogramを用いる場合には、必要に応じて<strong>underlying numerical data</strong>も提出する。Tableの方が明瞭であればtableが優先されることがある。</td>
-<td>Plot typeをsample sizeで切り替える明示的な基準はない。</td>
+<td>Histogram等は<strong>simple 2-dimensional format</strong>とし、background gridを避ける</td>
 </tr>
 <tr class="odd">
 <td><strong>The Lancet</strong><sup>5</sup></td>
 <td><strong>3D graphは可能であれば1つ以上の2D graphへ変換</strong>する。</td>
-<td>明瞭な<strong>2D presentation</strong>を基本とし、axis、line、symbol、colour contrastを適切に設定する。</td>
-<td>Plot typeをsample sizeで切り替える明示的な基準はない。</td>
 </tr>
 <tr class="even">
 <td><strong>JACC</strong><sup>6</sup></td>
-<td><strong>Bar graphはcounts/proportions以外では避ける</strong>。特にcontinuous dataをbarのみで要約することを避ける。</td>
-<td>Continuous data、特に<strong>small sample sizeではdot plot / scatter plot等でfull data distributionを示す</strong>。</td>
-<td>Small sampleでは個々のdata pointやfull distributionを示すことを推奨。具体的なnのcutoffは規定されていない。</td>
+<td><p><strong>Bar graphは個数や割合以外では避ける</strong>。特にcontinuous dataをbarのみで要約することを避ける。</p>
+<p>nが少ないときはdot/scatter plotで全体の分布を示す</p>
+<p>色覚異常者に優しい色を使う</p></td>
 </tr>
 <tr class="odd">
 <td><strong>European Heart Journal (EHJ)</strong><sup>7</sup></td>
-<td>Misleadingなaxis truncationや、小さな差を視覚的に誇張する表示を避ける。公開EHJ guidelineではdynamite plot、pie chart、3D graphの一律禁止は明示されていない。</td>
-<td>大きなtableより、key messageを明瞭に示せる場合は<strong>graphical presentation</strong>を推奨。Kaplan–Meier curveではnumber at riskの表示を推奨。</td>
-<td>Figure legend等に<strong>number of animals / cells / observations</strong>を明示する。Plot typeをnで切り替える明示的なcutoffはない。</td>
+<td><p>特に記載なし</p>
+<p>色覚異常者に優しい色を使う</p></td>
 </tr>
 <tr class="even">
 <td><strong>Circulation / AHA Journals</strong><sup>8</sup></td>
-<td><strong>Bar graphはcounts/proportions以外では避ける</strong>。Continuous dataをbarだけで要約しない。</td>
-<td>Continuous data、特に<strong>small nではdot plot / scatter plotでfull distributionを表示</strong>する。Dense dataではviolin plot等も使用可能。可能な場合はindividual data pointsを示す。</td>
-<td><strong>各groupのnをfigure/tableに明示</strong>する。Small nではraw dataを重視するが、dot/box/violinを切り替える一律のn cutoffは規定されていない。</td>
+<td><p><strong>Bar graphはcounts/proportions以外では避ける</strong>。Continuous dataをbarだけで要約しない。</p>
+<p>Continuous data、nが小さい時は<strong>dot plot / scatter plotで全体の分布を表示</strong>する。</p>
+<p>色覚異常者に優しい色を使う</p></td>
 </tr>
 </tbody>
 </table>
+<!-- Todo: 各々チェックする -->
 <aside><ol class="aside-footnotes"><li id="fn1"><p>JAMA. <em>Instructions for Authors</em>. <a href="https://jamanetwork.com/journals/jama/pages/instructions-for-authors" class="uri">https://jamanetwork.com/journals/jama/pages/instructions-for-authors</a></p></li><li id="fn2"><p>Annals of Internal Medicine. <em>Statistical Guidance</em>. <a href="https://www.acpjournals.org/journal/aim/authors/statistical-guidance" class="uri">https://www.acpjournals.org/journal/aim/authors/statistical-guidance</a></p></li><li id="fn3"><p>New England Journal of Medicine. <em>Author Center: New Manuscripts</em>. <a href="https://www.nejm.org/author-center/new-manuscripts" class="uri">https://www.nejm.org/author-center/new-manuscripts</a></p></li><li id="fn4"><p>BMJ Author Hub. <em>Formatting your paper</em>. <a href="https://authors.bmj.com/writing-and-formatting/formatting-your-paper/" class="uri">https://authors.bmj.com/writing-and-formatting/formatting-your-paper/</a>; The BMJ. <em>House Style</em>. <a href="https://www.bmj.com/about-bmj/resources-authors/house-style" class="uri">https://www.bmj.com/about-bmj/resources-authors/house-style</a></p></li><li id="fn5"><p>The Lancet. <em>Artwork Guidelines</em>. <a href="https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf" class="uri">https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf</a></p></li><li id="fn6"><p>Journal of the American College of Cardiology. <em>Publication Ethics / Data Visualization Guidelines</em>. <a href="https://www.jacc.org/author-center/publication-ethics" class="uri">https://www.jacc.org/author-center/publication-ethics</a></p></li><li id="fn7"><p>European Heart Journal. <em>Statistical Guidelines</em>. <a href="https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_" class="uri">https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_</a>; <em>General Instructions</em>. <a href="https://academic.oup.com/eurheartj/pages/General_Instructions" class="uri">https://academic.oup.com/eurheartj/pages/General_Instructions</a></p></li><li id="fn8"><p>American Heart Association Journals. <em>Figure Guidelines</em>. <a href="https://www.ahajournals.org/figure-guidelines" class="uri">https://www.ahajournals.org/figure-guidelines</a>; <em>Statistical Reporting Recommendations</em>. <a href="https://www.ahajournals.org/statistical-recommendations" class="uri">https://www.ahajournals.org/statistical-recommendations</a>; Circulation. <em>Manuscript Preparation</em>. <a href="https://www.ahajournals.org/circ/manuscript-preparation" class="uri">https://www.ahajournals.org/circ/manuscript-preparation</a></p></li></ol></aside></section>
 <section id="take-home-message-1" class="slide level2">
 <h2>Take Home Message</h2>
@@ -766,18 +762,16 @@ Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbo
 <div id="ref-kiranhiri2021-fw" class="csl-entry" role="listitem">
 キーラン・ヒーリー. 2021. <em>データ分析のためのデータ可視化入門</em>. 実践Data Scienceシリーズ. 講談社.
 </div>
+<div id="ref-tokyo_color_universal_design_2011" class="csl-entry" role="listitem">
+東京都福祉保健局生活福祉部地域福祉推進課. 2011. <em>東京都カラーユニバーサルデザインガイドライン</em>. 東京都福祉保健局生活福祉部地域福祉推進課. <a href="https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/colorudguideline2">https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/colorudguideline2</a>.
+</div>
 </div>
 </section>
 <section id="ご静聴ありがとうございました" class="slide level2">
 <h2>ご静聴ありがとうございました</h2>
+
+
 </section>
-<section id="補足画像" class="slide level2">
-<h2>補足画像</h2>
-<!-- TODO: 元スライド38は画像のみ。必要ならReferenceまたはAppendixへ移動する。 -->
-
-
-
-<img data-src="images/slide38_image01.png" style="width:76.0%" alt="補足画像" class="r-stretch"></section>
 
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
