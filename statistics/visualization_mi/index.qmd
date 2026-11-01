@@ -71,7 +71,6 @@ library(plotrix)
 
 ```
 
-
 ## Take Home Message
 
 - まず、最初に何を見せたいのかを3つから考える
@@ -149,24 +148,19 @@ ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add 
 
 ## よいFigureの条件
 
-:::: columns
-
+::::: columns
 ::: {.column width="42%"}
 ![](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
 
 Edward Tufte
-
 :::
 
 ::: {.column width="58%"}
-> すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. ...(中略)... よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. 
-[@kiranhiri2021-fw]
+> すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. ...(中略)... よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. [@kiranhiri2021-fw]
 :::
-::::
+:::::
 
 ## 非常に良いFigureの見本
-
-
 
 ![](images/good_figure_example.png){fig-alt="非常に良いFigureの見本" width="100%"}
 
@@ -174,7 +168,7 @@ Edward Tufte
 
 ## よいFigureの条件
 
-:::: columns
+::::: columns
 ::: {.column width="58%"}
 > 優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。
 
@@ -183,9 +177,8 @@ Edward Tufte
 
 ::: {.column width="42%"}
 ![Edward Tufte](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
-
 :::
-::::
+:::::
 
 ## 今日の内容
 
@@ -198,15 +191,14 @@ Edward Tufte
 
 ## インク・データ比の法則
 
-:::: columns
+::::: columns
 ::: {.column width="52%"}
 - そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件
 - 簡単にいうと「シンプル イズ ベスト」
 :::
 
 ::: {.column width="48%"}
-![](images/minimalist_figure.png){fig-alt="インク・データ比の例1" width="66%"}
-[@Weissgerber2019-ho]
+![](images/minimalist_figure.png){fig-alt="インク・データ比の例1" width="66%"} [@Weissgerber2019-ho]
 
 ```{r}
 #| label: bad-ink-data-ratio
@@ -240,14 +232,12 @@ ggdraw(base_irisplot) +
 
 
 ```
-
 :::
-::::
-
+:::::
 
 ## 見せたいものって？
 
-:::: columns
+::::: columns
 ::: {.column width="44%"}
 - 見せたいものは大体この3種類に大別
   - 関係性
@@ -265,9 +255,9 @@ ggdraw(base_irisplot) +
 ::: {.column width="56%"}
 ![](images/basic_visualization.png){fig-alt="見せたいものと図の種類" width="100%"}
 :::
-[@waskom_seaborn_function_overview]
 
-::::
+[@waskom_seaborn_function_overview]
+:::::
 
 ## 人間の得意・苦手分野
 
@@ -282,16 +272,12 @@ ggdraw(base_irisplot) +
 - 黒がその他
 - どちらが分かりやすいですか？
 
-
-:::: columns
+::::: columns
 ::: {.column width="50%"}
-
 ![ナイチンゲールの元図](images/nightingale_fig.png)
-
 :::
 
 ::: {.column width="50%"}
-
 ```{r}
 library(Rdatasets)
 library(marginaleffects)
@@ -311,9 +297,8 @@ tidyr::pivot_longer(
     theme_bw()
 
 ```
-
 :::
-::::
+:::::
 
 ## 今日の内容
 
@@ -331,9 +316,8 @@ tidyr::pivot_longer(
 - サンプルサイズの大きさで、使う図表を分けるべき
 - 一つの目安として `n < 30` ではドットチャートを併用する
 
-:::: columns
+::::: columns
 ::: {.column width="50%"}
-
 ```{r}
 library(ggpubr)
 
@@ -344,11 +328,9 @@ ggpubr::ggviolin(
   )
 
 ```
-
 :::
 
 ::: {.column width="50%"}
-
 ```{r}
 library(ggpubr)
 
@@ -360,16 +342,14 @@ ggpubr::ggdotplot(
   )
 
 ```
-
 :::
-::::
+:::::
 
 ## What’s This？
 
 - STEMI患者のPCI後のCKの値の平均
 - STEMI患者のPCI後のCKの値の中央値
 - ???
-
 
 ```{r}
 
@@ -425,7 +405,6 @@ mean_bar_simple + median_bar_simple
 
 ```
 
-
 ## What’s This？
 
 ```{r}
@@ -446,9 +425,7 @@ mean_bar + median_bar
 
 ```
 
-
 ## That’s It!!
-
 
 ```{r}
 library(ggpubr)
@@ -473,7 +450,6 @@ female_plot <- ggplot(dplyr::filter(dat, sex == "Female"), aes(x = sex, y = ck_p
 all_plot + male_plot + female_plot
 
 ```
-
 
 ## Nへの意識
 
@@ -521,8 +497,6 @@ dotplot <- ggpubr::ggdotplot(
 violin + dotplot +  plot_layout(widths = c(1, 3))
 
 ```
-
-
 ::::
 
 ## Nへの意識と見やすさの両立
@@ -531,7 +505,6 @@ violin + dotplot +  plot_layout(widths = c(1, 3))
 
 - ドットチャートに要約（平均・中央値）を追加する
 - ドットを出来るだけ薄くする[@Weissgerber2019-ho]
-
 
 ## まとめ
 
@@ -549,7 +522,6 @@ violin + dotplot +  plot_layout(widths = c(1, 3))
 - Tips：Gestaltと色使いについて
 
 ## 3次元プロットって？
-
 
 ```{r}
 
@@ -583,7 +555,6 @@ plotrix::pie3D(
 - 一番ダメなのが3次元円グラフ
   - 4つの"13"は同じ大きさに見えますか？
   - 13に挟まれた数値はどれが一番大きく見えますか？
-
 
 ## どちらが見やすい？
 
@@ -622,7 +593,6 @@ plot_2d <- ggplot(df_3d) +
 plot_3d + plot_2d
 
 ```
-
 
 ## Stacked-barとaligned barについて
 
@@ -678,7 +648,6 @@ stacked_bar + dodged_bar + plot_layout(guides = "collect")
 
 ![](images/Gestalt.png){fig-alt="ゲシュタルトの法則" width="100%"}
 
-
 - 少ない視覚的情報から要素間の関係性を推論すること
 - 主に以下の法則が存在する
   - 近接性(Proximity):空間的に近いものは互いに関連しているように見える
@@ -717,13 +686,16 @@ no_gestalt_fig + gestalt_fig + plot_layout(guides = "collect")
   - 男性により多い
 - 読者・査読者にもいるかも知れないので色使いは皆に優しい方が良い
 
-
 ## カラーユニバーサルデザイン
 
-- 具体的な色彩の選び方は以下を参照
-- <https://www.fukushihoken.metro.tokyo.lg.jp/kiban/machizukuri/kanren/color.files/colorudguideline.pdf>
+![](images/different_color.png)
 
-
+- この組み合わせは避ける
+- 以下のルールは有用
+  1.  赤を使うときは赤橙やオレンジを使う
+  2.  黄色、黄緑、明るい緑は同時に使わない
+  3.  赤~緑(暖色系)と緑~青(寒色系)のそれぞれの側から交互に選ぶ
+- 具体的な色彩の選び方は以下を参照[@tokyo_color_universal_design_2011]
 
 ## Rで使えるカラーパレット
 
@@ -798,33 +770,51 @@ par(op)
 
 ## 各JournalのVisualizationの推奨
 
-| Journal | 明示的に避けるもの | Continuous dataの推奨 | nに関する記載 |
-|---|---|---|---|
-| **JAMA**[^JAMA] | **Pie chart、3D graph、stacked bar chart**を避ける。Bar graphは原則としてfrequency data（number、percentage、rate）のみに使用する。 | MeanやORなどのsummary estimateはbarではなく**data marker + error bar**で表示する。OR、RR、HRなどは実値を**log scale**上にplotする。 | 原則として`No. (%)`で表示。**n < 100ではpercentageに小数を付けない**。小標本ではnumerator/denominatorの併記を重視。 |
-| **Annals of Internal Medicine (AIM)**[^AIM] | **Pie chart、3-dimensional graphic**を避ける。Variabilityを十分に示さない単純なbar plotを避ける。 | Continuous dataではvariabilityを示す。推定値の不確実性は可能であれば**SEよりconfidence interval**を用いる。 | **n < 200ではpercentageは整数**、**n ≥ 200では小数1桁**を基本とする。 |
-| **NEJM**[^NEJM] | 公開Author Guidelineでは、pie chart、3D graph、dynamite plotについての一律の明示的禁止は確認できない。 | Statistical estimateには**effect estimate + SEまたはCI**を提示する。重要なsubgroup analysisには**forest plot**を推奨。 | Figure typeをnで切り替える明示的な基準はない。数値のprecisionはsample sizeに見合ったものとする。 |
-| **The BMJ**[^BMJ] | Histogram等は**simple 2-dimensional format**とし、background gridを避ける。3D表示を積極的に用いることは推奨されない。 | Graph、scattergram、histogramを用いる場合には、必要に応じて**underlying numerical data**も提出する。Tableの方が明瞭であればtableが優先されることがある。 | Plot typeをsample sizeで切り替える明示的な基準はない。 |
-| **The Lancet**[^Lancet] | **3D graphは可能であれば1つ以上の2D graphへ変換**する。 | 明瞭な**2D presentation**を基本とし、axis、line、symbol、colour contrastを適切に設定する。 | Plot typeをsample sizeで切り替える明示的な基準はない。 |
-| **JACC**[^JACC] | **Bar graphはcounts/proportions以外では避ける**。特にcontinuous dataをbarのみで要約することを避ける。 | Continuous data、特に**small sample sizeではdot plot / scatter plot等でfull data distributionを示す**。 | Small sampleでは個々のdata pointやfull distributionを示すことを推奨。具体的なnのcutoffは規定されていない。 |
-| **European Heart Journal (EHJ)**[^EHJ] | Misleadingなaxis truncationや、小さな差を視覚的に誇張する表示を避ける。公開EHJ guidelineではdynamite plot、pie chart、3D graphの一律禁止は明示されていない。 | 大きなtableより、key messageを明瞭に示せる場合は**graphical presentation**を推奨。Kaplan–Meier curveではnumber at riskの表示を推奨。 | Figure legend等に**number of animals / cells / observations**を明示する。Plot typeをnで切り替える明示的なcutoffはない。 |
-| **Circulation / AHA Journals**[^AHA] | **Bar graphはcounts/proportions以外では避ける**。Continuous dataをbarだけで要約しない。 | Continuous data、特に**small nではdot plot / scatter plotでfull distributionを表示**する。Dense dataではviolin plot等も使用可能。可能な場合はindividual data pointsを示す。 | **各groupのnをfigure/tableに明示**する。Small nではraw dataを重視するが、dot/box/violinを切り替える一律のn cutoffは規定されていない。 |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| Journal                              | 明示的に避けるもの                                                                                                        |
++======================================+===========================================================================================================================+
+| **JAMA**[^1]                         | **Pie chart、3D graph、stacked bar chart**を避ける。Bar graphは原則として頻度（number、percentage、rate）のみに使用する。 |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **Annals of Internal Medicine**[^2]  | **Pie chart、3D graphic**を避ける。不確実性を示せない単なるBar plotは避ける                                               |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **NEJM**[^3]                         | 禁止事項の記載はないが、Common figure typeの中にPie chartはなし                                                           |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **The BMJ**[^4]                      | Histogram等は**simple 2-dimensional format**とし、background gridを避ける                                                 |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **The Lancet**[^5]                   | **3D graphは可能であれば1つ以上の2D graphへ変換**する。                                                                   |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **JACC**[^6]                         | **Bar graphは個数や割合以外では避ける**。特にcontinuous dataをbarのみで要約することを避ける。                             |
+|                                      |                                                                                                                           |
+|                                      | nが少ないときはdot/scatter plotで全体の分布を示す                                                                         |
+|                                      |                                                                                                                           |
+|                                      | 色覚異常者に優しい色を使う                                                                                                |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **European Heart Journal (EHJ)**[^7] | 特に記載なし                                                                                                              |
+|                                      |                                                                                                                           |
+|                                      | 色覚異常者に優しい色を使う                                                                                                |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **Circulation / AHA Journals**[^8]   | **Bar graphはcounts/proportions以外では避ける**。Continuous dataをbarだけで要約しない。                                   |
+|                                      |                                                                                                                           |
+|                                      | Continuous data、nが小さい時は**dot plot / scatter plotで全体の分布を表示**する。                                         |
+|                                      |                                                                                                                           |
+|                                      | 色覚異常者に優しい色を使う                                                                                                |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
 
-[^JAMA]: JAMA. *Instructions for Authors*. <https://jamanetwork.com/journals/jama/pages/instructions-for-authors>
+[^1]: JAMA. *Instructions for Authors*. <https://jamanetwork.com/journals/jama/pages/instructions-for-authors>
 
-[^AIM]: Annals of Internal Medicine. *Statistical Guidance*. <https://www.acpjournals.org/journal/aim/authors/statistical-guidance>
+[^2]: Annals of Internal Medicine. *Statistical Guidance*. <https://www.acpjournals.org/journal/aim/authors/statistical-guidance>
 
-[^NEJM]: New England Journal of Medicine. *Author Center: New Manuscripts*. <https://www.nejm.org/author-center/new-manuscripts>
+[^3]: New England Journal of Medicine. *Author Center: New Manuscripts*. <https://www.nejm.org/author-center/new-manuscripts>
 
-[^BMJ]: BMJ Author Hub. *Formatting your paper*. <https://authors.bmj.com/writing-and-formatting/formatting-your-paper/>; The BMJ. *House Style*. <https://www.bmj.com/about-bmj/resources-authors/house-style>
+[^4]: BMJ Author Hub. *Formatting your paper*. <https://authors.bmj.com/writing-and-formatting/formatting-your-paper/>; The BMJ. *House Style*. <https://www.bmj.com/about-bmj/resources-authors/house-style>
 
-[^Lancet]: The Lancet. *Artwork Guidelines*. <https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf>
+[^5]: The Lancet. *Artwork Guidelines*. <https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf>
 
-[^JACC]: Journal of the American College of Cardiology. *Publication Ethics / Data Visualization Guidelines*. <https://www.jacc.org/author-center/publication-ethics>
+[^6]: Journal of the American College of Cardiology. *Publication Ethics / Data Visualization Guidelines*. <https://www.jacc.org/author-center/publication-ethics>
 
-[^EHJ]: European Heart Journal. *Statistical Guidelines*. <https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_>; *General Instructions*. <https://academic.oup.com/eurheartj/pages/General_Instructions>
+[^7]: European Heart Journal. *Statistical Guidelines*. <https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_>; *General Instructions*. <https://academic.oup.com/eurheartj/pages/General_Instructions>
 
-[^AHA]: American Heart Association Journals. *Figure Guidelines*. <https://www.ahajournals.org/figure-guidelines>; *Statistical Reporting Recommendations*. <https://www.ahajournals.org/statistical-recommendations>; Circulation. *Manuscript Preparation*. <https://www.ahajournals.org/circ/manuscript-preparation>
-
+[^8]: American Heart Association Journals. *Figure Guidelines*. <https://www.ahajournals.org/figure-guidelines>; *Statistical Reporting Recommendations*. <https://www.ahajournals.org/statistical-recommendations>; Circulation. *Manuscript Preparation*. <https://www.ahajournals.org/circ/manuscript-preparation>
 
 <!-- Todo: 各々チェックする -->
 
@@ -851,7 +841,4 @@ grateful::cite_packages(output = "paragraph", out.dir = here::here("statistics",
 ::: {#refs}
 :::
 
-
 ## ご静聴ありがとうございました
-
-
