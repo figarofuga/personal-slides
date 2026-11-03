@@ -16,3 +16,4 @@ format: html
 | [PRO(patient reported outcomes) analysis入門](PROanalysis/) | PROの解析時の注意点です |
 | [model performance入門](model_performance/) | 予測モデルの評価方法です |
 | [機械学習を用いた因果推論](mlcausal/) | 機械学習を用いた因果推論、特にCausal forestについて |
+| [Visualization](visualization/) | 論文におけるFigureの作り方 |

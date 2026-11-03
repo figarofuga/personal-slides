@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Nozomi Niimi">
-  <meta name="dcterms.date" content="2021-03-05">
+  <meta name="dcterms.date" content="2026-11-01">
   <title>My personal slides – 可視化事始め</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -169,7 +169,17 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
     </div>
 </div>
 
-  <p class="date">2021-03-05</p>
+  <p class="date">2026-11-01</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/visualization良いfigureの条件" id="/toc-visualization良いfigureの条件">Visualization：良いFigureの条件</a></li>
+<li><a href="#/データインク比" id="/toc-データインク比">データ・インク比</a></li>
+<li><a href="#/nへの意識" id="/toc-nへの意識">Nへの意識</a></li>
+<li><a href="#/visualizationのテクニック" id="/toc-visualizationのテクニック">Visualizationのテクニック</a></li>
+</ul>
+</nav>
 </section>
 <section class="slide level2">
 
@@ -216,28 +226,19 @@ blockquote {
 <ul>
 <li>連続値に棒グラフは避ける</li>
 </ul></li>
+<li>棒グラフは極力積み上げでなくDodgedする</li>
+<li>3次元プロットは避ける！(特に円グラフ)</li>
 <li>色覚多様性にも配慮した色を使う</li>
 </ul>
 </section>
 <section id="what-is-this" class="slide level2">
-<h2>What Is This？</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/anscombes-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/anscombes-2.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
+<h2>What is This？</h2>
+
+<img data-src="index_files/figure-revealjs/anscombes-1.svg" width="960" class="r-stretch"></section>
+<section id="what-is-this-1" class="slide level2">
+<h2>What is this?</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.svg" width="960" class="r-stretch"><ul>
 <li>Anscombe’s Quartet
 <ul>
 <li>上記、相関係数と回帰直線に加えて・・・・・・</li>
@@ -256,27 +257,10 @@ blockquote {
 <li>Visualizationって誰かに習ったっけ？</li>
 </ul>
 </section>
-<section id="今日の内容" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
-</section>
-<section id="今日の内容-1" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
+<section>
+<section id="visualization良いfigureの条件" class="title-slide slide level1 center">
+<h1>Visualization：良いFigureの条件</h1>
+
 </section>
 <section id="よいfigureの条件" class="slide level2">
 <h2>よいFigureの条件</h2>
@@ -286,7 +270,7 @@ blockquote {
 <p>Edward Tufte</p>
 </div><div class="column" style="width:58%;">
 <blockquote>
-<p>すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. …(中略)… よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. <span class="citation" data-cites="kiranhiri2021-fw">(<a href="#/reference" role="doc-biblioref" onclick="">キーラン・ヒーリー 2021</a>)</span></p>
+<p>すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして デザインの問題です. <span class="citation" data-cites="kiranhiri2021-fw">(<a href="#/references" role="doc-biblioref" onclick="">キーラン・ヒーリー 2021</a>)</span></p>
 </blockquote>
 </div></div>
 </section>
@@ -294,49 +278,41 @@ blockquote {
 <h2>非常に良いFigureの見本</h2>
 
 <img data-src="images/good_figure_example.png" style="width:100.0%" alt="非常に良いFigureの見本" class="r-stretch"><ul>
+<li>左の図は同時に6種類の変数をきれいに示している</li>
+<li>右の図はCostの高さをモンスターの牙に例えている</li>
 <li>？？？</li>
 </ul>
 </section>
 <section id="よいfigureの条件-1" class="slide level2">
 <h2>よいFigureの条件</h2>
 <div class="columns">
-<div class="column" style="width:58%;">
-<blockquote>
-<p>優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。</p>
-</blockquote>
-<ul>
-<li>データ・インク比を最大化する</li>
-</ul>
-</div><div class="column" style="width:42%;">
+<div class="column" style="width:42%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/edward_tufte.png" style="width:60.0%" alt="Edward Tufte"></p>
 <figcaption>Edward Tufte</figcaption>
 </figure>
 </div>
-</div></div>
-</section>
-<section id="今日の内容-2" class="slide level2">
-<h2>今日の内容</h2>
+</div><div class="column" style="width:58%;">
+<blockquote>
+<p>よいグラフは読み手に対して最小のスペース、最小のインクによって最小の時間で最大限のアイディアを与えてくれます.……ほとんどの場合,グラフは複数の変量からなり。……そしてすばらしいグラフは私たちにデータの真 実を教えてくれます。</p>
+</blockquote>
 <ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
+<li><span style="color: red;font-size: 1.2em;"><strong>最小のスペース、最小のインクで最大限のアイディアを与える？</strong></span></li>
 </ul>
+</div></div>
+</section></section>
+<section>
+<section id="データインク比" class="title-slide slide level1 center">
+<h1>データ・インク比</h1>
+
 </section>
 <section id="インクデータ比の法則" class="slide level2">
 <h2>インク・データ比の法則</h2>
 <div class="columns">
 <div class="column" style="width:52%;">
-<ul>
-<li>そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件</li>
-<li>簡単にいうと「シンプル イズ ベスト」</li>
-</ul>
+<p><img data-src="images/minimalist_figure.png" style="width:66.0%" alt="インク・データ比の例1"> <span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/references" role="doc-biblioref" onclick="">Weissgerber et al. 2019</a>)</span></p>
 </div><div class="column" style="width:48%;">
-<p><img data-src="images/minimalist_figure.png" style="width:66.0%" alt="インク・データ比の例1"> <span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/reference" role="doc-biblioref" onclick="">Weissgerber et al. 2019</a>)</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -347,6 +323,11 @@ blockquote {
 </div>
 </div>
 </div></div>
+<ul>
+<li>そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件</li>
+<li>棒グラフに下の部分や、X軸でわざわざ分かれているグラフの色の塗り替えは不要</li>
+<li>簡単にいうと”Simple is best”</li>
+</ul>
 </section>
 <section id="見せたいものって" class="slide level2">
 <h2>見せたいものって？</h2>
@@ -371,22 +352,19 @@ blockquote {
 </ul>
 </div><div class="column" style="width:56%;">
 <p><img data-src="images/basic_visualization.png" style="width:100.0%" alt="見せたいものと図の種類"></p>
-</div><p><span class="citation" data-cites="waskom_seaborn_function_overview">(<a href="#/reference" role="doc-biblioref" onclick="">Waskom, n.d.</a>)</span></p>
+</div><p><span class="citation" data-cites="waskom_seaborn_function_overview">(<a href="#/references" role="doc-biblioref" onclick="">Waskom, n.d.</a>)</span></p>
 </div>
 </section>
 <section id="人間の得意苦手分野" class="slide level2">
 <h2>人間の得意・苦手分野</h2>
-
-<img data-src="images/human_error.png" style="width:80.0%" alt="Example 元図" class="r-stretch"><p><span class="citation" data-cites="kiranhiri2021-fw">(<a href="#/reference" role="doc-biblioref" onclick="">キーラン・ヒーリー 2021</a>)</span></p>
+<p><img data-src="images/human_error.png" style="width:80.0%" alt="Example 元図"> <span class="citation" data-cites="kiranhiri2021-fw">(<a href="#/references" role="doc-biblioref" onclick="">キーラン・ヒーリー 2021</a>)</span></p>
+<ul>
+<li>右の方がエラーが多い</li>
+<li>面積を使うMosaic図や円グラフはエラーが多い</li>
+</ul>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<ul>
-<li>青が感染症</li>
-<li>赤が戦場での負傷</li>
-<li>黒がその他</li>
-<li>どちらが分かりやすいですか？</li>
-</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -395,31 +373,33 @@ blockquote {
 <figcaption>ナイチンゲールの元図</figcaption>
 </figure>
 </div>
+<ul>
+<li>青が負傷による死亡</li>
+<li>赤が感染症による死亡</li>
+<li>黒がその他</li>
+</ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
-</section>
-<section id="今日の内容-3" class="slide level2">
-<h2>今日の内容</h2>
 <ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
+<li>どちらがより、<strong>感染症による死亡</strong>の影響の強さを示せていますか？</li>
 </ul>
+</section></section>
+<section>
+<section id="nへの意識" class="title-slide slide level1 center">
+<h1>Nへの意識</h1>
+
 </section>
-<section id="nへの意識" class="slide level2">
-<h2>Nへの意識</h2>
+<section id="nによるプロットの選択" class="slide level2">
+<h2>Nによるプロットの選択</h2>
 <ul>
 <li>連続値の平均や中央値を比較する時には分布も非常に重要</li>
 <li>分布を見る時にはバイオリンプロットもよい</li>
@@ -432,7 +412,7 @@ blockquote {
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -442,7 +422,7 @@ blockquote {
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -457,64 +437,49 @@ blockquote {
 <li>???</li>
 </ul>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960" class="r-stretch"></section>
 <section id="whats-this-1" class="slide level2">
 <h2>What’s This？</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960" class="r-stretch"></section>
-<section id="thats-it" class="slide level2">
-<h2>That’s It!!</h2>
-
 <img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" width="960" class="r-stretch"></section>
+<section id="thats-it" class="slide level2">
+<h2>That’s it!!</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.svg" width="960" class="r-stretch"><ul>
+<li>Femaleだけ外れ値があるが故の問題</li>
+<li>棒グラフだと不適切に要約されてしまい気づけない</li>
+</ul>
+</section>
 <section id="nへの意識-1" class="slide level2">
 <h2>Nへの意識</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<ul>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="960" class="r-stretch"><ul>
 <li>何かの比較の時には必ず分布も考慮する</li>
 <li>箱ひげ図やバイオリンプロットは非常に見やすい</li>
 <li>一方で、Nが小さいときにはその意味も変わる</li>
 <li>Nが少ないときはそのデータも入れた方が良い</li>
 </ul>
-</div><div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="nへの意識と見やすさの両立" class="slide level2">
 <h2>Nへの意識と見やすさの両立</h2>
 <p><img data-src="images/effective_method.png">{fig-alt=“ドットチャートと要約1”“}</p>
 <ul>
 <li>ドットチャートに要約（平均・中央値）を追加する</li>
-<li>ドットを出来るだけ薄くする<span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/reference" role="doc-biblioref" onclick="">Weissgerber et al. 2019</a>)</span></li>
+<li>ドットを出来るだけ薄くする<span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/references" role="doc-biblioref" onclick="">Weissgerber et al. 2019</a>)</span></li>
 </ul>
 </section>
-<section id="まとめ" class="slide level2">
-<h2>まとめ</h2>
+<section id="連続値の出し方まとめ" class="slide level2">
+<h2>連続値の出し方まとめ</h2>
 
-<img data-src="images/figure_spp_table.png" alt="まとめ図" class="r-stretch"><p><span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/reference" role="doc-biblioref" onclick="">Weissgerber et al. 2019</a>)</span></p>
+<img data-src="images/figure_spp_table.png" alt="まとめ図" class="r-stretch"><p><span class="citation" data-cites="Weissgerber2019-ho">(<a href="#/references" role="doc-biblioref" onclick="">Weissgerber et al. 2019</a>)</span></p>
 </section>
-<section id="今日の内容-4" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>Visualization：良いFigureの条件</li>
-<li>データ・インク比</li>
-<li>見せたいものと人間の得意分野</li>
-<li>Nへの意識</li>
-<li>3次元プロットって？</li>
-<li>Tips：Gestaltと色使いについて</li>
-</ul>
+<section id="よくある不適切なvisualization" class="slide level2">
+<h2>よくある不適切なVisualization</h2>
 </section>
 <section id="次元プロットって" class="slide level2">
 <h2>3次元プロットって？</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="960" class="r-stretch"><ul>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.svg" width="960" class="r-stretch"><ul>
 <li>基本的にはmisleading</li>
 <li>使わなくて済むなら絶対に使わない</li>
 <li>一番ダメなのが3次元円グラフ
@@ -527,9 +492,9 @@ blockquote {
 <section id="どちらが見やすい" class="slide level2">
 <h2>どちらが見やすい？</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.svg" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="960" class="r-stretch"></section>
 <section id="stacked-barとaligned-barについて" class="slide level2">
-<h2>Stacked-barとaligned barについて</h2>
+<h2>Stacked-barとAligned barについて</h2>
 <ul>
 <li>縦に重ねた棒グラフと横に重ねた棒グラフ</li>
 <li>どちらが良いですか？</li>
@@ -541,21 +506,31 @@ blockquote {
 <li>棒グラフは横に並べて長さで差や比率を示すもの</li>
 <li>途中でBreakしている棒グラフは決して使ってはいけない</li>
 <li>そういう意味で、積み重ねの棒グラフは一番下がそろっていないので×</li>
-<li>事実、長さを間違える人が多い事が知られている<span class="citation" data-cites="Talbot2014-bo">(<a href="#/reference" role="doc-biblioref" onclick="">Talbot et al. 2014</a>)</span></li>
+<li>事実、長さを間違える人が多い事が知られている<span class="citation" data-cites="Talbot2014-bo">(<a href="#/references" role="doc-biblioref" onclick="">Talbot et al. 2014</a>)</span></li>
 </ul>
 </section>
 <section id="stacked-bar-and-algined-bar-graph" class="slide level2">
 <h2>Stacked bar and algined bar graph</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="960" class="r-stretch"><ul>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960" class="r-stretch"><ul>
 <li>どっちが見やすい？</li>
 <li>例えば、AのQの値とBのPの値は？</li>
 </ul>
+</section></section>
+<section>
+<section id="visualizationのテクニック" class="title-slide slide level1 center">
+<h1>Visualizationのテクニック</h1>
+
 </section>
 <section id="ゲシュタルトとは" class="slide level2">
 <h2>ゲシュタルトとは</h2>
-
-<img data-src="images/Gestalt.png" style="width:100.0%" alt="ゲシュタルトの法則" class="r-stretch"><ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img src="images/Gestalt.png" class="" alt="ゲシュタルトの法則" style="width: 100%; height: auto; max-height: none; max-width: 100%;"></p>
+<figcaption>ゲシュタルトの法則</figcaption>
+</figure>
+</div>
+<ul>
 <li>少ない視覚的情報から要素間の関係性を推論すること</li>
 <li>主に以下の法則が存在する
 <ul>
@@ -572,14 +547,14 @@ blockquote {
 <section id="推奨はしないけど" class="slide level2">
 <h2>推奨はしないけど</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960" class="r-stretch"><ul>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="960" class="r-stretch"><ul>
 <li>右の方が、まだ視線を誘導できる</li>
 </ul>
 </section>
 <section id="色使いについて" class="slide level2">
 <h2>色使いについて</h2>
 <ul>
-<li>いわゆる色覚異常は一般人口で約3%おり非常にCommon<span class="citation" data-cites="Jeong2025-bw">(<a href="#/reference" role="doc-biblioref" onclick="">Jeong et al. 2025</a>)</span>
+<li>いわゆる色覚異常は一般人口で約3%おり非常にCommon<span class="citation" data-cites="Jeong2025-bw">(<a href="#/references" role="doc-biblioref" onclick="">Jeong et al. 2025</a>)</span>
 <ul>
 <li>男性により多い</li>
 </ul></li>
@@ -597,22 +572,22 @@ blockquote {
 <li>黄色、黄緑、明るい緑は同時に使わない</li>
 <li>赤<sub>緑(暖色系)と緑</sub>青(寒色系)のそれぞれの側から交互に選ぶ</li>
 </ol></li>
-<li>具体的な色彩の選び方は以下を参照<span class="citation" data-cites="tokyo_color_universal_design_2011">(<a href="#/reference" role="doc-biblioref" onclick="">東京都福祉保健局生活福祉部地域福祉推進課 2011</a>)</span></li>
+<li>具体的な色彩の選び方は以下を参照<span class="citation" data-cites="tokyo_color_universal_design_2011">(<a href="#/references" role="doc-biblioref" onclick="">東京都福祉保健局生活福祉部地域福祉推進課 2011</a>)</span></li>
 </ul>
 </section>
 <section id="rで使えるカラーパレット" class="slide level2">
 <h2>Rで使えるカラーパレット</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="960" class="r-stretch"></section>
 <section id="おすすめ" class="slide level2">
 <h2>おすすめ</h2>
-<ul>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.svg" width="960" class="r-stretch"><ul>
 <li>カテゴリー変数はOkabe-Ito</li>
 <li>連続値はViridisがおすすめ！</li>
 <li>正負を強調する時はDiverginc HCLが良い</li>
 </ul>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="960" class="r-stretch"></section>
+</section>
 <section id="各journalのvisualizationの推奨" class="slide level2 scrollable">
 <h2>各JournalのVisualizationの推奨</h2>
 <table class="caption-top">
@@ -662,7 +637,6 @@ blockquote {
 </tr>
 </tbody>
 </table>
-<!-- Todo: 各々チェックする -->
 <aside><ol class="aside-footnotes"><li id="fn1"><p>JAMA. <em>Instructions for Authors</em>. <a href="https://jamanetwork.com/journals/jama/pages/instructions-for-authors" class="uri">https://jamanetwork.com/journals/jama/pages/instructions-for-authors</a></p></li><li id="fn2"><p>Annals of Internal Medicine. <em>Statistical Guidance</em>. <a href="https://www.acpjournals.org/journal/aim/authors/statistical-guidance" class="uri">https://www.acpjournals.org/journal/aim/authors/statistical-guidance</a></p></li><li id="fn3"><p>New England Journal of Medicine. <em>Author Center: New Manuscripts</em>. <a href="https://www.nejm.org/author-center/new-manuscripts" class="uri">https://www.nejm.org/author-center/new-manuscripts</a></p></li><li id="fn4"><p>BMJ Author Hub. <em>Formatting your paper</em>. <a href="https://authors.bmj.com/writing-and-formatting/formatting-your-paper/" class="uri">https://authors.bmj.com/writing-and-formatting/formatting-your-paper/</a>; The BMJ. <em>House Style</em>. <a href="https://www.bmj.com/about-bmj/resources-authors/house-style" class="uri">https://www.bmj.com/about-bmj/resources-authors/house-style</a></p></li><li id="fn5"><p>The Lancet. <em>Artwork Guidelines</em>. <a href="https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf" class="uri">https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdf</a></p></li><li id="fn6"><p>Journal of the American College of Cardiology. <em>Publication Ethics / Data Visualization Guidelines</em>. <a href="https://www.jacc.org/author-center/publication-ethics" class="uri">https://www.jacc.org/author-center/publication-ethics</a></p></li><li id="fn7"><p>European Heart Journal. <em>Statistical Guidelines</em>. <a href="https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_" class="uri">https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_</a>; <em>General Instructions</em>. <a href="https://academic.oup.com/eurheartj/pages/General_Instructions" class="uri">https://academic.oup.com/eurheartj/pages/General_Instructions</a></p></li><li id="fn8"><p>American Heart Association Journals. <em>Figure Guidelines</em>. <a href="https://www.ahajournals.org/figure-guidelines" class="uri">https://www.ahajournals.org/figure-guidelines</a>; <em>Statistical Reporting Recommendations</em>. <a href="https://www.ahajournals.org/statistical-recommendations" class="uri">https://www.ahajournals.org/statistical-recommendations</a>; Circulation. <em>Manuscript Preparation</em>. <a href="https://www.ahajournals.org/circ/manuscript-preparation" class="uri">https://www.ahajournals.org/circ/manuscript-preparation</a></p></li></ol></aside></section>
 <section id="take-home-message-1" class="slide level2">
 <h2>Take Home Message</h2>
@@ -685,16 +659,21 @@ blockquote {
 <ul>
 <li>連続値に棒グラフは避ける</li>
 </ul></li>
+<li>棒グラフは極力積み上げでなくDodgedする</li>
+<li>3次元プロットは避ける！(特に円グラフ)</li>
 <li>色覚多様性にも配慮した色を使う</li>
 </ul>
 </section>
-<section id="reference" class="slide level2 smaller scrollable">
-<h2>Reference</h2>
+<section id="r-packages-reference" class="slide level2">
+<h2>R packages reference</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p>We used R v. 4.5.3 <span class="citation" data-cites="base">(<a href="#/reference" role="doc-biblioref" onclick="">R Core Team 2026</a>)</span> and the following R packages: cowplot v. 1.2.0 <span class="citation" data-cites="cowplot">(<a href="#/reference" role="doc-biblioref" onclick="">Wilke 2025</a>)</span>, ggcube v. 0.3.0 <span class="citation" data-cites="ggcube">(<a href="#/reference" role="doc-biblioref" onclick="">Kling 2026</a>)</span>, ggdist v. 3.3.3 <span class="citation" data-cites="ggdist2024 ggdist2025">(<a href="#/reference" role="doc-biblioref" onclick="">Kay 2024</a>, <a href="#/reference" role="doc-biblioref" onclick="">2025</a>)</span>, ggpubr v. 1.0.0 <span class="citation" data-cites="ggpubr">(<a href="#/reference" role="doc-biblioref" onclick="">Kassambara 2026</a>)</span>, here v. 1.0.2 <span class="citation" data-cites="here">(<a href="#/reference" role="doc-biblioref" onclick="">Müller 2025</a>)</span>, marginaleffects v. 1.0.0 <span class="citation" data-cites="marginaleffects">(<a href="#/reference" role="doc-biblioref" onclick="">Arel-Bundock et al. 2024</a>)</span>, patchwork v. 1.3.2 <span class="citation" data-cites="patchwork">(<a href="#/reference" role="doc-biblioref" onclick="">Pedersen 2025</a>)</span>, plotrix v. 3.8.14 <span class="citation" data-cites="plotrix">(<a href="#/reference" role="doc-biblioref" onclick="">J 2006</a>)</span>, RColorBrewer v. 1.1.3 <span class="citation" data-cites="RColorBrewer">(<a href="#/reference" role="doc-biblioref" onclick="">Neuwirth 2022</a>)</span>, Rdatasets v. 0.0.1 <span class="citation" data-cites="Rdatasets">(<a href="#/reference" role="doc-biblioref" onclick="">Arel-Bundock 2025</a>)</span>, rmarkdown v. 2.32 <span class="citation" data-cites="rmarkdown2018 rmarkdown2020 rmarkdown2026">(<a href="#/reference" role="doc-biblioref" onclick="">Xie et al. 2018</a>, <a href="#/reference" role="doc-biblioref" onclick="">2020</a>; <a href="#/reference" role="doc-biblioref" onclick="">Allaire et al. 2026</a>)</span>, tidyverse v. 2.0.0 <span class="citation" data-cites="tidyverse">(<a href="#/reference" role="doc-biblioref" onclick="">Wickham et al. 2019</a>)</span>, viridisLite v. 0.4.3 <span class="citation" data-cites="viridisLite">(<a href="#/reference" role="doc-biblioref" onclick="">Garnier et al. 2026</a>)</span>.</p>
+<p>We used R v. 4.5.3 <span class="citation" data-cites="base">(<a href="#/references" role="doc-biblioref" onclick="">R Core Team 2026</a>)</span> and the following R packages: cowplot v. 1.2.0 <span class="citation" data-cites="cowplot">(<a href="#/references" role="doc-biblioref" onclick="">Wilke 2025</a>)</span>, ggcube v. 0.3.0 <span class="citation" data-cites="ggcube">(<a href="#/references" role="doc-biblioref" onclick="">Kling 2026</a>)</span>, ggdist v. 3.3.3 <span class="citation" data-cites="ggdist2024 ggdist2025">(<a href="#/references" role="doc-biblioref" onclick="">Kay 2024</a>, <a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span>, ggpubr v. 1.0.0 <span class="citation" data-cites="ggpubr">(<a href="#/references" role="doc-biblioref" onclick="">Kassambara 2026</a>)</span>, here v. 1.0.2 <span class="citation" data-cites="here">(<a href="#/references" role="doc-biblioref" onclick="">Müller 2025</a>)</span>, marginaleffects v. 1.0.0 <span class="citation" data-cites="marginaleffects">(<a href="#/references" role="doc-biblioref" onclick="">Arel-Bundock et al. 2024</a>)</span>, patchwork v. 1.3.2 <span class="citation" data-cites="patchwork">(<a href="#/references" role="doc-biblioref" onclick="">Pedersen 2025</a>)</span>, plotrix v. 3.8.14 <span class="citation" data-cites="plotrix">(<a href="#/references" role="doc-biblioref" onclick="">J 2006</a>)</span>, RColorBrewer v. 1.1.3 <span class="citation" data-cites="RColorBrewer">(<a href="#/references" role="doc-biblioref" onclick="">Neuwirth 2022</a>)</span>, Rdatasets v. 0.0.1 <span class="citation" data-cites="Rdatasets">(<a href="#/references" role="doc-biblioref" onclick="">Arel-Bundock 2025</a>)</span>, rmarkdown v. 2.32 <span class="citation" data-cites="rmarkdown2018 rmarkdown2020 rmarkdown2026">(<a href="#/references" role="doc-biblioref" onclick="">Xie et al. 2018</a>, <a href="#/references" role="doc-biblioref" onclick="">2020</a>; <a href="#/references" role="doc-biblioref" onclick="">Allaire et al. 2026</a>)</span>, tidyverse v. 2.0.0 <span class="citation" data-cites="tidyverse">(<a href="#/references" role="doc-biblioref" onclick="">Wickham et al. 2019</a>)</span>, viridisLite v. 0.4.3 <span class="citation" data-cites="viridisLite">(<a href="#/references" role="doc-biblioref" onclick="">Garnier et al. 2026</a>)</span>.</p>
 </div>
 </div>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-rmarkdown2026" class="csl-entry" role="listitem">
 Allaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026. <em><span class="nocase">rmarkdown</span>: Dynamic Documents for r</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
@@ -771,7 +750,7 @@ Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbo
 <h2>ご静聴ありがとうございました</h2>
 
 
-</section>
+</section></section>
 
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

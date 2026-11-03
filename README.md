@@ -346,3 +346,7 @@ git add .
 git commit -m "update visualization slides"
 git push
 ```
+
+## よく使う手法
+
+[**酸塩基平衡**]{style="color: red;font-size: 1.2em;"}

@@ -1,7 +1,7 @@
 ---
 title: "可視化事始め"
 subtitle: "そのフィギュア、必要ですか？"
-date: "2021/3/5"
+date: "2026/11/1"
 format:
   clean-revealjs:
     toc: true
@@ -83,9 +83,11 @@ library(plotrix)
   - データ・インク比率が良いもの
 - Nや分布にも配慮する
   - 連続値に棒グラフは避ける
+- 棒グラフは極力積み上げでなくDodgedする
+- 3次元プロットは避ける！(特に円グラフ)
 - 色覚多様性にも配慮した色を使う
 
-## What Is This？
+## What is This？
 
 ```{r}
 #| label: anscombes
@@ -106,6 +108,12 @@ anscombe_fig <- ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.
   theme_bw()
 
 anscombe_fig
+
+```
+
+## What is this?
+
+```{r}
 
 ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add = "reg.line") +
   ylim(c(0, 17)) + 
@@ -128,23 +136,8 @@ ggpubr::ggscatter(data = anscombe_long, x = "x", y = "y", facet.by = "set", add 
 - 内科の問診のように、基礎中の基礎だけど重要極まりない工程
 - Visualizationって誰かに習ったっけ？
 
-## 今日の内容
 
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：Gestaltと色使いについて
-
-## 今日の内容
-
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：Gestaltと色使いについて
+# Visualization：良いFigureの条件
 
 ## よいFigureの条件
 
@@ -156,7 +149,7 @@ Edward Tufte
 :::
 
 ::: {.column width="58%"}
-> すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. ...(中略)... よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. [@kiranhiri2021-fw]
+> すばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして デザインの問題です.  [@kiranhiri2021-fw]
 :::
 :::::
 
@@ -164,41 +157,40 @@ Edward Tufte
 
 ![](images/good_figure_example.png){fig-alt="非常に良いFigureの見本" width="100%"}
 
+- 左の図は同時に6種類の変数をきれいに示している
+- 右の図はCostの高さをモンスターの牙に例えている
 - ？？？
 
 ## よいFigureの条件
 
 ::::: columns
-::: {.column width="58%"}
-> 優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。
-
-- データ・インク比を最大化する
-:::
 
 ::: {.column width="42%"}
 ![Edward Tufte](images/edward_tufte.png){fig-alt="Edward Tufte" width="60%"}
 :::
+
+::: {.column width="58%"}
+> よいグラフは読み手に対して最小のスペース、最小のインクによって最小の時間で最大限のアイディアを与えてくれます.……ほとんどの場合,グラフは複数の変量からなり。……そしてすばらしいグラフは私たちにデータの真 実を教えてくれます。
+
+- [**最小のスペース、最小のインクで最大限のアイディアを与える？**]{style="color: red;font-size: 1.2em;"}
+:::
+
+
 :::::
 
-## 今日の内容
+# データ・インク比
 
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：Gestaltと色使いについて
 
 ## インク・データ比の法則
 
 ::::: columns
 ::: {.column width="52%"}
-- そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件
-- 簡単にいうと「シンプル イズ ベスト」
+
+![](images/minimalist_figure.png){fig-alt="インク・データ比の例1" width="66%"} [@Weissgerber2019-ho]
+
 :::
 
 ::: {.column width="48%"}
-![](images/minimalist_figure.png){fig-alt="インク・データ比の例1" width="66%"} [@Weissgerber2019-ho]
 
 ```{r}
 #| label: bad-ink-data-ratio
@@ -235,6 +227,10 @@ ggdraw(base_irisplot) +
 :::
 :::::
 
+- そのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件
+- 棒グラフに下の部分や、X軸でわざわざ分かれているグラフの色の塗り替えは不要
+- 簡単にいうと"Simple is best"
+
 ## 見せたいものって？
 
 ::::: columns
@@ -262,19 +258,21 @@ ggdraw(base_irisplot) +
 ## 人間の得意・苦手分野
 
 ![](images/human_error.png){fig-alt="Example 元図" width="80%"}
-
 [@kiranhiri2021-fw]
 
-## Example
+- 右の方がエラーが多い
+- 面積を使うMosaic図や円グラフはエラーが多い
 
-- 青が感染症
-- 赤が戦場での負傷
-- 黒がその他
-- どちらが分かりやすいですか？
+## Example
 
 ::::: columns
 ::: {.column width="50%"}
 ![ナイチンゲールの元図](images/nightingale_fig.png)
+
+- 青が負傷による死亡
+- 赤が感染症による死亡
+- 黒がその他
+
 :::
 
 ::: {.column width="50%"}
@@ -300,16 +298,11 @@ tidyr::pivot_longer(
 :::
 :::::
 
-## 今日の内容
+- どちらがより、**感染症による死亡**の影響の強さを示せていますか？
 
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：Gestaltと色使いについて
+# Nへの意識
 
-## Nへの意識
+## Nによるプロットの選択
 
 - 連続値の平均や中央値を比較する時には分布も非常に重要
 - 分布を見る時にはバイオリンプロットもよい
@@ -425,7 +418,7 @@ mean_bar + median_bar
 
 ```
 
-## That’s It!!
+## That’s it!!
 
 ```{r}
 library(ggpubr)
@@ -437,29 +430,15 @@ all_plot <- ggplot(dat, aes(x = sex, y = ck_peak)) +
   scale_fill_brewer(palette = "Set2") +
   theme_bw()
 
-male_plot <- ggplot(dplyr::filter(dat, sex == "Male"), aes(x = sex, y = ck_peak)) +
-  stat_dotsinterval(side = "bottom", scale = 0.3, slab_linewidth = NA) + 
-  scale_fill_brewer(palette = "Set2") +
-  theme_bw()
-
-female_plot <- ggplot(dplyr::filter(dat, sex == "Female"), aes(x = sex, y = ck_peak)) +
-  stat_dotsinterval(side = "bottom", scale = 0.3, slab_linewidth = NA) + 
-  scale_fill_brewer(palette = "Set2") +
-  theme_bw()
-
-all_plot + male_plot + female_plot
+all_plot
 
 ```
 
+- Femaleだけ外れ値があるが故の問題
+- 棒グラフだと不適切に要約されてしまい気づけない
+
 ## Nへの意識
 
-:::: columns
-::: {.column width="48%"}
-- 何かの比較の時には必ず分布も考慮する
-- 箱ひげ図やバイオリンプロットは非常に見やすい
-- 一方で、Nが小さいときにはその意味も変わる
-- Nが少ないときはそのデータも入れた方が良い
-:::
 
 ```{r}
 
@@ -497,7 +476,11 @@ dotplot <- ggpubr::ggdotplot(
 violin + dotplot +  plot_layout(widths = c(1, 3))
 
 ```
-::::
+
+- 何かの比較の時には必ず分布も考慮する
+- 箱ひげ図やバイオリンプロットは非常に見やすい
+- 一方で、Nが小さいときにはその意味も変わる
+- Nが少ないときはそのデータも入れた方が良い
 
 ## Nへの意識と見やすさの両立
 
@@ -506,20 +489,14 @@ violin + dotplot +  plot_layout(widths = c(1, 3))
 - ドットチャートに要約（平均・中央値）を追加する
 - ドットを出来るだけ薄くする[@Weissgerber2019-ho]
 
-## まとめ
+## 連続値の出し方まとめ
 
 ![](images/figure_spp_table.png){fig-alt="まとめ図"}
 
 [@Weissgerber2019-ho]
 
-## 今日の内容
 
-- Visualization：良いFigureの条件
-- データ・インク比
-- 見せたいものと人間の得意分野
-- Nへの意識
-- 3次元プロットって？
-- Tips：Gestaltと色使いについて
+# よくある不適切なVisualization
 
 ## 3次元プロットって？
 
@@ -594,7 +571,7 @@ plot_3d + plot_2d
 
 ```
 
-## Stacked-barとaligned barについて
+## Stacked-barとAligned barについて
 
 - 縦に重ねた棒グラフと横に重ねた棒グラフ
 - どちらが良いですか？
@@ -644,9 +621,19 @@ stacked_bar + dodged_bar + plot_layout(guides = "collect")
 - どっちが見やすい？
 - 例えば、AのQの値とBのPの値は？
 
+# Visualizationのテクニック
+
 ## ゲシュタルトとは
 
-![](images/Gestalt.png){fig-alt="ゲシュタルトの法則" width="100%"}
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img src="images/Gestalt.png" class="nostretch" alt="ゲシュタルトの法則" style="width: 100%; height: auto; max-height: none; max-width: 100%;"></p>
+<figcaption>ゲシュタルトの法則</figcaption>
+</figure>
+</div>
+```
 
 - 少ない視覚的情報から要素間の関係性を推論すること
 - 主に以下の法則が存在する
@@ -711,10 +698,6 @@ display.brewer.all(colorblindFriendly = TRUE)
 
 ## おすすめ
 
-- カテゴリー変数はOkabe-Ito
-- 連続値はViridisがおすすめ！
-- 正負を強調する時はDiverginc HCLが良い
-
 ```{r}
 library(viridisLite)
 
@@ -768,6 +751,11 @@ par(op)
 
 ```
 
+- カテゴリー変数はOkabe-Ito
+- 連続値はViridisがおすすめ！
+- 正負を強調する時はDiverginc HCLが良い
+
+
 ## 各JournalのVisualizationの推奨
 
 +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
@@ -816,7 +804,6 @@ par(op)
 
 [^8]: American Heart Association Journals. *Figure Guidelines*. <https://www.ahajournals.org/figure-guidelines>; *Statistical Reporting Recommendations*. <https://www.ahajournals.org/statistical-recommendations>; Circulation. *Manuscript Preparation*. <https://www.ahajournals.org/circ/manuscript-preparation>
 
-<!-- Todo: 各々チェックする -->
 
 ## Take Home Message
 
@@ -830,13 +817,17 @@ par(op)
   - データ・インク比率が良いもの
 - Nや分布にも配慮する
   - 連続値に棒グラフは避ける
+- 棒グラフは極力積み上げでなくDodgedする
+- 3次元プロットは避ける！(特に円グラフ)
 - 色覚多様性にも配慮した色を使う
 
-## Reference
+## R packages reference
 
 ```{r}
 grateful::cite_packages(output = "paragraph", out.dir = here::here("statistics", "visualization_mi"), pkgs = here::here("statistics", "visualization_mi", "index.qmd"), out.format = "html")
 ```
+
+## References 
 
 ::: {#refs}
 :::

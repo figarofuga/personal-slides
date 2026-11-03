@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n19.08102\n\n\n2\n21.58557\n\n\n3\n25.00537\n\n\n4\n19.97910\n\n\n5\n16.86863\n\n\n6\n18.65711\n\n\n7\n22.62385\n\n\n8\n21.23232\n\n\n9\n18.92366\n\n\n10\n20.39269\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n19.66352\n\n\n2\n22.24033\n\n\n3\n20.01665\n\n\n4\n20.97740\n\n\n5\n22.51331\n\n\n6\n17.31354\n\n\n7\n17.05093\n\n\n8\n18.57279\n\n\n9\n22.80472\n\n\n10\n21.21012\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.54801\n185.1051\n\n\n\n2\n75.27181\n177.1864\n\n\n\n3\n74.30770\n183.7379\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.54678\n203.8865\n\n\n\n2\n75.22322\n174.1023\n\n\n\n3\n72.75683\n170.6127\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -1726,14 +1726,14 @@
     "href": "statistics/index.html",
     "title": "統計学",
     "section": "",
-    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\nmodel performance入門\n予測モデルの評価方法です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
+    "text": "統計学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\nmodel performance入門\n予測モデルの評価方法です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて\n\n\nVisualization\n論文におけるFigureの作り方"
   },
   {
     "objectID": "statistics/index.html#スライド一覧",
     "href": "statistics/index.html#スライド一覧",
     "title": "統計学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\nmodel performance入門\n予測モデルの評価方法です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて"
+    "text": "タイトル\n内容\n\n\n\n\nブートストラップ入門\n通常の計算が難しい時の信頼区間の出し方\n\n\ng-computation入門\n統計モデルのより良い解釈の方法\n\n\nPRO(patient reported outcomes) analysis入門\nPROの解析時の注意点です\n\n\nmodel performance入門\n予測モデルの評価方法です\n\n\n機械学習を用いた因果推論\n機械学習を用いた因果推論、特にCausal forestについて\n\n\nVisualization\n論文におけるFigureの作り方"
   },
   {
     "objectID": "statistics/marginaleffects/index.html#皆さん多変量回帰は好きですか",
@@ -3056,14 +3056,14 @@
     "href": "statistics/visualization_mi/index.html#take-home-message",
     "title": "可視化事始め",
     "section": "Take Home Message",
-    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n色覚多様性にも配慮した色を使う"
+    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n棒グラフは極力積み上げでなくDodgedする\n3次元プロットは避ける！(特に円グラフ)\n色覚多様性にも配慮した色を使う"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#what-is-this",
     "href": "statistics/visualization_mi/index.html#what-is-this",
     "title": "可視化事始め",
-    "section": "What Is This？",
-    "text": "What Is This？\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnscombe’s Quartet\n\n上記、相関係数と回帰直線に加えて・・・・・・\nXの平均 9, 分散 11\nyの平均 7.50, 分散 4.1\n\nでも全く違う形"
+    "section": "What is This？",
+    "text": "What is This？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#画像例",
@@ -3098,21 +3098,21 @@
     "href": "statistics/visualization_mi/index.html#よいfigureの条件",
     "title": "可視化事始め",
     "section": "よいFigureの条件",
-    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\nすばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして ##デザイン## の問題です. …(中略)… よいグラフは読み手に対して最小のスペース・最小のインクによって最小の時間で最大限のアイディアを与えてくれます. (キーラン・ヒーリー 2021)"
+    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\nすばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして デザインの問題です. (キーラン・ヒーリー 2021)"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#非常に良いfigureの見本",
     "href": "statistics/visualization_mi/index.html#非常に良いfigureの見本",
     "title": "可視化事始め",
     "section": "非常に良いFigureの見本",
-    "text": "非常に良いFigureの見本\n\n\n？？？"
+    "text": "非常に良いFigureの見本\n\n\n左の図は同時に6種類の変数をきれいに示している\n右の図はCostの高さをモンスターの牙に例えている\n？？？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#よいfigureの条件-1",
     "href": "statistics/visualization_mi/index.html#よいfigureの条件-1",
     "title": "可視化事始め",
     "section": "よいFigureの条件",
-    "text": "よいFigureの条件\n\n\n\n優れたFigureとはよくデザインされた興味深いデータ、データそのものや統計、そしてデザインの問題です。透明性・精確性・効率性が複雑に絡み合っています。最も少ないインク・スペースを用いて見たものに即座にいくつもの素晴らしいアイデアを示すことが可能です。\n\n\nデータ・インク比を最大化する\n\n\n\n\n\nEdward Tufte"
+    "text": "よいFigureの条件\n\n\n\n\n\nEdward Tufte\n\n\n\n\nよいグラフは読み手に対して最小のスペース、最小のインクによって最小の時間で最大限のアイディアを与えてくれます.……ほとんどの場合,グラフは複数の変量からなり。……そしてすばらしいグラフは私たちにデータの真 実を教えてくれます。\n\n\n最小のスペース、最小のインクで最大限のアイディアを与える？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#今日の内容-2",
@@ -3126,7 +3126,7 @@
     "href": "statistics/visualization_mi/index.html#インクデータ比の法則",
     "title": "可視化事始め",
     "section": "インク・データ比の法則",
-    "text": "インク・データ比の法則\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n簡単にいうと「シンプル イズ ベスト」\n\n\n (Weissgerber et al. 2019)"
+    "text": "インク・データ比の法則\n\n\n (Weissgerber et al. 2019)\n\n\n\n\n\n\n\n\n\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n棒グラフに下の部分や、X軸でわざわざ分かれているグラフの色の塗り替えは不要\n簡単にいうと”Simple is best”"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#今日の内容-3",
@@ -3147,14 +3147,14 @@
     "href": "statistics/visualization_mi/index.html#人間の得意苦手分野",
     "title": "可視化事始め",
     "section": "人間の得意・苦手分野",
-    "text": "人間の得意・苦手分野\n\n(キーラン・ヒーリー 2021)"
+    "text": "人間の得意・苦手分野\n (キーラン・ヒーリー 2021)\n\n右の方がエラーが多い\n面積を使うMosaic図や円グラフはエラーが多い"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#example",
     "href": "statistics/visualization_mi/index.html#example",
     "title": "可視化事始め",
     "section": "Example",
-    "text": "Example\n\n青が感染症\n赤が戦場での負傷\n黒がその他\nどちらが分かりやすいですか？\n\n\n\n\n\n\nナイチンゲールの元図"
+    "text": "Example\n\n\n\n\n\nナイチンゲールの元図\n\n\n\n青が負傷による死亡\n赤が感染症による死亡\n黒がその他\n\n\n\n\n\n\n\n\n\n\n\n\n\nどちらがより、感染症による死亡の影響の強さを示せていますか？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#空白スライド",
@@ -3195,15 +3195,15 @@
     "objectID": "statistics/visualization_mi/index.html#thats-it",
     "href": "statistics/visualization_mi/index.html#thats-it",
     "title": "可視化事始め",
-    "section": "That’s It!!",
-    "text": "That’s It!!"
+    "section": "That’s it!!",
+    "text": "That’s it!!\n\n\nFemaleだけ外れ値があるが故の問題\n棒グラフだと不適切に要約されてしまい気づけない"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#nへの意識-1",
     "href": "statistics/visualization_mi/index.html#nへの意識-1",
     "title": "可視化事始め",
     "section": "Nへの意識",
-    "text": "Nへの意識\n\n\n\n何かの比較の時には必ず分布も考慮する\n箱ひげ図やバイオリンプロットは非常に見やすい\n一方で、Nが小さいときにはその意味も変わる\nNが少ないときはそのデータも入れた方が良い"
+    "text": "Nへの意識\n\n\n何かの比較の時には必ず分布も考慮する\n箱ひげ図やバイオリンプロットは非常に見やすい\n一方で、Nが小さいときにはその意味も変わる\nNが少ないときはそのデータも入れた方が良い"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#nへの意識と見やすさの両立",
@@ -3252,7 +3252,7 @@
     "href": "statistics/visualization_mi/index.html#ゲシュタルトとは",
     "title": "可視化事始め",
     "section": "ゲシュタルトとは",
-    "text": "ゲシュタルトとは\n\n\n少ない視覚的情報から要素間の関係性を推論すること\n主に以下の法則が存在する\n\n近接性(Proximity):空間的に近いものは互いに関連しているように見える\n類似性(Similarity):見た目が似ているものは関係しているように見える\n接続性(Coneetction):視覚的に結び付けられているもの同士は関係を持っているように見える\n連続性(Continuity):一部が隠されているオブジェクトは親和性のある形に補完される\n閉鎖性(Closure):不完全な形は完全なものとして知覚される\n共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される\n\nただし、別データを線で結んではいけない"
+    "text": "ゲシュタルトとは\n\n\n\nゲシュタルトの法則\n\n\n\n少ない視覚的情報から要素間の関係性を推論すること\n主に以下の法則が存在する\n\n近接性(Proximity):空間的に近いものは互いに関連しているように見える\n類似性(Similarity):見た目が似ているものは関係しているように見える\n接続性(Coneetction):視覚的に結び付けられているもの同士は関係を持っているように見える\n連続性(Continuity):一部が隠されているオブジェクトは親和性のある形に補完される\n閉鎖性(Closure):不完全な形は完全なものとして知覚される\n共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される\n\nただし、別データを線で結んではいけない"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#推奨はしないけど",
@@ -3287,7 +3287,7 @@
     "href": "statistics/visualization_mi/index.html#take-home-message-1",
     "title": "可視化事始め",
     "section": "Take Home Message",
-    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n色覚多様性にも配慮した色を使う"
+    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n棒グラフは極力積み上げでなくDodgedする\n3次元プロットは避ける！(特に円グラフ)\n色覚多様性にも配慮した色を使う"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#reference",
@@ -5065,28 +5065,28 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "代謝性 アルカローシス",
-    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い\n一応、発生因子と維持因子を分けて考える必要がある\n発生因子\n\nCl-塩の喪失: 下痢、嘔吐、利尿薬、MRA亢進(しばしば脱水)\nKの欠乏\n塩基負荷: 重曹、グルコン酸塩、クエン酸など\n\n維持因子\n\n発生因子の持続\nHCO3-濾過の低下: 脱水によるRAA系の亢進\nHCO3-再吸収の増加"
+    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い\n一応、発生因子と維持因子を分けて考える必要がある\n\n発生因子\n\nCl-塩の喪失: 下痢、嘔吐、利尿薬、MRA亢進(しばしば脱水)\nKの欠乏\n塩基負荷: 重曹、グルコン酸塩、クエン酸など\n\n維持因子\n\n発生因子の持続\nHCO3-濾過の低下: 脱水によるRAA系の亢進\nHCO3-再吸収の増加"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "呼吸性 アシドーシス",
-    "text": "呼吸性 アシドーシス\n\nいわゆる肺胞低換気 = II型呼吸不全\n物理的に肺胞に空気が入らない状態\n解剖学的に考えるのが良い\n\n脳: 重度の意識障害の他に、CO2 Narcosis\n中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も\n上気道: Stridorが出る疾患、簡単に言うと窒息\n下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど\n\nHCO3-が代償していたら慢性的なものを疑う\n\n← Acid–Base Map"
+    "text": "呼吸性 アシドーシス\n\n\nいわゆる肺胞低換気 = II型呼吸不全\n物理的に肺胞に空気が入らない状態\n解剖学的に考えるのが良い\n\n脳: 重度の意識障害の他に、CO2 Narcosis\n中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も\n上気道: Stridorが出る疾患、簡単に言うと窒息\n下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど\n\nHCO3-が代償していたら慢性的なものを疑う\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
-    "section": "呼吸性 アルカローシス",
-    "text": "呼吸性 アルカローシス"
+    "section": "呼吸性アルカローシス",
+    "text": "呼吸性アルカローシス\n\n\n過換気が原因\n正直、一番多いのは肺炎とか心不全とかの全身状態悪化に伴う過換気\n後は代謝性Acidosis(特にDKA)に対する代償\n\nKussmaul呼吸\n\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#references",
     "href": "medicine/blood_gas_analysis_mi/index.html#references",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "References",
-    "text": "References\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
+    "text": "References\n\n\nDynaMed. 2026. Renal Tubular Acidosis (RTA) in Adults. DynaMed; EBSCO Information Services. https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults.\n\n\nEmmett, Michael, and Biff F. Palmer. 2025. Etiology and Diagnosis of Distal (Type 1) and Proximal (Type 2) Renal Tubular Acidosis. UpToDate; Wolters Kluwer. https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis.\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
   },
   {
     "objectID": "statistics/mlcausal/index.html#hteを見つける意義",
@@ -5429,7 +5429,7 @@
     "href": "medicine/elder_hf_mi/index.html#phaseを意識した心不全管理",
     "title": "高齢者の心不全管理",
     "section": "Phaseを意識した心不全管理",
-    "text": "Phaseを意識した心不全管理"
+    "text": "Phaseを意識した心不全管理\n\n超急性期: 分秒での判断\n\nNPPV、DOB、緊急カテなどの判断\n\n時間レベルの判断\n\n利尿薬投与、Vitalの安定\n\n数日での判断\n\nVolume status、GBMT導入開始 \n\n綜合内科では主に時間レベル～数日レベルの判断が必要"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#hfref-1-gbmt",
@@ -5590,14 +5590,14 @@
     "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査ｘ線",
     "title": "妊娠患者をERで診たとき",
     "section": "妊婦への検査～Ｘ線",
-    "text": "妊婦への検査～Ｘ線\n\nほとんどの場合は問題にならない\n一応、胸部X線をとる時は腹部を覆う\n東京からNYに行くと何枚分？"
+    "text": "妊婦への検査～Ｘ線\n\nほとんどの場合は問題にならない\n一応、胸部X線をとる時は腹部を覆う\n東京からNYに行くと約0.11- 0.16 mGy(胸部X線の2枚分くらい)\n年間の自然被曝は2.1-2.4 mGy(環境省 2015)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への検査ct検査",
     "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査ct検査",
     "title": "妊娠患者をERで診たとき",
     "section": "妊婦への検査～CT検査",
-    "text": "妊婦への検査～CT検査\n\n必要なら勇気をもってやる\nアメリカのガイドライン"
+    "text": "妊婦への検査～CT検査\n\n必要なら勇気をもってやる\nTodo: アメリカのガイドラインを確認する"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への検査mri検査",
@@ -5611,7 +5611,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響薬剤の影響",
     "title": "妊娠患者をERで診たとき",
     "section": "妊娠の時期による影響～薬剤の影響",
-    "text": "妊娠の時期による影響～薬剤の影響\n\n再掲する\nTodo: 日本のガイドラインを参照\n\n\n妊娠初期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nカルバマゼピン\nテグレトール，他\n催奇形性\n\n\nシクロホスファミド\nエンドキサン\n催奇形性\n\n\nダナゾール\nボンゾール，他\n催奇形性：女児外性器の男性化\n\n\nチアマゾール\nメルカゾール\n催奇形性：MMI奇形症候群\n\n\nバルプロ酸ナトリウム\nデパケン、セレニカR，他\n催奇形性：二分脊椎、胎児バルプロ酸症候群\n\n\nビタミンA（大量）\nチョコラA，他\n催奇形性\n\n\nフェニトイン\nアレビアチン、ヒダントール，他\n催奇形性：胎児ヒダントイン症候群\n\n\nフェノバルビタール\nフェノバール，他\n催奇形性：口唇・口蓋裂，他\n\n\nミコフェノール酸モフェチル\nセルセプト\n催奇形性：外耳・顔面奇形、口唇・口蓋裂、遠位四肢・心臓・食道・腎臓の奇形，他／流産\n\n\nミソプロストール\nサイトテック\nメビウス症候群、四肢切断、子宮収縮、流産\n\n\nメトトレキサート\nリウマトレックス，他\n催奇形性：メトトレキサート胎芽病\n\n\nワルファリンカリウム（クマリン系抗凝血薬）\nワーファリン，他\n催奇形性：ワルファリン胎芽病、点状軟骨異栄養症、中枢神経異常\n\n\n\n妊娠中・後期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nアミノグリコシド系抗結核薬\nカナマイシン注、ストレプトマイシン注\n胎児毒性：非可逆的第VIII脳神経障害、先天性聴力障害\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）\nカプトプリル、レニベース，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nアンジオテンシンII受容体拮抗薬（ARB）\nニューロタン、バルサルタン，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nテトラサイクリン系抗菌薬\nアクロマイシン、レダマイシン、ミノマイシン，他\n胎児毒性：歯牙の着色、エナメル質形成不全\n\n\nミソプロストール\nサイトテック\n子宮収縮、流早産\n\n\n\n妊娠後期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nアミノグリコシド系抗結核薬\nカナマイシン注、ストレプトマイシン注\n胎児毒性：非可逆的第VIII脳神経障害、先天性聴力障害\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）\nカプトプリル、レニベース，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nアンジオテンシンII受容体拮抗薬（ARB）\nニューロタン、バルサルタン，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nテトラサイクリン系抗菌薬\nアクロマイシン、レダマイシン、ミノマイシン，他\n胎児毒性：歯牙の着色、エナメル質形成不全\n\n\nミソプロストール\nサイトテック\n子宮収縮、流早産\n\n\n非ステロイド系抗炎症薬（NSAIDs）（インドメタシン、ジクロフェナクナトリウム，他）\nインダシン、ボルタレン，他\n胎児毒性：動脈管収縮、胎児循環遷延、羊水過少、新生児壊死性腸炎\n\n\n\nTimingでダメな薬"
+    "text": "妊娠の時期による影響～薬剤の影響\n\n薬剤や放射線の場合は以下で考える\n\n受精前～妊娠3週末まで: 先天異常出現率は増加しない: all or none\n4-7週: 器官形成期で薬剤感受性が高い\n8-12週末まで: 大奇形は起こさないが小奇形を起こしうる医薬品はわずかにある(口蓋や性器など)\n13週～: 奇形は基本起こさない。胎児毒性を引き起こす可能性がある薬品がわずかにある(日本産科婦人科学会 and 日本産婦人科医会 2020)\n\n薬で困ったら患者に妊娠と薬のHPを教えても良い(国立成育医療研究センター, n.d.)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#どの薬が使える",
@@ -5667,7 +5667,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#reference",
     "title": "妊娠患者をERで診たとき",
     "section": "Reference",
-    "text": "Reference"
+    "text": "Reference\n\n\nDynaMed. n.d. Acute Abdominal Pain in Pregnancy and Postpartum - Approach to the Patient. EBSCO Information Services. Accessed October 19, 2026. https://www.dynamed.com/approach-to/acute-abdominal-pain-in-pregnancy-and-postpartum-approach-to-the-patient.\n\n\nRebarber, Andrei, and Brian P. Jacob. n.d. “Acute Appendicitis in Pregnancy.” In UpToDate, edited by R. F. Connor. Wolters Kluwer. Accessed October 19, 2026. https://www.uptodate.com/contents/acute-appendicitis-in-pregnancy.\n\n\nZingone, Fabiana, Alyshah Abdul Sultan, David James Humes, and Joe West. 2015. “Risk of Acute Appendicitis in and Around Pregnancy: A Population-Based Cohort Study from England.” Annals of Surgery 261 (2): 332–37. https://doi.org/10.1097/SLA.0000000000000780.\n\n\n国立成育医療研究センター. n.d. 妊娠と薬情報センター. https://www.ncchd.go.jp/kusuri/.\n\n\n日本救急医学会Point-of-Care超音波推進委員会, ed. 2023. 救急超音波診療ガイド. 医学書院.\n\n\n日本産科婦人科学会, and 日本産婦人科医会. 2020. 産婦人科診療ガイドライン―産科編2020. 日本産科婦人科学会. https://minds.jcqhc.or.jp/common/summary/pdf/c00572.pdf.\n\n\n環境省. 2015. 放射線による健康影響等に関する統一的な基礎資料（平成26年度版）. https://www.env.go.jp/content/900413502.pdf."
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#dagの基本",
@@ -6248,7 +6248,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#妊娠の時期と意味",
     "title": "妊娠患者をERで診たとき",
     "section": "妊娠の時期と意味",
-    "text": "妊娠の時期と意味\n\n妊娠の数え方とは？\n妊娠初期、第二期、第三期、器官形成期についてとその意味。All or noneと催奇形性に弱い時\n3%は先天異常、15%は流産"
+    "text": "妊娠の時期と意味\n\n妊娠前の最終月経が始まった日を0週0日と数える\n\n1st trimester: 0w0d ~ 13w6d\n2nd trimester: 14w0d ~ 27w6d\n3rd trimester: 28w0d ~\n\n薬剤の場合は以下で考える\n\n受精前～妊娠3週末まで: 先天異常出現率は増加しない: all or none\n4-7週: 器官形成期で薬剤感受性が高い\n8-12週末まで: 大奇形は起こさないが小奇形を起こしうる医薬品はわずかにある(口蓋や性器など)\n13週～: 奇形は基本起こさない。胎児毒性を引き起こす可能性がある薬品がわずかにある(日本産科婦人科学会 and 日本産婦人科医会 2020)\n\n3-5%は先天異常、15%は流産\n\n-放射線の場合は以下の通り - 受精後10日までの被曝で奇形発生率の上昇はない - 受精後11日～妊娠10週までの被曝で奇形誘発の可能性はあるが50 mGy未満では奇形発生率は上昇しない - 妊娠9-26週では中枢神経障害を起こす可能性があるが、100 mGy未満では影響しない"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#造影ctでのヨード造影剤は",
@@ -6276,7 +6276,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#腹痛",
     "title": "妊娠患者をERで診たとき",
     "section": "腹痛",
-    "text": "腹痛\n\nまずは、産科的緊急疾患\n時期との関連\n\n異所性妊娠\n常位胎盤早期剝離\n切迫早産など\n\nまぁ、ここら辺はさすがに産科に行くと思うが・・・・・・\n気を付けるのは虫垂炎の疼痛部位→Todo: 調べる"
+    "text": "腹痛\n\nまずは、産科的緊急疾患\n時期との関連\n\n異所性妊娠\n常位胎盤早期剝離\n切迫早産など\n\nまぁ、ここら辺はさすがに産科に行くと思うが・・・・・・\n気を付けるのは虫垂炎の疼痛部位"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#胸痛の患者",
@@ -6290,7 +6290,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#dvtpeを疑う患者",
     "title": "妊娠患者をERで診たとき",
     "section": "DVT/PEを疑う患者",
-    "text": "DVT/PEを疑う患者"
+    "text": "DVT/PEを疑う患者\nDVT: 5000U → 10000-15000 U/day PE: UFH 5000U → 31200 U/day\n正直、PEは多すぎる気はする"
   },
   {
     "objectID": "medicine/sepsis_iv_mi/index.html#早期の昇圧薬の使用",
@@ -6324,8 +6324,8 @@
     "objectID": "statistics/visualization_mi/index.html#stacked-barとaligned-barについて",
     "href": "statistics/visualization_mi/index.html#stacked-barとaligned-barについて",
     "title": "可視化事始め",
-    "section": "Stacked-barとaligned barについて",
-    "text": "Stacked-barとaligned barについて\n\n縦に重ねた棒グラフと横に重ねた棒グラフ\nどちらが良いですか？"
+    "section": "Stacked-barとAligned barについて",
+    "text": "Stacked-barとAligned barについて\n\n縦に重ねた棒グラフと横に重ねた棒グラフ\nどちらが良いですか？"
   },
   {
     "objectID": "statistics/visualization_mi/index.html#棒グラフが見せたいもの",
@@ -6346,21 +6346,21 @@
     "href": "statistics/visualization_mi/index.html#各journalのvisualizationの推奨",
     "title": "可視化事始め",
     "section": "各JournalのVisualizationの推奨",
-    "text": "各JournalのVisualizationの推奨\n\n\n\nJournal\n明示的に避けるもの\n\n\n\n\nJAMA1\nPie chart、3D graph、stacked bar chartを避ける。Bar graphは原則として頻度（number、percentage、rate）のみに使用する。\n\n\nAnnals of Internal Medicine2\nPie chart、3D graphicを避ける。不確実性を示せない単なるBar plotは避ける\n\n\nNEJM3\n禁止事項の記載はないが、Common figure typeの中にPie chartはなし\n\n\nThe BMJ4\nHistogram等はsimple 2-dimensional formatとし、background gridを避ける\n\n\nThe Lancet5\n3D graphは可能であれば1つ以上の2D graphへ変換する。\n\n\nJACC6\nBar graphは個数や割合以外では避ける。特にcontinuous dataをbarのみで要約することを避ける。\nnが少ないときはdot/scatter plotで全体の分布を示す\n色覚異常者に優しい色を使う\n\n\nEuropean Heart Journal (EHJ)7\n特に記載なし\n色覚異常者に優しい色を使う\n\n\nCirculation / AHA Journals8\nBar graphはcounts/proportions以外では避ける。Continuous dataをbarだけで要約しない。\nContinuous data、nが小さい時はdot plot / scatter plotで全体の分布を表示する。\n色覚異常者に優しい色を使う\n\n\n\n\nJAMA. Instructions for Authors. https://jamanetwork.com/journals/jama/pages/instructions-for-authorsAnnals of Internal Medicine. Statistical Guidance. https://www.acpjournals.org/journal/aim/authors/statistical-guidanceNew England Journal of Medicine. Author Center: New Manuscripts. https://www.nejm.org/author-center/new-manuscriptsBMJ Author Hub. Formatting your paper. https://authors.bmj.com/writing-and-formatting/formatting-your-paper/; The BMJ. House Style. https://www.bmj.com/about-bmj/resources-authors/house-styleThe Lancet. Artwork Guidelines. https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdfJournal of the American College of Cardiology. Publication Ethics / Data Visualization Guidelines. https://www.jacc.org/author-center/publication-ethicsEuropean Heart Journal. Statistical Guidelines. https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_; General Instructions. https://academic.oup.com/eurheartj/pages/General_InstructionsAmerican Heart Association Journals. Figure Guidelines. https://www.ahajournals.org/figure-guidelines; Statistical Reporting Recommendations. https://www.ahajournals.org/statistical-recommendations; Circulation. Manuscript Preparation. https://www.ahajournals.org/circ/manuscript-preparation"
+    "text": "各JournalのVisualizationの推奨\n\n\n\nJournal\n明示的に避けるもの\n\n\n\n\nJAMA1\nPie chart、3D graph、stacked bar chartを避ける。Bar graphは原則として頻度（number、percentage、rate）のみに使用する。\n\n\nAnnals of Internal Medicine2\nPie chart、3D graphicを避ける。不確実性を示せない単なるBar plotは避ける\n\n\nNEJM3\n禁止事項の記載はないが、Common figure typeの中にPie chartはなし\n\n\nThe BMJ4\nHistogram等はsimple 2-dimensional formatとし、background gridを避ける\n\n\nThe Lancet5\n3D graphは可能であれば1つ以上の2D graphへ変換する。\n\n\nJACC6\nBar graphは個数や割合以外では避ける。特にcontinuous dataをbarのみで要約することを避ける。\nnが少ないときはdot/scatter plotで全体の分布を示す\n色覚異常者に優しい色を使う\n\n\nEuropean Heart Journal (EHJ)7\n特に記載なし\n色覚異常者に優しい色を使う\n\n\nCirculation / AHA Journals8\nBar graphはcounts/proportions以外では避ける。Continuous dataをbarだけで要約しない。\nContinuous data、nが小さい時はdot plot / scatter plotで全体の分布を表示する。\n色覚異常者に優しい色を使う\n\n\n\nJAMA. Instructions for Authors. https://jamanetwork.com/journals/jama/pages/instructions-for-authorsAnnals of Internal Medicine. Statistical Guidance. https://www.acpjournals.org/journal/aim/authors/statistical-guidanceNew England Journal of Medicine. Author Center: New Manuscripts. https://www.nejm.org/author-center/new-manuscriptsBMJ Author Hub. Formatting your paper. https://authors.bmj.com/writing-and-formatting/formatting-your-paper/; The BMJ. House Style. https://www.bmj.com/about-bmj/resources-authors/house-styleThe Lancet. Artwork Guidelines. https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdfJournal of the American College of Cardiology. Publication Ethics / Data Visualization Guidelines. https://www.jacc.org/author-center/publication-ethicsEuropean Heart Journal. Statistical Guidelines. https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_; General Instructions. https://academic.oup.com/eurheartj/pages/General_InstructionsAmerican Heart Association Journals. Figure Guidelines. https://www.ahajournals.org/figure-guidelines; Statistical Reporting Recommendations. https://www.ahajournals.org/statistical-recommendations; Circulation. Manuscript Preparation. https://www.ahajournals.org/circ/manuscript-preparation"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#type-i-rtadistal",
     "href": "medicine/blood_gas_analysis_mi/index.html#type-i-rtadistal",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "Type I RTA(distal)",
-    "text": "Type I RTA(distal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\nPrimary\n家族性\n\n\n薬剤\nAmphotericin B, Lithium, Ibuprofen\n\n\n自己免疫性疾患\nSJD, AIH/PBC, SLE, RA, Hashimoto thyroiditis, PAN, Cryoglobulinemia\n\n\n高Ca尿症状となる疾患\n副甲状腺機能亢進症, FHH, Vitamin D中毒, Sarcoidosis\n\n\n腎疾患\n尿閉解除後, AIN\n\n\n\nUptoDate “Etiology and diagnosis of distal(type 1) and proximal (type2) renal tubular acidosis”\n\n尿路結石や腎へのCa沈着が多い"
+    "text": "Type I RTA(distal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\nPrimary\n家族性\n\n\n薬剤\nAmphotericin B, Lithium, Ibuprofen\n\n\n自己免疫性疾患\nSJD, AIH/PBC, SLE, RA, Hashimoto thyroiditis, PAN, Cryoglobulinemia\n\n\n高Ca尿症状となる疾患\n副甲状腺機能亢進症, FHH, Vitamin D中毒, Sarcoidosis\n\n\n腎疾患\n尿閉解除後, AIN\n\n\n\n(Emmett and Palmer 2025)\n\n尿路結石や腎へのCa沈着が多い"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#type-ii-rtaproximal",
     "href": "medicine/blood_gas_analysis_mi/index.html#type-ii-rtaproximal",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "Type II RTA(proximal)",
-    "text": "Type II RTA(proximal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\n家族性\nFanconi症候群\n\n\n薬剤\nTenofovir等の抗ウィルス薬, Acetazolamide, Topiramate, Aminoglycoside, プラチナ系抗癌剤, Valproate\n\n\n自己免疫性疾患\nSJD(通常はType I)\n\n\nM蛋白血症\nAmyloidosis、MM/軽鎖病\n\n\n重金属\n鉛, Cadmium, 水銀, 銅\n\n\nその他\nVitamin D欠乏\n\n\n\nDynamed\n\n尿路結石や腎へのCa沈着は多くない"
+    "text": "Type II RTA(proximal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\n家族性\nFanconi症候群\n\n\n薬剤\nTenofovir等の抗ウィルス薬, Acetazolamide, Topiramate, Aminoglycoside, プラチナ系抗癌剤, Valproate\n\n\n自己免疫性疾患\nSJD(通常はType I)\n\n\nM蛋白血症\nAmyloidosis、MM/軽鎖病\n\n\n重金属\n鉛, Cadmium, 水銀, 銅\n\n\nその他\nVitamin D欠乏\n\n\n\n(DynaMed 2026)\n\n尿路結石や腎へのCa沈着は多くない"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#type-iv-rta",
@@ -6402,6 +6402,188 @@
     "href": "statistics/visualization_mi/index.html#おすすめ",
     "title": "可視化事始め",
     "section": "おすすめ",
-    "text": "おすすめ\n\nカテゴリー変数はOkabe-Ito\n連続値はViridisがおすすめ！\n正負を強調する時はDiverginc HCLが良い"
+    "text": "おすすめ\n\n\nカテゴリー変数はOkabe-Ito\n連続値はViridisがおすすめ！\n正負を強調する時はDiverginc HCLが良い"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#what-is-this-1",
+    "href": "statistics/visualization_mi/index.html#what-is-this-1",
+    "title": "可視化事始め",
+    "section": "What is this?",
+    "text": "What is this?\n\n\nAnscombe’s Quartet\n\n上記、相関係数と回帰直線に加えて・・・・・・\nXの平均 9, 分散 11\nyの平均 7.50, 分散 4.1\n\nでも全く違う形"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#nによるプロットの選択",
+    "href": "statistics/visualization_mi/index.html#nによるプロットの選択",
+    "title": "可視化事始め",
+    "section": "Nによるプロットの選択",
+    "text": "Nによるプロットの選択\n\n連続値の平均や中央値を比較する時には分布も非常に重要\n分布を見る時にはバイオリンプロットもよい\nサンプルサイズの大きさで、使う図表を分けるべき\n一つの目安として n &lt; 30 ではドットチャートを併用する"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#連続値の出し方まとめ",
+    "href": "statistics/visualization_mi/index.html#連続値の出し方まとめ",
+    "title": "可視化事始め",
+    "section": "連続値の出し方まとめ",
+    "text": "連続値の出し方まとめ\n\n(Weissgerber et al. 2019)"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#よくある不適切なvisualization",
+    "href": "statistics/visualization_mi/index.html#よくある不適切なvisualization",
+    "title": "可視化事始め",
+    "section": "よくある不適切なVisualization",
+    "text": "よくある不適切なVisualization"
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#r-packages-reference",
+    "href": "statistics/visualization_mi/index.html#r-packages-reference",
+    "title": "可視化事始め",
+    "section": "R packages reference",
+    "text": "R packages reference\n\n\nWe used R v. 4.5.3 (R Core Team 2026) and the following R packages: cowplot v. 1.2.0 (Wilke 2025), ggcube v. 0.3.0 (Kling 2026), ggdist v. 3.3.3 (Kay 2024, 2025), ggpubr v. 1.0.0 (Kassambara 2026), here v. 1.0.2 (Müller 2025), marginaleffects v. 1.0.0 (Arel-Bundock et al. 2024), patchwork v. 1.3.2 (Pedersen 2025), plotrix v. 3.8.14 (J 2006), RColorBrewer v. 1.1.3 (Neuwirth 2022), Rdatasets v. 0.0.1 (Arel-Bundock 2025), rmarkdown v. 2.32 (Xie et al. 2018, 2020; Allaire et al. 2026), tidyverse v. 2.0.0 (Wickham et al. 2019), viridisLite v. 0.4.3 (Garnier et al. 2026)."
+  },
+  {
+    "objectID": "statistics/visualization_mi/index.html#references",
+    "href": "statistics/visualization_mi/index.html#references",
+    "title": "可視化事始め",
+    "section": "References",
+    "text": "References\n\n\nAllaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026. rmarkdown: Dynamic Documents for r. https://github.com/rstudio/rmarkdown.\n\n\nArel-Bundock, Vincent. 2025. Rdatasets: Access Datasets from the Rdatasets Archive. https://vincentarelbundock.github.io/Rdatasetspkg/.\n\n\nArel-Bundock, Vincent, Noah Greifer, and Andrew Heiss. 2024. “How to Interpret Statistical Models Using marginaleffects for R and Python.” Journal of Statistical Software 111 (9): 1–32. https://doi.org/10.18637/jss.v111.i09.\n\n\nGarnier, Simon, Ross, et al. 2026. viridis(Lite) - Colorblind-Friendly Color Maps for r. https://doi.org/10.5281/zenodo.4678326.\n\n\nJ, Lemon. 2006. “Plotrix: A Package in the Red Light District of r.” R-News 6 (4): 8–12.\n\n\nJeong, Yi Deun, Jaehyeong Cho, Yejun Son, et al. 2025. “Global Prevalence of Congenital Color Vision Deficiency Among Children and Adolescents, 1932-2022.” Ophthalmology 132 (12): 1431–44. https://doi.org/10.1016/j.ophtha.2025.07.031.\n\n\nKassambara, Alboukadel. 2026. ggpubr: “ggplot2” Based Publication Ready Plots. https://CRAN.R-project.org/package=ggpubr.\n\n\nKay, Matthew. 2024. “ggdist: Visualizations of Distributions and Uncertainty in the Grammar of Graphics.” IEEE Transactions on Visualization and Computer Graphics 30 (1): 414–24. https://doi.org/10.1109/TVCG.2023.3327195.\n\n\nKay, Matthew. 2025. ggdist: Visualizations of Distributions and Uncertainty. https://doi.org/10.5281/zenodo.3879620.\n\n\nKling, Matthew. 2026. ggcube: 3D Plotting with “ggplot2”. https://github.com/matthewkling/ggcube.\n\n\nMüller, Kirill. 2025. here: A Simpler Way to Find Your Files. https://here.r-lib.org/.\n\n\nNeuwirth, Erich. 2022. RColorBrewer: ColorBrewer Palettes.\n\n\nPedersen, Thomas Lin. 2025. patchwork: The Composer of Plots. https://patchwork.data-imaginist.com.\n\n\nR Core Team. 2026. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing. https://www.R-project.org/.\n\n\nTalbot, Justin, Vidya Setlur, and Anushka Anand. 2014. “Four Experiments on the Perception of Bar Charts.” IEEE Transactions on Visualization and Computer Graphics 20 (12): 2152–60. https://doi.org/10.1109/TVCG.2014.2346320.\n\n\nWaskom, Michael. n.d. Overview of seaborn Plotting Functions. Https://seaborn.pydata.org/tutorial/function_overview.html.\n\n\nWeissgerber, Tracey L, Stacey J Winham, Ethan P Heinzen, et al. 2019. “Reveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency: Transforming Data Visualization to Improve Transparency.” Circulation 140 (18): 1506–18. https://doi.org/10.1161/CIRCULATIONAHA.118.037777.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to the tidyverse.” Journal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nWilke, Claus O. 2025. cowplot: Streamlined Plot Theme and Plot Annotations for “ggplot2”. https://wilkelab.org/cowplot/.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-book/.\n\n\nXie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. R Markdown Cookbook. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-cookbook/.\n\n\nキーラン・ヒーリー. 2021. データ分析のためのデータ可視化入門. 実践Data Scienceシリーズ. 講談社.\n\n\n東京都福祉保健局生活福祉部地域福祉推進課. 2011. 東京都カラーユニバーサルデザインガイドライン. 東京都福祉保健局生活福祉部地域福祉推進課. https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/colorudguideline2."
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因の大雑把な考えと検索",
+    "href": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因の大雑把な考えと検索",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "代謝性アルカローシスの原因の大雑把な考えと検索",
+    "text": "代謝性アルカローシスの原因の大雑把な考えと検索\n\n大きく分けて以下の3つ\n\nアルカリの負荷: 薬剤性\n酸の喪失(H, Cl): 腎臓 vs. 腎臓外でのCl\n\n腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)\n\n脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など\n\n\n(髙岸 2024) - 原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認 - それで分からない時は尿中Clを計測する - 尿中Cl &lt; 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢 - 尿中Cl &gt; 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など\n← Acid–Base Map"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者における急性心不全管理",
+    "href": "medicine/elder_hf_mi/index.html#高齢者における急性心不全管理",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者における急性心不全管理",
+    "text": "高齢者における急性心不全管理\n\n原因検索\n何が多い？\n調べる"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢心不全におけるnppvinotropeなど",
+    "href": "medicine/elder_hf_mi/index.html#高齢心不全におけるnppvinotropeなど",
+    "title": "高齢者の心不全管理",
+    "section": "高齢心不全におけるNPPV、Inotropeなど",
+    "text": "高齢心不全におけるNPPV、Inotropeなど\n\n高齢者における治療の記述統計を調べる(Circ QOで良いか？)\nおそらくは行われないという文脈になる"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢心不全の利尿薬",
+    "href": "medicine/elder_hf_mi/index.html#高齢心不全の利尿薬",
+    "title": "高齢者の心不全管理",
+    "section": "高齢心不全の利尿薬",
+    "text": "高齢心不全の利尿薬\n\n高齢心不全患者への利尿薬反応性のDataがあるか調べる"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢心不全の利尿薬のrisk",
+    "href": "medicine/elder_hf_mi/index.html#高齢心不全の利尿薬のrisk",
+    "title": "高齢者の心不全管理",
+    "section": "高齢心不全の利尿薬のRisk",
+    "text": "高齢心不全の利尿薬のRisk\n\nCrの変動が多いことを調べる\n予後との関連は薄い"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者心不全の心不全治療を頑張る意義",
+    "href": "medicine/elder_hf_mi/index.html#高齢者心不全の心不全治療を頑張る意義",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者心不全の心不全治療を頑張る意義？",
+    "text": "高齢者心不全の心不全治療を頑張る意義？\n\n高齢者心不全の予後は間違いなく悪い\n\n死亡は・・・\n心不全再入院は・・・ \n\n一方で、死亡の中身は大分異なる"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者心不全の死亡原因",
+    "href": "medicine/elder_hf_mi/index.html#高齢者心不全の死亡原因",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者心不全の死亡原因",
+    "text": "高齢者心不全の死亡原因\n\nWET-HFだと高齢者は非心血管死亡が多い Nakamaru, Ryo, Yasuyuki Shiraishi, Alexander T. Sandhu, et al. 2023. “Cardiovascular vs. Non-Cardiovascular Deaths after Heart Failure Hospitalization in Young, Older, and Very Old Patients.” ESC Heart Failure 10 (1): 673–84. Takabayashi, Kensuke, Shouji Kitaguchi, Takashi Yamamoto, et al. 2021. “Mode of Death in Elderly and Super-Elderly Patients with Acute Heart Failure: Insights from Japanese Heart Failure Registry.” Clinical Cardiology 44 (6): 848–56. Takabayashi, Kensuke, Shouji Kitaguchi, Takashi Yamamoto, et al. 2021. “Mode of Death in Elderly and Super-Elderly Patients with Acute Heart Failure: Insights from Japanese Heart Failure Registry.” Clinical Cardiology 44 (6): 848–56. -　特にFrailだとそれが多くなる Ohashi, Koichi, Yuya Matsue, Daichi Maeda, et al. 2024. “Impact of Multidomain Frailty on the Mode of Death in Older Patients with Heart Failure: A Cohort Study.” Circulation. Cardiovascular Quality and Outcomes 17 (5): e010416.\n\nそこまで死亡をガリガリ下げるために頑張るか？"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#高齢者心不全にとって重要なこと",
+    "href": "medicine/elder_hf_mi/index.html#高齢者心不全にとって重要なこと",
+    "title": "高齢者の心不全管理",
+    "section": "高齢者心不全にとって重要なこと？",
+    "text": "高齢者心不全にとって重要なこと？\n\n心血管死亡減少も重要だが\n心不全入院を減らすこと\nQOLを良くする治療"
+  },
+  {
+    "objectID": "medicine/elder_hf_mi/index.html#qolを改善する薬",
+    "href": "medicine/elder_hf_mi/index.html#qolを改善する薬",
+    "title": "高齢者の心不全管理",
+    "section": "QOLを改善する薬",
+    "text": "QOLを改善する薬\n\nARNI\nSGLT2i"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#当院では",
+    "href": "medicine/pregnancy_er_mi/index.html#当院では",
+    "title": "妊娠患者をERで診たとき",
+    "section": "当院では？",
+    "text": "当院では？\n\n2026/10に確認したところ、理論上は可能(数年前に腹部MRI検査をやった事はあると)\n\nただし、休日夜間は不可能\nまた腹部MRIの虫垂炎の読影は制度が落ちる\n\n「本当に疑うなら造影CT撮像してください」との事\n特別なプロトコルはないとの事で「造影のみで」くらいで良いらしい"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠初期",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠初期",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠初期",
+    "text": "妊娠初期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nカルバマゼピン\nテグレトール，他\n催奇形性\n\n\nシクロホスファミド\nエンドキサン\n催奇形性\n\n\nダナゾール\nボンゾール，他\n催奇形性：女児外性器の男性化\n\n\nチアマゾール\nメルカゾール\n催奇形性：MMI奇形症候群\n\n\nバルプロ酸ナトリウム\nデパケン、セレニカR，他\n催奇形性：二分脊椎、胎児バルプロ酸症候群\n\n\nビタミンA（大量）\nチョコラA，他\n催奇形性\n\n\nフェニトイン\nアレビアチン、ヒダントール，他\n催奇形性：胎児ヒダントイン症候群\n\n\nフェノバルビタール\nフェノバール，他\n催奇形性：口唇・口蓋裂，他\n\n\nミコフェノール酸モフェチル\nセルセプト\n催奇形性：外耳・顔面奇形、口唇・口蓋裂、遠位四肢・心臓・食道・腎臓の奇形，他／流産\n\n\nミソプロストール\nサイトテック\nメビウス症候群、四肢切断、子宮収縮、流産\n\n\nメトトレキサート\nリウマトレックス，他\n催奇形性：メトトレキサート胎芽病\n\n\nワルファリンカリウム（クマリン系抗凝血薬）\nワーファリン，他\n催奇形性：ワルファリン胎芽病、点状軟骨異栄養症、中枢神経異常"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠中後期",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠中後期",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠中・後期",
+    "text": "妊娠中・後期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nアミノグリコシド系抗結核薬\nカナマイシン注、ストレプトマイシン注\n胎児毒性：非可逆的第VIII脳神経障害、先天性聴力障害\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）\nカプトプリル、レニベース，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nアンジオテンシンII受容体拮抗薬（ARB）\nニューロタン、バルサルタン，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nテトラサイクリン系抗菌薬\nアクロマイシン、レダマイシン、ミノマイシン，他\n胎児毒性：歯牙の着色、エナメル質形成不全\n\n\nミソプロストール\nサイトテック\n子宮収縮、流早産"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠後期",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠後期",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠後期",
+    "text": "妊娠後期\n\n\n\n\n\n\n\n\n一般名または医薬品群名\n代表的商品名\n報告された催奇形性・胎児毒性\n\n\n\n\nアミノグリコシド系抗結核薬\nカナマイシン注、ストレプトマイシン注\n胎児毒性：非可逆的第VIII脳神経障害、先天性聴力障害\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）\nカプトプリル、レニベース，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nアンジオテンシンII受容体拮抗薬（ARB）\nニューロタン、バルサルタン，他\n胎児毒性：胎児腎障害・無尿・羊水過少、肺低形成、Potter sequence\n\n\nテトラサイクリン系抗菌薬\nアクロマイシン、レダマイシン、ミノマイシン，他\n胎児毒性：歯牙の着色、エナメル質形成不全\n\n\nミソプロストール\nサイトテック\n子宮収縮、流早産\n\n\n非ステロイド系抗炎症薬（NSAIDs）（インドメタシン、ジクロフェナクナトリウム，他）\nインダシン、ボルタレン，他\n胎児毒性：動脈管収縮、胎児循環遷延、羊水過少、新生児壊死性腸炎"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊娠初期にのみ使用されたときに問題がない薬",
+    "href": "medicine/pregnancy_er_mi/index.html#妊娠初期にのみ使用されたときに問題がない薬",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊娠初期にのみ使用されたときに問題がない薬",
+    "text": "妊娠初期にのみ使用されたときに問題がない薬\n\n\n\nTable 1: 添付文書上いわゆる禁忌*の医薬品のうち、妊娠初期のみに使用された場合、臨床的に有意な胎児への影響はないと判断してよい医薬品\n\n\n\n\n\n\n\n\n\n医薬品＜一般名＞\n分類\n\n\n\n\nイトラコナゾール、ミコナゾール\n抗真菌薬\n\n\nオフロキサシン、シプロフロキサシン、スパルフロキサシン、トスフロキサシントシル酸塩、ノルフロキサシン、レボフロキサシン、ロメフロキサシン塩酸塩\nニューキノロン系抗菌薬\n\n\nニフェジピン（妊娠20週未満）、ニカルジピン塩酸塩（経口錠）、アムロジピンベシル酸塩\nカルシウム拮抗薬\n\n\nヒドロキシジン塩酸塩\n抗ヒスタミン薬\n\n\nオキサトミド、トラニラスト、ペミロラストカリウム\n抗アレルギー薬\n\n\n風疹ワクチン、水痘ワクチン、流行性耳下腺炎ワクチン、麻疹ワクチン\n生ワクチン\n\n\nセンナ、センノシド\n緩下薬\n\n\nハロペリドール、ブロムペリドール（ただしこれらは、妊娠末期では新生児錐体症候群のリスクとなる）\nブチロフェノン系抗精神病薬\n\n\nメトホルミン塩酸塩、グリベンクラミド\n経口血糖降下薬\n\n\nドンペリドン\n制吐薬\n\n\n卵胞ホルモン、黄体ホルモン、低用量ピル\n女性ホルモン薬\n\n\nクロミフェンクエン酸塩\n排卵誘発薬\n\n\nニコチン置換療法薬\n禁煙補助薬\n\n\nエチドロン酸二ナトリウム、ミノドロン酸水和物、リセドロン酸ナトリウム\nビスフォスフォネート製剤\n\n\nインドメタシン、ジクロフェナクナトリウム、スリンダク、メロキシカム（ただしこれらは、妊娠末期では胎児毒性を示す）\n非ステロイド系抗炎症薬\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）、アンジオテンシンII受容体拮抗薬（ARB）（ただしこれらは、妊娠中期以降では胎児毒性を示す）\n降圧薬"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#授乳婦への説明",
+    "href": "medicine/pregnancy_er_mi/index.html#授乳婦への説明",
+    "title": "妊娠患者をERで診たとき",
+    "section": "授乳婦への説明",
+    "text": "授乳婦への説明\n\n基本的に母親が使っている医薬品が児に影響することは少ない\n\n母乳を介しての薬剤曝露は通常子宮内に比べて1%未満~10%程度"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の急性腹症",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦の急性腹症",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦の急性腹症",
+    "text": "妊婦の急性腹症\n\n全妊婦の中で非産科関連の急性腹症は0.5-2%で起こる\n妊娠中は実は虫垂炎の発症率は非妊婦に比べて低い(35%ほど下がる)(Zingone et al. 2015)が、妊娠中の急性腹症の中では最多(約25%)(DynaMed, n.d.)\n\n1st~2nd trimesterが多く3rd trimesterではそこまで多くない"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の虫垂炎疑い",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦の虫垂炎疑い",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦の虫垂炎疑い",
+    "text": "妊婦の虫垂炎疑い\n\n(日本救急医学会Point-of-Care超音波推進委員会 2023)\n\n実際は、右下腹部が痛い妊婦が大多数(80%)(DynaMed, n.d.)\nただし、3rd trimesterだと右上に痛みが出ることがある\n\n反跳痛や板状硬も出にくい\nWBCも自然に上昇しているため診断が難しい\n\n診断はUS → 単純MRI → 造影CT(Rebarber and Jacob, n.d.)"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#超音波",
+    "href": "medicine/pregnancy_er_mi/index.html#超音波",
+    "title": "妊娠患者をERで診たとき",
+    "section": "超音波",
+    "text": "超音波\n (Rebarber and Jacob, n.d.)\n\n感度 0.72 (95% CI 0.45-0.92) / 特異度 0.95 (95% CI 0.84-0.99)\n見えなかったときに除外は出来ない"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#単純mri",
+    "href": "medicine/pregnancy_er_mi/index.html#単純mri",
+    "title": "妊娠患者をERで診たとき",
+    "section": "単純MRI",
+    "text": "単純MRI\n感度 96.8% (95% CI 89-99.6)/ 特異度 99.2% (95% CI 98.2-99.8)(Rebarber and Jacob, n.d.)"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#造影ct",
+    "href": "medicine/pregnancy_er_mi/index.html#造影ct",
+    "title": "妊娠患者をERで診たとき",
+    "section": "造影CT",
+    "text": "造影CT\n\nUptoDateによると、プロトコルを変えれば胎児被曝を3mGy未満に出来る(一般的なプロトコルだと20-40mGy)\n感度0.99 (95% CI 0.96-1.00) / 特異度 0.91 (0.75-0.97)(Rebarber and Jacob, n.d.)"
   }
 ]
