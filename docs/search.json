@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n19.66352\n\n\n2\n22.24033\n\n\n3\n20.01665\n\n\n4\n20.97740\n\n\n5\n22.51331\n\n\n6\n17.31354\n\n\n7\n17.05093\n\n\n8\n18.57279\n\n\n9\n22.80472\n\n\n10\n21.21012\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n17.54662\n\n\n2\n21.56860\n\n\n3\n19.77366\n\n\n4\n20.92782\n\n\n5\n21.98521\n\n\n6\n23.17364\n\n\n7\n19.98384\n\n\n8\n22.28981\n\n\n9\n19.94002\n\n\n10\n20.00368\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.54678\n203.8865\n\n\n\n2\n75.22322\n174.1023\n\n\n\n3\n72.75683\n170.6127\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n74.90762\n196.0337\n\n\n\n2\n74.31003\n191.9489\n\n\n\n3\n79.69706\n202.2170\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
