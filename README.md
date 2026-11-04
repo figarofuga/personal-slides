@@ -96,7 +96,7 @@ pixi run --as-is check
 ```bash
 pixi run --as-is preview
 pixi run --as-is render
-pixi run --as-is quarto render statistics/model_performance/index.qmd --no-clean
+pixi run --as-is quarto render statistics/visualization/index.qmd --no-clean
 pixi run --as-is R
 pixi shell --as-is
 ```

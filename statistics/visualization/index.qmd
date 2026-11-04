@@ -824,7 +824,7 @@ par(op)
 ## R packages reference
 
 ```{r}
-grateful::cite_packages(output = "paragraph", out.dir = here::here("statistics", "visualization"), pkgs = here::here("statistics", "visualization", "index.qmd"), out.format = "html")
+grateful::cite_packages(output = "table", out.dir = here::here("statistics", "visualization"), pkgs = here::here("statistics", "visualization", "index.qmd"), out.format = "html")
 ```
 
 ## References 
