@@ -6585,5 +6585,243 @@
     "title": "妊娠患者をERで診たとき",
     "section": "造影CT",
     "text": "造影CT\n\nUptoDateによると、プロトコルを変えれば胎児被曝を3mGy未満に出来る(一般的なプロトコルだと20-40mGy)\n感度0.99 (95% CI 0.96-1.00) / 特異度 0.91 (0.75-0.97)(Rebarber and Jacob, n.d.)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#take-home-message",
+    "href": "statistics/visualization/index.html#take-home-message",
+    "title": "可視化事始め",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n棒グラフは極力積み上げでなくDodgedする\n3次元プロットは避ける！(特に円グラフ)\n色覚多様性にも配慮した色を使う"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#what-is-this",
+    "href": "statistics/visualization/index.html#what-is-this",
+    "title": "可視化事始め",
+    "section": "What is This？",
+    "text": "What is This？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#what-is-this-1",
+    "href": "statistics/visualization/index.html#what-is-this-1",
+    "title": "可視化事始め",
+    "section": "What is this?",
+    "text": "What is this?\n\n\nAnscombe’s Quartet\n\n上記、相関係数と回帰直線に加えて・・・・・・\nXの平均 9, 分散 11\nyの平均 7.50, 分散 4.1\n\nでも全く違う形"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#visualization",
+    "href": "statistics/visualization/index.html#visualization",
+    "title": "可視化事始め",
+    "section": "Visualization",
+    "text": "Visualization\n\nTableと異なり、Figureにすることで情報量は格段に上がる\n一方で、適切なFigureを描かないと見にくいばかりか、misleadingにもなりうる\n内科の問診のように、基礎中の基礎だけど重要極まりない工程\nVisualizationって誰かに習ったっけ？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#よいfigureの条件",
+    "href": "statistics/visualization/index.html#よいfigureの条件",
+    "title": "可視化事始め",
+    "section": "よいFigureの条件",
+    "text": "よいFigureの条件\n\n\n\nEdward Tufte\n\n\nすばらしいグラフは興味深いデータを, よく工夫して表現したものです. これはデータの中身の問題であり, 統計の問題であり, そして デザインの問題です. (キーラン・ヒーリー 2021)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#非常に良いfigureの見本",
+    "href": "statistics/visualization/index.html#非常に良いfigureの見本",
+    "title": "可視化事始め",
+    "section": "非常に良いFigureの見本",
+    "text": "非常に良いFigureの見本\n\n\n左の図は同時に6種類の変数をきれいに示している\n右の図はCostの高さをモンスターの牙に例えている\n？？？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#よいfigureの条件-1",
+    "href": "statistics/visualization/index.html#よいfigureの条件-1",
+    "title": "可視化事始め",
+    "section": "よいFigureの条件",
+    "text": "よいFigureの条件\n\n\n\n\n\nEdward Tufte\n\n\n\n\nよいグラフは読み手に対して最小のスペース、最小のインクによって最小の時間で最大限のアイディアを与えてくれます.……ほとんどの場合,グラフは複数の変量からなり。……そしてすばらしいグラフは私たちにデータの真 実を教えてくれます。\n\n\n最小のスペース、最小のインクで最大限のアイディアを与える？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#インクデータ比の法則",
+    "href": "statistics/visualization/index.html#インクデータ比の法則",
+    "title": "可視化事始め",
+    "section": "インク・データ比の法則",
+    "text": "インク・データ比の法則\n\n\n (Weissgerber et al. 2019)\n\n\n\n\n\n\n\n\n\n\n\n\nそのプロットの中で意味がある部分と、使ったインクの割合を小さくすることが良いプロットの条件\n棒グラフに下の部分や、X軸でわざわざ分かれているグラフの色の塗り替えは不要\n簡単にいうと”Simple is best”"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#見せたいものって",
+    "href": "statistics/visualization/index.html#見せたいものって",
+    "title": "可視化事始め",
+    "section": "見せたいものって？",
+    "text": "見せたいものって？\n\n\n\n見せたいものは大体この3種類に大別\n\n関係性\n分布\n比率・差\n\nこの6種類が基本\n\n散布図\nヒストグラム\n折れ線グラフ\n箱ひげ図\nドットチャート\n棒グラフ\n\n\n\n\n(Waskom, n.d.)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#人間の得意苦手分野",
+    "href": "statistics/visualization/index.html#人間の得意苦手分野",
+    "title": "可視化事始め",
+    "section": "人間の得意・苦手分野",
+    "text": "人間の得意・苦手分野\n (キーラン・ヒーリー 2021)\n\n右の方がエラーが多い\n面積を使うMosaic図や円グラフはエラーが多い"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#example",
+    "href": "statistics/visualization/index.html#example",
+    "title": "可視化事始め",
+    "section": "Example",
+    "text": "Example\n\n\n\n\n\nナイチンゲールの元図\n\n\n\n青が負傷による死亡\n赤が感染症による死亡\n黒がその他\n\n\n\n\n\n\n\n\n\n\n\n\n\nどちらがより、感染症による死亡の影響の強さを示せていますか？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#nによるプロットの選択",
+    "href": "statistics/visualization/index.html#nによるプロットの選択",
+    "title": "可視化事始め",
+    "section": "Nによるプロットの選択",
+    "text": "Nによるプロットの選択\n\n連続値の平均や中央値を比較する時には分布も非常に重要\n分布を見る時にはバイオリンプロットもよい\nサンプルサイズの大きさで、使う図表を分けるべき\n一つの目安として n &lt; 30 ではドットチャートを併用する"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#whats-this",
+    "href": "statistics/visualization/index.html#whats-this",
+    "title": "可視化事始め",
+    "section": "What’s This？",
+    "text": "What’s This？\n\nSTEMI患者のPCI後のCKの値の平均\nSTEMI患者のPCI後のCKの値の中央値\n???"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#whats-this-1",
+    "href": "statistics/visualization/index.html#whats-this-1",
+    "title": "可視化事始め",
+    "section": "What’s This？",
+    "text": "What’s This？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#thats-it",
+    "href": "statistics/visualization/index.html#thats-it",
+    "title": "可視化事始め",
+    "section": "That’s it!!",
+    "text": "That’s it!!\n\n\nFemaleだけ外れ値があるが故の問題\n棒グラフだと不適切に要約されてしまい気づけない"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#nへの意識-1",
+    "href": "statistics/visualization/index.html#nへの意識-1",
+    "title": "可視化事始め",
+    "section": "Nへの意識",
+    "text": "Nへの意識\n\n\n何かの比較の時には必ず分布も考慮する\n箱ひげ図やバイオリンプロットは非常に見やすい\n一方で、Nが小さいときにはその意味も変わる\nNが少ないときはそのデータも入れた方が良い"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#nへの意識と見やすさの両立",
+    "href": "statistics/visualization/index.html#nへの意識と見やすさの両立",
+    "title": "可視化事始め",
+    "section": "Nへの意識と見やすさの両立",
+    "text": "Nへの意識と見やすさの両立\n{fig-alt=“ドットチャートと要約1”“}\n\nドットチャートに要約（平均・中央値）を追加する\nドットを出来るだけ薄くする(Weissgerber et al. 2019)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#連続値の出し方まとめ",
+    "href": "statistics/visualization/index.html#連続値の出し方まとめ",
+    "title": "可視化事始め",
+    "section": "連続値の出し方まとめ",
+    "text": "連続値の出し方まとめ\n\n(Weissgerber et al. 2019)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#次元プロットって",
+    "href": "statistics/visualization/index.html#次元プロットって",
+    "title": "可視化事始め",
+    "section": "3次元プロットって？",
+    "text": "3次元プロットって？\n\n\n基本的にはmisleading\n使わなくて済むなら絶対に使わない\n一番ダメなのが3次元円グラフ\n\n4つの”13”は同じ大きさに見えますか？\n13に挟まれた数値はどれが一番大きく見えますか？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#どちらが見やすい",
+    "href": "statistics/visualization/index.html#どちらが見やすい",
+    "title": "可視化事始め",
+    "section": "どちらが見やすい？",
+    "text": "どちらが見やすい？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#stacked-barとaligned-barについて",
+    "href": "statistics/visualization/index.html#stacked-barとaligned-barについて",
+    "title": "可視化事始め",
+    "section": "Stacked-barとAligned barについて",
+    "text": "Stacked-barとAligned barについて\n\n縦に重ねた棒グラフと横に重ねた棒グラフ\nどちらが良いですか？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#棒グラフが見せたいもの",
+    "href": "statistics/visualization/index.html#棒グラフが見せたいもの",
+    "title": "可視化事始め",
+    "section": "棒グラフが見せたいもの",
+    "text": "棒グラフが見せたいもの\n\n棒グラフは横に並べて長さで差や比率を示すもの\n途中でBreakしている棒グラフは決して使ってはいけない\nそういう意味で、積み重ねの棒グラフは一番下がそろっていないので×\n事実、長さを間違える人が多い事が知られている(Talbot et al. 2014)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#stacked-bar-and-algined-bar-graph",
+    "href": "statistics/visualization/index.html#stacked-bar-and-algined-bar-graph",
+    "title": "可視化事始め",
+    "section": "Stacked bar and algined bar graph",
+    "text": "Stacked bar and algined bar graph\n\n\nどっちが見やすい？\n例えば、AのQの値とBのPの値は？"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#ゲシュタルトとは",
+    "href": "statistics/visualization/index.html#ゲシュタルトとは",
+    "title": "可視化事始め",
+    "section": "ゲシュタルトとは",
+    "text": "ゲシュタルトとは\n\n\n\nゲシュタルトの法則\n\n\n\n少ない視覚的情報から要素間の関係性を推論すること\n主に以下の法則が存在する\n\n近接性(Proximity):空間的に近いものは互いに関連しているように見える\n類似性(Similarity):見た目が似ているものは関係しているように見える\n接続性(Coneetction):視覚的に結び付けられているもの同士は関係を持っているように見える\n連続性(Continuity):一部が隠されているオブジェクトは親和性のある形に補完される\n閉鎖性(Closure):不完全な形は完全なものとして知覚される\n共通の運命(Common fate):同じ方向に移動するオブジェクトは1つの群として認識される\n\nただし、別データを線で結んではいけない"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#推奨はしないけど",
+    "href": "statistics/visualization/index.html#推奨はしないけど",
+    "title": "可視化事始め",
+    "section": "推奨はしないけど",
+    "text": "推奨はしないけど\n\n\n右の方が、まだ視線を誘導できる"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#色使いについて",
+    "href": "statistics/visualization/index.html#色使いについて",
+    "title": "可視化事始め",
+    "section": "色使いについて",
+    "text": "色使いについて\n\nいわゆる色覚異常は一般人口で約3%おり非常にCommon(Jeong et al. 2025)\n\n男性により多い\n\n読者・査読者にもいるかも知れないので色使いは皆に優しい方が良い"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#カラーユニバーサルデザイン",
+    "href": "statistics/visualization/index.html#カラーユニバーサルデザイン",
+    "title": "可視化事始め",
+    "section": "カラーユニバーサルデザイン",
+    "text": "カラーユニバーサルデザイン\n\n\nこの組み合わせは避ける\n以下のルールは有用\n\n赤を使うときは赤橙やオレンジを使う\n黄色、黄緑、明るい緑は同時に使わない\n赤緑(暖色系)と緑青(寒色系)のそれぞれの側から交互に選ぶ\n\n具体的な色彩の選び方は以下を参照(東京都福祉保健局生活福祉部地域福祉推進課 2011)"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#rで使えるカラーパレット",
+    "href": "statistics/visualization/index.html#rで使えるカラーパレット",
+    "title": "可視化事始め",
+    "section": "Rで使えるカラーパレット",
+    "text": "Rで使えるカラーパレット"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#おすすめ",
+    "href": "statistics/visualization/index.html#おすすめ",
+    "title": "可視化事始め",
+    "section": "おすすめ",
+    "text": "おすすめ\n\n\nカテゴリー変数はOkabe-Ito\n連続値はViridisがおすすめ！\n正負を強調する時はDiverginc HCLが良い"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#各journalのvisualizationの推奨",
+    "href": "statistics/visualization/index.html#各journalのvisualizationの推奨",
+    "title": "可視化事始め",
+    "section": "各JournalのVisualizationの推奨",
+    "text": "各JournalのVisualizationの推奨\n\n\n\nJournal\n明示的に避けるもの\n\n\n\n\nJAMA1\nPie chart、3D graph、stacked bar chartを避ける。Bar graphは原則として頻度（number、percentage、rate）のみに使用する。\n\n\nAnnals of Internal Medicine2\nPie chart、3D graphicを避ける。不確実性を示せない単なるBar plotは避ける\n\n\nNEJM3\n禁止事項の記載はないが、Common figure typeの中にPie chartはなし\n\n\nThe BMJ4\nHistogram等はsimple 2-dimensional formatとし、background gridを避ける\n\n\nThe Lancet5\n3D graphは可能であれば1つ以上の2D graphへ変換する。\n\n\nJACC6\nBar graphは個数や割合以外では避ける。特にcontinuous dataをbarのみで要約することを避ける。\nnが少ないときはdot/scatter plotで全体の分布を示す\n色覚異常者に優しい色を使う\n\n\nEuropean Heart Journal (EHJ)7\n特に記載なし\n色覚異常者に優しい色を使う\n\n\nCirculation / AHA Journals8\nBar graphはcounts/proportions以外では避ける。Continuous dataをbarだけで要約しない。\nContinuous data、nが小さい時はdot plot / scatter plotで全体の分布を表示する。\n色覚異常者に優しい色を使う\n\n\n\nJAMA. Instructions for Authors. https://jamanetwork.com/journals/jama/pages/instructions-for-authorsAnnals of Internal Medicine. Statistical Guidance. https://www.acpjournals.org/journal/aim/authors/statistical-guidanceNew England Journal of Medicine. Author Center: New Manuscripts. https://www.nejm.org/author-center/new-manuscriptsBMJ Author Hub. Formatting your paper. https://authors.bmj.com/writing-and-formatting/formatting-your-paper/; The BMJ. House Style. https://www.bmj.com/about-bmj/resources-authors/house-styleThe Lancet. Artwork Guidelines. https://www.lancet.com/pb/assets/raw/Lancet/authors/artwork-guidelines.pdfJournal of the American College of Cardiology. Publication Ethics / Data Visualization Guidelines. https://www.jacc.org/author-center/publication-ethicsEuropean Heart Journal. Statistical Guidelines. https://academic.oup.com/eurheartj/pages/Statistical_Guidelines_; General Instructions. https://academic.oup.com/eurheartj/pages/General_InstructionsAmerican Heart Association Journals. Figure Guidelines. https://www.ahajournals.org/figure-guidelines; Statistical Reporting Recommendations. https://www.ahajournals.org/statistical-recommendations; Circulation. Manuscript Preparation. https://www.ahajournals.org/circ/manuscript-preparation"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#take-home-message-1",
+    "href": "statistics/visualization/index.html#take-home-message-1",
+    "title": "可視化事始め",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\nまず、最初に何を見せたいのかを3つから考える\n\n分布\n関係\n差・比率\n\n差・比率を見せる時は極力長さで表す\n\n面積は使わない\n\n最もシンプルな図を実現する\n\nデータ・インク比率が良いもの\n\nNや分布にも配慮する\n\n連続値に棒グラフは避ける\n\n棒グラフは極力積み上げでなくDodgedする\n3次元プロットは避ける！(特に円グラフ)\n色覚多様性にも配慮した色を使う"
+  },
+  {
+    "objectID": "statistics/visualization/index.html#r-packages-reference",
+    "href": "statistics/visualization/index.html#r-packages-reference",
+    "title": "可視化事始め",
+    "section": "R packages reference",
+    "text": "R packages reference\n\n\nWe used R v. 4.5.3 (R Core Team 2026) and the following R packages: cowplot v. 1.2.0 (Wilke 2025), ggcube v. 0.3.0 (Kling 2026), ggdist v. 3.3.3 (Kay 2024, 2025), ggpubr v. 1.0.0 (Kassambara 2026), here v. 1.0.2 (Müller 2025), marginaleffects v. 1.0.0 (Arel-Bundock et al. 2024), patchwork v. 1.3.2 (Pedersen 2025), plotrix v. 3.8.14 (J 2006), RColorBrewer v. 1.1.3 (Neuwirth 2022), Rdatasets v. 0.0.1 (Arel-Bundock 2025), rmarkdown v. 2.32 (Xie et al. 2018, 2020; Allaire et al. 2026), tidyverse v. 2.0.0 (Wickham et al. 2019), viridisLite v. 0.4.3 (Garnier et al. 2026)."
+  },
+  {
+    "objectID": "statistics/visualization/index.html#references",
+    "href": "statistics/visualization/index.html#references",
+    "title": "可視化事始め",
+    "section": "References",
+    "text": "References\n\n\nAllaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026. rmarkdown: Dynamic Documents for r. https://github.com/rstudio/rmarkdown.\n\n\nArel-Bundock, Vincent. 2025. Rdatasets: Access Datasets from the Rdatasets Archive. https://vincentarelbundock.github.io/Rdatasetspkg/.\n\n\nArel-Bundock, Vincent, Noah Greifer, and Andrew Heiss. 2024. “How to Interpret Statistical Models Using marginaleffects for R and Python.” Journal of Statistical Software 111 (9): 1–32. https://doi.org/10.18637/jss.v111.i09.\n\n\nGarnier, Simon, Ross, et al. 2026. viridis(Lite) - Colorblind-Friendly Color Maps for r. https://doi.org/10.5281/zenodo.4678326.\n\n\nJ, Lemon. 2006. “Plotrix: A Package in the Red Light District of r.” R-News 6 (4): 8–12.\n\n\nJeong, Yi Deun, Jaehyeong Cho, Yejun Son, et al. 2025. “Global Prevalence of Congenital Color Vision Deficiency Among Children and Adolescents, 1932-2022.” Ophthalmology 132 (12): 1431–44. https://doi.org/10.1016/j.ophtha.2025.07.031.\n\n\nKassambara, Alboukadel. 2026. ggpubr: “ggplot2” Based Publication Ready Plots. https://CRAN.R-project.org/package=ggpubr.\n\n\nKay, Matthew. 2024. “ggdist: Visualizations of Distributions and Uncertainty in the Grammar of Graphics.” IEEE Transactions on Visualization and Computer Graphics 30 (1): 414–24. https://doi.org/10.1109/TVCG.2023.3327195.\n\n\nKay, Matthew. 2025. ggdist: Visualizations of Distributions and Uncertainty. https://doi.org/10.5281/zenodo.3879620.\n\n\nKling, Matthew. 2026. ggcube: 3D Plotting with “ggplot2”. https://github.com/matthewkling/ggcube.\n\n\nMüller, Kirill. 2025. here: A Simpler Way to Find Your Files. https://here.r-lib.org/.\n\n\nNeuwirth, Erich. 2022. RColorBrewer: ColorBrewer Palettes.\n\n\nPedersen, Thomas Lin. 2025. patchwork: The Composer of Plots. https://patchwork.data-imaginist.com.\n\n\nR Core Team. 2026. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing. https://www.R-project.org/.\n\n\nTalbot, Justin, Vidya Setlur, and Anushka Anand. 2014. “Four Experiments on the Perception of Bar Charts.” IEEE Transactions on Visualization and Computer Graphics 20 (12): 2152–60. https://doi.org/10.1109/TVCG.2014.2346320.\n\n\nWaskom, Michael. n.d. Overview of seaborn Plotting Functions. Https://seaborn.pydata.org/tutorial/function_overview.html.\n\n\nWeissgerber, Tracey L, Stacey J Winham, Ethan P Heinzen, et al. 2019. “Reveal, Don’t Conceal: Transforming Data Visualization to Improve Transparency: Transforming Data Visualization to Improve Transparency.” Circulation 140 (18): 1506–18. https://doi.org/10.1161/CIRCULATIONAHA.118.037777.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to the tidyverse.” Journal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nWilke, Claus O. 2025. cowplot: Streamlined Plot Theme and Plot Annotations for “ggplot2”. https://wilkelab.org/cowplot/.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. R Markdown: The Definitive Guide. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-book/.\n\n\nXie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. R Markdown Cookbook. Chapman; Hall/CRC. https://pkg.yihui.org/rmarkdown-cookbook/.\n\n\nキーラン・ヒーリー. 2021. データ分析のためのデータ可視化入門. 実践Data Scienceシリーズ. 講談社.\n\n\n東京都福祉保健局生活福祉部地域福祉推進課. 2011. 東京都カラーユニバーサルデザインガイドライン. 東京都福祉保健局生活福祉部地域福祉推進課. https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/colorudguideline2."
+  },
+  {
+    "objectID": "statistics/visualization/index.html#ご静聴ありがとうございました",
+    "href": "statistics/visualization/index.html#ご静聴ありがとうございました",
+    "title": "可視化事始め",
+    "section": "ご静聴ありがとうございました",
+    "text": "ご静聴ありがとうございました"
   }
 ]
