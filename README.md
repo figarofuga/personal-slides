@@ -343,7 +343,7 @@ git commit -m "Update analysis environment"
 ```bash
 pixi run --as-is render
 git add .
-git commit -m "update visualization slides"
+git commit -m "update blood gas analysis slides"
 git push
 ```
 

@@ -197,6 +197,10 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 .reveal .small-table table {
   font-size: 0.6em;
 }
+.reveal .compensation-table th:first-child,
+.reveal .compensation-table td:first-child {
+  white-space: nowrap;
+}
 .reveal table {
   font-size: 0.8em;
 }
@@ -268,7 +272,9 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </tbody>
 </table>
 </div>
-<p><em>Eur J Emerg Med. 2014 Apr;21(2):81–8</em></p>
+<div class="reference">
+<p><em>Eur J Emerg Med.</em> 2014 Apr;21(2):81–8</p>
+</div>
 <ul>
 <li>基本的には、pHと<span class="math inline">\(HCO3^-\)</span>は信じてよい</li>
 <li><span class="math inline">\(PaO_2\)</span>は信じちゃダメ</li>
@@ -284,7 +290,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </section>
 <section id="酸塩基の代償範囲" class="slide level2">
 <h2>酸塩基の代償範囲</h2>
-<div class="small-table">
+<div class="small-table compensation-table">
 <table class="caption-top" style="width:99%;">
 <colgroup>
 <col style="width: 11%">
@@ -344,13 +350,15 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </ul>
 </section>
 <section id="acid-base-map" class="slide level2">
-<h2>酸塩基平衡のざっくりとした(厳密には少し違うけど)</h2>
+<h2>実用的な酸塩基平衡の分類</h2>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart TD
+<pre class="mermaid mermaid-js">%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+
+flowchart TD
     ABG["Acid–Base Disorders"]
 
     ABG --&gt; MA["代謝性アシドーシス"]

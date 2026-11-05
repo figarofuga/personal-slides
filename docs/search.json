@@ -5043,8 +5043,8 @@
     "objectID": "medicine/blood_gas_analysis_mi/index.html#acid-base-map",
     "href": "medicine/blood_gas_analysis_mi/index.html#acid-base-map",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
-    "section": "酸塩基平衡のざっくりとした(厳密には少し違うけど)",
-    "text": "酸塩基平衡のざっくりとした(厳密には少し違うけど)\n\n\n\n\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; MA[\"代謝性アシドーシス\"]\n    ABG --&gt; MK[\"代謝性アルカローシス\"]\n    ABG --&gt; RA[\"呼吸性アシドーシス\"]\n    ABG --&gt; RK[\"呼吸性アルカローシス \"]\n\n    MA --&gt; AGMA[\"AG開大性代謝性アシドーシス\"]\n    MA --&gt; NAGMA[\"AG非開大性代謝性アシドーシス\"]\n\n    click AGMA \"#/ag-acidosis\"\n    click NAGMA \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
+    "section": "実用的な酸塩基平衡の分類",
+    "text": "実用的な酸塩基平衡の分類\n\n\n\n\n\n%%{init: {\"htmlLabels\": false, \"flowchart\": {\"htmlLabels\": false}}}%%\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; MA[\"代謝性アシドーシス\"]\n    ABG --&gt; MK[\"代謝性アルカローシス\"]\n    ABG --&gt; RA[\"呼吸性アシドーシス\"]\n    ABG --&gt; RK[\"呼吸性アルカローシス \"]\n\n    MA --&gt; AGMA[\"AG開大性代謝性アシドーシス\"]\n    MA --&gt; NAGMA[\"AG非開大性代謝性アシドーシス\"]\n\n    click AGMA \"#/ag-acidosis\"\n    click NAGMA \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#ag-acidosis",
@@ -5331,7 +5331,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#動脈血液ガス-vs.-静脈血液ガス",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "動脈血液ガス vs. 静脈血液ガス",
-    "text": "動脈血液ガス vs. 静脈血液ガス\n\n\n\n\n項目\n静脈血 − 動脈血\n\n\n\n\npH\n0.033 [0.027–0.039] 低い\n\n\npCO₂\n4.41 [2.55–6.27] mmHg 高い\n\n\nHCO₃⁻\n1.03 [0.56–1.50] mmHg 高い\n\n\n乳酸値\n2.3 [1.4–3.2] mg/dL 高い\n\n\n\n\nEur J Emerg Med. 2014 Apr;21(2):81–8\n\n基本的には、pHと\\(HCO3^-\\)は信じてよい\n\\(PaO_2\\)は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
+    "text": "動脈血液ガス vs. 静脈血液ガス\n\n\n\n\n項目\n静脈血 − 動脈血\n\n\n\n\npH\n0.033 [0.027–0.039] 低い\n\n\npCO₂\n4.41 [2.55–6.27] mmHg 高い\n\n\nHCO₃⁻\n1.03 [0.56–1.50] mmHg 高い\n\n\n乳酸値\n2.3 [1.4–3.2] mg/dL 高い\n\n\n\n\n\nEur J Emerg Med. 2014 Apr;21(2):81–8\n\n\n基本的には、pHと\\(HCO3^-\\)は信じてよい\n\\(PaO_2\\)は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#酸塩基平衡の考え方",
