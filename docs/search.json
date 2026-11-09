@@ -5065,28 +5065,28 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#metabolic-alkalosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "代謝性 アルカローシス",
-    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い\n一応、発生因子と維持因子を分けて考える必要がある\n\n発生因子\n\nCl-塩の喪失: 下痢、嘔吐、利尿薬、MRA亢進(しばしば脱水)\nKの欠乏\n塩基負荷: 重曹、グルコン酸塩、クエン酸など\n\n維持因子\n\n発生因子の持続\nHCO3-濾過の低下: 脱水によるRAA系の亢進\nHCO3-再吸収の増加\n\n\n\n← Acid–Base Map"
+    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い(見逃しているだけかも)\n考えとしては、発生因子と維持因子を分けて考える必要がある\n\n発生因子\n\nCl-塩の喪失: 下痢、嘔吐、利尿薬、RAAS亢進(しばしば脱水)\nKの欠乏\n塩基負荷: 重曹、グルコン酸塩、クエン酸など\n\n維持因子\n\n発生因子の持続\nHCO3-濾過の低下: 脱水によるRAA系の亢進\nHCO3-再吸収の増加\n\n\n簡単には、「腎臓」か「それ以外」(大体消化管)か\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-acidosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "呼吸性アシドーシス",
-    "text": "呼吸性アシドーシス\n\n\nいわゆる肺胞低換気 = II型呼吸不全\n物理的に肺胞に空気が入らない状態\n解剖学的に考えるのが良い\n\n脳: 重度の意識障害\n中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も\n上気道: Stridorが出る疾患、簡単に言うと窒息\n下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど\n\nHCO3-が代償していたら慢性的なものを疑う(72時間程度で腎代償が始まる)\n\n← Acid–Base Map"
+    "text": "呼吸性アシドーシス\n\nいわゆる肺胞低換気 = II型呼吸不全\n物理的に肺胞に空気が入らない状態\n解剖学的に考えるのが良い\n\n脳: 重度の意識障害\n中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も\n上気道: Stridorが出る疾患、簡単に言うと窒息\n下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど\n\nHCO3-が代償していたら慢性的なものを疑う(72時間程度で腎代償が始まる)\n教科書的にはA-aDO2の測定だがあまり役に立った記憶はない\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
     "href": "medicine/blood_gas_analysis_mi/index.html#respiratory-alkalosis",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "呼吸性アルカローシス",
-    "text": "呼吸性アルカローシス\n\n\n過換気が原因\n正直、一番多いのは肺炎とか心不全とかの全身状態悪化に伴う過換気\n後は代謝性Acidosis(特にDKA)に対する代償\n\nKussmaul呼吸\n\n\n← Acid–Base Map"
+    "text": "呼吸性アルカローシス\n\n過換気が原因\n正直、一番多いのは不安とか肺炎とか心不全とかの全身状態悪化に伴う過換気\n後は代謝性Acidosis(特にDKA)に対する代償\n\nKussmaul呼吸\n\n\n← Acid–Base Map"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#references",
     "href": "medicine/blood_gas_analysis_mi/index.html#references",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "References",
-    "text": "References\n\n\nDynaMed. 2026. Renal Tubular Acidosis (RTA) in Adults. DynaMed; EBSCO Information Services. https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults.\n\n\nEmmett, Michael, and Biff F. Palmer. 2025. Etiology and Diagnosis of Distal (Type 1) and Proximal (Type 2) Renal Tubular Acidosis. UpToDate; Wolters Kluwer. https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis.\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
+    "text": "References\n\n\nDynaMed. 2026. Renal Tubular Acidosis (RTA) in Adults. DynaMed; EBSCO Information Services. https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults.\n\n\nEmmett, Michael, and Biff F. Palmer. 2025. Etiology and Diagnosis of Distal (Type 1) and Proximal (Type 2) Renal Tubular Acidosis. UpToDate; Wolters Kluwer. https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis.\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n岡田和也, and 植西憲達, eds. 2025. INTENSIVIST Vol.17 No.1：酸塩基平衡，電解質異常に挑む. メディカル・サイエンス・インターナショナル.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
   },
   {
     "objectID": "statistics/mlcausal/index.html#hteを見つける意義",
@@ -5373,7 +5373,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#低alb血症の補正の考え方",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "低Alb血症の補正の考え方",
-    "text": "低Alb血症の補正の考え方\n\n\nAlb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」\nそうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5"
+    "text": "低Alb血症の補正の考え方\n\n\nAlb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・\n真に知りたいのはUAの中の硫酸塩やKetone体、Lactate等\nAlb自信もUA(すなわち、AGの計算の因子)なのでズレてしまう\nどうすればいい？"
   },
   {
     "objectID": "medicine/blood_gas_analysis_mi/index.html#補正hco3-の考え方",
@@ -6451,7 +6451,7 @@
     "href": "medicine/blood_gas_analysis_mi/index.html#代謝性アルカローシスの原因の大雑把な考えと検索",
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "代謝性アルカローシスの原因の大雑把な考えと検索",
-    "text": "代謝性アルカローシスの原因の大雑把な考えと検索\n\n大きく分けて以下の3つ\n\nアルカリの負荷: 薬剤性\n酸の喪失(H, Cl): 腎臓 vs. 腎臓外でのCl\n\n腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)\n\n脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など(髙岸 2024)\n\n原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認\nそれで分からない時は尿中Clを計測する\n\n尿中Cl &lt; 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢\n尿中Cl &gt; 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など"
+    "text": "代謝性アルカローシスの原因の大雑把な考えと検索\n\n(岡田 and 植西 2025)\n\n大きく分けて以下の3つ\n\nアルカリの負荷: 薬剤性\n酸の喪失(H, Cl): 腎臓 vs. 腎臓外でのCl\n\n腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)\n\n脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など(髙岸 2024)\n\n原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認\nそれで分からない時は尿中Clを計測する\n\n尿中Cl &lt; 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢\n尿中Cl &gt; 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など"
   },
   {
     "objectID": "medicine/elder_hf_mi/index.html#高齢者における急性心不全管理",
@@ -6830,5 +6830,33 @@
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "AGとは？",
     "text": "AGとは？\n\n\nUnmeasured anion(UA)の増加あるいはUnmeasured cation(UC)の減少\n\nUCの減少によるAG開大性代謝性アシドーシスほぼ起こらない\n\nそのため、基本はUAの増加によるもの\nUAって何ですか？"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#補正agの考え",
+    "href": "medicine/blood_gas_analysis_mi/index.html#補正agの考え",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "補正AGの考え",
+    "text": "補正AGの考え\n \n\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」\nそうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5\n実際はAnion gapではないが、求めたいものを代替する値と考える"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#thank-you-for-your-listening",
+    "href": "medicine/blood_gas_analysis_mi/index.html#thank-you-for-your-listening",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Thank you for your listening",
+    "text": "Thank you for your listening"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#答え魔法使いを出す",
+    "href": "medicine/blood_gas_analysis_mi/index.html#答え魔法使いを出す",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "答え：魔法使いを出す",
+    "text": "答え：魔法使いを出す\n\n\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis_mi/index.html#するとどうなる",
+    "href": "medicine/blood_gas_analysis_mi/index.html#するとどうなる",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "すると、どうなる？",
+    "text": "すると、どうなる？\n\n\nそうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5\n実際はAnion gapではないが、求めたいものを代替する値と考える"
   }
 ]

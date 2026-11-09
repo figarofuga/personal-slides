@@ -272,12 +272,16 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
 - Alb自信もUA(すなわち、AGの計算の因子)なのでズレてしまう
 - どうすればいい？
 
-## 補正AGの考え
+## 答え：魔法使いを出す
 
 ![](images/wizard.png)
-![](images/alb_correction_image2.drawio.svg)
 
 - 魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」
+
+## すると、どうなる？
+
+![](images/alb_correction_image2.drawio.svg)
+
 - そうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！
 - 補正の式は補正AG = AG + (4 - 血清Alb) \* 2.5
 - 実際はAnion gapではないが、求めたいものを代替する値と考える
@@ -481,6 +485,7 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 
 
 <!-- Todo: Intensivisitの図を入れる -->
+[@okada2025acidbase]
 
 - 大きく分けて以下の3つ
   - アルカリの負荷: 薬剤性
