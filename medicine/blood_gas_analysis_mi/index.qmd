@@ -155,6 +155,8 @@ flowchart TD
 
 ------------------------------------------------------------------------
 
+# 酸塩基平衡の重要な概念
+
 ## 酸塩基平衡の考え方
 
 - pHの実際の値がAcidemia/Alkalemia
@@ -196,21 +198,21 @@ flowchart TD
 +-------------------------------------+------------------------------+
 | GOLDMARK                            | KUSSMAUL                     |
 +=====================================+==============================+
-| Glycols(Ethylene and propylene)     | Ketoacidosis                 |
+| Glycols(Ethylene and propylene)     | **Ketoacidosis**             |
 +-------------------------------------+------------------------------+
-| Oxoproline                          | Uremia                       |
+| Oxoproline                          | **Uremia**                   |
 +-------------------------------------+------------------------------+
-| L-lactate                           | Salicylate poisoning         |
+| **L-lactate**                       | Salicylate poisoning         |
 +-------------------------------------+------------------------------+
 | D-lactate                           | Methanol                     |
 +-------------------------------------+------------------------------+
 | Methanol                            | Aldehyde                     |
 +-------------------------------------+------------------------------+
-| Aspirin                             | Lactic acidosis              |
+| Aspirin                             | **Lactic acidosis**          |
 +-------------------------------------+------------------------------+
-| Renal failure                       | Ethylene glycol              |
+| **Renal failure**                   | Ethylene glycol              |
 +-------------------------------------+------------------------------+
-| Ketoacidosis                        |                              |
+| **Ketoacidosis**                    |                              |
 +-------------------------------------+------------------------------+
 :::
 
@@ -226,7 +228,7 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
 
 - 未測定陰イオン - 未測定陽イオン = AG
 
-[← Acid–Base Map](#/acid-base-map)
+[← Acid–Base Map](#acid-base-map)
 
 ## AGとは？
 
@@ -262,13 +264,16 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
 
 ## 低Alb血症の補正の考え方
 
+<!-- Todo: ここを2毎のスライドにして魔法使いを出す -->
+<!-- svgのファイルも直す -->
+
 ![](images/alb_correction_image.drawio.svg)
 
 - Alb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・
 
 - 魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」
 
-- そうすると、AGはどうなる？ → UAが増えるのだから、その分AGは開大する！
+- そうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！
 
 - 補正の式は補正AG = AG + (4 - 血清Alb) \* 2.5
 
@@ -338,7 +343,9 @@ $$Anion Gap = Na^+ - (Cl^- + HCO_3^-)$$
 
 - 「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-
 
-## Normal Anion Gap 代謝性 アシドーシス {#nag-acidosis}
+# Normal Anion Gap代謝性アシドーシス
+
+## Normal Anion Gap代謝性アシドーシス {#nag-acidosis}
 
 - 「測定されるAnionの異常」
   - 具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)
@@ -357,7 +364,7 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
   - 下痢(腸液のHCO3-の排泄による代謝性Acidosis)
   - [**尿細管Acidosis**]{style="color: red; font-size: 1.1em;"}
 
-[← Acid–Base Map](#/acid-base-map)
+[← Acid–Base Map](#acid-base-map)
 
 ## 尿細管Acidosis
 
@@ -425,11 +432,9 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 - 最も多いのは保存期CKD
 - その他だと糖尿病性腎症による低レニン高アルドステロン症や間質性腎炎が多い
 
-## RTAの比較
-
 ## 尿細管性アシドーシスの類型の特徴と鑑別点
 
-|  | 近位 RTA | 遠位 RTA | Type 4 RTA |
+|  | 近位 RTA(type 2) | 遠位 RTA(type 1) | Type 4 RTA |
 |---|---|---|---|
 | **病態** | 近位尿細管での<br>HCO₃⁻ 再吸収障害 | 遠位・集合管での<br>尿酸性化障害 | アルドステロン<br>作用障害 |
 | **成人での主要な原因疾患** | Fanconi 症候群<br>パラプロテイン血症（LCPT など） | Sjögren 症候群<br>関節リウマチ、SLE<br>原発性胆汁性肝硬変 | 保存期 CKD、糖尿病、SLE |
@@ -450,6 +455,7 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 
 ------------------------------------------------------------------------
 
+# 代謝性アルカローシス
 
 ## 代謝性 アルカローシス {#metabolic-alkalosis}
 
@@ -464,7 +470,7 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
     - HCO3-濾過の低下: 脱水によるRAA系の亢進
     - HCO3-再吸収の増加
 
-[← Acid–Base Map](#/acid-base-map)
+[← Acid–Base Map](#acid-base-map)
 
 ## 代謝性アルカローシスの原因の大雑把な考えと検索
 
@@ -478,8 +484,9 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
   - 尿中Cl \< 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢
   - 尿中Cl > 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など
 
+# 呼吸性アシドーシス
 
-## 呼吸性 アシドーシス {#respiratory-acidosis}
+## 呼吸性アシドーシス {#respiratory-acidosis}
 
 <!-- Todo: 確認 -->
 - いわゆる肺胞低換気 = II型呼吸不全
@@ -491,8 +498,10 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
   - 下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど
 - HCO3-が代償していたら慢性的なものを疑う(72時間程度で腎代償が始まる)
 
-[← Acid–Base Map](#/acid-base-map)
+[← Acid–Base Map](#acid-base-map)
 
+
+# 呼吸性アルカローシス
 
 ## 呼吸性アルカローシス {#respiratory-alkalosis}
 
@@ -502,7 +511,9 @@ $尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+$
 - 後は代謝性Acidosis(特にDKA)に対する代償
   - Kussmaul呼吸
 
-[← Acid–Base Map](#/acid-base-map)
+[← Acid–Base Map](#acid-base-map)
+
+## Thank you for your listening
 
 ## References {.scrollable}
 
