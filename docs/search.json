@@ -1012,14 +1012,14 @@
     "href": "medicine/index.html",
     "title": "医学",
     "section": "",
-    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです"
+    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです\n\n\n動脈血液ガス分析の基礎\n中級者のための酸塩基平衡の分析です"
   },
   {
     "objectID": "medicine/index.html#スライド一覧",
     "href": "medicine/index.html#スライド一覧",
     "title": "医学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです"
+    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです\n\n\n動脈血液ガス分析の基礎\n中級者のための酸塩基平衡の分析です"
   },
   {
     "objectID": "medicine/pituitary_incidentaloma/index.html#症例",
@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n17.54662\n\n\n2\n21.56860\n\n\n3\n19.77366\n\n\n4\n20.92782\n\n\n5\n21.98521\n\n\n6\n23.17364\n\n\n7\n19.98384\n\n\n8\n22.28981\n\n\n9\n19.94002\n\n\n10\n20.00368\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n23.51821\n\n\n2\n21.68200\n\n\n3\n22.90134\n\n\n4\n19.83297\n\n\n5\n20.01842\n\n\n6\n23.42748\n\n\n7\n23.32528\n\n\n8\n23.16103\n\n\n9\n22.51010\n\n\n10\n17.48768\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n74.90762\n196.0337\n\n\n\n2\n74.31003\n191.9489\n\n\n\n3\n79.69706\n202.2170\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n67.08022\n173.1515\n\n\n\n2\n71.64291\n193.3737\n\n\n\n3\n73.30423\n187.4116\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -6858,5 +6858,222 @@
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "すると、どうなる？",
     "text": "すると、どうなる？\n\n\nそうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5\n実際はAnion gapではないが、求めたいものを代替する値と考える"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#take-home-message",
+    "href": "medicine/blood_gas_analysis/index.html#take-home-message",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Take home message",
+    "text": "Take home message\n\n血液ガスは「今の状態(acidemia/alkalemia)」と「ベクトル(alkalosis/acidosis)」を区別する\n\n見た目が正常でも、何が起きているかは分からないと考える\n\n「もしも、目に見えるその異常がなかったらどういうガスになる？」というルール = 神様ルール/玉ねぎの皮むきルール\n特に代謝性の代償を考えるときはTime courseをしっかり考える"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#血液ガスでわかること",
+    "href": "medicine/blood_gas_analysis/index.html#血液ガスでわかること",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "血液ガスでわかること",
+    "text": "血液ガスでわかること\n\n主に以下の2つが分かる\n\n酸素化と換気(呼吸の評価)\n酸塩基平衡\n\n実はCPAの時に検索する原疾患の4H4Tのうち4Hのかなりを推測可能\n\n低血糖、低/高K血症、Acidosis、低酸素血症"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#動脈血液ガス-vs.-静脈血液ガス",
+    "href": "medicine/blood_gas_analysis/index.html#動脈血液ガス-vs.-静脈血液ガス",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "動脈血液ガス vs. 静脈血液ガス",
+    "text": "動脈血液ガス vs. 静脈血液ガス\n\n\n\n\n項目\n静脈血 − 動脈血\n\n\n\n\npH\n0.033 [0.027–0.039] 低い\n\n\npCO₂\n4.41 [2.55–6.27] mmHg 高い\n\n\nHCO₃⁻\n1.03 [0.56–1.50] mmHg 高い\n\n\n乳酸値\n2.3 [1.4–3.2] mg/dL 高い\n\n\n\n\n\nEur J Emerg Med. 2014 Apr;21(2):81–8\n\n\n基本的には、pHと\\(HCO3^-\\)は信じてよい\n\\(PaO_2\\)は信じちゃダメ\n過去にはCO2-は変換式があるといわれたが微妙かも\n「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断\nDKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#酸塩基の代償範囲",
+    "href": "medicine/blood_gas_analysis/index.html#酸塩基の代償範囲",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "酸塩基の代償範囲",
+    "text": "酸塩基の代償範囲\n\n\n\n\n\n\n\n\n\n\n\n1次性病態\n1次性変化\n代償性変化\n代償性変化の範囲\n代償の限界値\n\n\n\n\n代謝性アシドーシス\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\(\\Delta\\mathrm{pCO_2}=1.2\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\\(\\mathrm{pCO_2}=1.5\\times[\\mathrm{HCO_3^-}]+8\\pm2\\)\n\\(\\mathrm{pCO_2}:15 mmHg\\)\n\n\n代謝性アルカローシス\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\(\\Delta\\mathrm{pCO_2}=0.7\\times\\Delta[\\mathrm{HCO_3^-}]\\pm5\\)\n\\(\\mathrm{pCO_2}:60mmHg\\)\n\n\n呼吸性アシドーシス\n\\(\\mathrm{pCO_2}\\uparrow\\)\n\\([\\mathrm{HCO_3^-}]\\uparrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.35\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:42mEq/L\\)\n\n\n呼吸性アルカローシス\n\\(\\mathrm{pCO_2}\\downarrow\\)\n\\([\\mathrm{HCO_3^-}]\\downarrow\\)\n慢性期\\(\\Delta[\\mathrm{HCO_3^-}]=0.40\\times\\Delta\\mathrm{pCO_2}\\pm3\\)\n\\([\\mathrm{HCO_3^-}]:12 mEq/L\\)\n\n\n\n\n\n代償反応が十分であれば、高度の酸塩基平衡異常は起こらない\n\npH &lt;&lt; 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併\npH &gt;&gt; 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併\n\nとは言え、Septic shockとか著名なDKAなら単独でも起こりうる"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#acid-base-map",
+    "href": "medicine/blood_gas_analysis/index.html#acid-base-map",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "実用的な酸塩基平衡の分類",
+    "text": "実用的な酸塩基平衡の分類\n\n\n\n\n\n%%{init: {\"htmlLabels\": false, \"flowchart\": {\"htmlLabels\": false}}}%%\n\nflowchart TD\n    ABG[\"Acid–Base Disorders\"]\n\n    ABG --&gt; MA[\"代謝性アシドーシス\"]\n    ABG --&gt; MK[\"代謝性アルカローシス\"]\n    ABG --&gt; RA[\"呼吸性アシドーシス\"]\n    ABG --&gt; RK[\"呼吸性アルカローシス \"]\n\n    MA --&gt; AGMA[\"AG開大性代謝性アシドーシス\"]\n    MA --&gt; NAGMA[\"AG非開大性代謝性アシドーシス\"]\n\n    click AGMA \"#/ag-acidosis\"\n    click NAGMA \"#/nag-acidosis\"\n    click MK \"#/metabolic-alkalosis\"\n    click RA \"#/respiratory-acidosis\"\n    click RK \"#/respiratory-alkalosis\""
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#酸塩基平衡の考え方",
+    "href": "medicine/blood_gas_analysis/index.html#酸塩基平衡の考え方",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "酸塩基平衡の考え方",
+    "text": "酸塩基平衡の考え方\n\npHの実際の値がAcidemia/Alkalemia\nそこに持っていく力(ベクトル)がAcidosis/Alkalosis\n\n呼吸性/代謝性に分かれる\n\n明らかな時もあるが、打ち消しあって目に見えないこともある"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#例えば",
+    "href": "medicine/blood_gas_analysis/index.html#例えば",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "例えば",
+    "text": "例えば\n\npH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？\n答え1:\n\nまったく問題がない健常人のA gas\n\n答え2:\n\n呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas …\n\n答え4:\n\n呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#どうやって区別する",
+    "href": "medicine/blood_gas_analysis/index.html#どうやって区別する",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "どうやって区別する？",
+    "text": "どうやって区別する？\n\n\n明らかな異常がある場合、「それがなかったら……」という風に考える\n\n\n\n目の前の、酸塩基の異常を魔法で消し去ったらどうなる？\n\n\n\n代表的なのが\n\n代償\nAlb補正\n補正HCO3-\n\nまずは、AG開大代謝性Acidosisで考えてみましょう"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#ag-acidosis",
+    "href": "medicine/blood_gas_analysis/index.html#ag-acidosis",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "AG開大性代謝性 アシドーシス",
+    "text": "AG開大性代謝性 アシドーシス\n\n\n\n\n\n\n\n\nGOLDMARK\nKUSSMAUL\n\n\n\n\nGlycols(Ethylene and propylene)\nKetoacidosis\n\n\nOxoproline\nUremia\n\n\nL-lactate\nSalicylate poisoning\n\n\nD-lactate\nMethanol\n\n\nMethanol\nAldehyde\n\n\nAspirin\nLactic acidosis\n\n\nRenal failure\nEthylene glycol\n\n\nKetoacidosis\n\n\n\n\n\n: AG開大性代謝性アシドーシスの鑑別(Mehta et al. 2008)\n\\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\\]\n\n通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)\nAnion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質\n\n正確にはUnmeasured anion(測定されない分の陰イオン)\n\n未測定陰イオン - 未測定陽イオン = AG\n\n← Acid–Base Map"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#agとは",
+    "href": "medicine/blood_gas_analysis/index.html#agとは",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "AGとは？",
+    "text": "AGとは？\n\n\nUnmeasured anion(UA)の増加あるいはUnmeasured cation(UC)の減少\n\nUCの減少によるAG開大性代謝性アシドーシスほぼ起こらない\n\nそのため、基本はUAの増加によるもの\nUAって何ですか？"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#unmeasured-anionとは",
+    "href": "medicine/blood_gas_analysis/index.html#unmeasured-anionとは",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Unmeasured anionとは",
+    "text": "Unmeasured anionとは\n\nAGの寄与因子(Marino 2026)\n\n\n\n\n\n\n測定されていない陰イオン\n測定されていない陽イオン\n\n\n\n\n\nAlb(15 mEq/L)\n有機酸(5 mEq/L)\nリン酸塩(2 mEq/L)\n硫酸塩(1 mEq/L)\n\n= 23 mEq/L\n\nCa(5 mEq/L)\nK(4.5 mEq/L)\nMg (1.5 mEq/L)\n\n= 11 mEq/L\n\n\n\n\nUAのほとんどはAlbでできている\nそのため、低Alb血症の時に補正が必要"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#低alb血症の補正の考え方",
+    "href": "medicine/blood_gas_analysis/index.html#低alb血症の補正の考え方",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "低Alb血症の補正の考え方",
+    "text": "低Alb血症の補正の考え方\n\n\nAlb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・\n真に知りたいのはUAの中の硫酸塩やKetone体、Lactate等\nAlb自信もUA(すなわち、AGの計算の因子)なのでズレてしまう\nどうすればいい？"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#答え魔法使いを出す",
+    "href": "medicine/blood_gas_analysis/index.html#答え魔法使いを出す",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "答え：魔法使いを出す",
+    "text": "答え：魔法使いを出す\n\n\n魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#するとどうなる",
+    "href": "medicine/blood_gas_analysis/index.html#するとどうなる",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "すると、どうなる？",
+    "text": "すると、どうなる？\n\n\nそうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！\n補正の式は補正AG = AG + (4 - 血清Alb) * 2.5\n実際はAnion gapではないが、求めたいものを代替する値と考える"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#anion-gapが変化する要因",
+    "href": "medicine/blood_gas_analysis/index.html#anion-gapが変化する要因",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Anion gapが変化する要因",
+    "text": "Anion gapが変化する要因\n\n\n\n\n\n\n\n\n\nAG上昇：原因\nAG上昇：例\nAG低下：原因\nAG低下：例\n\n\n\n\nUCの減少\n\n低γグロブリン血症\n低K、Ca、Mg血症\n\nUCの増加\n\n高γグロブリン血症(多発性骨髄腫、膠原病)\n高K、Ca、Mg血症\nリチウム中毒\n\n\n\nUAの増加\n\n乳酸アシドーシス\nケトアシドーシス\n尿毒症、高P血症\nHHS\n横紋筋融解症\nペニシリン系抗菌薬\nトルエン、サリチル酸\n\nUAの減少\n\n低アルブミン血症\n\n\n\n\n\nAGが開大した時に次に考えることは？"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#補正hco3-の考え方",
+    "href": "medicine/blood_gas_analysis/index.html#補正hco3-の考え方",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "補正HCO3-の考え方",
+    "text": "補正HCO3-の考え方\n\nAG開大している = 異常物質(UA)が増えている = 代謝性Acidosisが起きている = HCO3-はUAの分見た目上減っている\nAGが開大していたら、HCO3-やCO2が正常でも少なくとも1種類の異常(AG開大性代謝性Acidosis)が起きている！\nなら、このUAを消したらどうなる？\nAGのGapの分が減ると、その分HCO3-が増加する\n補正HCO3- = (AG - 12) + HCO3-\n\n22 mEq/L以下でAG非開大性代謝性Aidosisの合併、26 mEq/L以上で代謝性Alkalosisの合併"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#浸透圧gap",
+    "href": "medicine/blood_gas_analysis/index.html#浸透圧gap",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "浸透圧Gap",
+    "text": "浸透圧Gap\n\n「AG開大しているのにLactateやケトン体が陰性」の時に毒物の存在を疑うきっかけとなる指標\n\\[Osm_{gap} = Serum_{osm} - 2 * [Na] + BUN/2.8 + Glu/18 \\]\n10-15 mOsm/L以上の場合に毒物の存在を疑う\nケトン体の場合はどれくらいがDisproportionalかは分からないのが難点・・・・・・"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#ここまでのまとめ",
+    "href": "medicine/blood_gas_analysis/index.html#ここまでのまとめ",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "ここまでのまとめ",
+    "text": "ここまでのまとめ\n\nAGとはUA - UCであり、UAのメインの成分はAlb\nAGが開大していたら、絶対にAG開大性代謝性Acidosisはある\n\nAGの開大は常に探したほうが良い\n\n「もしもこの患者に低Albがなかったら？」→補正AG\n「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#nag-acidosis",
+    "href": "medicine/blood_gas_analysis/index.html#nag-acidosis",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Normal Anion Gap代謝性アシドーシス",
+    "text": "Normal Anion Gap代謝性アシドーシス\n\n「測定されるAnionの異常」\n\n具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)\n\n腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける\n\n\\(尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\\)\n\n腎臓が原因でなければ、尿中のNH4+が増加→Urine AGは負の値となる\n血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い\n\nそのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低値\n\n実際は実臨床で覚える鑑別は2種類\n\n下痢(腸液のHCO3-の排泄による代謝性Acidosis)\n尿細管Acidosis\n\n\n← Acid–Base Map"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#尿細管acidosis",
+    "href": "medicine/blood_gas_analysis/index.html#尿細管acidosis",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "尿細管Acidosis",
+    "text": "尿細管Acidosis\n\n4種類に分かれるが、実際は3種類のみ\n遠位尿細管で起こるI型RTA\n近位尿細管で起こるII型RTA\nAldosterone内服した状態のIII型RTA\nまずは薬 → 膠原病という風に考える"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#尿細管acidosis-1",
+    "href": "medicine/blood_gas_analysis/index.html#尿細管acidosis-1",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "尿細管Acidosis",
+    "text": "尿細管Acidosis\n\nI型RTAの方が遠位のため代償が聞かず尿のpHが高い(アルカリ)\n\nI型RTAでは尿pH&gt;5.5, 尿中Na &gt; 25 mEq/L, 尿中HCO3- &lt; 15 mg/dL\n\nII型RTAは近位尿細管の再吸収が聞かないため、色んなものが抜ける"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#type-i-rtadistal",
+    "href": "medicine/blood_gas_analysis/index.html#type-i-rtadistal",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Type I RTA(distal)",
+    "text": "Type I RTA(distal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\nPrimary\n家族性\n\n\n薬剤\nAmphotericin B, Lithium, Ibuprofen\n\n\n自己免疫性疾患\nSJD, AIH/PBC, SLE, RA, Hashimoto thyroiditis, PAN, Cryoglobulinemia\n\n\n高Ca尿症状となる疾患\n副甲状腺機能亢進症, FHH, Vitamin D中毒, Sarcoidosis\n\n\n腎疾患\n尿閉解除後, AIN\n\n\n\n(Emmett and Palmer 2025)\n\n尿路結石や腎へのCa沈着が多い"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#type-ii-rtaproximal",
+    "href": "medicine/blood_gas_analysis/index.html#type-ii-rtaproximal",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Type II RTA(proximal)",
+    "text": "Type II RTA(proximal)\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\n家族性\nFanconi症候群\n\n\n薬剤\nTenofovir等の抗ウィルス薬, Acetazolamide, Topiramate, Aminoglycoside, プラチナ系抗癌剤, Valproate\n\n\n自己免疫性疾患\nSJD(通常はType I)\n\n\nM蛋白血症\nAmyloidosis、MM/軽鎖病\n\n\n重金属\n鉛, Cadmium, 水銀, 銅\n\n\nその他\nVitamin D欠乏\n\n\n\n(DynaMed 2026)\n\n尿路結石や腎へのCa沈着は多くない"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#type-iv-rta",
+    "href": "medicine/blood_gas_analysis/index.html#type-iv-rta",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Type IV RTA",
+    "text": "Type IV RTA\n\n\n\n\n\n\n\n分類\n疾患名\n\n\n\n\n家族性\n\n\n\n薬剤\nACEi/ARB/MRA, NSAIDs, MRA, BB, Calcineurin阻害薬, Heparin\n\n\nMineralcorticoid欠乏症\nAddison病、DM、AIDS、TIN、IgM monoclonal gammopathy\n\n\nMineralcorticoid耐性\nAmyloidosis、糖尿病性腎症, Lupus腎症\n\n\n\n\n最も多いのは保存期CKD\nその他だと糖尿病性腎症による低レニン高アルドステロン症や間質性腎炎が多い"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#尿細管性アシドーシスの類型の特徴と鑑別点",
+    "href": "medicine/blood_gas_analysis/index.html#尿細管性アシドーシスの類型の特徴と鑑別点",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "尿細管性アシドーシスの類型の特徴と鑑別点",
+    "text": "尿細管性アシドーシスの類型の特徴と鑑別点\n\n\n\n\n\n\n\n\n\n\n近位 RTA(type 2)\n遠位 RTA(type 1)\nType 4 RTA\n\n\n\n\n病態\n近位尿細管でのHCO₃⁻ 再吸収障害\n遠位・集合管での尿酸性化障害\nアルドステロン作用障害\n\n\n成人での主要な原因疾患\nFanconi 症候群パラプロテイン血症（LCPT など）\nSjögren 症候群関節リウマチ、SLE原発性胆汁性肝硬変\n保存期 CKD、糖尿病、SLE\n\n\n原因となる主要な薬剤\nアセタゾラミドプラチナ系抗癌薬イホスファミドアミノグリコシドバルプロ酸・ゾニサミド重金属（鉛・カドミウム）\nST 合剤・ペンタミジンアムホテリシン Bリチウムトピラマート（トルエン1）\nカルシニューリン阻害薬RAAS 阻害薬ヘパリン・ナファモスタット\n\n\n成人での主要な症候（遺伝性以外）\nFanconi 症候群（尿糖・低尿酸血症・尿細管障害）\n腎石灰化・腎尿路結石高 Ca 尿症・低クエン酸尿症\n特異的なものはなし\n\n\n腎石灰化・結石\n時々リン酸 Ca 結石\n多いリン酸 Ca 結石\nしばしばシュウ酸 Ca 結石 ＞ 尿酸結石\n\n\n血清 K 値\n低値\n低値\n高値\n\n\n血清 HCO₃⁻ 値\n15 mEq/L 未満は稀\n15 mEq/L 未満となりうる\n大抵 ＞15 mEq/L\n\n\n尿 pH\n高度アシデミアで低値（&lt;6）を取りうる\n常に高値（≥6.5）\n大抵低値（&lt;6.0）\n\n\n尿 AG\n腎障害が軽度であれば負\n正\n正\n\n\nアシデミア是正に必要な HCO₃⁻ 量\n10〜15 mEq/kg/日（多量に必要）\n1〜2 mEq/kg/日\n1 mEq/kg/日\n\n\n成人での薬物治療\n症状や合併症なければ必ずしも必要なし\n急性期：KCl にて低 K を先に是正後、アルカリ投与慢性期：クエン酸 K\n重曹フロリネフ（0.1〜0.2 mg/日）\n\n\n食事指導（慢性期）\nアルカリ食（野菜・果物）\n結石予防（塩分・シュウ酸・果糖・動物蛋白制限）\nK 制限\n\n\n\nトルエンは dRTA と同様の臨床所見を呈するが、尿酸性化障害とは別機序で生じる。"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#metabolic-alkalosis",
+    "href": "medicine/blood_gas_analysis/index.html#metabolic-alkalosis",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "代謝性 アルカローシス",
+    "text": "代謝性 アルカローシス\n\n正直あまり問題にならない事が多い(見逃しているだけかも)\n腎臓のHCO3-の調節機能が大きいため、単独の理由でずっとアルカローシスは持続しにくい\nそのため、代謝性アルカローシスは発生因子と維持因子を分けて考える必要がある\n\n発生因子\n\nCl-塩の喪失: 下痢、嘔吐、利尿薬、RAAS亢進(しばしば脱水)\nKの欠乏\n塩基負荷: 重曹、グルコン酸塩、クエン酸など\n\n維持因子\n\n発生因子の持続\nHCO3-濾過の低下: 脱水によるRAA系の亢進\nHCO3-再吸収の増加\n\n\n簡単には、「腎臓」か「それ以外」(大体消化管)か\nとは言え、「発生因子の持続」が維持因子にあったり、両者に「脱水」があるのでそこまで実践的ではない\n\n← Acid–Base Map"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#代謝性アルカローシスの原因の大雑把な考えと検索",
+    "href": "medicine/blood_gas_analysis/index.html#代謝性アルカローシスの原因の大雑把な考えと検索",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "代謝性アルカローシスの原因の大雑把な考えと検索",
+    "text": "代謝性アルカローシスの原因の大雑把な考えと検索\n (岡田 and 植西 2025)\n\n大きく分けて以下の3つ\n\nアルカリの負荷: 薬剤性\n酸の喪失(H, Cl): 腎臓 vs. 腎臓外でのCl\n\n腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)\n\n脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など(髙岸 2024)\n\n原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認\nそれで分からない時は尿中Clを計測する\n\n尿中Cl &lt; 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢\n尿中Cl &gt; 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#respiratory-acidosis",
+    "href": "medicine/blood_gas_analysis/index.html#respiratory-acidosis",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "呼吸性アシドーシス",
+    "text": "呼吸性アシドーシス\n\nいわゆる肺胞低換気 = II型呼吸不全\n物理的に肺胞に空気が入らない状態\n解剖学的に考えるのが良い\n\n脳: 重度の意識障害\n中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も\n上気道: Stridorが出る疾患、簡単に言うと窒息\n下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど\n\nHCO3-が代償していたら慢性的なものを疑う(72時間程度で腎代償が始まる)\n教科書的にはA-aDO2の測定だがあまり役に立った記憶はない\n\n← Acid–Base Map"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#respiratory-alkalosis",
+    "href": "medicine/blood_gas_analysis/index.html#respiratory-alkalosis",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "呼吸性アルカローシス",
+    "text": "呼吸性アルカローシス\n\n過換気が原因\n正直、一番多いのは不安とか肺炎とか心不全とかの全身状態悪化に伴う過換気\n後は代謝性Acidosis(特にDKA)に対する代償\n\nKussmaul呼吸\n\n\n← Acid–Base Map"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#thank-you-for-your-listening",
+    "href": "medicine/blood_gas_analysis/index.html#thank-you-for-your-listening",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "Thank you for your listening",
+    "text": "Thank you for your listening"
+  },
+  {
+    "objectID": "medicine/blood_gas_analysis/index.html#references",
+    "href": "medicine/blood_gas_analysis/index.html#references",
+    "title": "動脈血液ガス分析の酸塩基平衡の基礎",
+    "section": "References",
+    "text": "References\n\n\nDynaMed. 2026. Renal Tubular Acidosis (RTA) in Adults. DynaMed; EBSCO Information Services. https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults.\n\n\nEmmett, Michael, and Biff F. Palmer. 2025. Etiology and Diagnosis of Distal (Type 1) and Proximal (Type 2) Renal Tubular Acidosis. UpToDate; Wolters Kluwer. https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis.\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n岡田和也, and 植西憲達, eds. 2025. INTENSIVIST Vol.17 No.1：酸塩基平衡，電解質異常に挑む. メディカル・サイエンス・インターナショナル.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
   }
 ]

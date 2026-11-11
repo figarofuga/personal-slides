@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Nozomi Niimi">
+  <meta name="dcterms.date" content="2026-12-04">
+  <title>My personal slides – 動脈血液ガス分析の酸塩基平衡の基礎</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+<script src="mathjax-config.js"></script>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">動脈血液ガス分析の酸塩基平衡の基礎</h1>
+  <p class="subtitle">たった2つの簡単なルール</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:figarofuga@gmail.com">figarofuga@gmail.com</a>
+</div>
+        <p class="quarto-title-affiliation">
+            東京医療センター総合内科
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-12-04</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/血液ガスについて" id="/toc-血液ガスについて">血液ガスについて</a></li>
+<li><a href="#/酸塩基平衡の基礎" id="/toc-酸塩基平衡の基礎">酸塩基平衡の基礎</a></li>
+<li><a href="#/酸塩基平衡の重要な概念" id="/toc-酸塩基平衡の重要な概念">酸塩基平衡の重要な概念</a></li>
+<li><a href="#/normal-anion-gap代謝性アシドーシス" id="/toc-normal-anion-gap代謝性アシドーシス">Normal Anion Gap代謝性アシドーシス</a></li>
+<li><a href="#/代謝性アルカローシス" id="/toc-代謝性アルカローシス">代謝性アルカローシス</a></li>
+<li><a href="#/呼吸性アシドーシス" id="/toc-呼吸性アシドーシス">呼吸性アシドーシス</a></li>
+<li><a href="#/呼吸性アルカローシス" id="/toc-呼吸性アルカローシス">呼吸性アルカローシス</a></li>
+</ul>
+</nav>
+</section>
+<section class="slide level2">
+
+<style>
+.reveal .reference {
+  color: #666;
+  font-size: 0.5em;
+  margin-top: 0.7em;
+  text-align: right;
+}
+.reveal .large-table table {
+  font-size: 1.0em;
+}
+.reveal .small-table table {
+  font-size: 0.6em;
+}
+.reveal .compensation-table th:first-child,
+.reveal .compensation-table td:first-child {
+  white-space: nowrap;
+}
+.reveal table {
+  font-size: 0.8em;
+}
+.reveal .small {
+  font-size: 0.75em;
+}
+.reveal .columns {
+  gap: 1rem;
+}
+</style>
+</section>
+<section id="take-home-message" class="slide level2">
+<h2>Take home message</h2>
+<ul>
+<li>血液ガスは「今の状態(acidemia/alkalemia)」と「ベクトル(alkalosis/acidosis)」を区別する
+<ul>
+<li>見た目が正常でも、何が起きているかは分からないと考える</li>
+</ul></li>
+<li>「もしも、目に見えるその異常がなかったらどういうガスになる？」というルール = 神様ルール/玉ねぎの皮むきルール</li>
+<li>特に代謝性の代償を考えるときはTime courseをしっかり考える</li>
+</ul>
+</section>
+<section>
+<section id="血液ガスについて" class="title-slide slide level1 center">
+<h1>血液ガスについて</h1>
+
+</section>
+<section id="血液ガスでわかること" class="slide level2">
+<h2>血液ガスでわかること</h2>
+<ul>
+<li>主に以下の2つが分かる
+<ul>
+<li>酸素化と換気(呼吸の評価)</li>
+<li><span style="color: red;font-size: 1.2em;"><strong>酸塩基平衡</strong></span></li>
+</ul></li>
+<li>実はCPAの時に検索する原疾患の4H4Tのうち4Hのかなりを推測可能
+<ul>
+<li>低血糖、低/高K血症、Acidosis、低酸素血症</li>
+</ul></li>
+</ul>
+</section>
+<section id="動脈血液ガス-vs.-静脈血液ガス" class="slide level2">
+<h2>動脈血液ガス vs.&nbsp;静脈血液ガス</h2>
+<div class="large-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>項目</th>
+<th>静脈血 − 動脈血</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pH</td>
+<td>0.033 [0.027–0.039] 低い</td>
+</tr>
+<tr class="even">
+<td>pCO₂</td>
+<td>4.41 [2.55–6.27] mmHg 高い</td>
+</tr>
+<tr class="odd">
+<td>HCO₃⁻</td>
+<td>1.03 [0.56–1.50] mmHg 高い</td>
+</tr>
+<tr class="even">
+<td>乳酸値</td>
+<td>2.3 [1.4–3.2] mg/dL 高い</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="reference">
+<p><em>Eur J Emerg Med.</em> 2014 Apr;21(2):81–8</p>
+</div>
+<ul>
+<li>基本的には、pHと<span class="math inline">\(HCO3^-\)</span>は信じてよい</li>
+<li><span class="math inline">\(PaO_2\)</span>は信じちゃダメ</li>
+<li>過去にはCO2-は変換式があるといわれたが微妙かも</li>
+<li>「V gasでCO2/Lactate貯留がなければA gasでも大丈夫だろう」くらいの判断</li>
+<li>DKAの初療とかのGasの異常の解釈が重要な時はA gasを取り直すようにしている</li>
+</ul>
+</section></section>
+<section>
+<section id="酸塩基平衡の基礎" class="title-slide slide level1 center">
+<h1>酸塩基平衡の基礎</h1>
+
+</section>
+<section id="酸塩基の代償範囲" class="slide level2">
+<h2>酸塩基の代償範囲</h2>
+<div class="small-table compensation-table">
+<table class="caption-top" style="width:99%;">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 47%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>1次性病態</th>
+<th>1次性変化</th>
+<th>代償性変化</th>
+<th>代償性変化の範囲</th>
+<th>代償の限界値</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>代謝性アシドーシス</strong></td>
+<td><span class="math inline">\([\mathrm{HCO_3^-}]\downarrow\)</span></td>
+<td><span class="math inline">\(\mathrm{pCO_2}\downarrow\)</span></td>
+<td><span class="math inline">\(\Delta\mathrm{pCO_2}=1.2\times\Delta[\mathrm{HCO_3^-}]\pm5\)</span><br><span class="math inline">\(\mathrm{pCO_2}=1.5\times[\mathrm{HCO_3^-}]+8\pm2\)</span></td>
+<td><span class="math inline">\(\mathrm{pCO_2}:15 mmHg\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>代謝性アルカローシス</strong></td>
+<td><span class="math inline">\([\mathrm{HCO_3^-}]\uparrow\)</span></td>
+<td><span class="math inline">\(\mathrm{pCO_2}\uparrow\)</span></td>
+<td><span class="math inline">\(\Delta\mathrm{pCO_2}=0.7\times\Delta[\mathrm{HCO_3^-}]\pm5\)</span></td>
+<td><span class="math inline">\(\mathrm{pCO_2}:60mmHg\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>呼吸性アシドーシス</strong></td>
+<td><span class="math inline">\(\mathrm{pCO_2}\uparrow\)</span></td>
+<td><span class="math inline">\([\mathrm{HCO_3^-}]\uparrow\)</span></td>
+<td>慢性期<br><span class="math inline">\(\Delta[\mathrm{HCO_3^-}]=0.35\times\Delta\mathrm{pCO_2}\pm3\)</span></td>
+<td><span class="math inline">\([\mathrm{HCO_3^-}]:42mEq/L\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>呼吸性アルカローシス</strong></td>
+<td><span class="math inline">\(\mathrm{pCO_2}\downarrow\)</span></td>
+<td><span class="math inline">\([\mathrm{HCO_3^-}]\downarrow\)</span></td>
+<td>慢性期<br><span class="math inline">\(\Delta[\mathrm{HCO_3^-}]=0.40\times\Delta\mathrm{pCO_2}\pm3\)</span></td>
+<td><span class="math inline">\([\mathrm{HCO_3^-}]:12 mEq/L\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>代償反応が十分であれば、高度の酸塩基平衡異常は起こらない
+<ul>
+<li>pH &lt;&lt; 7.2 → 代謝性Acidosis + 呼吸性Acidosisの合併</li>
+<li>pH &gt;&gt; 7.6 → 代謝性Alkalosis + 呼吸性Alkalosisの合併</li>
+</ul></li>
+<li>とは言え、Septic shockとか著名なDKAなら単独でも起こりうる</li>
+</ul>
+</section>
+<section id="acid-base-map" class="slide level2">
+<h2>実用的な酸塩基平衡の分類</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}}}%%
+
+flowchart TD
+    ABG["Acid–Base Disorders"]
+
+    ABG --&gt; MA["代謝性アシドーシス"]
+    ABG --&gt; MK["代謝性アルカローシス"]
+    ABG --&gt; RA["呼吸性アシドーシス"]
+    ABG --&gt; RK["呼吸性アルカローシス "]
+
+    MA --&gt; AGMA["AG開大性代謝性アシドーシス"]
+    MA --&gt; NAGMA["AG非開大性代謝性アシドーシス"]
+
+    click AGMA "#/ag-acidosis"
+    click NAGMA "#/nag-acidosis"
+    click MK "#/metabolic-alkalosis"
+    click RA "#/respiratory-acidosis"
+    click RK "#/respiratory-alkalosis"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="酸塩基平衡の重要な概念" class="title-slide slide level1 center">
+<h1>酸塩基平衡の重要な概念</h1>
+
+</section>
+<section id="酸塩基平衡の考え方" class="slide level2">
+<h2>酸塩基平衡の考え方</h2>
+<ul>
+<li>pHの実際の値がAcidemia/Alkalemia</li>
+<li>そこに持っていく力(ベクトル)がAcidosis/Alkalosis
+<ul>
+<li>呼吸性/代謝性に分かれる</li>
+</ul></li>
+<li>明らかな時もあるが、打ち消しあって目に見えないこともある</li>
+</ul>
+</section>
+<section id="例えば" class="slide level2">
+<h2>例えば</h2>
+<ul>
+<li>pH 7.4, HCO3- 24, CO2 40のA gasをみたらどう解釈する？</li>
+<li>答え1:
+<ul>
+<li>まったく問題がない健常人のA gas</li>
+</ul></li>
+<li>答え2:
+<ul>
+<li>呼吸性Acidosisと呼吸性Alkalosisが同時に起きている患者のA gas …</li>
+</ul></li>
+<li>答え4:
+<ul>
+<li>呼吸性Acidosisと呼吸性Alkalosisと代謝性acidosisと代謝性alkalosisが同時に起きている患者のA gas</li>
+</ul></li>
+</ul>
+</section>
+<section id="どうやって区別する" class="slide level2">
+<h2>どうやって区別する？</h2>
+
+<img data-src="images/image_bloodgas_analysis.png" class="r-stretch"><ul>
+<li>明らかな異常がある場合、「それがなかったら……」という風に考える</li>
+</ul>
+<div style="color: red; font-size: 1.2em;">
+<ul>
+<li><strong>目の前の、酸塩基の異常を魔法で消し去ったらどうなる？</strong></li>
+</ul>
+</div>
+<ul>
+<li><p>代表的なのが</p>
+<ul>
+<li>代償</li>
+<li>Alb補正</li>
+<li>補正HCO3-</li>
+</ul></li>
+<li><p>まずは、AG開大代謝性Acidosisで考えてみましょう</p></li>
+</ul>
+</section>
+<section id="ag-acidosis" class="slide level2">
+<h2>AG開大性代謝性 アシドーシス</h2>
+<div class="large-table">
+<table class="caption-top" style="width:96%;">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GOLDMARK</th>
+<th>KUSSMAUL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Glycols(Ethylene and propylene)</td>
+<td><strong>Ketoacidosis</strong></td>
+</tr>
+<tr class="even">
+<td>Oxoproline</td>
+<td><strong>Uremia</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>L-lactate</strong></td>
+<td>Salicylate poisoning</td>
+</tr>
+<tr class="even">
+<td>D-lactate</td>
+<td>Methanol</td>
+</tr>
+<tr class="odd">
+<td>Methanol</td>
+<td>Aldehyde</td>
+</tr>
+<tr class="even">
+<td>Aspirin</td>
+<td><strong>Lactic acidosis</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Renal failure</strong></td>
+<td>Ethylene glycol</td>
+</tr>
+<tr class="even">
+<td><strong>Ketoacidosis</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>: AG開大性代謝性アシドーシスの鑑別<span class="citation" data-cites="Mehta2008-mi">(<a href="#/references" role="doc-biblioref" onclick="">Mehta et al. 2008</a>)</span></p>
+<p><span class="math display">\[Anion Gap = Na^+ - (Cl^- + HCO_3^-)\]</span></p>
+<ul>
+<li><p>通常はAGが開大(12以上)だと以下の項目を鑑別(GOLDMARK, KUSSMAUL)</p></li>
+<li><p>Anion Gapの式は上記だが、名前のごとく”陰イオンのGap(差)“が本質</p>
+<ul>
+<li>正確にはUnmeasured anion(測定されない分の陰イオン)</li>
+</ul></li>
+<li><p>未測定陰イオン - 未測定陽イオン = AG</p></li>
+</ul>
+<p><a href="#/acid-base-map">← Acid–Base Map</a></p>
+</section>
+<section id="agとは" class="slide level2">
+<h2>AGとは？</h2>
+
+<img data-src="images/serumAG_image.drawio.svg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Unmeasured anion(UA)の増加あるいはUnmeasured cation(UC)の減少
+<ul>
+<li>UCの減少によるAG開大性代謝性アシドーシスほぼ起こらない</li>
+</ul></li>
+<li>そのため、基本はUAの増加によるもの</li>
+<li>UAって何ですか？</li>
+</ul>
+</section>
+<section id="unmeasured-anionとは" class="slide level2">
+<h2>Unmeasured anionとは</h2>
+<table class="caption-top" style="width:75%;">
+<caption>AGの寄与因子<span class="citation" data-cites="Marino2026ICU">(<a href="#/references" role="doc-biblioref" onclick="">Marino 2026</a>)</span></caption>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>測定されていない陰イオン</th>
+<th>測定されていない陽イオン</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><ul>
+<li><p><strong>Alb(15 mEq/L)</strong></p></li>
+<li><p>有機酸(5 mEq/L)</p></li>
+<li><p>リン酸塩(2 mEq/L)</p></li>
+<li><p>硫酸塩(1 mEq/L)</p></li>
+</ul>
+<p>= 23 mEq/L</p></td>
+<td><ul>
+<li><p>Ca(5 mEq/L)</p></li>
+<li><p>K(4.5 mEq/L)</p></li>
+<li><p>Mg (1.5 mEq/L)</p></li>
+</ul>
+<p>= 11 mEq/L</p></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>UAのほとんどは<span style="color: red;font-size: 1.4em;"><strong>Alb</strong></span>でできている</p></li>
+<li><p>そのため、低Alb血症の時に補正が必要</p></li>
+</ul>
+</section>
+<section id="低alb血症の補正の考え方" class="slide level2">
+<h2>低Alb血症の補正の考え方</h2>
+
+<img data-src="images/alb_correction_image.drawio.svg" class="r-stretch"><ul>
+<li>Alb 2g/dLの患者のAGが11 mEq/Lだったら・・・・・・</li>
+<li>真に知りたいのはUAの中の硫酸塩やKetone体、Lactate等</li>
+<li>Alb自信もUA(すなわち、AGの計算の因子)なのでズレてしまう</li>
+<li>どうすればいい？</li>
+</ul>
+</section>
+<section id="答え魔法使いを出す" class="slide level2">
+<h2>答え：魔法使いを出す</h2>
+
+<img data-src="images/wizard.png" class="r-stretch"><ul>
+<li>魔法使い: 「今から、この患者のAlbを 4g/dLに直してあげよう」</li>
+</ul>
+</section>
+<section id="するとどうなる" class="slide level2">
+<h2>すると、どうなる？</h2>
+
+<img data-src="images/alb_correction_image2.drawio.svg" class="r-stretch"><ul>
+<li>そうすると、AGはどうなる？ → Alb (=UA)が増えるのだから、その分AGは開大する！</li>
+<li>補正の式は補正AG = AG + (4 - 血清Alb) * 2.5</li>
+<li>実際はAnion gapではないが、求めたいものを代替する値と考える</li>
+</ul>
+</section>
+<section id="anion-gapが変化する要因" class="slide level2">
+<h2>Anion gapが変化する要因</h2>
+<table class="caption-top" style="width:98%;">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 24%">
+<col style="width: 14%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>AG上昇：原因</th>
+<th>AG上昇：例</th>
+<th>AG低下：原因</th>
+<th>AG低下：例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>UCの減少</strong></td>
+<td><ul>
+<li><p>低γグロブリン血症</p></li>
+<li><p>低K、Ca、Mg血症</p></li>
+</ul></td>
+<td><strong>UCの増加</strong></td>
+<td><ul>
+<li><p>高γグロブリン血症(多発性骨髄腫、膠原病)</p></li>
+<li><p>高K、Ca、Mg血症</p></li>
+<li><p>リチウム中毒</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>UAの増加</strong></td>
+<td><ul>
+<li><p>乳酸アシドーシス</p></li>
+<li><p>ケトアシドーシス</p></li>
+<li><p>尿毒症、高P血症</p></li>
+<li><p>HHS</p></li>
+<li><p>横紋筋融解症</p></li>
+<li><p>ペニシリン系抗菌薬</p></li>
+<li><p>トルエン、サリチル酸</p></li>
+</ul></td>
+<td><strong>UAの減少</strong></td>
+<td><ul>
+<li><strong>低アルブミン血症</strong></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>AGが開大した時に次に考えることは？</li>
+</ul>
+</section>
+<section id="補正hco3-の考え方" class="slide level2">
+<h2>補正HCO3-の考え方</h2>
+<ul>
+<li><p>AG開大している = 異常物質(UA)が増えている = 代謝性Acidosisが起きている = HCO3-はUAの分見た目上減っている</p></li>
+<li><p>AGが開大していたら、HCO3-やCO2が正常でも少なくとも1種類の異常(AG開大性代謝性Acidosis)が起きている！</p></li>
+<li><p>なら、このUAを消したらどうなる？</p></li>
+<li><p>AGのGapの分が減ると、その分HCO3-が増加する</p></li>
+<li><p>補正HCO3- = (AG - 12) + HCO3-</p>
+<ul>
+<li>22 mEq/L以下でAG非開大性代謝性Aidosisの合併、26 mEq/L以上で代謝性Alkalosisの合併</li>
+</ul></li>
+</ul>
+</section>
+<section id="浸透圧gap" class="slide level2">
+<h2>浸透圧Gap</h2>
+<ul>
+<li><p>「AG開大しているのにLactateやケトン体が陰性」の時に毒物の存在を疑うきっかけとなる指標</p>
+<p><span class="math display">\[Osm_{gap} = Serum_{osm} - 2 * [Na] + BUN/2.8 + Glu/18 \]</span></p></li>
+<li><p>10-15 mOsm/L以上の場合に毒物の存在を疑う</p></li>
+<li><p>ケトン体の場合はどれくらいがDisproportionalかは分からないのが難点・・・・・・</p></li>
+</ul>
+</section>
+<section id="ここまでのまとめ" class="slide level2">
+<h2>ここまでのまとめ</h2>
+<ul>
+<li><p>AGとはUA - UCであり、UAのメインの成分はAlb</p></li>
+<li><p>AGが開大していたら、<strong>絶対に</strong>AG開大性代謝性Acidosisはある</p>
+<ul>
+<li>AGの開大は常に探したほうが良い</li>
+</ul></li>
+<li><p>「もしもこの患者に低Albがなかったら？」→補正AG</p></li>
+<li><p>「もしもこの患者にUAの貯留がなかったら？」→補正HCO3-</p></li>
+</ul>
+</section></section>
+<section>
+<section id="normal-anion-gap代謝性アシドーシス" class="title-slide slide level1 center">
+<h1>Normal Anion Gap代謝性アシドーシス</h1>
+
+</section>
+<section id="nag-acidosis" class="slide level2">
+<h2>Normal Anion Gap代謝性アシドーシス</h2>
+<ul>
+<li>「測定されるAnionの異常」
+<ul>
+<li>具体的にはHCO3-の喪失かClの負荷(Normal salineの負荷)</li>
+</ul></li>
+<li>腎臓がアンモニウムイオンの排泄を介して調整をしているため、そこから鑑別をつける</li>
+</ul>
+<p><span class="math inline">\(尿AG = 尿中Na^+ + 尿中K^+ - 尿中Cl^- = 80 - 尿中NH4^+\)</span></p>
+<ul>
+<li><p>腎臓が<strong>原因でなければ</strong>、尿中のNH4+が増加→Urine AGは負の値となる</p></li>
+<li><p>血中AGのイメージだと、Unmeasured cationがNH4+と考えると良い</p>
+<ul>
+<li>そのため、尿中のUnmeasured anion(Alb)が増えるトルエン中毒では見た目上AGが低値</li>
+</ul></li>
+<li><p>実際は実臨床で覚える鑑別は2種類</p>
+<ul>
+<li>下痢(腸液のHCO3-の排泄による代謝性Acidosis)</li>
+<li><span style="color: red; font-size: 1.1em;"><strong>尿細管Acidosis</strong></span></li>
+</ul></li>
+</ul>
+<p><a href="#/acid-base-map">← Acid–Base Map</a></p>
+</section>
+<section id="尿細管acidosis" class="slide level2">
+<h2>尿細管Acidosis</h2>
+<ul>
+<li>4種類に分かれるが、実際は3種類のみ</li>
+<li>遠位尿細管で起こるI型RTA</li>
+<li>近位尿細管で起こるII型RTA</li>
+<li>Aldosterone内服した状態のIII型RTA</li>
+<li>まずは薬 → 膠原病という風に考える</li>
+</ul>
+</section>
+<section id="尿細管acidosis-1" class="slide level2">
+<h2>尿細管Acidosis</h2>
+<ul>
+<li><p>I型RTAの方が遠位のため代償が聞かず尿のpHが高い(アルカリ)</p>
+<ul>
+<li>I型RTAでは尿pH&gt;5.5, 尿中Na &gt; 25 mEq/L, 尿中HCO3- &lt; 15 mg/dL</li>
+</ul></li>
+<li><p>II型RTAは近位尿細管の再吸収が聞かないため、色んなものが抜ける</p></li>
+</ul>
+</section>
+<section id="type-i-rtadistal" class="slide level2">
+<h2>Type I RTA(distal)</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>分類</th>
+<th>疾患名</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary</td>
+<td>家族性</td>
+</tr>
+<tr class="even">
+<td>薬剤</td>
+<td>Amphotericin B, Lithium, Ibuprofen</td>
+</tr>
+<tr class="odd">
+<td>自己免疫性疾患</td>
+<td><strong>SJD</strong>, AIH/PBC, SLE, RA, Hashimoto thyroiditis, PAN, Cryoglobulinemia</td>
+</tr>
+<tr class="even">
+<td>高Ca尿症状となる疾患</td>
+<td>副甲状腺機能亢進症, FHH, Vitamin D中毒, Sarcoidosis</td>
+</tr>
+<tr class="odd">
+<td>腎疾患</td>
+<td>尿閉解除後, AIN</td>
+</tr>
+</tbody>
+</table>
+<p><span class="citation" data-cites="emmett2025rta">(<a href="#/references" role="doc-biblioref" onclick="">Emmett and Palmer 2025</a>)</span></p>
+<ul>
+<li>尿路結石や腎へのCa沈着が多い</li>
+</ul>
+</section>
+<section id="type-ii-rtaproximal" class="slide level2">
+<h2>Type II RTA(proximal)</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>分類</th>
+<th>疾患名</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>家族性</td>
+<td>Fanconi症候群</td>
+</tr>
+<tr class="even">
+<td>薬剤</td>
+<td>Tenofovir等の抗ウィルス薬, Acetazolamide, Topiramate, Aminoglycoside, プラチナ系抗癌剤, Valproate</td>
+</tr>
+<tr class="odd">
+<td>自己免疫性疾患</td>
+<td>SJD(通常はType I)</td>
+</tr>
+<tr class="even">
+<td><strong>M蛋白血症</strong></td>
+<td>Amyloidosis、MM/軽鎖病</td>
+</tr>
+<tr class="odd">
+<td>重金属</td>
+<td>鉛, Cadmium, 水銀, 銅</td>
+</tr>
+<tr class="even">
+<td>その他</td>
+<td>Vitamin D欠乏</td>
+</tr>
+</tbody>
+</table>
+<p><span class="citation" data-cites="dynamed2026rta">(<a href="#/references" role="doc-biblioref" onclick="">DynaMed 2026</a>)</span></p>
+<ul>
+<li>尿路結石や腎へのCa沈着は多くない</li>
+</ul>
+</section>
+<section id="type-iv-rta" class="slide level2">
+<h2>Type IV RTA</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>分類</th>
+<th>疾患名</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>家族性</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>薬剤</td>
+<td>ACEi/ARB/MRA, NSAIDs, MRA, BB, Calcineurin阻害薬, Heparin</td>
+</tr>
+<tr class="odd">
+<td>Mineralcorticoid欠乏症</td>
+<td>Addison病、DM、AIDS、TIN、IgM monoclonal gammopathy</td>
+</tr>
+<tr class="even">
+<td>Mineralcorticoid耐性</td>
+<td>Amyloidosis、糖尿病性腎症, Lupus腎症</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>最も多いのは保存期CKD</li>
+<li>その他だと糖尿病性腎症による低レニン高アルドステロン症や間質性腎炎が多い</li>
+</ul>
+</section>
+<section id="尿細管性アシドーシスの類型の特徴と鑑別点" class="slide level2 scrollable">
+<h2>尿細管性アシドーシスの類型の特徴と鑑別点</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>近位 RTA(type 2)</th>
+<th>遠位 RTA(type 1)</th>
+<th>Type 4 RTA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>病態</strong></td>
+<td>近位尿細管での<br>HCO₃⁻ 再吸収障害</td>
+<td>遠位・集合管での<br>尿酸性化障害</td>
+<td>アルドステロン<br>作用障害</td>
+</tr>
+<tr class="even">
+<td><strong>成人での主要な原因疾患</strong></td>
+<td>Fanconi 症候群<br>パラプロテイン血症（LCPT など）</td>
+<td>Sjögren 症候群<br>関節リウマチ、SLE<br>原発性胆汁性肝硬変</td>
+<td>保存期 CKD、糖尿病、SLE</td>
+</tr>
+<tr class="odd">
+<td><strong>原因となる主要な薬剤</strong></td>
+<td>アセタゾラミド<br>プラチナ系抗癌薬<br>イホスファミド<br>アミノグリコシド<br>バルプロ酸・ゾニサミド<br>重金属（鉛・カドミウム）</td>
+<td>ST 合剤・ペンタミジン<br>アムホテリシン B<br>リチウム<br>トピラマート<br>（トルエン<sup>1</sup>）</td>
+<td>カルシニューリン阻害薬<br>RAAS 阻害薬<br>ヘパリン・ナファモスタット</td>
+</tr>
+<tr class="even">
+<td><strong>成人での主要な症候<br>（遺伝性以外）</strong></td>
+<td>Fanconi 症候群<br>（尿糖・低尿酸血症・尿細管障害）</td>
+<td>腎石灰化・腎尿路結石<br>高 Ca 尿症・低クエン酸尿症</td>
+<td>特異的なものはなし</td>
+</tr>
+<tr class="odd">
+<td><strong>腎石灰化・結石</strong></td>
+<td>時々<br>リン酸 Ca 結石</td>
+<td>多い<br>リン酸 Ca 結石</td>
+<td>しばしば<br>シュウ酸 Ca 結石 ＞ 尿酸結石</td>
+</tr>
+<tr class="even">
+<td><strong>血清 K 値</strong></td>
+<td>低値</td>
+<td>低値</td>
+<td>高値</td>
+</tr>
+<tr class="odd">
+<td><strong>血清 HCO₃⁻ 値</strong></td>
+<td>15 mEq/L 未満は稀</td>
+<td>15 mEq/L 未満となりうる</td>
+<td>大抵 ＞15 mEq/L</td>
+</tr>
+<tr class="even">
+<td><strong>尿 pH</strong></td>
+<td>高度アシデミアで<br>低値（&lt;6）を取りうる</td>
+<td>常に高値（≥6.5）</td>
+<td>大抵低値（&lt;6.0）</td>
+</tr>
+<tr class="odd">
+<td><strong>尿 AG</strong></td>
+<td>腎障害が軽度であれば負</td>
+<td>正</td>
+<td>正</td>
+</tr>
+<tr class="even">
+<td><strong>アシデミア是正に必要な HCO₃⁻ 量</strong></td>
+<td>10〜15 mEq/kg/日<br>（多量に必要）</td>
+<td>1〜2 mEq/kg/日</td>
+<td>1 mEq/kg/日</td>
+</tr>
+<tr class="odd">
+<td><strong>成人での薬物治療</strong></td>
+<td>症状や合併症なければ<br>必ずしも必要なし</td>
+<td>急性期：KCl にて低 K を先に是正後、アルカリ投与<br>慢性期：クエン酸 K</td>
+<td>重曹<br>フロリネフ（0.1〜0.2 mg/日）</td>
+</tr>
+<tr class="even">
+<td><strong>食事指導<br>（慢性期）</strong></td>
+<td>アルカリ食（野菜・果物）</td>
+<td>結石予防<br>（塩分・シュウ酸・果糖・動物蛋白制限）</td>
+<td>K 制限</td>
+</tr>
+</tbody>
+</table>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>トルエンは dRTA と同様の臨床所見を呈するが、尿酸性化障害とは別機序で生じる。</p></li></ol></aside></section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="代謝性アルカローシス" class="title-slide slide level1 center">
+<h1>代謝性アルカローシス</h1>
+
+</section>
+<section id="metabolic-alkalosis" class="slide level2">
+<h2>代謝性 アルカローシス</h2>
+<ul>
+<li>正直あまり問題にならない事が多い(見逃しているだけかも)</li>
+<li>腎臓のHCO3-の調節機能が大きいため、単独の理由でずっとアルカローシスは持続しにくい</li>
+<li>そのため、代謝性アルカローシスは<strong>発生因子</strong>と<strong>維持因子</strong>を分けて考える必要がある
+<ul>
+<li>発生因子
+<ul>
+<li>Cl-塩の喪失: 下痢、嘔吐、利尿薬、RAAS亢進(しばしば脱水)</li>
+<li>Kの欠乏</li>
+<li>塩基負荷: 重曹、グルコン酸塩、クエン酸など</li>
+</ul></li>
+<li>維持因子
+<ul>
+<li>発生因子の持続</li>
+<li>HCO3-濾過の低下: 脱水によるRAA系の亢進</li>
+<li>HCO3-再吸収の増加</li>
+</ul></li>
+</ul></li>
+<li>簡単には、「腎臓」か「それ以外」(大体消化管)か</li>
+<li>とは言え、「発生因子の持続」が維持因子にあったり、両者に「脱水」があるのでそこまで実践的ではない</li>
+</ul>
+<p><a href="#/acid-base-map">← Acid–Base Map</a></p>
+</section>
+<section id="代謝性アルカローシスの原因の大雑把な考えと検索" class="slide level2">
+<h2>代謝性アルカローシスの原因の大雑把な考えと検索</h2>
+<p><img data-src="images/alkalosis_flowchart.jpeg"> <span class="citation" data-cites="okada2025acidbase">(<a href="#/references" role="doc-biblioref" onclick="">岡田 and 植西 2025</a>)</span></p>
+<ul>
+<li>大きく分けて以下の3つ
+<ul>
+<li>アルカリの負荷: 薬剤性</li>
+<li>酸の喪失(H, Cl): 腎臓 vs.&nbsp;腎臓外でのCl
+<ul>
+<li>腎MR活性亢進および尿細管のCl再吸収阻害(利尿薬)</li>
+</ul></li>
+<li>脱水: RAA系亢進→Angiotensin IIによりHCO3-吸収亢進など<span class="citation" data-cites="takagishi2024flowchart">(<a href="#/references" role="doc-biblioref" onclick="">髙岸 2024</a>)</span></li>
+</ul></li>
+<li>原因検索はまずは病歴で、嘔吐・胃管吸引・利尿薬を確認</li>
+<li>それで分からない時は<strong>尿中Cl</strong>を計測する
+<ul>
+<li>尿中Cl &lt; 10-25 mEq/Lの場合は腎臓以外のCl喪失: 嘔吐などの胃液の喪失、Cl喪失性の下痢</li>
+<li>尿中Cl &gt; 20-40 mEq/Lの場合は腎臓からのCl喪失: Barter/Gitelman症候群、RAA系の亢進、Steroid、利尿薬、低Mg血症など</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="呼吸性アシドーシス" class="title-slide slide level1 center">
+<h1>呼吸性アシドーシス</h1>
+
+</section>
+<section id="respiratory-acidosis" class="slide level2">
+<h2>呼吸性アシドーシス</h2>
+<ul>
+<li>いわゆる肺胞低換気 = II型呼吸不全</li>
+<li>物理的に肺胞に空気が入らない状態</li>
+<li>解剖学的に考えるのが良い
+<ul>
+<li>脳: 重度の意識障害</li>
+<li>中枢神経/胸郭/筋肉: Guillan-Barre syndromeなどの神経筋疾患の他に呼吸筋疲労や結核後遺症や重度の胸郭変形も</li>
+<li>上気道: Stridorが出る疾患、簡単に言うと窒息</li>
+<li>下気道: Wheezeが出る疾患、心不全/Asthma/COPDなど</li>
+</ul></li>
+<li>HCO3-が代償していたら慢性的なものを疑う(72時間程度で腎代償が始まる)</li>
+<li>教科書的にはA-aDO2の測定だがあまり役に立った記憶はない</li>
+</ul>
+<p><a href="#/acid-base-map">← Acid–Base Map</a></p>
+</section></section>
+<section>
+<section id="呼吸性アルカローシス" class="title-slide slide level1 center">
+<h1>呼吸性アルカローシス</h1>
+
+</section>
+<section id="respiratory-alkalosis" class="slide level2">
+<h2>呼吸性アルカローシス</h2>
+<ul>
+<li>過換気が原因</li>
+<li>正直、一番多いのは不安とか肺炎とか心不全とかの全身状態悪化に伴う過換気</li>
+<li>後は代謝性Acidosis(特にDKA)に対する代償
+<ul>
+<li>Kussmaul呼吸</li>
+</ul></li>
+</ul>
+<p><a href="#/acid-base-map">← Acid–Base Map</a></p>
+</section>
+<section id="thank-you-for-your-listening" class="slide level2">
+<h2>Thank you for your listening</h2>
+</section>
+<section id="references" class="slide level2 scrollable smaller">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-dynamed2026rta" class="csl-entry" role="listitem">
+DynaMed. 2026. <em>Renal Tubular Acidosis (<span>RTA</span>) in Adults</em>. DynaMed; EBSCO Information Services. <a href="https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults">https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults</a>.
+</div>
+<div id="ref-emmett2025rta" class="csl-entry" role="listitem">
+Emmett, Michael, and Biff F. Palmer. 2025. <em>Etiology and Diagnosis of Distal (Type 1) and Proximal (Type 2) Renal Tubular Acidosis</em>. UpToDate; Wolters Kluwer. <a href="https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis">https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis</a>.
+</div>
+<div id="ref-Marino2026ICU" class="csl-entry" role="listitem">
+Marino, Paul L. 2026. <em>Icuブック</em>. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.
+</div>
+<div id="ref-Mehta2008-mi" class="csl-entry" role="listitem">
+Mehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. <span>“<span>GOLD</span> <span>MARK</span>: An Anion Gap Mnemonic for the 21st Century.”</span> <em>Lancet</em> 372 (9642): 892.
+</div>
+<div id="ref-okada2025acidbase" class="csl-entry" role="listitem">
+岡田和也, and 植西憲達, eds. 2025. <em><span>INTENSIVIST</span> Vol.17 No.1：酸塩基平衡，電解質異常に挑む</em>. メディカル・サイエンス・インターナショナル.
+</div>
+<div id="ref-takagishi2024flowchart" class="csl-entry" role="listitem">
+髙岸勝繁. 2024. <em>ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス</em>. 3rd ed. シーニュ.
+</div>
+</div>
+
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="../../medicine/index.html">Medicine</a> · <a href="../../statistics/index.html">Statistics</a> · <a href="../../index.html">Home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 3,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/figarofuga\.github\.io\/personal-slides\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
