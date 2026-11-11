@@ -1,6 +1,6 @@
 ---
 title: RMSTに関してあるいは、Cox回帰の限界
-subtitle: 多変量回帰・・・好きですか？
+subtitle: Beyond 比例ハザード性
 date: 2020/4/1
 format:
   clean-revealjs:
@@ -74,19 +74,6 @@ library(Hmisc)
 
 ```
 
-<!-- TODO: 元スライドは画像3枚の配置。Quartoでは簡略配置。 -->
-
-:::: columns
-::: {.column width="38%"}
-![](images/slide02_image01.png){fig-alt="ある日のこと 画像1" width="82%"}
-:::
-
-::: {.column width="62%"}
-![](images/slide02_image02.png){fig-alt="ある日のこと 画像2" width="78%"}
-
-![](images/slide02_image03.png){fig-alt="ある日のこと 画像3" width="100%"}
-:::
-::::
 
 ## 今日の内容
 
@@ -97,97 +84,76 @@ library(Hmisc)
 - RMSTの使い方
 - 観察研究での使い道
 
-## 今日の内容
+# 速習：生存解析
 
-- 速習：生存解析
-- Cox hazardの限界
-- RMSTとは？
-- RMSTは何がいいの？限界は？
-- RMSTの使い方
-- 観察研究での使い道
 
 ## 速習：生存解析
 
-:::: columns
-::: {.column width="52%"}
-- 生存時間およびイベントの発症率の推定にKaplan-Meier法
-- 単純な比較にLog-rank
-- 影響の大きさの定量化や多変量調整にCoxハザードモデル
-- これらを用いることが多い
-:::
+- 時間および、打ち切り(censor)が存在するイベントの有無の解析方法の総称(別名 time-to-event analysis)
+  - 生存時間およびイベントの発症率の推定にKaplan-Meier法
+  - 単純な比較にLog-rank検定
+  - 影響の大きさの定量化や多変量調整にCoxハザードモデル
+- 医学解析で最も多いと言っても過言ではない
 
-::: {.column width="48%"}
-![](images/slide05_image01.png){fig-alt="生存解析の図1" width="82%"}
 
-![](images/slide05_image02.png){fig-alt="生存解析の図2" width="82%"}
-:::
-::::
-
-## Kaplan-Meier Method
 
 :::: columns
-::: {.column width="56%"}
-- eventがあった時にその時の瞬間風速を計算する
-- 瞬間風速の積み重ねでplotを行う
-- 指標では中央値を用いる
+::: {.column width="50%"}
+
+```{r}
+library(survival)
+library(parameters)
+library(ggsurvfit)
+
+multi_colonfit <- coxph(Surv(time, status) ~ surg + rx + sex + age + obstruct + differ, data = colon) 
+
+parameters::model_parameters(multi_colonfit, exponentiate = TRUE) |> 
+  print(select = c("Parameter", "Coefficient", "CI_low", "CI_high", "p"))
+
+```
+
 :::
 
-::: {.column width="44%"}
-![](images/slide06_image01.png){fig-alt="Kaplan-Meier method" width="74%"}
+::: {.column width="50%"}
+```{r}
+library(survival)
+library(parameters)
+library(ggsurvfit)
+
+survfit2(Surv(time, status) ~ surg, data = colon) |> 
+  ggsurvfit::ggsurvfit() + 
+  ggsurvfit::add_pvalue(location = "annotation") + 
+  ggsurvfit::add_risktable(risktable_stats = "n.risk")
+```
+
 :::
+
 ::::
 
-## Non Parametric：Log-rank、一般化Wilcoxon検定
-
-:::: columns
-::: {.column width="52%"}
-- 大雑把に言うとχ2検定
-- 多群で使えるのがメリット
-- 影響の大きさの定量化は出来ない
-- 一般化Wilcoxon検定の方が早期のeventに対して検出力が高い
-- Log-rankが苦手な形がある
-:::
-
-::: {.column width="48%"}
-![](images/slide07_image01.png){fig-alt="Log-rankの模式図" width="42%"}
-
-![](images/slide07_image02.png){fig-alt="Log-rankが苦手な形" width="100%"}
-:::
-::::
+# Cox回帰について
 
 ## Cox回帰について
 
-:::: columns
-::: {.column width="58%"}
-- ハザード比
-- 大元の生存曲線の形はどうでも良い
-- 各々の共変量の有無で瞬間の死亡率（hazard比）が変化する
-:::
+![](images/hazard_ratio.drawio.svg)
 
-::: {.column width="42%"}
-![](images/slide08_image01.png){fig-alt="Cox回帰の式" width="100%"}
-:::
-::::
+- イベント発生のハザード比率が常に等しいという仮定のSemiparametricな解析
+- 大元の生存曲線の形はどうでも良い(non parametric)
+- 各々の共変量(下の式だとx1, x2...)の有無で瞬間の死亡率（hazard比）が変化する(parametric)
 
-## 今日の内容
+$h(t) = h_0exp\{b_1x_1 + b_2x_2 + ...b_px_p\}$
 
-- 復習：生存解析
-- Cox hazardの限界
-- RMSTとは？
-- RMSTは何がいいの？限界は？
-- RMSTの使い方
-- 観察研究での使い道
 
 ## Cox Modelの限界
 
 - 共変量が時間に関わらずに同じように影響するという仮定が必要
-- 比例ハザード性がないといけない
+- 他にも、[**比例ハザード性**]{style="color: red;font-size: 1.2em;"}がないといけない
   - Log-log plotなどで確認する
-- 結果の解釈が難しい
+- 結果の言語化が実は難しい
 - 例：REAL-CAD study
   - 高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました
-  - 患者さんにどう説明する？
+  - 患者さんにHR 0.8をどう説明しますか？
 
+<!-- Todo: ここから -->
 ## 本当ならダメな形！！
 
 ![](images/slide11_image01.png){fig-alt="比例ハザード性が成り立たない例" width="76%"}
