@@ -8,6 +8,18 @@ format:
     slide-level: 2
     theme: default
     scrollable: true
+    auto-stretch: false
+    include-in-header:
+      - text: |
+          <style>
+            .reveal .slides section.slide img {
+              display: block;
+              width: 100%;
+              max-width: 100%;
+              height: auto;
+              max-height: none;
+            }
+          </style>
     smaller: true
     transition: slide
     incremental: false
@@ -59,7 +71,7 @@ bibliography: references.bib
 
 ## EGDT時代の終焉
 
-![](images/egdt_metaanalysis.jpeg){fig-alt="EGDTのメタ解析" height="45%"}
+![](images/egdt_metaanalysis.jpeg){fig-alt="EGDTのメタ解析"}
 
 - 通常治療とEGDTを比較した3つのRCTでは、死亡率に差を認めなかった[@The_PRISM_Investigators2017-kw]。
 - さらに、**輸液過剰の害**が指摘されるようになった。
@@ -67,6 +79,7 @@ bibliography: references.bib
 ## 輸液過剰の害
 
 ![](images/harm_overvolume.png)
+
 - 観察研究だと、大量輸液（初日に5 L/day以上）により、死亡率が上昇する可能性が示唆された[@Marik2017-km]。
   - 1L増えるごとに、2.3%の追加
 
@@ -90,7 +103,7 @@ bibliography: references.bib
 
 ## CLASSIC trial
 
-![](images/classic_km.png){fig-alt="CLASSIC trialのKaplan-Meier曲線" height="38%"}
+![](images/classic_km.png){fig-alt="CLASSIC trialのKaplan-Meier曲線"}
 
 - **P**: 24時間以内に1 L以上の補液下で敗血症性ショックが持続する患者（n = 1,554）
 - **I**: 輸液制限群（ICUでのin balance 1,645 mL）[^classic-protocol]
@@ -173,7 +186,7 @@ bibliography: references.bib
 
 ## 65 trial
 
-![](images/sixty_five_trial.png){fig-alt="65 trialのKaplan-Meier曲線" height="38%"}
+![](images/sixty_five_trial.png){fig-alt="65 trialのKaplan-Meier曲線"}
 
 - **P**: ICU入室後、輸液および昇圧薬使用初期の65歳以上の患者（n = 2,600）
 - **I**: 低血圧許容群（MAP 60--65 mmHg、n = 1,291）
@@ -204,7 +217,7 @@ bibliography: references.bib
 
 ## Capillary refilling time
 
-![](images/crt.png){fig-alt="毛細血管再充満時間の測定方法" height="34%"}
+![](images/crt.png){fig-alt="毛細血管再充満時間の測定方法"}
 
 - 中指の末節骨を5秒間圧迫し、離してから血管が再充満するまでの時間。
 - 正常範囲: 成人男性は2秒以内、成人女性は3秒、高齢者は4秒。
@@ -212,7 +225,7 @@ bibliography: references.bib
 
 ## ANDROMEDA-SHOCK trial
 
-![](images/andromeda_km.png){fig-alt="ANDROMEDA-SHOCK trialのKaplan-Meier曲線" height="25%"}
+![](images/andromeda_km.png){fig-alt="ANDROMEDA-SHOCK trialのKaplan-Meier曲線"}
 
 - **P**: 20 mL/kg以上の初期輸液に反応しない敗血症性ショック患者（n = 424）
 - **I**: CRT guided therapy（30分ごとにCRTを確認）
@@ -238,3 +251,8 @@ bibliography: references.bib
 - Sepsisの輸液は、まずはしっかり投与し、その後は絞る。
 - 早期のノルアドレナリン併用を考慮する。
 - 患者背景やほかの指標を考え、MAPの目標値を変更してもよいかもしれない。
+
+## References
+
+::: {#refs}
+:::
