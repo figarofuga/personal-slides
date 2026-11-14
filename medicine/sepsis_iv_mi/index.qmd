@@ -103,6 +103,13 @@ bibliography: references.bib
 - **C**: 輸液自由療法（24時間平均 3,400 mL、95% CI: 2,500--4,495 mL）
 - **O**: 90日死亡に差なし（14.0% vs. 14.9%）[@National_Heart_Lung_and_Blood_Institute_Prevention_and_Early_Treatment_of_Acute_Lung_Injury_Clinical_Trials_Network2023-cv]
 
+## ここまで・・・・・・
+
+- 初期輸液後の輸液は絞っても絞らなくても同じ
+- 初期輸液も怖くない？
+
+## FLUID-ARSE trial
+
 ## まとめると……
 
 - 理論上、輸液制限は敗血症性ショック患者の予後を改善しうると考えられた。
@@ -161,6 +168,7 @@ bibliography: references.bib
 ## 今のガイドライン
 
 - 2026年のSSCGではMAP 60 mmHgに変わっている
+Todo: 確認する
 
 ## MAP以外の指標を用いる
 

@@ -153,12 +153,46 @@ $h(t) = h_0exp\{b_1x_1 + b_2x_2 + ...b_px_p\}$
   - 高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました
   - 患者さんにHR 0.8をどう説明しますか？
 
-<!-- Todo: ここから -->
+
 ## 本当ならダメな形！！
 
 ![](images/slide11_image01.png){fig-alt="比例ハザード性が成り立たない例" width="76%"}
 
 ## Log-log Plot
+
+```{r}
+library(simsurv)
+library(survival)
+
+
+set.seed(42)
+
+# GBMT 群は gamma > 1 なので、初期のハザードは低く、徐々に増加する。
+gbmt <- simsurv(
+  dist = "weibull", lambdas = 0.00038, gammas = 3,
+  x = data.frame(id = 1:500), maxt = 12
+)
+
+# Intervention 群は gamma < 1 なので、初期のハザードは高く、徐々に低下する。
+intervention <- simsurv(
+  dist = "weibull", lambdas = 0.12, gammas = 0.4,
+  x = data.frame(id = 501:1000), maxt = 12
+)
+
+dat <- rbind(
+  base::transform(gbmt, group = "GBMT"),
+  base::transform(intervention, group = "Intervention")
+)
+
+# 理論上の生存曲線は約 9.1 か月で交差する。
+# 群間のハザード比は時間とともに変わるため、比例ハザード性は成り立たない。
+km <- survfit(Surv(eventtime, status) ~ group, data = dat)
+
+cols <- c("steelblue", "firebrick")
+plot(km, col = cols, lwd = 2, mark.time = FALSE,
+     xlab = "Time (months)", ylab = "Survival probability")
+legend("bottomleft", c("GBMT", "Intervention"), col = cols, lwd = 2, bty = "n")
+```
 
 :::: columns
 ::: {.column width="48%"}
