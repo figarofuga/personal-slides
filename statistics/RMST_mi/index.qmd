@@ -156,24 +156,60 @@ $h(t) = h_0exp\{b_1x_1 + b_2x_2 + ...b_px_p\}$
 
 ## 本当ならダメな形！！
 
-![](images/slide11_image01.png){fig-alt="比例ハザード性が成り立たない例" width="76%"}
+
+::: {.columns}
+
+::: {.column}
+
+![](images/courage_km.png){fig-alt="比例ハザード性が成り立たない例1"}
+
+:::
+
+::: {.column}
+
+![](images/ischemia_km.png){fig-alt="比例ハザード性が成り立たない例2"}
+
+:::
+
+:::
+
+- COURAGE trialとISCHEMIA trialのKaplan-Meier曲線[@Boden2007-mi; @Maron2020-hg]
+- 手技やOpeのtrialはこうなりがち
+
 
 ## Log-log Plot
 
 ```{r}
 library(simsurv)
+library(dplyr)
 library(survival)
+library(ggsurvfit)
+library(patchwork)
 
 
-set.seed(42)
+colon_dat <- base::subset(survival::colon, etype == 2)
+
+good_hazard_fit <- ggsurvfit::survfit2(Surv(time, status) ~ surg, data = colon_dat) 
+
+good_hazard_fig <- ggsurvfit::ggsurvfit(good_hazard_fit) + 
+  theme(legend.position = "none")
+
+good_hazard_cloglog_fig <- ggsurvfit::ggsurvfit(good_hazard_fit, type = "cloglog") + 
+  scale_x_continuous(transform = "log") + 
+  theme(legend.position = "none")
+
 
 # GBMT 群は gamma > 1 なので、初期のハザードは低く、徐々に増加する。
+set.seed(42)
+
 gbmt <- simsurv(
   dist = "weibull", lambdas = 0.00038, gammas = 3,
   x = data.frame(id = 1:500), maxt = 12
 )
 
 # Intervention 群は gamma < 1 なので、初期のハザードは高く、徐々に低下する。
+set.seed(42)
+
 intervention <- simsurv(
   dist = "weibull", lambdas = 0.12, gammas = 0.4,
   x = data.frame(id = 501:1000), maxt = 12
@@ -182,31 +218,39 @@ intervention <- simsurv(
 dat <- rbind(
   base::transform(gbmt, group = "GBMT"),
   base::transform(intervention, group = "Intervention")
+) |> 
+  dplyr::mutate(eventtime = eventtime * 100)
+
+bad_hazard_fit <- ggsurvfit::survfit2(Surv(eventtime, status) ~ group, data = dat) 
+
+
+bad_hazard_fig <- ggsurvfit::ggsurvfit(bad_hazard_fit) + 
+  theme(legend.position = "none")
+
+bad_hazard_cloglog_fig <- ggsurvfit::ggsurvfit(bad_hazard_fit, type = "cloglog") + 
+  scale_x_continuous(transform = "log") + 
+  theme(legend.position = "none")
+
+right_arrow <- patchwork::wrap_elements(
+  panel = grid::segmentsGrob(
+    x0 = 0.12, x1 = 0.88, y0 = 0.5, y1 = 0.5,
+    arrow = grid::arrow(length = grid::unit(2.5, "mm"), type = "closed"),
+    gp = grid::gpar(lwd = 3, col = "black", fill = "black")
+  )
 )
 
-# 理論上の生存曲線は約 9.1 か月で交差する。
-# 群間のハザード比は時間とともに変わるため、比例ハザード性は成り立たない。
-km <- survfit(Surv(eventtime, status) ~ group, data = dat)
+good_hazard_fig + right_arrow + good_hazard_cloglog_fig +
+  bad_hazard_fig + right_arrow + bad_hazard_cloglog_fig +
+  patchwork::plot_layout(ncol = 3, nrow = 2, widths = c(1, 0.16, 1))
 
-cols <- c("steelblue", "firebrick")
-plot(km, col = cols, lwd = 2, mark.time = FALSE,
-     xlab = "Time (months)", ylab = "Survival probability")
-legend("bottomleft", c("GBMT", "Intervention"), col = cols, lwd = 2, bty = "n")
 ```
 
-:::: columns
-::: {.column width="48%"}
+
 - 横軸が時間、縦軸が `log{-log(S(t))}` のグラフ
 - これが平行の時には比例hazard性が保たれていると判断
 - わかりやすいのは元の曲線が交わっているか否か
-:::
 
-::: {.column width="52%"}
-![](images/slide12_image01.png){fig-alt="Log-log plot 1" width="96%"}
 
-![](images/slide12_image02.png){fig-alt="Log-log plot 2" width="96%"}
-:::
-::::
 
 ## 今日の内容
 
