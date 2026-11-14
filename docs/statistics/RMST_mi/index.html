@@ -134,7 +134,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">RMSTに関してあるいは、Cox回帰の限界</h1>
-  <p class="subtitle">多変量回帰・・・好きですか？</p>
+  <p class="subtitle">Beyond 比例ハザード性</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -151,6 +151,14 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </div>
 
   <p class="date">2020-04-01</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/速習生存解析" id="/toc-速習生存解析">速習：生存解析</a></li>
+<li><a href="#/cox回帰について" id="/toc-cox回帰について">Cox回帰について</a></li>
+</ul>
+</nav>
 </section>
 <section class="slide level2">
 
@@ -183,14 +191,6 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 </section>
 <section id="ある日のこと" class="slide level2">
 <h2>ある日のこと</h2>
-<!-- TODO: 元スライドは画像3枚の配置。Quartoでは簡略配置。 -->
-<div class="columns">
-<div class="column" style="width:38%;">
-<p><img data-src="images/slide02_image01.png" style="width:82.0%" alt="ある日のこと 画像1"></p>
-</div><div class="column" style="width:62%;">
-<p><img data-src="images/slide02_image02.png" style="width:78.0%" alt="ある日のこと 画像2"></p>
-<p><img data-src="images/slide02_image03.png" style="width:100.0%" alt="ある日のこと 画像3"></p>
-</div></div>
 </section>
 <section id="今日の内容" class="slide level2">
 <h2>今日の内容</h2>
@@ -203,98 +203,77 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <li>観察研究での使い道</li>
 </ul>
 </section>
-<section id="今日の内容-1" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>速習：生存解析</li>
-<li>Cox hazardの限界</li>
-<li>RMSTとは？</li>
-<li>RMSTは何がいいの？限界は？</li>
-<li>RMSTの使い方</li>
-<li>観察研究での使い道</li>
-</ul>
+<section>
+<section id="速習生存解析" class="title-slide slide level1 center">
+<h1>速習：生存解析</h1>
+
 </section>
-<section id="速習生存解析" class="slide level2">
+<section id="速習生存解析-1" class="slide level2">
 <h2>速習：生存解析</h2>
-<div class="columns">
-<div class="column" style="width:52%;">
+<ul>
+<li>時間および、打ち切り(censor)が存在するイベントの有無の解析方法の総称(別名 time-to-event analysis)
 <ul>
 <li>生存時間およびイベントの発症率の推定にKaplan-Meier法</li>
-<li>単純な比較にLog-rank</li>
+<li>単純な比較にLog-rank検定</li>
 <li>影響の大きさの定量化や多変量調整にCoxハザードモデル</li>
-<li>これらを用いることが多い</li>
+</ul></li>
+<li>医学解析で最も多いと言っても過言ではない</li>
 </ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide05_image01.png" style="width:82.0%" alt="生存解析の図1"></p>
-<p><img data-src="images/slide05_image02.png" style="width:82.0%" alt="生存解析の図2"></p>
-</div></div>
-</section>
-<section id="kaplan-meier-method" class="slide level2">
-<h2>Kaplan-Meier Method</h2>
 <div class="columns">
-<div class="column" style="width:56%;">
-<ul>
-<li>eventがあった時にその時の瞬間風速を計算する</li>
-<li>瞬間風速の積み重ねでplotを行う</li>
-<li>指標では中央値を用いる</li>
-</ul>
-</div><div class="column" style="width:44%;">
-<p><img data-src="images/slide06_image01.png" style="width:74.0%" alt="Kaplan-Meier method"></p>
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Parameter    | Coefficient |       95% CI |      p
+--------------------------------------------------
+surg         |        1.25 | [1.08, 1.44] | 0.003 
+rx [Lev]     |        1.00 | [0.86, 1.17] | 0.949 
+rx [Lev+5FU] |        0.66 | [0.56, 0.78] | &lt; .001
+sex          |        0.93 | [0.82, 1.06] | 0.278 
+age          |        1.00 | [0.99, 1.00] | 0.750 
+obstruct     |        1.25 | [1.07, 1.47] | 0.006 
+differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
+</section></section>
+<section>
+<section id="cox回帰について" class="title-slide slide level1 center">
+<h1>Cox回帰について</h1>
+
 </section>
-<section id="non-parametriclog-rank一般化wilcoxon検定" class="slide level2">
-<h2>Non Parametric：Log-rank、一般化Wilcoxon検定</h2>
-<div class="columns">
-<div class="column" style="width:52%;">
-<ul>
-<li>大雑把に言うとχ2検定</li>
-<li>多群で使えるのがメリット</li>
-<li>影響の大きさの定量化は出来ない</li>
-<li>一般化Wilcoxon検定の方が早期のeventに対して検出力が高い</li>
-<li>Log-rankが苦手な形がある</li>
-</ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide07_image01.png" style="width:42.0%" alt="Log-rankの模式図"></p>
-<p><img data-src="images/slide07_image02.png" style="width:100.0%" alt="Log-rankが苦手な形"></p>
-</div></div>
-</section>
-<section id="cox回帰について" class="slide level2">
+<section id="cox回帰について-1" class="slide level2">
 <h2>Cox回帰について</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
-<ul>
-<li>ハザード比</li>
-<li>大元の生存曲線の形はどうでも良い</li>
-<li>各々の共変量の有無で瞬間の死亡率（hazard比）が変化する</li>
+
+<img data-src="images/hazard_ratio.drawio.svg" class="r-stretch"><ul>
+<li>イベント発生のハザード比率が常に等しいという仮定のSemiparametricな解析</li>
+<li>大元の生存曲線の形はどうでも良い(non parametric)</li>
+<li>各々の共変量(下の式だとx1, x2…)の有無で瞬間の死亡率（hazard比）が変化する(parametric)</li>
 </ul>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide08_image01.png" style="width:100.0%" alt="Cox回帰の式"></p>
-</div></div>
-</section>
-<section id="今日の内容-2" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>復習：生存解析</li>
-<li>Cox hazardの限界</li>
-<li>RMSTとは？</li>
-<li>RMSTは何がいいの？限界は？</li>
-<li>RMSTの使い方</li>
-<li>観察研究での使い道</li>
-</ul>
+<p><span class="math inline">\(h(t) = h_0exp\{b_1x_1 + b_2x_2 + ...b_px_p\}\)</span></p>
 </section>
 <section id="cox-modelの限界" class="slide level2">
 <h2>Cox Modelの限界</h2>
 <ul>
 <li>共変量が時間に関わらずに同じように影響するという仮定が必要</li>
-<li>比例ハザード性がないといけない
+<li>他にも、<span style="color: red;font-size: 1.2em;"><strong>比例ハザード性</strong></span>がないといけない
 <ul>
 <li>Log-log plotなどで確認する</li>
 </ul></li>
-<li>結果の解釈が難しい</li>
+<li>結果の言語化が実は難しい</li>
 <li>例：REAL-CAD study
 <ul>
 <li>高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました</li>
-<li>患者さんにどう説明する？</li>
+<li>患者さんにHR 0.8をどう説明しますか？</li>
 </ul></li>
 </ul>
 </section>
@@ -304,6 +283,15 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <img data-src="images/slide11_image01.png" style="width:76.0%" alt="比例ハザード性が成り立たない例" class="r-stretch"></section>
 <section id="log-log-plot" class="slide level2">
 <h2>Log-log Plot</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <div class="columns">
 <div class="column" style="width:48%;">
 <ul>
@@ -316,7 +304,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <p><img data-src="images/slide12_image02.png" style="width:96.0%" alt="Log-log plot 2"></p>
 </div></div>
 </section>
-<section id="今日の内容-3" class="slide level2">
+<section id="今日の内容-1" class="slide level2">
 <h2>今日の内容</h2>
 <ul>
 <li>復習：生存解析</li>
@@ -369,7 +357,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <h2>HRとRMSTの関係</h2>
 
 <img data-src="images/slide17_image01.png" style="width:62.0%" alt="HRとRMSTの関係" class="r-stretch"></section>
-<section id="今日の内容-4" class="slide level2">
+<section id="今日の内容-2" class="slide level2">
 <h2>今日の内容</h2>
 <ul>
 <li>復習：生存解析</li>
@@ -477,7 +465,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <p><img data-src="images/slide23_image01.png" style="width:100.0%" alt="ISCHEMIAのRMST結果"></p>
 </div></div>
 </section>
-<section id="今日の内容-5" class="slide level2">
+<section id="今日の内容-3" class="slide level2">
 <h2>今日の内容</h2>
 <ul>
 <li>復習：生存解析</li>
@@ -516,7 +504,7 @@ Nozomi Niimi <a href="https://orcid.org/0000-0002-6909-0740" class="quarto-title
 <h2>ご静聴ありがとうございました</h2>
 
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

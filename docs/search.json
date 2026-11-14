@@ -1012,14 +1012,14 @@
     "href": "medicine/index.html",
     "title": "医学",
     "section": "",
-    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです\n\n\n動脈血液ガス分析の基礎\n中級者のための酸塩基平衡の分析です"
+    "text": "医学関連のスライドをまとめています。\n\n\n\n\n\nタイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです\n\n\n動脈血液ガス分析の基礎\n中級者のための酸塩基平衡の分析です\n\n\n敗血症性ショックへの輸液\n敗血症性ショックへの輸液療法の基礎です"
   },
   {
     "objectID": "medicine/index.html#スライド一覧",
     "href": "medicine/index.html#スライド一覧",
     "title": "医学",
     "section": "",
-    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです\n\n\n動脈血液ガス分析の基礎\n中級者のための酸塩基平衡の分析です"
+    "text": "タイトル\n内容\n\n\n\n\n低血糖の見方\n非糖尿病患者の低血糖の見方です\n\n\n下垂体偶発種の見方\n偶然下垂体腺腫を見つけた時の動き方です\n\n\nPEG~食べられない時の選択\nPEGの基本情報です\n\n\nESUS\nESUSを診た時の動きです\n\n\n全身性アミロイドーシス\nアミロイドーシスの診断・治療の流れです\n\n\nFMF\nFMFの概念・診断基本についてです\n\n\n脳梗塞の抗血栓薬の困りごと\n脳梗塞への抗血栓薬で日常臨床で困る内容についてです\n\n\n動脈血液ガス分析の基礎\n中級者のための酸塩基平衡の分析です\n\n\n敗血症性ショックへの輸液\n敗血症性ショックへの輸液療法の基礎です"
   },
   {
     "objectID": "medicine/pituitary_incidentaloma/index.html#症例",
@@ -1551,7 +1551,7 @@
     "href": "statistics/bootstrap/index.html#信頼区間の出し方",
     "title": "Bootstrapについて",
     "section": "95％信頼区間の出し方",
-    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n23.51821\n\n\n2\n21.68200\n\n\n3\n22.90134\n\n\n4\n19.83297\n\n\n5\n20.01842\n\n\n6\n23.42748\n\n\n7\n23.32528\n\n\n8\n23.16103\n\n\n9\n22.51010\n\n\n10\n17.48768\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
+    "text": "95％信頼区間の出し方\n\n\n\n\n\n\n\nid\nbmi\n\n\n\n\n1\n21.85865\n\n\n2\n23.17732\n\n\n3\n17.66322\n\n\n4\n22.27238\n\n\n5\n18.77093\n\n\n6\n18.33549\n\n\n7\n21.29324\n\n\n8\n21.68721\n\n\n9\n16.50354\n\n\n10\n19.21825\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n例えば、患者のBMIを出すときはどう考えるか？"
   },
   {
     "objectID": "statistics/bootstrap/index.html#信頼区間の出し方-1",
@@ -1593,7 +1593,7 @@
     "href": "statistics/bootstrap/index.html#jacknife法の問題点1",
     "title": "Bootstrapについて",
     "section": "Jacknife法の問題点1",
-    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n67.08022\n173.1515\n\n\n\n2\n71.64291\n193.3737\n\n\n\n3\n73.30423\n187.4116\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
+    "text": "Jacknife法の問題点1\n\n　MIを起こした患者の年齢とLDLを見たデータがあるとする\n\n\n\n\n\n\nid\nage\nldl\ncomment\n\n\n\n\n1\n75.60269\n197.0429\n\n\n\n2\n82.46072\n178.1290\n\n\n\n3\n73.02460\n173.6460\n\n\n\n30\n25.00000\n300.0000\nFHの患者\n\n\n31\n35.00000\n75.0000\n特発性冠動脈解離"
   },
   {
     "objectID": "statistics/bootstrap/index.html#jacknife法の問題点2",
@@ -2405,7 +2405,7 @@
     "href": "statistics/RMST_mi/index.html#今日の内容-1",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "今日の内容",
-    "text": "今日の内容\n\n速習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
+    "text": "今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#速習生存解析",
@@ -2447,7 +2447,7 @@
     "href": "statistics/RMST_mi/index.html#cox-modelの限界",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "Cox Modelの限界",
-    "text": "Cox Modelの限界\n\n共変量が時間に関わらずに同じように影響するという仮定が必要\n比例ハザード性がないといけない\n\nLog-log plotなどで確認する\n\n結果の解釈が難しい\n例：REAL-CAD study\n\n高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました\n患者さんにどう説明する？"
+    "text": "Cox Modelの限界\n\n共変量が時間に関わらずに同じように影響するという仮定が必要\n他にも、比例ハザード性がないといけない\n\nLog-log plotなどで確認する\n\n結果の言語化が実は難しい\n例：REAL-CAD study\n\n高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました\n患者さんにHR 0.8をどう説明しますか？"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#本当ならダメな形",
@@ -2461,7 +2461,7 @@
     "href": "statistics/RMST_mi/index.html#log-log-plot",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "Log-log Plot",
-    "text": "Log-log Plot\n\n\n\n横軸が時間、縦軸が log{-log(S(t))} のグラフ\nこれが平行の時には比例hazard性が保たれていると判断\nわかりやすいのは元の曲線が交わっているか否か"
+    "text": "Log-log Plot\n\n\n\n\n\n\n\n\n\n\n\n\n横軸が時間、縦軸が log{-log(S(t))} のグラフ\nこれが平行の時には比例hazard性が保たれていると判断\nわかりやすいのは元の曲線が交わっているか否か"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#今日の内容-3",
@@ -4918,7 +4918,7 @@
     "href": "medicine/sepsis_iv_mi/index.html#輸液過剰の害",
     "title": "敗血症における輸液療法今昔",
     "section": "輸液過剰の害",
-    "text": "輸液過剰の害\n\n大量輸液（初日に5 L/day以上）により、以下が上昇することが示された(Marik et al. 2017)。\n\n人工呼吸器装着期間\nICU入室期間\n死亡率"
+    "text": "輸液過剰の害\n - 観察研究だと、大量輸液（初日に5 L/day以上）により、死亡率が上昇する可能性が示唆された(Marik et al. 2017)。 - 1L増えるごとに、2.3%の追加"
   },
   {
     "objectID": "medicine/sepsis_iv_mi/index.html#post-egdt時代のギモン",
@@ -4932,7 +4932,7 @@
     "href": "medicine/sepsis_iv_mi/index.html#輸液はどれくらいいれるどれくらい絞っても大丈夫",
     "title": "敗血症における輸液療法今昔",
     "section": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）",
-    "text": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）\n\n現在、初期輸液後にどこまで輸液を行うべきかは明確でない。\n輸液反応性をみて必要に応じて投与する、という実践になりがちである。\n初期輸液以降の輸液量を評価したRCTとして、次の2つがある。\n\nCLASSIC trial\nCLOVERS trial"
+    "text": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）\n\n現在、初期輸液後にどこまで輸液を行うべきかは明確でない。\n輸液反応性をみて必要に応じて投与する、という実践になりがちである。\n初期輸液以降の輸液量を評価したRCTとして、次の2つがある。\n\nCLASSIC trial\nCLOVERS trial\n\n初期輸液の時点での輸液量を評価したものとして、以下のものがある\n\nARISE-Fluid trial"
   },
   {
     "objectID": "medicine/sepsis_iv_mi/index.html#classic-trial",
@@ -5023,7 +5023,7 @@
     "href": "medicine/sepsis_iv_mi/index.html#take-home-message",
     "title": "敗血症における輸液療法今昔",
     "section": "Take home message",
-    "text": "Take home message\n\nSepsisの輸液は、まずはしっかり投与し、その後は絞る。\n早期のノルアドレナリン併用を考慮する。\n患者背景やほかの指標を考え、MAPの目標値を変更してもよいかもしれない。\n\n\n\n\n\nAsfar, Pierre, Ferhat Meziani, Jean-François Hamel, et al. 2014. “High Versus Low Blood-Pressure Target in Patients with Septic Shock.” The New England Journal of Medicine 370 (17): 1583–93. https://doi.org/10.1056/NEJMoa1312173.\n\n\nDe Backer, Daniel, Patrick Biston, Jacques Devriendt, et al. 2010. “Comparison of Dopamine and Norepinephrine in the Treatment of Shock.” The New England Journal of Medicine 362 (9): 779–89. https://doi.org/10.1056/NEJMoa0907118.\n\n\nEvans, Laura, Andrew Rhodes, Waleed Alhazzani, et al. 2021. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021.” Intensive Care Medicine 47: 1181–247. https://doi.org/10.1007/s00134-021-06506-y.\n\n\nHernández, Glenn, Alexandre Biasi Cavalcanti, Gustavo Ospina-Tascón, et al. 2018. “Early Goal-Directed Therapy Using a Physiological Holistic View: The ANDROMEDA-SHOCK Randomized Controlled Trial.” Annals of Intensive Care 8 (1): 52. https://doi.org/10.1186/s13613-018-0398-2.\n\n\nHernández, Glenn, Gustavo A. Ospina-Tascón, Lucas P. Damiani, et al. 2019. “Effect of a Resuscitation Strategy Targeting Peripheral Perfusion Status Vs Serum Lactate Levels on 28-Day Mortality Among Patients with Septic Shock: The ANDROMEDA-SHOCK Randomized Clinical Trial.” JAMA 321 (7): 654–64. https://doi.org/10.1001/jama.2019.0071.\n\n\nJones, Timothy W., Sarah E. Smith, Joshua S. Van Tuyl, and A. Scott Newsome. 2021. “Sepsis with Preexisting Heart Failure: Management of Confounding Clinical Features.” Journal of Intensive Care Medicine 36 (9): 989–1012. https://doi.org/10.1177/0885066620928299.\n\n\nLamontagne, François, Alvin Richards-Belle, Karen Thomas, et al. 2020. “Effect of Reduced Exposure to Vasopressors on 90-Day Mortality in Older Critically Ill Patients with Vasodilatory Hypotension: A Randomized Clinical Trial.” JAMA 323 (10): 938–49. https://doi.org/10.1001/jama.2020.0930.\n\n\nMarik, Paul E., Walter T. Linde-Zwirble, Edward A. Bittner, et al. 2017. “Fluid Administration in Severe Sepsis and Septic Shock, Patterns and Outcomes: An Analysis of a Large National Database.” Intensive Care Medicine 43 (5): 625–32. https://doi.org/10.1007/s00134-016-4675-y.\n\n\nMcGee, Steven, William B. Abernethy, and David L. Simel. 1999. “Is This Patient Hypovolemic?” JAMA 281 (11): 1022–29. https://doi.org/10.1001/jama.281.11.1022.\n\n\nMeyhoff, Tine S., Peter B. Hjortrup, Jørn Wetterslev, et al. 2022. “Restriction of Intravenous Fluid in ICU Patients with Septic Shock.” The New England Journal of Medicine 386 (26): 2459–70. https://doi.org/10.1056/NEJMoa2202707.\n\n\nNational Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network, Nathan I. Shapiro, Ivor S. Douglas, et al. 2023. “Early Restrictive or Liberal Fluid Management for Sepsis-Induced Hypotension.” The New England Journal of Medicine 388 (6): 499–510. https://doi.org/10.1056/NEJMoa2212663.\n\n\nPermpikul, Chairat, Surat Tongyoo, Tanuwong Viarasilpa, et al. 2019. “Early Use of Norepinephrine in Septic Shock Resuscitation (CENSER): A Randomized Trial.” American Journal of Respiratory and Critical Care Medicine 199 (9): 1097–105. https://doi.org/10.1164/rccm.201806-1034OC.\n\n\nRivers, Emanuel, Brian Nguyen, Stephen Havstad, et al. 2001. “Early Goal-Directed Therapy in the Treatment of Severe Sepsis and Septic Shock.” The New England Journal of Medicine 345 (19): 1368–77. https://doi.org/10.1056/NEJMoa010307.\n\n\nThe PRISM Investigators. 2017. “Early, Goal-Directed Therapy for Septic Shock: A Patient-Level Meta-Analysis.” The New England Journal of Medicine 376 (23): 2223–34. https://doi.org/10.1056/NEJMoa1701380.\n\n\nZampieri, Fernando G., Sean M. Bagshaw, and Matthew W. Semler. 2023. “Fluid Therapy for Critically Ill Adults with Sepsis: A Review.” JAMA 329 (22): 1967–80. https://doi.org/10.1001/jama.2023.7560."
+    "text": "Take home message\n\nSepsisの輸液は、まずはしっかり投与し、その後は絞る。\n早期のノルアドレナリン併用を考慮する。\n患者背景やほかの指標を考え、MAPの目標値を変更してもよいかもしれない。\n\n\n\n\n\nARISE FLUIDS Investigators, the ANZICS Clinical Trials Group, and the ACEM Clinical Trials Network, Sandra L Peake, Stephen P J Macdonald, et al. 2026. “Vasopressors or Fluids in Early Septic Shock.” New England Journal of Medicine 395 (14): 1387–98. https://doi.org/10.1056/NEJMoa2516225.\n\n\nAsfar, Pierre, Ferhat Meziani, Jean-François Hamel, et al. 2014. “High Versus Low Blood-Pressure Target in Patients with Septic Shock.” The New England Journal of Medicine 370 (17): 1583–93. https://doi.org/10.1056/NEJMoa1312173.\n\n\nDe Backer, Daniel, Patrick Biston, Jacques Devriendt, et al. 2010. “Comparison of Dopamine and Norepinephrine in the Treatment of Shock.” The New England Journal of Medicine 362 (9): 779–89. https://doi.org/10.1056/NEJMoa0907118.\n\n\nEvans, Laura, Andrew Rhodes, Waleed Alhazzani, et al. 2021. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021.” Intensive Care Medicine 47: 1181–247. https://doi.org/10.1007/s00134-021-06506-y.\n\n\nHernández, Glenn, Alexandre Biasi Cavalcanti, Gustavo Ospina-Tascón, et al. 2018. “Early Goal-Directed Therapy Using a Physiological Holistic View: The ANDROMEDA-SHOCK Randomized Controlled Trial.” Annals of Intensive Care 8 (1): 52. https://doi.org/10.1186/s13613-018-0398-2.\n\n\nHernández, Glenn, Gustavo A. Ospina-Tascón, Lucas P. Damiani, et al. 2019. “Effect of a Resuscitation Strategy Targeting Peripheral Perfusion Status Vs Serum Lactate Levels on 28-Day Mortality Among Patients with Septic Shock: The ANDROMEDA-SHOCK Randomized Clinical Trial.” JAMA 321 (7): 654–64. https://doi.org/10.1001/jama.2019.0071.\n\n\nLamontagne, François, Alvin Richards-Belle, Karen Thomas, et al. 2020. “Effect of Reduced Exposure to Vasopressors on 90-Day Mortality in Older Critically Ill Patients with Vasodilatory Hypotension: A Randomized Clinical Trial.” JAMA 323 (10): 938–49. https://doi.org/10.1001/jama.2020.0930.\n\n\nMarik, Paul E., Walter T. Linde-Zwirble, Edward A. Bittner, et al. 2017. “Fluid Administration in Severe Sepsis and Septic Shock, Patterns and Outcomes: An Analysis of a Large National Database.” Intensive Care Medicine 43 (5): 625–32. https://doi.org/10.1007/s00134-016-4675-y.\n\n\nMcGee, Steven, William B. Abernethy, and David L. Simel. 1999. “Is This Patient Hypovolemic?” JAMA 281 (11): 1022–29. https://doi.org/10.1001/jama.281.11.1022.\n\n\nMeyhoff, Tine S., Peter B. Hjortrup, Jørn Wetterslev, et al. 2022. “Restriction of Intravenous Fluid in ICU Patients with Septic Shock.” The New England Journal of Medicine 386 (26): 2459–70. https://doi.org/10.1056/NEJMoa2202707.\n\n\nNational Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network, Nathan I. Shapiro, Ivor S. Douglas, et al. 2023. “Early Restrictive or Liberal Fluid Management for Sepsis-Induced Hypotension.” The New England Journal of Medicine 388 (6): 499–510. https://doi.org/10.1056/NEJMoa2212663.\n\n\nPermpikul, Chairat, Surat Tongyoo, Tanuwong Viarasilpa, et al. 2019. “Early Use of Norepinephrine in Septic Shock Resuscitation (CENSER): A Randomized Trial.” American Journal of Respiratory and Critical Care Medicine 199 (9): 1097–105. https://doi.org/10.1164/rccm.201806-1034OC.\n\n\nPrescott, Hallie C, Massimo Antonelli, Waleed Alhazzani, et al. 2026. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026.” Critical Care Medicine, ahead of print, March. https://doi.org/10.1097/CCM.0000000000007075.\n\n\nRivers, Emanuel, Brian Nguyen, Stephen Havstad, et al. 2001. “Early Goal-Directed Therapy in the Treatment of Severe Sepsis and Septic Shock.” The New England Journal of Medicine 345 (19): 1368–77. https://doi.org/10.1056/NEJMoa010307.\n\n\nThe PRISM Investigators. 2017. “Early, Goal-Directed Therapy for Septic Shock: A Patient-Level Meta-Analysis.” The New England Journal of Medicine 376 (23): 2223–34. https://doi.org/10.1056/NEJMoa1701380."
   },
   {
     "objectID": "statistics/mlcausal/index.html#modelの解釈best-linear-preojection",
@@ -5597,14 +5597,14 @@
     "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査ct検査",
     "title": "妊娠患者をERで診たとき",
     "section": "妊婦への検査～CT検査",
-    "text": "妊婦への検査～CT検査\n\n必要なら勇気をもってやる\nTodo: アメリカのガイドラインを確認する"
+    "text": "妊婦への検査～CT検査\n\n通常のCT検査はよほどの事がない限り胎児毒性が出る被曝量にはならないため、必要ならやる\n\n例えば、虫垂炎、腸閉塞を疑ったときはやるべきと明記されている(American College of Obstetricians and Gynecologists 2017)\n\nPE条件も胎児への被曝量は少なくなる"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への検査mri検査",
     "href": "medicine/pregnancy_er_mi/index.html#妊婦への検査mri検査",
     "title": "妊娠患者をERで診たとき",
     "section": "妊婦への検査～MRI検査",
-    "text": "妊婦への検査～MRI検査\n\n安全に可能"
+    "text": "妊婦への検査～MRI検査\n\n安全に可能\nただし、Gd造影剤は基本的に禁忌\n当院では結局使わないと思う"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊娠の時期による影響薬剤の影響",
@@ -5625,7 +5625,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#無症候性膿尿細菌尿",
     "title": "妊娠患者をERで診たとき",
     "section": "無症候性膿尿/細菌尿",
-    "text": "無症候性膿尿/細菌尿\n\n腎盂腎炎、早産が増えるため、基本的には治療対象\n2015年のRCTでは治療効果がないというのもあるが・・・・・・"
+    "text": "無症候性膿尿/細菌尿\n\n\n腎盂腎炎、早産が増えるため、基本的には治療対象\n2015年のRCTでは治療効果がないというのもあるが・・・・・・"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#腹痛の部位",
@@ -5646,7 +5646,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#気管支喘息の患者",
     "title": "妊娠患者をERで診たとき",
     "section": "気管支喘息の患者",
-    "text": "気管支喘息の患者\n\n30歳女性、妊娠20週\n元々気管支喘息を指摘されていた。3日前の感冒をきっかけにWheezeがあり来院、SpO2 90％(RA)\nSystemic corticosteroid、使えるICS/LABA"
+    "text": "気管支喘息の患者\n\n30歳女性、妊娠20週\n元々気管支喘息を指摘されていた。3日前の感冒をきっかけにWheezeがあり来院、SpO2 90％(RA)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#発熱で検査をしたら膿尿があった患者",
@@ -5667,7 +5667,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#reference",
     "title": "妊娠患者をERで診たとき",
     "section": "Reference",
-    "text": "Reference\n\n\nDynaMed. n.d. Acute Abdominal Pain in Pregnancy and Postpartum - Approach to the Patient. EBSCO Information Services. Accessed October 19, 2026. https://www.dynamed.com/approach-to/acute-abdominal-pain-in-pregnancy-and-postpartum-approach-to-the-patient.\n\n\nRebarber, Andrei, and Brian P. Jacob. n.d. “Acute Appendicitis in Pregnancy.” In UpToDate, edited by R. F. Connor. Wolters Kluwer. Accessed October 19, 2026. https://www.uptodate.com/contents/acute-appendicitis-in-pregnancy.\n\n\nZingone, Fabiana, Alyshah Abdul Sultan, David James Humes, and Joe West. 2015. “Risk of Acute Appendicitis in and Around Pregnancy: A Population-Based Cohort Study from England.” Annals of Surgery 261 (2): 332–37. https://doi.org/10.1097/SLA.0000000000000780.\n\n\n国立成育医療研究センター. n.d. 妊娠と薬情報センター. https://www.ncchd.go.jp/kusuri/.\n\n\n日本救急医学会Point-of-Care超音波推進委員会, ed. 2023. 救急超音波診療ガイド. 医学書院.\n\n\n日本産科婦人科学会, and 日本産婦人科医会. 2020. 産婦人科診療ガイドライン―産科編2020. 日本産科婦人科学会. https://minds.jcqhc.or.jp/common/summary/pdf/c00572.pdf.\n\n\n環境省. 2015. 放射線による健康影響等に関する統一的な基礎資料（平成26年度版）. https://www.env.go.jp/content/900413502.pdf."
+    "text": "Reference\n\n\nAmerican College of Obstetricians and Gynecologists. 2017. “Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation.” Obstetrics & Gynecology 130 (4): e210–16. https://doi.org/10.1097/AOG.0000000000002355.\n\n\nAmerican College of Radiology Committee on Drugs and Contrast Media. 2026. ACR Manual on Contrast Media. American College of Radiology. https://edge.sitecorecloud.io/americancoldf5f-acrorgf92a-productioncb02-3650/media/ACR/Files/Clinical/Contrast-Manual/ACR-Manual-on-Contrast-Media.pdf.\n\n\nDynaMed. n.d. Acute Abdominal Pain in Pregnancy and Postpartum - Approach to the Patient. EBSCO Information Services. Accessed October 19, 2026. https://www.dynamed.com/approach-to/acute-abdominal-pain-in-pregnancy-and-postpartum-approach-to-the-patient.\n\n\nRebarber, Andrei, and Brian P. Jacob. n.d. “Acute Appendicitis in Pregnancy.” In UpToDate, edited by R. F. Connor. Wolters Kluwer. Accessed October 19, 2026. https://www.uptodate.com/contents/acute-appendicitis-in-pregnancy.\n\n\nZingone, Fabiana, Alyshah Abdul Sultan, David James Humes, and Joe West. 2015. “Risk of Acute Appendicitis in and Around Pregnancy: A Population-Based Cohort Study from England.” Annals of Surgery 261 (2): 332–37. https://doi.org/10.1097/SLA.0000000000000780.\n\n\n国立成育医療研究センター. n.d. 妊娠と薬情報センター. https://www.ncchd.go.jp/kusuri/.\n\n\n日本救急医学会Point-of-Care超音波推進委員会, ed. 2023. 救急超音波診療ガイド. 医学書院.\n\n\n日本産科婦人科学会, and 日本産婦人科医会. 2020. 産婦人科診療ガイドライン―産科編2020. 日本産科婦人科学会. https://minds.jcqhc.or.jp/common/summary/pdf/c00572.pdf.\n\n\n環境省. 2015. 放射線による健康影響等に関する統一的な基礎資料（平成26年度版）. https://www.env.go.jp/content/900413502.pdf."
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#dagの基本",
@@ -6255,7 +6255,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#造影ctでのヨード造影剤は",
     "title": "妊娠患者をERで診たとき",
     "section": "造影CTでのヨード造影剤は？",
-    "text": "造影CTでのヨード造影剤は？\n\n水溶性なら問題はない\n一方で、一時的に甲状腺機能亢進になる可能性がある"
+    "text": "造影CTでのヨード造影剤は？\n\nヨード造影剤は胎盤を超えて胎児循環には入るが、特に催奇形性はないとされる(American College of Obstetricians and Gynecologists 2017)\n理論上の甲状腺機能亢進になるRiskも、水溶性のヨード造影剤だと大丈夫らしい(American College of Radiology Committee on Drugs and Contrast Media 2026)\nとは言え、必要な時にだけ使う(大体妊婦にCTするときは必要な時な気もするが)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#造影mriのgd造影剤は",
@@ -6276,7 +6276,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#腹痛",
     "title": "妊娠患者をERで診たとき",
     "section": "腹痛",
-    "text": "腹痛\n\nまずは、産科的緊急疾患\n時期との関連\n\n異所性妊娠\n常位胎盤早期剝離\n切迫早産など\n\nまぁ、ここら辺はさすがに産科に行くと思うが・・・・・・\n気を付けるのは虫垂炎の疼痛部位"
+    "text": "腹痛\n\nまずは、産科的緊急疾患\n\n\n\n時期との関連\n\n異所性妊娠\n常位胎盤早期剝離\n切迫早産など\n\nまぁ、ここら辺はさすがに産科に行くと思うが・・・・・・\n気を付けるのは虫垂炎の疼痛部位が移動する事(後述)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#胸痛の患者",
@@ -6290,14 +6290,14 @@
     "href": "medicine/pregnancy_er_mi/index.html#dvtpeを疑う患者",
     "title": "妊娠患者をERで診たとき",
     "section": "DVT/PEを疑う患者",
-    "text": "DVT/PEを疑う患者\nDVT: 5000U → 10000-15000 U/day PE: UFH 5000U → 31200 U/day\n正直、PEは多すぎる気はする"
+    "text": "DVT/PEを疑う患者\n\n\nYEARS criteriaを使う\n必要があれば、造影CTはしちゃって良い(被曝量は少ない)\n治療はHeparin\n\nDVT: 5000U → 10000-15000 U/day PE: UFH 5000U → 31200 U/day\n正直、PEは多すぎる気はする"
   },
   {
     "objectID": "medicine/sepsis_iv_mi/index.html#早期の昇圧薬の使用",
     "href": "medicine/sepsis_iv_mi/index.html#早期の昇圧薬の使用",
     "title": "敗血症における輸液療法今昔",
     "section": "早期の昇圧薬の使用",
-    "text": "早期の昇圧薬の使用\n\nSOAP2 trialの結果からNADが基本(DOAは不整脈が優位に多かった)(De Backer et al. 2010)\nどうしてもだめなら、次はVasopressin\nNAD→Vasopressinのタイミングは？ \nVasopressinを使うタイミングなら一度救急科転科が良いと思う。"
+    "text": "早期の昇圧薬の使用\n\nSOAP2 trialの結果からNADが基本(De Backer et al. 2010)\n\nDOAは不整脈が優位に多かった\n\nどのタイミングが良い？\n早い方が良い？"
   },
   {
     "objectID": "medicine/sepsis_iv_mi/index.html#早期のnad使用censer-trial",
@@ -6311,7 +6311,7 @@
     "href": "medicine/sepsis_iv_mi/index.html#今のガイドライン",
     "title": "敗血症における輸液療法今昔",
     "section": "今のガイドライン",
-    "text": "今のガイドライン\n\n2026年のSSCGではMAP 60 mmHgに変わっている"
+    "text": "今のガイドライン\n\nARISE-Fluid前だからか、30mL/kgの初期輸液は変更なし\n一応は初期輸液 → NADを推奨しているが、Case by caseで同時のNADでも良いと言われている\nMAPの目標は通常は65 mmHg, 65歳以上は60-65 mmHgとなっている (Prescott et al. 2026)"
   },
   {
     "objectID": "medicine/sepsis_iv_mi/index.html#andromeda-shock-trialのプロトコル",
@@ -6542,14 +6542,14 @@
     "href": "medicine/pregnancy_er_mi/index.html#妊娠初期にのみ使用されたときに問題がない薬",
     "title": "妊娠患者をERで診たとき",
     "section": "妊娠初期にのみ使用されたときに問題がない薬",
-    "text": "妊娠初期にのみ使用されたときに問題がない薬\n\n\n\nTable 1: 添付文書上いわゆる禁忌*の医薬品のうち、妊娠初期のみに使用された場合、臨床的に有意な胎児への影響はないと判断してよい医薬品\n\n\n\n\n\n\n\n\n\n医薬品＜一般名＞\n分類\n\n\n\n\nイトラコナゾール、ミコナゾール\n抗真菌薬\n\n\nオフロキサシン、シプロフロキサシン、スパルフロキサシン、トスフロキサシントシル酸塩、ノルフロキサシン、レボフロキサシン、ロメフロキサシン塩酸塩\nニューキノロン系抗菌薬\n\n\nニフェジピン（妊娠20週未満）、ニカルジピン塩酸塩（経口錠）、アムロジピンベシル酸塩\nカルシウム拮抗薬\n\n\nヒドロキシジン塩酸塩\n抗ヒスタミン薬\n\n\nオキサトミド、トラニラスト、ペミロラストカリウム\n抗アレルギー薬\n\n\n風疹ワクチン、水痘ワクチン、流行性耳下腺炎ワクチン、麻疹ワクチン\n生ワクチン\n\n\nセンナ、センノシド\n緩下薬\n\n\nハロペリドール、ブロムペリドール（ただしこれらは、妊娠末期では新生児錐体症候群のリスクとなる）\nブチロフェノン系抗精神病薬\n\n\nメトホルミン塩酸塩、グリベンクラミド\n経口血糖降下薬\n\n\nドンペリドン\n制吐薬\n\n\n卵胞ホルモン、黄体ホルモン、低用量ピル\n女性ホルモン薬\n\n\nクロミフェンクエン酸塩\n排卵誘発薬\n\n\nニコチン置換療法薬\n禁煙補助薬\n\n\nエチドロン酸二ナトリウム、ミノドロン酸水和物、リセドロン酸ナトリウム\nビスフォスフォネート製剤\n\n\nインドメタシン、ジクロフェナクナトリウム、スリンダク、メロキシカム（ただしこれらは、妊娠末期では胎児毒性を示す）\n非ステロイド系抗炎症薬\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）、アンジオテンシンII受容体拮抗薬（ARB）（ただしこれらは、妊娠中期以降では胎児毒性を示す）\n降圧薬"
+    "text": "妊娠初期にのみ使用されたときに問題がない薬\n\n\n\nTable 2: 添付文書上いわゆる禁忌*の医薬品のうち、妊娠初期のみに使用された場合、臨床的に有意な胎児への影響はないと判断してよい医薬品\n\n\n\n\n\n\n\n\n\n医薬品＜一般名＞\n分類\n\n\n\n\nイトラコナゾール、ミコナゾール\n抗真菌薬\n\n\nオフロキサシン、シプロフロキサシン、スパルフロキサシン、トスフロキサシントシル酸塩、ノルフロキサシン、レボフロキサシン、ロメフロキサシン塩酸塩\nニューキノロン系抗菌薬\n\n\nニフェジピン（妊娠20週未満）、ニカルジピン塩酸塩（経口錠）、アムロジピンベシル酸塩\nカルシウム拮抗薬\n\n\nヒドロキシジン塩酸塩\n抗ヒスタミン薬\n\n\nオキサトミド、トラニラスト、ペミロラストカリウム\n抗アレルギー薬\n\n\n風疹ワクチン、水痘ワクチン、流行性耳下腺炎ワクチン、麻疹ワクチン\n生ワクチン\n\n\nセンナ、センノシド\n緩下薬\n\n\nハロペリドール、ブロムペリドール（ただしこれらは、妊娠末期では新生児錐体症候群のリスクとなる）\nブチロフェノン系抗精神病薬\n\n\nメトホルミン塩酸塩、グリベンクラミド\n経口血糖降下薬\n\n\nドンペリドン\n制吐薬\n\n\n卵胞ホルモン、黄体ホルモン、低用量ピル\n女性ホルモン薬\n\n\nクロミフェンクエン酸塩\n排卵誘発薬\n\n\nニコチン置換療法薬\n禁煙補助薬\n\n\nエチドロン酸二ナトリウム、ミノドロン酸水和物、リセドロン酸ナトリウム\nビスフォスフォネート製剤\n\n\nインドメタシン、ジクロフェナクナトリウム、スリンダク、メロキシカム（ただしこれらは、妊娠末期では胎児毒性を示す）\n非ステロイド系抗炎症薬\n\n\nアンジオテンシン変換酵素阻害薬（ACE-I）、アンジオテンシンII受容体拮抗薬（ARB）（ただしこれらは、妊娠中期以降では胎児毒性を示す）\n降圧薬"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#授乳婦への説明",
     "href": "medicine/pregnancy_er_mi/index.html#授乳婦への説明",
     "title": "妊娠患者をERで診たとき",
     "section": "授乳婦への説明",
-    "text": "授乳婦への説明\n\n基本的に母親が使っている医薬品が児に影響することは少ない\n\n母乳を介しての薬剤曝露は通常子宮内に比べて1%未満~10%程度"
+    "text": "授乳婦への説明\n\n基本的に母親が使っている医薬品が児に影響することは少ない\n\n母乳を介しての薬剤曝露は通常子宮内に比べて1%未満~10%程度\n\nX線被曝と授乳は関係ない\nヨード造影剤後は古典的には24時間授乳を待つように言われていたが、特に不要らしい(すぐあげてOK)(American College of Obstetricians and Gynecologists 2017)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の急性腹症",
@@ -7075,5 +7075,229 @@
     "title": "動脈血液ガス分析の酸塩基平衡の基礎",
     "section": "References",
     "text": "References\n\n\nDynaMed. 2026. Renal Tubular Acidosis (RTA) in Adults. DynaMed; EBSCO Information Services. https://www.dynamed.com/condition/renal-tubular-acidosis-rta-in-adults.\n\n\nEmmett, Michael, and Biff F. Palmer. 2025. Etiology and Diagnosis of Distal (Type 1) and Proximal (Type 2) Renal Tubular Acidosis. UpToDate; Wolters Kluwer. https://www.uptodate.com/contents/etiology-and-diagnosis-of-distal-type-1-and-proximal-type-2-renal-tubular-acidosis.\n\n\nMarino, Paul L. 2026. Icuブック. 5th ed. Edited by 英一. メディカル・サイエンス・インターナショナル.\n\n\nMehta, Ankit N, Joshua B Emmett, and Michael Emmett. 2008. “GOLD MARK: An Anion Gap Mnemonic for the 21st Century.” Lancet 372 (9642): 892.\n\n\n岡田和也, and 植西憲達, eds. 2025. INTENSIVIST Vol.17 No.1：酸塩基平衡，電解質異常に挑む. メディカル・サイエンス・インターナショナル.\n\n\n髙岸勝繁. 2024. ホスピタリストのための内科診療フローチャート：専門的対応が求められる疾患の診療の流れとエビデンス. 3rd ed. シーニュ."
+  },
+  {
+    "objectID": "medicine/sepsis_iv_mi/index.html#arise-fluid-trial",
+    "href": "medicine/sepsis_iv_mi/index.html#arise-fluid-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "ARISE-Fluid trial",
+    "text": "ARISE-Fluid trial\n\n\nP: 受診6時間以内で、1Lの急速輸液でも改善しない、敗血症による低血圧(SBP &lt;90 or MAP &lt;54 mmHg)かつ低潅流患者（n = 1,000）\nI: 昇圧剤群\n\n昇圧剤はRandom化の後中央値24分で(86.5%使用)\n24時間の輸液量 中央値 1,140 mL、95% CI: 500–2,120 mL\n\nC: 輸液群\n\n昇圧剤はRandom化の後中央値84分で(67.6%使用)\n24時間の輸液量 中央値 2,248 mL、95% CI: 1,500–3,332 mL\n\nO: 90日死亡に差なし（16.4% vs. 14.4%）\n\n肺水腫のみ優位に昇圧剤群が少ない(0.6% vs. 5.0%)\n\n\n(ARISE FLUIDS Investigators, the ANZICS Clinical Trials Group, and the ACEM Clinical Trials Network et al. 2026)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html",
+    "href": "medicine/sepsis_iv/index.html",
+    "title": "敗血症における輸液療法今昔",
+    "section": "",
+    "text": "9月と言えば……\n\n秋だ！\n月見だ！\n敗血症だ！！1"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#月になりましたね",
+    "href": "medicine/sepsis_iv/index.html#月になりましたね",
+    "title": "敗血症における輸液療法今昔",
+    "section": "9月になりましたね",
+    "text": "9月になりましたね\n9月と言えば……\n\n秋だ！\n月見だ！\n敗血症だ！！1\n\n9月13日は世界敗血症デー。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#という事で",
+    "href": "medicine/sepsis_iv/index.html#という事で",
+    "title": "敗血症における輸液療法今昔",
+    "section": "という事で",
+    "text": "という事で\n今日は敗血症における輸液療法について考えてみたい。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#egdtについて",
+    "href": "medicine/sepsis_iv/index.html#egdtについて",
+    "title": "敗血症における輸液療法今昔",
+    "section": "EGDTについて",
+    "text": "EGDTについて\n\nEGDTは複数の介入（バンドル）で構成される。\n主な介入の一つは、大量輸液による早期の組織灌流改善である。\n組織灌流は平均血圧（MAP）で規定されていた。\nEGDTにより死亡率が 16% 改善した（46.5% vs. 30.5%）(Rivers et al. 2001)。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#egdt時代の終焉",
+    "href": "medicine/sepsis_iv/index.html#egdt時代の終焉",
+    "title": "敗血症における輸液療法今昔",
+    "section": "EGDT時代の終焉",
+    "text": "EGDT時代の終焉\n\n\n通常治療とEGDTを比較した3つのRCTでは、死亡率に差を認めなかった(The PRISM Investigators 2017)。\nさらに、輸液過剰の害が指摘されるようになった。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#輸液過剰の害",
+    "href": "medicine/sepsis_iv/index.html#輸液過剰の害",
+    "title": "敗血症における輸液療法今昔",
+    "section": "輸液過剰の害",
+    "text": "輸液過剰の害\n - 観察研究だと、大量輸液（初日に5 L/day以上）により、死亡率が上昇する可能性が示唆された(Marik et al. 2017)。 - 1L増えるごとに、2.3%の追加"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#輸液に関するギモン",
+    "href": "medicine/sepsis_iv/index.html#輸液に関するギモン",
+    "title": "敗血症における輸液療法今昔",
+    "section": "輸液に関するギモン",
+    "text": "輸液に関するギモン\n\n輸液はどのくらい入れればよいのか。どこまで絞ってもよいのか。\n輸液量を抑える代わりの治療法は何か。\n組織灌流を評価する別の方法は何か。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#輸液はどれくらいいれるどれくらい絞っても大丈夫",
+    "href": "medicine/sepsis_iv/index.html#輸液はどれくらいいれるどれくらい絞っても大丈夫",
+    "title": "敗血症における輸液療法今昔",
+    "section": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）",
+    "text": "輸液はどれくらいいれる？（どれくらい絞っても大丈夫？）\n\n現在、敗血症性ショックに対してどの程度輸液を行うべきかは明確でない。\n輸液反応性をみて必要に応じて投与する、という実践になりがちである。\n初期輸液以降の輸液量を評価したRCTとして、次の2つがある。\n\nCLASSIC trial\nCLOVERS trial\n\n初期輸液の時点での輸液量を評価したものとして、以下のものがある\n\nARISE-Fluid trial"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#classic-trial",
+    "href": "medicine/sepsis_iv/index.html#classic-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "CLASSIC trial",
+    "text": "CLASSIC trial\n\n\nP: 24時間以内に1 L以上の補液下で敗血症性ショックが持続する患者（n = 1,554）\nI: 輸液制限群（ICUでのin balance 1,645 mL）1\nC: 通常治療群（ICUでのin balance 2,368 mL）\nO: 90日死亡に差なし（42.3% vs. 42.1%）(Meyhoff et al. 2022)\n\nプロトコル違反が20%であった点には注意を要する。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#clovers-trial",
+    "href": "medicine/sepsis_iv/index.html#clovers-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "CLOVERS trial",
+    "text": "CLOVERS trial\n\n\nP: 1–3 Lの輸液でも改善しない、敗血症による低灌流患者（n = 1,563）\nI: 輸液制限療法（24時間平均 1,267 mL、95% CI: 555–2,279 mL）\nC: 輸液自由療法（24時間平均 3,400 mL、95% CI: 2,500–4,495 mL）\nO: 90日死亡に差なし（14.0% vs. 14.9%）(National Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network et al. 2023)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#arise-fluid-trial",
+    "href": "medicine/sepsis_iv/index.html#arise-fluid-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "ARISE-Fluid trial",
+    "text": "ARISE-Fluid trial\n\n\nP: 受診6時間以内で、1Lの急速輸液でも改善しない、敗血症による低血圧(SBP &lt;90 or MAP &lt;54 mmHg)かつ低潅流患者（n = 1,000）\nI: 昇圧剤群\n\n昇圧剤はRandom化の後中央値24分で(86.5%使用)\n24時間の輸液量 中央値 1,140 mL、95% CI: 500–2,120 mL\n\nC: 輸液群\n\n昇圧剤はRandom化の後中央値84分で(67.6%使用)\n24時間の輸液量 中央値 2,248 mL、95% CI: 1,500–3,332 mL\n\nO: 90日死亡に差なし（16.4% vs. 14.4%）\n\n肺水腫のみ優位に昇圧剤群が少ない(0.6% vs. 5.0%)\n\n\n(ARISE FLUIDS Investigators, the ANZICS Clinical Trials Group, and the ACEM Clinical Trials Network et al. 2026)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#まとめると",
+    "href": "medicine/sepsis_iv/index.html#まとめると",
+    "title": "敗血症における輸液療法今昔",
+    "section": "まとめると……",
+    "text": "まとめると……\n\n理論上、輸液制限は敗血症性ショック患者の予後を改善しうると考えられた。\nしかし実際には差はなく、輸液制限による明確なメリットは示されなかった。\n\n逆に言えば、明確なデメリットも示されていない。\n\n\n敗血症への輸液をどのように考えればいい？"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#適切な輸液",
+    "href": "medicine/sepsis_iv/index.html#適切な輸液",
+    "title": "敗血症における輸液療法今昔",
+    "section": "適切な輸液？",
+    "text": "適切な輸液？\n\n呼吸状態不良、心不全、腎不全など、輸液を絞りたい状況は多い。\n輸液はMAPを65 mmHg以上に保ち、末梢循環を改善するための手段である。\n輸液を絞るとMAP目標の達成は難しくなる。その場合の選択肢:\n\n早期の昇圧薬使用\n目標MAPの引き下げ\n\nシンプルにMAP目標を下げる\nMAP以外の指標を用いる"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#敗血症性ショックへの昇圧剤の選択",
+    "href": "medicine/sepsis_iv/index.html#敗血症性ショックへの昇圧剤の選択",
+    "title": "敗血症における輸液療法今昔",
+    "section": "敗血症性ショックへの昇圧剤の選択",
+    "text": "敗血症性ショックへの昇圧剤の選択\n\nSOAP2 trialの結果からNADが基本(De Backer et al. 2010)\n\nDOAは不整脈が優位に多かった\n\nどのタイミングが良い？\n早い方が良い？"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#早期のnad使用censer-trial",
+    "href": "medicine/sepsis_iv/index.html#早期のnad使用censer-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "早期のNAD使用～CENSER trial",
+    "text": "早期のNAD使用～CENSER trial\n\n\nP: 敗血症による低血圧患者（n = 310）\nI: 早期ノルアドレナリン併用群（n = 155）\nC: 通常治療群（n = 155）\nO: 6時間後のショックコントロールは早期ノルアドレナリン群で良好（76.1% vs. 48.4%）(Permpikul et al. 2019)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#敗血症性ショックの蘇生の目標血圧",
+    "href": "medicine/sepsis_iv/index.html#敗血症性ショックの蘇生の目標血圧",
+    "title": "敗血症における輸液療法今昔",
+    "section": "敗血症性ショックの蘇生の目標血圧",
+    "text": "敗血症性ショックの蘇生の目標血圧\n\nMAP 65 mmHg以上という目標は、少数のICU患者における乳酸値などから決められており、根拠は限定的である。\nSEPSISPAM trialでは、より高いMAP目標は必ずしも必要ではないとされた（65–70 mmHg vs. 75–80 mmHg）(Asfar et al. 2014)。\n高齢者（65歳以上）では、MAP目標を下げてノルアドレナリン使用量を減らす方がよいかもしれない。\n高齢者を対象とした65 trialがある。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#trial",
+    "href": "medicine/sepsis_iv/index.html#trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "65 trial",
+    "text": "65 trial\n\n\nP: ICU入室後、輸液および昇圧薬使用初期の65歳以上の患者（n = 2,600）\nI: 低血圧許容群（MAP 60–65 mmHg、n = 1,291）\nC: 通常治療群（MAP &gt;65 mmHg、n = 1,307）\nO: 90日死亡に差なし（41.0% vs. 43.8%）(Lamontagne et al. 2020)\n実際は以下のパラメーター\n\nmedian MAP 66.7 vs. 72.6 mmHg\nMAP &lt;65 mmHgの時間 12 vs. 6時間"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#今のガイドライン",
+    "href": "medicine/sepsis_iv/index.html#今のガイドライン",
+    "title": "敗血症における輸液療法今昔",
+    "section": "今のガイドライン",
+    "text": "今のガイドライン\n\nARISE-Fluid前だからか、30mL/kgの初期輸液は変更なし\n一応は初期輸液 → NADを推奨しているが、Case by caseで同時のNADでも良いと言われている\nMAPの目標は通常は65 mmHg, 65歳以上は60-65 mmHgとなっている (Prescott et al. 2026)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#capillary-refilling-time",
+    "href": "medicine/sepsis_iv/index.html#capillary-refilling-time",
+    "title": "敗血症における輸液療法今昔",
+    "section": "Capillary refilling time",
+    "text": "Capillary refilling time\n\n\n中指の末節骨を5秒間圧迫し、離してから血管が再充満するまでの時間。\n正常範囲: 成人男性は2秒以内、成人女性は3秒、高齢者は4秒。\n脱水の指標としてLR 6.9と有用性が高い(McGee et al. 1999)。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#andromeda-shock-trial",
+    "href": "medicine/sepsis_iv/index.html#andromeda-shock-trial",
+    "title": "敗血症における輸液療法今昔",
+    "section": "ANDROMEDA-SHOCK trial",
+    "text": "ANDROMEDA-SHOCK trial\n\n\nP: 20 mL/kg以上の初期輸液に反応しない敗血症性ショック患者（n = 424）\nI: CRT guided therapy（30分ごとにCRTを確認）\nC: Lactate guided therapy（2時間ごとに乳酸値を確認）\nO: 28日死亡に差なし（CRT群 34.9% vs. Lactate群 43.4%）(Hernández et al. 2018, 2019)"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#andromeda-shock-trialのプロトコル",
+    "href": "medicine/sepsis_iv/index.html#andromeda-shock-trialのプロトコル",
+    "title": "敗血症における輸液療法今昔",
+    "section": "ANDROMEDA-SHOCK trialのプロトコル",
+    "text": "ANDROMEDA-SHOCK trialのプロトコル"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#小括",
+    "href": "medicine/sepsis_iv/index.html#小括",
+    "title": "敗血症における輸液療法今昔",
+    "section": "小括",
+    "text": "小括\n\n輸液を大量に投与することは Harm から Neutral と考えられる。\n輸液をやや絞るために、次を検討してもよいかもしれない。\n\n高齢者ではMAP目標を60–65 mmHgへ下げる。\n早期のノルアドレナリン併用。\nMAPに加えて、ほかの灌流指標を用いる。"
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#take-home-message",
+    "href": "medicine/sepsis_iv/index.html#take-home-message",
+    "title": "敗血症における輸液療法今昔",
+    "section": "Take home message",
+    "text": "Take home message\n\nSepsisの輸液は、まずはしっかり投与し、その後は絞る。\n早期のノルアドレナリン併用を考慮する。\n患者背景やほかの指標を考え、MAPの目標値を変更してもよいかもしれない。\n\n\n\n\n\nARISE FLUIDS Investigators, the ANZICS Clinical Trials Group, and the ACEM Clinical Trials Network, Sandra L Peake, Stephen P J Macdonald, et al. 2026. “Vasopressors or Fluids in Early Septic Shock.” New England Journal of Medicine 395 (14): 1387–98. https://doi.org/10.1056/NEJMoa2516225.\n\n\nAsfar, Pierre, Ferhat Meziani, Jean-François Hamel, et al. 2014. “High Versus Low Blood-Pressure Target in Patients with Septic Shock.” The New England Journal of Medicine 370 (17): 1583–93. https://doi.org/10.1056/NEJMoa1312173.\n\n\nDe Backer, Daniel, Patrick Biston, Jacques Devriendt, et al. 2010. “Comparison of Dopamine and Norepinephrine in the Treatment of Shock.” The New England Journal of Medicine 362 (9): 779–89. https://doi.org/10.1056/NEJMoa0907118.\n\n\nEvans, Laura, Andrew Rhodes, Waleed Alhazzani, et al. 2021. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021.” Intensive Care Medicine 47: 1181–247. https://doi.org/10.1007/s00134-021-06506-y.\n\n\nHernández, Glenn, Alexandre Biasi Cavalcanti, Gustavo Ospina-Tascón, et al. 2018. “Early Goal-Directed Therapy Using a Physiological Holistic View: The ANDROMEDA-SHOCK Randomized Controlled Trial.” Annals of Intensive Care 8 (1): 52. https://doi.org/10.1186/s13613-018-0398-2.\n\n\nHernández, Glenn, Gustavo A. Ospina-Tascón, Lucas P. Damiani, et al. 2019. “Effect of a Resuscitation Strategy Targeting Peripheral Perfusion Status Vs Serum Lactate Levels on 28-Day Mortality Among Patients with Septic Shock: The ANDROMEDA-SHOCK Randomized Clinical Trial.” JAMA 321 (7): 654–64. https://doi.org/10.1001/jama.2019.0071.\n\n\nLamontagne, François, Alvin Richards-Belle, Karen Thomas, et al. 2020. “Effect of Reduced Exposure to Vasopressors on 90-Day Mortality in Older Critically Ill Patients with Vasodilatory Hypotension: A Randomized Clinical Trial.” JAMA 323 (10): 938–49. https://doi.org/10.1001/jama.2020.0930.\n\n\nMarik, Paul E., Walter T. Linde-Zwirble, Edward A. Bittner, et al. 2017. “Fluid Administration in Severe Sepsis and Septic Shock, Patterns and Outcomes: An Analysis of a Large National Database.” Intensive Care Medicine 43 (5): 625–32. https://doi.org/10.1007/s00134-016-4675-y.\n\n\nMcGee, Steven, William B. Abernethy, and David L. Simel. 1999. “Is This Patient Hypovolemic?” JAMA 281 (11): 1022–29. https://doi.org/10.1001/jama.281.11.1022.\n\n\nMeyhoff, Tine S., Peter B. Hjortrup, Jørn Wetterslev, et al. 2022. “Restriction of Intravenous Fluid in ICU Patients with Septic Shock.” The New England Journal of Medicine 386 (26): 2459–70. https://doi.org/10.1056/NEJMoa2202707.\n\n\nNational Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network, Nathan I. Shapiro, Ivor S. Douglas, et al. 2023. “Early Restrictive or Liberal Fluid Management for Sepsis-Induced Hypotension.” The New England Journal of Medicine 388 (6): 499–510. https://doi.org/10.1056/NEJMoa2212663.\n\n\nPermpikul, Chairat, Surat Tongyoo, Tanuwong Viarasilpa, et al. 2019. “Early Use of Norepinephrine in Septic Shock Resuscitation (CENSER): A Randomized Trial.” American Journal of Respiratory and Critical Care Medicine 199 (9): 1097–105. https://doi.org/10.1164/rccm.201806-1034OC.\n\n\nPrescott, Hallie C, Massimo Antonelli, Waleed Alhazzani, et al. 2026. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026.” Critical Care Medicine, ahead of print, March. https://doi.org/10.1097/CCM.0000000000007075.\n\n\nRivers, Emanuel, Brian Nguyen, Stephen Havstad, et al. 2001. “Early Goal-Directed Therapy in the Treatment of Severe Sepsis and Septic Shock.” The New England Journal of Medicine 345 (19): 1368–77. https://doi.org/10.1056/NEJMoa010307.\n\n\nThe PRISM Investigators. 2017. “Early, Goal-Directed Therapy for Septic Shock: A Patient-Level Meta-Analysis.” The New England Journal of Medicine 376 (23): 2223–34. https://doi.org/10.1056/NEJMoa1701380."
+  },
+  {
+    "objectID": "medicine/sepsis_iv/index.html#footnotes",
+    "href": "medicine/sepsis_iv/index.html#footnotes",
+    "title": "敗血症における輸液療法今昔",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n9月13日は世界敗血症デー。↩︎\nプロトコル違反が20%であった点には注意を要する。↩︎"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html",
+    "href": "statistics/RMST_mi/index.html",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "",
+    "text": "2020/4 ＠Keio University\n新美 望"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#速習生存解析-1",
+    "href": "statistics/RMST_mi/index.html#速習生存解析-1",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "速習：生存解析",
+    "text": "速習：生存解析\n\n時間および、打ち切り(censor)が存在するイベントの有無の解析方法の総称(別名 time-to-event analysis)\n\n生存時間およびイベントの発症率の推定にKaplan-Meier法\n単純な比較にLog-rank検定\n影響の大きさの定量化や多変量調整にCoxハザードモデル\n\n医学解析で最も多いと言っても過言ではない\n\n\n\n\n\nParameter    | Coefficient |       95% CI |      p\n--------------------------------------------------\nsurg         |        1.25 | [1.08, 1.44] | 0.003 \nrx [Lev]     |        1.00 | [0.86, 1.17] | 0.949 \nrx [Lev+5FU] |        0.66 | [0.56, 0.78] | &lt; .001\nsex          |        0.93 | [0.82, 1.06] | 0.278 \nage          |        1.00 | [0.99, 1.00] | 0.750 \nobstruct     |        1.25 | [1.07, 1.47] | 0.006 \ndiffer       |        1.37 | [1.20, 1.57] | &lt; .001"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#cox回帰について-1",
+    "href": "statistics/RMST_mi/index.html#cox回帰について-1",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "Cox回帰について",
+    "text": "Cox回帰について\n\n\nイベント発生のハザード比率が常に等しいという仮定のSemiparametricな解析\n大元の生存曲線の形はどうでも良い(non parametric)\n各々の共変量(下の式だとx1, x2…)の有無で瞬間の死亡率（hazard比）が変化する(parametric)\n\n\\(h(t) = h_0exp\\{b_1x_1 + b_2x_2 + ...b_px_p\\}\\)"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦への放射線検査概論",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦への放射線検査概論",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦への放射線検査概論",
+    "text": "妊婦への放射線検査概論\n\nチェルノブイリのデータか原子爆弾のデータがメイン\n受精後10日までの被曝では胎児奇形の発生率上昇はない(50-100mGy)\n\nAll or noneの時期\n\n11日～10週までの胎児被曝では奇形誘発をする可能性があるが50mGyまでは安全\n9-26週までは中枢神経障害を起こす可能性があるが、100mGyまでは安全とされる\n\nACOGだと、8-15週は60-310mGy, 16週以降は250-280mGyで知的障害が起こりうるとされる (日本産科婦人科学会 and 日本産婦人科医会 2020; American College of Obstetricians and Gynecologists 2017)"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#放射線被ばく量にソートした検査",
+    "href": "medicine/pregnancy_er_mi/index.html#放射線被ばく量にソートした検査",
+    "title": "妊娠患者をERで診たとき",
+    "section": "放射線被ばく量にソートした検査",
+    "text": "放射線被ばく量にソートした検査\n\n\n\nTable 1: 一般的な放射線画像検査における胎児線量\n\n\n\n\n\n検査の種類\n胎児線量（mGy）[^fetal-dose]\n\n\n\n\n極低線量の検査（&lt;0.1 mGy）\n\n\n\n　頸椎X線撮影（AP・側面像）\n&lt;0.001\n\n\n　頭部or頸部CT\n0.001–0.01\n\n\n　四肢のX線撮影\n&lt;0.001\n\n\n　マンモグラフィ（2方向）\n0.001–0.01\n\n\n　胸部X線撮影（2方向）\n0.0005–0.01\n\n\n低～中等度線量の検査（0.1–10 mGy）\n\n\n\n　X線撮影・造影検査\n\n\n\n　　腹部X線撮影\n0.1–3.0\n\n\n　　腰椎X線撮影\n1.0–10\n\n\n　　静脈性腎盂造影\n5–10\n\n\n　　二重造影バリウム注腸検査\n1.0–20\n\n\n　CT\n\n\n\n　　胸部CTまたはCT肺動脈造影\n0.01–0.66\n\n\n　　撮影範囲を限定したCT骨盤計測（大腿骨頭を通る横断像1断面）\n&lt;1\n\n\n　核医学検査\n\n\n\n　　低線量肺血流シンチグラフィ\n0.1–0.5\n\n\n　　テクネチウム99m骨シンチグラフィ\n4–5\n\n\n　肺動脈の血管造影(DSA)\n0.5\n\n\n高線量の検査（10–50 mGy）\n\n\n\n　腹部CT\n1.3–35\n\n\n　骨盤CT\n10–50\n\n\n　フッ素18標識FDGを用いた全身PET/CT\n10–50\n\n\n\n\n\n\n(American College of Obstetricians and Gynecologists 2017)"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#放射線検査ないし薬物治療をする時の心得",
+    "href": "medicine/pregnancy_er_mi/index.html#放射線検査ないし薬物治療をする時の心得",
+    "title": "妊娠患者をERで診たとき",
+    "section": "放射線検査ないし薬物治療をする時の心得",
+    "text": "放射線検査ないし薬物治療をする時の心得\n\n基本的に妊婦は心配している\n\nお腹の赤ちゃんに何かあった時に自分のせいじゃないか？と思ってしまう\n\n事実として、全ての妊娠の3-5%は先天異常、15%は流産の事を伝える\n「絶対に安全」とは言えないが、「現状なら使った方が良い」とか「使わなくても良い」とかを教えている\nEx) 「人体実験ができない以上、どんな薬も絶対に安全だという事は絶対には言えないです。ただし、このカロナールという薬は今までの歴史で多くの妊婦さんに使われてきて問題がなかったことが証明されている薬です」 「必要がなければ飲まなくても良い薬ですが、どうしても熱が苦しかったり痛かったら飲んでも良いと思います」 「今、あなたはおしっこにばい菌がいるので抗菌薬が必要です。抗菌薬も、絶対に安全という事は難しいのですが、その上であなたの場合は飲まない事が圧倒的に飲むことより赤ちゃんにも不利益が出ます。絶対に飲み切ってください。今までの歴史で安全性が高いものをお出ししますのでご安心ください」\n咳止めとか、痰切りとかは上記のテンションで話して飲むかどうか相談している(大体飲まない人が多い)"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の気管支喘息",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦の気管支喘息",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦の気管支喘息",
+    "text": "妊婦の気管支喘息\n\n\nSystemic corticosteroid、使えるICS/LABA、ICSだけの方がいい？\nICS/LABAによる胎児の身長の影響など\nCommunicationをする"
   }
 ]
