@@ -148,7 +148,7 @@ $h(t) = h_0exp\{b_1x_1 + b_2x_2 + ...b_px_p\}$
 - 共変量が時間に関わらずに同じように影響するという仮定が必要
 - 他にも、[**比例ハザード性**]{style="color: red;font-size: 1.2em;"}がないといけない
   - Log-log plotなどで確認する
-- 結果の言語化が実は難しい
+- 結果の言語化が実は難しい [@Dumas2025-dp]
 - 例：REAL-CAD study
   - 高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました
   - 患者さんにHR 0.8をどう説明しますか？
@@ -187,9 +187,7 @@ library(ggsurvfit)
 library(patchwork)
 
 
-colon_dat <- base::subset(survival::colon, etype == 2)
-
-good_hazard_fit <- ggsurvfit::survfit2(Surv(time, status) ~ surg, data = colon_dat) 
+good_hazard_fit <- ggsurvfit::survfit2(Surv(futime, death) ~  I(age >= 70), data = flchain) 
 
 good_hazard_fig <- ggsurvfit::ggsurvfit(good_hazard_fit) + 
   theme(legend.position = "none")
@@ -250,18 +248,45 @@ good_hazard_fig + right_arrow + good_hazard_cloglog_fig +
 - これが平行の時には比例hazard性が保たれていると判断
 - わかりやすいのは元の曲線が交わっているか否か
 
+## 小括
 
-
-## 今日の内容
-
-- 復習：生存解析
-- Cox hazardの限界
-- RMSTとは？
-- RMSTは何がいいの？限界は？
-- RMSTの使い方
-- 観察研究での使い道
+- 生存分析(time-to-event analysis)において、ある治療効果を定量的にみたい時にCox回帰が主流である
+- しかし、Cox回帰には複数の弱点がある
+  - Hazard ratioの数値の解釈が難しい
+  - 比例ハザード性が保たれない時に回帰が行えない
+- どうやって解決すればいい？
 
 ## RMSTとは
+
+```{r}
+
+library(survival)
+library(ggsurvfit)
+library(ggplot2)
+library(broom)
+
+fit <- survfit2(
+  Surv(time, status == 2) ~ 1,
+  data = lung
+)
+
+interval_km_dat <- broom::tidy(fit) |> 
+  dplyr::filter(time <= 500)
+
+
+p <- fit |>
+  ggsurvfit() +
+  add_risktable() +
+  stat_stepribbon(
+    dat = interval_km_dat,
+    aes(x = time, ymin = 0, ymax = estimate),
+    alpha = 0.15,
+    color = NA
+  )
+
+p
+
+```
 
 :::: columns
 ::: {.column width="52%"}
