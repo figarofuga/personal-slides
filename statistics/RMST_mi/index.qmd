@@ -335,7 +335,9 @@ p
 
 ## HRとRMSTの関係
 
-![](images/slide17_image01.png){fig-alt="HRとRMSTの関係" width="62%"}
+![](images/aim_rmst_image.png){fig-alt="HRとRMSTの関係"}
+
+
 
 ## 今日の内容
 
