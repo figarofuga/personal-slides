@@ -2447,21 +2447,21 @@
     "href": "statistics/RMST_mi/index.html#cox-modelの限界",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "Cox Modelの限界",
-    "text": "Cox Modelの限界\n\n共変量が時間に関わらずに同じように影響するという仮定が必要\n他にも、比例ハザード性がないといけない\n\nLog-log plotなどで確認する\n\n結果の言語化が実は難しい\n例：REAL-CAD study\n\n高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました\n患者さんにHR 0.8をどう説明しますか？"
+    "text": "Cox Modelの限界\n\n共変量が時間に関わらずに同じように影響するという仮定が必要\n他にも、比例ハザード性がないといけない\n\nLog-log plotなどで確認する\n\n結果の言語化が実は難しい (Dumas and Stensrud 2025)\n例：REAL-CAD study\n\n高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました\n患者さんにHR 0.8をどう説明しますか？"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#本当ならダメな形",
     "href": "statistics/RMST_mi/index.html#本当ならダメな形",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "本当ならダメな形！！",
-    "text": "本当ならダメな形！！"
+    "text": "本当ならダメな形！！\n\n\n\n\n\n\n\nCOURAGE trialとISCHEMIA trialのKaplan-Meier曲線(Boden et al. 2007; Maron et al. 2020)\n手技やOpeのtrialはこうなりがち"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#log-log-plot",
     "href": "statistics/RMST_mi/index.html#log-log-plot",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "Log-log Plot",
-    "text": "Log-log Plot\n\n\n\n\n\n\n\n\n\n\n\n\n横軸が時間、縦軸が log{-log(S(t))} のグラフ\nこれが平行の時には比例hazard性が保たれていると判断\nわかりやすいのは元の曲線が交わっているか否か"
+    "text": "Log-log Plot\n\n\n横軸が時間、縦軸が log{-log(S(t))} のグラフ\nこれが平行の時には比例hazard性が保たれていると判断\nわかりやすいのは元の曲線が交わっているか否か"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#今日の内容-3",
@@ -2475,14 +2475,14 @@
     "href": "statistics/RMST_mi/index.html#rmstとは",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "RMSTとは",
-    "text": "RMSTとは\n\n\n\nRestricted Mean Survival Timeの略\nある特定の時間（τ）までの生存曲線の面積を計測したもの\n近年、がん領域の研究でよく使われるようになっている"
+    "text": "RMSTとは\n\n\n\n\n\n\n\n\n\n\n\n\nRestricted Mean Survival Timeの略\nある特定の時間（τ）までの生存曲線の下の面積を計測したもの\n\n全時間を積分すると平均生存時間になる\nτまでの生存曲線の上の面積を計測したものはRestricted mean time loss(RMTL)\n\n近年、がん領域の研究でよく使われるようになっている\n\n\nRMSTとは\n\n(Harhay et al. 2018)\n\n比較には各々の治療群のRMSTの差や比をとる事が可能\n多変量回帰として種々の因子の調整も可能\n\n\n\n\n\n\n\n\n\n\n\nRMSTの直観的理解\n\n\n\n\n\n\n\n\nHRとRMSTの関係\n\n\n\n今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道\n\n\n\nRMSTは何がいいの？限界は？\n\nRMSTでは、複数の異なる研究の比較の時にフォローアップ時間が違っていても比較が可能とされる\n臨床的解釈として「ある時間まで追跡した時の平均生存時間」という風に解釈が可能\n例：薬を飲むと、10年後には1年間の寿命伸延効果があります\n一番の注意点は、特定の時間τを臨床的に意味がある数字にする事\nτが決められない時は長めの時間をとるのがベター\n\n\n\nハザードとの比較\n\n\n\n評価指標の比較\n\n\n\n\n\n\n\n\n\n\n\n\n評価指標\n時間\n意味\n利点\n欠点\n特に適した状況\n\n\n\n\nHR\nフォロー期間全部\nある瞬間でのRiskの変化率の比率\nフォロー期間全部の情報を使える\n直観的理解が困難発症率が低いと広いCIになる\n研究：比例ハザードがある状況（非劣勢以外）\n\n\nARR\nある特定の期間\nある瞬間でのEvent freeの絶対差\nKM曲線から計算可能\nKM曲線の形の差を捉えられない\n研究と臨床：治療のインパクトの説明\n\n\nNNT\nある特定の期間\n1 / ARR\nKM曲線から計算可能\n患者への説明が困難KM曲線の形の差を捉えられない\n研究：介入の効果や有害事象への説明\n\n\n中央生存時間の差\n各々のグループである一点\n各グループで生存率が50%になる時間の差\nKM曲線から計算可能Robust\nSample sizeやイベント率が低いと計算不可能\n研究：大規模研究や長期の研究、高いイベント率の研究\n\n\nRMST\nある特定の期間\nある期間における平均イベントフリーの延長効果\n直観的非劣勢試験でも狭いCIで計算できる\n決めた期間より先について解釈できないKM曲線の形の差を捉えられない\n研究と臨床：治療のインパクトの説明\n\n\n\n\n\n補足図\n\n\n\nISCHEMIAの場合\n\n\n\nICTUS, FRISC-II, RITA-3などの過去のRCTのメタアナライシスに準じて5年という時間を決めている\n5年restricted mean event-free timeの差は、invasive strategy群で9.5日長い\n95% CIは -17.8から36.9日\n\n\n\n\n\n\n今日の内容\n\n復習：生存解析\nCox hazardの限界\nRMSTとは？\nRMSTは何がいいの？限界は？\nRMSTの使い方\n観察研究での使い道\n\n\n\n観察研究での使い道\n\n回帰式を用いて、交絡因子を調整することも出来る\n\nStroke. 2018;49:607-613.\n\nPropensity score match後に単変量でも可能\n\nOpen Heart. 2020;7:e001163.\n\n近年、Risk model作成も行われている\n\nCirc Cardiovasc Qual Outcomes. 2020;13:e005918.\n\n\n\n\nAIMの締めの言葉\n\nRCTにおいて、ルーチンでRMSTの差を使う事を推奨する\n\n\n\n\nご静聴ありがとうございました\n\n\n\n\n\n\nBoden, William E, Robert A O’Rourke, Koon K Teo, et al. 2007. “Optimal Medical Therapy with or Without PCI for Stable Coronary Disease.” The New England Journal of Medicine 356 (15): 1503–16. https://doi.org/10.1056/NEJMoa070829.\n\n\nDumas, Elise, and Mats J Stensrud. 2025. “How Hazard Ratios Can Mislead and Why It Matters in Practice.” European Journal of Epidemiology 40 (6): 603–9. https://doi.org/10.1007/s10654-025-01250-9.\n\n\nHarhay, Michael O, Raphaël Porcher, Edward Cantu, et al. 2018. “An Alternative Approach for the Analysis of Time-to-Event and Survival Outcomes in Pulmonary Medicine.” American Journal of Respiratory and Critical Care Medicine 198 (5): 684–87. https://doi.org/10.1164/rccm.201801-0189LE.\n\n\nMaron, David J, Judith S Hochman, Harmony R Reynolds, et al. 2020. “Initial Invasive or Conservative Strategy for Stable Coronary Disease.” The New England Journal of Medicine 382 (15): 1395–407. https://doi.org/10.1056/NEJMoa1915922."
   },
   {
     "objectID": "statistics/RMST_mi/index.html#rmstとは-1",
     "href": "statistics/RMST_mi/index.html#rmstとは-1",
     "title": "RMSTに関してあるいは、Cox回帰の限界",
     "section": "RMSTとは",
-    "text": "RMSTとは\n\n比較には各々の治療群のRMSTの差や比をとる事が可能\n多変量回帰として種々の因子の調整も可能"
+    "text": "RMSTとは\n\n(Harhay et al. 2018)\n\n比較には各々の治療群のRMSTの差や比をとる事が可能\n多変量回帰として種々の因子の調整も可能"
   },
   {
     "objectID": "statistics/RMST_mi/index.html#rmstの直観的理解",
@@ -5667,7 +5667,7 @@
     "href": "medicine/pregnancy_er_mi/index.html#reference",
     "title": "妊娠患者をERで診たとき",
     "section": "Reference",
-    "text": "Reference\n\n\nAmerican College of Obstetricians and Gynecologists. 2017. “Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation.” Obstetrics & Gynecology 130 (4): e210–16. https://doi.org/10.1097/AOG.0000000000002355.\n\n\nAmerican College of Radiology Committee on Drugs and Contrast Media. 2026. ACR Manual on Contrast Media. American College of Radiology. https://edge.sitecorecloud.io/americancoldf5f-acrorgf92a-productioncb02-3650/media/ACR/Files/Clinical/Contrast-Manual/ACR-Manual-on-Contrast-Media.pdf.\n\n\nDynaMed. n.d. Acute Abdominal Pain in Pregnancy and Postpartum - Approach to the Patient. EBSCO Information Services. Accessed October 19, 2026. https://www.dynamed.com/approach-to/acute-abdominal-pain-in-pregnancy-and-postpartum-approach-to-the-patient.\n\n\nRebarber, Andrei, and Brian P. Jacob. n.d. “Acute Appendicitis in Pregnancy.” In UpToDate, edited by R. F. Connor. Wolters Kluwer. Accessed October 19, 2026. https://www.uptodate.com/contents/acute-appendicitis-in-pregnancy.\n\n\nZingone, Fabiana, Alyshah Abdul Sultan, David James Humes, and Joe West. 2015. “Risk of Acute Appendicitis in and Around Pregnancy: A Population-Based Cohort Study from England.” Annals of Surgery 261 (2): 332–37. https://doi.org/10.1097/SLA.0000000000000780.\n\n\n国立成育医療研究センター. n.d. 妊娠と薬情報センター. https://www.ncchd.go.jp/kusuri/.\n\n\n日本救急医学会Point-of-Care超音波推進委員会, ed. 2023. 救急超音波診療ガイド. 医学書院.\n\n\n日本産科婦人科学会, and 日本産婦人科医会. 2020. 産婦人科診療ガイドライン―産科編2020. 日本産科婦人科学会. https://minds.jcqhc.or.jp/common/summary/pdf/c00572.pdf.\n\n\n環境省. 2015. 放射線による健康影響等に関する統一的な基礎資料（平成26年度版）. https://www.env.go.jp/content/900413502.pdf."
+    "text": "Reference\n\n\nAmerican College of Obstetricians and Gynecologists. 2017. “Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation.” Obstetrics & Gynecology 130 (4): e210–16. https://doi.org/10.1097/AOG.0000000000002355.\n\n\nAmerican College of Radiology Committee on Drugs and Contrast Media. 2026. ACR Manual on Contrast Media. American College of Radiology. https://edge.sitecorecloud.io/americancoldf5f-acrorgf92a-productioncb02-3650/media/ACR/Files/Clinical/Contrast-Manual/ACR-Manual-on-Contrast-Media.pdf.\n\n\nDynaMed. n.d.-a. Acute Abdominal Pain in Pregnancy and Postpartum - Approach to the Patient. EBSCO Information Services. Accessed October 19, 2026. https://www.dynamed.com/approach-to/acute-abdominal-pain-in-pregnancy-and-postpartum-approach-to-the-patient.\n\n\nDynaMed. n.d.-b. “Asthma During Pregnancy.” EBSCO Information Services. Accessed November 22, 2026. https://www.dynamed.com/condition/asthma-during-pregnancy.\n\n\nRebarber, Andrei, and Brian P. Jacob. n.d. “Acute Appendicitis in Pregnancy.” In UpToDate, edited by R. F. Connor. Wolters Kluwer. Accessed October 19, 2026. https://www.uptodate.com/contents/acute-appendicitis-in-pregnancy.\n\n\nSchatz, Michael, and Steven E. Weinberger. 2026. “Management of Asthma During Pregnancy.” In UpToDate, edited by R. F. Connor. Wolters Kluwer. https://www.uptodate.com/contents/management-of-asthma-during-pregnancy.\n\n\nZingone, Fabiana, Alyshah Abdul Sultan, David James Humes, and Joe West. 2015. “Risk of Acute Appendicitis in and Around Pregnancy: A Population-Based Cohort Study from England.” Annals of Surgery 261 (2): 332–37. https://doi.org/10.1097/SLA.0000000000000780.\n\n\n国立成育医療研究センター. n.d. 妊娠と薬情報センター. https://www.ncchd.go.jp/kusuri/.\n\n\n日本救急医学会Point-of-Care超音波推進委員会, ed. 2023. 救急超音波診療ガイド. 医学書院.\n\n\n日本産科婦人科学会, and 日本産婦人科医会. 2020. 産婦人科診療ガイドライン―産科編2020. 日本産科婦人科学会. https://minds.jcqhc.or.jp/common/summary/pdf/c00572.pdf.\n\n\n環境省. 2015. 放射線による健康影響等に関する統一的な基礎資料（平成26年度版）. https://www.env.go.jp/content/900413502.pdf."
   },
   {
     "objectID": "statistics/DAG_variable_selection_mi/index.html#dagの基本",
@@ -6556,14 +6556,14 @@
     "href": "medicine/pregnancy_er_mi/index.html#妊婦の急性腹症",
     "title": "妊娠患者をERで診たとき",
     "section": "妊婦の急性腹症",
-    "text": "妊婦の急性腹症\n\n全妊婦の中で非産科関連の急性腹症は0.5-2%で起こる\n妊娠中は実は虫垂炎の発症率は非妊婦に比べて低い(35%ほど下がる)(Zingone et al. 2015)が、妊娠中の急性腹症の中では最多(約25%)(DynaMed, n.d.)\n\n1st~2nd trimesterが多く3rd trimesterではそこまで多くない"
+    "text": "妊婦の急性腹症\n\n全妊婦の中で非産科関連の急性腹症は0.5-2%で起こる\n妊娠中は実は虫垂炎の発症率は非妊婦に比べて低い(35%ほど下がる)(Zingone et al. 2015)が、妊娠中の急性腹症の中では最多(約25%)(DynaMed, n.d.-a)\n\n1st~2nd trimesterが多く3rd trimesterではそこまで多くない"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の虫垂炎疑い",
     "href": "medicine/pregnancy_er_mi/index.html#妊婦の虫垂炎疑い",
     "title": "妊娠患者をERで診たとき",
     "section": "妊婦の虫垂炎疑い",
-    "text": "妊婦の虫垂炎疑い\n\n(日本救急医学会Point-of-Care超音波推進委員会 2023)\n\n実際は、右下腹部が痛い妊婦が大多数(80%)(DynaMed, n.d.)\nただし、3rd trimesterだと右上に痛みが出ることがある\n\n反跳痛や板状硬も出にくい\nWBCも自然に上昇しているため診断が難しい\n\n診断はUS → 単純MRI → 造影CT(Rebarber and Jacob, n.d.)"
+    "text": "妊婦の虫垂炎疑い\n\n(日本救急医学会Point-of-Care超音波推進委員会 2023)\n\n実際は、右下腹部が痛い妊婦が大多数(80%)(DynaMed, n.d.-a)\nただし、3rd trimesterだと右上に痛みが出ることがある\n\n反跳痛や板状硬も出にくい\nWBCも自然に上昇しているため診断が難しい\n\n診断はUS → 単純MRI → 造影CT(Rebarber and Jacob, n.d.)"
   },
   {
     "objectID": "medicine/pregnancy_er_mi/index.html#超音波",
@@ -7306,5 +7306,33 @@
     "title": "敗血症における輸液療法今昔",
     "section": "References",
     "text": "References\n\n\nARISE FLUIDS Investigators, the ANZICS Clinical Trials Group, and the ACEM Clinical Trials Network, Sandra L Peake, Stephen P J Macdonald, et al. 2026. “Vasopressors or Fluids in Early Septic Shock.” New England Journal of Medicine 395 (14): 1387–98. https://doi.org/10.1056/NEJMoa2516225.\n\n\nAsfar, Pierre, Ferhat Meziani, Jean-François Hamel, et al. 2014. “High Versus Low Blood-Pressure Target in Patients with Septic Shock.” The New England Journal of Medicine 370 (17): 1583–93. https://doi.org/10.1056/NEJMoa1312173.\n\n\nDe Backer, Daniel, Patrick Biston, Jacques Devriendt, et al. 2010. “Comparison of Dopamine and Norepinephrine in the Treatment of Shock.” The New England Journal of Medicine 362 (9): 779–89. https://doi.org/10.1056/NEJMoa0907118.\n\n\nEvans, Laura, Andrew Rhodes, Waleed Alhazzani, et al. 2021. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021.” Intensive Care Medicine 47: 1181–247. https://doi.org/10.1007/s00134-021-06506-y.\n\n\nHernández, Glenn, Alexandre Biasi Cavalcanti, Gustavo Ospina-Tascón, et al. 2018. “Early Goal-Directed Therapy Using a Physiological Holistic View: The ANDROMEDA-SHOCK Randomized Controlled Trial.” Annals of Intensive Care 8 (1): 52. https://doi.org/10.1186/s13613-018-0398-2.\n\n\nHernández, Glenn, Gustavo A. Ospina-Tascón, Lucas P. Damiani, et al. 2019. “Effect of a Resuscitation Strategy Targeting Peripheral Perfusion Status Vs Serum Lactate Levels on 28-Day Mortality Among Patients with Septic Shock: The ANDROMEDA-SHOCK Randomized Clinical Trial.” JAMA 321 (7): 654–64. https://doi.org/10.1001/jama.2019.0071.\n\n\nLamontagne, François, Alvin Richards-Belle, Karen Thomas, et al. 2020. “Effect of Reduced Exposure to Vasopressors on 90-Day Mortality in Older Critically Ill Patients with Vasodilatory Hypotension: A Randomized Clinical Trial.” JAMA 323 (10): 938–49. https://doi.org/10.1001/jama.2020.0930.\n\n\nMarik, Paul E., Walter T. Linde-Zwirble, Edward A. Bittner, et al. 2017. “Fluid Administration in Severe Sepsis and Septic Shock, Patterns and Outcomes: An Analysis of a Large National Database.” Intensive Care Medicine 43 (5): 625–32. https://doi.org/10.1007/s00134-016-4675-y.\n\n\nMcGee, Steven, William B. Abernethy, and David L. Simel. 1999. “Is This Patient Hypovolemic?” JAMA 281 (11): 1022–29. https://doi.org/10.1001/jama.281.11.1022.\n\n\nMeyhoff, Tine S., Peter B. Hjortrup, Jørn Wetterslev, et al. 2022. “Restriction of Intravenous Fluid in ICU Patients with Septic Shock.” The New England Journal of Medicine 386 (26): 2459–70. https://doi.org/10.1056/NEJMoa2202707.\n\n\nNational Heart, Lung, and Blood Institute Prevention and Early Treatment of Acute Lung Injury Clinical Trials Network, Nathan I. Shapiro, Ivor S. Douglas, et al. 2023. “Early Restrictive or Liberal Fluid Management for Sepsis-Induced Hypotension.” The New England Journal of Medicine 388 (6): 499–510. https://doi.org/10.1056/NEJMoa2212663.\n\n\nPermpikul, Chairat, Surat Tongyoo, Tanuwong Viarasilpa, et al. 2019. “Early Use of Norepinephrine in Septic Shock Resuscitation (CENSER): A Randomized Trial.” American Journal of Respiratory and Critical Care Medicine 199 (9): 1097–105. https://doi.org/10.1164/rccm.201806-1034OC.\n\n\nPrescott, Hallie C, Massimo Antonelli, Waleed Alhazzani, et al. 2026. “Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026.” Critical Care Medicine, ahead of print, March. https://doi.org/10.1097/CCM.0000000000007075.\n\n\nRivers, Emanuel, Brian Nguyen, Stephen Havstad, et al. 2001. “Early Goal-Directed Therapy in the Treatment of Severe Sepsis and Septic Shock.” The New England Journal of Medicine 345 (19): 1368–77. https://doi.org/10.1056/NEJMoa010307.\n\n\nThe PRISM Investigators. 2017. “Early, Goal-Directed Therapy for Septic Shock: A Patient-Level Meta-Analysis.” The New England Journal of Medicine 376 (23): 2223–34. https://doi.org/10.1056/NEJMoa1701380."
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#妊婦の気管支喘息発作",
+    "href": "medicine/pregnancy_er_mi/index.html#妊婦の気管支喘息発作",
+    "title": "妊娠患者をERで診たとき",
+    "section": "妊婦の気管支喘息発作",
+    "text": "妊婦の気管支喘息発作\n\n喘息コントロールは非常に重要\n\n喘息が背景の妊婦はわずかに奇形や流産率は高くなる(10-15%程度上がる)\n喘息のコントロールが悪いと、習慣性流産のOddsが高くなる(Schatz and Weinberger 2026)\n\n喘息のある妊婦のうち20%が増悪を経験し、そのうち1/3が入院する(DynaMed, n.d.-b)\n基本的にコントロール良好の方が胎児も母体も予後が良い事を伝える\n基本的には喘息薬は継続だが、以下の薬がより安全\n\nICS: Budesonide(©パルミコートなど), beclomethasone(©キュバールなど), Fluticasone(©フルタイドなど)が安全\nSABA: Albuterol(©ベネトリンなど)が臨床経験が多い\nLABA: Salmeterol(©セレベント、©アドエアなど), formoterol(©オーキシス、©シムビコートなど)は安全"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#喘息のコントローラーと有害事象",
+    "href": "medicine/pregnancy_er_mi/index.html#喘息のコントローラーと有害事象",
+    "title": "妊娠患者をERで診たとき",
+    "section": "喘息のコントローラーと有害事象",
+    "text": "喘息のコントローラーと有害事象\n\nケースコントロール研究だとSABAの使用と胎児の腹壁欠損/口蓋裂はわずかに関連あるが、交絡や適応もありなんとも言えない・・・・・・\nLABAはSABAほどのデータがない。動物実験ではSalmeterolなどは安心\nICSは上記が望ましいが、元々別ので管理良好ならあえて変更しなくても良い(DynaMed, n.d.-b)\nICS/LABAとICSで胎児奇形の差があるというEvidenceはない\n慢性期の薬については専門家にお願いをするのが良い"
+  },
+  {
+    "objectID": "medicine/pregnancy_er_mi/index.html#喘息の発作の時",
+    "href": "medicine/pregnancy_er_mi/index.html#喘息の発作の時",
+    "title": "妊娠患者をERで診たとき",
+    "section": "喘息の発作の時",
+    "text": "喘息の発作の時\n\nここは、もしかしたら対応するかもしれない\n\n妊娠高血圧腎症，妊娠糖尿病，胎盤早期剥離，および前置胎盤のリスクが増大する(Schatz and Weinberger 2026)\n\nSpO2 &gt; 95%目標に酸素は投与する\n基本的にはその他の成人と一緒でABCを考慮\n\nAlbuterolなどのSABAの吸入、PSL内服、MgのIVなど\nIptropium(LAMA)の吸入はUptoDateには記載あるが、Dynamedだとやや推奨度が下がっている\nエピネフリンのIVやテオフィリンは基本使わない！\n\nMonitoringのために産科にも相談を"
+  },
+  {
+    "objectID": "statistics/RMST_mi/index.html#小括",
+    "href": "statistics/RMST_mi/index.html#小括",
+    "title": "RMSTに関してあるいは、Cox回帰の限界",
+    "section": "小括",
+    "text": "小括\n\n生存分析(time-to-event analysis)において、ある治療効果を定量的にみたい時にCox回帰が主流である\nしかし、Cox回帰には複数の弱点がある\n\nHazard ratioの数値の解釈が難しい\n比例ハザード性が保たれない時に回帰が行えない\n\nどうやって解決すればいい？"
   }
 ]

@@ -32,7 +32,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -269,7 +288,7 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <ul>
 <li>Log-log plotなどで確認する</li>
 </ul></li>
-<li>結果の言語化が実は難しい</li>
+<li>結果の言語化が実は難しい <span class="citation" data-cites="Dumas2025-dp">(<a href="#/rmstとは" role="doc-biblioref" onclick="">Dumas and Stensrud 2025</a>)</span></li>
 <li>例：REAL-CAD study
 <ul>
 <li>高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました</li>
@@ -279,58 +298,64 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </section>
 <section id="本当ならダメな形" class="slide level2">
 <h2>本当ならダメな形！！</h2>
-
-<img data-src="images/slide11_image01.png" style="width:76.0%" alt="比例ハザード性が成り立たない例" class="r-stretch"></section>
+<div class="columns">
+<div class="column">
+<p><img data-src="images/courage_km.png" alt="比例ハザード性が成り立たない例1"></p>
+</div><div class="column">
+<p><img data-src="images/ischemia_km.png" alt="比例ハザード性が成り立たない例2"></p>
+</div></div>
+<ul>
+<li>COURAGE trialとISCHEMIA trialのKaplan-Meier曲線<span class="citation" data-cites="Boden2007-mi Maron2020-hg">(<a href="#/rmstとは" role="doc-biblioref" onclick="">Boden et al. 2007</a>; <a href="#/rmstとは" role="doc-biblioref" onclick="">Maron et al. 2020</a>)</span></li>
+<li>手技やOpeのtrialはこうなりがち</li>
+</ul>
+</section>
 <section id="log-log-plot" class="slide level2">
 <h2>Log-log Plot</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960" class="r-stretch"><ul>
+<li>横軸が時間、縦軸が <code>log{-log(S(t))}</code> のグラフ</li>
+<li>これが平行の時には比例hazard性が保たれていると判断</li>
+<li>わかりやすいのは元の曲線が交わっているか否か</li>
+</ul>
+</section>
+<section id="小括" class="slide level2">
+<h2>小括</h2>
+<ul>
+<li>生存分析(time-to-event analysis)において、ある治療効果を定量的にみたい時にCox回帰が主流である</li>
+<li>しかし、Cox回帰には複数の弱点がある
+<ul>
+<li>Hazard ratioの数値の解釈が難しい</li>
+<li>比例ハザード性が保たれない時に回帰が行えない</li>
+</ul></li>
+<li>どうやって解決すればいい？</li>
+</ul>
+</section>
+<section id="rmstとは" class="slide level2 smaller scrollable">
+<h2>RMSTとは</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="columns">
-<div class="column" style="width:48%;">
-<ul>
-<li>横軸が時間、縦軸が <code>log{-log(S(t))}</code> のグラフ</li>
-<li>これが平行の時には比例hazard性が保たれていると判断</li>
-<li>わかりやすいのは元の曲線が交わっているか否か</li>
-</ul>
-</div><div class="column" style="width:52%;">
-<p><img data-src="images/slide12_image01.png" style="width:96.0%" alt="Log-log plot 1"></p>
-<p><img data-src="images/slide12_image02.png" style="width:96.0%" alt="Log-log plot 2"></p>
-</div></div>
-</section>
-<section id="今日の内容-1" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>復習：生存解析</li>
-<li>Cox hazardの限界</li>
-<li>RMSTとは？</li>
-<li>RMSTは何がいいの？限界は？</li>
-<li>RMSTの使い方</li>
-<li>観察研究での使い道</li>
-</ul>
-</section>
-<section id="rmstとは" class="slide level2">
-<h2>RMSTとは</h2>
-<div class="columns">
 <div class="column" style="width:52%;">
 <ul>
 <li>Restricted Mean Survival Timeの略</li>
-<li>ある特定の時間（τ）までの生存曲線の面積を計測したもの</li>
+<li>ある特定の時間（τ）までの生存曲線の下の面積を計測したもの
+<ul>
+<li>全時間を積分すると平均生存時間になる</li>
+<li>τまでの生存曲線の上の面積を計測したものはRestricted mean time loss(RMTL)</li>
+</ul></li>
 <li>近年、がん領域の研究でよく使われるようになっている</li>
 </ul>
-</div><div class="column" style="width:48%;">
-<p><img data-src="images/slide14_image01.png" style="width:72.0%" alt="RMSTの概念図1"></p>
-<p><img data-src="images/slide14_image02.png" style="width:90.0%" alt="RMSTの概念図2"></p>
-</div></div>
-</section>
 <section id="rmstとは-1" class="slide level2">
 <h2>RMSTとは</h2>
+<p><img data-src="images/rmst_diff_image.png"></p>
+<p><span class="citation" data-cites="Harhay2018-te">(<a href="#/rmstとは" role="doc-biblioref" onclick="">Harhay et al. 2018</a>)</span></p>
 <ul>
 <li>比較には各々の治療群のRMSTの差や比をとる事が可能</li>
 <li>多変量回帰として種々の因子の調整も可能</li>
@@ -355,9 +380,9 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </section>
 <section id="hrとrmstの関係" class="slide level2">
 <h2>HRとRMSTの関係</h2>
-
-<img data-src="images/slide17_image01.png" style="width:62.0%" alt="HRとRMSTの関係" class="r-stretch"></section>
-<section id="今日の内容-2" class="slide level2">
+<p><img data-src="images/aim_rmst_image.png" alt="HRとRMSTの関係"></p>
+</section>
+<section id="今日の内容-1" class="slide level2">
 <h2>今日の内容</h2>
 <ul>
 <li>復習：生存解析</li>
@@ -380,8 +405,8 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </section>
 <section id="ハザードとの比較" class="slide level2">
 <h2>ハザードとの比較</h2>
-
-<img data-src="images/slide20_image01.png" style="width:82.0%" alt="ハザードとの比較" class="r-stretch"></section>
+<p><img data-src="images/slide20_image01.png" style="width:82.0%" alt="ハザードとの比較"></p>
+</section>
 <section id="評価指標の比較" class="slide level2 scrollable">
 <h2>評価指標の比較</h2>
 <!-- TODO: 元スライドは横長表。QuartoではMarkdown表に変換し、スクロール可能にしている。 -->
@@ -450,8 +475,8 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </section>
 <section id="補足図" class="slide level2">
 <h2>補足図</h2>
-
-<img data-src="images/slide22_image01.png" style="width:70.0%" alt="RMST補足図" class="r-stretch"></section>
+<p><img data-src="images/slide22_image01.png" style="width:70.0%" alt="RMST補足図"></p>
+</section>
 <section id="ischemiaの場合" class="slide level2">
 <h2>ISCHEMIAの場合</h2>
 <div class="columns">
@@ -465,7 +490,7 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <p><img data-src="images/slide23_image01.png" style="width:100.0%" alt="ISCHEMIAのRMST結果"></p>
 </div></div>
 </section>
-<section id="今日の内容-3" class="slide level2">
+<section id="今日の内容-2" class="slide level2">
 <h2>今日の内容</h2>
 <ul>
 <li>復習：生存解析</li>
@@ -498,12 +523,28 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <ul>
 <li>RCTにおいて、ルーチンでRMSTの差を使う事を推奨する</li>
 </ul>
-
-<img data-src="images/slide26_image01.png" style="width:70.0%" alt="AIMの締めの言葉" class="r-stretch"></section>
+<p><img data-src="images/slide26_image01.png" style="width:70.0%" alt="AIMの締めの言葉"></p>
+</section>
 <section id="ご静聴ありがとうございました" class="slide level2">
 <h2>ご静聴ありがとうございました</h2>
 
 
+</section>
+</div></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Boden2007-mi" class="csl-entry" role="listitem">
+Boden, William E, Robert A O’Rourke, Koon K Teo, et al. 2007. <span>“Optimal Medical Therapy with or Without <span>PCI</span> for Stable Coronary Disease.”</span> <em>The New England Journal of Medicine</em> 356 (15): 1503–16. <a href="https://doi.org/10.1056/NEJMoa070829">https://doi.org/10.1056/NEJMoa070829</a>.
+</div>
+<div id="ref-Dumas2025-dp" class="csl-entry" role="listitem">
+Dumas, Elise, and Mats J Stensrud. 2025. <span>“How Hazard Ratios Can Mislead and Why It Matters in Practice.”</span> <em>European Journal of Epidemiology</em> 40 (6): 603–9. <a href="https://doi.org/10.1007/s10654-025-01250-9">https://doi.org/10.1007/s10654-025-01250-9</a>.
+</div>
+<div id="ref-Harhay2018-te" class="csl-entry" role="listitem">
+Harhay, Michael O, Raphaël Porcher, Edward Cantu, et al. 2018. <span>“An Alternative Approach for the Analysis of Time-to-Event and Survival Outcomes in Pulmonary Medicine.”</span> <em>American Journal of Respiratory and Critical Care Medicine</em> 198 (5): 684–87. <a href="https://doi.org/10.1164/rccm.201801-0189LE">https://doi.org/10.1164/rccm.201801-0189LE</a>.
+</div>
+<div id="ref-Maron2020-hg" class="csl-entry" role="listitem">
+Maron, David J, Judith S Hochman, Harmony R Reynolds, et al. 2020. <span>“Initial Invasive or Conservative Strategy for Stable Coronary Disease.”</span> <em>The New England Journal of Medicine</em> 382 (15): 1395–407. <a href="https://doi.org/10.1056/NEJMoa1915922">https://doi.org/10.1056/NEJMoa1915922</a>.
+</div>
+</div>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

@@ -416,31 +416,35 @@ bibliography: references.bib
 ## 妊婦の気管支喘息発作
 
 - 喘息コントロールは非常に重要
+  - 喘息が背景の妊婦はわずかに奇形や流産率は高くなる(10-15%程度上がる)
   - 喘息のコントロールが悪いと、習慣性流産のOddsが高くなる[@Schatz2026AsthmaPregnancy]
 - 喘息のある妊婦のうち20%が増悪を経験し、そのうち1/3が入院する[@DynaMedAsthmaDuringPregnancy]
-- 喘息が背景の妊婦はわずかに奇形や流産率は高くなる(10-15%程度上がる)
-- ICS: Budesonide, beclomethasone, Fluticasoneが安全
-- SABA: Albuterolが臨床経験が多い
-- LABA: Salmeterol, formoterolは安全
+- [**基本的にコントロール良好の方が胎児も母体も予後が良い事**]{style="color: red;font-size: 1.2em;font-weight: bold;"}を伝える
+- 基本的には喘息薬は継続だが、以下の薬がより安全
+  - ICS: Budesonide(©パルミコートなど), beclomethasone(©キュバールなど), Fluticasone(©フルタイドなど)が安全
+  - SABA: Albuterol(©ベネトリンなど)が臨床経験が多い
+  - LABA: Salmeterol(©セレベント、©アドエアなど), formoterol(©オーキシス、©シムビコートなど)は安全
 
-- SpO2 > 95%目標に酸素は投与する
 
-## 喘息薬と有害事象
+## 喘息のコントローラーと有害事象
 
-- Case controlだとSABAの使用と胎児の腹壁欠損、口蓋裂はわずかに関連あるが、交絡や適応もありなんとも言えない・・・・・・。
-- LABAはSABAほどのデータがない。動物実験ではSalmeterol
-- ICSは上記が望ましいが、元々別ので管理良好ならあえて変更しなくても良い
-- ICS/LABAとICSで胎児奇形の差があるというEvidenceはないものの、ここら辺は専門家に任せたい
-- Systemic corticosteroid：口蓋裂、早産、低体重と関連
+- ケースコントロール研究だとSABAの使用と胎児の腹壁欠損/口蓋裂はわずかに関連あるが、交絡や適応もありなんとも言えない・・・・・・
+- LABAはSABAほどのデータがない。動物実験ではSalmeterolなどは安心
+- ICSは上記が望ましいが、元々別ので管理良好ならあえて変更しなくても良い[@DynaMedAsthmaDuringPregnancy]
+- ICS/LABAとICSで胎児奇形の差があるというEvidenceはない
+- 慢性期の薬については専門家にお願いをするのが良い
 
 ## 喘息の発作の時
 
+- ここは、もしかしたら対応するかもしれない
+  - 妊娠高血圧腎症，妊娠糖尿病，胎盤早期剥離，および前置胎盤のリスクが増大する[@Schatz2026AsthmaPregnancy]
+- SpO2 > 95%目標に酸素は投与する
 - 基本的にはその他の成人と一緒でABCを考慮
-- 妊娠高血圧腎症，妊娠糖尿病，胎盤早期剥離，および前置胎盤のリスクが増大suru
+  - AlbuterolなどのSABAの吸入、PSL内服、MgのIVなど
+  - Iptropium(LAMA)の吸入はUptoDateには記載あるが、Dynamedだとやや推奨度が下がっている
+  - エピネフリンのIVやテオフィリンは基本使わない！
 - Monitoringのために産科にも相談を
-- AlbuterolなどのSABAの吸入、PSL内服、MgのIVなど
-- Iptropium(LAMA)の吸入はUptoDateには記載あるが、Dynamedだとやや推奨度が下がっている
-- エピネフリンのIVやテオフィリンは基本使わない！
+
 
 
 
