@@ -68,7 +68,9 @@ bibliography: references.bib
 
 ```{r}
 library(survival)
+library(coin)
 library(survRM2)
+library(survRM2adapt)
 library(rms)
 library(Hmisc)
 
@@ -249,11 +251,17 @@ library(ggplot2)
 library(broom)
 library(dplyr)
 library(tibble)
+library(survRM2)
+
+lung2 <- dplyr::mutate(lung, status = status - 1, arm = 1)
 
 fit <- survfit2(
-  Surv(time, status == 2) ~ 1,
-  data = lung
+  Surv(time, status) ~ 1,
+  data = lung2
 )
+
+rmst <- round(summary(fit, rmean = 500)$table[["rmean"]], 1)
+rmtl <- 500 - rmst
 
 interval_km_dat_pre <- broom::tidy(fit) |> 
   dplyr::filter(time <= 500) 
@@ -290,11 +298,9 @@ p <- fit |>
     fill = "pink"
   ) + 
   annotate("text", 
-    x = 750, y = 0.50, label = "全時間における積分値 = 平均生存時間") +
-  annotate("text", 
-    x = 250, y = 0.25, label = "RMST") + 
+    x = 300, y = 0.25, label = paste0("RMST: ", rmst, "days")) + 
   annotate("text",
-    x = 250, y = 0.82, label = "RMTL")
+    x = 300, y = 0.85, label = paste0("RMTL: ", rmtl, "days"))
 
 p
 
