@@ -68,7 +68,6 @@ bibliography: references.bib
 
 ```{r}
 library(survival)
-library(coin)
 library(survRM2)
 library(survRM2adapt)
 library(rms)
@@ -314,6 +313,9 @@ p
   - τまでの生存曲線の上の面積を計測したものはRestricted mean time loss(RMTL)
 - 近年、がん領域の研究でよく使われるようになっている
 
+::::::
+:::::::
+
 ## RMSTを用いた群間比較
 
 $$\mu_\tau = \int_0^\tau S(t)\,\mathrm{d}t$$
@@ -401,28 +403,320 @@ $$\{\tau - \mu_\tau(1)\} / \{\tau - \mu_\tau(0)\}$$
 +------------------+--------------------------+----------------------------------------------+--------------------------------------------+----------------------------------------------------------------------+----------------------------------------------------+
 
 
-## ISCHEMIAの場合
+## 胃がんデータの生存曲線
 
-::::: columns
-::: {.column width="58%"}
+```{r}
+library(readr)
+library(here)
+library(survival)
+library(survRM2)
+
+gastric <- readr::read_csv(here::here("statistics", "RMST_mi", "gastric.csv"))
+
+survfit(Surv(time, status) ~ radiation, data = gastric) |> plot()
+
+logrank <- survdiff(Surv(time, status) ~ radiation, data = gastric)
+cox_fit <- coxph(Surv(time, status) ~ radiation, data = gastric)
+
+```
+
+## τ決定の重要性
+
+```{r}
+
+library(survival)
+library(quarto)
+
+gastric <- readr::read_csv(here::here("statistics", "RMST_mi", "gastric.csv"))
+
+taus <- seq(500, 1700, by = 200)
+
+fit <- survfit(
+  Surv(time, status) ~ radiation,
+  data = gastric
+)
+
+# KM推定値を右連続の階段関数にする
+s0 <- stepfun(fit[1]$time, c(1, fit[1]$surv))
+s1 <- stepfun(fit[2]$time, c(1, fit[2]$surv))
+
+# 両群の観測時刻を共通の区切りとして使う
+times <- sort(unique(c(
+  0,
+  fit$time[fit$time > 0 & fit$time < max(taus)],
+  max(taus)
+)))
+
+km_data <- data.frame(
+  time = times,
+  s0 = s0(times),
+  s1 = s1(times)
+)
+
+# τごとの統計量を事前計算
+rmst_data <- lapply(taus, function(tau) {
+
+  z <- survRM2::rmst2(
+    time = gastric$time,
+    status = gastric$status,
+    arm = gastric$radiation,
+    tau = tau
+  )
+
+  z$unadjusted.result |> tibble::as_tibble(rownames = "risk") |> dplyr::filter(stringr::str_detect(risk, "RMTL", negate = T)) |> dplyr::mutate(risk = if_else(risk == "RMST (arm=1)-(arm=0)", "diff", "ratio")) |> tidyr::pivot_wider(
+    names_from = risk,
+    values_from = c(Est., `lower .95`, `upper .95`, p),
+    names_glue = "{risk}_{.value}"
+  ) |>
+  janitor::clean_names() |>
+  dplyr::mutate(tau = tau)
+
+}) |>
+  dplyr::bind_rows()
+
+# 画像ではなく数値データだけを渡す
+ojs_define(
+  km_data = km_data,
+  rmst_data = rmst_data
+)
+```
+
+```{ojs}
+//| output: false
+
+km = transpose(km_data)
+
+stats = transpose(rmst_data)
+
+positive = "#0072B2"
+
+negative = "#D55E00"
+
+fmt = (x, digits = 2) => Number(x).toFixed(digits)
+
+fmtP = p => p < 0.001 ? "< 0.001" : p.toFixed(3)
+
+// KM曲線の各水平区間
+intervals = km.slice(0, -1).map((d, i) => ({
+  start: d.time,
+  end: km[i + 1].time,
+  s0: d.s0,
+  s1: d.s1
+}))
+```
+
+```{ojs}
+viewof tau = Inputs.range([500, 1700], {
+  step: 200,
+  value: 1100,
+  label: "τ（日）"
+})
+```
+
+```{ojs}
+//| output: false
+
+current = stats.find(d => d.tau === tau)
+
+// τをまたぐ最後の区間はτで切る
+area = intervals
+  .filter(d => d.start < tau)
+  .map(d => ({
+    ...d,
+    end: Math.min(d.end, tau)
+  }))
+
+kmPlot = Plot.plot({
+  width: 640,
+  height: 350,
+  marginLeft: 65,
+  marginBottom: 50,
+  x: {
+    domain: [0, 2000],
+    label: "時間（日）"
+  },
+  y: {
+    domain: [0, 1],
+    label: "生存確率",
+    grid: true
+  },
+  marks: [
+    // 正の面積：放射線併用群の生存率が高い区間
+    Plot.rect(area.filter(d => d.s1 > d.s0), {
+      x1: "start", x2: "end",
+      y1: "s0", y2: "s1",
+      fill: positive,
+      fillOpacity: 0.35
+    }),
+
+    // 負の面積：放射線併用群の生存率が低い区間
+    Plot.rect(area.filter(d => d.s1 < d.s0), {
+      x1: "start", x2: "end",
+      y1: "s1", y2: "s0",
+      fill: negative,
+      fillOpacity: 0.35
+    }),
+
+    // KM曲線は右連続の階段関数として描く
+    Plot.line(km, {
+      x: "time",
+      y: "s0",
+      curve: "step-after",
+      stroke: "#333333",
+      strokeWidth: 2
+    }),
+
+    Plot.line(km, {
+      x: "time",
+      y: "s1",
+      curve: "step-after",
+      stroke: "#009E73",
+      strokeWidth: 2,
+      strokeDasharray: "6,4"
+    }),
+
+    Plot.ruleX([tau], {
+      stroke: "#555",
+      strokeDasharray: "4,4"
+    })
+  ]
+})
+
+diffPlot = Plot.plot({
+  width: 510,
+  height: 350,
+  marginLeft: 75,
+  marginBottom: 50,
+  x: {
+    domain: [500, 2000],
+    ticks: stats.map(d => d.tau),
+    label: "τ（日）"
+  },
+  y: {
+    domain: [
+      Math.min(0, ...stats.map(d => d.diff_lower_95)),
+      Math.max(0, ...stats.map(d => d.diff_upper_95))
+    ],
+    label: "RMST差（日）：併用 − 単独",
+    grid: true
+  },
+  marks: [
+    Plot.ruleY([0], {
+      stroke: "#777",
+      strokeDasharray: "4,4"
+    }),
+
+    // 各τでの95%信頼区間
+    Plot.ruleX(stats, {
+      x: "tau",
+      y1: "diff_lower_95",
+      y2: "diff_upper_95",
+      stroke: "#bbb"
+    }),
+
+    // 250日刻みの推定値を結ぶ
+    Plot.line(stats, {
+      x: "tau",
+      y: "diff_est",
+      stroke: "#999"
+    }),
+
+    Plot.dot(stats.filter(d => d.diff_est >= 0), {
+      x: "tau", y: "diff_est",
+      fill: positive,
+      r: 4
+    }),
+
+    Plot.dot(stats.filter(d => d.diff_est < 0), {
+      x: "tau", y: "diff_est",
+      fill: negative,
+      r: 4
+    }),
+
+    Plot.ruleX([tau], {
+      stroke: "#555",
+      strokeDasharray: "4,4"
+    }),
+
+    Plot.dot([current], {
+      x: "tau",
+      y: "diff_est",
+      fill: current.diff_est >= 0 ? positive : negative,
+      stroke: "black",
+      r: 8
+    })
+  ]
+})
+```
+
+```{ojs}
+html`
+<div style="display:grid; grid-template-columns:minmax(0, 640fr) minmax(0, 510fr); gap:16px;">
+  <div>
+    <div style="font-size:20px;">
+      <span style="color:#333;">━ 化学療法単独</span>
+      ／
+      <span style="color:#009E73;">┄ 放射線併用</span>
+    </div>
+    ${kmPlot}
+  </div>
+  <div>
+    <div style="font-size:20px;">RMST差と95%信頼区間</div>
+    ${diffPlot}
+  </div>
+</div>
+<div style="font-size:20px;">
+  τまでの
+  <span style="color:${positive};">青い面積</span>
+  −
+  <span style="color:${negative};">赤い面積</span>
+  ＝ RMST差
+</div>
+`
+```
+
+```{ojs}
+html`
+<table style="width:100%; font-size:24px; margin-top:16px;">
+  <thead>
+    <tr>
+      <th>τ = ${tau} 日</th>
+      <th>推定値</th>
+      <th>95%信頼区間</th>
+      <th>p値</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RMST差：併用 − 単独（日）</td>
+      <td style=${`color:${
+        current.diff_est >= 0 ? positive : negative
+      }; font-weight:bold;`}>
+        ${fmt(current.diff_est)}
+      </td>
+      <td>${fmt(current.diff_lower_95)} ～ ${fmt(current.diff_upper_95)}</td>
+      <td>${fmtP(current.diff_p)}</td>
+    </tr>
+    <tr>
+      <td>RMST比：併用 / 単独</td>
+      <td>${fmt(current.ratio_est, 3)}</td>
+      <td>
+        ${fmt(current.ratio_lower_95, 3)} ～
+        ${fmt(current.ratio_upper_95, 3)}
+      </td>
+      <td>${fmtP(current.ratio_p)}</td>
+    </tr>
+  </tbody>
+</table>
+`
+```
+
+## τの決め方～ISCHEMIAの場合
+
 - ICTUS, FRISC-II, RITA-3などの過去のRCTのメタアナライシスに準じて5年という時間を決めている
 - 5年restricted mean event-free timeの差は、invasive strategy群で9.5日長い
 - 95% CIは -17.8から36.9日
-:::
 
-::: {.column width="42%"}
-![](images/slide23_image01.png){fig-alt="ISCHEMIAのRMST結果" width="100%"}
-:::
-:::::
-
-## 今日の内容
-
-- 復習：生存解析
-- Cox hazardの限界
-- RMSTとは？
-- RMSTは何がいいの？限界は？
-- RMSTの使い方
-- 観察研究での使い道
 
 ## 観察研究での使い道
 
@@ -440,5 +734,3 @@ $$\{\tau - \mu_\tau(1)\} / \{\tau - \mu_\tau(0)\}$$
 ![](images/slide26_image01.png){fig-alt="AIMの締めの言葉" width="70%"}
 
 ## ご静聴ありがとうございました
-::::::
-:::::::

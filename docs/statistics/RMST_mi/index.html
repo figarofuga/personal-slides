@@ -32,6 +32,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -145,6 +211,11 @@
       margin-right: 0; 
     }
   </style>
+  <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+  <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script type="ojs-define">
+  {"contents":[{"name":"km_data","value":{"time":[0,1,17,42,44,48,60,63,72,74,95,103,105,108,122,125,144,167,170,182,183,185,193,195,197,208,216,234,235,250,254,262,301,307,315,342,354,356,358,380,383,388,394,401,408,445,460,464,484,489,499,523,524,528,535,542,562,567,569,577,580,675,676,748,778,786,795,797,855,955,968,977,1174,1214,1232,1245,1271,1366,1420,1455,1460,1516,1551,1585,1622,1626,1690,1694,1700],"s0":[1,0.977777777777778,0.977777777777778,0.977777777777778,0.977777777777778,0.977777777777778,0.977777777777778,0.955555555555555,0.955555555555555,0.955555555555555,0.955555555555555,0.955555555555555,0.933333333333333,0.933333333333333,0.933333333333333,0.911111111111111,0.911111111111111,0.911111111111111,0.911111111111111,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.866666666666666,0.866666666666666,0.866666666666666,0.844444444444444,0.844444444444444,0.822222222222222,0.777777777777778,0.777777777777778,0.777777777777778,0.755555555555555,0.733333333333333,0.711111111111111,0.688888888888889,0.666666666666667,0.622222222222222,0.6,0.577777777777778,0.577777777777778,0.555555555555555,0.555555555555555,0.533333333333333,0.533333333333333,0.533333333333333,0.511111111111111,0.488888888888889,0.466666666666667,0.444444444444444,0.444444444444444,0.422222222222222,0.422222222222222,0.4,0.4,0.377777777777778,0.377777777777778,0.377777777777778,0.355555555555555,0.333333333333333,0.311111111111111,0.288888888888889,0.266666666666667,0.266666666666667,0.244444444444444,0.244444444444444,0.222222222222222,0.2,0.177777777777778,0.177777777777778,0.177777777777778,0.177777777777778,0.155555555555556,0.133333333333333,0.133333333333333,0.111111111111111,0.111111111111111,0.111111111111111,0.111111111111111,0.0740740740740741,0.0740740740740741,0.0740740740740741,0.0740740740740741,0.0740740740740741,0,0],"s1":[1,1,0.977777777777778,0.955555555555555,0.933333333333333,0.911111111111111,0.888888888888889,0.888888888888889,0.866666666666666,0.844444444444444,0.822222222222222,0.8,0.8,0.777777777777778,0.755555555555555,0.755555555555555,0.733333333333333,0.711111111111111,0.688888888888889,0.688888888888889,0.666666666666667,0.644444444444444,0.622222222222222,0.6,0.577777777777778,0.555555555555555,0.555555555555555,0.533333333333333,0.511111111111111,0.511111111111111,0.488888888888889,0.488888888888889,0.488888888888889,0.466666666666667,0.444444444444444,0.444444444444444,0.444444444444444,0.444444444444444,0.444444444444444,0.444444444444444,0.444444444444444,0.444444444444444,0.444444444444444,0.422222222222222,0.422222222222222,0.4,0.4,0.377777777777778,0.355555555555555,0.355555555555555,0.355555555555555,0.355555555555555,0.355555555555555,0.333333333333333,0.333333333333333,0.311111111111111,0.311111111111111,0.288888888888889,0.288888888888889,0.266666666666667,0.244444444444444,0.244444444444444,0.244444444444444,0.244444444444444,0.244444444444444,0.244444444444444,0.222222222222222,0.222222222222222,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667,0.166666666666667]}},{"name":"rmst_data","value":{"diff_est":[-98.5333333333333,-122.311111111111,-132.511111111111,-132.511111111111,-126.2,-115.555555555556,-98.4814814814815],"ratio_est":[0.753666666666667,0.744759784826562,0.752295102396877,0.769528079465079,0.792653985176531,0.817601459188327,0.848441667996625],"diff_lower_95":[-164.380909782635,-216.736952972455,-254.463111450178,-280.178876097006,-300.316078291151,-313.198855677966,-317.329608913802],"ratio_lower_95":[0.616699069711834,0.586358173621404,0.572373128751844,0.568323396537562,0.569140109222672,0.573583431478637,0.583415947224965],"diff_upper_95":[-32.6857568840312,-27.8852692497673,-10.5591107720443,15.1566538747836,47.916078291151,82.0877445668552,120.366645950839],"ratio_upper_95":[0.921054485634073,0.945952767519605,0.988774442162357,1.04196566372765,1.10394669086732,1.16543140784878,1.23385942296726],"diff_p":[0.003358542895523,0.0111243339129835,0.0331992137734546,0.0786127041651176,0.155436162422603,0.251825498421534,0.377786423368364],"ratio_p":[0.0057171690104898,0.0157193917905181,0.041259582843874,0.0902414365731679,0.169177153258491,0.265501063994753,0.389705148872694],"tau":[500,700,900,1100,1300,1500,1700]}}]}
+  </script>
 </head>
 <body class="quarto-light">
 <script src="mathjax-config.js"></script>
@@ -288,7 +359,7 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <ul>
 <li>Log-log plotなどで確認する</li>
 </ul></li>
-<li>結果の言語化が実は難しい <span class="citation" data-cites="Dumas2025-dp">(<a href="#/rmstとは" role="doc-biblioref" onclick="">Dumas and Stensrud 2025</a>)</span></li>
+<li>結果の言語化が実は難しい <span class="citation" data-cites="Dumas2025-dp">(<a href="#/ご静聴ありがとうございました" role="doc-biblioref" onclick="">Dumas and Stensrud 2025</a>)</span></li>
 <li>例：REAL-CAD study
 <ul>
 <li>高容量のピタバスタチンを内服すると、MACEがHR 0.8に減りました</li>
@@ -305,7 +376,7 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <p><img data-src="images/ischemia_km.png" alt="比例ハザード性が成り立たない例2"></p>
 </div></div>
 <ul>
-<li>COURAGE trialとISCHEMIA trialのKaplan-Meier曲線<span class="citation" data-cites="Boden2007-mi Maron2020-hg">(<a href="#/rmstとは" role="doc-biblioref" onclick="">Boden et al. 2007</a>; <a href="#/rmstとは" role="doc-biblioref" onclick="">Maron et al. 2020</a>)</span></li>
+<li>COURAGE trialとISCHEMIA trialのKaplan-Meier曲線<span class="citation" data-cites="Boden2007-mi Maron2020-hg">(<a href="#/ご静聴ありがとうございました" role="doc-biblioref" onclick="">Boden et al. 2007</a>; <a href="#/ご静聴ありがとうございました" role="doc-biblioref" onclick="">Maron et al. 2020</a>)</span></li>
 <li>手技やOpeのtrialはこうなりがち</li>
 </ul>
 </section>
@@ -330,18 +401,10 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <li>どうやって解決すればいい？</li>
 </ul>
 </section>
-<section id="rmstとは" class="slide level2 smaller scrollable">
+<section id="rmstとは" class="slide level2">
 <h2>RMSTとは</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="columns">
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960" class="r-stretch"><div class="columns">
 <div class="column" style="width:52%;">
 <ul>
 <li>Restricted Mean Survival Timeの略</li>
@@ -352,36 +415,39 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </ul></li>
 <li>近年、がん領域の研究でよく使われるようになっている</li>
 </ul>
-<section id="rmstとは-1" class="slide level2">
-<h2>RMSTとは</h2>
-<p><img data-src="images/rmst_diff_image.png"></p>
-<p><span class="citation" data-cites="Harhay2018-te">(<a href="#/rmstとは" role="doc-biblioref" onclick="">Harhay et al. 2018</a>)</span></p>
-<ul>
-<li>比較には各々の治療群のRMSTの差や比をとる事が可能</li>
-<li>多変量回帰として種々の因子の調整も可能</li>
-</ul>
-<!-- TODO: 元スライドの式・図配置は簡略化。 -->
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/slide15_image01.png" style="width:92.0%" alt="RMST比較の図"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/slide15_image02.png" style="width:82.0%" alt="RMST差の図"></p>
-<p><img data-src="images/slide15_image03.png" style="width:82.0%" alt="RMST比の図"></p>
 </div></div>
 </section>
-<section id="rmstの直観的理解" class="slide level2">
-<h2>RMSTの直観的理解</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/slide16_image01.png" style="width:80.0%" alt="RMSTの直観的理解1"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/slide16_image02.png" style="width:80.0%" alt="RMSTの直観的理解2"></p>
-</div></div>
+<section id="rmstを用いた群間比較" class="slide level2 scrollable">
+<h2>RMSTを用いた群間比較</h2>
+<p><span class="math display">\[\mu_\tau = \int_0^\tau S(t)\,\mathrm{d}t\]</span></p>
+<p>とした時に 1. RMSTの差 <span class="math display">\[\mu_\tau(1) - \mu_\tau(0)\]</span></p>
+<ol start="2" type="1">
+<li>RMSTの比率(Ratio)</li>
+</ol>
+<p><span class="math display">\[\mu_\tau(1) / \mu_\tau(0)\]</span></p>
+<ol start="3" type="1">
+<li>RMTLの比率(Ratio)</li>
+</ol>
+<p><span class="math display">\[\{\tau - \mu_\tau(1)\} / \{\tau - \mu_\tau(0)\}\]</span></p>
+<ul>
+<li><p>τまでの時間の平均値</p></li>
+<li><p>比較には各々の治療群のRMSTの差や比をとる事が可能</p></li>
+<li><p>多変量回帰として種々の因子の調整も可能</p></li>
+</ul>
+</section>
+<section id="rmstの差の直観的理解" class="slide level2">
+<h2>RMSTの差の直観的理解</h2>
+
+<img data-src="images/rmst_diff_image.png" class="r-stretch"><p><span class="citation" data-cites="Harhay2018-te">(<a href="#/ご静聴ありがとうございました" role="doc-biblioref" onclick="">Harhay et al. 2018</a>)</span></p>
+<ul>
+<li>この差の面積を考えてよい</li>
+<li>途中で交差するとその分を引き算する</li>
+</ul>
 </section>
 <section id="hrとrmstの関係" class="slide level2">
 <h2>HRとRMSTの関係</h2>
-<p><img data-src="images/aim_rmst_image.png" alt="HRとRMSTの関係"></p>
-</section>
+
+<img data-src="images/aim_rmst_image.png" alt="HRとRMSTの関係" class="r-stretch"></section>
 <section id="今日の内容-1" class="slide level2">
 <h2>今日の内容</h2>
 <ul>
@@ -405,19 +471,60 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </section>
 <section id="ハザードとの比較" class="slide level2">
 <h2>ハザードとの比較</h2>
-<p><img data-src="images/slide20_image01.png" style="width:82.0%" alt="ハザードとの比較"></p>
+<table class="caption-top" style="width:99%;">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 35%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>RMSTの差</th>
+<th>Hazard ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>評価するもの</td>
+<td>境界時間(τ)内で、平均生存時間がどの程度延長するか</td>
+<td>リスクがどれほど減るか</td>
+</tr>
+<tr class="even">
+<td>メリット</td>
+<td><ul>
+<li><p>比例ハザード性が成立しない状況でも使える</p></li>
+<li><p>臨床的に解釈・説明がしやすい</p></li>
+<li><p>境界時間が一致している時に他試験との比較が容易</p></li>
+</ul></td>
+<td><ul>
+<li><p>比例ハザード性が成立していたら検出力が高い</p></li>
+<li><p>全ての時間のデータを利用できる(RMSTはτまでの時間のデータしか使っていない)</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>デメリット</td>
+<td><ul>
+<li>境界時間τについて明確な根拠が必要</li>
+</ul></td>
+<td><ul>
+<li><p>比例ハザード性が成立していない時の解釈は困難</p></li>
+<li><p>臨床的に解釈・説明がしにくい</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="評価指標の比較" class="slide level2 scrollable">
 <h2>評価指標の比較</h2>
-<!-- TODO: 元スライドは横長表。QuartoではMarkdown表に変換し、スクロール可能にしている。 -->
-<table class="caption-top" style="width:100%;">
+<table class="caption-top" style="width:98%;">
 <colgroup>
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 17%">
 <col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 26%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -473,32 +580,332 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 </tbody>
 </table>
 </section>
-<section id="補足図" class="slide level2">
-<h2>補足図</h2>
-<p><img data-src="images/slide22_image01.png" style="width:70.0%" alt="RMST補足図"></p>
+<section id="胃がんデータの生存曲線" class="slide level2">
+<h2>胃がんデータの生存曲線</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" width="960" class="r-stretch"></section>
+<section id="τ決定の重要性" class="slide level2">
+<h2>τ決定の重要性</h2>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="487" data-source-offset="-1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 486;"><span id="cb2-487"><a></a>km <span class="op">=</span> <span class="fu">transpose</span>(km_data)</span>
+<span id="cb2-488"><a></a></span>
+<span id="cb2-489"><a></a>stats <span class="op">=</span> <span class="fu">transpose</span>(rmst_data)</span>
+<span id="cb2-490"><a></a></span>
+<span id="cb2-491"><a></a>positive <span class="op">=</span> <span class="st">"#0072B2"</span></span>
+<span id="cb2-492"><a></a></span>
+<span id="cb2-493"><a></a>negative <span class="op">=</span> <span class="st">"#D55E00"</span></span>
+<span id="cb2-494"><a></a></span>
+<span id="cb2-495"><a></a>fmt <span class="op">=</span> (x<span class="op">,</span> digits <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> <span class="bu">Number</span>(x)<span class="op">.</span><span class="fu">toFixed</span>(digits)</span>
+<span id="cb2-496"><a></a></span>
+<span id="cb2-497"><a></a>fmtP <span class="op">=</span> p <span class="kw">=&gt;</span> p <span class="op">&lt;</span> <span class="fl">0.001</span> <span class="op">?</span> <span class="st">"&lt; 0.001"</span> <span class="op">:</span> p<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)</span>
+<span id="cb2-498"><a></a></span>
+<span id="cb2-499"><a></a><span class="co">// KM曲線の各水平区間</span></span>
+<span id="cb2-500"><a></a>intervals <span class="op">=</span> km<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="op">-</span><span class="dv">1</span>)<span class="op">.</span><span class="fu">map</span>((d<span class="op">,</span> i) <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-501"><a></a>  <span class="dt">start</span><span class="op">:</span> d<span class="op">.</span><span class="at">time</span><span class="op">,</span></span>
+<span id="cb2-502"><a></a>  <span class="dt">end</span><span class="op">:</span> km[i <span class="op">+</span> <span class="dv">1</span>]<span class="op">.</span><span class="at">time</span><span class="op">,</span></span>
+<span id="cb2-503"><a></a>  <span class="dt">s0</span><span class="op">:</span> d<span class="op">.</span><span class="at">s0</span><span class="op">,</span></span>
+<span id="cb2-504"><a></a>  <span class="dt">s1</span><span class="op">:</span> d<span class="op">.</span><span class="at">s1</span></span>
+<span id="cb2-505"><a></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="508" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 507;"><span id="cb3-508"><a></a>viewof tau <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">500</span><span class="op">,</span> <span class="dv">1700</span>]<span class="op">,</span> {</span>
+<span id="cb3-509"><a></a>  <span class="dt">step</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span></span>
+<span id="cb3-510"><a></a>  <span class="dt">value</span><span class="op">:</span> <span class="dv">1100</span><span class="op">,</span></span>
+<span id="cb3-511"><a></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"τ（日）"</span></span>
+<span id="cb3-512"><a></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="519" data-source-offset="-1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 518;"><span id="cb4-519"><a></a>current <span class="op">=</span> stats<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">tau</span> <span class="op">===</span> tau)</span>
+<span id="cb4-520"><a></a></span>
+<span id="cb4-521"><a></a><span class="co">// τをまたぐ最後の区間はτで切る</span></span>
+<span id="cb4-522"><a></a>area <span class="op">=</span> intervals</span>
+<span id="cb4-523"><a></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">start</span> <span class="op">&lt;</span> tau)</span>
+<span id="cb4-524"><a></a>  <span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb4-525"><a></a>    <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb4-526"><a></a>    <span class="dt">end</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(d<span class="op">.</span><span class="at">end</span><span class="op">,</span> tau)</span>
+<span id="cb4-527"><a></a>  }))</span>
+<span id="cb4-528"><a></a></span>
+<span id="cb4-529"><a></a>kmPlot <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-530"><a></a>  <span class="dt">width</span><span class="op">:</span> <span class="dv">640</span><span class="op">,</span></span>
+<span id="cb4-531"><a></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">350</span><span class="op">,</span></span>
+<span id="cb4-532"><a></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">65</span><span class="op">,</span></span>
+<span id="cb4-533"><a></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb4-534"><a></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb4-535"><a></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">2000</span>]<span class="op">,</span></span>
+<span id="cb4-536"><a></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"時間（日）"</span></span>
+<span id="cb4-537"><a></a>  }<span class="op">,</span></span>
+<span id="cb4-538"><a></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb4-539"><a></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span></span>
+<span id="cb4-540"><a></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"生存確率"</span><span class="op">,</span></span>
+<span id="cb4-541"><a></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb4-542"><a></a>  }<span class="op">,</span></span>
+<span id="cb4-543"><a></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-544"><a></a>    <span class="co">// 正の面積：放射線併用群の生存率が高い区間</span></span>
+<span id="cb4-545"><a></a>    Plot<span class="op">.</span><span class="fu">rect</span>(area<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">s1</span> <span class="op">&gt;</span> d<span class="op">.</span><span class="at">s0</span>)<span class="op">,</span> {</span>
+<span id="cb4-546"><a></a>      <span class="dt">x1</span><span class="op">:</span> <span class="st">"start"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"end"</span><span class="op">,</span></span>
+<span id="cb4-547"><a></a>      <span class="dt">y1</span><span class="op">:</span> <span class="st">"s0"</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> <span class="st">"s1"</span><span class="op">,</span></span>
+<span id="cb4-548"><a></a>      <span class="dt">fill</span><span class="op">:</span> positive<span class="op">,</span></span>
+<span id="cb4-549"><a></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.35</span></span>
+<span id="cb4-550"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-551"><a></a></span>
+<span id="cb4-552"><a></a>    <span class="co">// 負の面積：放射線併用群の生存率が低い区間</span></span>
+<span id="cb4-553"><a></a>    Plot<span class="op">.</span><span class="fu">rect</span>(area<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">s1</span> <span class="op">&lt;</span> d<span class="op">.</span><span class="at">s0</span>)<span class="op">,</span> {</span>
+<span id="cb4-554"><a></a>      <span class="dt">x1</span><span class="op">:</span> <span class="st">"start"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"end"</span><span class="op">,</span></span>
+<span id="cb4-555"><a></a>      <span class="dt">y1</span><span class="op">:</span> <span class="st">"s1"</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> <span class="st">"s0"</span><span class="op">,</span></span>
+<span id="cb4-556"><a></a>      <span class="dt">fill</span><span class="op">:</span> negative<span class="op">,</span></span>
+<span id="cb4-557"><a></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.35</span></span>
+<span id="cb4-558"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-559"><a></a></span>
+<span id="cb4-560"><a></a>    <span class="co">// KM曲線は右連続の階段関数として描く</span></span>
+<span id="cb4-561"><a></a>    Plot<span class="op">.</span><span class="fu">line</span>(km<span class="op">,</span> {</span>
+<span id="cb4-562"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"time"</span><span class="op">,</span></span>
+<span id="cb4-563"><a></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"s0"</span><span class="op">,</span></span>
+<span id="cb4-564"><a></a>      <span class="dt">curve</span><span class="op">:</span> <span class="st">"step-after"</span><span class="op">,</span></span>
+<span id="cb4-565"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#333333"</span><span class="op">,</span></span>
+<span id="cb4-566"><a></a>      <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span></span>
+<span id="cb4-567"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-568"><a></a></span>
+<span id="cb4-569"><a></a>    Plot<span class="op">.</span><span class="fu">line</span>(km<span class="op">,</span> {</span>
+<span id="cb4-570"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"time"</span><span class="op">,</span></span>
+<span id="cb4-571"><a></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"s1"</span><span class="op">,</span></span>
+<span id="cb4-572"><a></a>      <span class="dt">curve</span><span class="op">:</span> <span class="st">"step-after"</span><span class="op">,</span></span>
+<span id="cb4-573"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#009E73"</span><span class="op">,</span></span>
+<span id="cb4-574"><a></a>      <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></span>
+<span id="cb4-575"><a></a>      <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"6,4"</span></span>
+<span id="cb4-576"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-577"><a></a></span>
+<span id="cb4-578"><a></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([tau]<span class="op">,</span> {</span>
+<span id="cb4-579"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#555"</span><span class="op">,</span></span>
+<span id="cb4-580"><a></a>      <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span></span>
+<span id="cb4-581"><a></a>    })</span>
+<span id="cb4-582"><a></a>  ]</span>
+<span id="cb4-583"><a></a>})</span>
+<span id="cb4-584"><a></a></span>
+<span id="cb4-585"><a></a>diffPlot <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-586"><a></a>  <span class="dt">width</span><span class="op">:</span> <span class="dv">510</span><span class="op">,</span></span>
+<span id="cb4-587"><a></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">350</span><span class="op">,</span></span>
+<span id="cb4-588"><a></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">75</span><span class="op">,</span></span>
+<span id="cb4-589"><a></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span></span>
+<span id="cb4-590"><a></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb4-591"><a></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">500</span><span class="op">,</span> <span class="dv">2000</span>]<span class="op">,</span></span>
+<span id="cb4-592"><a></a>    <span class="dt">ticks</span><span class="op">:</span> stats<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">tau</span>)<span class="op">,</span></span>
+<span id="cb4-593"><a></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"τ（日）"</span></span>
+<span id="cb4-594"><a></a>  }<span class="op">,</span></span>
+<span id="cb4-595"><a></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb4-596"><a></a>    <span class="dt">domain</span><span class="op">:</span> [</span>
+<span id="cb4-597"><a></a>      <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="dv">0</span><span class="op">,</span> <span class="op">...</span>stats<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">diff_lower_95</span>))<span class="op">,</span></span>
+<span id="cb4-598"><a></a>      <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">0</span><span class="op">,</span> <span class="op">...</span>stats<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">diff_upper_95</span>))</span>
+<span id="cb4-599"><a></a>    ]<span class="op">,</span></span>
+<span id="cb4-600"><a></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"RMST差（日）：併用 − 単独"</span><span class="op">,</span></span>
+<span id="cb4-601"><a></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb4-602"><a></a>  }<span class="op">,</span></span>
+<span id="cb4-603"><a></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-604"><a></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]<span class="op">,</span> {</span>
+<span id="cb4-605"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#777"</span><span class="op">,</span></span>
+<span id="cb4-606"><a></a>      <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span></span>
+<span id="cb4-607"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-608"><a></a></span>
+<span id="cb4-609"><a></a>    <span class="co">// 各τでの95%信頼区間</span></span>
+<span id="cb4-610"><a></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>(stats<span class="op">,</span> {</span>
+<span id="cb4-611"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"tau"</span><span class="op">,</span></span>
+<span id="cb4-612"><a></a>      <span class="dt">y1</span><span class="op">:</span> <span class="st">"diff_lower_95"</span><span class="op">,</span></span>
+<span id="cb4-613"><a></a>      <span class="dt">y2</span><span class="op">:</span> <span class="st">"diff_upper_95"</span><span class="op">,</span></span>
+<span id="cb4-614"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#bbb"</span></span>
+<span id="cb4-615"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-616"><a></a></span>
+<span id="cb4-617"><a></a>    <span class="co">// 250日刻みの推定値を結ぶ</span></span>
+<span id="cb4-618"><a></a>    Plot<span class="op">.</span><span class="fu">line</span>(stats<span class="op">,</span> {</span>
+<span id="cb4-619"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"tau"</span><span class="op">,</span></span>
+<span id="cb4-620"><a></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"diff_est"</span><span class="op">,</span></span>
+<span id="cb4-621"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#999"</span></span>
+<span id="cb4-622"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-623"><a></a></span>
+<span id="cb4-624"><a></a>    Plot<span class="op">.</span><span class="fu">dot</span>(stats<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">diff_est</span> <span class="op">&gt;=</span> <span class="dv">0</span>)<span class="op">,</span> {</span>
+<span id="cb4-625"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"tau"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff_est"</span><span class="op">,</span></span>
+<span id="cb4-626"><a></a>      <span class="dt">fill</span><span class="op">:</span> positive<span class="op">,</span></span>
+<span id="cb4-627"><a></a>      <span class="dt">r</span><span class="op">:</span> <span class="dv">4</span></span>
+<span id="cb4-628"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-629"><a></a></span>
+<span id="cb4-630"><a></a>    Plot<span class="op">.</span><span class="fu">dot</span>(stats<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">diff_est</span> <span class="op">&lt;</span> <span class="dv">0</span>)<span class="op">,</span> {</span>
+<span id="cb4-631"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"tau"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff_est"</span><span class="op">,</span></span>
+<span id="cb4-632"><a></a>      <span class="dt">fill</span><span class="op">:</span> negative<span class="op">,</span></span>
+<span id="cb4-633"><a></a>      <span class="dt">r</span><span class="op">:</span> <span class="dv">4</span></span>
+<span id="cb4-634"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-635"><a></a></span>
+<span id="cb4-636"><a></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([tau]<span class="op">,</span> {</span>
+<span id="cb4-637"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#555"</span><span class="op">,</span></span>
+<span id="cb4-638"><a></a>      <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span></span>
+<span id="cb4-639"><a></a>    })<span class="op">,</span></span>
+<span id="cb4-640"><a></a></span>
+<span id="cb4-641"><a></a>    Plot<span class="op">.</span><span class="fu">dot</span>([current]<span class="op">,</span> {</span>
+<span id="cb4-642"><a></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"tau"</span><span class="op">,</span></span>
+<span id="cb4-643"><a></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"diff_est"</span><span class="op">,</span></span>
+<span id="cb4-644"><a></a>      <span class="dt">fill</span><span class="op">:</span> current<span class="op">.</span><span class="at">diff_est</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> positive <span class="op">:</span> negative<span class="op">,</span></span>
+<span id="cb4-645"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
+<span id="cb4-646"><a></a>      <span class="dt">r</span><span class="op">:</span> <span class="dv">8</span></span>
+<span id="cb4-647"><a></a>    })</span>
+<span id="cb4-648"><a></a>  ]</span>
+<span id="cb4-649"><a></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-3-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-3-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="652" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 651;"><span id="cb5-652"><a></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb5-653"><a></a><span class="vs">&lt;div style="display:grid; grid-template-columns:minmax(0, 640fr) minmax(0, 510fr); gap:16px;"&gt;</span></span>
+<span id="cb5-654"><a></a><span class="vs">  &lt;div&gt;</span></span>
+<span id="cb5-655"><a></a><span class="vs">    &lt;div style="font-size:20px;"&gt;</span></span>
+<span id="cb5-656"><a></a><span class="vs">      &lt;span style="color:#333;"&gt;━ 化学療法単独&lt;/span&gt;</span></span>
+<span id="cb5-657"><a></a><span class="vs">      ／</span></span>
+<span id="cb5-658"><a></a><span class="vs">      &lt;span style="color:#009E73;"&gt;┄ 放射線併用&lt;/span&gt;</span></span>
+<span id="cb5-659"><a></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb5-660"><a></a><span class="vs">    </span><span class="sc">${</span>kmPlot<span class="sc">}</span></span>
+<span id="cb5-661"><a></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb5-662"><a></a><span class="vs">  &lt;div&gt;</span></span>
+<span id="cb5-663"><a></a><span class="vs">    &lt;div style="font-size:20px;"&gt;RMST差と95%信頼区間&lt;/div&gt;</span></span>
+<span id="cb5-664"><a></a><span class="vs">    </span><span class="sc">${</span>diffPlot<span class="sc">}</span></span>
+<span id="cb5-665"><a></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb5-666"><a></a><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb5-667"><a></a><span class="vs">&lt;div style="font-size:20px;"&gt;</span></span>
+<span id="cb5-668"><a></a><span class="vs">  τまでの</span></span>
+<span id="cb5-669"><a></a><span class="vs">  &lt;span style="color:</span><span class="sc">${</span>positive<span class="sc">}</span><span class="vs">;"&gt;青い面積&lt;/span&gt;</span></span>
+<span id="cb5-670"><a></a><span class="vs">  −</span></span>
+<span id="cb5-671"><a></a><span class="vs">  &lt;span style="color:</span><span class="sc">${</span>negative<span class="sc">}</span><span class="vs">;"&gt;赤い面積&lt;/span&gt;</span></span>
+<span id="cb5-672"><a></a><span class="vs">  ＝ RMST差</span></span>
+<span id="cb5-673"><a></a><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb5-674"><a></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="678" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 677;"><span id="cb6-678"><a></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb6-679"><a></a><span class="vs">&lt;table style="width:100%; font-size:24px; margin-top:16px;"&gt;</span></span>
+<span id="cb6-680"><a></a><span class="vs">  &lt;thead&gt;</span></span>
+<span id="cb6-681"><a></a><span class="vs">    &lt;tr&gt;</span></span>
+<span id="cb6-682"><a></a><span class="vs">      &lt;th&gt;τ = </span><span class="sc">${</span>tau<span class="sc">}</span><span class="vs"> 日&lt;/th&gt;</span></span>
+<span id="cb6-683"><a></a><span class="vs">      &lt;th&gt;推定値&lt;/th&gt;</span></span>
+<span id="cb6-684"><a></a><span class="vs">      &lt;th&gt;95%信頼区間&lt;/th&gt;</span></span>
+<span id="cb6-685"><a></a><span class="vs">      &lt;th&gt;p値&lt;/th&gt;</span></span>
+<span id="cb6-686"><a></a><span class="vs">    &lt;/tr&gt;</span></span>
+<span id="cb6-687"><a></a><span class="vs">  &lt;/thead&gt;</span></span>
+<span id="cb6-688"><a></a><span class="vs">  &lt;tbody&gt;</span></span>
+<span id="cb6-689"><a></a><span class="vs">    &lt;tr&gt;</span></span>
+<span id="cb6-690"><a></a><span class="vs">      &lt;td&gt;RMST差：併用 − 単独（日）&lt;/td&gt;</span></span>
+<span id="cb6-691"><a></a><span class="vs">      &lt;td style=</span><span class="sc">${</span><span class="vs">`color:</span><span class="sc">${</span></span>
+<span id="cb6-692"><a></a>        current<span class="op">.</span><span class="at">diff_est</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> positive <span class="op">:</span> negative</span>
+<span id="cb6-693"><a></a>      <span class="sc">}</span><span class="vs">; font-weight:bold;`</span><span class="sc">}</span><span class="vs">&gt;</span></span>
+<span id="cb6-694"><a></a><span class="vs">        </span><span class="sc">${</span><span class="fu">fmt</span>(current<span class="op">.</span><span class="at">diff_est</span>)<span class="sc">}</span></span>
+<span id="cb6-695"><a></a><span class="vs">      &lt;/td&gt;</span></span>
+<span id="cb6-696"><a></a><span class="vs">      &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(current<span class="op">.</span><span class="at">diff_lower_95</span>)<span class="sc">}</span><span class="vs"> ～ </span><span class="sc">${</span><span class="fu">fmt</span>(current<span class="op">.</span><span class="at">diff_upper_95</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-697"><a></a><span class="vs">      &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtP</span>(current<span class="op">.</span><span class="at">diff_p</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-698"><a></a><span class="vs">    &lt;/tr&gt;</span></span>
+<span id="cb6-699"><a></a><span class="vs">    &lt;tr&gt;</span></span>
+<span id="cb6-700"><a></a><span class="vs">      &lt;td&gt;RMST比：併用 / 単独&lt;/td&gt;</span></span>
+<span id="cb6-701"><a></a><span class="vs">      &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(current<span class="op">.</span><span class="at">ratio_est</span><span class="op">,</span> <span class="dv">3</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-702"><a></a><span class="vs">      &lt;td&gt;</span></span>
+<span id="cb6-703"><a></a><span class="vs">        </span><span class="sc">${</span><span class="fu">fmt</span>(current<span class="op">.</span><span class="at">ratio_lower_95</span><span class="op">,</span> <span class="dv">3</span>)<span class="sc">}</span><span class="vs"> ～</span></span>
+<span id="cb6-704"><a></a><span class="vs">        </span><span class="sc">${</span><span class="fu">fmt</span>(current<span class="op">.</span><span class="at">ratio_upper_95</span><span class="op">,</span> <span class="dv">3</span>)<span class="sc">}</span></span>
+<span id="cb6-705"><a></a><span class="vs">      &lt;/td&gt;</span></span>
+<span id="cb6-706"><a></a><span class="vs">      &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtP</span>(current<span class="op">.</span><span class="at">ratio_p</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-707"><a></a><span class="vs">    &lt;/tr&gt;</span></span>
+<span id="cb6-708"><a></a><span class="vs">  &lt;/tbody&gt;</span></span>
+<span id="cb6-709"><a></a><span class="vs">&lt;/table&gt;</span></span>
+<span id="cb6-710"><a></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
 </section>
-<section id="ischemiaの場合" class="slide level2">
-<h2>ISCHEMIAの場合</h2>
-<div class="columns">
-<div class="column" style="width:58%;">
+<section id="τの決め方ischemiaの場合" class="slide level2">
+<h2>τの決め方～ISCHEMIAの場合</h2>
 <ul>
 <li>ICTUS, FRISC-II, RITA-3などの過去のRCTのメタアナライシスに準じて5年という時間を決めている</li>
 <li>5年restricted mean event-free timeの差は、invasive strategy群で9.5日長い</li>
 <li>95% CIは -17.8から36.9日</li>
-</ul>
-</div><div class="column" style="width:42%;">
-<p><img data-src="images/slide23_image01.png" style="width:100.0%" alt="ISCHEMIAのRMST結果"></p>
-</div></div>
-</section>
-<section id="今日の内容-2" class="slide level2">
-<h2>今日の内容</h2>
-<ul>
-<li>復習：生存解析</li>
-<li>Cox hazardの限界</li>
-<li>RMSTとは？</li>
-<li>RMSTは何がいいの？限界は？</li>
-<li>RMSTの使い方</li>
-<li>観察研究での使い道</li>
 </ul>
 </section>
 <section id="観察研究での使い道" class="slide level2">
@@ -523,14 +930,12 @@ differ       |        1.37 | [1.20, 1.57] | &lt; .001</code></pre>
 <ul>
 <li>RCTにおいて、ルーチンでRMSTの差を使う事を推奨する</li>
 </ul>
-<p><img data-src="images/slide26_image01.png" style="width:70.0%" alt="AIMの締めの言葉"></p>
-</section>
-<section id="ご静聴ありがとうございました" class="slide level2">
+
+<img data-src="images/slide26_image01.png" style="width:70.0%" alt="AIMの締めの言葉" class="r-stretch"></section>
+<section id="ご静聴ありがとうございました" class="slide level2 smaller scrollable">
 <h2>ご静聴ありがとうございました</h2>
 
 
-</section>
-</div></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Boden2007-mi" class="csl-entry" role="listitem">
 Boden, William E, Robert A O’Rourke, Koon K Teo, et al. 2007. <span>“Optimal Medical Therapy with or Without <span>PCI</span> for Stable Coronary Disease.”</span> <em>The New England Journal of Medicine</em> 356 (15): 1503–16. <a href="https://doi.org/10.1056/NEJMoa070829">https://doi.org/10.1056/NEJMoa070829</a>.
@@ -761,6 +1166,17 @@ Maron, David J, Judith S Hochman, Harmony R Reynolds, et al. 2020. <span>“Init
           RevealZoom
         ]
       });
+    </script>
+    <script type="ojs-module-contents">
+    eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxua20gPSB0cmFuc3Bvc2Uoa21fZGF0YSlcblxuc3RhdHMgPSB0cmFuc3Bvc2Uocm1zdF9kYXRhKVxuXG5wb3NpdGl2ZSA9IFwiIzAwNzJCMlwiXG5cbm5lZ2F0aXZlID0gXCIjRDU1RTAwXCJcblxuZm10ID0gKHgsIGRpZ2l0cyA9IDIpID0+IE51bWJlcih4KS50b0ZpeGVkKGRpZ2l0cylcblxuZm10UCA9IHAgPT4gcCA8IDAuMDAxID8gXCI8IDAuMDAxXCIgOiBwLnRvRml4ZWQoMylcblxuLy8gS03mm7Lnt5rjga7lkITmsLTlubPljLrplpNcbmludGVydmFscyA9IGttLnNsaWNlKDAsIC0xKS5tYXAoKGQsIGkpID0+ICh7XG4gIHN0YXJ0OiBkLnRpbWUsXG4gIGVuZDoga21baSArIDFdLnRpbWUsXG4gIHMwOiBkLnMwLFxuICBzMTogZC5zMVxufSkpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgdGF1ID0gSW5wdXRzLnJhbmdlKFs1MDAsIDE3MDBdLCB7XG4gIHN0ZXA6IDIwMCxcbiAgdmFsdWU6IDExMDAsXG4gIGxhYmVsOiBcIs+E77yI5pel77yJXCJcbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcbmN1cnJlbnQgPSBzdGF0cy5maW5kKGQgPT4gZC50YXUgPT09IHRhdSlcblxuLy8gz4TjgpLjgb7jgZ/jgZDmnIDlvozjga7ljLrplpPjga/PhOOBp+WIh+OCi1xuYXJlYSA9IGludGVydmFsc1xuICAuZmlsdGVyKGQgPT4gZC5zdGFydCA8IHRhdSlcbiAgLm1hcChkID0+ICh7XG4gICAgLi4uZCxcbiAgICBlbmQ6IE1hdGgubWluKGQuZW5kLCB0YXUpXG4gIH0pKVxuXG5rbVBsb3QgPSBQbG90LnBsb3Qoe1xuICB3aWR0aDogNjQwLFxuICBoZWlnaHQ6IDM1MCxcbiAgbWFyZ2luTGVmdDogNjUsXG4gIG1hcmdpbkJvdHRvbTogNTAsXG4gIHg6IHtcbiAgICBkb21haW46IFswLCAyMDAwXSxcbiAgICBsYWJlbDogXCLmmYLplpPvvIjml6XvvIlcIlxuICB9LFxuICB5OiB7XG4gICAgZG9tYWluOiBbMCwgMV0sXG4gICAgbGFiZWw6IFwi55Sf5a2Y56K6546HXCIsXG4gICAgZ3JpZDogdHJ1ZVxuICB9LFxuICBtYXJrczogW1xuICAgIC8vIOato+OBrumdouepje+8muaUvuWwhOe3muS9teeUqOe+pOOBrueUn+WtmOeOh+OBjOmrmOOBhOWMuumWk1xuICAgIFBsb3QucmVjdChhcmVhLmZpbHRlcihkID0+IGQuczEgPiBkLnMwKSwge1xuICAgICAgeDE6IFwic3RhcnRcIiwgeDI6IFwiZW5kXCIsXG4gICAgICB5MTogXCJzMFwiLCB5MjogXCJzMVwiLFxuICAgICAgZmlsbDogcG9zaXRpdmUsXG4gICAgICBmaWxsT3BhY2l0eTogMC4zNVxuICAgIH0pLFxuXG4gICAgLy8g6LKg44Gu6Z2i56mN77ya5pS+5bCE57ea5L2155So576k44Gu55Sf5a2Y546H44GM5L2O44GE5Yy66ZaTXG4gICAgUGxvdC5yZWN0KGFyZWEuZmlsdGVyKGQgPT4gZC5zMSA8IGQuczApLCB7XG4gICAgICB4MTogXCJzdGFydFwiLCB4MjogXCJlbmRcIixcbiAgICAgIHkxOiBcInMxXCIsIHkyOiBcInMwXCIsXG4gICAgICBmaWxsOiBuZWdhdGl2ZSxcbiAgICAgIGZpbGxPcGFjaXR5OiAwLjM1XG4gICAgfSksXG5cbiAgICAvLyBLTeabsue3muOBr+WPs+mAo+e2muOBrumajuautemWouaVsOOBqOOBl+OBpuaPj+OBj1xuICAgIFBsb3QubGluZShrbSwge1xuICAgICAgeDogXCJ0aW1lXCIsXG4gICAgICB5OiBcInMwXCIsXG4gICAgICBjdXJ2ZTogXCJzdGVwLWFmdGVyXCIsXG4gICAgICBzdHJva2U6IFwiIzMzMzMzM1wiLFxuICAgICAgc3Ryb2tlV2lkdGg6IDJcbiAgICB9KSxcblxuICAgIFBsb3QubGluZShrbSwge1xuICAgICAgeDogXCJ0aW1lXCIsXG4gICAgICB5OiBcInMxXCIsXG4gICAgICBjdXJ2ZTogXCJzdGVwLWFmdGVyXCIsXG4gICAgICBzdHJva2U6IFwiIzAwOUU3M1wiLFxuICAgICAgc3Ryb2tlV2lkdGg6IDIsXG4gICAgICBzdHJva2VEYXNoYXJyYXk6IFwiNiw0XCJcbiAgICB9KSxcblxuICAgIFBsb3QucnVsZVgoW3RhdV0sIHtcbiAgICAgIHN0cm9rZTogXCIjNTU1XCIsXG4gICAgICBzdHJva2VEYXNoYXJyYXk6IFwiNCw0XCJcbiAgICB9KVxuICBdXG59KVxuXG5kaWZmUGxvdCA9IFBsb3QucGxvdCh7XG4gIHdpZHRoOiA1MTAsXG4gIGhlaWdodDogMzUwLFxuICBtYXJnaW5MZWZ0OiA3NSxcbiAgbWFyZ2luQm90dG9tOiA1MCxcbiAgeDoge1xuICAgIGRvbWFpbjogWzUwMCwgMjAwMF0sXG4gICAgdGlja3M6IHN0YXRzLm1hcChkID0+IGQudGF1KSxcbiAgICBsYWJlbDogXCLPhO+8iOaXpe+8iVwiXG4gIH0sXG4gIHk6IHtcbiAgICBkb21haW46IFtcbiAgICAgIE1hdGgubWluKDAsIC4uLnN0YXRzLm1hcChkID0+IGQuZGlmZl9sb3dlcl85NSkpLFxuICAgICAgTWF0aC5tYXgoMCwgLi4uc3RhdHMubWFwKGQgPT4gZC5kaWZmX3VwcGVyXzk1KSlcbiAgICBdLFxuICAgIGxhYmVsOiBcIlJNU1Tlt67vvIjml6XvvInvvJrkvbXnlKgg4oiSIOWNmOeLrFwiLFxuICAgIGdyaWQ6IHRydWVcbiAgfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LnJ1bGVZKFswXSwge1xuICAgICAgc3Ryb2tlOiBcIiM3NzdcIixcbiAgICAgIHN0cm9rZURhc2hhcnJheTogXCI0LDRcIlxuICAgIH0pLFxuXG4gICAgLy8g5ZCEz4Tjgafjga45NSXkv6HpoLzljLrplpNcbiAgICBQbG90LnJ1bGVYKHN0YXRzLCB7XG4gICAgICB4OiBcInRhdVwiLFxuICAgICAgeTE6IFwiZGlmZl9sb3dlcl85NVwiLFxuICAgICAgeTI6IFwiZGlmZl91cHBlcl85NVwiLFxuICAgICAgc3Ryb2tlOiBcIiNiYmJcIlxuICAgIH0pLFxuXG4gICAgLy8gMjUw5pel5Yi744G/44Gu5o6o5a6a5YCk44KS57WQ44G2XG4gICAgUGxvdC5saW5lKHN0YXRzLCB7XG4gICAgICB4OiBcInRhdVwiLFxuICAgICAgeTogXCJkaWZmX2VzdFwiLFxuICAgICAgc3Ryb2tlOiBcIiM5OTlcIlxuICAgIH0pLFxuXG4gICAgUGxvdC5kb3Qoc3RhdHMuZmlsdGVyKGQgPT4gZC5kaWZmX2VzdCA+PSAwKSwge1xuICAgICAgeDogXCJ0YXVcIiwgeTogXCJkaWZmX2VzdFwiLFxuICAgICAgZmlsbDogcG9zaXRpdmUsXG4gICAgICByOiA0XG4gICAgfSksXG5cbiAgICBQbG90LmRvdChzdGF0cy5maWx0ZXIoZCA9PiBkLmRpZmZfZXN0IDwgMCksIHtcbiAgICAgIHg6IFwidGF1XCIsIHk6IFwiZGlmZl9lc3RcIixcbiAgICAgIGZpbGw6IG5lZ2F0aXZlLFxuICAgICAgcjogNFxuICAgIH0pLFxuXG4gICAgUGxvdC5ydWxlWChbdGF1XSwge1xuICAgICAgc3Ryb2tlOiBcIiM1NTVcIixcbiAgICAgIHN0cm9rZURhc2hhcnJheTogXCI0LDRcIlxuICAgIH0pLFxuXG4gICAgUGxvdC5kb3QoW2N1cnJlbnRdLCB7XG4gICAgICB4OiBcInRhdVwiLFxuICAgICAgeTogXCJkaWZmX2VzdFwiLFxuICAgICAgZmlsbDogY3VycmVudC5kaWZmX2VzdCA+PSAwID8gcG9zaXRpdmUgOiBuZWdhdGl2ZSxcbiAgICAgIHN0cm9rZTogXCJibGFja1wiLFxuICAgICAgcjogOFxuICAgIH0pXG4gIF1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYFxuPGRpdiBzdHlsZT1cImRpc3BsYXk6Z3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOm1pbm1heCgwLCA2NDBmcikgbWlubWF4KDAsIDUxMGZyKTsgZ2FwOjE2cHg7XCI+XG4gIDxkaXY+XG4gICAgPGRpdiBzdHlsZT1cImZvbnQtc2l6ZToyMHB4O1wiPlxuICAgICAgPHNwYW4gc3R5bGU9XCJjb2xvcjojMzMzO1wiPuKUgSDljJblrabnmYLms5XljZjni6w8L3NwYW4+XG4gICAgICDvvI9cbiAgICAgIDxzcGFuIHN0eWxlPVwiY29sb3I6IzAwOUU3MztcIj7ilIQg5pS+5bCE57ea5L2155SoPC9zcGFuPlxuICAgIDwvZGl2PlxuICAgICR7a21QbG90fVxuICA8L2Rpdj5cbiAgPGRpdj5cbiAgICA8ZGl2IHN0eWxlPVwiZm9udC1zaXplOjIwcHg7XCI+Uk1TVOW3ruOBqDk1JeS/oemgvOWMuumWkzwvZGl2PlxuICAgICR7ZGlmZlBsb3R9XG4gIDwvZGl2PlxuPC9kaXY+XG48ZGl2IHN0eWxlPVwiZm9udC1zaXplOjIwcHg7XCI+XG4gIM+E44G+44Gn44GuXG4gIDxzcGFuIHN0eWxlPVwiY29sb3I6JHtwb3NpdGl2ZX07XCI+6Z2S44GE6Z2i56mNPC9zcGFuPlxuICDiiJJcbiAgPHNwYW4gc3R5bGU9XCJjb2xvcjoke25lZ2F0aXZlfTtcIj7otaTjgYTpnaLnqY08L3NwYW4+XG4gIO+8nSBSTVNU5beuXG48L2Rpdj5cbmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Imh0bWxgXG48dGFibGUgc3R5bGU9XCJ3aWR0aDoxMDAlOyBmb250LXNpemU6MjRweDsgbWFyZ2luLXRvcDoxNnB4O1wiPlxuICA8dGhlYWQ+XG4gICAgPHRyPlxuICAgICAgPHRoPs+EID0gJHt0YXV9IOaXpTwvdGg+XG4gICAgICA8dGg+5o6o5a6a5YCkPC90aD5cbiAgICAgIDx0aD45NSXkv6HpoLzljLrplpM8L3RoPlxuICAgICAgPHRoPnDlgKQ8L3RoPlxuICAgIDwvdHI+XG4gIDwvdGhlYWQ+XG4gIDx0Ym9keT5cbiAgICA8dHI+XG4gICAgICA8dGQ+Uk1TVOW3ru+8muS9teeUqCDiiJIg5Y2Y54us77yI5pel77yJPC90ZD5cbiAgICAgIDx0ZCBzdHlsZT0ke2Bjb2xvcjoke1xuICAgICAgICBjdXJyZW50LmRpZmZfZXN0ID49IDAgPyBwb3NpdGl2ZSA6IG5lZ2F0aXZlXG4gICAgICB9OyBmb250LXdlaWdodDpib2xkO2B9PlxuICAgICAgICAke2ZtdChjdXJyZW50LmRpZmZfZXN0KX1cbiAgICAgIDwvdGQ+XG4gICAgICA8dGQ+JHtmbXQoY3VycmVudC5kaWZmX2xvd2VyXzk1KX0g772eICR7Zm10KGN1cnJlbnQuZGlmZl91cHBlcl85NSl9PC90ZD5cbiAgICAgIDx0ZD4ke2ZtdFAoY3VycmVudC5kaWZmX3ApfTwvdGQ+XG4gICAgPC90cj5cbiAgICA8dHI+XG4gICAgICA8dGQ+Uk1TVOavlO+8muS9teeUqCAvIOWNmOeLrDwvdGQ+XG4gICAgICA8dGQ+JHtmbXQoY3VycmVudC5yYXRpb19lc3QsIDMpfTwvdGQ+XG4gICAgICA8dGQ+XG4gICAgICAgICR7Zm10KGN1cnJlbnQucmF0aW9fbG93ZXJfOTUsIDMpfSDvvZ5cbiAgICAgICAgJHtmbXQoY3VycmVudC5yYXRpb191cHBlcl85NSwgMyl9XG4gICAgICA8L3RkPlxuICAgICAgPHRkPiR7Zm10UChjdXJyZW50LnJhdGlvX3ApfTwvdGQ+XG4gICAgPC90cj5cbiAgPC90Ym9keT5cbjwvdGFibGU+XG5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3RhdScpIn1dfQ==
+    </script>
+    <script type="module">
+    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+    window._ojs.paths.runtimeToDoc = "../../statistics/RMST_mi";
+    window._ojs.paths.runtimeToRoot = "../..";
+    window._ojs.paths.docToRoot = "../..";
+    window._ojs.selfContained = false;
+    window._ojs.runtime.interpretFromScriptTags();
     </script>
     
     <script>
